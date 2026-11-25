@@ -7,7 +7,7 @@
 ## Concluído e verificado estruturalmente
 - 35 skills: 26 skills comunitárias selecionadas e 9 skills originais específicas do BOLT.
 - Oito agentes consultivos read-only.
-- Quatro comandos de fluxo Claude Code.
+- Seis comandos de fluxo Claude Code.
 - Bíblias de design, narrativa, mundos, personagens, gameplay, level design, UI/UX e direção de arte/áudio.
 - Especificações técnicas para arquitetura, Android/performance, touch/display, loading/assets e contratos de sistemas.
 - Roadmap, gates, Definition of Done, gestão de mudanças, matriz de QA, templates e registros de decisão.
@@ -20,7 +20,9 @@
 - Arquivos recém-criados foram recuperados do GitHub e inspecionados quanto à presença e conteúdo.
 - Frontmatter e nomes foram verificados nas nove skills novas e nos quatro comandos.
 - Os 25 destinos Markdown do índice docs/README.md foram recuperados com sucesso.
-- O workflow CI foi criado, mas sua execução ainda não foi confirmada.
+- O workflow CI documental está configurado; sua execução ainda precisa ser confirmada.
+- Criados protocolo de qualidade, handoff entre sessões e rastreador de 24 sistemas + 42 fases.
+- Criados os comandos /bolt-continue e /bolt-release-check.
 - Não foi executado Claude Code neste ambiente.
 
 ## Atualização da diretiva de produção — 2026-11-25
@@ -46,3 +48,19 @@ Iniciar a execução da diretiva from-zero: verificar ambiente e versão Godot 4
 
 ## Regra
 Este status não declara o jogo implementado nem certifica compatibilidade ou desempenho Android. Atualize somente com evidências verificáveis.
+
+
+## Auditoria e controles adicionais — 2026-11-25
+
+A árvore recursiva da branch main foi consultada novamente após as alterações e contém **222 entradas**. Foram confirmados 35 skills, 8 agentes, 6 comandos, 37 documentos Markdown em docs/, e os cinco arquivos novos desta revisão. A árvore continua sem project.godot, sem cenas .tscn e sem scripts .gd de gameplay fora dos exemplos de skills.
+
+### Novos controles adicionados
+- quality-control-protocol.md: ciclo de implementação, níveis L0–L5, critérios por domínio, severidade e evidências.
+- CONTINUITY.md: procedimento de retomada e handoff entre sessões, com baseline e próxima ação.
+- implementation-tracker.md: 24 sistemas globais e IDs para as 42 fases, todos no status inicial Não iniciado.
+- /bolt-continue: retomada a partir do estado real do repositório.
+- /bolt-release-check: auditoria read-only de prontidão para release.
+
+Os novos documentos foram integrados a MASTER_DIRECTIVE.md, CLAUDE.md, AGENTS.md, README.md, docs/README.md e ao catálogo de skills/comandos. Arquivos recuperados do GitHub após a gravação confirmam presença e conteúdo. O script de validação documental e o workflow ainda não foram executados nesta sessão; não há confirmação de CI verde.
+
+**O trabalho desta revisão é documental e de governança. Não cria nem valida o jogo Godot.**
