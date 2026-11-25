@@ -26,14 +26,21 @@ Exibir somente informações necessárias ao estado atual. Definir prioridade, p
 - Multitouch testado, especialmente movimento + salto + dash.
 - Layout configurável quando viável.
 - Não depender exclusivamente de gestos pouco descobertos.
-- Evitar que botões fiquem sob recortes, barras do sistema ou gestos do Android.
+- Evitar que botões fiquem sob recortes ou regiões de gestos do Android.
 - Garantir que eventos de toque terminem corretamente em pausa, troca de cena ou perda de foco.
 
-## 5. Tela e áreas seguras
-Separar área de jogo, área de interface e área de sistema. Decidir explicitamente se a experiência usa modo imersivo, barras visíveis ou política híbrida. A escolha deve ser validada no Android real; não assumir que o app pode desenhar sobre barras em todos os aparelhos/versões.
+## 5. Tela, barras do sistema e áreas seguras
+A orientação do produto é paisagem. A política de barras do sistema não é uma decisão em aberto: cumprir [ADR-0003](../decisions/ADR-0003-android-system-bars.md).
+
+- Manter as barras de status e navegação do Android ocultas por política imersiva durante a experiência do jogo, inclusive quando a opção de Tela cheia da interface estiver desligada.
+- A opção/configuração de Tela cheia permanece DESLIGADA. Não criar um toggle que altere a decisão sem aprovação explícita.
+- O sistema operacional pode revelar temporariamente as barras por gestos, políticas de segurança ou comportamento específico do dispositivo; não prometer ocultação absoluta.
+- Separar a área visual que pode se estender da área segura em que botões precisam ser tocáveis.
+- Não posicionar ações essenciais sob recortes ou regiões de gestos do sistema.
+- Validar entrada/saída do modo imersivo, foco, pausa e retomada em aparelhos reais. Headless não comprova esse comportamento.
 
 ## 6. Acessibilidade
 Considerar tamanho de texto, contraste, legendas, controles alternativos, remapeamento quando suportado, volume independente, redução de screen shake/flashes e opções de dificuldade quando aprovadas. Não usar somente cor para comunicar estado.
 
 ## 7. QA de interface
-Testar telas estreitas e largas, proporções extremas, orientação definida para o jogo, safe areas, recortes, toque rápido e prolongado, multitouch, navegação de menu, foco, pausa, mudança de app e retomada.
+Testar telas estreitas e largas, proporções extremas, orientação paisagem, safe areas, recortes, toque rápido e prolongado, multitouch, navegação de menu, foco, pausa, mudança de app e retomada.
