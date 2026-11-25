@@ -29,3 +29,13 @@ A prioridade técnica é compatibilidade e desempenho em Android de entrada/inte
 As skills foram selecionadas da coleção [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills), distribuída sob Apache License 2.0. A licença e o NOTICE originais estão preservados em `THIRD_PARTY_NOTICES/awesome-gamedev-agent-skills/`.
 
 Esta é uma biblioteca de apoio para agentes, não a implementação do jogo. A presença das skills não significa que o projeto Godot ou o APK já tenham sido criados.
+
+
+## Documentação e agentes
+- [Índice da documentação](docs/README.md)
+- [Estado real da etapa](docs/production/stage-status.md)
+- [Catálogo de skills](docs/skills-catalog.md)
+- `.claude/agents/`: oito revisores especializados em arquitetura, gameplay, narrativa, level design, Android/performance, QA, UI/UX e arte/áudio. São agentes consultivos read-only.
+
+## Importante
+O repositório contém um framework de desenvolvimento e documentação. A existência das skills e agentes não significa que o projeto executável Godot, os sete mundos ou um APK já estejam implementados. Consulte o status de produção para ver o que foi efetivamente verificado.
