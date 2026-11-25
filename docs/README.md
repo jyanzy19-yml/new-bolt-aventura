@@ -29,8 +29,8 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 2. [Bíblia narrativa](game-design/01-narrative-bible.md)
 3. [Bíblia dos sete mundos](game-design/02-world-bible.md)
 4. [Personagens, inimigos e chefes](game-design/03-character-bible.md)
-5. [Sistemas de gameplay](game-design/04-gameplay-systems.md)
-6. [Padrão de level design](game-design/05-level-design-standard.md)
+5. [Padrão de level design](game-design/05-level-design-standard.md)
+6. [Sistemas de gameplay](game-design/04-gameplay-systems.md)
 7. [UI/UX e acessibilidade](game-design/06-ui-ux.md)
 8. [Direção de arte e áudio](game-design/07-art-audio-direction.md)
 
@@ -47,14 +47,16 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - [Input touch, tela e áreas seguras](technical/02-touch-and-display.md)
 - [Carregamento e recursos](technical/03-loading-and-assets.md)
 - [Checklist de build Android](technical/04-android-build-checklist.md)
-- [Contratos entre sistemas](technical/05-system-contracts.md).
-- [Pipeline de CI e validação](production/CI_AND_VALIDATION_PIPELINE.md).
-- [Pipeline de assets](production/ASSET_PIPELINE.md).
+- [Contratos entre sistemas](technical/05-system-contracts.md)
+- [Pipeline de CI e validação](production/CI_AND_VALIDATION_PIPELINE.md)
+- [Pipeline de assets](production/ASSET_PIPELINE.md)
 
 ## Produção e qualidade
 
 - [Roadmap e gates](production/roadmap.md)
 - [Protocolo de qualidade](production/quality-control-protocol.md)
+- [Checklist de execução e aceite da Etapa 0](production/ETAPA_0_CLAUDE_CHECKLIST.md)
+- [Auditoria de pré-produção](production/PREPRODUCTION_AUDIT.md)
 - [Protocolo de desenvolvimento alternado Claude Code ↔ ChatGPT](production/COLLABORATIVE_DEVELOPMENT_PROTOCOL.md) — Claude Etapa 0, ChatGPT Etapa 1, Claude Etapa 2, ChatGPT Etapa 3 e assim sucessivamente.
 - [Estado canônico da colaboração](production/COLLABORATION_STATE.md) — etapa atual, responsável, commit-base e próximo turno.
 - [Configuração de acesso dos agentes](production/AGENT_ACCESS_SETUP.md) — diferença entre contexto de leitura e acesso real de escrita/commit.
