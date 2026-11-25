@@ -20,7 +20,7 @@
 - Arquivos recém-criados foram recuperados do GitHub e inspecionados quanto à presença e conteúdo.
 - Frontmatter e nomes foram verificados nas nove skills novas e nos quatro comandos.
 - Os 25 destinos Markdown do índice docs/README.md foram recuperados com sucesso.
-- O workflow CI documental está configurado; sua execução ainda precisa ser confirmada.
+- O workflow CI documental está configurado e a execução mais recente desta revisão foi confirmada como SUCCESS (run #51; commit b07fe549949def93fbca0b68a00a346a585ce1fc).
 - Criados protocolo de qualidade, handoff entre sessões e rastreador de 24 sistemas + 42 fases.
 - Criados os comandos /bolt-continue e /bolt-release-check.
 - Não foi executado Claude Code neste ambiente.
@@ -64,3 +64,13 @@ A árvore recursiva da branch main foi consultada novamente após as alteraçõe
 Os novos documentos foram integrados a MASTER_DIRECTIVE.md, CLAUDE.md, AGENTS.md, README.md, docs/README.md e ao catálogo de skills/comandos. Arquivos recuperados do GitHub após a gravação confirmam presença e conteúdo. O script de validação documental e o workflow ainda não foram executados nesta sessão; não há confirmação de CI verde.
 
 **O trabalho desta revisão é documental e de governança. Não cria nem valida o jogo Godot.**
+
+
+### Evidência de CI — execução confirmada
+
+- Workflow: BOLT documentation validation.
+- Run: #51.
+- Commit testado: b07fe549949def93fbca0b68a00a346a585ce1fc.
+- Job: Validate project documentation — SUCCESS.
+- Etapa: Validate Claude metadata and local links — SUCCESS.
+- Isso valida metadados Claude e links Markdown locais conforme o script atual. Não executa Godot, gameplay, export Android ou testes em aparelho.
