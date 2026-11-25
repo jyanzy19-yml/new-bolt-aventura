@@ -39,7 +39,7 @@ def check_claude_files(folder: str, required: tuple[str, ...]) -> int:
     if not base.exists():
         WARNINGS.append(f"{folder}: directory not present")
         return 0
-    files = sorted(base.rglob("*.md"))
+    files = sorted(base.rglob("SKILL.md")) if folder.endswith("/skills") else sorted(base.rglob("*.md"))
     for path in files:
         fields, _ = frontmatter(path)
         for key in required:
