@@ -27,7 +27,7 @@
 
 ## Atualização documental — mandato de criação do zero
 
-Nesta revisão foram adicionados o mandato operacional de implementação integral do zero, referências obrigatórias em `MASTER_DIRECTIVE.md`, `CLAUDE.md`, `AGENTS.md`, READMEs e roadmap; reconciliação entre o prompt mestre e as Bíblias narrativa/mundos/personagens; e ADR-0003 para a política de barras do sistema Android. Os arquivos foram escritos por commits no GitHub e serão verificados por recuperação após a gravação.
+Nesta revisão foram adicionados o mandato operacional de implementação integral do zero e sua referência obrigatória em `MASTER_DIRECTIVE.md`, `CLAUDE.md`, `AGENTS.md`, READMEs, prompt mestre e roadmap; foram reconciliadas as Bíblias de visão geral, narrativa, mundos e personagens com o prompt mestre; e foi registrada a ADR-0003 para a política de barras do sistema Android. Os arquivos atualizados foram recuperados novamente do GitHub após os commits e inspecionados quanto à presença e ao conteúdo esperado.
 
 Esta revisão não implementou código Godot, cenas, assets do jogo, build ou APK. A verificação desta etapa é documental e não substitui execução do CI, testes Godot ou validação Android.
 
