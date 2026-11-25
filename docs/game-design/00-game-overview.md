@@ -58,5 +58,5 @@ O nome da máquina temporal é **NEXO** e o antagonista central é **o Arquiteto
 - Android empacotado: **confirmado**.
 - Godot: **direção confirmada**, versão exata **a detectar**.
 - Meta de cinco inimigos distintos por mundo: **requisito de design**.
-- Nomes e detalhes dos sete mundos: **a definir/recuperar da Bíblia aprovada**.
+- Sequência, nomes, fragmentos e guardiões dos sete mundos: **confirmados na Bíblia dos Mundos**. Detalhes de NPCs, paletas, mecânicas exclusivas e layouts: **a desenvolver**.
 - Mecânicas finais, números de balanceamento e duração: **a definir**.
