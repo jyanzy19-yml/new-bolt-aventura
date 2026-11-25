@@ -1,0 +1,58 @@
+# Curated skills catalog — BOLT · AVENTURA
+
+**Source collection:** [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills)  
+**Integration format:** Claude Code project skills, one `SKILL.md` per skill under `.claude/skills/<name>/`.  
+**Selection policy:** focused set for a Godot 2D Android platform-adventure; this is not a full mirror of the upstream multi-engine collection.
+
+## Router and Godot implementation
+| Skill | Use |
+|---|---|
+| `router` | Classifies the game-development task and selects the smallest relevant skill set. |
+| `godot-gdscript` | GDScript language patterns and engine-specific scripting. |
+| `godot-nodes-scenes` | Scene tree, nodes, reusable scenes and scene composition. |
+| `godot-signals-groups` | Signal wiring and node groups. |
+| `godot-resources` | Reusable data/resources and resource loading. |
+| `godot-2d-movement` | CharacterBody2D platform movement. |
+| `godot-physics` | Collision bodies, areas, layers/masks and physics queries. |
+| `godot-tilemap` | TileMapLayer/TileSet level construction and collision. |
+| `godot-animation` | AnimatedSprite2D, AnimationPlayer/Tree and transitions. |
+| `godot-ui-control` | Control nodes, anchors, containers, themes and focus. |
+| `godot-audio` | Godot audio players and buses. |
+| `godot-export` | Export configuration and platform packaging, including Android workflow checks. |
+| `godot-gdscript-headless-testing` | Automated headless validation and test reporting. |
+
+## Game design and disciplines
+| Skill | Use |
+|---|---|
+| `platformer` | Platformer genre structure and common gameplay systems. |
+| `input-systems` | Input abstraction, remapping and device/touch considerations. |
+| `physics-tuning` | Frame-independent physics tuning and motion quality. |
+| `game-feel` | Feedback, timing, animation response and readable impacts. |
+| `camera-systems` | Camera follow, look-ahead, dead zones and bounds. |
+| `level-design` | Pacing, traversal, challenge progression and level readability. |
+| `game-ai` | Enemy behavior architecture and state-driven decision making. |
+| `create-game-assets` | Art direction, asset pipelines, sprites and asset QA. |
+| `dialogue-systems` | NPC dialogue and branching narrative structure. |
+| `save-systems` | Save data, versioning, migration and recovery. |
+| `performance-optimization` | Profiling-led performance and memory optimization. |
+| `game-ui-ux` | HUD, menus, interaction flow, readability and accessibility. |
+| `audio-design` | Music, sound effects, adaptive audio and mix design. |
+
+## How Claude should load skills
+1. At the beginning of a new game-development task, read `router/SKILL.md`.
+2. Identify the project's actual engine/version from its files. If there is no Godot project yet, report that and treat engine API details as provisional.
+3. Read only the selected skill files needed for the current task. For example:
+   - Player movement: `godot-2d-movement` + `input-systems` + `game-feel`.
+   - Level production: `godot-tilemap` + `level-design` + `camera-systems`.
+   - Enemy behavior: `game-ai` + `godot-physics` + `game-feel`.
+   - Menus/HUD: `godot-ui-control` + `game-ui-ux` + `input-systems`.
+   - Narrative/NPCs: `dialogue-systems` + `godot-signals-groups`.
+   - Saves: `save-systems` + `godot-resources` + `godot-gdscript-headless-testing`.
+   - Android build: `godot-export` + `performance-optimization`.
+4. Check the APIs and commands in each skill against the actual Godot version and installed export templates. Upstream skills may target a newer release.
+5. Do not load all skills for every task; avoid unnecessary context consumption.
+
+## Compatibility and provenance
+The upstream repository describes its skills as authored from primary documentation and is distributed under Apache License 2.0. The original `LICENSE` and `NOTICE` are preserved in `THIRD_PARTY_NOTICES/awesome-gamedev-agent-skills/`. Each skill file is copied from the source collection without claiming it was authored by this project.
+
+The upstream collection changes over time. Check the upstream repository before future updates; do not automatically overwrite local customizations. The presence of a skill does not guarantee compatibility with every Godot release or Android device.
