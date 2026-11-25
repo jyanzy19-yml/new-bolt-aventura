@@ -12,9 +12,11 @@ O jogador deve sentir que acordou em um lugar que precisa compreender; que a má
 | Ato | Função | Estado |
 |---|---|---|
 | Ato I — Despertar | Apresentar protagonista, mundo destruído e encontro com a máquina | A premissa é confirmada; cenas e diálogos a definir |
-| Ato II — Travessia | Estabelecer viagem entre mundos e busca dos fragmentos | Sete mundos e fragmentos confirmados; ordem e revelações a definir |
-| Ato III — Convergência | Reunir significado dos fragmentos e confrontar o conflito central | Equilíbrio dos universos é o objetivo; clímax a definir |
-| Epílogo | Mostrar consequências e encerrar a jornada | Desfecho específico precisa de aprovação |
+| Ato II — Travessia | Estabelecer viagem entre mundos e busca dos fragmentos | Sete mundos, fragmentos e ordem confirmados na Bíblia dos Mundos; ritmo de revelações e cenas a desenvolver |
+| Ato III — Convergência | Reunir significado dos fragmentos e confrontar o conflito central | Equilíbrio dos universos é o objetivo; clímax a desenvolver sem contradizer o canon |
+| Epílogo | Mostrar consequências e encerrar a jornada | Encerramento principal obrigatório; encenação e diálogos finais a desenvolver |
+
+A sequência dos sete mundos e a ordem dos fragmentos são fixas conforme `docs/game-design/02-world-bible.md` e o prompt mestre. O que permanece a desenvolver é a distribuição das revelações, cenas, diálogos e consequências dentro dessa sequência.
 
 ## 4. Regras narrativas
 1. Toda cutscene apresenta informação, emoção, decisão ou consequência nova.
