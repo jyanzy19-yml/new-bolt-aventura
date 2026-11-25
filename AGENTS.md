@@ -15,7 +15,7 @@ Apply the project guidance in `CLAUDE.md` to every task. If both files are prese
 ## Task procedure
 1. Inspect repository state and relevant project documents.
 2. Identify engine version, platform configuration and current stage.
-3. Load `.claude/skills/router/SKILL.md` at the start of a game-development task, then only the specialist skills required.
+3. Load `.claude/skills/router/SKILL.md` at the start of a game-development task, then only the specialist skills required. For Godot folder layout, file placement, dependency boundaries or reorganization, also load `.claude/skills/godot-project-structure/SKILL.md`; never restructure before inspecting the actual project and approved ADRs.
 4. Define the smallest change that satisfies the user's request.
 5. Implement without unrelated scope expansion.
 6. Run relevant automated checks and clearly separate automated results from manual/device validation.
