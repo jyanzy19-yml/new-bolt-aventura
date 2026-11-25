@@ -11,7 +11,7 @@
 ## 2. Premissa central confirmada
 Um robô desperta em um mundo destruído e encontra uma máquina temporal que se une a ele. Essa união permite viajar entre eras e mundos. A missão principal é recuperar um fragmento em cada um dos sete mundos. Os fragmentos são protegidos pelos chefes no final de cada mundo e estão ligados ao mistério da máquina temporal; juntos, são necessários para restaurar o equilíbrio dos universos.
 
-Nomes próprios, cronologia detalhada, causa da destruição, identidade da máquina e desfecho específico precisam vir de material aprovado ou de aprovação explícita. Não extrapolar a premissa como se detalhes novos fossem canon.
+O nome da máquina temporal é **NEXO** e o antagonista central é **o Arquiteto**, conforme o prompt mestre. A forma, personalidade, origem detalhada, cronologia completa, causa mais profunda do Colapso e encenação do desfecho devem seguir as Bíblias narrativa/personagens; detalhes adicionais permanecem propostas até aprovação. Não extrapolar a premissa como se detalhes novos fossem canon.
 
 ## 3. Pilares de experiência
 1. **Aventura com progressão clara:** cada mundo acrescenta compreensão, desafio e domínio.
