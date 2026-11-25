@@ -51,7 +51,7 @@ def check_claude_files(folder: str, required: tuple[str, ...]) -> int:
 
 
 def check_markdown_links() -> int:
-    candidates = [ROOT / "README.md", ROOT / "CLAUDE.md", ROOT / "AGENTS.md"]
+    candidates = [ROOT / "README.md", ROOT / "CLAUDE.md", ROOT / "AGENTS.md", ROOT / "MASTER_DIRECTIVE.md"]
     for folder in ("docs",):
         base = ROOT / folder
         if base.exists():
@@ -90,8 +90,21 @@ def main() -> int:
         ERRORS.append(f"Expected at least 35 skills in the current baseline; found {skills}")
     if agents < 8:
         ERRORS.append(f"Expected at least 8 specialist agents in the current baseline; found {agents}")
-    if commands < 4:
-        ERRORS.append(f"Expected at least 4 BOLT workflow commands; found {commands}")
+    if commands < 6:
+        ERRORS.append(f"Expected at least 6 BOLT workflow commands; found {commands}")
+
+    required_collaboration_docs = (
+        "docs/production/COLLABORATION_STATE.md",
+        "docs/production/AGENT_ACCESS_SETUP.md",
+        "docs/production/HANDOFF_TEMPLATE.md",
+    )
+    for relative in required_collaboration_docs:
+        if not (ROOT / relative).is_file():
+            ERRORS.append(f"Required collaboration document is missing: {relative}")
+
+    docs_index = read(ROOT / "docs/README.md")
+    if r"## Skills e agentes\\n" in docs_index:
+        ERRORS.append("docs/README.md: literal escaped newline found in Skills section")
 
     print("BOLT documentation validation")
     print(f"Skills: {skills} | Agents: {agents} | Commands: {commands} | Local Markdown links: {links}")
