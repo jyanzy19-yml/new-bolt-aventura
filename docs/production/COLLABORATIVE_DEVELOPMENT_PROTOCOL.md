@@ -74,8 +74,9 @@ Skills e agentes do repositório são recursos de apoio ao responsável pela eta
 
 **Antes de qualquer alteração, o responsável pelo novo turno deve:**
 
-1. Confirmar repositório, branch e commit atual.
-2. Verificar se há alterações não commitadas, arquivos novos, conflitos ou mudanças posteriores ao handoff.
+1. Ler primeiro docs/production/COLLABORATION_STATE.md e confirmar se o agente atual é o responsável pela etapa atribuída.
+2. Confirmar repositório, branch e commit atual; main é a branch de integração oficial.
+3. Verificar se há alterações não commitadas, arquivos novos, conflitos ou mudanças posteriores ao handoff.
 3. Ler `MASTER_DIRECTIVE.md`, `CLAUDE.md`, `AGENTS.md`, `docs/README.md` e este protocolo.
 4. Ler `docs/production/from-zero-implementation-directive.md`, status atual, roadmap, tracker, continuidade e documentos especializados da etapa.
 5. Inspecionar a estrutura real do projeto Godot, cenas, scripts, recursos, testes e configurações existentes; não presumir que um componente existe porque está documentado.
@@ -132,6 +133,8 @@ O responsável atualiza:
 - `docs/production/implementation-tracker.md`, apenas com evidência;
 - `docs/production/CONTINUITY.md`, com estado e próximo passo;
 - decisões/ADRs, se uma decisão material tiver sido aprovada;
+- docs/production/COLLABORATION_STATE.md, atualizando etapa, estado, responsável seguinte e commit real;
+- handoff preenchido conforme docs/production/HANDOFF_TEMPLATE.md;
 - changelog ou relatório de etapa, quando previsto pelo repositório.
 
 Depois cria ou registra um commit identificável e entrega o pacote de transferência.
@@ -172,7 +175,7 @@ Toda entrega deve incluir:
 - itens do tracker atualizados;
 - instrução concreta para o próximo responsável começar.
 
-O handoff deve permitir que o outro modelo continue sem depender da conversa anterior.
+O handoff deve seguir docs/production/HANDOFF_TEMPLATE.md e permitir que o outro modelo continue sem depender da conversa anterior. O estado canônico do próximo turno deve ser atualizado em docs/production/COLLABORATION_STATE.md.
 
 ## 8. Critérios de revisão e triagem
 
@@ -221,6 +224,8 @@ A divisão exata deve respeitar o roadmap oficial, as dependências e a coerênc
 - Antes de escrever, confirmar que o commit-base ainda é o mais recente.
 - Se o repositório avançou desde a inspeção, reconciliar as mudanças antes de editar.
 - Preferir commits pequenos e identificáveis por etapa.
+- Usar main como branch de integração; se houver branch de tarefa/PR, só transferir o turno depois da integração e do registro do merge commit.
+- Nunca presumir que uma integração GitHub de leitura oferece permissão de escrita/commit.
 - Não fazer force push, apagar branches, mudar visibilidade, publicar release ou executar operações destrutivas sem autorização explícita.
 - Não acessar ou expor secrets, tokens ou credenciais.
 - Não incluir chaves de assinatura, dados pessoais ou segredos nos commits.
