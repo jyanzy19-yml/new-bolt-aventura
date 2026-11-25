@@ -202,3 +202,8 @@ Last verified: 2026-11-11.
   needs a description of guardrails); AI tools used only for efficiency are not its focus
   (https://partner.steamgames.com/doc/gettingstarted/contentsurvey).
 - Engine import settings in `references/raster-pipeline.md` target Godot 4.7 and Unity 6.3 LTS.
+
+
+## BOLT installation note
+
+The upstream example path `assets/player-idle.png` is illustrative and the source image was not present in the upstream repository when this skill was curated. Do not assume it exists locally or treat it as a BOLT asset. Use an actual project asset path and record provenance. The helper script and text references used by this skill are included beside this SKILL.md.
