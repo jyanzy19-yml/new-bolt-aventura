@@ -34,6 +34,10 @@ O alvo técnico inclui aparelhos Android com aproximadamente 4 GB de RAM e Media
 - Distinguir validação estrutural, testes automatizados, validação visual, emulador e dispositivo físico.
 - Não declarar testes, APK, compatibilidade ou FPS sem evidência.
 
+## Mandato de implementação
+
+A missão não é apenas manter documentação: é criar o jogo completo do zero em Godot 4.x para Android. A especificação operacional obrigatória está em [docs/production/from-zero-implementation-directive.md](docs/production/from-zero-implementation-directive.md), vinculada também a `MASTER_DIRECTIVE.md` e `CLAUDE.md`. Auditoria, planejamento e vertical slice são etapas internas; não são entregáveis finais. O estado atual continua sendo documental até que os arquivos executáveis Godot sejam efetivamente criados e testados.
+
 ## Origem e licença
 As 26 skills comunitárias foram selecionadas da coleção [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills), distribuída sob Apache License 2.0. LICENSE e NOTICE originais foram preservados. As nove skills `bolt-*` são instruções originais específicas do projeto.
 
