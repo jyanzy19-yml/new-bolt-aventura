@@ -33,3 +33,10 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - **Validado:** comprovado por inspeção ou teste identificável.
 
 Atualize este índice quando documentos forem adicionados ou movidos. Use links relativos e confira se todos resolvem.
+
+
+## Referências complementares
+- [Checklist de build Android](technical/04-android-build-checklist.md)
+- [Status da etapa](production/stage-status.md)
+- [Checklist de release Android](production/android-release-checklist.md)
+- [Template de captura de performance](qa/performance-capture-template.md)
