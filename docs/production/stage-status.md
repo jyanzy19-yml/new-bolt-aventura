@@ -31,6 +31,8 @@
 - Registrada a política aprovada de barras do sistema Android em ADR-0003 e vinculada à especificação touch/display.
 - **Esta atualização continua sendo documental. Nenhum projeto Godot, cena, script, asset de jogo ou APK foi criado nesta ação.**
 
+- Rechecagem da árvore `main` após as alterações: 133 arquivos; **nenhum `project.godot` e nenhuma cena `.tscn`**. Os quatro arquivos `.gd` existentes pertencem a scripts de teste/exemplo das skills, não constituem o jogo BOLT.
+
 ## Ainda não comprovado
 - Projeto Godot executável e seu project.godot.
 - Versão exata do Godot e renderer.
