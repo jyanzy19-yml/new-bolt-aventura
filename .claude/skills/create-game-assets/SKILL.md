@@ -206,4 +206,4 @@ Last verified: 2026-11-11.
 
 ## BOLT installation note
 
-The upstream example path `assets/player-idle.png` is illustrative and the source image was not present in the upstream repository when this skill was curated. Do not assume it exists locally or treat it as a BOLT asset. Use an actual project asset path and record provenance. The helper script and text references used by this skill are included beside this SKILL.md.
+Use a real project asset path in place of `<path-to-your-sprite.png>`; this is a placeholder, not a bundled asset. Do not assume a sample sprite exists locally or treat it as a BOLT asset. Record provenance for every actual asset. The helper scripts, dependency file and text references used by this skill are included beside this SKILL.md.
