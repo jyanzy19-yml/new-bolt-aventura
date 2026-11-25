@@ -2,74 +2,64 @@ name: BOLT Godot validation
 on:
   push:
     branches: [main]
-    paths: ["project.godot", ".godot-version", "**/*.gd", "**/*.tscn", "**/*.tres", "**/*.res", "**/*.gdshader", "addons/**", ".github/workflows/godot-validation.yml"]
+    paths:
+      - project.godot
+      - .godot-version
+      - "**/*.gd"
+      - "**/*.tscn"
+      - "**/*.tres"
+      - "**/*.res"
+      - "**/*.gdshader"
+      - addons/**
+      - .github/workflows/godot-validation.yml
   pull_request:
-    paths: ["project.godot", ".godot-version", "**/*.gd", "**/*.tscn", "**/*.tres", "**/*.res", "**/*.gdshader", "addons/**", ".github/workflows/godot-validation.yml"]
+    paths:
+      - project.godot
+      - .godot-version
+      - "**/*.gd"
+      - "**/*.tscn"
+      - "**/*.tres"
+      - "**/*.res"
+      - "**/*.gdshader"
+      - addons/**
+      - .github/workflows/godot-validation.yml
   workflow_dispatch:
 permissions:
   contents: read
-concurrency:
-  group: bolt-godot-validation-${{ github.ref }}
-  cancel-in-progress: true
 jobs:
-  validate:
-    name: Import and parse Godot project
+  godot-validation:
+    name: Godot headless import and parse
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-        name: Checkout
-      - name: Detect project and pinned engine version
-        id: project
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Validate project when available
         shell: bash
         run: |
+          set -euo pipefail
           if [[ ! -f project.godot ]]; then
-            echo "present=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::NOT APPLICABLE: project.godot is absent; no Godot test was performed."
+            echo "::notice::NOT APPLICABLE — project.godot is absent. No Godot test was performed."
             exit 0
           fi
           if [[ ! -f .godot-version ]]; then
             echo "::error::project.godot exists but .godot-version is missing."
             exit 1
           fi
-          version="$(tr -d '[:space:]' < .godot-version)"
-          if [[ ! "$version" =~ ^4\.[0-9]+\.[0-9]+$ ]]; then
-            echo "::error::Expected an exact stable Godot 4.x.y version; found '$version'."
+          GODOT_VERSION="$(tr -d '[:space:]' < .godot-version)"
+          if [[ ! "$GODOT_VERSION" =~ ^4\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Expected exact stable Godot 4.x.y; found '$GODOT_VERSION'."
             exit 1
           fi
-          echo "present=true" >> "$GITHUB_OUTPUT"
-          echo "version=$version" >> "$GITHUB_OUTPUT"
-      - name: Download official pinned Godot release
-        if: steps.project.outputs.present == 'true'
-        shell: bash
-        env:
-          GODOT_VERSION: ${{ steps.project.outputs.version }}
-        run: |
-          archive="Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
-          url="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/${archive}"
-          curl --fail --location --retry 3 "$url" --output godot.zip
+          ARCHIVE="Godot_v\${GODOT_VERSION}-stable_linux.x86_64.zip"
+          URL="https://github.com/godotengine/godot/releases/download/\${GODOT_VERSION}-stable/\${ARCHIVE}"
+          curl --fail --location --retry 3 "$URL" --output godot.zip
           unzip -q godot.zip -d godot-bin
-          binary="godot-bin/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
-          test -f "$binary"
-          chmod +x "$binary"
-          echo "GODOT_BIN=$PWD/$binary" >> "$GITHUB_ENV"
-      - name: Verify engine version
-        if: steps.project.outputs.present == 'true'
-        env:
-          EXPECTED_GODOT_VERSION: ${{ steps.project.outputs.version }}
-        run: |
-          actual="$("$GODOT_BIN" --headless --version)"
-          echo "Expected: $EXPECTED_GODOT_VERSION"
-          echo "Actual: $actual"
-          [[ "$actual" == "$EXPECTED_GODOT_VERSION" ]]
-      - name: Import resources and parse project scripts
-        if: steps.project.outputs.present == 'true'
-        run: "$GODOT_BIN" --headless --editor --path . --import --quit
-      - name: Report scope
-        if: always()
-        run: |
-          if [[ "${{ steps.project.outputs.present }}" != "true" ]]; then
-            echo "NOT APPLICABLE — no Godot project exists yet."
-          else
-            echo "Headless import/parse only; not Android export, gameplay acceptance or performance certification."
-          fi
+          GODOT_BIN="godot-bin/Godot_v\${GODOT_VERSION}-stable_linux.x86_64"
+          test -f "$GODOT_BIN"
+          chmod +x "$GODOT_BIN"
+          ACTUAL_VERSION="$("$GODOT_BIN" --headless --version)"
+          [[ "$ACTUAL_VERSION" == "$GODOT_VERSION" ]]
+          "$GODOT_BIN" --headless --editor --path . --import --quit
+          echo "Headless import/parse passed for Godot $GODOT_VERSION."
+          echo "This is not Android export, gameplay acceptance or performance certification."
