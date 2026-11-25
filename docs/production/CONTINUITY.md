@@ -176,3 +176,16 @@ Limite de evidência: auditoria estrutural/documental. Não foi executado Godot,
 - Pipeline CI: CI_AND_VALIDATION_PIPELINE.md; assets: ASSET_PIPELINE.md; QA físico: ../qa/ANDROID_DEVICE_TEST_TEMPLATE.md.
 
 Este snapshot substitui os inventários anteriores. A auditoria continua estrutural/documental, sem APK, emulador ou teste físico.
+
+
+## 14. Snapshot de pré-produção — base auditada em 2026-11-25
+
+- Commit-base auditado: `bc5799c651ccd5ffbcdfadf36f669435df63501b`.
+- Inventário nessa base: 232 entradas; 132 Markdown totais; 44 Markdown em docs/; 36 skills; 8 agentes; 6 comandos; 2 workflows.
+- Não existe `project.godot`, cena `.tscn` ou gameplay BOLT; os quatro `.gd` identificados pertencem a exemplos/testes de skills. Nenhum asset final de jogo foi identificado.
+- CI documental Run #96: SUCCESS. CI Godot Run #6: SUCCESS com `NOT APPLICABLE`; o log confirma que não houve teste de engine porque `project.godot` estava ausente.
+- PR #1 permanece aberta e divergente: 17 commits exclusivos da PR, 94 exclusivos de main. Não mesclar automaticamente.
+- Etapa 0 continua PENDING para Claude Code; nenhum escritor ativo. O checklist e a auditoria estão em `ETAPA_0_CLAUDE_CHECKLIST.md` e `PREPRODUCTION_AUDIT.md`.
+- As mudanças de pré-produção após o commit-base são documentais: corrigem coerência de ADR/orientação/narrativa, adicionam checklist e auditoria e reforçam QA Android. Não criam projeto Godot, gameplay ou assets.
+
+Ao retomar, consultar o HEAD real; este snapshot descreve a base auditada e não substitui a inspeção atual do Git.
