@@ -364,7 +364,7 @@ For this project:
 - The authoritative installed skill names and task combinations are listed in `docs/skills-catalog.md`.
 - Do not assume that any upstream skill named in the broad multi-engine router is installed locally.
 - If a suggested skill is absent from the local catalog, use the closest installed skill only when it genuinely covers the task; otherwise state the gap and request permission before adding another dependency.
-- The installed Godot skill set is: `godot-gdscript`, `godot-nodes-scenes`, `godot-signals-groups`, `godot-resources`, `godot-2d-movement`, `godot-physics`, `godot-tilemap`, `godot-animation`, `godot-ui-control`, `godot-audio`, `godot-export`, and `godot-gdscript-headless-testing`.
+- The installed Godot skill set is: `godot-project-structure`, `godot-gdscript`, `godot-nodes-scenes`, `godot-signals-groups`, `godot-resources`, `godot-2d-movement`, `godot-physics`, `godot-tilemap`, `godot-animation`, `godot-ui-control`, `godot-audio`, `godot-export`, and `godot-gdscript-headless-testing`.
 - The installed discipline/genre set is: `platformer`, `input-systems`, `physics-tuning`, `game-feel`, `camera-systems`, `level-design`, `game-ai`, `create-game-assets`, `dialogue-systems`, `save-systems`, `performance-optimization`, `game-ui-ux`, and `audio-design`.
 
-For BOLT, do not route to web-game or browser-engine skills. Android is the product platform; desktop tools are development/validation tools only.
+For project layout, file placement, modular boundaries, or safe folder migrations in BOLT, load `godot-project-structure` together with the approved architecture documents. For BOLT, do not route to web-game or browser-engine skills. Android is the product platform; desktop tools are development/validation tools only.
