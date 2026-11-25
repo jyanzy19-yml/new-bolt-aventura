@@ -83,3 +83,25 @@ Os novos documentos foram integrados a MASTER_DIRECTIVE.md, CLAUDE.md, AGENTS.md
 - Conteúdo escrito especificamente para BOLT, com referência de inspiração a grndctrl/godot-skills; sem cópia de código/texto upstream.
 - Catálogo, router, CLAUDE.md, AGENTS.md, README.md e índice docs/README.md atualizados.
 - A expansão é documental. Não cria projeto Godot nem valida cenas, scripts de gameplay, export ou APK.
+
+
+## Auditoria consolidada da colaboração — 2026-11-25
+
+A branch main foi inspecionada diretamente após as últimas alterações.
+
+- Árvore: 225 entradas.
+- Biblioteca: 36 skills, 8 agentes consultivos e 6 comandos Claude Code.
+- Documentação: 38 arquivos Markdown em docs/.
+- Automação: um workflow de validação documental; a execução 45692594026 terminou SUCCESS no commit b9b84660b251313ff3cec014aced9292777e4550.
+- Projeto Godot: não há project.godot, cenas .tscn ou scripts .gd de gameplay BOLT.
+- Não foi executado Godot, export Android, emulador ou aparelho físico nesta auditoria.
+
+### Governança Claude ↔ ChatGPT
+
+- Criado COLLABORATION_STATE.md como fonte única para etapa, responsável e próximo turno.
+- Criado AGENT_ACCESS_SETUP.md para explicar como Claude pode obter contexto e acesso efetivo de escrita; a integração GitHub do ChatGPT não concede acesso automaticamente ao Claude.
+- Criado HANDOFF_TEMPLATE.md para commits, testes, evidências, limitações e próxima ação.
+- Protocolo, MASTER_DIRECTIVE.md, CLAUDE.md, AGENTS.md, README.md e docs/README.md foram integrados a esses controles.
+- Estado inicial: Etapa 0 atribuída a Claude Code, PENDING; nenhum escritor ativo. O usuário precisa iniciar Claude e depois acionar ChatGPT quando o handoff estiver integrado em main.
+
+**Este trabalho é governança/documentação. Não cria nem valida o jogo Godot.**
