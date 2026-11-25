@@ -5,10 +5,12 @@
 - **Escopo:** engine e tecnologia
 
 ## Contexto
-A direção de desenvolvimento definida para o BOLT é uma reconstrução 2D em Godot. O repositório de skills contém exemplos voltados a versões específicas, mas ainda não comprova a versão efetiva do projeto.
+A direção de desenvolvimento definida para o BOLT é uma reconstrução 2D em Godot Engine 4.x, usando GDScript. O repositório de skills contém exemplos voltados a versões específicas, mas ainda não comprova a versão minor/patch efetiva nem a instalação do ambiente.
 
 ## Decisão
-Usar Godot como direção de engine. Antes de implementar, inspecionar o projeto real e identificar a versão em project.godot, configuração de build ou instrução explícita. Não assumir versão por causa da documentação das skills.
+
+Godot Engine 4.x + GDScript são a direção tecnológica aprovada; a versão minor/patch será registrada na fundação do projeto.
+Usar Godot Engine 4.x e GDScript. Como o projeto executável ainda não existe, selecionar uma versão 4.x estável e compatível com Android, registrar a versão exata, renderer e export templates antes de implementar APIs específicas. Se já existir projeto em checkout futuro, detectar a versão real antes de qualquer migração. Não assumir versão por causa da documentação das skills.
 
 ## Consequências
 - APIs, plugins e export templates precisam corresponder à versão detectada.
