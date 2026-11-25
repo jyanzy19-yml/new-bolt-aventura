@@ -44,8 +44,11 @@ Duplicar para cada sessão significativa. Não preencher com estimativas ou resu
 | Pausar/retomar sem input preso | A executar | |
 | Trocar cena durante interação | A executar | |
 | Perda de foco e retorno | A executar | |
-| Barras do sistema/safe areas | A executar | |
-| Recortes/regiões de gesto | A executar | |
+| Barras de status/navegação ocultas conforme ADR-0003 | A executar | |
+| Política imersiva consistente em menus e gameplay | A executar | |
+| Opção/configuração Tela cheia permanece desligada/ausente | A executar | |
+| Revelação temporária de barras pelo Android e retorno ao modo imersivo | A executar | |
+| Safe areas, recortes e regiões de gesto | A executar | |
 
 ## Métricas
 
