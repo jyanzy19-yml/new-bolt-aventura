@@ -9,19 +9,25 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 4. [Personagens, inimigos e chefes](game-design/03-character-bible.md)
 5. [Sistemas de gameplay](game-design/04-gameplay-systems.md)
 6. [Padrão de level design](game-design/05-level-design-standard.md)
-7. [UI/UX e acessibilidade](game-design/06-ui-ux.md)\n8. [Direção de arte e áudio](game-design/07-art-audio-direction.md)
+7. [UI/UX e acessibilidade](game-design/06-ui-ux.md)
+8. [Direção de arte e áudio](game-design/07-art-audio-direction.md)
 
 ## Engenharia
 - [Princípios de arquitetura Godot](technical/00-architecture-principles.md)
 - [Especificação Android e desempenho](technical/01-android-performance.md)
 - [Input touch, tela e áreas seguras](technical/02-touch-and-display.md)
-- [Carregamento e recursos](technical/03-loading-and-assets.md)\n- [Contratos entre sistemas](technical/05-system-contracts.md)
+- [Carregamento e recursos](technical/03-loading-and-assets.md)
+- [Contratos entre sistemas](technical/05-system-contracts.md)
 
 ## Produção e qualidade
-- [Roadmap e gates](production/roadmap.md)\n- [Gestão de mudanças](production/change-management.md)
+- [Roadmap e gates](production/roadmap.md)
+- [Gestão de mudanças](production/change-management.md)
 - [Definition of Done](production/definition-of-done.md)
 - [Matriz de QA](qa/test-matrix.md)
-- [Modelo de bug report](qa/bug-report-template.md)\n- [Captura de performance](qa/performance-capture-template.md)\n- [Relatório de validação do ecossistema](production/validation-report.md)\n- [Estado da etapa](production/stage-status.md)
+- [Modelo de bug report](qa/bug-report-template.md)
+- [Captura de performance](qa/performance-capture-template.md)
+- [Relatório de validação do ecossistema](production/validation-report.md)
+- [Estado da etapa](production/stage-status.md)
 - [Registro de decisões](decisions/README.md)
 - [Modelos de trabalho](templates/README.md)
 
@@ -32,7 +38,12 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - **A definir:** informação ausente; não inventar.
 - **Validado:** comprovado por inspeção ou teste identificável.
 
-## Automação e colaboração\n- Validador local: `scripts/validate_project_docs.py`.\n- CI: `.github/workflows/docs-validation.yml`.\n- Modelos de issue e pull request: `.github/ISSUE_TEMPLATE/` e `.github/PULL_REQUEST_TEMPLATE.md`.\n\nAtualize este índice quando documentos forem adicionados ou movidos. Use links relativos e confira se todos resolvem.
+## Automação e colaboração
+- Validador local: `scripts/validate_project_docs.py`.
+- CI: `.github/workflows/docs-validation.yml`.
+- Modelos de issue e pull request: `.github/ISSUE_TEMPLATE/` e `.github/PULL_REQUEST_TEMPLATE.md`.
+
+Atualize este índice quando documentos forem adicionados ou movidos. Use links relativos e confira se todos resolvem.
 
 
 ## Referências complementares
