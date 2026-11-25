@@ -91,3 +91,13 @@ NEXT EXACT ACTION:
 ## 7. Critério de sessão encerrada corretamente
 
 Uma sessão está pronta para handoff quando o trabalho está commitado ou suas alterações não commitadas estão explicitamente descritas, os testes estão registrados, os riscos estão identificados e a próxima ação pode ser executada sem depender da memória da conversa.
+
+
+## 8. Snapshot mais recente após os controles adicionais
+
+- Árvore Git verificada: 222 entradas.
+- Skills: 35; agentes: 8; comandos: 6; documentos Markdown em docs/: 37.
+- Rastreador: 24 IDs SYS e 42 IDs de fase W1-L1 a W7-L6; IDs únicos confirmados.
+- Novos arquivos e links de navegação recuperados do GitHub.
+- GitHub Actions run #51: SUCCESS para validação documental no commit b07fe549949def93fbca0b68a00a346a585ce1fc.
+- Ainda sem project.godot, cenas .tscn ou scripts .gd de gameplay BOLT na árvore verificada.
