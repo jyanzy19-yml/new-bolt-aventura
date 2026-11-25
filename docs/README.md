@@ -42,6 +42,7 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 ## Produção e qualidade
 - [Roadmap e gates](production/roadmap.md)
 - [Protocolo de qualidade](production/quality-control-protocol.md)
+- [Protocolo colaborativo Claude Code + ChatGPT](production/COLLABORATIVE_DEVELOPMENT_PROTOCOL.md) — papéis, handoff, revisão independente, correções e critérios de fechamento.
 - [Continuidade entre sessões](production/CONTINUITY.md)
 - [Rastreador de implementação — 24 sistemas e 42 fases](production/implementation-tracker.md)
 - [Gestão de mudanças](production/change-management.md)
