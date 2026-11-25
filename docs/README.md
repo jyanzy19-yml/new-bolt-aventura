@@ -41,6 +41,9 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 
 ## Produção e qualidade
 - [Roadmap e gates](production/roadmap.md)
+- [Protocolo de qualidade](production/quality-control-protocol.md)
+- [Continuidade entre sessões](production/CONTINUITY.md)
+- [Rastreador de implementação — 24 sistemas e 42 fases](production/implementation-tracker.md)
 - [Gestão de mudanças](production/change-management.md)
 - [Definition of Done](production/definition-of-done.md)
 - [Matriz de QA](qa/test-matrix.md)
@@ -63,6 +66,7 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - Validador local: `scripts/validate_project_docs.py`.
 - CI: `.github/workflows/docs-validation.yml`.
 - Modelos de issue e pull request: `.github/ISSUE_TEMPLATE/` e `.github/PULL_REQUEST_TEMPLATE.md`.
+- Comandos Claude Code: `/bolt-audit`, `/bolt-plan`, `/bolt-qa`, `/bolt-android-review`, `/bolt-continue` e `/bolt-release-check`.
 
 Atualize este índice quando documentos forem adicionados ou movidos. Use links relativos e confira se todos resolvem.
 
