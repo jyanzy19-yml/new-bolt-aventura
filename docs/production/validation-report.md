@@ -65,3 +65,8 @@ A árvore continua sem project.godot, sem cenas .tscn e sem scripts .gd de gamep
 Foi confirmada a presença dos novos arquivos pela árvore Git e os arquivos de orientação foram recuperados após a atualização. Não foi possível executar o validador Python em checkout local nesta sessão nem confirmar uma execução verde do GitHub Actions. Não foram executados testes Godot, export Android ou testes em aparelho físico.
 
 **Conclusão:** os controles de documentação, continuidade e rastreamento foram adicionados e integrados estruturalmente. A implementação do jogo continua pendente e deve começar pela fundação Godot conforme a diretiva from-zero.
+
+
+### CI documental — execução observada
+
+A execução #51 do workflow BOLT documentation validation, no commit b07fe549949def93fbca0b68a00a346a585ce1fc, foi consultada no GitHub Actions. O job Validate project documentation terminou com SUCCESS e a etapa Validate Claude metadata and local links também terminou com SUCCESS. Isso comprova que o script documental atual passou nessa execução; não comprova compilação, execução do Godot, testes de gameplay ou validação Android.
