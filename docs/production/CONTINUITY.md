@@ -101,3 +101,14 @@ Uma sessão está pronta para handoff quando o trabalho está commitado ou suas 
 - Novos arquivos e links de navegação recuperados do GitHub.
 - GitHub Actions run #51: SUCCESS para validação documental no commit b07fe549949def93fbca0b68a00a346a585ce1fc.
 - Ainda sem project.godot, cenas .tscn ou scripts .gd de gameplay BOLT na árvore verificada.
+
+
+## 9. Expansão da biblioteca de skills — 2026-11-25
+
+- Adicionada `.claude/skills/godot-project-structure/SKILL.md`.
+- Skill original orientada ao BOLT, inspirada na abordagem Function First apresentada por grndctrl/godot-skills; nenhum texto ou script externo foi copiado.
+- O catálogo agora registra 36 skills: 26 da coleção comunitária Apache-2.0 já existente, 1 adaptação original de estrutura Godot e 9 skills originais BOLT.
+- Router, CLAUDE.md, AGENTS.md, README.md e docs/README.md foram integrados ao novo fluxo.
+- A skill exige inspeção do projeto real, leitura das ADRs e migração em lotes; não cria uma estrutura fictícia nem autoriza reorganização ampla automaticamente.
+- A skill complementa a biblioteca existente; não foram importadas skills duplicadas de gameplay, QA ou profiling.
+- Verificações Godot ainda não aplicáveis: a árvore continua sem projeto executável, salvo confirmação posterior em nova inspeção.
