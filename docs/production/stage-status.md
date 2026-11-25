@@ -74,3 +74,12 @@ Os novos documentos foram integrados a MASTER_DIRECTIVE.md, CLAUDE.md, AGENTS.md
 - Job: Validate project documentation — SUCCESS.
 - Etapa: Validate Claude metadata and local links — SUCCESS.
 - Isso valida metadados Claude e links Markdown locais conforme o script atual. Não executa Godot, gameplay, export Android ou testes em aparelho.
+
+
+## Expansão de skills — 2026-11-25
+
+- Biblioteca ampliada de 35 para 36 skills.
+- Nova skill: `.claude/skills/godot-project-structure/SKILL.md`, com orientações de arquitetura funcional, posicionamento de arquivos, dependências e migração segura.
+- Conteúdo escrito especificamente para BOLT, com referência de inspiração a grndctrl/godot-skills; sem cópia de código/texto upstream.
+- Catálogo, router, CLAUDE.md, AGENTS.md, README.md e índice docs/README.md atualizados.
+- A expansão é documental. Não cria projeto Godot nem valida cenas, scripts de gameplay, export ou APK.
