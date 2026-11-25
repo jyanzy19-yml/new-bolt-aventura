@@ -48,3 +48,14 @@ For each substantial task, report:
 - Tests actually executed and results.
 - Tests not executed and why.
 - Risks, blockers and next gate.
+
+## Mandatory from-zero production mandate
+
+The mission is to **create BOLT · AVENTURA from scratch as a complete, playable Godot 4.x Android game**. This repository currently provides production documentation and agent tooling; do not assume a runnable Godot project exists. The documentation is the product specification, not the implementation.
+
+Before coding, read `docs/production/from-zero-implementation-directive.md` in full, together with `MASTER_DIRECTIVE.md` and the required project documents. Create `project.godot`, scenes, GDScript, Resources/data, UI, gameplay systems, content, tests and Android export configuration as required. Do not stop after audit, planning, architecture or a vertical slice. Those are quality gates inside a continuous implementation mission; proceed through the seven worlds and 42 planned phases to a complete release candidate.
+
+The user has authorized implementation of the documented scope. Do not ask permission for ordinary in-scope implementation. Preserve approved canon and ADRs. Keep unresolved creative details explicitly provisional and isolated; do not canonize them. Ask only when a material decision is not covered by approved documentation, when the user must provide credentials/signing material, or when a genuine external blocker prevents progress. Continue independent work while blocked.
+
+Never report a feature as implemented unless it exists in the project; never report a test, APK, device validation, compatibility or performance result unless actually evidenced. Update production status and leave a precise continuation point at each session boundary.
+
