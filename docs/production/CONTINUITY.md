@@ -53,7 +53,7 @@ Não deixar campos como "feito" sem indicar arquivo, commit ou evidência.
 
 1. Ler COLLABORATION_STATE.md e confirmar agente, etapa e estado.
 2. Reconfirmar HEAD, branch, PRs, diff e arquivos reais.
-3. Se Etapa 0 estiver PENDING, Claude Code executa a fundação Godot definida no estado canônico, sem antecipar gameplay.
+3. Se Etapa 0 estiver PENDING, Claude Code lê e executa `ETAPA_0_CLAUDE_CHECKLIST.md` e cria a fundação Godot definida no estado canônico, sem antecipar gameplay.
 4. Detectar a versão estável Godot 4.x realmente instalada e registrar .godot-version somente após confirmar a versão usada.
 5. Criar/validar project.godot, configuração Android/paisagem, input map e cena inicial funcional.
 6. Executar import/parse headless quando possível; registrar o que não foi executado.
