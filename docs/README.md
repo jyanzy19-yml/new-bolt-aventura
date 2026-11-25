@@ -8,8 +8,10 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - [MASTER_DIRECTIVE.md](../MASTER_DIRECTIVE.md) — diretriz central para criação, produção, implementação e validação. Leia primeiro.
 - [Master Game Design & Gameplay Prompt](prompts/master-game-design-and-gameplay-prompt.md) — diretiva detalhada de design e gameplay; deve ser lida em conjunto com as bíblias e decisões.
 - [CLAUDE.md](../CLAUDE.md) — regras permanentes de trabalho do Claude Code.
+- [AGENTS.md](../AGENTS.md) — regras para agentes de implementação e revisão.
 
 ## Mapa das oito áreas mestras
+
 | Área | Documento-fonte |
 |---|---|
 | Diretriz central | [MASTER_DIRECTIVE.md](../MASTER_DIRECTIVE.md) |
@@ -22,6 +24,7 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 | QA & Acceptance | [Matriz de QA](qa/test-matrix.md), [Definition of Done](production/definition-of-done.md) |
 
 ## Design
+
 1. [Visão geral e pilares](game-design/00-game-overview.md)
 2. [Bíblia narrativa](game-design/01-narrative-bible.md)
 3. [Bíblia dos sete mundos](game-design/02-world-bible.md)
@@ -31,7 +34,14 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 7. [UI/UX e acessibilidade](game-design/06-ui-ux.md)
 8. [Direção de arte e áudio](game-design/07-art-audio-direction.md)
 
-## Skills e agentes\n- [Catálogo de skills](skills-catalog.md) — conjunto selecionado, regras de carregamento e proveniência.\n- Skills Claude Code: `.claude/skills/`; carregar apenas as necessárias.\n\n## Engenharia
+## Skills e agentes
+
+- [Catálogo de skills](skills-catalog.md) — conjunto selecionado, regras de carregamento e proveniência.
+- Skills Claude Code: .claude/skills/; carregar apenas as necessárias.
+- Agentes consultivos: .claude/agents/.
+
+## Engenharia
+
 - [Princípios de arquitetura Godot](technical/00-architecture-principles.md)
 - [Especificação Android e desempenho](technical/01-android-performance.md)
 - [Input touch, tela e áreas seguras](technical/02-touch-and-display.md)
@@ -40,9 +50,13 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - [Contratos entre sistemas](technical/05-system-contracts.md)
 
 ## Produção e qualidade
+
 - [Roadmap e gates](production/roadmap.md)
 - [Protocolo de qualidade](production/quality-control-protocol.md)
-- [Protocolo de desenvolvimento alternado Claude Code ↔ ChatGPT](production/COLLABORATIVE_DEVELOPMENT_PROTOCOL.md) — implementação em pingue-pongue: Claude Etapa 0, ChatGPT Etapa 1, Claude Etapa 2, ChatGPT Etapa 3 e assim sucessivamente; cada responsável audita/corrige a etapa anterior antes de implementar a sua.
+- [Protocolo de desenvolvimento alternado Claude Code ↔ ChatGPT](production/COLLABORATIVE_DEVELOPMENT_PROTOCOL.md) — Claude Etapa 0, ChatGPT Etapa 1, Claude Etapa 2, ChatGPT Etapa 3 e assim sucessivamente.
+- [Estado canônico da colaboração](production/COLLABORATION_STATE.md) — etapa atual, responsável, commit-base e próximo turno.
+- [Configuração de acesso dos agentes](production/AGENT_ACCESS_SETUP.md) — diferença entre contexto de leitura e acesso real de escrita/commit.
+- [Template obrigatório de handoff](production/HANDOFF_TEMPLATE.md) — transferência verificável entre os agentes.
 - [Continuidade entre sessões](production/CONTINUITY.md)
 - [Rastreador de implementação — 24 sistemas e 42 fases](production/implementation-tracker.md)
 - [Gestão de mudanças](production/change-management.md)
@@ -56,6 +70,7 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - [Modelos de trabalho](templates/README.md)
 
 ## Status de informação
+
 - **Confirmado:** declarado explicitamente pelo usuário ou registrado em decisão aprovada.
 - **Requisito:** critério obrigatório ainda sujeito a verificação de implementação.
 - **Proposta:** solução sugerida, ainda não aprovada.
@@ -64,13 +79,16 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - **Validado:** comprovado por teste identificável.
 
 ## Automação e colaboração
-- Validador local: `scripts/validate_project_docs.py`.
-- CI: `.github/workflows/docs-validation.yml`.
-- Modelos de issue e pull request: `.github/ISSUE_TEMPLATE/` e `.github/PULL_REQUEST_TEMPLATE.md`.
-- Comandos Claude Code: `/bolt-audit`, `/bolt-plan`, `/bolt-qa`, `/bolt-android-review`, `/bolt-continue` e `/bolt-release-check`.
+
+- Validador local: scripts/validate_project_docs.py.
+- CI documental: .github/workflows/docs-validation.yml.
+- Modelos de issue e pull request: .github/ISSUE_TEMPLATE/ e .github/PULL_REQUEST_TEMPLATE.md.
+- Comandos Claude Code: /bolt-audit, /bolt-plan, /bolt-qa, /bolt-android-review, /bolt-continue e /bolt-release-check.
+- O usuário inicia manualmente o agente indicado no estado canônico; não há transferência automática de sessão.
 
 Atualize este índice quando documentos forem adicionados ou movidos. Use links relativos e confira se todos resolvem.
 
 ## Referências complementares
+
 - [Relatório de validação estrutural](production/validation-report.md)
 - [Checklist de release Android](production/android-release-checklist.md)
