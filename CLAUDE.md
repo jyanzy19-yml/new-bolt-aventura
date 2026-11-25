@@ -47,6 +47,10 @@ Choose tests that match the change. For gameplay changes, verify movement, colli
 Skills are located in `.claude/skills/<skill-name>/SKILL.md`. Start with `router` when a game-development task begins or changes category, then read only the minimum relevant skills. The skills are technical references, not permission to expand the task. Check every API against the project's actual Godot version.
 
 
+
+## Master game design directive
+For any task involving story, worlds, phases, bosses, NPCs, cutscenes, menus, HUD, tutorial, gameplay, progression or difficulty, read `docs/prompts/master-game-design-and-gameplay-prompt.md` together with the relevant `docs/game-design/` specifications. It consolidates approved product constraints and production requirements; preserve the canon/proposal distinction and do not treat planned content as implemented.
+
 ## Documentation and specialist agents
 - Start from `docs/README.md`; consult the relevant game-design, technical, production and QA documents before implementation.
 - Treat the status labels in the docs as authoritative: confirmed, requirement, proposal, to be defined and validated.
