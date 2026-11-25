@@ -14,7 +14,7 @@ O gameplay deve consumir ações lógicas, não depender diretamente de um únic
 - Garantir que pausa/configurações não deixem comandos de gameplay ativos por trás.
 
 ## 3. Orientação e proporção
-A orientação oficial deve ser confirmada a partir das decisões aprovadas e da configuração real do projeto. Testar proporções comuns e telas alongadas; não distorcer o mundo para preencher espaço. Definir política de letterbox, câmera, UI e áreas extras.
+A orientação oficial do produto é **paisagem**. Configurar o projeto Android para essa orientação e testar proporções comuns e telas alongadas; não distorcer o mundo para preencher espaço. Definir política de letterbox, câmera, UI e áreas extras sem alterar a orientação do dispositivo.
 
 ## Decisão de exibição aprovada
 
