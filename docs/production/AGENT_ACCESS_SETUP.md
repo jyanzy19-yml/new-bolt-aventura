@@ -11,6 +11,7 @@ Repositório oficial: jyanzy19-yml/new-bolt-aventura (privado). Branch de integr
 - **ChatGPT:** a conexão GitHub disponível nesta sessão confirmou permissões de leitura, escrita e administração no repositório. Isso não garante que qualquer outra sessão/dispositivo mantenha as mesmas permissões.
 - **Claude:** o acesso efetivo de leitura/escrita não pode ser inferido a partir da conexão do ChatGPT. O usuário precisa conectar/autenticar o Claude separadamente.
 - **Automação:** não há workflow Claude configurado no repositório. A colaboração manual por commits não exige criar um agente automático nem adicionar secrets.
+- **Proteção Git:** a branch main foi observada sem proteção de branch. A regra de escritor único está documentada, mas não é tecnicamente imposta pelo GitHub. A conexão disponível permite consultar regras, mas não oferece uma ação de escrita para configurar branch protection; essa configuração deve ser feita pelo proprietário nas configurações do repositório se desejar exigir PR e checks.
 
 ## Escolha o modo correto do Claude
 
