@@ -8,7 +8,7 @@
 O produto foi definido para ser desenvolvido e executado como aplicativo Android empacotado. Navegador e navegador móvel não são plataformas-alvo.
 
 ## Decisão
-Priorizar Android em arquitetura, input, interface, desempenho, exportação, QA e release. Ferramentas desktop podem ser usadas para desenvolvimento e validação, mas não alteram a plataforma final.
+Priorizar Android em arquitetura, input, interface, desempenho, exportação, QA e release. A orientação de gameplay e apresentação do produto é paisagem (landscape). Ferramentas desktop podem ser usadas para desenvolvimento e validação, mas não alteram a plataforma final.
 
 ## Consequências
 - Testes touch e em dispositivos Android são essenciais.
