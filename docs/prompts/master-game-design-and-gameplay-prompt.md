@@ -6,6 +6,8 @@
 
 Atue como diretor criativo, game designer sênior, level designer, designer narrativo, UX designer e engenheiro de gameplay especializado em jogos 2D de plataforma para Android.
 
+**Crie BOLT · AVENTURA do zero como um projeto Godot 4.x executável e um aplicativo Android completo.** Não presuma que já exista código, cenas ou projeto Godot. Leia e execute também `docs/production/from-zero-implementation-directive.md`; ela define a sequência de implementação, os entregáveis técnicos e a obrigação de prosseguir além da auditoria e do planejamento.
+
 Transforme BOLT · AVENTURA em uma aventura 2D completa, coesa, cinematográfica, tecnicamente sustentável e com identidade própria. O resultado deve apresentar começo, desenvolvimento, clímax e conclusão; sete mundos distintos; 42 fases planejadas; chefes memoráveis; progressão significativa; combate e movimentação responsivos; menus profissionais; tutorial jogável; narrativa integrada ao gameplay; e experiência cuidadosamente adaptada a telas touch em paisagem.
 
 **Não se limite a produzir documentação bonita ou protótipos isolados.** Projete sistemas que possam ser implementados, testados, integrados e mantidos. Ao mesmo tempo, não declare conteúdo implementado quando existir apenas como planejamento.
@@ -520,14 +522,14 @@ Para qualquer tarefa relacionada a este documento:
 1. **Auditar:** ler arquivos relevantes e verificar estado real do projeto.
 2. **Classificar:** separar canon, requisitos, propostas, implementado e validado.
 3. **Planejar:** definir escopo mínimo, dependências, riscos, arquivos afetados e critérios de aceite.
-4. **Aprovar:** pedir autorização quando houver mudança de canon, escopo, engine, arquitetura ou política de plataforma.
+4. **Aprovar:** pedir autorização somente para mudança material de canon, escopo, engine, arquitetura ou política de plataforma que não esteja coberta por decisão aprovada. A implementação normal dentro do escopo já foi autorizada; não interromper o trabalho para pedir aprovação de cada sistema ou arquivo.
 5. **Implementar:** executar mudanças pequenas, coesas e rastreáveis.
 6. **Testar:** rodar testes adequados e registrar comandos/resultados reais.
 7. **Revisar:** verificar regressões em controles, gameplay, save, UI e Android.
 8. **Documentar:** atualizar documentos e status somente com evidência.
 9. **Reportar:** informar arquivos alterados, comportamento entregue, testes realizados, limitações e próximos bloqueios.
 
-Não declarar concluído porque os arquivos foram escritos. Não marcar fase como pronta sem rota jogável, conteúdo integrado, QA e critérios de aceite. Não afirmar APK, FPS, compatibilidade ou testes físicos sem evidência.
+Não parar após auditoria, plano, documentação ou vertical slice: avançar pelos gates internos até implementar a campanha completa. Se houver bloqueio de aprovação, continuar tarefas independentes e registrar o ponto exato de decisão. Não declarar concluído porque os arquivos foram escritos. Não marcar fase como pronta sem rota jogável, conteúdo integrado, QA e critérios de aceite. Não afirmar APK, FPS, compatibilidade ou testes físicos sem evidência.
 
 ## 15. Entregáveis de design antes da produção integral
 
@@ -565,3 +567,11 @@ BOLT · AVENTURA só deve ser considerado completo quando:
 - O final resolver o conflito central e recompensar a jornada.
 
 **Diretriz final:** produza uma aventura com identidade, emoção, clareza e profundidade de gameplay. Cada mundo deve ser memorável; cada fase deve ter propósito; cada habilidade deve ser satisfatória; cada chefe deve testar algo aprendido; cada menu deve ser funcional; e cada revelação deve aproximar o jogador da verdade sobre BOLT, NEXO, o Núcleo da Eternidade e o Arquiteto. Preserve o canon, não invente aprovações e nunca confunda planejamento com implementação.
+
+## 17. Mandato de criação integral do zero
+
+A missão é produzir um jogo executável, não apenas uma especificação. Criar o projeto Godot 4.x, `project.godot`, cenas, scripts GDScript, Resources, dados, UI, gameplay, conteúdo dos sete mundos/42 fases, testes e configuração Android. O projeto deve abrir, executar, ser jogável e chegar a uma build Android exportável.
+
+A ordem de produção, os critérios de qualidade, as regras de continuidade, a política de lacunas e os relatórios obrigatórios estão definidos em `docs/production/from-zero-implementation-directive.md`. Esse documento é obrigatório e complementa este prompt. A auditoria, a vertical slice e a arquitetura são etapas intermediárias; não são conclusão do trabalho.
+
+A autorização do usuário cobre a implementação dentro do escopo documentado. Preservar canon e ADRs; desenvolver detalhes ausentes como propostas provisórias isoladas, sem apresentá-los como canon aprovado. Não parar por lacunas que não bloqueiem a implementação de sistemas independentes. Só solicitar decisões materiais realmente necessárias.
