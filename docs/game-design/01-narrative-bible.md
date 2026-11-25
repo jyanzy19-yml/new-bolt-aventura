@@ -47,8 +47,31 @@ O jogador deve sentir que acordou em um lugar que precisa compreender; que a má
 - Estado inicial e mudanças após eventos.
 - Linhas com IDs; função de gameplay; repetição e encerramento da conversa.
 
-## 7. Questões pendentes — não preencher por suposição
-Nome e personalidade formal do protagonista; nome, origem e voz da máquina temporal; causa da destruição; antagonismo central; nomes, eras, ordem e tema dos mundos; origem e funcionamento dos fragmentos; chefes e motivações; destino dos NPCs; revelação final e epílogo.
+## 7. Canon narrativo consolidado
 
-## 8. Controle de canon
+Os elementos abaixo já estão definidos no prompt mestre de design e devem ser tratados como canon de produção, não como lacunas:
+
+- O **Grande Colapso** rompeu o **Núcleo da Eternidade** e desestabilizou a continuidade entre universos.
+- **BOLT** desperta sem memória nas ruínas de **Cybercore**. Sua função original está ligada à preservação dos universos.
+- A máquina temporal **NEXO** desperta e se une a BOLT, permitindo atravessar eras e mundos. NEXO está ligada ao mistério dos fragmentos.
+- O antagonista central é **o Arquiteto**, que deseja impor uma única realidade e eliminar a coexistência entre universos em nome de uma ordem absoluta.
+- A jornada reúne sete fragmentos, na ordem e nos mundos definidos na Bíblia dos Mundos: Origem, Memória, Verdade, Sombra, Luz, Ilusão e Equilíbrio.
+- A sequência de abertura é: **cinemática de abertura → tutorial guiado por robô mensageiro com balões de fala → início da campanha em Cybercore**.
+- O final deve resolver o conflito entre controle absoluto e coexistência, dar consequência à reunião dos sete fragmentos e encerrar o arco principal sem depender de uma continuação.
+
+A causa mais profunda do Grande Colapso, a cadeia completa de eventos que levou à ruptura e a história integral do Arquiteto podem receber aprofundamento narrativo, mas qualquer detalhe novo além do que está estabelecido deve permanecer identificado como proposta até aprovação.
+
+## 8. Questões pendentes — não preencher por suposição
+
+- Personalidade, voz/ausência de voz, aparência final, expressões e arco emocional detalhado de BOLT.
+- Forma visual, personalidade, voz, origem específica, limites e capacidades detalhadas de NEXO.
+- Identidade pessoal, aparência, história completa, motivações secundárias e caracterização do Arquiteto além do objetivo central já definido.
+- Origem técnica e funcionamento detalhado dos sete fragmentos; regras exatas da viagem temporal/dimensional.
+- Nomes próprios, biografias e diálogos de NPCs ainda não aprovados.
+- Diálogos finais, encenação exata das cutscenes, revelações intermediárias e epílogo detalhado.
+- Detalhes de lore de cada mundo que não estejam definidos na Bíblia dos Mundos.
+
+Não tratar os sete mundos, a ordem dos fragmentos, o Grande Colapso, o Núcleo da Eternidade, NEXO ou o Arquiteto como pendências gerais: esses elementos já estão definidos no prompt mestre e devem permanecer consistentes em todos os documentos.
+
+## 9. Controle de canon
 Use os rótulos **CANON APROVADO**, **PROPOSTA**, **RASCUNHO** e **DESCARTADO**. Uma proposta só vira canon após aprovação explícita. Ao alterar canon, registre a decisão em docs/decisions e atualize os documentos dependentes.
