@@ -25,6 +25,12 @@
 - Criado script de validação estrutural e workflow GitHub Actions para validar metadados Claude e links Markdown locais.
 - Criados formulários de issue para bugs e propostas, além de template de pull request.
 
+## Atualização documental — mandato de criação do zero
+
+Nesta revisão foram adicionados o mandato operacional de implementação integral do zero, referências obrigatórias em `MASTER_DIRECTIVE.md`, `CLAUDE.md`, `AGENTS.md`, READMEs e roadmap; reconciliação entre o prompt mestre e as Bíblias narrativa/mundos/personagens; e ADR-0003 para a política de barras do sistema Android. Os arquivos foram escritos por commits no GitHub e serão verificados por recuperação após a gravação.
+
+Esta revisão não implementou código Godot, cenas, assets do jogo, build ou APK. A verificação desta etapa é documental e não substitui execução do CI, testes Godot ou validação Android.
+
 ## Método e limites
 A validação realizada nesta conversa foi por leitura dos arquivos recuperados do GitHub, inspeção de conteúdo/frontmatter e verificação de existência dos destinos listados no índice principal de documentação. Não foi executado o script Python em checkout local nem foi observado um resultado de execução do GitHub Actions; portanto, o CI recém-criado aguarda sua primeira execução confirmada.
 
