@@ -2,8 +2,22 @@
 
 Este índice organiza a documentação de design, narrativa, tecnologia, produção e qualidade. Os documentos distinguem decisões confirmadas, requisitos, propostas e informações ainda pendentes.
 
-## Prompts mestres
-- [Master Game Design & Gameplay Directive](prompts/master-game-design-and-gameplay-prompt.md) — prompt mestre para história, sete mundos, 42 fases, menus, HUD, tutorial, gameplay, progressão e QA.
+## Ponto de entrada obrigatório
+- [MASTER_DIRECTIVE.md](../MASTER_DIRECTIVE.md) — diretriz central para criação, produção, implementação e validação. Leia primeiro.
+- [Master Game Design & Gameplay Prompt](prompts/master-game-design-and-gameplay-prompt.md) — diretiva detalhada de design e gameplay; deve ser lida em conjunto com as bíblias e decisões.
+- [CLAUDE.md](../CLAUDE.md) — regras permanentes de trabalho do Claude Code.
+
+## Mapa das oito áreas mestras
+| Área | Documento-fonte |
+|---|---|
+| Diretriz central | [MASTER_DIRECTIVE.md](../MASTER_DIRECTIVE.md) |
+| Game Bible | [Bíblia narrativa](game-design/01-narrative-bible.md), [personagens](game-design/03-character-bible.md) |
+| Worlds & Level Design | [Bíblia dos mundos](game-design/02-world-bible.md), [padrão de fases](game-design/05-level-design-standard.md) |
+| Gameplay Specification | [Sistemas de gameplay](game-design/04-gameplay-systems.md) |
+| UI/UX Specification | [UI/UX e acessibilidade](game-design/06-ui-ux.md) |
+| Technical Specification | Documentos em [technical](technical/) |
+| Production Roadmap | [Roadmap](production/roadmap.md), [status da etapa](production/stage-status.md), [gestão de mudanças](production/change-management.md) |
+| QA & Acceptance | [Matriz de QA](qa/test-matrix.md), [Definition of Done](production/definition-of-done.md) |
 
 ## Design
 1. [Visão geral e pilares](game-design/00-game-overview.md)
@@ -20,6 +34,7 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - [Especificação Android e desempenho](technical/01-android-performance.md)
 - [Input touch, tela e áreas seguras](technical/02-touch-and-display.md)
 - [Carregamento e recursos](technical/03-loading-and-assets.md)
+- [Checklist de build Android](technical/04-android-build-checklist.md)
 - [Contratos entre sistemas](technical/05-system-contracts.md)
 
 ## Produção e qualidade
@@ -35,11 +50,12 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - [Modelos de trabalho](templates/README.md)
 
 ## Status de informação
-- **Confirmado:** declarado explicitamente no contexto aprovado.
-- **Requisito:** critério que o produto deve cumprir.
-- **Proposta:** solução recomendada, ainda sujeita a aprovação.
+- **Confirmado:** declarado explicitamente pelo usuário ou registrado em decisão aprovada.
+- **Requisito:** critério obrigatório ainda sujeito a verificação de implementação.
+- **Proposta:** solução sugerida, ainda não aprovada.
 - **A definir:** informação ausente; não inventar.
-- **Validado:** comprovado por inspeção ou teste identificável.
+- **Implementado:** presente no projeto executável e inspecionado.
+- **Validado:** comprovado por teste identificável.
 
 ## Automação e colaboração
 - Validador local: `scripts/validate_project_docs.py`.
@@ -48,10 +64,6 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 
 Atualize este índice quando documentos forem adicionados ou movidos. Use links relativos e confira se todos resolvem.
 
-
 ## Referências complementares
 - [Relatório de validação estrutural](production/validation-report.md)
-- [Checklist de build Android](technical/04-android-build-checklist.md)
-- [Status da etapa](production/stage-status.md)
 - [Checklist de release Android](production/android-release-checklist.md)
-- [Template de captura de performance](qa/performance-capture-template.md)
