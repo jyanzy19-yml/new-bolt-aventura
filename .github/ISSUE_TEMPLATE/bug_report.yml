@@ -1,0 +1,61 @@
+name: Bug report
+description: Report a reproducible BOLT gameplay, UI, Android or stability problem.
+title: "[BUG] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "Report only what you observed. Do not include passwords, signing keys or private account data."
+  - type: input
+    id: build
+    attributes:
+      label: Game build / commit
+      placeholder: "Commit SHA or build identifier"
+    validations:
+      required: false
+  - type: input
+    id: device
+    attributes:
+      label: Android device and Android version
+      placeholder: "Device model, SoC, RAM, Android version"
+    validations:
+      required: false
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - Blocker
+        - Critical
+        - Major
+        - Minor
+        - Cosmetic
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Include exact steps and how often it occurs.
+      placeholder: "1. ...\n2. ...\n3. ..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed result
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Logs, screenshots or video
+      description: Remove personal information before attaching.
+    validations:
+      required: false
