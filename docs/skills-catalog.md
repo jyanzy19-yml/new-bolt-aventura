@@ -81,3 +81,27 @@ Eles apoiam auditorias e recomendações; não substituem aprovação do usuári
 ## Documentação de produto e engenharia
 
 O índice em docs/README.md conecta as bíblias de design, especificações Android/Godot, roadmap, critérios de conclusão, matriz de QA, templates e registros de decisão. A versão atual não fixa a versão do Godot nem preenche os nomes dos sete mundos sem fonte aprovada.
+
+
+## Skills originais específicas do BOLT (9)
+| Skill | Uso |
+|---|---|
+| `bolt-android-touch` | Multitouch, buffer de input, salto/dash, interrupções e safe areas Android. |
+| `bolt-performance-validation` | Baselines, frame time, CPU/GPU, memória, loading e validação térmica. |
+| `bolt-boss-encounters` | Fases, telegraphs, arenas, fragmentos e justiça dos chefes. |
+| `bolt-cinematic-sequences` | Cutscenes, câmera, diálogo, skip/replay e flags narrativas. |
+| `bolt-world-continuity` | Continuidade dos sete mundos, fragmentos, NPCs e progressão. |
+| `bolt-save-integrity` | Save versionado, checkpoints, migração, recuperação e integridade. |
+| `bolt-mobile-ui` | HUD, menus, ergonomia touch, safe areas e acessibilidade. |
+| `bolt-content-pipeline` | Proveniência, licenças, importação, sprites, áudio e orçamento de memória. |
+| `bolt-production-gates` | Planejamento incremental, aprovações, evidências e critérios de conclusão. |
+
+Total atual: **35 skills** (26 selecionadas da coleção upstream + 9 originais BOLT).
+
+## Comandos de projeto
+- `/bolt-audit` — auditoria read-only do estado real do repositório/projeto.
+- `/bolt-plan` — plano de implementação com limites e aprovações.
+- `/bolt-qa` — matriz focada de testes e regressão.
+- `/bolt-android-review` — revisão de input, display, export e desempenho Android.
+
+Os comandos estão em `.claude/commands/` e são instruções de fluxo para Claude Code; não são agentes autônomos nem executam automaticamente testes.
