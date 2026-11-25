@@ -5,7 +5,7 @@ Framework de produção para apoiar o desenvolvimento de BOLT · AVENTURA com Cl
 ## Conteúdo do repositório
 - **35 skills:** 26 skills selecionadas da coleção comunitária de game development e 9 skills originais específicas do BOLT.
 - **8 agentes consultivos read-only:** arquitetura, gameplay, narrativa, level design, Android/performance, QA, UI/UX e direção de arte/áudio.
-- **4 comandos de fluxo de trabalho:** auditoria, planejamento, QA e revisão Android.
+- **4 comandos de fluxo de trabalho:** auditoria, planejamento, QA e revisão Android.\n- **CI documental:** validação de metadados Claude e links locais por GitHub Actions.\n- **Colaboração:** formulários GitHub para bugs/propostas e template de pull request.
 - **Bíblias de design:** visão geral, narrativa, sete mundos, personagens/inimigos/chefes, gameplay, level design, UI/UX e direção de arte/áudio.
 - **Especificações técnicas:** arquitetura, Android/performance, touch/tela/safe areas, loading/assets e contratos entre sistemas.
 - **Produção e QA:** roadmap com gates, Definition of Done, gestão de mudanças, matriz de testes, templates, decisões e checklists de release.
