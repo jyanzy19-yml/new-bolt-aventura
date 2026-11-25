@@ -31,7 +31,7 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 7. [UI/UX e acessibilidade](game-design/06-ui-ux.md)
 8. [Direção de arte e áudio](game-design/07-art-audio-direction.md)
 
-## Engenharia
+## Skills e agentes\n- [Catálogo de skills](skills-catalog.md) — conjunto selecionado, regras de carregamento e proveniência.\n- Skills Claude Code: `.claude/skills/`; carregar apenas as necessárias.\n\n## Engenharia
 - [Princípios de arquitetura Godot](technical/00-architecture-principles.md)
 - [Especificação Android e desempenho](technical/01-android-performance.md)
 - [Input touch, tela e áreas seguras](technical/02-touch-and-display.md)
