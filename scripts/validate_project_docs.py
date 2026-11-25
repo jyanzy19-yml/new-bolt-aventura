@@ -103,7 +103,7 @@ def main() -> int:
             ERRORS.append(f"Required collaboration document is missing: {relative}")
 
     docs_index = read(ROOT / "docs/README.md")
-    if r"## Skills e agentes\\n" in docs_index:
+    if r"## Skills e agentes\n" in docs_index:
         ERRORS.append("docs/README.md: literal escaped newline found in Skills section")
 
     print("BOLT documentation validation")
