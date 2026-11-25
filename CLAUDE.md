@@ -63,3 +63,8 @@ Never report a feature as implemented unless it exists in the project; never rep
 ## Mandatory quality and session continuity
 
 For every substantial implementation task, follow `docs/production/quality-control-protocol.md`. Update `docs/production/implementation-tracker.md` only from evidence in the current branch. Before ending a session, update `docs/production/CONTINUITY.md` with the exact commit, changed files, tests actually run, validation level, open bugs and next executable action. On resumption, inspect Git state first; repository evidence overrides stale handoff notes. Use `/bolt-continue` to resume and `/bolt-release-check` for a read-only release-readiness audit. Do not confuse implemented with validated, or a release candidate with a published release.
+
+
+## Collaborative development with ChatGPT
+
+When the user requests the collaborative workflow, follow `docs/production/COLLABORATIVE_DEVELOPMENT_PROTOCOL.md`. Claude Code remains the primary implementer. ChatGPT is an independent reviewer when the user supplies the exact current commit/files. Do not let both systems edit the same files concurrently: implement, hand off an immutable commit and evidence, receive a prioritized review, apply or explicitly disposition findings, rerun tests, and update continuity. ChatGPT review is not a substitute for executable QA or user approval of material decisions.
