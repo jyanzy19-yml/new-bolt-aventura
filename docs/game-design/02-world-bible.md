@@ -3,7 +3,7 @@
 ## 1. Regra geral
 A aventura contém sete mundos. Cada mundo contribui para a história, oferece identidade visual e sonora própria, ensina ou aprofunda habilidades e culmina em um chefe que protege o fragmento daquele mundo.
 
-Nomes, épocas, biomas, paletas, personagens e mecânicas particulares não são preenchidos aqui porque precisam ser recuperados dos materiais aprovados ou confirmados. Os sete espaços abaixo são uma estrutura de produção, não novos nomes de canon.
+A sequência, os nomes dos sete mundos, seus fragmentos e os títulos descritivos dos guardiões estão definidos na matriz oficial abaixo e no prompt mestre. Paletas, biomas específicos, NPCs, mecânicas exclusivas e layouts detalhados devem ser desenvolvidos a partir dessas identidades; novos nomes próprios e detalhes narrativos não aprovados permanecem propostas.
 
 ## 2. Requisitos por mundo
 - Identidade visual reconhecível em silhueta, composição, paleta e materiais.
