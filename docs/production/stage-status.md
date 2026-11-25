@@ -105,3 +105,13 @@ A branch main foi inspecionada diretamente após as últimas alterações.
 - Estado inicial: Etapa 0 atribuída a Claude Code, PENDING; nenhum escritor ativo. O usuário precisa iniciar Claude e depois acionar ChatGPT quando o handoff estiver integrado em main.
 
 **Este trabalho é governança/documentação. Não cria nem valida o jogo Godot.**
+
+
+### Snapshot após integração dos controles colaborativos — 2026-11-25
+
+- Árvore main: 228 entradas.
+- 36 skills, 8 agentes, 6 comandos e 41 arquivos Markdown em docs/.
+- Um workflow documental; ainda não existe pipeline Godot/Android porque não existe projeto Godot executável.
+- Etapa 0 Claude Code: PENDING, conforme COLLABORATION_STATE.md.
+- O snapshot de produção permanece documental: sem project.godot, cenas .tscn, scripts de gameplay BOLT, export Android ou APK.
+- O resultado do workflow para o commit final desta série deve ser confirmado pelo run associado ao HEAD; sucesso em commits intermediários não substitui essa verificação.
