@@ -38,7 +38,13 @@
 | `game-ui-ux` | HUD, menus, interaction flow, readability and accessibility. |
 | `audio-design` | Music, sound effects, adaptive audio and mix design. |
 
-## Skill adicional adaptada para BOLT\n\n| Skill | Origem de referência | Uso e adaptação |\n|---|---|---|\n| `godot-project-structure` | Abordagem Function First descrita em [grndctrl/godot-skills](https://github.com/grndctrl/godot-skills) | Skill original reescrita para BOLT: organização por responsabilidade, dependências, posicionamento de arquivos e migrações seguras. Não copia scripts nem o texto da skill upstream; não impõe estrutura antes de existir um projeto Godot real. |\n\n## How Claude should load skills
+## Skill adicional adaptada para BOLT
+
+| Skill | Origem de referência | Uso e adaptação |
+|---|---|---|
+| `godot-project-structure` | Abordagem Function First descrita em [grndctrl/godot-skills](https://github.com/grndctrl/godot-skills) | Skill original reescrita para BOLT: organização por responsabilidade, dependências, posicionamento de arquivos e migrações seguras. Não copia scripts nem o texto da skill upstream; não impõe estrutura antes de existir um projeto Godot real. |
+
+## How Claude should load skills
 1. At the beginning of a new game-development task, read `router/SKILL.md`.
 2. Identify the project's actual engine/version from its files. If there is no Godot project yet, report that and treat engine API details as provisional.
 3. Read only the selected skill files needed for the current task. For example:
@@ -80,7 +86,7 @@ Eles apoiam auditorias e recomendações; não substituem aprovação do usuári
 
 ## Documentação de produto e engenharia
 
-O índice em docs/README.md conecta as bíblias de design, especificações Android/Godot, roadmap, critérios de conclusão, matriz de QA, templates e registros de decisão. A versão atual não fixa a versão do Godot nem preenche os nomes dos sete mundos sem fonte aprovada.
+O índice em docs/README.md conecta as bíblias de design, especificações Android/Godot, roadmap, critérios de conclusão, matriz de QA, templates e registros de decisão. Este catálogo não fixa a versão exata do Godot; ela será registrada após detecção no projeto real. Os nomes e a sequência dos sete mundos são canon definidos na Bíblia dos Mundos e no prompt mestre.
 
 
 ## Skills originais específicas do BOLT (9)
