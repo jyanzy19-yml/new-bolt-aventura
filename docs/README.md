@@ -36,6 +36,7 @@ Atualize este índice quando documentos forem adicionados ou movidos. Use links 
 
 
 ## Referências complementares
+- [Relatório de validação estrutural](production/validation-report.md)
 - [Checklist de build Android](technical/04-android-build-checklist.md)
 - [Status da etapa](production/stage-status.md)
 - [Checklist de release Android](production/android-release-checklist.md)
