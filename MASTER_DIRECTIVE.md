@@ -50,8 +50,8 @@ Antes de criar ou alterar conteúdo, classifique cada informação:
 
 Se dois documentos de nível semelhante discordarem, **não escolha silenciosamente**. Registre o conflito, identifique os arquivos e trechos envolvidos, indique impacto e apresente uma recomendação. Peça decisão quando a escolha alterar canon, escopo, experiência ou arquitetura.
 
-### Conflito documental conhecido a resolver
-A bíblia narrativa atual mantém como pendentes vários detalhes de origem, antagonismo, nomes, ordem e desfecho, enquanto o prompt mestre de design contém uma versão mais específica desses elementos (incluindo Grande Colapso, Núcleo da Eternidade, NEXO e Arquiteto). Até que a decisão seja reconciliada na bíblia e/ou no registro de decisões, trate os detalhes divergentes como **proposta/pendência**, não como autorização para sobrescrever o canon. Faça uma auditoria de consistência antes de expandir a narrativa.
+### Reconciliação documental concluída
+A divergência entre o prompt mestre e as Bíblias narrativa, de mundos e personagens foi corrigida nesta revisão. O Grande Colapso, Núcleo da Eternidade, BOLT, NEXO, o Arquiteto, a sequência dos sete mundos, os sete fragmentos e os títulos descritivos dos guardiões estão consolidados nas bíblias correspondentes. Detalhes de caracterização, lore secundária, paletas, NPCs e mecânicas específicas que ainda não foram definidos permanecem propostas/pendências; não os transformar em canon sem aprovação.
 
 Nunca transforme uma sugestão de Claude, agente, skill, ferramenta ou documento não aprovado em decisão do usuário.
 
