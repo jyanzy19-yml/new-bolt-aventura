@@ -9,7 +9,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: bolt-godot-validation-\${{ github.ref }}
+  group: bolt-godot-validation-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   validate:
@@ -43,20 +43,20 @@ jobs:
         if: steps.project.outputs.present == 'true'
         shell: bash
         env:
-          GODOT_VERSION: \${{ steps.project.outputs.version }}
+          GODOT_VERSION: ${{ steps.project.outputs.version }}
         run: |
-          archive="Godot_v\${GODOT_VERSION}-stable_linux.x86_64.zip"
-          url="https://github.com/godotengine/godot/releases/download/\${GODOT_VERSION}-stable/\${archive}"
+          archive="Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          url="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/${archive}"
           curl --fail --location --retry 3 "$url" --output godot.zip
           unzip -q godot.zip -d godot-bin
-          binary="godot-bin/Godot_v\${GODOT_VERSION}-stable_linux.x86_64"
+          binary="godot-bin/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
           test -f "$binary"
           chmod +x "$binary"
           echo "GODOT_BIN=$PWD/$binary" >> "$GITHUB_ENV"
       - name: Verify engine version
         if: steps.project.outputs.present == 'true'
         env:
-          EXPECTED_GODOT_VERSION: \${{ steps.project.outputs.version }}
+          EXPECTED_GODOT_VERSION: ${{ steps.project.outputs.version }}
         run: |
           actual="$("$GODOT_BIN" --headless --version)"
           echo "Expected: $EXPECTED_GODOT_VERSION"
@@ -68,7 +68,7 @@ jobs:
       - name: Report scope
         if: always()
         run: |
-          if [[ "\${{ steps.project.outputs.present }}" != "true" ]]; then
+          if [[ "${{ steps.project.outputs.present }}" != "true" ]]; then
             echo "NOT APPLICABLE — no Godot project exists yet."
           else
             echo "Headless import/parse only; not Android export, gameplay acceptance or performance certification."
