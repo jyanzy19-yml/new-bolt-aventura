@@ -352,3 +352,19 @@ and offer to load it if the user confirms.
   `references/engine-detection.md`.
 - Exhaustive per-skill trigger words, engine bindings, and binding gaps: `references/routing-table.md`.
 - Custom/proprietary or unsupported engine integration: `references/custom-engines.md`.
+
+
+## BOLT project-local installation map (authoritative for this repository)
+
+This repository installs a curated subset of the upstream collection as Claude Code project skills. The upstream routing tables above describe the source collection, not the local folder layout.
+
+For this project:
+- Open installed skills at `.claude/skills/<skill-name>/SKILL.md`.
+- Read supporting files relative to that skill's own folder.
+- The authoritative installed skill names and task combinations are listed in `docs/skills-catalog.md`.
+- Do not assume that any upstream skill named in the broad multi-engine router is installed locally.
+- If a suggested skill is absent from the local catalog, use the closest installed skill only when it genuinely covers the task; otherwise state the gap and request permission before adding another dependency.
+- The installed Godot skill set is: `godot-gdscript`, `godot-nodes-scenes`, `godot-signals-groups`, `godot-resources`, `godot-2d-movement`, `godot-physics`, `godot-tilemap`, `godot-animation`, `godot-ui-control`, `godot-audio`, `godot-export`, and `godot-gdscript-headless-testing`.
+- The installed discipline/genre set is: `platformer`, `input-systems`, `physics-tuning`, `game-feel`, `camera-systems`, `level-design`, `game-ai`, `create-game-assets`, `dialogue-systems`, `save-systems`, `performance-optimization`, `game-ui-ux`, and `audio-design`.
+
+For BOLT, do not route to web-game or browser-engine skills. Android is the product platform; desktop tools are development/validation tools only.
