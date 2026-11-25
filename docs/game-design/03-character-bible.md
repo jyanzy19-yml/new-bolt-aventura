@@ -29,6 +29,14 @@ Todo personagem deve ter função narrativa, função de gameplay ou ambas. Silh
 
 A máquina não deve ser tratada apenas como interface de menu. Sua presença deve ser coerente na narrativa, feedback, progressão e identidade audiovisual.
 
+### 3.1 NEXO — identidade narrativa
+
+O nome **NEXO** e sua função de máquina temporal que se une a BOLT estão definidos. NEXO permite a travessia entre eras/mundos e está ligada ao mistério dos fragmentos. Sua forma, voz, personalidade, origem específica, limites, custo/risco das viagens e evolução audiovisual permanecem decisões de caracterização a desenvolver sem contradizer esse papel.
+
+### 3.2 O Arquiteto — antagonista central
+
+**O Arquiteto** é o antagonista central definido no prompt mestre. Seu objetivo é impor uma única realidade, eliminando a coexistência entre universos em nome de uma ordem absoluta. BOLT foi criado para preservar os universos; o conflito central opõe controle/uniformidade à coexistência. Aparência, identidade pessoal, história completa, métodos e caracterização detalhada permanecem a desenvolver. Não criar revelações que contradigam o conflito aprovado.
+
 ## 4. NPCs
 Cada NPC deve cumprir pelo menos uma função verificável: revelar contexto, orientar, oferecer serviço aprovado, apresentar missão opcional, demonstrar consequência do mundo ou criar vínculo emocional.
 
