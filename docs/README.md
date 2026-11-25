@@ -2,6 +2,9 @@
 
 Este índice organiza a documentação de design, narrativa, tecnologia, produção e qualidade. Os documentos distinguem decisões confirmadas, requisitos, propostas e informações ainda pendentes.
 
+## Prompts mestres
+- [Master Game Design & Gameplay Directive](prompts/master-game-design-and-gameplay-prompt.md) — prompt mestre para história, sete mundos, 42 fases, menus, HUD, tutorial, gameplay, progressão e QA.
+
 ## Design
 1. [Visão geral e pilares](game-design/00-game-overview.md)
 2. [Bíblia narrativa](game-design/01-narrative-bible.md)
