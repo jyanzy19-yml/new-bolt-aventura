@@ -21,7 +21,7 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - [Roadmap e gates](production/roadmap.md)\n- [Gestão de mudanças](production/change-management.md)
 - [Definition of Done](production/definition-of-done.md)
 - [Matriz de QA](qa/test-matrix.md)
-- [Modelo de bug report](qa/bug-report-template.md)
+- [Modelo de bug report](qa/bug-report-template.md)\n- [Captura de performance](qa/performance-capture-template.md)\n- [Relatório de validação do ecossistema](production/validation-report.md)\n- [Estado da etapa](production/stage-status.md)
 - [Registro de decisões](decisions/README.md)
 - [Modelos de trabalho](templates/README.md)
 
@@ -32,7 +32,7 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - **A definir:** informação ausente; não inventar.
 - **Validado:** comprovado por inspeção ou teste identificável.
 
-Atualize este índice quando documentos forem adicionados ou movidos. Use links relativos e confira se todos resolvem.
+## Automação e colaboração\n- Validador local: `scripts/validate_project_docs.py`.\n- CI: `.github/workflows/docs-validation.yml`.\n- Modelos de issue e pull request: `.github/ISSUE_TEMPLATE/` e `.github/PULL_REQUEST_TEMPLATE.md`.\n\nAtualize este índice quando documentos forem adicionados ou movidos. Use links relativos e confira se todos resolvem.
 
 
 ## Referências complementares
