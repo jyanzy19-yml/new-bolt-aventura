@@ -10,8 +10,8 @@
 |---|---:|---|
 | Skills Claude | 35 | 26 skills comunitárias previamente verificadas + 9 skills BOLT novas; as 9 novas foram recuperadas do GitHub e validadas quanto à presença, frontmatter, nome do diretório e descrição |
 | Agentes especializados | 8 | Arquivos existentes; configuração read-only documentada |
-| Comandos Claude Code | 4 | Arquivos recuperados e frontmatter/descrição verificados |
-| Documentos em docs/ | 34 | Conteúdo não vazio; os 25 destinos Markdown do índice docs/README.md foram recuperados com sucesso |
+| Comandos Claude Code | 6 | Quatro existentes e dois novos; os dois novos foram criados com frontmatter e instruções de fluxo |
+| Documentos em docs/ | 37 | 34 anteriores e três novos documentos de qualidade, continuidade e rastreamento; links de índice integrados |
 | Arquivos de orientação raiz | 4 | README, CLAUDE, AGENTS e catálogo recuperados após atualização |
 | Arquivos auxiliares das skills upstream | 39 | Validação estrutural registrada na auditoria anterior |
 | Atribuição | 2 | LICENSE e NOTICE preservados |
@@ -42,3 +42,26 @@ Não foi executado Claude Code neste ambiente. Não foram executados testes GDSc
 **Jogo Godot e APK: não avaliados nesta etapa.**
 
 Próximo gate: auditar o projeto executável, identificar versão Godot/renderer e submeter o primeiro vertical slice para aprovação.
+
+
+## Auditoria ampliada e controles de produção — 2026-11-25
+
+A árvore recursiva da branch main foi consultada após as alterações: 222 entradas no total; 35 skills, 8 agentes, 6 comandos e 37 documentos Markdown em docs/. Os cinco arquivos novos desta revisão foram confirmados na árvore.
+
+### Novos arquivos
+- docs/production/quality-control-protocol.md
+- docs/production/CONTINUITY.md
+- docs/production/implementation-tracker.md
+- .claude/commands/bolt-continue.md
+- .claude/commands/bolt-release-check.md
+
+### Integração documental
+Os novos controles foram vinculados a MASTER_DIRECTIVE.md, CLAUDE.md, AGENTS.md, README.md, docs/README.md e docs/skills-catalog.md. O rastreador contém 24 sistemas globais e 42 IDs de fase. Todos partem de Não iniciado porque a árvore continua sem projeto executável.
+
+### Estado real do produto
+A árvore continua sem project.godot, sem cenas .tscn e sem scripts .gd de gameplay BOLT. Os arquivos .gd presentes são exemplos/testes distribuídos com skills. Nenhum APK, build ou teste de runtime foi produzido nesta revisão.
+
+### Limites da verificação
+Foi confirmada a presença dos novos arquivos pela árvore Git e os arquivos de orientação foram recuperados após a atualização. Não foi possível executar o validador Python em checkout local nesta sessão nem confirmar uma execução verde do GitHub Actions. Não foram executados testes Godot, export Android ou testes em aparelho físico.
+
+**Conclusão:** os controles de documentação, continuidade e rastreamento foram adicionados e integrados estruturalmente. A implementação do jogo continua pendente e deve começar pela fundação Godot conforme a diretiva from-zero.
