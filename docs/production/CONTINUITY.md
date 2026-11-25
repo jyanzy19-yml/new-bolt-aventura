@@ -112,3 +112,19 @@ Uma sessão está pronta para handoff quando o trabalho está commitado ou suas 
 - A skill exige inspeção do projeto real, leitura das ADRs e migração em lotes; não cria uma estrutura fictícia nem autoriza reorganização ampla automaticamente.
 - A skill complementa a biblioteca existente; não foram importadas skills duplicadas de gameplay, QA ou profiling.
 - Verificações Godot ainda não aplicáveis: a árvore continua sem projeto executável, salvo confirmação posterior em nova inspeção.
+
+
+## 10. Snapshot verificado em 2026-11-25 — substitui os números anteriores
+
+- Repositório: jyanzy19-yml/new-bolt-aventura.
+- Branch de integração: main.
+- Commit inspecionado antes da criação dos controles de colaboração: b9b84660b251313ff3cec014aced9292777e4550.
+- Árvore recursiva: 225 entradas; 36 skills, 8 agentes, 6 comandos e 38 documentos Markdown em docs/.
+- Workflow: um workflow de validação documental; run 45692594026 concluiu SUCCESS no commit b9b84660b251313ff3cec014aced9292777e4550.
+- Não há project.godot, cenas .tscn ou scripts .gd de gameplay BOLT. Os scripts .gd encontrados pertencem a exemplos/testes das skills.
+- Não foi executado Godot, não foi exportado APK e não houve teste em emulador ou aparelho nesta inspeção.
+- PR #1 está aberto e divergente de main; não usar seu branch como base de implementação sem revisão.
+- O estado de atribuição do próximo turno está em [COLLABORATION_STATE.md](COLLABORATION_STATE.md): Etapa 0 atribuída a Claude Code, PENDING; nenhum escritor ativo.
+- A configuração de acesso e o template oficial estão em [AGENT_ACCESS_SETUP.md](AGENT_ACCESS_SETUP.md) e [HANDOFF_TEMPLATE.md](HANDOFF_TEMPLATE.md).
+
+Este snapshot é uma inspeção de repositório e CI documental, não uma validação do jogo.
