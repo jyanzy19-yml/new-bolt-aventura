@@ -117,3 +117,16 @@ As melhorias de infraestrutura não iniciam nem substituem a Etapa 0 e não auto
 - Novos controles: CI condicional Godot, pipeline de CI, pipeline de assets, template de teste Android e links nos índices.
 
 Este snapshot substitui os inventários anteriores para retomadas futuras. Não altera a atribuição nem inicia a Etapa 0.
+
+
+## Snapshot de pré-produção — base auditada em 2026-11-25
+
+- Commit-base da auditoria: `bc5799c651ccd5ffbcdfadf36f669435df63501b`.
+- Inventário nessa base: 232 entradas; 132 Markdown totais; 44 Markdown em docs/; 36 skills; 8 agentes; 6 comandos; 2 workflows.
+- `project.godot` ausente; 0 cenas `.tscn`; 4 scripts `.gd` de exemplos/testes das skills; nenhum asset final de jogo identificado.
+- Run documental #96: SUCCESS.
+- Run Godot #6: workflow SUCCESS com `NOT APPLICABLE`; o log confirma que `project.godot` estava ausente e nenhum teste de engine foi executado.
+- PR #1: 17 commits exclusivos da PR e 94 exclusivos de main; divergente. Não integrar automaticamente.
+- O checklist obrigatório da Etapa 0 está em [ETAPA_0_CLAUDE_CHECKLIST.md](ETAPA_0_CLAUDE_CHECKLIST.md); a auditoria está em [PREPRODUCTION_AUDIT.md](PREPRODUCTION_AUDIT.md).
+
+Os commits seguintes desta auditoria alteram apenas documentação e QA. Antes de iniciar a Etapa 0, Claude deve consultar o HEAD real novamente. A atribuição permanece PENDING — Claude Code Etapa 0; nenhum escritor ativo; ChatGPT Etapa 1 após handoff aceito.
