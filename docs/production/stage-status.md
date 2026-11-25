@@ -5,7 +5,7 @@
 **Escopo:** framework de desenvolvimento e documentação.
 
 ## Concluído e verificado estruturalmente
-- 35 skills: 26 skills comunitárias selecionadas e 9 skills originais específicas do BOLT.
+- 36 skills: 26 skills comunitárias selecionadas, 1 adaptação de estrutura Godot e 9 skills originais específicas do BOLT.
 - Oito agentes consultivos read-only.
 - Seis comandos de fluxo Claude Code.
 - Bíblias de design, narrativa, mundos, personagens, gameplay, level design, UI/UX e direção de arte/áudio.
