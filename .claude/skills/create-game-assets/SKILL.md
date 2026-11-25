@@ -105,7 +105,7 @@ Inspect constraints and emit a machine-readable report. `--require-alpha` also f
 whose every pixel is opaque, which is how a baked background or fake checkerboard shows up:
 
 ```bash
-python scripts/asset_report.py assets/player-idle.png \
+python scripts/asset_report.py <path-to-your-sprite.png> \
   --expect-size 64x64 --require-alpha --max-colors 48 --json
 ```
 
