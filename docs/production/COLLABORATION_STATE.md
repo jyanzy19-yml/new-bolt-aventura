@@ -103,3 +103,17 @@ Este snapshot substitui os números anteriores para decisões atuais; registros 
 - Próximo agente após aceite: ChatGPT — Etapa 1.
 
 As melhorias de infraestrutura não iniciam nem substituem a Etapa 0 e não autorizam dois escritores simultâneos.
+
+
+## Snapshot após instalação dos controles de CI e QA — 2026-11-25
+
+- HEAD main de referência: 75e5021b95c013c70b4b19d7fbb8a84290280647.
+- Árvore: 232 entradas; 132 Markdown totais; 44 Markdown em docs/.
+- 36 skills, 8 agentes, 6 comandos e 2 workflows.
+- project.godot ausente; 0 cenas .tscn; 4 scripts .gd de exemplos/testes das skills; nenhum asset final de jogo identificado.
+- Run documental #94: SUCCESS.
+- Run Godot #4: SUCCESS com NOT APPLICABLE; nenhum teste de engine foi realizado.
+- Etapa 0 Claude Code continua PENDING; nenhum escritor ativo.
+- Novos controles: CI condicional Godot, pipeline de CI, pipeline de assets, template de teste Android e links nos índices.
+
+Este snapshot substitui os inventários anteriores para retomadas futuras. Não altera a atribuição nem inicia a Etapa 0.

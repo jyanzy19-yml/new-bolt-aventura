@@ -161,3 +161,18 @@ Substitui os inventários anteriores para retomadas atuais.
 - Controles adicionados: pipeline CI, pipeline de assets e template de teste Android.
 
 Limite de evidência: auditoria estrutural/documental. Não foi executado Godot, exportado APK, instalado build, usado emulador ou medido desempenho físico nesta sessão.
+
+
+## 13. Snapshot após instalação dos controles de CI e QA — 2026-11-25
+
+- HEAD main de referência: 75e5021b95c013c70b4b19d7fbb8a84290280647.
+- Árvore: 232 entradas; 132 Markdown; 44 Markdown em docs/.
+- 36 skills, 8 agentes, 6 comandos, 2 workflows.
+- Sem project.godot, cenas .tscn, gameplay BOLT ou assets finais.
+- Run documental #94 SUCCESS.
+- Run Godot #4 SUCCESS com NOT APPLICABLE; não houve execução de engine.
+- Etapa 0 Claude Code PENDING; nenhum escritor ativo.
+- Ler COLLABORATION_STATE.md antes de escolher a próxima tarefa.
+- Pipeline CI: CI_AND_VALIDATION_PIPELINE.md; assets: ASSET_PIPELINE.md; QA físico: ../qa/ANDROID_DEVICE_TEST_TEMPLATE.md.
+
+Este snapshot substitui os inventários anteriores. A auditoria continua estrutural/documental, sem APK, emulador ou teste físico.
