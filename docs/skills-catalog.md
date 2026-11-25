@@ -38,7 +38,7 @@
 | `game-ui-ux` | HUD, menus, interaction flow, readability and accessibility. |
 | `audio-design` | Music, sound effects, adaptive audio and mix design. |
 
-## How Claude should load skills
+## Skill adicional adaptada para BOLT\n\n| Skill | Origem de referência | Uso e adaptação |\n|---|---|---|\n| `godot-project-structure` | Abordagem Function First descrita em [grndctrl/godot-skills](https://github.com/grndctrl/godot-skills) | Skill original reescrita para BOLT: organização por responsabilidade, dependências, posicionamento de arquivos e migrações seguras. Não copia scripts nem o texto da skill upstream; não impõe estrutura antes de existir um projeto Godot real. |\n\n## How Claude should load skills
 1. At the beginning of a new game-development task, read `router/SKILL.md`.
 2. Identify the project's actual engine/version from its files. If there is no Godot project yet, report that and treat engine API details as provisional.
 3. Read only the selected skill files needed for the current task. For example:
@@ -96,7 +96,7 @@ O índice em docs/README.md conecta as bíblias de design, especificações Andr
 | `bolt-content-pipeline` | Proveniência, licenças, importação, sprites, áudio e orçamento de memória. |
 | `bolt-production-gates` | Planejamento incremental, aprovações, evidências e critérios de conclusão. |
 
-Total atual: **35 skills** (26 selecionadas da coleção upstream + 9 originais BOLT). Total de comandos Claude Code: **6**.
+Total atual: **36 skills** (26 skills selecionadas da coleção Apache-2.0 + 1 skill de estrutura original adaptada com referência comunitária + 9 originais BOLT). Total de comandos Claude Code: **6**.
 
 ## Comandos de projeto
 - `/bolt-audit` — auditoria read-only do estado real do repositório/projeto.
