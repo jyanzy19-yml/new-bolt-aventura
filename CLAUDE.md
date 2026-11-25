@@ -56,3 +56,10 @@ Skills are located in `.claude/skills/<skill-name>/SKILL.md`. Start with `router
 - Use `docs/templates/implementation-plan.md` for multi-step work and `docs/templates/decision-record.md` for consequential decisions.
 - Use `docs/production/definition-of-done.md` and the QA matrix before marking work complete.
 - Current baseline status is recorded in `docs/production/stage-status.md`. Update it only with verifiable evidence.
+
+
+## BOLT-specific skills and workflow commands
+- Nine original BOLT skills are under `.claude/skills/bolt-*/SKILL.md`. They cover Android touch, performance validation, boss encounters, cinematic sequences, seven-world continuity, save integrity, mobile UI, asset pipeline and production gates.
+- Load only the specialist skills relevant to the current task. They complement, rather than replace, the upstream Godot and game-development skills.
+- Four project commands are available in `.claude/commands/`: `/bolt-audit`, `/bolt-plan`, `/bolt-qa` and `/bolt-android-review`.
+- The commands provide repeatable workflows; they do not grant approval for scope, canon, architecture, platform or release changes.
