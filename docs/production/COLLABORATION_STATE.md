@@ -3,18 +3,20 @@
 **Fonte única para descobrir quem trabalha agora, qual etapa está ativa e quem recebe a próxima entrega.**
 Este arquivo controla a alternância; não substitui código, commits, tracker ou evidências de QA.
 
-## Estado atual verificado
+## Snapshot de auditoria antes dos controles colaborativos
 
 - **Repositório:** jyanzy19-yml/new-bolt-aventura (privado).
 - **Branch de integração:** main.
 - **Commit-base inspecionado antes deste registro:** b9b84660b251313ff3cec014aced9292777e4550.
-- **Árvore nesse commit:** 225 entradas; 36 skills, 8 agentes, 6 comandos e 38 arquivos Markdown em docs/.
+- **Árvore nesse commit:** 225 entradas; 36 skills, 8 agentes, 6 comandos e 38 arquivos Markdown em docs/. Este é o snapshot anterior à criação dos três documentos de coordenação abaixo; não é um substituto da leitura do HEAD atual.
 - **Automação existente:** um workflow de validação documental.
 - **Última execução observada:** GitHub Actions run 45692594026, SUCCESS, no commit-base acima. Valida metadados Claude e links Markdown; não executa Godot nem valida gameplay/Android.
 - **Projeto executável:** não foi encontrado project.godot, cenas .tscn ou scripts .gd de gameplay BOLT. Os scripts GDScript existentes são exemplos/testes internos de skills.
-- **PR aberto observado:** #1 (docs/master-directive-bolt), divergente de main. Não é a branch de integração e não deve ser incorporado sem revisão independente.
+- **PR aberto observado:** #1 (docs/master-directive-bolt), divergente de main (17 commits à frente e 68 atrás no momento da comparação). Contém arquivos de diretiva dividida que não estão na árvore main; não mesclar nem fechar automaticamente. Revisar o conteúdo e decidir separadamente.
 
 ## Atribuição do próximo turno
+
+Antes de iniciar, o agente deve atualizar este snapshot com o HEAD atual. Os commits de governança criados depois do snapshot acima são documentação; não alteram a constatação de que o projeto Godot ainda não foi criado.
 
 - **Estado:** PENDING — aguardando início pelo usuário.
 - **Escritor ativo:** nenhum.
