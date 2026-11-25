@@ -343,3 +343,17 @@ A autorização cobre a implementação do escopo já documentado, não autoriza
 ### 16.2 Regra de continuidade
 Não solicitar autorização para tarefas normais dentro do escopo. Solicitar decisão somente quando houver mudança material não coberta por canon/ADR, credencial/assinatura exclusiva do usuário, risco destrutivo ou bloqueio externo real. Continuar trabalho independente durante bloqueios. Ao encerrar uma sessão, registrar arquivos alterados, testes, estado real e próximo passo executável.
 
+
+---
+
+## 17. Protocolo de qualidade, rastreamento e continuidade
+
+Aplicar obrigatoriamente `docs/production/quality-control-protocol.md` em toda mudança substancial. O protocolo define inspeção prévia, implementação incremental, revisão de diff, regressão, severidade e níveis de validação L0–L5. Não confundir inspeção documental, análise estática, teste Godot/headless, observação em emulador e validação em aparelho Android físico.
+
+Manter `docs/production/implementation-tracker.md` atualizado com evidência do branch atual. O tracker contém 24 sistemas globais e IDs para as 42 fases planejadas; nenhuma fase pode ser declarada implementada apenas pela existência de uma cena vazia. O status deve ser Não iniciado, Em andamento, Implementado, Validado, Bloqueado ou Não aplicável, conforme critérios do documento.
+
+Antes de encerrar cada sessão substancial, atualizar `docs/production/CONTINUITY.md` com commit, arquivos alterados, testes realmente executados, nível de validação, bugs abertos, bloqueios e próxima ação exata. Ao retomar, inspecionar Git e arquivos reais primeiro; o estado do repositório prevalece sobre qualquer handoff antigo.
+
+Comandos auxiliares: `/bolt-continue` retoma o trabalho sem depender da memória do chat; `/bolt-release-check` verifica prontidão sem publicar, assinar ou liberar builds. São prompts de fluxo, não evidência de que verificações foram executadas.
+
+**Regra de qualidade:** nunca esconder falhas, inventar resultados, marcar teste não executado como aprovado, sacrificar controles touch ou alterar canon/ADRs para acelerar. Corrigir S0/S1 antes de aprovar o gate afetado; registrar riscos residuais de S2 antes de qualquer release.
