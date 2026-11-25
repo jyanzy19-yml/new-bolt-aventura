@@ -1,45 +1,24 @@
-name: BOLT Godot validation
+name: Godot validation
 on:
   push:
     branches: [main]
-    paths:
-      - project.godot
-      - .godot-version
-      - "**/*.gd"
-      - "**/*.tscn"
-      - "**/*.tres"
-      - "**/*.res"
-      - "**/*.gdshader"
-      - addons/**
-      - .github/workflows/godot-validation.yml
   pull_request:
-    paths:
-      - project.godot
-      - .godot-version
-      - "**/*.gd"
-      - "**/*.tscn"
-      - "**/*.tres"
-      - "**/*.res"
-      - "**/*.gdshader"
-      - addons/**
-      - .github/workflows/godot-validation.yml
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
-  godot-validation:
-    name: Godot headless import and parse
+  godot:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Validate project when available
+      - name: Conditional Godot import and script parse
         shell: bash
         run: |
           set -euo pipefail
           if [[ ! -f project.godot ]]; then
-            echo "::notice::NOT APPLICABLE — project.godot is absent. No Godot test was performed."
+            echo "::notice::NOT APPLICABLE — project.godot is absent; no engine test was performed."
             exit 0
           fi
           if [[ ! -f .godot-version ]]; then
@@ -51,15 +30,15 @@ jobs:
             echo "::error::Expected exact stable Godot 4.x.y; found '$GODOT_VERSION'."
             exit 1
           fi
-          ARCHIVE="Godot_v\${GODOT_VERSION}-stable_linux.x86_64.zip"
-          URL="https://github.com/godotengine/godot/releases/download/\${GODOT_VERSION}-stable/\${ARCHIVE}"
+          ARCHIVE="Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          URL="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/${ARCHIVE}"
           curl --fail --location --retry 3 "$URL" --output godot.zip
           unzip -q godot.zip -d godot-bin
-          GODOT_BIN="godot-bin/Godot_v\${GODOT_VERSION}-stable_linux.x86_64"
+          GODOT_BIN="godot-bin/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
           test -f "$GODOT_BIN"
           chmod +x "$GODOT_BIN"
           ACTUAL_VERSION="$("$GODOT_BIN" --headless --version)"
           [[ "$ACTUAL_VERSION" == "$GODOT_VERSION" ]]
           "$GODOT_BIN" --headless --editor --path . --import --quit
           echo "Headless import/parse passed for Godot $GODOT_VERSION."
-          echo "This is not Android export, gameplay acceptance or performance certification."
+          echo "This does not prove Android export, gameplay correctness or physical-device performance."
