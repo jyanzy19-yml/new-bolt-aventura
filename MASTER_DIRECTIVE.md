@@ -357,3 +357,10 @@ Antes de encerrar cada sessão substancial, atualizar `docs/production/CONTINUIT
 Comandos auxiliares: `/bolt-continue` retoma o trabalho sem depender da memória do chat; `/bolt-release-check` verifica prontidão sem publicar, assinar ou liberar builds. São prompts de fluxo, não evidência de que verificações foram executadas.
 
 **Regra de qualidade:** nunca esconder falhas, inventar resultados, marcar teste não executado como aprovado, sacrificar controles touch ou alterar canon/ADRs para acelerar. Corrigir S0/S1 antes de aprovar o gate afetado; registrar riscos residuais de S2 antes de qualquer release.
+
+
+---
+
+## 18. Desenvolvimento colaborativo Claude Code + ChatGPT
+
+Aplicar `docs/production/COLLABORATIVE_DEVELOPMENT_PROTOCOL.md` quando o usuário solicitar colaboração entre Claude Code e ChatGPT. Claude Code permanece o principal implementador; ChatGPT atua como revisor independente e consultor quando recebe o commit/arquivos atuais. Manter um único escritor ativo por conjunto de arquivos: Claude implementa, ChatGPT revisa sem editar simultaneamente, Claude aplica correções e comprova os resultados. O protocolo define pacote de transferência, severidade, triagem, revisão proporcional ao risco e encerramento de cada ciclo. A revisão do ChatGPT não substitui testes Godot/Android nem aprovação do usuário para decisões materiais.
