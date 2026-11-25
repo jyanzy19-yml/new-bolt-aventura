@@ -96,12 +96,14 @@ O índice em docs/README.md conecta as bíblias de design, especificações Andr
 | `bolt-content-pipeline` | Proveniência, licenças, importação, sprites, áudio e orçamento de memória. |
 | `bolt-production-gates` | Planejamento incremental, aprovações, evidências e critérios de conclusão. |
 
-Total atual: **35 skills** (26 selecionadas da coleção upstream + 9 originais BOLT).
+Total atual: **35 skills** (26 selecionadas da coleção upstream + 9 originais BOLT). Total de comandos Claude Code: **6**.
 
 ## Comandos de projeto
 - `/bolt-audit` — auditoria read-only do estado real do repositório/projeto.
 - `/bolt-plan` — plano de implementação com limites e aprovações.
 - `/bolt-qa` — matriz focada de testes e regressão.
 - `/bolt-android-review` — revisão de input, display, export e desempenho Android.
+- `/bolt-continue` — retomada de produção a partir do estado verificado e do handoff.
+- `/bolt-release-check` — auditoria read-only de prontidão para release Android.
 
 Os comandos estão em `.claude/commands/` e são instruções de fluxo para Claude Code; não são agentes autônomos nem executam automaticamente testes.
