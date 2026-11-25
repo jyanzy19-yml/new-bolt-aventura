@@ -19,16 +19,29 @@ Nomes, épocas, biomas, paletas, personagens e mecânicas particulares não são
 - Fragmento com significado narrativo e consequência clara.
 - Transição coerente para o mundo seguinte.
 
-## 3. Matriz de mundos
-| Slot | Identidade e era | Mecânica exclusiva | NPCs | Inimigos (mín. 5 arquétipos) | Chefe/fragmento |
-|---|---|---|---|---|---|
-| Mundo 1 | A definir | A definir | A definir | A definir | A definir |
-| Mundo 2 | A definir | A definir | A definir | A definir | A definir |
-| Mundo 3 | A definir | A definir | A definir | A definir | A definir |
-| Mundo 4 | A definir | A definir | A definir | A definir | A definir |
-| Mundo 5 | A definir | A definir | A definir | A definir | A definir |
-| Mundo 6 | A definir | A definir | A definir | A definir | A definir |
-| Mundo 7 | A definir | A definir | A definir | A definir | A definir |
+## 3. Matriz oficial dos sete mundos
+
+A ordem abaixo é fixa e está definida no prompt mestre de design. Cada mundo possui seis fases: cinco fases de progressão/exploração e uma sexta fase de guardião, fragmento e transição.
+
+| Nº | Mundo | Identidade central | Fragmento | Guardião final |
+|---|---|---|---|---|
+| 1 | **Cybercore** | Ruínas tecnológicas e mundo destruído; ponto de despertar de BOLT e introdução da viagem com NEXO | **Origem** | Guardião Tecnológico |
+| 2 | **Egito Antigo Futurista** | Arquitetura monumental, civilização ancestral, mecanismos e tecnologia futurista | **Memória** | Guardião Ancestral das Pirâmides |
+| 3 | **Speakeasy Aesthetic** | Atmosfera urbana inspirada nos speakeasies dos anos 1920, elegância, música, mistério e segredos | **Verdade** | Mestre das Sombras |
+| 4 | **Dark Fantasy** | Fantasia sombria, ruínas, exploração, ameaça e atmosfera | **Sombra** | Rei Esquecido |
+| 5 | **Pôr do Sol em Cidade Medieval** | Cidade medieval sob luz de fim de tarde, arquitetura histórica e atmosfera de transição | **Luz** | Guardião da Coroa |
+| 6 | **Vaporwave / Las Vegas** | Neon, espetáculo urbano, reflexos, geometrias e estética vaporwave | **Ilusão** | Ilusionista Supremo |
+| 7 | **Natal / Nova York Futurista** | Nova York futurista em atmosfera natalina; encerramento visual e emocional da campanha | **Equilíbrio** | Guardião do Inverno |
+
+Os títulos dos guardiões são descrições aprovadas disponíveis; não inventar nomes próprios para eles. A relação temática de cada fragmento deve aparecer no cenário, desafios, NPCs, chefe e consequência narrativa.
+
+### 3.1 Estrutura das 42 fases
+
+- Cada mundo contém exatamente seis fases planejadas.
+- Fases 1–5 desenvolvem exploração, mecânicas, narrativa, encontros e domínio progressivo.
+- Fase 6 é a conclusão do arco local: arena/confronto do guardião, obtenção do fragmento, consequência narrativa e abertura do portão dimensional.
+- A primeira fase de Cybercore apresenta o mundo destruído e o despertar de BOLT; o tutorial guiado por robô mensageiro antecede a entrada na campanha conforme a sequência de abertura aprovada.
+- A progressão deve variar entre layouts horizontais, verticais e híbridos conforme a identidade e o objetivo de cada fase.
 
 ## 4. Template de mundo
 ### Identidade
