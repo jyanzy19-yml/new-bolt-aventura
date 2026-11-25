@@ -77,6 +77,7 @@ Atualize esta tabela a cada handoff aceito. Não preencher commits hipotéticos.
 - COLLABORATIVE_DEVELOPMENT_PROTOCOL.md — regras completas da alternância.
 - AGENT_ACCESS_SETUP.md — como dar ao Claude acesso real de leitura/escrita.
 - HANDOFF_TEMPLATE.md — formato obrigatório da transferência.
+- ETAPA_0_CLAUDE_CHECKLIST.md — checklist específico de execução e aceite da Etapa 0.
 - from-zero-implementation-directive.md e roadmap.md — escopo de produto e gates.
 - stage-status.md, implementation-tracker.md e CONTINUITY.md — estado de produção e evidências.
 
