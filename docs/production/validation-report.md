@@ -11,7 +11,7 @@
 | Skills Claude | 35 | 26 skills comunitárias previamente verificadas + 9 skills BOLT novas; as 9 novas foram recuperadas do GitHub e validadas quanto à presença, frontmatter, nome do diretório e descrição |
 | Agentes especializados | 8 | Arquivos existentes; configuração read-only documentada |
 | Comandos Claude Code | 4 | Arquivos recuperados e frontmatter/descrição verificados |
-| Documentos em docs/ | 31 | Conteúdo não vazio; os 25 destinos Markdown do índice docs/README.md foram recuperados com sucesso |
+| Documentos em docs/ | 34 | Conteúdo não vazio; os 25 destinos Markdown do índice docs/README.md foram recuperados com sucesso |
 | Arquivos de orientação raiz | 4 | README, CLAUDE, AGENTS e catálogo recuperados após atualização |
 | Arquivos auxiliares das skills upstream | 39 | Validação estrutural registrada na auditoria anterior |
 | Atribuição | 2 | LICENSE e NOTICE preservados |
@@ -27,7 +27,7 @@
 
 ## Atualização documental — mandato de criação do zero
 
-Nesta revisão foram adicionados o mandato operacional de implementação integral do zero e sua referência obrigatória em `MASTER_DIRECTIVE.md`, `CLAUDE.md`, `AGENTS.md`, READMEs, prompt mestre e roadmap; foram reconciliadas as Bíblias de visão geral, narrativa, mundos e personagens com o prompt mestre; e foi registrada a ADR-0003 para a política de barras do sistema Android. Os arquivos atualizados foram recuperados novamente do GitHub após os commits e inspecionados quanto à presença e ao conteúdo esperado.
+Nesta revisão foram adicionados o mandato operacional de implementação integral do zero e sua referência obrigatória em `MASTER_DIRECTIVE.md`, `CLAUDE.md`, `AGENTS.md`, READMEs, prompt mestre e roadmap; foram reconciliadas as Bíblias de visão geral, narrativa, mundos e personagens com o prompt mestre; e foi registrada a ADR-0003 para a política de barras do sistema Android. Os arquivos atualizados foram recuperados novamente do GitHub após os commits e inspecionados quanto à presença e ao conteúdo esperado. Foram verificados 7 links locais no README raiz e 43 no índice docs/README.md, sem destinos ausentes. A árvore da branch main contém 133 arquivos; não contém project.godot nem cenas .tscn, e os quatro scripts .gd existentes são exemplos/testes das skills, não código do jogo.
 
 Esta revisão não implementou código Godot, cenas, assets do jogo, build ou APK. A verificação desta etapa é documental e não substitui execução do CI, testes Godot ou validação Android.
 
