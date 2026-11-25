@@ -16,6 +16,10 @@ O gameplay deve consumir ações lógicas, não depender diretamente de um únic
 ## 3. Orientação e proporção
 A orientação oficial deve ser confirmada a partir das decisões aprovadas e da configuração real do projeto. Testar proporções comuns e telas alongadas; não distorcer o mundo para preencher espaço. Definir política de letterbox, câmera, UI e áreas extras.
 
+## Decisão de exibição aprovada
+
+Consultar também `docs/decisions/ADR-0003-android-system-bars.md`. A política de produto aprovada é manter as barras de status e navegação do Android ocultas de forma imersiva durante a experiência do jogo, inclusive fora de uma opção de tela cheia; a opção/configuração de Tela cheia permanece DESLIGADA. Não adicionar um toggle que reative ou altere essa decisão sem aprovação. A implementação deve usar as APIs Android/Godot compatíveis com a versão escolhida e reconhecer que o sistema operacional pode revelar barras temporariamente por gestos ou políticas próprias. Nunca posicionar controles essenciais em áreas reservadas a gestos do sistema.
+
 ## 4. Barras do sistema e recortes
 O requisito do projeto é tratar barra de status, barra de navegação e recortes de tela de forma intencional, inclusive quando a experiência for imersiva. O comportamento exato depende da versão Android, API, configuração do app e dispositivo.
 
