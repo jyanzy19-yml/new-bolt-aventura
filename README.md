@@ -3,7 +3,7 @@
 Framework de produção para apoiar o desenvolvimento de BOLT · AVENTURA com Claude Code.
 
 ## Conteúdo do repositório
-- **35 skills:** 26 skills selecionadas da coleção comunitária de game development e 9 skills originais específicas do BOLT.
+- **36 skills:** 26 skills selecionadas da coleção comunitária de game development, 1 skill BOLT de estrutura Godot adaptada com referência comunitária e 9 skills originais específicas do BOLT.
 - **8 agentes consultivos read-only:** arquitetura, gameplay, narrativa, level design, Android/performance, QA, UI/UX e direção de arte/áudio.
 - **6 comandos de fluxo de trabalho:** auditoria, planejamento, QA, revisão Android, continuidade e prontidão de release.
 - **CI documental:** validação de metadados Claude e links locais por GitHub Actions.
@@ -47,6 +47,6 @@ O alvo técnico inclui aparelhos Android com aproximadamente 4 GB de RAM e Media
 A missão não é apenas manter documentação: é criar o jogo completo do zero em Godot 4.x para Android. A especificação operacional obrigatória está em [docs/production/from-zero-implementation-directive.md](docs/production/from-zero-implementation-directive.md), vinculada também a `MASTER_DIRECTIVE.md` e `CLAUDE.md`. Auditoria, planejamento e vertical slice são etapas internas; não são entregáveis finais. O estado atual continua sendo documental até que os arquivos executáveis Godot sejam efetivamente criados e testados.
 
 ## Origem e licença
-As 26 skills comunitárias foram selecionadas da coleção [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills), distribuída sob Apache License 2.0. LICENSE e NOTICE originais foram preservados. As nove skills `bolt-*` são instruções originais específicas do projeto.
+As 26 skills comunitárias foram selecionadas da coleção [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills), distribuída sob Apache License 2.0. LICENSE e NOTICE originais foram preservados. A skill `godot-project-structure` é uma adaptação original orientada ao BOLT, inspirada na abordagem Function First de [grndctrl/godot-skills](https://github.com/grndctrl/godot-skills); não copia o texto nem os scripts da origem. As nove skills `bolt-*` são instruções originais específicas do projeto.
 
 Este repositório é um ecossistema de documentação e instruções para agentes. **Não é, por si só, a implementação executável do jogo.** A presença de skills, agentes e documentos não significa que o projeto Godot, os sete mundos ou um APK já estejam implementados.
