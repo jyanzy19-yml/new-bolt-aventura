@@ -51,16 +51,16 @@ Não deixar campos como "feito" sem indicar arquivo, commit ou evidência.
 
 ## 4. Próxima tarefa executável
 
-Na ausência de uma implementação Godot real:
-1. Confirmar o estado atual do branch e se project.godot passou a existir.
-2. Auditar ambiente, versão Godot 4.x estável compatível, export templates, renderer e caminho de export Android.
-3. Registrar a versão exata e as limitações do ambiente.
-4. Criar o projeto Godot real e a fundação Android conforme a diretiva from-zero.
-5. Criar uma cena inicial que abra no editor e em execução; validar parse/importação.
-6. Implementar a vertical slice do BOLT com input touch real e fluxo de save/load, sem substituir o produto por demo genérica.
-7. Atualizar tracker e stage status com evidências e prosseguir pelos gates.
+1. Ler COLLABORATION_STATE.md e confirmar agente, etapa e estado.
+2. Reconfirmar HEAD, branch, PRs, diff e arquivos reais.
+3. Se Etapa 0 estiver PENDING, Claude Code executa a fundação Godot definida no estado canônico, sem antecipar gameplay.
+4. Detectar a versão estável Godot 4.x realmente instalada e registrar .godot-version somente após confirmar a versão usada.
+5. Criar/validar project.godot, configuração Android/paisagem, input map e cena inicial funcional.
+6. Executar import/parse headless quando possível; registrar o que não foi executado.
+7. Atualizar tracker, stage status, continuidade, estado e handoff.
+8. O próximo agente assume somente após inspecionar a entrega real e o commit integrado.
 
-Se o projeto Godot já existir ao retomar, não recriar. Inspecionar e continuar a partir do estado executável.
+Se o projeto já existir, não recriar. Vertical slice e gameplay seguem roadmap e alternância; não devem ser antecipados por este registro.
 
 ## 5. Template de handoff por tarefa
 
@@ -143,3 +143,21 @@ Este snapshot é uma inspeção de repositório e CI documental, não uma valida
 - A PR #1 permanece aberta e divergente; não a usar como branch de trabalho sem revisar os 17 commits exclusivos e a divergência com main.
 
 O HEAD deve sempre ser consultado novamente ao retomar; o hash acima é histórico do snapshot, não uma trava de versão.
+
+
+## 12. Snapshot autoritativo mais recente — 2026-11-25
+
+Substitui os inventários anteriores para retomadas atuais.
+
+- HEAD main: d8d1a5b8801f0096ba372bf686c459fdba385931.
+- Árvore: 228 entradas; 129 Markdown totais; 41 Markdown em docs/.
+- 36 skills, 8 agentes, 6 comandos.
+- 1 workflow documental no HEAD auditado; workflow Godot condicional adicionado nesta atualização.
+- Sem project.godot, cenas .tscn, assets de jogo ou gameplay BOLT.
+- Os 4 scripts .gd são exemplos/testes das skills.
+- Run documental #90 SUCCESS; não valida engine, gameplay ou Android.
+- PR #1 aberta e divergente (17 commits exclusivos da PR; 88 exclusivos de main); não mergeável no momento da consulta.
+- Etapa 0 Claude Code PENDING; nenhum escritor ativo.
+- Controles adicionados: pipeline CI, pipeline de assets e template de teste Android.
+
+Limite de evidência: auditoria estrutural/documental. Não foi executado Godot, exportado APK, instalado build, usado emulador ou medido desempenho físico nesta sessão.

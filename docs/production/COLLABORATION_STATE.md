@@ -3,7 +3,7 @@
 **Fonte única para descobrir quem trabalha agora, qual etapa está ativa e quem recebe a próxima entrega.**
 Este arquivo controla a alternância; não substitui código, commits, tracker ou evidências de QA.
 
-## Snapshot de auditoria antes dos controles colaborativos
+## Snapshot histórico de auditoria antes dos controles colaborativos
 
 - **Repositório:** jyanzy19-yml/new-bolt-aventura (privado).
 - **Branch de integração:** main.
@@ -79,3 +79,27 @@ Atualize esta tabela a cada handoff aceito. Não preencher commits hipotéticos.
 - HANDOFF_TEMPLATE.md — formato obrigatório da transferência.
 - from-zero-implementation-directive.md e roadmap.md — escopo de produto e gates.
 - stage-status.md, implementation-tracker.md e CONTINUITY.md — estado de produção e evidências.
+
+
+## Auditoria atual — 2026-11-25
+
+- HEAD main: d8d1a5b8801f0096ba372bf686c459fdba385931.
+- Árvore: 228 entradas; 129 Markdown totais; 41 Markdown em docs/.
+- Catálogo: 36 skills, 8 agentes, 6 comandos.
+- Projeto: project.godot ausente; 0 cenas .tscn; 4 scripts .gd de exemplos/testes de skills; nenhum gameplay BOLT.
+- Assets de jogo: nenhuma imagem, áudio ou fonte identificados.
+- CI: run documental #90 SUCCESS no HEAD acima; não executa Godot/Android.
+- PR #1: aberta e divergente; 17 commits exclusivos da PR e 88 exclusivos de main; não mergeável no momento da consulta. Não integrar automaticamente.
+- Workflow Godot condicional adicionado nesta atualização; NOT APPLICABLE até existir projeto e versão fixada.
+- Branch protection não foi alterada nesta rodada.
+
+Este snapshot substitui os números anteriores para decisões atuais; registros antigos permanecem como histórico.
+
+## Atribuição permanece inalterada
+
+- Estado PENDING; escritor ativo nenhum.
+- Etapa atual: 0 — Claude Code.
+- Entrega: fundação Godot executável e handoff completo.
+- Próximo agente após aceite: ChatGPT — Etapa 1.
+
+As melhorias de infraestrutura não iniciam nem substituem a Etapa 0 e não autorizam dois escritores simultâneos.

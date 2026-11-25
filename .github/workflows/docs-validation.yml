@@ -12,6 +12,7 @@ on:
       - ".claude/**"
       - "scripts/validate_project_docs.py"
       - ".github/workflows/docs-validation.yml"
+      - ".github/workflows/godot-validation.yml"
   pull_request:
     paths:
       - "README.md"

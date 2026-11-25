@@ -47,7 +47,9 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - [Input touch, tela e áreas seguras](technical/02-touch-and-display.md)
 - [Carregamento e recursos](technical/03-loading-and-assets.md)
 - [Checklist de build Android](technical/04-android-build-checklist.md)
-- [Contratos entre sistemas](technical/05-system-contracts.md)
+- [Contratos entre sistemas](technical/05-system-contracts.md).
+- [Pipeline de CI e validação](production/CI_AND_VALIDATION_PIPELINE.md).
+- [Pipeline de assets](production/ASSET_PIPELINE.md).
 
 ## Produção e qualidade
 
@@ -62,6 +64,7 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - [Gestão de mudanças](production/change-management.md)
 - [Definition of Done](production/definition-of-done.md)
 - [Matriz de QA](qa/test-matrix.md)
+- [Template de sessão Android](qa/ANDROID_DEVICE_TEST_TEMPLATE.md)
 - [Modelo de bug report](qa/bug-report-template.md)
 - [Captura de performance](qa/performance-capture-template.md)
 - [Relatório de validação do ecossistema](production/validation-report.md)
