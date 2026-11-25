@@ -32,6 +32,7 @@ Esta é uma biblioteca de apoio para agentes, não a implementação do jogo. A 
 
 
 ## Documentação e agentes
+- [Relatório de validação estrutural](docs/production/validation-report.md)
 - [Índice da documentação](docs/README.md)
 - [Estado real da etapa](docs/production/stage-status.md)
 - [Catálogo de skills](docs/skills-catalog.md)
