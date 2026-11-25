@@ -23,6 +23,14 @@
 - O workflow CI foi criado, mas sua execução ainda não foi confirmada.
 - Não foi executado Claude Code neste ambiente.
 
+## Atualização da diretiva de produção — 2026-11-25
+
+- Criada `docs/production/from-zero-implementation-directive.md`, mandato explícito para criar o jogo completo do zero em Godot 4.x e Android.
+- Atualizados `MASTER_DIRECTIVE.md`, `CLAUDE.md`, `AGENTS.md`, os READMEs e o roadmap para que auditoria/planejamento/vertical slice sejam etapas internas, não ponto de encerramento.
+- Reconciliadas as Bíblias narrativa, dos mundos e de personagens com o canon já descrito no prompt mestre.
+- Registrada a política aprovada de barras do sistema Android em ADR-0003 e vinculada à especificação touch/display.
+- **Esta atualização continua sendo documental. Nenhum projeto Godot, cena, script, asset de jogo ou APK foi criado nesta ação.**
+
 ## Ainda não comprovado
 - Projeto Godot executável e seu project.godot.
 - Versão exata do Godot e renderer.
@@ -32,7 +40,7 @@
 - Instalação, compatibilidade, FPS, memória ou estabilidade em aparelhos físicos.
 
 ## Próximo gate recomendado
-Auditar o conteúdo executável quando estiver disponível, confirmar engine/versão/renderer e mapear arquitetura existente. Depois, apresentar o plano do primeiro vertical slice para aprovação.
+Iniciar a execução da diretiva from-zero: verificar ambiente e versão Godot 4.x compatível, criar o projeto executável, implementar a fundação Android e avançar para a vertical slice. O usuário já autorizou a implementação dentro do escopo documentado.
 
 ## Regra
 Este status não declara o jogo implementado nem certifica compatibilidade ou desempenho Android. Atualize somente com evidências verificáveis.
