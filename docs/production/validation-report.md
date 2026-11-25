@@ -70,3 +70,15 @@ Foi confirmada a presença dos novos arquivos pela árvore Git e os arquivos de 
 ### CI documental — execução observada
 
 A execução #51 do workflow BOLT documentation validation, no commit b07fe549949def93fbca0b68a00a346a585ce1fc, foi consultada no GitHub Actions. O job Validate project documentation terminou com SUCCESS e a etapa Validate Claude metadata and local links também terminou com SUCCESS. Isso comprova que o script documental atual passou nessa execução; não comprova compilação, execução do Godot, testes de gameplay ou validação Android.
+
+
+## Atualização de estado — auditoria de pré-produção 2026-11-25
+
+O inventário e a CI foram reconsultados no commit-base `bc5799c651ccd5ffbcdfadf36f669435df63501b`. Naquele commit: 232 entradas, 132 Markdown, 44 Markdown em docs/, 36 skills, 8 agentes, 6 comandos e 2 workflows. O projeto continuava sem `project.godot`, cenas `.tscn`, gameplay BOLT ou assets finais.
+
+- Run documental #96: SUCCESS; validação documental e links/metadados concluídos.
+- Run Godot #6: workflow SUCCESS, mas o log registra `NOT APPLICABLE` porque `project.godot` não existia. Nenhum teste de engine foi executado.
+- PR #1: 17 commits exclusivos na PR e 94 exclusivos em main; estado divergente. Não integrar automaticamente.
+- A auditoria de pré-produção e o checklist da Etapa 0 foram adicionados em `PREPRODUCTION_AUDIT.md` e `ETAPA_0_CLAUDE_CHECKLIST.md`.
+
+Os inventários anteriores deste relatório são históricos e não devem ser usados como fotografia atual. Consulte `stage-status.md` e `PREPRODUCTION_AUDIT.md`. Esta atualização não executou Godot, exportação APK, emulador, Android físico ou medição de performance.
