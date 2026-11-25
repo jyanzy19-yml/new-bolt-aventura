@@ -361,6 +361,8 @@ Comandos auxiliares: `/bolt-continue` retoma o trabalho sem depender da memória
 
 ---
 
-## 18. Desenvolvimento colaborativo Claude Code + ChatGPT
 
-Aplicar `docs/production/COLLABORATIVE_DEVELOPMENT_PROTOCOL.md` quando o usuário solicitar colaboração entre Claude Code e ChatGPT. Claude Code permanece o principal implementador; ChatGPT atua como revisor independente e consultor quando recebe o commit/arquivos atuais. Manter um único escritor ativo por conjunto de arquivos: Claude implementa, ChatGPT revisa sem editar simultaneamente, Claude aplica correções e comprova os resultados. O protocolo define pacote de transferência, severidade, triagem, revisão proporcional ao risco e encerramento de cada ciclo. A revisão do ChatGPT não substitui testes Godot/Android nem aprovação do usuário para decisões materiais.
+
+## 18. Desenvolvimento alternado Claude Code ↔ ChatGPT
+
+Quando o usuário ativar o fluxo colaborativo, seguir obrigatoriamente `docs/production/COLLABORATIVE_DEVELOPMENT_PROTOCOL.md`. O modelo é pingue-pongue sequencial de implementação: Claude Code executa a Etapa 0; ChatGPT executa a Etapa 1; Claude executa a Etapa 2; ChatGPT executa a Etapa 3; a alternância continua até a conclusão. Ambos são implementadores nas etapas que lhes cabem. Ao assumir qualquer etapa, o responsável deve primeiro inspecionar o commit e o projeto reais, revisar a etapa anterior, corrigir defeitos confirmados e só então implementar sua etapa. Nunca editar simultaneamente nem iniciar implementação paralela. O repositório/commit é a fonte de verdade; toda entrega exige testes honestamente reportados, tracker/continuidade atualizados e pacote de transferência para o próximo responsável. ChatGPT só pode afirmar que alterou o repositório quando tiver efetivamente aplicado e verificado as alterações. Decisões materiais continuam sob autoridade do usuário.
