@@ -3,6 +3,8 @@
 Este índice organiza a documentação de design, narrativa, tecnologia, produção e qualidade. Os documentos distinguem decisões confirmadas, requisitos, propostas e informações ainda pendentes.
 
 ## Ponto de entrada obrigatório
+
+- [Diretiva obrigatória de implementação do zero](production/from-zero-implementation-directive.md)
 - [MASTER_DIRECTIVE.md](../MASTER_DIRECTIVE.md) — diretriz central para criação, produção, implementação e validação. Leia primeiro.
 - [Master Game Design & Gameplay Prompt](prompts/master-game-design-and-gameplay-prompt.md) — diretiva detalhada de design e gameplay; deve ser lida em conjunto com as bíblias e decisões.
 - [CLAUDE.md](../CLAUDE.md) — regras permanentes de trabalho do Claude Code.
