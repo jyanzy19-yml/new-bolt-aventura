@@ -9,16 +9,16 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 4. [Personagens, inimigos e chefes](game-design/03-character-bible.md)
 5. [Sistemas de gameplay](game-design/04-gameplay-systems.md)
 6. [Padrão de level design](game-design/05-level-design-standard.md)
-7. [UI/UX e acessibilidade](game-design/06-ui-ux.md)
+7. [UI/UX e acessibilidade](game-design/06-ui-ux.md)\n8. [Direção de arte e áudio](game-design/07-art-audio-direction.md)
 
 ## Engenharia
 - [Princípios de arquitetura Godot](technical/00-architecture-principles.md)
 - [Especificação Android e desempenho](technical/01-android-performance.md)
 - [Input touch, tela e áreas seguras](technical/02-touch-and-display.md)
-- [Carregamento e recursos](technical/03-loading-and-assets.md)
+- [Carregamento e recursos](technical/03-loading-and-assets.md)\n- [Contratos entre sistemas](technical/05-system-contracts.md)
 
 ## Produção e qualidade
-- [Roadmap e gates](production/roadmap.md)
+- [Roadmap e gates](production/roadmap.md)\n- [Gestão de mudanças](production/change-management.md)
 - [Definition of Done](production/definition-of-done.md)
 - [Matriz de QA](qa/test-matrix.md)
 - [Modelo de bug report](qa/bug-report-template.md)
