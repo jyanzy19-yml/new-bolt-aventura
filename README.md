@@ -20,11 +20,12 @@ BOLT · AVENTURA é planejado como jogo 2D de plataforma e aventura para aplicat
 O alvo técnico inclui aparelhos Android com aproximadamente 4 GB de RAM e MediaTek Helio G99 ou inferior. Responsividade touch, multitouch, salto/dash, estabilidade, memória, carregamento e validação em dispositivo são requisitos centrais.
 
 ## Comece por aqui
-1. Leia `CLAUDE.md` e `AGENTS.md`.
-2. Abra [o índice de documentação](docs/README.md).
-3. Consulte [o catálogo de skills](docs/skills-catalog.md).
-4. Verifique [o estado real da etapa](docs/production/stage-status.md) e [o relatório de validação](docs/production/validation-report.md).
-5. Para uma auditoria, use `/bolt-audit`; para planejar, `/bolt-plan`; para QA, `/bolt-qa`; para Android, `/bolt-android-review`.
+1. Leia `MASTER_DIRECTIVE.md`, `CLAUDE.md` e `AGENTS.md`.
+2. Leia a [diretiva obrigatória de implementação do zero](docs/production/from-zero-implementation-directive.md).
+3. Abra [o índice de documentação](docs/README.md) e o [prompt mestre de design/gameplay](docs/prompts/master-game-design-and-gameplay-prompt.md).
+4. Consulte [o catálogo de skills](docs/skills-catalog.md) e as decisões aprovadas.
+5. Verifique [o estado real da etapa](docs/production/stage-status.md) e [o relatório de validação](docs/production/validation-report.md).
+6. Use `/bolt-audit`, `/bolt-plan`, `/bolt-qa` e `/bolt-android-review` como ferramentas auxiliares, não como substitutos da implementação.
 
 ## Regras essenciais
 - Detectar a versão real do Godot antes de usar APIs ou skills específicas.
