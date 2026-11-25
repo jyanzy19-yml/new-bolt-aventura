@@ -48,6 +48,7 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - [Carregamento e recursos](technical/03-loading-and-assets.md)
 - [Checklist de build Android](technical/04-android-build-checklist.md)
 - [Contratos entre sistemas](technical/05-system-contracts.md)
+- [Fundação do projeto Godot — estado real](technical/06-godot-project-foundation.md)
 - [Pipeline de CI e validação](production/CI_AND_VALIDATION_PIPELINE.md)
 - [Pipeline de assets](production/ASSET_PIPELINE.md)
 

@@ -1,0 +1,28 @@
+# Godot 4 generated data (rebuilt by `godot --headless --path . --import`)
+.godot/
+*.translation
+
+# Editor / local overrides
+.nomedia
+export_credentials.cfg
+
+# Export artifacts and Android build tree
+build/
+export/
+*.apk
+*.aab
+*.idsig
+android/build/
+
+# Signing material — NEVER commit
+*.keystore
+*.jks
+*.p12
+*.pem
+*.key
+
+# OS / tool noise
+.DS_Store
+Thumbs.db
+*.tmp
+*.log

@@ -19,15 +19,15 @@ Não usar percentuais subjetivos. Não inferir "validado" a partir de arquivos e
 
 ## 2. Baseline inicial
 
-Na inspeção documental de 2026-11-25, não havia project.godot, cenas .tscn ou código de gameplay BOLT. Portanto, os sistemas abaixo começam como **Não iniciado** até nova inspeção confirmar uma alteração. Esta tabela é baseline histórico; atualizar quando o projeto executável for criado.
+Na inspeção documental de 2026-11-25, não havia project.godot, cenas .tscn ou código de gameplay BOLT. Portanto, os sistemas abaixo começam como **Não iniciado** até nova inspeção confirmar uma alteração. O baseline inicial era "Não iniciado" para todos os sistemas; a coluna Status é atualizada a partir de evidência (Etapa 0 em andamento, ver COLLABORATION_STATE.md).
 
 ## 3. Sistemas globais
 
-| ID | Sistema / entrega | Status inicial | Evidência / observação |
+| ID | Sistema / entrega | Status | Evidência / observação |
 |---|---|---|---|
-| SYS-001 | Projeto Godot e versão fixada | Não iniciado | Ausência de project.godot na baseline |
-| SYS-002 | Configuração Android, paisagem e renderer | Não iniciado | Sem projeto executável |
-| SYS-003 | Arquitetura, cenas e recursos compartilhados | Não iniciado | Sem cenas do jogo |
+| SYS-001 | Projeto Godot e versão fixada | Implementado | `project.godot`, `.godot-version` = 4.7.2. Evidência L2: `--headless --import` sem erros; `tests/test_runner.gd` 0 falhas (Godot 4.7.2 headless, Linux). Não validado em editor gráfico nem Android. Ver [06-godot-project-foundation.md](../technical/06-godot-project-foundation.md) |
+| SYS-002 | Configuração Android, paisagem e renderer | Implementado | Orientação 4 (sensor landscape), viewport 960×540 (provisório), GL Compatibility (provisório), preset Android com `screen/immersive_mode=true` (ADR-0003), sem segredos; verificado por `tests/unit/test_project_config.gd`. **Export Android NÃO executado** (sem SDK/templates); nenhum APK; nada validado em aparelho |
+| SYS-003 | Arquitetura, cenas e recursos compartilhados | Em andamento | Existem: boot, menu (sem ação), autoload `SceneFlow` (carregamento em thread, testado headless), `Actions`, `SafeAreaMargin`. Faltam player, fases, recursos compartilhados e demais contratos |
 | SYS-004 | Input abstrato e multitouch | Não iniciado | Sem implementação do jogo |
 | SYS-005 | BOLT: controller, estados e animação | Não iniciado | Sem implementação do jogo |
 | SYS-006 | Movimento, salto, All Jump e dash | Não iniciado | Sem implementação do jogo |

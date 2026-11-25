@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- PLACEHOLDER ICON — original geometric mark, not final art. Replace via the asset pipeline (SYS-021). -->
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="20" fill="#0b1020"/>
+  <path d="M72 14 36 70h26l-8 44 38-58H66z" fill="#2ee6ff" stroke="#e8fdff" stroke-width="3" stroke-linejoin="round"/>
+</svg>

@@ -18,8 +18,8 @@ Este arquivo controla a alternância; não substitui código, commits, tracker o
 
 Antes de iniciar, o agente deve atualizar este snapshot com o HEAD atual. Os commits de governança criados depois do snapshot acima são documentação; não alteram a constatação de que o projeto Godot ainda não foi criado.
 
-- **Estado:** PENDING — aguardando início pelo usuário.
-- **Escritor ativo:** nenhum.
+- **Estado:** IN_PROGRESS — Claude Code iniciou a Etapa 0 em 2026-11-25; commit-base `16d42de2f2b5b3a52411f7d13db6d37b3a38b9d3` (main). PR #1 não tocada.
+- **Escritor ativo:** Claude Code (Etapa 0).
 - **Próxima etapa:** 0.
 - **Responsável:** Claude Code.
 - **Entrega esperada:** fundação executável Godot do BOLT, conforme a diretiva from-zero e o Gate 1 do roadmap, sem fingir que o jogo completo ou a vertical slice já existem.
@@ -65,7 +65,7 @@ Não avançar o número da etapa apenas porque uma sessão terminou. O próximo 
 
 | Etapa | Responsável | Estado | Commit de entrega | Próxima ação |
 |---|---|---|---|---|
-| 0 | Claude Code | PENDING | — | Criar a fundação Godot e entregar handoff |
+| 0 | Claude Code | IN_PROGRESS | — (base `16d42de`) | Concluir verificações e entregar handoff |
 | 1 | ChatGPT | Aguardando | — | Auditar Etapa 0 e implementar a próxima unidade do roadmap |
 | 2 | Claude Code | Aguardando | — | Auditar Etapa 1 e continuar |
 | 3 | ChatGPT | Aguardando | — | Auditar Etapa 2 e continuar |
