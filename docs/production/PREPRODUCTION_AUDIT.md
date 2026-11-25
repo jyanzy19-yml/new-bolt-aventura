@@ -73,3 +73,10 @@ O checklist `ETAPA_0_CLAUDE_CHECKLIST.md` estabelece pré-leitura, inspeção, v
 ## 8. Próxima ação
 
 Claude Code inicia a Etapa 0 somente quando o usuário o acionar. Deve confirmar o HEAD mais recente, seguir `COLLABORATION_STATE.md`, `COLLABORATIVE_DEVELOPMENT_PROTOCOL.md` e o checklist da Etapa 0, criar a fundação Godot real e entregar commit e handoff verificáveis. ChatGPT assume a Etapa 1 apenas depois de inspecionar a entrega integrada.
+
+
+## 9. Alterações documentais aplicadas após a base auditada
+
+Após o inventário no commit-base `bc5799c651ccd5ffbcdfadf36f669435df63501b`, esta rodada adicionou dois documentos e atualizou as especificações de UI/UX, narrativa, orientação/touch, QA Android, status, continuidade, colaboração e índice de documentação. O inventário resultante passa a 234 entradas, 134 arquivos Markdown no repositório e 46 em `docs/`; as contagens de skills/agentes/comandos/workflows permanecem 36/8/6/2. Essas alterações não criam projeto Godot, gameplay, cenas ou assets.
+
+A validação documental correspondente deve ser consultada no GitHub Actions após a conclusão dos commits. O workflow Godot continuará registrando NOT APPLICABLE enquanto `project.godot` estiver ausente.
