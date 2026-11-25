@@ -11,7 +11,7 @@
 | Skills Claude | 26 | Arquivo presente, frontmatter reconhecível, nome corresponde ao diretório e conteúdo não vazio |
 | Agentes especializados | 8 | Arquivo presente, nome corresponde ao agente e ferramentas limitadas a Read/Grep/Glob |
 | Arquivos auxiliares de skills | 39 | Recuperados do GitHub após criação e conteúdo não vazio |
-| Documentos de projeto | 26 | Recuperados do GitHub, conteúdo não vazio e título presente |
+| Documentos de projeto | 27 | Recuperados do GitHub, conteúdo não vazio e título presente |
 | Arquivos de orientação raiz | 4 | README, CLAUDE, AGENTS e catálogo recuperados |
 | Atribuição | 2 | LICENSE e NOTICE presentes |
 | Manifesto de assets | 1 | JSON analisado com sucesso |
