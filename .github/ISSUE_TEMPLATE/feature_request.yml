@@ -1,0 +1,46 @@
+name: Feature proposal
+description: Propose a BOLT gameplay, narrative, accessibility or production improvement.
+title: "[FEATURE] "
+labels: ["enhancement", "needs-review"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Player problem or opportunity
+      description: What experience should this improve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe the idea. Treat narrative and scope changes as proposals until approved.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and trade-offs
+    validations:
+      required: false
+  - type: dropdown
+    id: domain
+    attributes:
+      label: Area
+      options:
+        - Gameplay
+        - Narrative
+        - World / level design
+        - UI / accessibility
+        - Android / performance
+        - Audio / visuals
+        - Production / tooling
+    validations:
+      required: true
+  - type: checkboxes
+    id: approvals
+    attributes:
+      label: Scope awareness
+      options:
+        - label: This may change approved canon, scope, architecture or platform and needs explicit review.
+          required: false
