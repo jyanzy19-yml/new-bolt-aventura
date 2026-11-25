@@ -322,3 +322,24 @@ BOLT · AVENTURA só pode ser declarado completo quando:
 - O estado final estiver registrado com evidências e aprovação exigida.
 
 **Regra final:** criar um jogo memorável, não apenas um conjunto de funcionalidades. Cada mundo deve ter personalidade; cada fase, propósito; cada habilidade, utilidade; cada chefe, leitura justa; cada menu, função clara; e cada revelação, consequência. Preservar o canon, respeitar decisões, medir o que for técnico e nunca confundir plano, código e validação.
+
+## 16. Mandato explícito: criar o jogo do zero
+
+A missão de produção é **criar BOLT · AVENTURA integralmente do zero como jogo Godot 4.x funcional e exportável para Android**. O repositório é atualmente um ecossistema documental; não presumir que exista `project.godot`, cenas ou gameplay implementados. A documentação especifica o produto; somente arquivos Godot executáveis constituem implementação.
+
+A diretiva operacional obrigatória está em [docs/production/from-zero-implementation-directive.md](docs/production/from-zero-implementation-directive.md). Claude deve lê-la integralmente e executá-la. Criar projeto, cenas, scripts, Resources, dados, assets licenciados, UI, sistemas, testes e configuração Android. Não parar após auditoria, planejamento, arquitetura ou vertical slice: esses são gates internos e o trabalho deve prosseguir até a campanha completa, respeitando bloqueios materiais e aprovações de canon.
+
+A autorização cobre a implementação do escopo já documentado, não autoriza alterar canon, engine, plataforma, controles ou decisões aprovadas. Lacunas devem ser isoladas como propostas provisórias e não podem bloquear trabalho independente. A execução deve distinguir claramente implementado, testado e validado em dispositivo real. Nunca declarar APK, FPS ou compatibilidade sem evidência.
+
+### 16.1 Sequência mínima de produção
+1. Descobrir estado real e fixar versão Godot 4.x compatível.
+2. Criar projeto executável e fundação Android.
+3. Implementar vertical slice representativa e validá-la.
+4. Consolidar sistemas reutilizáveis e contratos.
+5. Produzir os sete mundos e 42 fases com conteúdo distinto.
+6. Integrar narrativa, arte, áudio, menus, saves e progressão.
+7. Executar QA, otimização, exportação e checklist Android.
+
+### 16.2 Regra de continuidade
+Não solicitar autorização para tarefas normais dentro do escopo. Solicitar decisão somente quando houver mudança material não coberta por canon/ADR, credencial/assinatura exclusiva do usuário, risco destrutivo ou bloqueio externo real. Continuar trabalho independente durante bloqueios. Ao encerrar uma sessão, registrar arquivos alterados, testes, estado real e próximo passo executável.
+
