@@ -45,3 +45,14 @@ Choose tests that match the change. For gameplay changes, verify movement, colli
 
 ## Skills usage
 Skills are located in `.claude/skills/<skill-name>/SKILL.md`. Start with `router` when a game-development task begins or changes category, then read only the minimum relevant skills. The skills are technical references, not permission to expand the task. Check every API against the project's actual Godot version.
+
+
+## Documentation and specialist agents
+- Start from `docs/README.md`; consult the relevant game-design, technical, production and QA documents before implementation.
+- Treat the status labels in the docs as authoritative: confirmed, requirement, proposal, to be defined and validated.
+- The story premise is canon; unapproved names, world themes, dialogue, plot twists and endings are proposals only.
+- Specialist reviews are available in `.claude/agents/`: game architect, gameplay engineer, narrative designer, level designer, Android performance engineer, QA engineer, UI/UX designer and art/audio director.
+- These specialist agents are read-only reviewers. Use them for focused audits and recommendations; they do not independently approve scope or replace the user's decisions.
+- Use `docs/templates/implementation-plan.md` for multi-step work and `docs/templates/decision-record.md` for consequential decisions.
+- Use `docs/production/definition-of-done.md` and the QA matrix before marking work complete.
+- Current baseline status is recorded in `docs/production/stage-status.md`. Update it only with verifiable evidence.
