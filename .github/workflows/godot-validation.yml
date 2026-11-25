@@ -38,7 +38,7 @@ jobs:
           test -f "$GODOT_BIN"
           chmod +x "$GODOT_BIN"
           ACTUAL_VERSION="$("$GODOT_BIN" --headless --version)"
-          [[ "$ACTUAL_VERSION" == "$GODOT_VERSION" ]]
+          [[ "$ACTUAL_VERSION" == "$GODOT_VERSION".* ]]
           "$GODOT_BIN" --headless --editor --path . --import --quit
           echo "Headless import/parse passed for Godot $GODOT_VERSION."
           echo "This does not prove Android export, gameplay correctness or physical-device performance."
