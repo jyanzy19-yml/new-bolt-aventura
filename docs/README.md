@@ -2,6 +2,22 @@
 
 Este índice organiza a documentação de design, narrativa, tecnologia, produção e qualidade. Os documentos distinguem decisões confirmadas, requisitos, propostas e informações ainda pendentes.
 
+## Diretiva Mestra
+A especificação principal de produto e execução está dividida em partes para consulta e manutenção:
+- [Índice da Diretiva Mestra](master-directive/README.md)
+- [00 — Mandato, autonomia e identidade](master-directive/00-mandato-identidade.md)
+- [01 — Campanha e sete universos](master-directive/01-campanha-e-universos.md)
+- [02 — Antagonista e inimigos](master-directive/02-antagonista-e-inimigos.md)
+- [03 — Bolt, movimentação e combate](master-directive/03-bolt-movimentacao-combate.md)
+- [04 — Fluxo, menus e cinemáticas](master-directive/04-fluxo-menus-e-cinematicas.md)
+- [05 — HUD, controles e configurações](master-directive/05-hud-controles-configuracoes.md)
+- [06 — Progressão e salvamento](master-directive/06-progressao-e-salvamento.md)
+- [07 — Arquitetura e assets](master-directive/07-arquitetura-e-assets.md)
+- [08 — Android e performance](master-directive/08-android-performance.md)
+- [09 — GitHub, CI e QA](master-directive/09-github-ci-e-qa.md)
+- [10 — Documentação e skills](master-directive/10-documentacao-e-skills.md)
+- [11 — Etapas e conclusão](master-directive/11-etapas-e-conclusao.md)
+
 ## Design
 1. [Visão geral e pilares](game-design/00-game-overview.md)
 2. [Bíblia narrativa](game-design/01-narrative-bible.md)
@@ -44,7 +60,6 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - Modelos de issue e pull request: `.github/ISSUE_TEMPLATE/` e `.github/PULL_REQUEST_TEMPLATE.md`.
 
 Atualize este índice quando documentos forem adicionados ou movidos. Use links relativos e confira se todos resolvem.
-
 
 ## Referências complementares
 - [Relatório de validação estrutural](production/validation-report.md)
