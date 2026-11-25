@@ -31,6 +31,7 @@ O alvo técnico inclui aparelhos Android com aproximadamente 4 GB de RAM e Media
 
 - [Protocolo de qualidade](docs/production/quality-control-protocol.md) define o ciclo obrigatório de implementação, níveis de validação e severidade.
 - [CONTINUITY.md](docs/production/CONTINUITY.md) registra o handoff entre sessões; deve ser atualizado antes de encerrar trabalho substancial.
+- [Estado da colaboração](docs/production/COLLABORATION_STATE.md) identifica o responsável e a etapa atual; [configuração de acesso](docs/production/AGENT_ACCESS_SETUP.md) explica como garantir que Claude tenha acesso real; [template de handoff](docs/production/HANDOFF_TEMPLATE.md) padroniza a transferência.
 - [implementation-tracker.md](docs/production/implementation-tracker.md) acompanha 24 sistemas e as 42 fases sem percentuais subjetivos.
 - Os comandos `/bolt-continue` e `/bolt-release-check` retomam o trabalho e auditam prontidão sem alegar testes não executados.
 
