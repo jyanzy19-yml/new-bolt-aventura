@@ -49,6 +49,7 @@ O repositório é um framework documental e de ferramentas. Não há projeto God
 | AUD-04 | A tabela narrativa dizia que a ordem dos mundos estava a definir, embora a ordem seja fixa na Bíblia dos Mundos e no prompt mestre | Distinguir ordem fixa de ritmo/revelações narrativas ainda a desenvolver |
 | AUD-05 | Não havia checklist compacto de aceite específico da Etapa 0 | Criar checklist ligado ao estado colaborativo e ao índice |
 | AUD-06 | O relatório de validação estrutural continha inventários históricos que poderiam ser confundidos com o estado atual | Acrescentar referência explícita ao snapshot atual e aos limites do CI |
+| AUD-07 | O catálogo de skills continha quebras de linha literais e uma frase desatualizada sobre os nomes dos mundos | Corrigir a formatação e alinhar a referência à Bíblia dos Mundos e ao prompt mestre |
 
 ## 5. Integridade do design e dos contratos
 
@@ -80,3 +81,6 @@ Claude Code inicia a Etapa 0 somente quando o usuário o acionar. Deve confirmar
 Após o inventário no commit-base `bc5799c651ccd5ffbcdfadf36f669435df63501b`, esta rodada adicionou dois documentos e atualizou as especificações de UI/UX, narrativa, orientação/touch, QA Android, status, continuidade, colaboração e índice de documentação. O inventário resultante passa a 234 entradas, 134 arquivos Markdown no repositório e 46 em `docs/`; as contagens de skills/agentes/comandos/workflows permanecem 36/8/6/2. Essas alterações não criam projeto Godot, gameplay, cenas ou assets.
 
 A validação documental correspondente deve ser consultada no GitHub Actions após a conclusão dos commits. O workflow Godot continuará registrando NOT APPLICABLE enquanto `project.godot` estiver ausente.
+
+
+A revisão final também corrigiu a formatação do bloco da skill `godot-project-structure` em `docs/skills-catalog.md` e removeu uma frase desatualizada que tratava os nomes dos sete mundos como indefinidos. A versão exata do Godot continua corretamente pendente de detecção no projeto real.
