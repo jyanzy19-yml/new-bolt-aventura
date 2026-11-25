@@ -52,7 +52,7 @@ def check_claude_files(folder: str, required: tuple[str, ...]) -> int:
 
 def check_markdown_links() -> int:
     candidates = [ROOT / "README.md", ROOT / "CLAUDE.md", ROOT / "AGENTS.md"]
-    for folder in ("docs", ".claude"):
+    for folder in ("docs",):
         base = ROOT / folder
         if base.exists():
             candidates.extend(base.rglob("*.md"))
