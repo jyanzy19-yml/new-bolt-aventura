@@ -38,7 +38,7 @@ Do not invent approved names, plot twists, dialogue, world identities or finaliz
 Choose tests that match the change. For gameplay, verify movement, collisions, state transitions and checkpoints. For UI, verify aspect ratios, touch targets, navigation and safe areas. For Android, verify export configuration, permissions, input and runtime behavior on a physical device when possible. For performance, record repeatable frame-time/memory evidence and compare before/after. Headless success alone does not prove visual correctness or Android-device performance.
 
 ## Skills and specialist workflow
-Skills are located in `.claude/skills/`. Start with the router when a game-development task begins or changes category, then read only the minimum relevant skills. Specialist agents in `.claude/agents/` are reviewers, not approvers. Project commands include `/bolt-audit`, `/bolt-plan`, `/bolt-qa` and `/bolt-android-review`; they do not authorize scope or canon changes.
+Skills are located in `.claude/skills/`. Start with the router when a game-development task begins or changes category, then read only the minimum relevant skills. Use `godot-project-structure` for folder layout, file placement, module boundaries, dependency direction, or safe project reorganization; follow approved ADRs and do not reorganize a nonexistent or uninspected Godot project. Specialist agents in `.claude/agents/` are reviewers, not approvers. Project commands include `/bolt-audit`, `/bolt-plan`, `/bolt-qa` and `/bolt-android-review`; they do not authorize scope or canon changes.
 
 ## Required final report
 For each substantial task, report:
