@@ -128,3 +128,18 @@ Uma sessão está pronta para handoff quando o trabalho está commitado ou suas 
 - A configuração de acesso e o template oficial estão em [AGENT_ACCESS_SETUP.md](AGENT_ACCESS_SETUP.md) e [HANDOFF_TEMPLATE.md](HANDOFF_TEMPLATE.md).
 
 Este snapshot é uma inspeção de repositório e CI documental, não uma validação do jogo.
+
+
+## 11. Snapshot após a criação dos controles de colaboração — 2026-11-25
+
+- HEAD consultado antes desta atualização de snapshot: 5174de38ea500349704871b7fc9e625271d16b77.
+- Árvore recursiva: 228 entradas; 36 skills, 8 agentes, 6 comandos e 41 arquivos Markdown em docs/.
+- Existe um único workflow: validação documental.
+- A validação foi disparada novamente após as mudanças de governança; consultar o GitHub Actions para o resultado final do commit mais recente. Execuções intermediárias já concluídas passaram, mas não declarar o último commit como aprovado até confirmar seu run.
+- Os três documentos novos são COLLABORATION_STATE.md, AGENT_ACCESS_SETUP.md e HANDOFF_TEMPLATE.md.
+- A integração foi adicionada a MASTER_DIRECTIVE.md, CLAUDE.md, AGENTS.md, README.md, docs/README.md e ao protocolo colaborativo.
+- Não há project.godot, cenas .tscn ou scripts .gd de gameplay BOLT.
+- Etapa 0 está atribuída a Claude Code e PENDING; nenhum escritor está ativo. O usuário deve iniciar Claude e confirmar que o ambiente dele tem escrita/commit no repositório.
+- A PR #1 permanece aberta e divergente; não a usar como branch de trabalho sem revisar os 17 commits exclusivos e a divergência com main.
+
+O HEAD deve sempre ser consultado novamente ao retomar; o hash acima é histórico do snapshot, não uma trava de versão.
