@@ -56,3 +56,28 @@
 The upstream repository describes its skills as authored from primary documentation and is distributed under Apache License 2.0. The original `LICENSE` and `NOTICE` are preserved in `THIRD_PARTY_NOTICES/awesome-gamedev-agent-skills/`. Each skill file is copied from the source collection without claiming it was authored by this project.
 
 The upstream collection changes over time. Check the upstream repository before future updates; do not automatically overwrite local customizations. The presence of a skill does not guarantee compatibility with every Godot release or Android device.
+
+
+## Pacote instalado e arquivos auxiliares
+
+A seleção contém **26 skills**. Os arquivos de referência e exemplos de código citados pelas skills foram copiados para as pastas locais correspondentes, preservando seus caminhos relativos. O helper de relatório de assets também está disponível em create-game-assets/scripts.
+
+O exemplo binário player-idle.png citado pela skill de arte não estava disponível na origem consultada e, portanto, não foi fabricado nem incluído. A própria skill recebeu uma nota explicando que esse caminho é ilustrativo e deve ser substituído por um asset real do projeto.
+
+## Agentes consultivos do projeto
+
+Em .claude/agents/ existem oito revisores especializados, todos configurados como read-only:
+- game-architect
+- gameplay-engineer
+- narrative-designer
+- level-designer
+- android-performance-engineer
+- qa-engineer
+- ui-ux-designer
+- art-audio-director
+
+Eles apoiam auditorias e recomendações; não substituem aprovação do usuário nem executam mudanças por conta própria.
+
+## Documentação de produto e engenharia
+
+O índice em docs/README.md conecta as bíblias de design, especificações Android/Godot, roadmap, critérios de conclusão, matriz de QA, templates e registros de decisão. A versão atual não fixa a versão do Godot nem preenche os nomes dos sete mundos sem fonte aprovada.
