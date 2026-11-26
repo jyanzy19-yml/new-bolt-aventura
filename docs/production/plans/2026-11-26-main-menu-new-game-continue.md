@@ -85,3 +85,15 @@ O menu deve permitir iniciar uma campanha nova ou retomar o progresso salvo. A r
 - Reentrada na mesma fase preserva checkpoint.
 - Save ausente/corrompido/incompatível não bloqueia Nova Jornada.
 - Testes e workflows Godot/Docs aprovados; documentação atualizada.
+
+
+## Resultado da execução — 2026-11-26
+
+- **Status:** concluído e integrado.
+- **PR:** #31 — merged por squash.
+- **Main HEAD:** `42b60c06615c1d1bd8059e315f34fcedcff04d81`.
+- **Godot CI pré e pós-merge:** SUCCESS — Godot 4.7.2, 66 testes, 404 verificações, 0 falhas.
+- **Docs CI pré e pós-merge:** SUCCESS.
+- **Validação não executada:** Godot local/editor gráfico, APK, instalação, emulador, Android físico, encerramento forçado e métricas de desempenho.
+- **Resultado funcional coberto por CI:** Nova Jornada, reset seletivo, Continue direto para W1-L1, entrada inicial persistida, checkpoint preservado na reentrada, estado sem save, schema incompatível e envelope corrompido.
+- **Estado de produção:** menu implementado parcialmente e validado em headless; W1-L1 continua Em andamento.

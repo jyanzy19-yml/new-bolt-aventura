@@ -36,12 +36,21 @@ Implementar fluxo explícito de Nova Jornada e Continuar integrado ao SaveSystem
 - `tests/unit/test_campaign_entry.gd`
 - Documentação de produção e ADR-0005.
 
-## Validação
+## Validação e integração
 
+- PR #31: MERGED por squash.
+- Merge commit/main HEAD: `42b60c06615c1d1bd8059e315f34fcedcff04d81`.
+- Godot CI pré-merge run `45862187355`: SUCCESS — Godot 4.7.2, 66 testes, 404 verificações, 0 falhas.
+- Docs CI pré-merge run `45862187418`: SUCCESS.
+- Godot CI pós-merge run `45862459941`: SUCCESS — Godot 4.7.2, 66 testes, 404 verificações, 0 falhas.
+- Docs CI pós-merge run `45862459947`: SUCCESS.
 - Execução Godot local: não disponível/não executada nesta sessão.
-- CI Godot/Docs: pendente no momento da criação deste handoff.
 - Android, APK, emulador, encerramento forçado e aparelho físico: não executados.
+
+## Achado preexistente fora do escopo
+
+O log da suíte contém erro de `Area2D.monitoring` alterado sincronamente dentro de `body_entered`, em `BoltHealthPickup`. A mesma mensagem aparece no CI anterior à PR #31 (`45859653809`), portanto não foi introduzida por esta entrega. Corrigir em tarefa isolada usando mudança deferred e teste de regressão.
 
 ## Próxima ação
 
-Revisar diff e workflows; corrigir toda falha real; abrir/validar PR; integrar somente após checks verdes; verificar CI pós-merge e atualizar este handoff com SHA/evidências finais.
+Continuar a próxima unidade de produção a partir do HEAD integrado. W1-L1 permanece blockout em andamento; não criar W1-L2 sem conteúdo e cena reais.

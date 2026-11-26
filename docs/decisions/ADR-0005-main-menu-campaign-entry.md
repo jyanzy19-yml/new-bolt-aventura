@@ -40,4 +40,7 @@ O menu anterior oferecia apenas Nova Jornada e sempre encaminhava o jogador à a
 - Requisito do usuário: implementar Novo Jogo e Continuar integrado ao SaveSystem/CampaignProgress.
 - Implementação nesta etapa: branch `feat/main-menu-new-game-continue`.
 - Testes automatizados adicionados em `tests/unit/test_campaign_progress.gd` e `tests/unit/test_campaign_entry.gd`.
-- A aprovação da validação técnica depende dos workflows Godot e Docs concluírem com sucesso.
+- PR #31 integrada por squash em `42b60c06615c1d1bd8059e315f34fcedcff04d81`.
+- Godot CI pré-merge `45862187355` e pós-merge `45862459941`: SUCCESS, Godot 4.7.2, 66 testes, 404 verificações, 0 falhas em ambos.
+- Docs CI pré-merge `45862187418` e pós-merge `45862459947`: SUCCESS.
+- Limites não cobertos: validação visual, Android físico, encerramento forçado e performance.

@@ -443,5 +443,9 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - **Testes adicionados:** `tests/unit/test_campaign_progress.gd` e `tests/unit/test_campaign_entry.gd`; aguardando CI Godot/Docs.
 - **Validação local:** não executada; sem runtime Godot local disponível nesta sessão. Não alegar teste headless até o workflow concluir.
 - **Não executado:** editor gráfico, exportação APK, instalação, emulador, Android físico, teste de encerramento forçado, FPS, memória e I/O.
-- **PR:** ainda não aberta neste snapshot. Não integrar sem revisão do diff e ambos os workflows verdes.
-- **Próxima ação:** revisar o diff completo, corrigir falhas do CI, abrir PR, verificar checks pré-merge, integrar e verificar CI pós-merge.
+- **PR #31:** integrada por squash em `42b60c06615c1d1bd8059e315f34fcedcff04d81`.
+- **CI pré-merge:** Godot run `45862187355` SUCCESS — 66 testes/404 verificações/0 falhas; Docs run `45862187418` SUCCESS.
+- **CI pós-merge main:** Godot run `45862459941` SUCCESS — 66 testes/404 verificações/0 falhas; Docs run `45862459947` SUCCESS.
+- **Limites:** W1-L1 continua em andamento; sem encerramento forçado, editor gráfico, APK, emulador, Android físico ou benchmark.
+- **Achado preexistente fora do escopo:** o coletável altera `Area2D.monitoring` sincronicamente durante `body_entered`, gerando erro no log. O mesmo erro consta no CI anterior `45859653809`; não foi introduzido pela PR #31. Registrar para correção isolada.
+- **Próxima ação:** continuar a próxima unidade de produção a partir do HEAD integrado; preservar W1-L1 como blockout e não criar W1-L2 sem implementação real.
