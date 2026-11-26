@@ -5,15 +5,15 @@
 
 ## Snapshot vigente — revisão de 2026-11-26
 
-- **HEAD da main verificado antes desta rodada:** `75159132a7dc2503df68d8ca1abe57fc7e88019c` (PR #6; Docs CI #143 SUCCESS). Esta revisão documental parte desse commit em branch própria.
+- **PR #7 integrada:** merge `b8def7a22feee9573c8e4c46c99ed89cb92967c`; Docs CI #144 (PR) e #145 (push após merge) SUCCESS. A PR partiu do HEAD `75159132a7dc2503df68d8ca1abe57fc7e88019c`.
 - O projeto Godot executável existe na raiz: Godot **4.7.2**, `project.godot`, cenas, scripts GDScript, recursos e testes. Continuar a base existente; não recriar o projeto.
-- Etapa 0: **ACCEPTED**. Etapa 1: **HANDOFF_READY**. PRs #2–#6: **MERGED**.
+- Etapa 0: **ACCEPTED**. Etapa 1: **HANDOFF_READY**. PRs #2–#7: **MERGED**.
 - Próximo turno de gameplay: **Claude Code — Etapa 2**, somente depois da integração desta rodada e confirmação do HEAD atual pelo usuário/Claude.
 - **PR #1:** OPEN, `mergeable_state=dirty`; 17 commits exclusivos, 135 commits atrás da main verificada, 17 arquivos alterados. Contém documentos de raiz e uma diretiva em 12 partes/índice; não contém implementação de gameplay. Preservada sem merge/fechamento.
 - **Dash:** código e testes atuais incluem Dash; a diretiva da PR #1 exclui. Decisão canônica não resolvida. Não adicionar, remover ou retunar a mecânica sem decisão explícita.
 - **Branch protection:** endpoint de leitura retornou 403 para a integração; configuração atual não foi confirmada nesta rodada. A auditoria anterior reportou `protected=false`; proprietário deve verificar/configurar administrativamente.
 - **Validação máxima comprovada:** L2 (Godot headless/CI). Docs CI #143 SUCCESS no HEAD anterior à rodada. Não há APK exportado/instalado, editor gráfico, emulador, toque físico, safe area em aparelho, FPS ou memória medidos.
-- **Escopo desta rodada ChatGPT:** corrigir documentação/continuidade e auditar PR #1, governança, CI e riscos. Não há alterações de gameplay planejadas.
+- **Escopo concluído pelo ChatGPT nesta rodada:** reconciliação documental, revisão estática focalizada, análise da PR #1 e atualização do handoff. PR #7 integrada sem alterações de gameplay. Claude Code é o próximo escritor da Etapa 2 após o usuário iniciar a sessão e confirmar o HEAD real.
 
 O estado do repositório prevalece sobre handoffs antigos. Confirmar branch/HEAD/PRs antes de qualquer implementação.
 
