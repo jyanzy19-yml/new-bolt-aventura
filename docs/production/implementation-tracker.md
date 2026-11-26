@@ -1,7 +1,7 @@
 # BOLT · AVENTURA — Rastreador de implementação
 
 **Objetivo:** impedir que sistemas ou fases sejam declarados concluídos apenas por terem arquivos ou cenas criados.  
-**Atualização:** em toda entrega substancial e mudança de gate.\n\n**Snapshot 2026-11-26:** main após PR #52 (`6f8e9b8fbaaab9c44247050e5f86e4442bd2622f`); PR #47 pós-merge Godot 88 testes/553 verificações/0 falhas, Docs e Android Export SUCCESS. APK debug exportado, não instalado em aparelho. Etapas 01–03 concluídas; Etapa 04 em desenvolvimento.  
+**Atualização:** em toda entrega substancial e mudança de gate.\n\n**Snapshot 2026-11-26:** `main` HEAD `54fd48e5f49fba877740265aafa0d8f649c2b1e9` (PRs #57/#58 abertas, não integradas); PR #47 pós-merge Godot 88 testes/553 verificações/0 falhas, Docs e Android Export SUCCESS. APK debug exportado, não instalado em aparelho. Etapas 01–03 concluídas; Etapa 04 em desenvolvimento.  
 **Regra:** estado precisa refletir evidência no branch atual.
 
 ## 1. Vocabulário de status
