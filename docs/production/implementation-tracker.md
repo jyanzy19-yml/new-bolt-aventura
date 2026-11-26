@@ -238,3 +238,13 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - O workflow Godot passa a procurar também o erro de mutação de estado físico bloqueada durante sinais/flush de queries.
 - **Estado:** implementação e documentação na branch; Godot CI e Docs CI da PR ainda pendentes. Não marcar como validado antes dos checks.
 - Não altera cura, valores de gameplay, colisões, persistência ou canon.
+
+
+## SYS-024 — pipeline de exportação Android debug (2026-11-26)
+
+- Base: main após PR #37, commit `39b6db8298542c5057c06f509b20d250a888e289`.
+- Preset existente: `Android (debug/teste)`, arm64-v8a, landscape e modo imersivo; package ID `com.example.boltaventura` permanece placeholder.
+- Branch `ci/android-debug-export`: workflow baixa Godot e templates pareados, instala JDK 17/Android SDK, gera chave de debug efêmera, roda importação/testes, exporta APK, verifica assinatura/package ID/hash e publica artifact temporário.
+- Nenhuma chave de release, segredo, package ID definitivo ou permissão nova foi introduzida.
+- **Estado:** pipeline escrita; aguardando execução CI e artifact. Não classificar como exportação validada antes de confirmar o run e o arquivo.
+- Mesmo após export, instalação, cold start, touch, safe area, lifecycle e performance Android físico permanecem pendentes.

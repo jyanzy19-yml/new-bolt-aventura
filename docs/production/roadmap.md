@@ -2,6 +2,8 @@
 
 Este roadmap define gates de qualidade, não datas. A ordem pode ser ajustada após auditoria do projeto real, mas nenhuma etapa deve ser declarada concluída sem evidência e aprovação exigida.
 
+O plano operacional de 26 etapas em `stage-status.md` divide o trabalho em unidades menores dentro destes gates. Os números das 26 etapas não substituem nem renumeram os Gates 0–5; ambos devem ser acompanhados sem confundir seus critérios.
+
 ## Gate 0 — Auditoria e alinhamento
 **Objetivo:** compreender o estado real do repositório e congelar o escopo inicial aprovado.
 

@@ -1,0 +1,191 @@
+name: BOLT Android debug export
+
+on:
+  pull_request:
+    paths:
+      - '.godot-version'
+      - 'project.godot'
+      - 'export_presets.cfg'
+      - 'icon.svg'
+      - 'scenes/**'
+      - 'scripts/**'
+      - 'resources/**'
+      - 'tests/**'
+      - '.github/workflows/android-debug-export.yml'
+  push:
+    branches: [main]
+    paths:
+      - '.godot-version'
+      - 'project.godot'
+      - 'export_presets.cfg'
+      - 'icon.svg'
+      - 'scenes/**'
+      - 'scripts/**'
+      - 'resources/**'
+      - 'tests/**'
+      - '.github/workflows/android-debug-export.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-debug-export-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  android-debug:
+    name: Export Android debug APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+
+      - name: Install Android export packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${ANDROID_HOME:?Android SDK path was not configured}"
+          set +o pipefail
+          yes | sdkmanager --licenses >/dev/null
+          set -o pipefail
+          sdkmanager --install \
+            "platform-tools" \
+            "platforms;android-35" \
+            "build-tools;35.0.1" \
+            "cmdline-tools;latest" \
+            "ndk;28.1.13356709" \
+            "cmake;3.10.2.4988404"
+          test -x "$ANDROID_HOME/platform-tools/adb"
+          test -x "$ANDROID_HOME/build-tools/35.0.1/apksigner"
+          test -x "$ANDROID_HOME/build-tools/35.0.1/aapt"
+          java -version
+          sdkmanager --list_installed
+
+      - name: Download matching Godot editor and Android export templates
+        id: godot
+        shell: bash
+        run: |
+          set -euo pipefail
+          GODOT_VERSION="$(tr -d '[:space:]' < .godot-version)"
+          if [[ ! "$GODOT_VERSION" =~ ^4\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Expected exact stable Godot 4.x.y; found '$GODOT_VERSION'."
+            exit 1
+          fi
+
+          EDITOR_ARCHIVE="Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          TEMPLATE_ARCHIVE="Godot_v${GODOT_VERSION}-stable_export_templates.tpz"
+          RELEASE_URL="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable"
+
+          curl --fail --location --retry 3 "${RELEASE_URL}/${EDITOR_ARCHIVE}" --output godot.zip
+          unzip -q godot.zip -d godot-bin
+          GODOT_BIN="$PWD/godot-bin/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+          test -f "$GODOT_BIN"
+          chmod +x "$GODOT_BIN"
+
+          curl --fail --location --retry 3 "${RELEASE_URL}/${TEMPLATE_ARCHIVE}" --output export_templates.tpz
+          mkdir -p "$RUNNER_TEMP/godot-export-templates"
+          unzip -q export_templates.tpz -d "$RUNNER_TEMP/godot-export-templates"
+          TEMPLATE_SOURCE="$(find "$RUNNER_TEMP/godot-export-templates" -type f -name android_debug.apk -printf '%h\n' -quit)"
+          test -n "$TEMPLATE_SOURCE"
+          test -f "$TEMPLATE_SOURCE/android_release.apk"
+
+          TEMPLATE_DEST="$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
+          mkdir -p "$TEMPLATE_DEST"
+          cp "$TEMPLATE_SOURCE"/* "$TEMPLATE_DEST"/
+
+          ACTUAL_VERSION="$("$GODOT_BIN" --headless --version)"
+          [[ "$ACTUAL_VERSION" == "${GODOT_VERSION}".* ]]
+          echo "godot_bin=$GODOT_BIN" >> "$GITHUB_OUTPUT"
+          echo "godot_version=$GODOT_VERSION" >> "$GITHUB_OUTPUT"
+          echo "Godot ${ACTUAL_VERSION}; matching Android templates installed."
+
+      - name: Import project and run headless regression suite
+        shell: bash
+        env:
+          GODOT_BIN: ${{ steps.godot.outputs.godot_bin }}
+        run: |
+          set -euo pipefail
+          "$GODOT_BIN" --headless --editor --path . --import --quit 2>&1 | tee godot-import.log
+          "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd 2>&1 | tee godot-tests.log
+          if grep -nE "SCRIPT ERROR:|Parse Error:|^ERROR:.*(Function blocked during in/out signal|flushing queries)" godot-import.log godot-tests.log; then
+            echo "::error::Godot reported a script, parse or physics lifecycle error."
+            exit 1
+          fi
+
+      - name: Create ephemeral debug signing key
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$HOME/.android"
+          keytool -genkeypair -noprompt \
+            -keystore "$RUNNER_TEMP/bolt-debug.keystore" \
+            -storepass android \
+            -alias androiddebugkey \
+            -keypass android \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -dname "CN=Android Debug,O=Android,C=US"
+
+      - name: Export Android debug APK
+        shell: bash
+        env:
+          GODOT_BIN: ${{ steps.godot.outputs.godot_bin }}
+          GODOT_ANDROID_KEYSTORE_DEBUG_PATH: ${{ runner.temp }}/bolt-debug.keystore
+          GODOT_ANDROID_KEYSTORE_DEBUG_USER: androiddebugkey
+          GODOT_ANDROID_KEYSTORE_DEBUG_PASSWORD: android
+        run: |
+          set -euo pipefail
+          mkdir -p build/android
+          "$GODOT_BIN" --headless --path . --export-debug "Android (debug/teste)" build/android/bolt-aventura-debug.apk 2>&1 | tee godot-export.log
+          test -s build/android/bolt-aventura-debug.apk
+          if grep -nE "^ERROR:|SCRIPT ERROR:|Parse Error:" godot-export.log; then
+            echo "::error::Godot reported an export error."
+            exit 1
+          fi
+
+      - name: Verify APK and record provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          APK="build/android/bolt-aventura-debug.apk"
+          APKSIGNER="$ANDROID_HOME/build-tools/35.0.1/apksigner"
+          AAPT="$ANDROID_HOME/build-tools/35.0.1/aapt"
+          "$APKSIGNER" verify --verbose "$APK"
+          PACKAGE_ID="$("$AAPT" dump badging "$APK" | sed -n "s/^package: name='\\([^']*\\)'.*/\\1/p" | head -n 1)"
+          test -n "$PACKAGE_ID"
+          APK_SHA256="$(sha256sum "$APK" | cut -d ' ' -f 1)"
+          APK_BYTES="$(stat -c '%s' "$APK")"
+          cat > build/android/build-info.txt <<EOF
+          Commit: ${GITHUB_SHA}
+          Godot: ${{ steps.godot.outputs.godot_version }}
+          Package ID: ${PACKAGE_ID}
+          Artifact: bolt-aventura-debug.apk
+          Size bytes: ${APK_BYTES}
+          SHA-256: ${APK_SHA256}
+          Build type: debug/test only; not for store distribution
+          EOF
+          cat build/android/build-info.txt
+
+      - name: Upload Android debug artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bolt-aventura-android-debug-${{ github.sha }}
+          path: |
+            build/android/bolt-aventura-debug.apk
+            build/android/build-info.txt
+          if-no-files-found: error
+          retention-days: 14

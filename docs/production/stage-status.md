@@ -2,7 +2,7 @@
 
 **Atualização:** 2026-11-26  
 **Último merge de gameplay:** PR #34 integrada por squash em `c10ca6944bf0047abe694b7c429270a256cfff96`. **Última regressão integrada:** PR #35, teste de contato físico do campo energético, merge `e1f66cec92dae678dacfc6d35eb6a1abb3cad811`.  
-**Branch de trabalho:** `test/health-pickup-physical-contact` — regressão física do coletável em validação.  
+**Branch de trabalho:** `ci/android-debug-export` — pipeline de APK Android debug em validação.  
 **Última entrega integrada:** W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente da campanha (PR #34).  
 **CI pré-merge PR #34:** Godot run `45872508689` SUCCESS — Godot 4.7.2, 69 testes, 439 verificações, 0 falhas; Docs run `45872508675` SUCCESS.  
 **CI pós-merge PR #34:** Godot run `45872656738` SUCCESS — 69 testes, 439 verificações, 0 falhas; Docs run `45872656798` SUCCESS. **PR #35:** Godot CI pré/pós-merge SUCCESS — 69 testes, 439 verificações, 0 falhas (`45873118202`, `45873234656`). Docs CI da sincronização anterior `45872828901` SUCCESS.  
@@ -331,8 +331,8 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 | 21 | Interface e UX | EM DESENVOLVIMENTO | Menu, HUD, pausa e controles touch parciais; configurações e validação visual/Android pendentes |
 | 22 | Arte e efeitos visuais | EM DESENVOLVIMENTO | Placeholders geométricos e feedback básico; arte final e pipeline de assets pendentes |
 | 23 | Áudio e apresentação | NÃO INICIADA | Música, SFX, buses e opções de áudio não integrados |
-| 24 | Android e touchscreen | EM DESENVOLVIMENTO | Preset Android, landscape, política imersiva e touch implementados parcialmente; APK e dispositivo físico não validados |
-| 25 | Otimização e garantia de qualidade | EM DESENVOLVIMENTO | CI Godot headless e regressões; profiling CPU/GPU/memória, sessões longas e QA físico pendentes |
+| 24 | Android e touchscreen | EM DESENVOLVIMENTO | Preset Android e pipeline de export debug em validação; APK ainda não confirmado e dispositivo físico não validado |
+| 25 | Otimização e garantia de qualidade | EM DESENVOLVIMENTO | CI headless e regressões; pipeline de export Android em validação; profiling CPU/GPU/memória e QA físico pendentes |
 | 26 | Polimento e consolidação final | NÃO INICIADA | Produto ainda é protótipo técnico/blockout, sem campanha completa ou release candidate |
 
 **Regra de interpretação:** nenhuma etapa foi marcada como CONCLUÍDA neste baseline. “EM DESENVOLVIMENTO” indica existência de implementação parcial, não aprovação final. O status deve ser atualizado somente com evidência do branch/commit atual.
@@ -352,3 +352,19 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - A implementação atual usa `set_deferred("monitoring", false)`; o objetivo desta unidade é proteger o caminho físico e detectar o erro de mutação de física bloqueada no log.
 - Teste de sobreposição física e filtro CI direcionado estão na branch; CI da PR ainda pendente.
 - Plano: [health-pickup-physical-contact](plans/2026-11-26-health-pickup-physical-contact.md).
+
+
+### Pós-merge PR #37 — regressão isolada do coletável
+
+- Merge commit: `39b6db8298542c5057c06f509b20d250a888e289`.
+- Godot CI pré e pós-merge SUCCESS; Docs CI pré e pós-merge SUCCESS.
+- Precisão de cobertura: `tests/unit/test_campaign_entry.gd` já exercitava o coletável por contato físico real no fluxo W1-L1. PR #37 acrescentou cobertura isolada em `test_enemy_combat.gd`, com verificação de cura, quantidade, emissão única e consumo; não foi a primeira cobertura física do coletável.
+- O workflow Godot agora também procura o erro específico de mutação de estado físico bloqueada durante sinais/flush de queries.
+
+### Próxima unidade — exportação Android debug
+
+- Branch: `ci/android-debug-export`, baseada em `39b6db8298542c5057c06f509b20d250a888e289`.
+- Preset existente preservado; package ID placeholder mantido.
+- Pipeline usa Godot/editor templates pareados, JDK 17, Android SDK, chave debug efêmera, testes headless e verificação de assinatura/hash.
+- **Estado:** implementação na branch; execução e artefato ainda pendentes.
+- Plano: [android-debug-export-pipeline](plans/2026-11-26-android-debug-export-pipeline.md).

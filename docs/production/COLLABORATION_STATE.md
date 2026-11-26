@@ -2,12 +2,12 @@
 
 ## Snapshot operacional vigente — 2026-11-26
 
-- Último merge de gameplay: PR #34, commit `c10ca6944bf0047abe694b7c429270a256cfff96`; commits posteriores sincronizam documentação.
+- Último merge de conteúdo de gameplay: PR #34, commit `c10ca6944bf0047abe694b7c429270a256cfff96`. Última correção/regressão: PR #37, merge `39b6db8298542c5057c06f509b20d250a888e289`.
 - ChatGPT é o único escritor ativo conforme a decisão vigente do usuário; Claude permanece inativo para escrita concorrente.
 - Etapa de produção atual: continuação do Gate 1/vertical slice e expansão incremental da campanha.
 - PR #34 integrada: W1-L1 encaminha para W1-L2; save e menu Continuar reconhecem ambas as fases existentes; W1-L2 possui blockout, campo energético cíclico, checkpoint e saída.
 - CI pré e pós-merge das PRs #34/#35: Godot 4.7.2, 69 testes/439 verificações/0 falhas; Docs CI pré/pós-merge SUCCESS. PR #35 cobre contato físico real da `Area2D`.
-- A PR #1 permanece separada e não deve ser mesclada automaticamente. Android físico não validado.
+- Main HEAD vigente: `39b6db8298542c5057c06f509b20d250a888e289`. PR #1 permanece separada e não deve ser mesclada automaticamente. Android físico não validado.
 
 
 **Fonte única para o próximo turno.** Antes de editar, confirme este arquivo contra o HEAD, commits, branches e PRs reais do GitHub.
@@ -27,12 +27,14 @@
 - **Governança da main:** o endpoint de branches confirmou `protected=false` para `main`. A integração não disponibiliza operação administrativa para habilitar proteção/ruleset; o proprietário deve configurar as regras manualmente. Não presumir checks obrigatórios antes de resolver os filtros por caminhos dos workflows.
 - **Escritor desta rodada:** ChatGPT, único escritor ativo conforme a diretriz vigente do usuário; PR #34 integrada à main. Criar uma nova branch para a próxima unidade após confirmar o estado pós-merge.
 
-## Estado por etapa
+## Estado por etapa — protocolo legado 0–3
+
+**Nota vigente:** este quadro preserva o histórico do antigo fluxo de handoff. A sequência operacional atual é o plano de 26 etapas em `stage-status.md`; ChatGPT permanece como único escritor ativo. Não existe handoff pendente para Claude.
 
 | Etapa | Responsável | Estado | Evidência/entrega | Próximo responsável |
 |---|---|---|---|---|
 | 0 | Claude Code | ACCEPTED | Fundação e protótipo provisório; hardening PR #3 integrado | ChatGPT |
-| 1 | ChatGPT | HANDOFF_READY | `f3ab682`: correção multitouch, regressão e CI | Claude Code |
+| 1 | ChatGPT | HANDOFF_READY (histórico) | `f3ab682`: correção multitouch, regressão e CI | ChatGPT |
 | 2 | ChatGPT | IN_PROGRESS | PR #34 integrada (`c10ca69`); rota W1-L1→W1-L2, retomada e blockout W1-L2. CI Godot pré/pós-merge 69 testes/439 verificações/0 falhas; Docs CI SUCCESS | ChatGPT |
 | 3 | ChatGPT | Aguardando | Próxima unidade após revisão/validação da Etapa 2 | ChatGPT |
 
@@ -142,3 +144,17 @@ O usuário autorizou ChatGPT a assumir sozinho todas as etapas de desenvolviment
 - O baseline de 26 etapas está em `docs/production/stage-status.md`; nenhuma etapa foi marcada como CONCLUÍDA. Etapa 01 e Etapa 02 permanecem EM ANÁLISE; as demais refletem implementação parcial ou ausência de sistemas.
 - Unidade ativa: branch `test/health-pickup-physical-contact`, baseada no merge da PR #36. Objetivo: validar a coleta do item por contato físico real e fazer CI detectar erros específicos de mutação de estado físico.
 - Próxima ação: aguardar/revisar CI da branch/PR e atualizar stage-status, tracker e continuidade com resultados efetivos.
+
+
+---
+
+## Atualização operacional — PR #37 integrada e pipeline Android — 2026-11-26
+
+- Main HEAD: `39b6db8298542c5057c06f509b20d250a888e289`.
+- PR #37 integrada por squash; Godot CI pré/pós-merge e Docs CI pré/pós-merge SUCCESS.
+- Precisão da cobertura: o fluxo de integração `test_campaign_entry.gd` já exercitava coleta física em W1-L1; PR #37 adiciona teste físico isolado de `BoltHealthPickup` e filtro de log para erro de mutação física bloqueada.
+- Diretriz operacional das 26 etapas permanece subordinada ao prompt mestre e aos documentos canônicos.
+- Branch ativa: `ci/android-debug-export`.
+- Objetivo: exportar APK Android debug via preset existente, Godot 4.7.2 e templates pareados; não é release e não valida dispositivo.
+- Package ID `com.example.boltaventura` permanece placeholder. Nenhuma chave/credencial de release foi criada.
+- Próxima ação: validar a pipeline na PR e só registrar exportação após confirmar artifact, assinatura, package ID e hash.

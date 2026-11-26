@@ -185,6 +185,9 @@ func test_health_pickup_collects_through_physical_area_contact() -> bool:
 		await tree.physics_frame
 		if not collected_amounts.is_empty():
 			break
+	if not collected_amounts.is_empty():
+		for _settle_tick in 3:
+			await tree.physics_frame
 	check_eq(health.current_health, 3, "contato físico real restaura a vida de BOLT")
 	check_eq(collected_amounts.size(), 1, "contato físico emite collected exatamente uma vez")
 	if not collected_amounts.is_empty():

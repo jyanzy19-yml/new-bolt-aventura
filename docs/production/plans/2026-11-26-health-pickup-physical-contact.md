@@ -29,3 +29,8 @@ A implementação atual já usa `set_deferred("monitoring", false)` porque o God
 ## Limites
 
 Nenhuma execução local do Godot, editor gráfico, exportação APK, emulador ou validação em Android físico foi realizada nesta unidade. O CI headless não prova renderização, touch físico ou desempenho Android.
+
+
+## Nota de auditoria pós-merge
+
+A revisão posterior de `tests/unit/test_campaign_entry.gd` confirmou que a integração da W1-L1 já percorria a coleta por contato físico real, verificando restauração de vida, emissão do sinal, remoção do nó e feedback HUD. Portanto, a lacuna não era ausência total de cobertura física: o teste antigo em `test_enemy_combat.gd` chamava o handler diretamente. A PR #37 acrescentou uma regressão física isolada do componente e validação da emissão única/quantidade, complementando — e não inaugurando — a cobertura de integração da campanha.
