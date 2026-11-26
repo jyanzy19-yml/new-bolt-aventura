@@ -30,3 +30,12 @@ Persistir somente dados serializáveis e versionados. Não persistir referência
 
 ## 9. Critérios de revisão
 Para cada contrato, documentar produtor, consumidor, payload, frequência, ciclo de vida, tratamento de erro, ownership e testes. Revisar dependências circulares, estado duplicado e chamadas síncronas no caminho crítico.
+
+## 10. Moving Platform → CharacterBody2D
+
+- Plataformas estáticas usam `StaticBody2D`; plataformas móveis usam `AnimatableBody2D` com `sync_to_physics = true`.
+- O movimento deve ocorrer em `_physics_process(delta)`, com tempo de percurso explícito e sem depender da taxa de renderização.
+- A plataforma ocupa a world collision layer 1; o BOLT consulta essa layer pelo collision mask.
+- O transporte do `CharacterBody2D` usa a velocidade nativa da plataforma calculada pelo motor. Não somar manualmente a mesma velocidade no controller, evitando duplicação.
+- A plataforma deve respeitar a pausa da SceneTree e não continuar se movendo durante pause.
+- O componente atual é ping-pong e placeholder; dimensões, percurso, duração, pausa de endpoint e eventual colisão one-way permanecem decisões de level design/playtest, não cânone final.
