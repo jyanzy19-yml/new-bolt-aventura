@@ -1,11 +1,11 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Main HEAD:** `68b677aa7860894928a690861ef63b300f8175fb`.  
+**Main HEAD:** `22923228d2a58c0ee6d75b581d5a16aa70e1a7ef`.  
 **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente.  
 **Última regressão de gameplay integrada:** PR #39 — limpeza do ActionBuffer no ciclo de vida Android, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.  
 **Última entrega de infraestrutura integrada:** PR #38 — pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.  
-**Branch de trabalho:** `test/scene-flow-failure-pause-restoration` — regressão de restauração do pause state após falha.  
+**Branch de trabalho:** `test/camera-contracts` — regressões da configuração de câmera por fase.  
 **Responsável atual:** ChatGPT, único escritor ativo conforme decisão vigente do usuário.  
 **Estado do Gate 1:** EM ANDAMENTO — W1-L1/W1-L2 seguem blockouts; APK debug exportado em CI, instalação e validação Android física pendentes.
 
@@ -425,3 +425,12 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Branch: `test/scene-flow-failure-pause-restoration`, base `68b677aa7860894928a690861ef63b300f8175fb`.
 - Cobertura adicional para falha de transição iniciada a partir de estado pausado e despausado.
 - **Estado:** implementação escrita; aguardando CI.
+
+
+### Unidade atual — contratos da câmera 2D
+
+- Branch: `test/camera-contracts`, base main `22923228d2a58c0ee6d75b581d5a16aa70e1a7ef`.
+- Achado: a câmera já estava configurada com Camera2D nativa e limites por fase, mas a aplicação dos limites não tinha testes dedicados.
+- Alteração: extração de `configure_camera()` nos scripts W1-L1/W1-L2; teste de smoothing/drag/callback físico e limites exatos de cada fase.
+- Plano: [camera-contracts](plans/2026-11-26-camera-contracts.md).
+- **Estado:** implementação escrita; aguardando CI. Não altera zoom, tuning ou física.
