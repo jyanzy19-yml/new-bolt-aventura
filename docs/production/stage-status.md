@@ -11,6 +11,7 @@
 
 **CI da PR #39:** Godot Validation `45881320136` SUCCESS — Godot 4.7.2, 72 testes, 451 verificações, 0 falhas; Docs Validation `45881320133` SUCCESS; Android Debug Export `45881252046` SUCCESS.  
 **Artifact PR #39:** `bolt-aventura-android-debug-7415dfb988faf2dd63f9ff289106e7f7205dcdd1`, 28.194.534 bytes; package ID provisório `com.example.boltaventura`; assinatura v2/v3 verificada; SHA-256 `db03a42b909781a1f5e7c94d025615e1aa5f397c8ebd306ba30cddf84eca14b0`.
+**CI pós-merge main:** Godot `45881703643`, Docs `45881703650` e Android Export `45881703604`: SUCCESS. A execução da main repetiu 72 testes/451 verificações/0 falhas e gerou artifact `bolt-aventura-android-debug-50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`; SHA-256 do APK `edb88f43f407241e5716d6b7d327272c22e40f1025a00637d7393573e320c6d7`.
 
 ## Estado executável observado
 
