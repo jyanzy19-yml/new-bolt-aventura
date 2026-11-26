@@ -53,7 +53,7 @@ A hierarquia da fonte é a do MASTER_DIRECTIVE.md e da diretriz mestra de design
 | DEC-005 | Sete mundos, ordem e fragmentos fixos; 42 fases planejadas, seis por mundo | 02-world-bible.md; prompt mestre |
 | DEC-006 | Abertura → tutorial guiado por robô mensageiro → campanha em Cybercore | narrativa bíblia; prompt mestre |
 | DEC-007 | BOLT foi criado para preservar os universos; Arquiteto busca impor uma única realidade | narrativa bíblia; prompt mestre |
-| DEC-008 | Um único escritor ativo; ChatGPT conduz até decisão diferente do usuário | COLLABORATION_STATE.md |
+| DEC-008 | Um único escritor ativo; ChatGPT conduz até decisão diferente do usuário | COLLABORATION_STATE.md |\n| DEC-009 | CampaignProgress v1 persiste W1-L1→W1-L2; sem destino W1-L3 até existir cena e integração reais | ADR-0006 |
 
 ## 4. Sequência de resolução
 
@@ -130,7 +130,10 @@ Os critérios acima são gates de aceite, não resultados já alcançados. A exi
 | DOC-006 | Fundação técnica dizia que não havia cenas de campanha, export Android ou autoloads além de SceneFlow; Input attack aparecia sem consumidor | Corrigido nesta unidade: W1-L1/W1-L2, APK debug CI, quatro autoloads e BoltCombat documentados | 
 | DOC-007 | Documento de loading referia-se a branch temporária fix/scene-flow-input-lock como unidade não integrada | Corrigido: referência substituída pela PR #42 integrada | 
 | DOC-008 | Contratos de sistemas ainda descreviam todos os nomes como conceituais, apesar de contratos implementados de SceneFlow, plataformas e loading | Corrigido: documento distingue contratos já ancorados no código e requisitos ainda conceituais |
+| DOC-009 | SaveSystem/ CampaignProgress technical docs ainda diziam que o modelo de campanha não estava integrado e que somente W1-L1 existia | Corrigido: CampaignProgress persiste W1-L1 e W1-L2; SaveSystem continua agnóstico aos domínios | 
+| DOC-010 | ADR-0004 e ADR-0005 preservavam como estado atual que W1-L2 não existia e Continuar aceitava somente W1-L1 | Corrigido sem reescrever histórico: ADR-0006 formaliza a extensão W1-L1→W1-L2; ADRs originais recebem emendas históricas | 
+| DOC-011 | Game Overview citava somente W1-L1 como blockout de campanha | Corrigido: W1-L1 e W1-L2 são blockouts; demais 40 fases ainda não existem |
 
 ## 8. Estado de conclusão da Etapa 02
 
-O registro cobre 22 lacunas, oito decisões fechadas, owners, dependências, critérios verificáveis para os quatro requisitos P0 e oito conflitos/documentos obsoletos identificados (DOC-001…DOC-008). Ainda falta revisar cada linha contra o prompt mestre e todas as especificações, confirmar se há lacunas omitidas, registrar aprovação das decisões materiais e manter a matriz/tracker sincronizados. **Etapa 02 permanece EM DESENVOLVIMENTO.**
+O registro cobre 22 lacunas, oito decisões fechadas, owners, dependências, critérios verificáveis para os quatro requisitos P0 e onze conflitos/documentos obsoletos identificados (DOC-001…DOC-011). Ainda falta revisar cada linha contra o prompt mestre e todas as especificações, confirmar se há lacunas omitidas, registrar aprovação das decisões materiais e manter a matriz/tracker sincronizados. **Etapa 02 permanece EM DESENVOLVIMENTO.**
