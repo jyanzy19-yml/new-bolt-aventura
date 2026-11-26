@@ -34,12 +34,12 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(380, 80)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "SANDBOX DE MOVIMENTO"
+text = "NOVA JORNADA"
 
 [node name="DevNote" type="Label" parent="Center/Column"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-text = "Build de desenvolvimento — a campanha ainda não existe."
+text = "Abertura e tutorial jogáveis · campanha em desenvolvimento."
 horizontal_alignment = 1
 
 [node name="VersionLabel" type="Label" parent="Center/Column"]
