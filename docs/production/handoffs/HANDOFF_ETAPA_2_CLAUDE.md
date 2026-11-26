@@ -50,7 +50,7 @@ Validação máxima comprovada: L2 (Godot headless/CI). Não há APK exportado, 
 ## 5. Restrições e decisões ainda abertas
 
 - Android empacotado é o único alvo; orientação paisagem.
-- Priorizar controles touch, incluindo salto e multitouch, para aparelhos de aproximadamente 4 GB RAM e Helio G99 ou inferiores. Dash permanece implementado/provisório, mas seu escopo está em conflito documental; não alterar até decisão canônica.
+- Priorizar controles touch, incluindo salto e multitouch, para aparelhos de aproximadamente 4 GB RAM e Helio G99 ou inferiores. Dash está aprovado para permanecer: preservar implementação, Input Map, touch e testes conforme `../ADR-001-DASH.md`; não retunar sem escopo próprio.
 - Sandbox é ambiente de desenvolvimento, não fase da campanha.
 - Tuning de movimento, layout touch, viewport 960×540 e renderer GL Compatibility continuam provisórios.
 - Package ID `com.example.boltaventura` é placeholder; não inventar identificador definitivo.
@@ -72,5 +72,5 @@ Claude Code é o próximo escritor, Etapa 2. ChatGPT não deve iniciar implement
 - PR #10 está integrada. PR #1 continua OPEN, sem alterações; compare atual: 17 commits exclusivos e 139 commits atrás.
 - ChatGPT mantém a autoria exclusiva da branch/PR de auditoria. Claude não deve iniciar Etapa 2 enquanto esta alteração estiver em revisão/integração.
 - Após merge e atualização do estado colaborativo, Claude Code será o próximo escritor da Etapa 2.
-- Dash permanece preservado e provisório, aguardando decisão canônica explícita.
+- Dash deve permanecer por decisão explícita do usuário, registrada em `../ADR-001-DASH.md`; a exclusão na PR #1 está superada. Preservar implementação e não retunar sem escopo próprio.
 - Não há nova evidência de exportação APK, emulador, dispositivo físico, toque, safe area ou performance Android.
