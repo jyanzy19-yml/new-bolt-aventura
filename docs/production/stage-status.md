@@ -98,5 +98,5 @@ Claude Code assume a Etapa 2 após o usuário iniciar sua sessão. Ponto de part
 ## Estado desta auditoria — PR #11
 
 - PR #11 permanece aberta e mergeable, sem merge automático.
-- Docs CI run #156 (ID `45822018082`) SUCCESS; job `Validate project documentation` concluiu todas as etapas.
+- Docs CI run #157 (ID `45822873097`) SUCCESS no HEAD `bfec6e20e767477302801d46a50a637cfd4f30ad`; job `Validate project documentation` concluiu todas as etapas. As correções posteriores de consistência em continuidade, handoff e relatório precisam de nova execução CI.
 - Godot CI não foi acionado porque os arquivos alterados são documentais. Não houve execução local de Godot, exportação APK ou teste Android físico.
