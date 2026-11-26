@@ -121,6 +121,14 @@ func _button_at(point: Vector2, use_slop: bool) -> TouchButton:
 
 
 func _bind(index: int, button: TouchButton) -> void:
+	# Um mesmo ponteiro não pode permanecer associado a dois botões. Embora o Android
+	# normalmente envie UP antes de reutilizar um índice, eventos duplicados/reordenados
+	# não podem deixar a ação anterior presa.
+	var previous: TouchButton = _pointer_button.get(index) as TouchButton
+	if previous == button:
+		return
+	if previous != null:
+		_unbind(index)
 	_pointer_button[index] = button
 	var holders: Array = _action_pointers.get(button.action, [])
 	var first_holder: bool = holders.is_empty()
