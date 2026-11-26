@@ -6,13 +6,15 @@ const CAMPAIGN_LEVEL_PATH: String = "res://scenes/campaign/cybercore_w1_l1.tscn"
 const CAMERA_LIMITS: Rect2i = Rect2i(0, -320, 1400, 560)
 const MOVE_TARGET_X: float = 300.0
 
-enum Step { INTRO, MOVE, JUMP, DASH, COMPLETE }
+enum Step { INTRO, MOVE, JUMP, DASH, ATTACK, COMPLETE }
 
 @onready var _player: BoltPlayer = %Bolt
 @onready var _spawn: Marker2D = $SpawnPoint
 @onready var _hud: Hud = %Hud
 @onready var _speech: Label = %SpeechLabel
 @onready var _start_button: Button = %StartButton
+@onready var _target: BoltTrainingTarget = %TrainingTarget
+@onready var _combat: BoltCombat = %Bolt/Combat
 
 var _step: Step = Step.INTRO
 var _spawn_position: Vector2 = Vector2.ZERO
@@ -30,6 +32,8 @@ func _ready() -> void:
 	%KillZone.body_entered.connect(_on_kill_zone_body_entered)
 	_hud.set_restart_path("res://scenes/tutorial/tutorial.tscn")
 	_player.state_changed.connect(_on_player_state_changed)
+	_target.defeated.connect(_on_target_defeated)
+	_combat.set_enabled(false)
 	_start_button.pressed.connect(_on_start_or_continue)
 	_render_step()
 
@@ -48,6 +52,11 @@ func _on_player_state_changed(new_state: int) -> void:
 	if _step == Step.JUMP and new_state == BoltPlayer.State.RISING:
 		_set_step(Step.DASH)
 	elif _step == Step.DASH and new_state == BoltPlayer.State.DASHING:
+		_set_step(Step.ATTACK)
+
+
+func _on_target_defeated() -> void:
+	if _step == Step.ATTACK:
 		_set_step(Step.COMPLETE)
 
 
@@ -86,6 +95,10 @@ func _render_step() -> void:
 			_start_button.visible = false
 		Step.DASH:
 			_speech.text = "ROBÔ MENSAGEIRO\nExperimente o DASH para avançar rapidamente."
+			_start_button.visible = false
+		Step.ATTACK:
+			_combat.set_enabled(true)
+			_speech.text = "ROBÔ MENSAGEIRO\\nAponte para o alvo e use TIRO."
 			_start_button.visible = false
 		Step.COMPLETE:
 			_speech.text = "ROBÔ MENSAGEIRO\nControles básicos verificados. Cybercore aguarda."
