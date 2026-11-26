@@ -8,7 +8,7 @@
 - **Tutorial:** introduz deslocamento, salto e Dash usando o player/HUD/touch existentes. Textos são instruções funcionais provisórias; não definem a personalidade ou história do mensageiro.
 - **W1-L1:** blockout jogável com BOLT, HUD/touch, checkpoint local, respawn e objetivo de trecho. Ainda faltam inimigos, combate, assets finais, áudio, save/load e validação Android.
 - **Teste:** `tests/unit/test_campaign_entry.gd`, verificando carregamento e contratos estruturais das três cenas. CI pendente.
-- **Próxima ação:** revisar diff, corrigir falhas do Godot 4.7.2 CI, validar a rota de abertura e sincronizar status após merge.
+- **Próxima ação:** revisar o diff final e integrar a PR #15 após confirmar os checks finais; depois selecionar a próxima unidade da campanha.
 
 ---
 
