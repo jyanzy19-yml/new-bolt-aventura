@@ -12,7 +12,7 @@ var last_error: String = ""
 func load_state() -> Dictionary:
 	last_error = ""
 	var payload: Dictionary = SaveSystem.load_payload()
-	if not SaveSystem.last_error.is_empty() and SaveSystem.last_error != "recovered_backup":
+	if not SaveSystem.last_error.is_empty() and !_is_save_recovery_status(SaveSystem.last_error):
 		last_error = SaveSystem.last_error
 		return _default_state()
 
@@ -58,7 +58,7 @@ func save_checkpoint(level_id: String, checkpoint_id: String) -> bool:
 		last_error = "empty_level_or_checkpoint_id"
 		return false
 	var state: Dictionary = load_state()
-	if not last_error.is_empty() and last_error != "recovered_backup":
+	if not last_error.is_empty() and !_is_save_recovery_status(SaveSystem.last_error):
 		return false
 	state["current_level_id"] = level_id
 	state["active_checkpoint_id"] = checkpoint_id
@@ -70,7 +70,7 @@ func mark_level_completed(level_id: String, next_level_id: String = "") -> bool:
 		last_error = "empty_level_id"
 		return false
 	var state: Dictionary = load_state()
-	if not last_error.is_empty() and last_error != "recovered_backup":
+	if not last_error.is_empty() and !_is_save_recovery_status(SaveSystem.last_error):
 		return false
 	var completed: Array = state.get("completed_level_ids", [])
 	if not completed.has(level_id):
@@ -106,7 +106,7 @@ func start_new_campaign() -> bool:
 	# session, but persistence remains unavailable until the save can be recovered.
 	last_error = ""
 	var payload: Dictionary = SaveSystem.load_payload()
-	if not SaveSystem.last_error.is_empty() and SaveSystem.last_error != "recovered_backup":
+	if not SaveSystem.last_error.is_empty() and !_is_save_recovery_status(SaveSystem.last_error):
 		last_error = SaveSystem.last_error
 		return false
 	payload[PAYLOAD_KEY] = _default_state()
@@ -134,7 +134,7 @@ func begin_level(level_id: String) -> bool:
 
 func _persist_state(state: Dictionary) -> bool:
 	var payload: Dictionary = SaveSystem.load_payload()
-	if not SaveSystem.last_error.is_empty() and SaveSystem.last_error != "recovered_backup":
+	if not SaveSystem.last_error.is_empty() and !_is_save_recovery_status(SaveSystem.last_error):
 		last_error = SaveSystem.last_error
 		return false
 	payload[PAYLOAD_KEY] = state
@@ -143,6 +143,14 @@ func _persist_state(state: Dictionary) -> bool:
 		return false
 	last_error = ""
 	return true
+
+
+func _is_save_recovery_status(error: String) -> bool:
+	return (
+		error == "recovered_backup"
+		or error == "recovered_temp"
+		or error.begins_with("recovered_temp_unpromoted:")
+	)
 
 
 func _default_state() -> Dictionary:
