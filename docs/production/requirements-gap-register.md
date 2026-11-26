@@ -84,7 +84,7 @@ O escritor operacional é ChatGPT. O usuário mantém autoridade final sobre can
 
 | ID | Responsável pela preparação/implementação | Autoridade de decisão / validação | Dependências principais |
 |---|---|---|---|
-| GAP-001 | ChatGPT — blueprint, blockout e regressões | Usuário aprova experiência e decisões de design; QA humano valida | GAP-002, GAP-003, GAP-004, GAP-010, GAP-012, GAP-016 |
+| GAP-001 | ChatGPT — blueprint, blockout e regressões | Usuário aprova experiência e decisões de design; QA humano valida | GAP-002, GAP-003, GAP-004, GAP-016 |
 | GAP-002 | ChatGPT — tuning, instrumentação e testes | Usuário avalia sensação; aprovação de mudanças de física | GAP-003 |
 | GAP-003 | ChatGPT — build, checklist e correções | Usuário executa/observa teste físico; resultados vinculados ao aparelho | GAP-018 apenas para release |
 | GAP-004 | ChatGPT — save schema, migrações e testes | Usuário valida recuperação e política de progresso; dados não podem ser apagados sem decisão | GAP-003 |
@@ -116,7 +116,7 @@ O escritor operacional é ChatGPT. O usuário mantém autoridade final sobre can
 | GAP-003 | APK instala e abre; orientação paisagem; barras seguem ADR-0003; botões essenciais permanecem tocáveis; multitouch funciona; pause/focus/background/retomada não deixam input preso | Matriz por modelo/Android/build, vídeo/capturas, checklist preenchido e logs de falha |
 | GAP-004 | Save válido persiste após encerramento normal e forçado; backup recupera corrupção; versão futura não sobrescreve dados; Nova Jornada reseta apenas o domínio aprovado; checkpoint não produz estado impossível | Testes automatizados de serialização/migração, teste de lifecycle Android e evidência de save antes/depois |
 
-Os critérios acima são gates de aceite, não resultados já alcançados. A existência de CI headless e APK exportado não satisfaz, por si só, os itens de playtest e dispositivo.
+Os critérios acima são gates de aceite, não resultados já alcançados. A existência de CI headless e APK exportado não satisfaz, por si só, os itens de playtest e dispositivo. A vertical slice não deve esperar pelo catálogo completo de inimigos ou pelo arsenal futuro: W1-L1/W1-L2 podem ser aprovadas com os componentes representativos já existentes, desde que o design os justifique; GAP-010 e GAP-012 avançam conforme a necessidade real de conteúdo.
 
 ## 7. Conflitos e lacunas de documentação identificados
 
