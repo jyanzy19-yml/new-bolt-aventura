@@ -1,7 +1,7 @@
 # BOLT · AVENTURA — Rastreador de implementação
 
 **Objetivo:** impedir que sistemas ou fases sejam declarados concluídos apenas por terem arquivos ou cenas criados.  
-**Atualização:** em toda entrega substancial e mudança de gate.  
+**Atualização:** em toda entrega substancial e mudança de gate.\n\n**Snapshot 2026-11-26:** main após PR #48 (`e2e4f68b5b21c584c33eba739845adc3c685965e`); PR #47 pós-merge Godot 88 testes/553 verificações/0 falhas, Docs e Android Export SUCCESS. APK debug exportado, não instalado em aparelho. Etapa 01 estática concluída; Etapa 02 em revisão conforme matriz de 26 etapas.  
 **Regra:** estado precisa refletir evidência no branch atual.
 
 ## 1. Vocabulário de status
@@ -26,7 +26,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | ID | Sistema / entrega | Status | Evidência / observação |
 |---|---|---|---|
 | SYS-001 | Projeto Godot e versão fixada | Implementado | `project.godot`, `.godot-version` = 4.7.2. Evidência L2: `--headless --import` sem erros; `tests/test_runner.gd` 0 falhas (Godot 4.7.2 headless, Linux). Não validado em editor gráfico nem Android. Ver [06-godot-project-foundation.md](../technical/06-godot-project-foundation.md) |
-| SYS-002 | Configuração Android, paisagem e renderer | Implementado | Orientação 4 (sensor landscape), viewport 960×540 (provisório), GL Compatibility (provisório), preset Android com `screen/immersive_mode=true` (ADR-0003); PR #44 repetiu export Godot 4.7.2, assinatura v2/v3 e artifact `bolt-aventura-android-debug-5cfbc040d6b748092c5d2a5524f06bdb5272340e`; package ID placeholder, instalação e validação física pendentes |
+| SYS-002 | Configuração Android, paisagem e renderer | Implementado | Orientação 4 (sensor landscape), viewport 960×540 (provisório), GL Compatibility (provisório), preset Android com `screen/immersive_mode=true` (ADR-0003); PR #47 pós-merge main exportou APK 28.461.057 bytes, assinatura v2/v3 válida, artifact `bolt-aventura-android-debug-2636226c4027625649e66c51ff64d7e2e56168a6`, SHA-256 `c3ca03958eecf120f1a9f5f1e4fae3851fb7560bca303c8eb5a930f987b58123`; package ID placeholder, instalação e validação física pendentes |
 | SYS-003 | Arquitetura, cenas e recursos compartilhados | Em andamento | Boot, menu, `SceneFlow`, `SaveSystem`, `CampaignProgress`, `Actions`, `SafeAreaMargin`, `BoltTuning`, `PlatformBlock`, `MovingPlatform`, `OneWayPlatform` e HUD. Menu/retomada reconhece W1-L1 e W1-L2 na main após PR #34; demais contratos pendentes |
 | SYS-004 | Input abstrato e multitouch | Em andamento | `TouchControls`/`TouchButton` rastreiam ponteiros independentes; `ActionBuffer` limpa edges em pausa/suspensão/perda de foco. PR #39/#42 integradas; PR #43 cobre restauração de pause state após falha. PR #43 CI: 78 testes/484 verificações/0 falhas. Teste físico pendente |
 | SYS-005 | BOLT: controller, estados e animação | Em andamento | `BoltPlayer` (GROUNDED/RISING/FALLING/DASHING), vida/dano, knockback, invulnerabilidade e API de cura. Dash preservado. Placeholders e valores provisórios; sem validação física Android |
@@ -46,8 +46,8 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-019 | Áudio, música, buses e opções | Não iniciado | Sem implementação do jogo |
 | SYS-020 | Loading, transições e gestão de memória | Em andamento | PR #41 integrou `LoadingOverlay`; PR #42 pausa SceneTree, oculta touch e retoma após sucesso; PR #43 cobre restauração do pause state em falha. PR #43 CI: 78 testes/484 verificações/0 falhas, export Android SUCCESS. Cancelamento, preload e gestão de memória pendentes |
 | SYS-021 | Pipeline de assets e proveniência | Não iniciado | Pipeline do jogo a estabelecer |
-| SYS-022 | Testes automatizados e regressão | Em andamento | Workflow Godot 4.7.2 executa import + `tests/test_runner.gd`; PR #44 Godot CI: 81 testes/508 verificações/0 falhas; Docs e Android export SUCCESS. Headless não equivale a QA visual ou Android físico |
-| SYS-023 | Exportação, instalação e QA Android | Em andamento | PR #45 pós-merge main exportou artifact `bolt-aventura-android-debug-b24c8624a8ed64816d0131070f440a47f525ba47`, assinatura v2/v3 válida, SHA-256 `3b3be5c8df067c000216bbc3e5ad39b357f0ea70ad3d3a5bc12625724873ffd1`. Package ID provisório; instalação, inicialização, touch, safe area e QA físico ainda não executados |
+| SYS-022 | Testes automatizados e regressão | Em andamento | Workflow Godot 4.7.2 executa import + `tests/test_runner.gd`; PR #47 pós-merge Godot CI: 88 testes/553 verificações/0 falhas; Docs e Android export SUCCESS. Headless não equivale a QA visual ou Android físico |
+| SYS-023 | Exportação, instalação e QA Android | Em andamento | PR #47 pós-merge main exportou artifact `bolt-aventura-android-debug-2636226c4027625649e66c51ff64d7e2e56168a6`, 28.461.057 bytes, assinatura v2/v3 válida, SHA-256 `c3ca03958eecf120f1a9f5f1e4fae3851fb7560bca303c8eb5a930f987b58123`. Package ID `com.example.boltaventura` ainda placeholder; instalação, inicialização, touch, safe area e QA físico ainda não executados |
 | SYS-024 | Créditos, encerramento e release candidate | Não iniciado | Sem campanha implementada |
 
 ## 4. Rastreador das 42 fases
@@ -300,7 +300,7 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - **Estado:** aguardando CI. Headless valida propriedades, não o enquadramento visual ou o comportamento em hardware.
 
 
-| SYS-025 | Plataformas móveis e transporte de personagem | Implementado (componente) | PR #45 integrou `MovingPlatform` (`AnimatableBody2D`, sync_to_physics, ping-pong, espera em endpoints). Godot CI: 85 testes/533 verificações/0 falhas, incluindo transporte real do BOLT. Sem integração em fase; playtest Android pendente |
+| SYS-025 | Plataformas móveis e transporte de personagem | Implementado (componente) | PR #45 integrou `MovingPlatform` (`AnimatableBody2D`, sync_to_physics, ping-pong, espera em endpoints). CI pós-merge Godot 87 testes/548 verificações/0 falhas, Docs e Android Export SUCCESS. Sem integração em fase; playtest Android pendente |
 
 ## SYS-025 — plataforma móvel reutilizável (2026-11-26)
 
@@ -311,7 +311,7 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - **Estado:** em desenvolvimento.
 
 
-| SYS-026 | Plataformas unidirecionais | Integrado (componente) | PR #46 integrada em `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`; Godot CI pré-merge 87 testes/548 verificações/0 falhas, Docs e Android Debug Export SUCCESS. Pós-merge CI não confirmado; sem integração em fase/playtest Android |
+| SYS-026 | Plataformas unidirecionais | Integrado (componente) | PR #46 integrada em `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`; CI pós-merge Godot 87 testes/548 verificações/0 falhas, Docs e Android Export SUCCESS. Sem integração em fase/playtest Android |
 
 
 ## SYS-025 — resultado da plataforma móvel (2026-11-26)
@@ -330,3 +330,4 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Testes: passagem de baixo para cima e aterrissagem de cima para baixo.
 - Plano: `docs/production/plans/2026-11-26-one-way-platform.md`.
 - **Estado:** PR #46 integrada por squash em `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`. Godot CI pré-merge `45887805114`: 87 testes/548 verificações/0 falhas; Docs `45887805097` SUCCESS; Android Debug Export `45887805269` SUCCESS. Workflow runs pós-merge consultados sem execuções. Sem integração em fase, playtest visual ou Android físico.
+\n\n## Snapshot pós-PR #47/#48 — 2026-11-26\n\n- PR #47 corrigiu a inicialização de `TimedEnergyGate` quando `initial_active=false`; Godot pós-merge 88 testes/553 verificações/0 falhas, Docs e Android export SUCCESS.\n- PR #48 integrou a matriz operacional das 26 etapas; Docs CI pós-merge `45895074739` SUCCESS.\n- `SYS-025` e `SYS-026` continuam componentes reutilizáveis implementados, ainda sem inserção em fase aprovada.\n- `SYS-023` permanece Em andamento: exportação debug automatizada comprovada, mas package ID é placeholder e não há instalação/QA em aparelho.\n
