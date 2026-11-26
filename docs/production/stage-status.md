@@ -9,9 +9,9 @@
 **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente.  
 **Última correção de gameplay:** PR #47 — estado inicial de TimedEnergyGate, merge 2636226c4027625649e66c51ff64d7e2e56168a6.  
 **Última entrega de infraestrutura/testes:** PR #55 — validação estrita de versões do SaveSystem/CampaignProgress; 92 testes/577 verificações/0 falhas; export Android debug SUCCESS pré-merge.  
-**Android debug PR #55:** 28.461.057 bytes; SHA-256 6f094b6ee26f7eee7c70ae88c0c1a291b696bf0e19ad460e63e5f57de2f3cf00; assinatura v2/v3 válida; package ID placeholder com.example.boltaventura. Não instalado em aparelho.  
+**Android debug pós-merge PR #55:** 28.461.057 bytes; SHA-256 `55df5301e5cfec8cbfd533065d8dad00e8cca46f2307d0e02fa178bb30031a43`; assinatura v2/v3 válida; artifact `bolt-aventura-android-debug-d91af104ab5bf2112b4586431fc10bc44889d94e`, ID 15154468903; package ID placeholder `com.example.boltaventura`. Não instalado em aparelho.  
 **CI pós-merge PR #54:** Godot 45897906267, Docs 45897906375 e Android Export 45897906328 SUCCESS; 90 testes/558 verificações/0 falhas; APK 28.461.057 bytes, SHA-256 12b73f0df5f71bd922f412face81b7585b3da38b705f0751c1b4d0ea79d4218a.  
-**CI pós-merge PR #55:** Docs 45898659678 SUCCESS; Godot 45898659671 e Android Export 45898659639 ainda em execução no momento deste snapshot.  
+**CI pós-merge PR #55:** Godot 45898659671, Docs 45898659678 e Android Export 45898659639 SUCCESS; 92 testes/577 verificações/0 falhas.  
 **PR #1:** permanece OPEN, antiga e divergente; não mesclar/rebasear automaticamente.  
 **Limites físicos:** APKs debug exportados, mas não instalados; toque físico, safe area real, barras, lifecycle, profiling, temperatura e performance Android ainda não comprovados.
 
@@ -476,7 +476,7 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - **Estado:** implementação escrita; aguardando CI.
 
 
-## Sessão ChatGPT — OneWayPlatform integrada — 2026-11-26
+## Histórico — sessão ChatGPT: OneWayPlatform integrada — 2026-11-26
 
 - PR #46 integrada por squash em `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.
 - `OneWayPlatform` estende `PlatformBlock`, usa `CollisionShape2D.one_way_collision=true` e direção `Vector2.DOWN`; margem default de 2 px permanece provisória.
@@ -521,7 +521,7 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - A matriz foi integrada e indexada em `docs/README.md`. Etapa 02 permanece em desenvolvimento até revisão requisito-a-requisito, classificação das lacunas de canon e registro de conflitos/decisões.
 
 
-### Etapa 02 — registro de lacunas
+### Histórico — Etapa 02: registro de lacunas (antes da conclusão)
 
 - O registro `requirements-gap-register.md` foi criado na branch `docs/requirements-gap-register` com 22 lacunas priorizadas e 8 decisões já fechadas.
 - GAP-021 mantém como pendência de reconciliação os comandos históricos do protótipo HTML (Blast, Voar e seleção de armas 1–3); não reintroduzir nem descartar sem comparar fontes.
@@ -535,7 +535,7 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Gate 0 (auditoria/alinhamento) estático concluído; Gate 1 (vertical slice Android) permanece em andamento e depende de validação física.
 
 
-### Etapa 03 — mapa arquitetural integrado
+### Histórico — Etapa 03: mapa arquitetural integrado (antes da conclusão)
 
 - PR #51 integrou `technical/09-current-architecture-map.md`, com quatro autoloads, fluxo de boot, ownership de dados, player/combat, cenas de campanha, plataformas e lacunas.
 - O mapa identifica acoplamento de tipo entre BoltPlayer e BoltCombat; não foi feita refatoração sem necessidade comprovada.
@@ -551,5 +551,5 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 ### Integrações recentes — PR #54 e PR #55
 
 - [PR #54](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/54): isolamento de fixtures do SaveSystem no runner; CI pós-merge main SUCCESS, 90 testes/558 verificações/0 falhas; APK SHA-256 `12b73f0df5f71bd922f412face81b7585b3da38b705f0751c1b4d0ea79d4218a`.
-- [PR #55](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/55): versões do envelope/progresso aceitam apenas números finitos exatamente integrais; floats fracionários e strings são rejeitados. PR CI: 92 testes/577 verificações/0 falhas; Docs SUCCESS; Android export SUCCESS. CI pós-merge da main em validação.
+- [PR #55](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/55): versões do envelope/progresso aceitam apenas números finitos exatamente integrais; floats fracionários e strings são rejeitados. PR CI: 92 testes/577 verificações/0 falhas; Docs e Android export SUCCESS. Pós-merge main: Godot `45898659671`, Docs `45898659678`, Android `45898659639` SUCCESS; APK SHA-256 `55df5301e5cfec8cbfd533065d8dad00e8cca46f2307d0e02fa178bb30031a43`.
 - **Próxima unidade:** Etapa 05 — revisar carregamento threaded, cancelamento/timeout, lifecycle e orçamento de memória; não inventar percentuais de loading nem declarar preload abrangente.
