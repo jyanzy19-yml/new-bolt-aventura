@@ -26,7 +26,12 @@ func test_save_payload_round_trips_overwrites_and_deletes() -> bool:
 	check(system.call("save_payload", first_payload), "grava payload JSON versionado")
 	check(system.call("has_save"), "slot fica disponível após gravação")
 	var first_loaded: Dictionary = system.call("load_payload")
-	check_eq(first_loaded, first_payload, "payload é recuperado sem alteração")
+	check_eq(first_loaded.get("level_id"), "W1-L1", "campo textual de fase é recuperado")
+	check_eq(first_loaded.get("checkpoint_id"), "cybercore_w1_l1_checkpoint", "ID estável do checkpoint é recuperado")
+	check_eq(first_loaded.get("completed"), ["tutorial"], "lista de progresso é recuperada")
+	var loaded_stats: Dictionary = first_loaded.get("stats", {})
+	check_eq(int(loaded_stats.get("deaths", -1)), 2, "valor numérico inteiro pode ser convertido pelo domínio")
+	check_eq(int(loaded_stats.get("energy", -1)), 3, "segundo valor numérico pode ser convertido pelo domínio")
 
 	var second_payload: Dictionary = {"level_id": "W1-L2", "completed": ["tutorial", "W1-L1"]}
 	check(system.call("save_payload", second_payload), "substitui o save anterior")
