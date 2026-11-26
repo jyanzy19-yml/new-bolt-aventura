@@ -137,4 +137,4 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - `BoltTrainingTarget` é alvo estático de treino, não um arquétipo de inimigo da campanha.
 - Tutorial agora ensina mover → saltar → Dash → acertar o alvo com TIRO antes de liberar Cybercore.
 - Cadência, velocidade, dano e alcance são parâmetros de protótipo; não representam balanceamento aprovado. Tríplice Prisma, Laser Nexo, seleção de armas, IA inimiga e dano/vida de BOLT permanecem pendentes.
-- Testes novos: `test_combat_core.gd`, regressão de buffer ATTACK e extensão de `test_campaign_entry.gd`; CI pendente.
+- Testes novos: `test_combat_core.gd`, regressão de buffer ATTACK e extensão de `test_campaign_entry.gd`; Godot CI #58 SUCCESS (47 testes, 231 verificações, 0 falhas); Docs CI #179 SUCCESS.
