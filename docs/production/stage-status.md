@@ -335,7 +335,7 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 | Etapa | Área | Estado | Evidência / lacuna principal |
 |---:|---|---|---|
 | 01 | Auditoria integral do repositório | CONCLUÍDA — estática | Inventário recursivo de 288 arquivos; revisão manual das 19 cenas, 30 scripts runtime, recurso BoltTuning, configuração Android, fontes mestras, ADRs, PRs e branches. CI compila scripts e instancia cenas; 88 testes/553 verificações passaram na PR #47. Limites físicos Android permanecem nos Gates 1/5, não bloqueiam o fechamento da auditoria estática |
-| 02 | Requisitos e planejamento | EM DESENVOLVIMENTO | Matriz `26-stage-traceability-matrix.md` integrada pela PR #48; registro de lacunas GAP-001…GAP-022 em elaboração; revisão requisito-a-requisito e decisões/owners ainda pendentes |
+| 02 | Requisitos e planejamento | EM DESENVOLVIMENTO | Matriz `26-stage-traceability-matrix.md` integrada pela PR #48; registro de lacunas GAP-001…GAP-022 e conflitos DOC-001…DOC-008 em elaboração; revisão requisito-a-requisito e decisões/owners ainda pendentes |
 | 03 | Arquitetura e organização | EM DESENVOLVIMENTO | Godot 4.7.2, cenas, scripts, autoloads e contratos existentes; arquitetura global ainda parcial |
 | 04 | Infraestrutura e sistemas centrais | EM DESENVOLVIMENTO | Boot, SceneFlow, SaveSystem e CampaignProgress implementados parcialmente |
 | 05 | Recursos e carregamento | EM DESENVOLVIMENTO | SceneFlow threaded e LoadingOverlay integrados; progresso real sem porcentagem falsa; pausa/input lock em validação; cancelamento, preload abrangente e gestão de memória pendentes |
