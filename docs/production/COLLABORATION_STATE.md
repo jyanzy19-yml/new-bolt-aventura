@@ -4,10 +4,14 @@
 
 ## Estado vigente — 2026-11-26
 
+**HEAD da main confirmado:** `9d5381047817ac9fc949583f6645d24eadd88e8c`.
+
 - **Etapa 0 — Claude Code: ACCEPTED.** Fundação Godot 4.7.2 e protótipo técnico provisório aceitos após auditoria. Hardening complementar integrado pela PR #3.
 - **Etapa 1 — ChatGPT: HANDOFF_READY.** Correção de reatribuição de ponteiro em `TouchControls`, regressão e execução da suíte no CI. Handoff: [HANDOFF_ETAPA_1.md](handoffs/HANDOFF_ETAPA_1.md).
 - **PR #2 — qualidade e especialistas: MERGED.** Merge `6f8bae62018fc2c7efce8fa454c16681599dcbe6`; adiciona skills, agentes consultivos e validações.
 - **PR #3 — hardening da Etapa 0: MERGED.** Merge `4ecaff1d67049155d95bcbb5fc9d1c98187d3767`; runner não aceita suíte vazia, Safe Area responde ao ciclo de vida e registros de aceite/continuidade foram corrigidos. Auditoria: [stage-0-hardening-audit.md](stage-0-hardening-audit.md).
+- **PR #4 — handoff e sincronização documental: MERGED.** Merge `9d5381047817ac9fc949583f6645d24eadd88e8c`; registra a transferência para Claude Etapa 2.
+- **Auditoria de polimento:** relatório completo em [repository-polish-audit-2026-11-26.md](repository-polish-audit-2026-11-26.md), entregue pela PR #5.
 - **Próximo turno: Etapa 2 — Claude Code.** Aguardando o usuário iniciar Claude manualmente. Este handoff é o ponto de partida: [HANDOFF_ETAPA_2_CLAUDE.md](handoffs/HANDOFF_ETAPA_2_CLAUDE.md).
 - **Branch oficial:** `main`. Um único escritor ativo. Implementações substanciais em branch/PR; só passar o turno após integração e handoff.
 - **Projeto:** Godot 4.7.2, GDScript, Android em paisagem.
@@ -75,3 +79,4 @@ Não avançar etapa só porque uma sessão terminou. Não marcar ACCEPTED por au
 - **PR #2:** melhorias de skills, agentes, validação documental e CI integradas em 2026-11-26.
 - **PR #3:** hardening da fundação e registros de governança integrados em 2026-11-26.
 - **Etapa 2:** próximo turno de implementação de Claude Code; auditar HEAD e handoff antes de editar.
+- **PR #4:** handoff da Etapa 2 integrado em 2026-11-26.

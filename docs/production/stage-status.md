@@ -1,7 +1,7 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` (base verificada para handoff: `4ecaff1d67049155d95bcbb5fc9d1c98187d3767`)  
+**Branch de integração:** `main` (base verificada para handoff: `9d5381047817ac9fc949583f6645d24eadd88e8c`)  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
 
 ## Estado executável observado
@@ -44,9 +44,16 @@ Um único escritor por vez. O usuário aciona manualmente o próximo agente.
 
 ## Pull requests
 
+- [PR #4](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/4): MERGED — handoff Etapa 2 e sincronização documental.
+
 - [PR #2](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/2): MERGED — melhorias de qualidade e especialistas.
 - [PR #3](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/3): MERGED — hardening da fundação e governança.
 - [PR #1](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/1): permanece separada e divergente; não mesclar, fechar ou modificar automaticamente.
+
+## Auditoria de polimento
+
+- Auditoria abrangente concluída; relatório entregue pela PR #5: [repository-polish-audit-2026-11-26.md](repository-polish-audit-2026-11-26.md).
+- Foram identificadas divergências entre documentos raiz e o projeto Godot existente, além de conflito de escopo sobre Dash na PR #1 não integrada. Não alterar mecânica até reconciliação.
 
 ## Próximo gate executável
 
