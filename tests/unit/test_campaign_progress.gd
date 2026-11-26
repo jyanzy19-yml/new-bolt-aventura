@@ -19,7 +19,7 @@ func test_checkpoint_and_completion_preserve_unrelated_payload() -> bool:
 	var progress: Node = _prepare()
 	check(SaveSystem.save_payload({"settings": {"music": 0.25}}), "seed unrelated settings payload")
 	check(progress.call("save_checkpoint", "W1-L1", "cybercore_w1_l1_checkpoint"), "saves stable level/checkpoint IDs")
-	var state: Dictionary = progress.call("load_state", )
+	var state: Dictionary = progress.call("load_state")
 	check_eq(state.get("campaign_id"), "main", "campaign ID is explicit")
 	check_eq(int(state.get("schema_version", 0)), 1, "progress schema is versioned")
 	check_eq(state.get("current_level_id"), "W1-L1", "current level ID is persisted")
@@ -33,7 +33,7 @@ func test_checkpoint_and_completion_preserve_unrelated_payload() -> bool:
 	check(progress.call("is_level_completed", "W1-L1"), "completed level is queryable")
 	check_eq(progress.call("get_checkpoint_id", "W1-L1"), "", "completion clears the active checkpoint")
 	check(progress.call("mark_level_completed", "W1-L1"), "completion is idempotent")
-	state = progress.call("load_state", )
+	state = progress.call("load_state")
 	var completed: Array = state.get("completed_level_ids", [])
 	check_eq(completed.size(), 1, "completed level ID is stored only once")
 	check_eq(completed[0], "W1-L1", "completed level list contains stable ID")
@@ -62,7 +62,7 @@ func test_unknown_progress_schema_fails_closed() -> bool:
 			"completed_level_ids": [],
 		},
 	}), "writes an unknown progress schema fixture")
-	var state: Dictionary = progress.call("load_state", )
+	var state: Dictionary = progress.call("load_state")
 	check_eq(state.get("current_level_id"), "", "unknown schema is not interpreted as current state")
 	check_eq(progress.get("last_error"), "unsupported_progress_schema", "reports incompatible progress schema")
 	check(not progress.call("save_checkpoint", "W1-L1", "cp_2"), "does not overwrite an unsupported schema silently")
