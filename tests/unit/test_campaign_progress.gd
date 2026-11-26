@@ -41,6 +41,21 @@ func test_checkpoint_and_completion_preserve_unrelated_payload() -> bool:
 	return true
 
 
+
+func test_level_completion_advances_resume_target_when_next_level_is_supplied() -> bool:
+	var progress: Node = _prepare()
+	check(progress.call("begin_level", "W1-L1"), "inicia W1-L1")
+	check(progress.call("save_checkpoint", "W1-L1", "cybercore_w1_l1_checkpoint"), "salva checkpoint antes da conclusão")
+	check(progress.call("mark_level_completed", "W1-L1", "W1-L2"), "conclui W1-L1 e define W1-L2 como próximo destino")
+	var state: Dictionary = progress.call("load_state")
+	check_eq(state.get("completed_level_ids"), ["W1-L1"], "W1-L1 permanece registrada como concluída")
+	check_eq(state.get("current_level_id"), "W1-L2", "destino de retomada avança para a próxima fase")
+	check_eq(state.get("active_checkpoint_id"), "", "checkpoint anterior é limpo ao avançar")
+	check_eq(progress.call("get_checkpoint_id", "W1-L1"), "", "checkpoint não vaza para a fase concluída")
+	_cleanup()
+	return true
+
+
 func test_empty_ids_are_rejected_without_writing_progress() -> bool:
 	var progress: Node = _prepare()
 	check(not progress.call("save_checkpoint", "", "checkpoint"), "empty level ID is rejected")
