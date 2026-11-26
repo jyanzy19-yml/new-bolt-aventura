@@ -637,3 +637,323 @@ Requisitos de regressão:
 - perda de foco;
 - suspensão e retomada;
 - troca de cena;
+- evitar ação fantasma ao retornar;
+- evitar input preso após interrupção.
+
+---
+
+# 8. CÂMERA, MUNDO E SISTEMAS DE PLATAFORMA
+
+A arquitetura deve manter o contrato da câmera independente da lógica de UI e de persistência. A câmera deve oferecer leitura de movimento e antecipação espacial sem gerar enjoo, atraso involuntário ou enquadramento que esconda perigos.
+
+A base atual possui testes de contrato de câmera e componentes de plataforma identificados, incluindo:
+- plataforma móvel (`MovingPlatform`);
+- plataforma unidirecional (`OneWayPlatform`);
+- bloco de plataforma;
+- checkpoint;
+- campo/portão energético temporizado (`TimedEnergyGate`).
+
+A PR #45 adicionou `MovingPlatform`; PR #46 adicionou `OneWayPlatform`; PR #47 corrigiu o estado inicial de `TimedEnergyGate` para `initial_active=false`, conforme registros de continuidade. Cada componente precisa de testes de física, bordas, colisões, ativação, desativação e integração com o jogador.
+
+Não presumir que os componentes existentes já cobrem todos os hazards ou sistemas ambientais dos sete mundos.
+
+---
+
+# 9. CHECKPOINT, SAVE SYSTEM E PROGRESSÃO
+
+## 9.1. Separação conceitual
+
+O projeto separa:
+- armazenamento técnico;
+- estado de campanha;
+- estado transitório da fase;
+- estado visual do checkpoint;
+- lógica de respawn.
+
+O `SaveSystem` é infraestrutura de serialização e persistência. `CampaignProgress` representa o domínio da campanha. Não fundir esses papéis sem decisão arquitetural.
+
+## 9.2. SaveSystem v1
+
+O registro de produção descreve:
+- autoload `SaveSystem`;
+- arquivo `user://bolt_save.json`;
+- arquivo temporário e backup;
+- envelope com `format_version=1`;
+- payload `Dictionary` JSON-safe;
+- checksum SHA-256;
+- rejeição de tipos runtime como Node/Resource;
+- rejeição de chaves que não sejam String;
+- escrita por temporário/backup;
+- recuperação pelo backup quando o principal está ausente/inválido;
+- falha fechada para versão desconhecida.
+
+A API é síncrona e deve ser chamada em marcos discretos, nunca por frame. A migração de versões, integração com todos os domínios e validação em Android real permanecem aspectos de evolução.
+
+## 9.3. CampaignProgress v1
+
+O registro descreve um autoload `CampaignProgress` separado do `SaveSystem`, com schema de domínio v1 dentro da chave `campaign_progress`.
+
+Campos registrados:
+- `campaign_id=main`;
+- `current_level_id`;
+- `active_checkpoint_id`;
+- `completed_level_ids`.
+
+Os IDs devem ser estáveis. W1-L1 possui persistência e restauração de checkpoint e conclusão que define W1-L2 como destino salvo. W1-L2 recebeu progressão/checkpoint em desenvolvimento conforme registros, mas os estados exatos devem ser confirmados na main atual.
+
+## 9.4. Critérios de integridade
+
+- round-trip de save/load;
+- corrupção do arquivo principal;
+- recuperação de backup;
+- versão futura/desconhecida;
+- payload inválido;
+- dados incompletos;
+- IDs de fase inexistentes;
+- checkpoint inexistente;
+- progresso duplicado;
+- encerramento inesperado;
+- migração;
+- retomada após cold start;
+- consistência entre conclusão de fase e destino seguinte.
+
+Não declarar persistência completa enquanto não houver validação em Android físico, integração de todos os domínios e estratégia de migração adequada.
+
+---
+
+# 10. LOADING, ASSETS E TRANSIÇÕES
+
+O projeto possui `SceneFlow` com carregamento threaded e bloqueio de transições concorrentes, além de `LoadingOverlay` e cena `scenes/ui/loading_overlay.tscn`.
+
+O registro de implementação do overlay indica:
+- autoload `LoadingOverlay`;
+- overlay persistente;
+- integração com sinais de transição;
+- texto sem percentual quando o engine não reporta progresso;
+- barra somente quando existe progresso real;
+- ocultação em sucesso e falha;
+- `PROCESS_MODE_ALWAYS` para concluir transições mesmo com a árvore pausada.
+
+Loading deve refletir trabalho real. Não adicionar espera artificial de quatro segundos ou qualquer duração fixa apenas para mascarar problemas. Pré-carregamento, importação, cache, aquecimento e transição devem ser usados quando tecnicamente justificáveis.
+
+O pipeline de assets deve considerar:
+- formato e compressão;
+- resolução e densidade;
+- tamanho de textura;
+- memória residente;
+- import settings;
+- atlas e batching quando adequados;
+- carregamento sob demanda;
+- descarte seguro;
+- proveniência e licença;
+- fallback e placeholders;
+- relatório de assets.
+
+Placeholder não deve ser apresentado como arte final. O inventário de assets e sua proveniência devem ser rastreáveis.
+
+---
+
+# 11. DIREÇÃO DE ARTE, ANIMAÇÃO E ÁUDIO
+
+A identidade visual deve manter coerência entre personagem, ambientes, inimigos, UI, efeitos e cinematics. Cada mundo precisa de linguagem visual e sonora própria, mas o jogo deve manter unidade de produto.
+
+As fontes principais são:
+- `docs/game-design/07-art-audio-direction.md`;
+- `.claude/skills/create-game-assets/`;
+- documentos de pipeline e proveniência;
+- manifestos de assets presentes no repositório.
+
+Princípios:
+- silhuetas legíveis em resolução mobile;
+- contraste funcional entre gameplay e cenário;
+- animações com antecipação, ação e recuperação;
+- feedback responsivo sem excesso de partículas;
+- consistência de escala;
+- paleta por mundo;
+- UI com hierarquia;
+- efeitos visuais com custo controlado;
+- áudio com função de feedback e atmosfera;
+- trilha que respeite identidade e ritmo;
+- assets externos com licença e origem documentadas.
+
+Não copiar arte, música, sprites, personagens ou materiais protegidos sem autorização. Assets gerados ou adquiridos precisam de registro de origem, licença e condições de uso.
+
+---
+
+# 12. PERFORMANCE E OTIMIZAÇÃO ANDROID
+
+## 12.1. Perfil-alvo
+
+A referência é hardware Android de entrada/intermediário, com cerca de 4 GB de RAM e Helio G99 ou inferior. A otimização deve considerar CPU, GPU, memória, largura de banda, aquecimento, bateria, alocação, stutter e latência de input.
+
+## 12.2. Métricas
+
+Registrar sempre que possível:
+- frame time médio;
+- p95/p99 de frame time;
+- FPS sustentado;
+- spikes;
+- tempo de cold start;
+- tempo de transição;
+- memória;
+- uso de CPU/GPU quando mensurável;
+- comportamento térmico;
+- tamanho do APK;
+- custo de importação;
+- comportamento em sessões longas.
+
+A meta de 60 FPS deve ser avaliada por cenário e aparelho. Um número isolado de FPS sem condições de teste não é evidência suficiente.
+
+## 12.3. Estratégias
+
+- evitar trabalho redundante em `_process`/`_physics_process`;
+- limitar atualizações de UI;
+- controlar quantidade de partículas e efeitos;
+- reutilizar objetos quando profiling justificar;
+- reduzir alocações temporárias em loops quentes;
+- evitar carregamento pesado no meio da ação;
+- dimensionar texturas e áudio;
+- evitar nós/processamento desnecessários;
+- usar sinais com parcimônia e contratos claros;
+- reduzir consultas físicas redundantes;
+- evitar processamento de inimigos distantes quando seguro;
+- manter física determinística e independente de FPS;
+- validar mudanças por comparação antes/depois.
+
+Não otimizar por microbenchmark isolado se a mudança prejudicar game feel, legibilidade ou manutenção. Não sacrificar controles, Dash, conteúdo ou identidade visual sem justificativa e autorização quando necessário.
+
+---
+
+# 13. TESTES, QA E NÍVEIS DE VALIDAÇÃO
+
+## 13.1. Camadas
+
+Distinguir explicitamente:
+- validação estática/documental;
+- parsing/importação Godot;
+- testes unitários;
+- testes de integração;
+- testes de cena/fluxo;
+- testes headless;
+- observação no editor;
+- validação visual;
+- teste em emulador;
+- exportação Android;
+- instalação em aparelho;
+- validação touch/multitouch física;
+- profiling em dispositivo;
+- playtest humano.
+
+Uma camada não substitui outra.
+
+## 13.2. Suíte existente
+
+A árvore observada inclui testes para:
+- ActionBuffer;
+- contrato de câmera;
+- entrada de campanha;
+- CampaignProgress;
+- checkpoints;
+- combate;
+- inimigo/combate;
+- contrato de input;
+- loading overlay;
+- MovingPlatform;
+- OneWayPlatform;
+- movimento do player;
+- configuração de projeto;
+- safe area;
+- sandbox playthrough;
+- SaveSystem;
+- SceneFlow;
+- cenas e scripts;
+- touch controls;
+- progressão W1-L2;
+- isolamento do runner.
+
+O número exato de testes e verificações muda conforme novas alterações são integradas. Nunca copiar contagem histórica como se fosse a contagem atual.
+
+## 13.3. Severidade
+
+Os bugs devem ser classificados por impacto:
+- bloqueador: impede inicialização, progressão essencial ou release;
+- crítico: perda de progresso, input essencial quebrado, crash recorrente ou softlock;
+- alto: falha significativa de gameplay/UX;
+- médio: comportamento incorreto limitado;
+- baixo: polimento ou problema cosmético;
+- melhoria: evolução sem defeito confirmado.
+
+Todo bug deve ter reprodução, contexto, impacto, hipótese, evidência, correção e regressão.
+
+## 13.4. Definition of Done
+
+Uma unidade não está concluída apenas porque o código foi escrito. Deve possuir:
+- escopo e critérios de aceite;
+- implementação integrada;
+- testes adequados;
+- revisão de diff;
+- ausência de regressões conhecidas;
+- documentação atualizada;
+- estado do tracker atualizado;
+- limitações registradas;
+- evidência reproduzível.
+
+---
+
+# 14. GITHUB, BRANCHES, CI E RELEASE ANDROID
+
+## 14.1. Repositório
+
+Repositório observado: `jyanzy19-yml/new-bolt-aventura`, branch padrão `main`, visibilidade pública na consulta de 26/11/2026.
+
+O nome anterior `bolt-aventura` foi usado em conversas e etapas de preparação, mas a referência atual localizada na conexão GitHub é `new-bolt-aventura`. Não confundir o nome do projeto com o nome atual do repositório.
+
+## 14.2. CI
+
+O repositório possui workflows de validação documental, validação Godot e exportação Android debug. A documentação do pipeline está em `docs/production/CI_AND_VALIDATION_PIPELINE.md`.
+
+A exportação Android debug descrita utiliza:
+- download de Godot e templates pareados;
+- JDK 17;
+- Android SDK;
+- chave de debug efêmera;
+- importação e testes;
+- exportação APK;
+- verificação de assinatura;
+- verificação de package ID;
+- hash SHA-256;
+- publicação de artifact temporário.
+
+O package ID registrado como `com.example.boltaventura` é placeholder e não deve ser tratado como identificador definitivo de produto.
+
+## 14.3. Evidência histórica
+
+Os registros de continuidade consultados apontam:
+- PR #46: `OneWayPlatform`, checks CI pré-merge reportados como SUCCESS, com 87 testes/548 verificações/0 falhas no snapshot associado;
+- PR #47: correção do estado inicial de `TimedEnergyGate`, CI pós-merge reportado como SUCCESS, com 88 testes/553 verificações/0 falhas;
+- PR #48: matriz de rastreabilidade de 26 etapas integrada;
+- PRs #51/#52: revisão e sincronização do mapa arquitetural, incluindo acoplamento Player/Combat;
+- artifact Android debug exportado em CI, assinatura v2/v3 verificada e SHA-256 registrado no snapshot;
+- instalação em dispositivo físico não comprovada.
+
+Esses são registros históricos. Antes de qualquer release ou declaração de estado, consultar runs atuais e a branch `main`.
+
+## 14.4. Disciplina Git
+
+- confirmar branch e HEAD antes de editar;
+- criar branch de trabalho para unidade coerente;
+- commits pequenos e rastreáveis;
+- revisar diff;
+- executar checks relevantes;
+- integrar somente quando critérios forem atendidos;
+- atualizar documentos após merge;
+- não executar force push;
+- não alterar visibilidade do repositório;
+- não apagar branches/arquivos ou executar operações destrutivas sem solicitação explícita;
+- não manipular secrets/credenciais;
+- não publicar release de produção sem autorização.
+
+PR #1 foi registrada como antiga, divergente e separada; não integrar ou rebasear automaticamente. Consultar o estado atual antes de qualquer decisão sobre ela.
+
+---
+
