@@ -4,7 +4,7 @@
 - **PRs #2–#10:** integradas; PR #1 permanece aberta, sem rebase, fechamento ou merge.
 - **PR #1 vs main:** 17 commits exclusivos, 139 commits atrás; comparação executada em 2026-11-26. Métrica volátil, não reutilizar sem novo compare.
 - **Estado do projeto:** Godot 4.7.2/GDScript, cenas/scripts/testes reais, Android empacotado em paisagem; fundação técnica, não campanha completa.
-- **Dash:** existe em Input Map, `BoltPlayer`, touch e testes; PR #1 o exclui. Não adicionar, remover ou retunar até decisão canônica explícita.
+- **Dash:** decisão canônica já aprovada pelo usuário: deve permanecer. Preservar Input Map, `BoltPlayer`, touch e testes; a exclusão na PR #1 está superada. Ver `ADR-001-DASH.md`.
 - **Validação:** o status combinado consultado para este HEAD não retornou checks; a última execução documental confirmada permanece Docs CI run `45817363134` no commit anterior `caedfee2f790cc78222b281a5b602110d7229043`. Esta auditoria abrirá PR para nova execução documental. Godot CI mais recente com números detalhados continua sendo run `45809258952` no commit `4ecaff1d67049155d95bcbb5fc9d1c98187d3767` (42 testes, 171 verificações, 0 falhas).
 - **Limites:** nenhuma exportação APK, instalação, emulador, editor gráfico, toque físico, safe area em aparelho ou medição de FPS/RAM/temperatura foi executada nesta auditoria.
 - **Colaboração:** ChatGPT é o único escritor desta auditoria/branch. Claude Code não deve iniciar Etapa 2 até esta PR ser concluída e o handoff atualizado; depois disso, Claude é o próximo escritor.
@@ -21,8 +21,8 @@
 - O projeto Godot executável existe na raiz: Godot **4.7.2**, `project.godot`, cenas, scripts GDScript, recursos e testes. Continuar a base existente; não recriar o projeto.
 - Etapa 0: **ACCEPTED**. Etapa 1: **HANDOFF_READY**. PRs #2–#10: **MERGED**.
 - Próximo turno de gameplay: **Claude Code — Etapa 2**, somente depois da integração desta rodada e confirmação do HEAD atual pelo usuário/Claude.
-- **PR #1:** OPEN, `mergeable_state=dirty`; 17 commits exclusivos e 17 arquivos alterados; o compare de 2026-11-26 após PR #9 indicava 138 commits atrás. A contagem muda com cada merge; consultar o compare atual antes de qualquer rebase. Contém documentos de raiz e uma diretiva em 12 partes/índice; não contém implementação de gameplay. Preservada sem merge/fechamento.
-- **Dash:** código e testes atuais incluem Dash; a diretiva da PR #1 exclui. Decisão canônica não resolvida. Não adicionar, remover ou retunar a mecânica sem decisão explícita.
+- **PR #1:** OPEN e não mergeável; compare confirmado após PR #10: 17 commits exclusivos e 139 commits atrás (fotografia de 2026-11-26). A contagem muda com cada merge; consultar novamente antes de qualquer rebase. Contém apenas documentação; não contém implementação de gameplay. Preservada sem merge/fechamento.
+- **Dash:** decisão canônica resolvida em 2026-11-26: deve permanecer. Preservar implementação, Input Map, touch e testes; a exclusão na PR #1 está superada. Não retunar sem escopo próprio.
 - **Branch protection:** GitHub confirmou `protected=false` para `main`. A integração não oferece operação administrativa para ativar proteção/ruleset; o proprietário deve configurar manualmente. Como os workflows usam filtros por caminhos, não tornar checks condicionais obrigatórios sem um check agregador que sempre execute.
 - **Validação máxima comprovada:** L2 (Godot headless/CI). Docs CI run #45817363134 SUCCESS no commit anterior `caedfee`; para o HEAD `1e5294c`, o status combinado consultado não retornou checks. Nova validação documental será disparada pela PR desta auditoria. Não há APK exportado/instalado, editor gráfico, emulador, toque físico, safe area em aparelho, FPS ou memória medidos.
 - **Escopo concluído pelo ChatGPT nesta rodada:** reconciliação documental, revisão estática focalizada, análise da PR #1 e atualização do handoff. PR #7–#10 integradas sem alterações de gameplay. Claude Code é o próximo escritor da Etapa 2 após o usuário iniciar a sessão e confirmar o HEAD real.
@@ -278,7 +278,7 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 
 ## 16. Decisão canônica sobre Dash — 2026-11-26
 
-- O usuário confirmou explicitamente: **Dash deve permanecer no BOLT · AVENTURA**.
+- O usuário confirmou explicitamente: **Dash deve permanecer no BOLT · AVENTURA**. Esta decisão substitui todas as anotações anteriores deste arquivo que tratavam o escopo como pendente.
 - Decisão formal registrada em [ADR-001-DASH.md](ADR-001-DASH.md). Esta decisão prevalece sobre a exclusão de Dash na diretiva ainda não integrada da PR #1.
 - Preservar a implementação existente em Input Map, `BoltPlayer`, controles touch e testes. Não remover. Alterações de física, tuning, cooldown, controles ou balanceamento exigem tarefa própria.
 - A formalização foi exclusivamente documental; nenhum código de gameplay foi alterado.
