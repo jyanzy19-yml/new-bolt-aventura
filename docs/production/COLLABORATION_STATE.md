@@ -2,19 +2,25 @@
 
 ## Snapshot operacional vigente — 2026-11-26
 
-- Último merge de conteúdo de gameplay: PR #34, commit `c10ca6944bf0047abe694b7c429270a256cfff96`. Última correção/regressão: PR #37, merge `39b6db8298542c5057c06f509b20d250a888e289`.
-- ChatGPT é o único escritor ativo conforme a decisão vigente do usuário; Claude permanece inativo para escrita concorrente.
-- Etapa de produção atual: continuação do Gate 1/vertical slice e expansão incremental da campanha.
-- PR #34 integrada: W1-L1 encaminha para W1-L2; save e menu Continuar reconhecem ambas as fases existentes; W1-L2 possui blockout, campo energético cíclico, checkpoint e saída.
-- CI pré e pós-merge das PRs #34/#35: Godot 4.7.2, 69 testes/439 verificações/0 falhas; Docs CI pré/pós-merge SUCCESS. PR #35 cobre contato físico real da `Area2D`.
-- Main HEAD vigente: `39b6db8298542c5057c06f509b20d250a888e289`. PR #1 permanece separada e não deve ser mesclada automaticamente. Android físico não validado.
+- **Main HEAD:** `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.
+- **Última entrega de conteúdo:** PR #34, W1-L2 em blockout e progressão W1-L1→W1-L2.
+- **Última regressão integrada:** PR #39, limpeza do ActionBuffer em pausa/suspensão/perda de foco, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.
+- **Última infraestrutura integrada:** PR #38, pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.
+- **Escritor ativo:** ChatGPT como único escritor, por decisão explícita do usuário; Claude permanece inativo para escrita concorrente.
+- **Plano operacional:** 26 etapas em `docs/production/stage-status.md`, subordinadas ao MASTER_DIRECTIVE e às especificações canônicas.
+- **Etapas atuais:** Etapa 01 e 02 EM ANÁLISE; Gate 1 continua em andamento. W1-L1 e W1-L2 são blockouts.
+- **PR #39 CI:** Godot 4.7.2 — 72 testes/451 verificações/0 falhas; Docs SUCCESS; Android Debug Export SUCCESS.
+- **APK debug:** artifact `bolt-aventura-android-debug-7415dfb988faf2dd63f9ff289106e7f7205dcdd1`, package ID placeholder `com.example.boltaventura`, SHA-256 `db03a42b909781a1f5e7c94d025615e1aa5f397c8ebd306ba30cddf84eca14b0`. Exportado/assinado, não instalado nem testado em aparelho.
+- **PR #1:** permanece separada e não deve ser integrada/rebaseada automaticamente.
+- **Dash:** decisão aprovada e vigente: deve permanecer; ver `docs/production/ADR-001-DASH.md`.
+- **Próxima unidade:** reconciliação documental das decisões de Dash e da autoridade de escritor, sem alterações de gameplay.
 
 
 **Fonte única para o próximo turno.** Antes de editar, confirme este arquivo contra o HEAD, commits, branches e PRs reais do GitHub.
 
-## Estado vigente — revisão de 2026-11-26
+## Histórico — revisão anterior à sequência PR #38/#39
 
-**Último merge confirmado na main:** PR #34 integrada por squash em `c10ca6944bf0047abe694b7c429270a256cfff96`. Confirmar novamente o SHA antes de cada novo turno.
+O snapshot operacional vigente está no topo deste arquivo. As seções abaixo preservam registros históricos de etapas anteriores; não substituem o HEAD, escritor ou estado de 26 etapas atuais.
 
 - **Etapa 0 — Claude Code: ACCEPTED.** Fundação Godot 4.7.2 e protótipo técnico provisório aceitos; hardening integrado pela PR #3.
 - **Etapa 1 — ChatGPT: HANDOFF_READY.** Correção de reatribuição de ponteiro em `TouchControls`, regressão e execução da suíte no CI; entrega original `f3ab682`.
