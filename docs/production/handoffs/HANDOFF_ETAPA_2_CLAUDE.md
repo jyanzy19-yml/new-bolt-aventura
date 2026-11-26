@@ -5,7 +5,7 @@
 **Etapa:** 2 — continuação do Gate 1 / vertical slice  
 **Repositório:** `jyanzy19-yml/new-bolt-aventura`  
 **Branch de integração:** `main`  
-**Último HEAD verificado para este handoff:** `caedfee2f790cc78222b281a5b602110d7229043` (após PR #9; confirmar o HEAD real da main imediatamente antes de iniciar).  
+**Último HEAD verificado para este handoff:** `1e5294cf112c014c21e43c51b4c8e797beceb9b6` (após PR #10; confirmar o HEAD real da main imediatamente antes de iniciar).
 **Estado:** handoff integrado na PR #4; Claude pode iniciar após o usuário ativar a sessão e confirmar o HEAD atual.
 
 ## 1. O que já está integrado
@@ -16,7 +16,8 @@
 - PR #3 — MERGED: hardening da fundação e correção dos registros de aceite. Merge `4ecaff1d67049155d95bcbb5fc9d1c98187d3767`.
 - PR #4 — MERGED: handoff Etapa 2 e sincronização documental. Merge `9d5381047817ac9fc949583f6645d24eadd88e8c`.
 - PR #5 — MERGED: auditoria integral e polimento da continuidade; Docs CI #140 SUCCESS. Relatório: [repository-polish-audit-2026-11-26.md](../repository-polish-audit-2026-11-26.md).
-- PR #7 — MERGED: correção de documentação obsoleta e sincronização do handoff; merge `b8def7a`; Docs CI #144 (PR) e #145 (main) SUCCESS. Nenhum código de gameplay foi alterado.
+- PR #7 — MERGED: reconciliação da documentação raiz com o projeto Godot existente; merge `b8def7a`.
+- PR #8–#10 — MERGED: auditoria, sincronização de continuidade e atualização do handoff. Último merge observado: PR #10, commit `1e5294c`. Alterações documentais, sem gameplay.
 
 ## 2. Hardening recente da Etapa 0
 
@@ -31,7 +32,7 @@
 No commit da PR #3 (`373d5170362ded16d7054aeacf3daeb6b649d751`):
 - Godot CI Run #45: SUCCESS; importação condicional e análise de scripts concluídas.
 - Docs CI Run #133: SUCCESS.
-- A suíte anterior no Godot CI #36 executou 42 testes / 171 verificações / 0 falhas. Não atribuir esses números à Run #45 sem confirmar que o runner foi executado nela.
+- A suíte anterior no Godot CI #36 executou 42 testes / 171 verificações / 0 falhas. A evidência detalhada mais recente continua sendo Godot CI run `45809258952` no commit `4ecaff1d67049155d95bcbb5fc9d1c98187d3767`; não atribuir esses números a outras runs.
 
 Validação máxima comprovada: L2 (Godot headless/CI). Não há APK exportado, instalação, editor gráfico, emulador, toque físico, safe area em aparelho, FPS ou memória medidos.
 
@@ -54,7 +55,7 @@ Validação máxima comprovada: L2 (Godot headless/CI). Não há APK exportado, 
 - Tuning de movimento, layout touch, viewport 960×540 e renderer GL Compatibility continuam provisórios.
 - Package ID `com.example.boltaventura` é placeholder; não inventar identificador definitivo.
 - Não declarar exportação, instalação ou validação Android sem evidência.
-- PR #1 permanece OPEN, `mergeable_state=dirty`, 17 commits exclusivos; o compare após PR #9 indicava 138 commits atrás, número volátil que deve ser consultado novamente antes de qualquer rebase.; altera 17 arquivos documentais e não contém código de gameplay. Não mesclar automaticamente. Revisar cada um dos quatro documentos raiz e a diretiva em 12 partes; recuperar somente conteúdo compatível com as fontes aprovadas.
+- PR #1 permanece OPEN, `mergeable_state=dirty`, 17 commits exclusivos; o compare após PR #10 indica 139 commits atrás (fotografia de 2026-11-26; consultar novamente antes de rebasear); altera 17 arquivos documentais e não contém código de gameplay. Não mesclar automaticamente. Revisar cada um dos quatro documentos raiz e a diretiva em 12 partes; recuperar somente conteúdo compatível com as fontes aprovadas.
 - Dash existe no Input Map, em `BoltPlayer`, controles e testes; a diretiva proposta na PR #1 o exclui. A fonte canônica ainda não foi resolvida. Não adicionar, remover ou retunar até decisão explícita do usuário.
 - Um único escritor ativo. O usuário inicia Claude manualmente; não há transferência automática de sessão.
 
@@ -63,3 +64,13 @@ Validação máxima comprovada: L2 (Godot headless/CI). Não há APK exportado, 
 Claude Code é o próximo escritor, Etapa 2. ChatGPT não deve iniciar implementação concorrente. Após a entrega de Claude, ChatGPT auditará o commit/PR, verificará os testes e só então aceitará ou devolverá correções antes de assumir a Etapa 3.
 
 **Este handoff prepara o início da Etapa 2; não declara a vertical slice concluída nem autoriza pular gates de qualidade.**
+
+
+## 7. Estado após PR #10 e auditoria ChatGPT — 2026-11-26
+
+- HEAD de entrada desta auditoria: `1e5294cf112c014c21e43c51b4c8e797beceb9b6`.
+- PR #10 está integrada. PR #1 continua OPEN, sem alterações; compare atual: 17 commits exclusivos e 139 commits atrás.
+- ChatGPT mantém a autoria exclusiva da branch/PR de auditoria. Claude não deve iniciar Etapa 2 enquanto esta alteração estiver em revisão/integração.
+- Após merge e atualização do estado colaborativo, Claude Code será o próximo escritor da Etapa 2.
+- Dash permanece preservado e provisório, aguardando decisão canônica explícita.
+- Não há nova evidência de exportação APK, emulador, dispositivo físico, toque, safe area ou performance Android.
