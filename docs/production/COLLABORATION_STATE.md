@@ -2,7 +2,7 @@
 
 ## Snapshot operacional vigente — 2026-11-26
 
-- Main HEAD: `c10ca6944bf0047abe694b7c429270a256cfff96` (PR #34 merged).
+- Último merge de gameplay: PR #34, commit `c10ca6944bf0047abe694b7c429270a256cfff96`; commits posteriores sincronizam documentação.
 - ChatGPT é o único escritor ativo conforme a decisão vigente do usuário; Claude permanece inativo para escrita concorrente.
 - Etapa de produção atual: continuação do Gate 1/vertical slice e expansão incremental da campanha.
 - PR #34 integrada: W1-L1 encaminha para W1-L2; save e menu Continuar reconhecem ambas as fases existentes; W1-L2 possui blockout, campo energético cíclico, checkpoint e saída.
