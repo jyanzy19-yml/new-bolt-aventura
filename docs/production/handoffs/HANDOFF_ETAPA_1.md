@@ -10,7 +10,7 @@
 - **Commit-base completo:** `ab72c584522db49ad7b31c80717fd2d6ab7ab73e`.
 - **Commit de entrega da implementação:** `f3ab6829228c077b1a3c14eb65385a8a99c34608`.
 - **Commits de implementação:** `4700d39522670af5825d0c5a8899b43b2652f05a` (correção), `317f4ef9d7c2001af71100feb23d742ec8963476` (teste), `f3ab6829228c077b1a3c14eb65385a8a99c34608` (CI).
-- **Commits documentais posteriores:** `1d126f16ea4af966ab6ea007b1ead25a6c966a45`, `b3a6cc831d22b8561bdcb325a55a2fd9203e5127`, `05224517a085ed3c260569fcc14c7995b9ef3277`, `ebf7ed97eb676c18960de1dcacc94fa3f0e76e9f` e o commit deste handoff. Consultar o HEAD atual de `main`.
+- **Commits documentais posteriores:** atualizações do tracker, status, continuidade, colaboração e handoff foram gravadas em commits subsequentes; consultar o histórico atual de `main` para a lista integral.
 - **PR #1:** permanece aberta e divergente; não foi mesclada, fechada nem modificada.
 - **Estado no COLLABORATION_STATE.md:** Etapa 0 ACCEPTED; Etapa 1 HANDOFF_READY; próximo responsável Claude Code — Etapa 2.
 
