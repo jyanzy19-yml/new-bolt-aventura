@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 
 SceneFlow="*res://scripts/core/scene_flow.gd"
 SaveSystem="*res://scripts/core/save_system.gd"
+CampaignProgress="*res://scripts/campaign/campaign_progress.gd"
 
 [display]
 

@@ -38,8 +38,8 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-011 | Chefes e arenas | Não iniciado | Sem implementação do jogo |
 | SYS-012 | NPCs, interação, diálogo e flags | Não iniciado | Sem implementação do jogo |
 | SYS-013 | Objetivos, colecionáveis e fragmentos | Não iniciado | Sem implementação do jogo |
-| SYS-014 | Checkpoints, respawn e progressão | Em andamento | `BoltCheckpoint` (`scenes/levels/checkpoint.tscn`, `scripts/levels/bolt_checkpoint.gd`) ativa uma vez e atualiza o respawn da sandbox; teste `test_checkpoint_updates_respawn_target_once` adicionado. Estado apenas em memória durante a sessão; SaveSystem/persistência e fases da campanha ainda não implementados. Godot CI #50 SUCCESS no merge `09317a2c1b7c1113e7ff2f142a82b495998f7578`: 43 testes, 179 verificações, 0 falhas |
-| SYS-015 | Save/load, versão e recuperação | Em andamento | `scripts/core/save_system.gd` + autoload `SaveSystem`: envelope JSON v1, SHA-256, validação de payload, escrita temporária/backup/recuperação. Testes `tests/unit/test_save_system.gd` em CI. Ainda sem modelo de dados da campanha, migrações ou integração com checkpoint/progressão |
+| SYS-014 | Checkpoints, respawn e progressão | Em andamento | `BoltCheckpoint` mantém ativação local e expõe restauração visual; `CampaignProgress` persiste IDs estáveis de checkpoint/conclusão para W1-L1 e restaura respawn na reentrada. Sandbox permanece local à sessão; outras fases ainda não integradas. CI desta branch pendente |
+| SYS-015 | Save/load, versão e recuperação | Em andamento | `SaveSystem` genérico JSON v1 + `CampaignProgress` schema v1 em `campaign_progress`; IDs de checkpoint e conclusão W1-L1 integrados. Testes de round-trip, backup, schema e reentrada em CI. Migrações futuras, outros domínios e QA Android pendentes |
 | SYS-016 | Inventário, moedas, melhorias e skins | Não iniciado | Sem implementação do jogo |
 | SYS-017 | Menus, HUD, pausa e configurações | Em andamento | Menu inicial e HUD de sandbox com pausa/resultado existem; controles touch e safe area parcial. Configurações completas e fluxos finais ausentes. Headless apenas; sem validação visual/Android |
 | SYS-018 | Cutscenes, legendas e replay/pulo | Em andamento | Storyboard funcional de quatro páginas e avanço/pulo para tutorial; tutorial jogável guiado por robô mensageiro (texto instrucional provisório), incluindo ataque básico da Pistola Crono contra alvo de treinamento. Seleção de armas, animação final, áudio e replay persistente pendentes |
@@ -56,7 +56,7 @@ A matriz define a estrutura planejada: seis fases por mundo; fases 1–5 de prog
 
 | ID | Mundo | Função planejada | Status inicial | Evidência |
 |---|---|---|---|---|
-| W1-L1 | Cybercore | Entrada e exploração | Em andamento | Blockout com BOLT, HUD/touch, checkpoint local, inimigo-base provisório, Pistola Crono, dano/vida, coletável de cura e objetivo de trecho. SaveSystem de baixo nível em desenvolvimento, ainda não integrado ao checkpoint/campanha; arte/áudio finais e validação Android pendentes |
+| W1-L1 | Cybercore | Entrada e exploração | Em andamento | Blockout com BOLT, HUD/touch, combate, coletável, checkpoint persistente, recuperação, objetivo e estado de conclusão. Placeholders, sem transição para W1-L2, arte/áudio finais, playtest humano ou QA Android |
 | W1-L2 | Cybercore | Progressão | Não iniciado | Sem cena |
 | W1-L3 | Cybercore | Progressão | Não iniciado | Sem cena |
 | W1-L4 | Cybercore | Combinação de mecânicas | Não iniciado | Sem cena |
@@ -202,3 +202,12 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - Escrita com temporário e backup; leitura tenta backup após principal ausente/inválido. Versão desconhecida falha fechada. API síncrona deve ser chamada em marcos discretos, nunca por frame.
 - `tests/unit/test_save_system.gd`: round-trip/sobrescrita/delete, backup recovery, versão futura e payload não serializável; CI pendente.
 - Não há modelo de dados de campanha, migração de versão, autosave ou integração com `BoltCheckpoint`. `SYS-014` e W1-L1 permanecem Em andamento.
+
+
+## Integração CampaignProgress — branch `feat/w1-l1-persistent-checkpoint-progress`
+
+- Autoload `CampaignProgress` separado do `SaveSystem`; schema de domínio v1 dentro da chave `campaign_progress` do payload raiz.
+- Persiste `campaign_id=main`, `current_level_id`, `active_checkpoint_id` e `completed_level_ids` com IDs estáveis.
+- W1-L1 grava no evento de checkpoint, restaura indicador/respawn na reentrada e marca conclusão ao alcançar o objetivo; conclusão limpa o checkpoint ativo e não inventa transição para W1-L2.
+- ADR-0004 e docs técnicos `08-campaign-progress.md` formalizam o contrato. Testes de serviço e integração adicionados; CI pendente.
+- SYS-014/SYS-015 continuam **Em andamento** até validação Android, migrações e integração das demais fases.

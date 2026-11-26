@@ -33,3 +33,15 @@ func get_respawn_position() -> Vector2:
 func _on_body_entered(body: Node2D) -> void:
 	if body is BoltPlayer:
 		activate()
+
+
+## Restaura somente a apresentação/estado de ativação; não emite o sinal de gameplay novamente.
+func restore_activation() -> void:
+	if _is_activated:
+		return
+	_is_activated = true
+	_indicator.color = Color(0.35, 1.0, 0.68, 1.0)
+
+
+func is_activated() -> bool:
+	return _is_activated

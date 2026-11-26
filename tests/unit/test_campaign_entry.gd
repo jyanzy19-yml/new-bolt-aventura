@@ -66,6 +66,8 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	check(start_button.visible and start_button.text == "ENTRAR EM CYBERCORE", "tutorial libera entrada em Cybercore após o ataque")
 	tutorial_instance.free()
 
+	SaveSystem.storage_path_override = "user://bolt_w1_l1_integration_test.json"
+	SaveSystem.delete_save()
 	var cybercore_instance: Node = cybercore.instantiate()
 	tree.root.add_child(cybercore_instance)
 	await tree.physics_frame
@@ -123,6 +125,7 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	check(checkpoint_activated[0], "entrada física ativa o checkpoint")
 	check(hud.get_node("%ProgressNotification").visible, "HUD comunica a ativação do checkpoint")
 	check_eq(hud.get_node("%ProgressNotification").text, "CHECKPOINT ATIVADO", "notificação identifica o checkpoint")
+	check_eq(CampaignProgress.get_checkpoint_id("W1-L1"), String(checkpoint.checkpoint_id), "checkpoint é persistido por ID estável")
 
 	# Uma queda real na kill zone deve retornar ao ponto ativado e restaurar a vida.
 	check(level_player.take_damage(1, 1.0), "BOLT recebe dano antes da queda")
@@ -157,15 +160,57 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 			break
 	check(hud.get_node("%ResultOverlay").visible, "alcançar fisicamente a saída conclui o trecho")
 	check_eq(hud.get_node("%ResultTitle").text, "Cybercore — trecho inicial concluído", "tela de resultado identifica a conclusão")
+	check(CampaignProgress.is_level_completed("W1-L1"), "conclusão da W1-L1 é persistida")
+	check_eq(CampaignProgress.get_checkpoint_id("W1-L1"), "", "checkpoint ativo é limpo após conclusão")
 	tree.paused = false
 	cybercore_instance.free()
+	SaveSystem.delete_save()
+	SaveSystem.storage_path_override = ""
+	return true
+
+
+func test_w1_l1_restores_persisted_checkpoint_on_scene_reentry() -> bool:
+	SaveSystem.storage_path_override = "user://bolt_w1_l1_reentry_test.json"
+	SaveSystem.delete_save()
+	var cybercore: PackedScene = load(CYBERCORE_W1_L1_PATH) as PackedScene
+	check(cybercore != null, "W1-L1 carrega para teste de persistência do checkpoint")
+	if cybercore == null:
+		SaveSystem.storage_path_override = ""
+		return true
+
+	var first_level: Node = cybercore.instantiate()
+	tree.root.add_child(first_level)
+	await tree.physics_frame
+	var first_player: BoltPlayer = first_level.get_node("Bolt") as BoltPlayer
+	var first_checkpoint: BoltCheckpoint = first_level.get_node("Checkpoint") as BoltCheckpoint
+	first_player.global_position = first_checkpoint.global_position
+	first_player.velocity = Vector2.ZERO
+	for _tick in range(3):
+		await tree.physics_frame
+	check(first_checkpoint.is_activated(), "entrada física ativa o checkpoint na primeira instância")
+	check_eq(CampaignProgress.get_checkpoint_id("W1-L1"), String(first_checkpoint.checkpoint_id), "ID do checkpoint fica salvo")
+	first_level.free()
+
+	var second_level: Node = cybercore.instantiate()
+	tree.root.add_child(second_level)
+	await tree.physics_frame
+	var second_player: BoltPlayer = second_level.get_node("Bolt") as BoltPlayer
+	var second_checkpoint: BoltCheckpoint = second_level.get_node("Checkpoint") as BoltCheckpoint
+	check(second_checkpoint.is_activated(), "checkpoint salvo restaura o indicador na reentrada")
+	check(second_player.global_position.distance_to(second_checkpoint.get_respawn_position()) < 2.0, "BOLT reaparece no checkpoint persistido")
+	second_level.free()
+	SaveSystem.delete_save()
+	SaveSystem.storage_path_override = ""
 	return true
 
 
 func test_campaign_defeat_exposes_retry_for_w1_l1() -> bool:
+	SaveSystem.storage_path_override = "user://bolt_w1_l1_defeat_test.json"
+	SaveSystem.delete_save()
 	var cybercore: PackedScene = load(CYBERCORE_W1_L1_PATH) as PackedScene
 	check(cybercore != null, "W1-L1 carrega para validar derrota e reinício")
 	if cybercore == null:
+		SaveSystem.storage_path_override = ""
 		return true
 	var level: Node = cybercore.instantiate()
 	tree.root.add_child(level)
@@ -180,4 +225,6 @@ func test_campaign_defeat_exposes_retry_for_w1_l1() -> bool:
 	check_eq(hud.get("_restart_path"), CYBERCORE_W1_L1_PATH, "reinício aponta para a W1-L1 atual")
 	tree.paused = false
 	level.free()
+	SaveSystem.delete_save()
+	SaveSystem.storage_path_override = ""
 	return true
