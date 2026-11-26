@@ -126,4 +126,4 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - A abertura usa fatos do canon aprovado, mas ainda não é cinemática final animada.
 - Tutorial introduz movimento, salto e Dash com o player/HUD/touch existentes. Textos instrucionais são provisórios e não definem a personalidade do mensageiro.
 - W1-L1 permanece Em andamento; inimigos, combate, assets/áudio finais, save/load e QA Android continuam pendentes.
-- Teste de runtime novo: `tests/unit/test_campaign_entry.gd`; verifica storyboard, progressão de etapas do tutorial e contratos de W1-L1; Godot CI #54 SUCCESS (44 testes, 205 verificações, 0 falhas); Docs CI #173 SUCCESS.
+- Teste de runtime novo: `tests/unit/test_campaign_entry.gd`; verifica storyboard, progressão de etapas do tutorial e contratos de W1-L1; PR #15 integrada em `783c1d2`; Godot CI #56 e Docs CI #175 SUCCESS (44 testes, 205 verificações, 0 falhas). CI pós-merge #57/#176 em execução.

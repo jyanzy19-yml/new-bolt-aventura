@@ -1,3 +1,14 @@
+## Estado atual — PR #15 integrada — 2026-11-26
+
+- **Main HEAD:** `783c1d2587ebea39d645a641417e663e561ea710`.
+- **PR #15:** integrada por squash; adiciona storyboard funcional de abertura, tutorial guiado por robô mensageiro provisório e blockout jogável de W1-L1 Cybercore.
+- **Validação da PR:** Godot CI #56 (`45844707053`) SUCCESS — Godot 4.7.2, 44 testes / 205 verificações / 0 falhas. Docs CI #175 (`45844707079`) SUCCESS.
+- **CI pós-merge:** Godot #57 (`45844900388`) e Docs #176 (`45844900148`) em execução no momento deste registro.
+- **Limites:** abertura não é cinemática final animada; robô mensageiro é placeholder; W1-L1 é blockout sem inimigos/combate, assets/áudio finais ou save/load. Nenhum APK, emulador ou Android físico testado.
+- **Próximo foco:** continuar sistemas centrais da campanha, começando por combate/dano e um inimigo-base, sem multiplicar conteúdo antes de validar os contratos.
+
+---
+
 ## Estado atual — entrada da campanha em desenvolvimento
 
 - **Base main:** `d6301e887c6c3a54ab532fcc2f75cb983c3e9840`.
