@@ -34,7 +34,7 @@ func _check_level_limits(script_path: String, expected_right: int, level_name: S
 	check(level_script != null, "%s script carrega" % level_name)
 	if level_script == null:
 		return true
-	var level: Node2D = level_script.new() as Node2D
+	var level = level_script.new()
 	var camera: Camera2D = Camera2D.new()
 	level.configure_camera(camera)
 	check_eq(camera.limit_left, 0, "%s limite esquerdo" % level_name)
