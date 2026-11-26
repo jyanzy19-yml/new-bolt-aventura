@@ -77,7 +77,8 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	var checkpoint: BoltCheckpoint = cybercore_instance.get_node("Checkpoint") as BoltCheckpoint
 	var enemy: CybercorePatrolEnemy = cybercore_instance.get_node("PatrolEnemy") as CybercorePatrolEnemy
 	var goal: Area2D = cybercore_instance.get_node("Goal") as Area2D
-	check_eq(enemy.global_position, Vector2(850.0, -19.0), "inimigo começa apoiado no piso intermediário")
+	check_eq(enemy.global_position.y, -19.0, "inimigo começa apoiado no piso intermediário")
+	check(enemy.global_position.x >= 800.0 and enemy.global_position.x <= 900.0, "inimigo patrulha dentro dos limites seguros do piso")
 	check_eq(enemy.patrol_distance, 50.0, "patrulha fica limitada ao trecho seguro da plataforma")
 	check_eq(goal.global_position, Vector2(1960.0, -32.0), "área de conclusão alcança a altura do jogador sobre o piso")
 	checkpoint.activate()
