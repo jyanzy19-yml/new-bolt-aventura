@@ -1,7 +1,7 @@
 ## Snapshot vigente — 2026-11-26
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
-- **Último merge de conteúdo de gameplay:** PR #34, commit `c10ca6944bf0047abe694b7c429270a256cfff96`. **Última correção/regressão integrada:** PR #37, commit `39b6db8298542c5057c06f509b20d250a888e289`.
+- **Último merge de conteúdo de gameplay:** PR #34, commit `c10ca6944bf0047abe694b7c429270a256cfff96`. **Última regressão integrada:** PR #37, commit `39b6db8298542c5057c06f509b20d250a888e289`. **Última infraestrutura integrada:** PR #38, commit `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.
 - **PR #33:** MERGED. Expansão de documentação e correção do coletável; CI Godot 66 testes/404 verificações/0 falhas e Docs SUCCESS.
 - **PR #34:** MERGED. Adiciona W1-L2 em blockout, `TimedEnergyGate`, checkpoint e progressão persistente W1-L1→W1-L2.
 - **PR #35:** MERGED. Regressão de contato físico real do campo energético. **PR #36:** feedback de checkpoint W1-L2. **PR #37:** teste físico isolado do coletável e filtro CI para erro de mutação física bloqueada.
@@ -10,8 +10,8 @@
 - **PR #35:** Godot CI pré/pós-merge SUCCESS — 69 testes/439 verificações/0 falhas (`45873118202`, `45873234656`).
 - **Escritor ativo:** ChatGPT, seguindo a diretriz vigente do usuário. Não iniciar trabalho concorrente de Claude.
 - **Unidade integrada:** `TimedEnergyGate`, cena/script `cybercore_w1_l2`, botão PRÓXIMA FASE na conclusão W1-L1, destino salvo W1-L2, retomada de W1-L1/W1-L2 e regressões.
-- **Limites:** W1-L2 é blockout/protótipo de mecânica, não conteúdo final; ciclo, dano e percurso precisam de playtest. Sem APK, emulador, Android físico, touch físico ou medição de desempenho.
-- **Próximo passo:** continuar a vertical slice existente sem criar novas fases por volume. A próxima unidade ativa é a pipeline de exportação Android debug; APK, instalação e validação Android física continuam pendentes.
+- **Limites:** W1-L2 é blockout/protótipo de mecânica, não conteúdo final; ciclo, dano e percurso precisam de playtest. APK debug exportado em CI, mas não instalado; Android físico, touch físico e profiling continuam pendentes.
+- **Próximo passo:** manter a vertical slice e corrigir o ciclo de vida do ActionBuffer; depois seguir para teste de instalação e fluxo Android físico quando houver dispositivo disponível.
 
 ---
 
@@ -521,3 +521,26 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - **Workflow:** `.github/workflows/android-debug-export.yml`; plano `docs/production/plans/2026-11-26-android-debug-export-pipeline.md`.
 - **Validação:** aguardando execução do workflow na PR. Não há APK confirmado, hash de artefato, instalação, emulador ou teste em dispositivo físico nesta sessão.
 - **Próximo passo:** abrir PR, revisar o workflow e corrigir qualquer falha real; após sucesso, confirmar artifact e metadados; atualizar continuidade e distinguir exportação de validação no dispositivo.
+
+
+---
+
+## Sessão ChatGPT — exportação Android integrada e correção de ActionBuffer — 2026-11-26
+
+### PR #38 — pipeline Android debug integrada
+
+- PR #38 foi reaberta após revisão da execução final e integrada por squash em `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.
+- Godot Validation `45879045282`, Docs Validation `45879045081` e Android Debug Export `45879045098`: SUCCESS.
+- Artefato: `bolt-aventura-android-debug-5be706c042fceaa66dadf2509ffafd0833ad3617` (28.194.385 bytes).
+- Godot 4.7.2; assinatura APK v2/v3 válida; package ID `com.example.boltaventura` provisório; SHA-256 `acbacb86afeb767e293ba357d6749db4bdde55c2d78c05f90779dafc5f438fab`.
+- Exportação em CI comprovada; instalação, cold start, touch, safe area, lifecycle e performance física não executados.
+
+### Unidade atual — ActionBuffer lifecycle
+
+- Branch: `fix/action-buffer-lifecycle-clear-v2`, base `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.
+- Arquivos de gameplay/teste: `scripts/input/action_buffer.gd`, `tests/unit/test_action_buffer.gd`.
+- Mudança: limpar edges pendentes em `NOTIFICATION_APPLICATION_PAUSED`, `NOTIFICATION_APPLICATION_FOCUS_OUT`, `NOTIFICATION_WM_WINDOW_FOCUS_OUT` e `NOTIFICATION_PAUSED`.
+- Regressões: pending JUMP descartado na perda de foco; pending DASH descartado na suspensão do app.
+- Plano: `docs/production/plans/2026-11-26-action-buffer-lifecycle-clear.md`.
+- **Estado:** implementação escrita; CI ainda não confirmado. Sem validação Android física.
+- **Próximo passo:** abrir PR, aguardar Godot/Docs CI, revisar logs e corrigir falhas antes de integrar. Depois seguir para instalação e testes de ciclo de vida em aparelho.
