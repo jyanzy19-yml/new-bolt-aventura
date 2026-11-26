@@ -126,7 +126,11 @@ Os critérios acima são gates de aceite, não resultados já alcançados. A exi
 | DOC-002 | Character Bible listava a origem de BOLT como pendente sem separar sua função original já canonizada | Clarificado em game-design/03-character-bible.md: função de preservação dos universos é canon; origem técnica específica permanece pendente |
 | DOC-003 | Seção 50 do prompt mestre apontava como próxima prioridade um bug de coletável já resolvido e dizia para não criar W1-L2, embora W1-L2 exista em blockout | Corrigido pela PR #49; próxima prioridade passou a consultar a matriz/Etapa 02 e a vertical slice real |
 | DOC-004 | Snapshot de continuidade e colaboração estava em PR #45/#46 e não refletia PR #47/#48 | Corrigido pela PR #49; snapshots passam a refletir HEAD atual e evidências pós-merge |
+| DOC-005 | Arquitetura técnica dizia que o repositório ainda não continha projeto executável nem versão comprovada | Corrigido nesta unidade: Godot 4.7.2, projeto, cenas e pipeline CI confirmados | 
+| DOC-006 | Fundação técnica dizia que não havia cenas de campanha, export Android ou autoloads além de SceneFlow; Input attack aparecia sem consumidor | Corrigido nesta unidade: W1-L1/W1-L2, APK debug CI, quatro autoloads e BoltCombat documentados | 
+| DOC-007 | Documento de loading referia-se a branch temporária fix/scene-flow-input-lock como unidade não integrada | Corrigido: referência substituída pela PR #42 integrada | 
+| DOC-008 | Contratos de sistemas ainda descreviam todos os nomes como conceituais, apesar de contratos implementados de SceneFlow, plataformas e loading | Corrigido: documento distingue contratos já ancorados no código e requisitos ainda conceituais |
 
 ## 8. Estado de conclusão da Etapa 02
 
-O registro cobre 22 lacunas, oito decisões fechadas, owners, dependências e critérios verificáveis para os quatro requisitos P0. Ainda falta revisar cada linha contra o prompt mestre e todas as especificações, confirmar se há lacunas omitidas, registrar aprovação das decisões materiais e manter a matriz/tracker sincronizados. **Etapa 02 permanece EM DESENVOLVIMENTO.**
+O registro cobre 22 lacunas, oito decisões fechadas, owners, dependências, critérios verificáveis para os quatro requisitos P0 e oito conflitos/documentos obsoletos identificados (DOC-001…DOC-008). Ainda falta revisar cada linha contra o prompt mestre e todas as especificações, confirmar se há lacunas omitidas, registrar aprovação das decisões materiais e manter a matriz/tracker sincronizados. **Etapa 02 permanece EM DESENVOLVIMENTO.**
