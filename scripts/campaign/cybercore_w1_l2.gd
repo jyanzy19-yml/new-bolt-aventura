@@ -18,11 +18,7 @@ var _section_finished: bool = false
 
 
 func _ready() -> void:
-	var camera: Camera2D = _player.get_camera()
-	camera.limit_left = CAMERA_LIMITS.position.x
-	camera.limit_top = CAMERA_LIMITS.position.y
-	camera.limit_right = CAMERA_LIMITS.end.x
-	camera.limit_bottom = CAMERA_LIMITS.end.y
+	configure_camera(_player.get_camera())
 	_hud.bind_player(_player)
 	_hud.set_restart_path(LEVEL_PATH)
 	_player.defeated.connect(_on_player_defeated)
@@ -40,6 +36,14 @@ func _ready() -> void:
 		_checkpoint.restore_activation()
 		_respawn_position = _checkpoint.get_respawn_position()
 	_player.respawn(_respawn_position)
+
+
+func configure_camera(camera: Camera2D) -> void:
+	camera.limit_left = CAMERA_LIMITS.position.x
+	camera.limit_top = CAMERA_LIMITS.position.y
+	camera.limit_right = CAMERA_LIMITS.end.x
+	camera.limit_bottom = CAMERA_LIMITS.end.y
+	camera.limit_smoothed = true
 
 
 func _on_player_defeated() -> void:
