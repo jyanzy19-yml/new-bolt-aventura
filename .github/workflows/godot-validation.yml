@@ -66,7 +66,7 @@ jobs:
           "$GODOT_BIN" --headless --editor --path . --import --quit 2>&1 | tee godot-import.log
           echo "Headless import/parse passed for Godot $GODOT_VERSION."
           "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd 2>&1 | tee godot-tests.log
-          if grep -nE "SCRIPT ERROR:|Parse Error:" godot-import.log godot-tests.log; then
+          if grep -nE "SCRIPT ERROR:|Parse Error:|^ERROR:.*(Function blocked during in/out signal|flushing queries)" godot-import.log godot-tests.log; then
             echo "::error::Godot reported a script or parse error; refusing a green validation."
             exit 1
           fi
