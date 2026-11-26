@@ -311,7 +311,7 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - **Estado:** em desenvolvimento.
 
 
-| SYS-026 | Plataformas unidirecionais | Em andamento | Componente `OneWayPlatform` em implementação baseado em `PlatformBlock`/`CollisionShape2D.one_way_collision`; testes de passagem de baixo para cima e aterrissagem de cima para baixo pendentes |
+| SYS-026 | Plataformas unidirecionais | Em andamento | `OneWayPlatform` estende `PlatformBlock`, configura `one_way_collision=true`, direção `Vector2.DOWN` e margin configurável; testes headless de passagem ascendente e aterrissagem adicionados, aguardando CI |
 
 
 ## SYS-025 — resultado da plataforma móvel (2026-11-26)
@@ -321,3 +321,12 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Docs CI pós-merge `45886997138` SUCCESS.
 - Android Debug Export pós-merge `45886997220` SUCCESS; artifact e hash registrados em `CI_AND_VALIDATION_PIPELINE.md`.
 - Transporte do BOLT por AnimatableBody2D confirmado headless. Não integrado em fase; dimensões/percurso continuam provisórios.
+
+
+## SYS-026 — plataforma unidirecional (2026-11-26)
+
+- Base: main após PR #45, commit `b24c8624a8ed64816d0131070f440a47f525ba47`.
+- Implementação: `OneWayPlatform` reutiliza `PlatformBlock` e configura o sentido de colisão no `CollisionShape2D`; não altera o controller do player.
+- Testes: passagem de baixo para cima e aterrissagem de cima para baixo.
+- Plano: `docs/production/plans/2026-11-26-one-way-platform.md`.
+- **Estado:** aguardando Godot/Docs CI; sem integração em fase.
