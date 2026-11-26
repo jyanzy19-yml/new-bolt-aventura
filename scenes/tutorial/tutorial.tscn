@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/tutorial/tutorial.gd" id="1_tutorial"]
 [ext_resource type="PackedScene" path="res://scenes/world/platform_block.tscn" id="2_block"]
 [ext_resource type="PackedScene" path="res://scenes/player/bolt.tscn" id="3_player"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
+[ext_resource type="PackedScene" path="res://scenes/combat/training_target.tscn" id="5_target"]
 
 [sub_resource type="RectangleShape2D" id="KillShape"]
 size = Vector2(2200, 160)
@@ -38,6 +39,10 @@ position = Vector2(96, -24)
 
 [node name="Hud" parent="." instance=ExtResource("4_hud")]
 unique_name_in_owner = true
+
+[node name="TrainingTarget" parent="." instance=ExtResource("5_target")]
+unique_name_in_owner = true
+position = Vector2(650, -24)
 
 [node name="Messenger" type="Node2D" parent="."]
 unique_name_in_owner = true
