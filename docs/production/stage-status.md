@@ -1,9 +1,12 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Último merge de gameplay:** PR #34 integrada por squash em `c10ca6944bf0047abe694b7c429270a256cfff96`. **Última regressão integrada:** PR #35, teste de contato físico do campo energético, merge `e1f66cec92dae678dacfc6d35eb6a1abb3cad811`.  
-**Branch de trabalho:** `ci/android-debug-export` — pipeline de APK Android debug em validação.  
-**Última entrega integrada:** W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente da campanha (PR #34).  
+**Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente.  
+**Última regressão de gameplay integrada:** PR #37 — contato físico do coletável, merge `39b6db8298542c5057c06f509b20d250a888e289`.  
+**Última entrega de infraestrutura integrada:** PR #38 — pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.  
+**Branch de trabalho:** `fix/action-buffer-lifecycle-clear-v2` — regressão de limpeza do ActionBuffer no ciclo de vida, aguardando CI.  
+**Responsável atual:** ChatGPT, único escritor ativo conforme decisão vigente do usuário.  
+**Estado do Gate 1:** EM ANDAMENTO — W1-L1/W1-L2 seguem blockouts; APK debug foi exportado em CI, mas instalação e validação Android física continuam pendentes.  
 **CI pré-merge PR #34:** Godot run `45872508689` SUCCESS — Godot 4.7.2, 69 testes, 439 verificações, 0 falhas; Docs run `45872508675` SUCCESS.  
 **CI pós-merge PR #34:** Godot run `45872656738` SUCCESS — 69 testes, 439 verificações, 0 falhas; Docs run `45872656798` SUCCESS. **PR #35:** Godot CI pré/pós-merge SUCCESS — 69 testes, 439 verificações, 0 falhas (`45873118202`, `45873234656`). Docs CI da sincronização anterior `45872828901` SUCCESS.  
 **Responsável atual:** ChatGPT, como único escritor ativo conforme a diretriz vigente do usuário.  
@@ -14,7 +17,7 @@
 | Área | Estado | Evidência e limite |
 |---|---|---|
 | Projeto Godot | Implementado | `project.godot`, Godot 4.7.2 fixado em `.godot-version` |
-| Android/paisagem | Configurado | Preset Android, orientação sensor landscape e política imersiva ADR-0003; exportação não executada |
+| Android/paisagem | Configurado | Preset Android, orientação sensor landscape e política imersiva ADR-0003; APK debug exportado e assinatura verificada em CI; instalação física pendente |
 | Inicialização/menu | Implementado parcialmente | Boot e menu com Nova Jornada/Continuar; retomada mapeia W1-L1 e W1-L2 quando a cena existe. CI pré e pós-merge da PR #34 passou; validação visual/Android pendente |
 | SceneFlow/loading | Implementado parcialmente | Carregamento threaded, bloqueio de transições concorrentes e sinais; headless |
 | Player/movimento | Implementado parcialmente | Corrida, salto variável, pulo duplo provisório, coyote, buffer e dash; parâmetros provisórios |
@@ -32,9 +35,10 @@
 - **Godot CI Run #45:** [SUCCESS](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45808858828), commit da PR #3 `373d5170362ded16d7054aeacf3daeb6b649d751`. O job Godot e as etapas de importação condicional/análise de scripts concluíram com sucesso.
 - **Docs CI Run #133:** [SUCCESS](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45808858862), commit da PR #3.
 - **Suíte anterior:** Godot CI #36 passou com 42 testes, 171 verificações e 0 falhas; essa evidência é anterior ao hardening PR #3 e não deve ser atribuída à Run #45 sem log que confirme execução do runner.
-- Validação máxima comprovada: **L2 — Godot/headless via GitHub Actions**.
+- Validação máxima comprovada: **G3 — exportação APK debug via GitHub Actions**, além de Godot/headless (L2).
 - Godot local/editor gráfico/emulador: **NÃO EXECUTADO** nesta rodada.
-- Exportação APK/instalação Android/toque físico/barras/FPS/memória: **NÃO EXECUTADO**.
+- Exportação APK: **EXECUTADA** no run `45879045098`, assinatura v2/v3 verificada, artifact e SHA-256 registrados.
+- Instalação Android, cold start, toque físico, barras/safe area em aparelho, FPS e memória: **NÃO EXECUTADOS**.
 
 ## Etapas e colaboração
 
@@ -50,6 +54,10 @@ Um único escritor por vez. Por decisão do usuário, ChatGPT conduz sozinho as 
 ## Pull requests
 
 - [PR #35](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/35): MERGED — substitui chamada direta do handler por teste real de contato físico da `Area2D`; Godot CI pré/pós-merge: 69 testes/439 verificações/0 falhas.
+- [PR #36](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/36): MERGED — feedback de ativação do checkpoint W1-L2; CI pré/pós-merge SUCCESS.
+- [PR #37](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/37): MERGED — regressão física isolada do coletável e filtro de erro de física no CI.
+- [PR #38](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/38): MERGED — pipeline Android debug; Godot, Docs e export SUCCESS, artifact publicado.
+- [PR #39](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/39): OPEN — limpeza do ActionBuffer em interrupções do ciclo de vida Android; aguardando CI.
 - [PR #34](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/34): MERGED — W1-L2 Rede Interrompida, campo energético cíclico e progressão W1-L1→W1-L2; Godot CI pré-merge 69 testes/439 verificações/0 falhas; Docs CI SUCCESS.
 - [PR #33](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/33): MERGED — expansão da diretriz de produção e correção do coletável de vida.
 
@@ -331,8 +339,8 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 | 21 | Interface e UX | EM DESENVOLVIMENTO | Menu, HUD, pausa e controles touch parciais; configurações e validação visual/Android pendentes |
 | 22 | Arte e efeitos visuais | EM DESENVOLVIMENTO | Placeholders geométricos e feedback básico; arte final e pipeline de assets pendentes |
 | 23 | Áudio e apresentação | NÃO INICIADA | Música, SFX, buses e opções de áudio não integrados |
-| 24 | Android e touchscreen | EM DESENVOLVIMENTO | Preset Android e pipeline de export debug em validação; APK ainda não confirmado e dispositivo físico não validado |
-| 25 | Otimização e garantia de qualidade | EM DESENVOLVIMENTO | CI headless e regressões; pipeline de export Android em validação; profiling CPU/GPU/memória e QA físico pendentes |
+| 24 | Android e touchscreen | EM DESENVOLVIMENTO | Preset e pipeline Android debug integrados; APK exportado/assinado/verificado em CI; instalação, touch, safe area e lifecycle físico pendentes |
+| 25 | Otimização e garantia de qualidade | EM DESENVOLVIMENTO | Godot headless, regressões e export Android automatizado; profiling CPU/GPU/memória, sessões longas e QA físico pendentes |
 | 26 | Polimento e consolidação final | NÃO INICIADA | Produto ainda é protótipo técnico/blockout, sem campanha completa ou release candidate |
 
 **Regra de interpretação:** nenhuma etapa foi marcada como CONCLUÍDA neste baseline. “EM DESENVOLVIMENTO” indica existência de implementação parcial, não aprovação final. O status deve ser atualizado somente com evidência do branch/commit atual.
@@ -368,3 +376,20 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Pipeline usa Godot/editor templates pareados, JDK 17, Android SDK, chave debug efêmera, testes headless e verificação de assinatura/hash.
 - **Estado:** implementação na branch; execução e artefato ainda pendentes.
 - Plano: [android-debug-export-pipeline](plans/2026-11-26-android-debug-export-pipeline.md).
+
+
+### Pós-merge PR #38 — exportação Android debug
+
+- Merge commit: `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.
+- Godot Validation `45879045282` SUCCESS; Docs Validation `45879045081` SUCCESS; Android Debug Export `45879045098` SUCCESS.
+- Artefato publicado: `bolt-aventura-android-debug-5be706c042fceaa66dadf2509ffafd0833ad3617`, 28.194.385 bytes.
+- Log confirma Godot 4.7.2, assinatura APK v2/v3 válida, package ID provisório `com.example.boltaventura`, SHA-256 `acbacb86afeb767e293ba357d6749db4bdde55c2d78c05f90779dafc5f438fab`.
+- A execução de export ocorreu no commit da PR `500f29299a869913664c58331db11a45d4e4dbee`; o merge incorporou o workflow. Não houve instalação ou teste físico do APK.
+
+### Unidade em validação — ActionBuffer e ciclo de vida Android
+
+- Branch: `fix/action-buffer-lifecycle-clear-v2`, baseada no merge PR #38.
+- Achado: edges de input pendentes não eram explicitamente limpos pelo próprio `ActionBuffer` em pausa/suspensão/perda de foco.
+- Implementação: limpar buffer nas notificações de ciclo de vida; testes cobrem perda de foco e suspensão.
+- Plano: [action-buffer-lifecycle-clear](plans/2026-11-26-action-buffer-lifecycle-clear.md).
+- **Estado:** implementação escrita; aguardando Godot CI e Docs CI. Não validado em Android físico.

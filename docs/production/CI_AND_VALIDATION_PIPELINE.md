@@ -2,54 +2,51 @@
 
 ## Estado atual
 
-- docs-validation.yml valida metadados Claude, links Markdown e controles documentais.
-- godot-validation.yml prepara importação/parse headless após project.godot existir.
-- Sem project.godot, o workflow Godot registra NOT APPLICABLE; isso não é teste de engine nem resultado PASS.
-- A Etapa 0 deve detectar a versão estável Godot 4.x realmente usada e registrá-la em .godot-version.
-- O workflow `.github/workflows/android-debug-export.yml` está sendo introduzido para exportar APK debug com templates Godot correspondentes, JDK 17 e Android SDK. A primeira execução ainda precisa confirmar o pipeline; isso não equivale a instalação ou teste físico.
+- `docs-validation.yml` valida metadados, links Markdown e controles documentais.
+- `godot-validation.yml` baixa a versão fixada, importa o projeto e executa `tests/test_runner.gd`; erros de parse/runtime relevantes também são verificados nos logs.
+- `android-debug-export.yml` exporta APK debug usando Godot e templates pareados, JDK 17 e Android SDK com componentes fixados.
+- A pipeline Android foi integrada pela PR #38 em `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.
+- Execução comprovada: Android Debug Export `45879045098` SUCCESS; Godot Validation `45879045282` SUCCESS; Docs Validation `45879045081` SUCCESS.
+- Artifact `bolt-aventura-android-debug-5be706c042fceaa66dadf2509ffafd0833ad3617`, 28.194.385 bytes. Godot 4.7.2; assinatura APK v2/v3 verificada; package ID `com.example.boltaventura` (placeholder); SHA-256 `acbacb86afeb767e293ba357d6749db4bdde55c2d78c05f90779dafc5f438fab`.
+- O artifact é debug/teste, retenção temporária de 14 dias. Não é release nem distribuição. Nenhuma credencial de release foi criada.
 
 ## Portões
 
 | Gate | Verificação | Evidência |
 |---|---|---|
 | D0 | Documentação, links e metadados | Log documental |
-| G0 | Projeto e versão fixada | project.godot e .godot-version |
+| G0 | Projeto e versão fixada | `project.godot` e `.godot-version` |
 | G1 | Importação/parse headless | Log Godot, versão e commit |
 | G2 | Testes GDScript | Runner, casos e resultados |
-| G3 | Export Android debug | APK, preset, assinatura debug e proveniência SHA-256 |
+| G3 | Export Android debug | APK, preset, assinatura debug, package ID e SHA-256 |
 | G4 | Instalação e fluxo funcional | Aparelho, build e evidências |
 | G5 | Performance/sessão longa | Frame time, p95/p99, memória, duração e aparelho |
 
 ## Workflow Godot
 
-1. Procura project.godot.
-2. Se ausente, registra NOT APPLICABLE e não baixa engine.
-3. Se presente, exige .godot-version no formato 4.x.y.
-4. Baixa a distribuição oficial correspondente e confere a versão.
-5. Executa importação headless e parse do projeto.
-6. Não exporta APK, não assina, não instala e não afirma que gameplay está correto.
+1. Confirma `project.godot` e `.godot-version`.
+2. Baixa a distribuição oficial correspondente.
+3. Executa importação headless e `tests/test_runner.gd`.
+4. Falha em parse/runtime errors monitorados e testes com exit code não zero.
+5. Não exporta APK, não instala e não prova renderização, toque físico ou performance.
 
-## Próximas ampliações
+## Workflow Android debug
 
-- Adotar runner GDScript somente após escolher e fixar versão/licença.
-- Adicionar testes unitários, integração e validação de referências/IDs.
-- Exportar Android debug quando preset, templates e SDK estiverem disponíveis.
-- Manter assinatura release fora de logs e do repositório.
-- Tratar teste em dispositivo físico como etapa separada.
+1. Instala JDK 17 e Android SDK com Platform 35, Build Tools 35.0.1, NDK r28b e CMake fixados.
+2. Baixa Godot e templates da versão exata de `.godot-version`.
+3. Executa importação e suíte headless antes de exportar.
+4. Gera keystore de debug efêmera no runner.
+5. Exporta pelo preset `Android (debug/teste)`.
+6. Verifica assinatura, extrai package ID, calcula SHA-256 e publica artifact temporário.
+
+## Limites de validação
+
+- CI verde comprova somente as etapas executadas.
+- APK exportado e assinado não significa instalado ou inicializado.
+- Ainda não foram comprovados em aparelho: cold start, controles touch/multitouch, safe area, barras Android, suspensão/retomada, estabilidade prolongada, FPS, CPU/GPU ou memória.
+- Package ID `com.example.boltaventura` permanece placeholder; não usar para distribuição final.
+- A chave de debug é efêmera e não deve ser reutilizada como credencial de release.
 
 ## Integridade
 
-Workflow verde comprova somente os passos executados. NOT APPLICABLE não significa PASSOU. Headless não prova renderização, toque, barras Android, FPS ou memória. APK exportado não significa instalado/testado. Registrar commit, versão, comando, resultado e limitações em cada handoff.
-
-
-## Pipeline Android debug — em validação
-
-- Workflow: `.github/workflows/android-debug-export.yml`.
-- Executa em PRs/pushes relevantes e por `workflow_dispatch`.
-- Usa `.godot-version` para baixar editor e export templates da mesma versão.
-- Usa JDK 17 e Android SDK (Platform 35 / Build Tools 35.0.1, NDK e CMake fixados no workflow).
-- Usa chave de debug efêmera gerada no runner e variáveis `GODOT_ANDROID_KEYSTORE_DEBUG_*`; nenhum segredo de release é criado ou armazenado.
-- Executa importação e suíte headless antes do export; verifica assinatura, package ID e SHA-256.
-- O artefato é somente debug/teste, com retenção temporária de 14 dias. O package ID continua `com.example.boltaventura`, placeholder não aprovado para distribuição.
-- **Estado desta branch:** pipeline escrita; aguardar execução na PR. Não afirmar que APK foi gerado até existir run verde e artefato disponível.
-- Mesmo com export bem-sucedido, instalação, inicialização, controles touch, safe area, lifecycle e performance continuam dependentes de teste no Android físico.
+Registrar commit, versão, workflow, run, artifact, assinatura, package ID, hash e limitações. Não generalizar resultados de um aparelho para outros. Separar L2 headless, G3 export, G4 dispositivo e G5 sessão prolongada.
