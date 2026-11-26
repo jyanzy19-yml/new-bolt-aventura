@@ -193,9 +193,9 @@ O código atual contém Dash (Actions.DASH, estado DASHING, touch e testes), enq
 - Atualizados os snapshots de colaboração, continuidade, status e handoff para HEAD `1e5294cf112c014c21e43c51b4c8e797beceb9b6` e PR #10.
 - Atualizada a referência volátil de divergência da PR #1 em `CLAUDE.md`; não rebasear nem mesclar PR #1 nesta missão.
 
-### 8.3 Dash — decisão não inferida
+### 8.3 Dash — decisão posterior e canônica
 
-A implementação real inclui `dash` no Input Map, `DASHING` em `BoltPlayer`, `Actions.DASH` no buffer e suporte em controles/testes. A diretiva não integrada da PR #1 exclui Dash. Nenhum ADR ou decisão canônica foi demonstrado nesta leitura que resolva essa oposição. **Não houve alteração na mecânica, controles, tuning ou testes de Dash.** A decisão permanece com o usuário.
+A inspeção inicial registrou corretamente o conflito documental, mas a decisão foi resolvida depois pelo usuário em 2026-11-26: **Dash deve permanecer**. O ADR `ADR-001-DASH.md` é a fonte canônica e supera as anotações anteriores de pendência e a exclusão na PR #1. Nenhuma alteração na mecânica, controles, tuning ou testes foi feita nesta auditoria.
 
 ### 8.4 Inspeção técnica e classificação
 
@@ -203,7 +203,7 @@ Arquivos relidos: `project.godot`, `.gitignore`, `export_presets.cfg`, `TouchCon
 
 - **S0:** nenhum defeito confirmado nesta inspeção.
 - **S1:** nenhum defeito confirmado nesta inspeção.
-- **S2:** divergência documental de escopo Dash (decisão pendente); divergência histórica sobre “começar do zero” no protocolo colaborativo (corrigida).
+- **S2:** divergência documental de escopo Dash, resolvida por decisão explícita e ADR-001; divergência histórica sobre “começar do zero” no protocolo colaborativo (corrigida).
 - **S3:** métricas e snapshots de continuidade estavam desatualizados após PR #10 (corrigidos); branch protection da main permanece sem confirmação administrativa nova nesta rodada.
 - Não foi identificado defeito reproduzível de runtime/input na inspeção estática. Não inventar bug a partir de risco não testado.
 
@@ -228,3 +228,11 @@ As correções documentais confirmadas foram implementadas em branch separada. N
 - A implementação existente (Input Map, `Actions.DASH`, estado `DASHING`, controles touch e testes) deve ser preservada. A diretiva ainda não integrada da PR #1 que exclui Dash está superada neste ponto e não pode ser usada para remover a mecânica.
 - Esta decisão não autoriza retuning, redesign, expansão ou alteração de física/controles; essas mudanças continuam exigindo escopo próprio e testes.
 - Nenhum código de gameplay foi alterado para registrar esta decisão.
+
+
+### 8.8 Consistência final após decisão Dash e CI — 2026-11-26
+
+- A decisão explícita do usuário de manter Dash, registrada em `ADR-001-DASH.md`, substitui todas as observações anteriores deste relatório que diziam que a decisão estava pendente. As seções 7.x preservam a cronologia da auditoria; não são instruções atuais.
+- A PR #1 permanece intacta e não integrada. Sua diretiva ainda exclui Dash, mas essa exclusão não tem autoridade para remover a mecânica aprovada.
+- A PR #11 recebeu Docs CI run #157 (ID `45822873097`) com conclusão SUCCESS no HEAD `bfec6e20e767477302801d46a50a637cfd4f30ad`.
+- A aprovação de CI valida a documentação segundo o workflow; não valida gameplay, exportação APK ou Android físico.
