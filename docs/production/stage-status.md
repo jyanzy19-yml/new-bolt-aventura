@@ -1,8 +1,8 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` — HEAD `b2e66d9638d367cce29b266d75f230cb16ed1763` (PR #21 integrada).  
-**Última entrega integrada:** inimigo-base provisório, dano/vida do jogador, invulnerabilidade, respawn, HUD, coletável de cura e feedback visual de impacto (PR #19 e #21).  
+**Branch de integração:** `main` — HEAD `13105c5422b73e2c362bdf3d4ce9eea45c97fc99` (PR #23 integrada).  
+**Última entrega integrada:** correção de layout e integração de checkpoint/queda/respawn W1-L1 (PR #23); feedback de progressão e testes de gatilhos reais em desenvolvimento na branch `feat/w1-l1-progression-feedback`.  
 **CI da PR #21:** Godot run #45849915250 SUCCESS em Godot 4.7.2; 53 testes, 276 verificações, 0 falhas. CI pós-merge da PR #21 deve ser consultado separadamente.  
 **Responsável atual:** ChatGPT, por decisão explícita do usuário; Claude não está no fluxo ativo.  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
@@ -190,3 +190,16 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Teste de integração ampliado para conferir layout, ativação do checkpoint, dano e retorno após queda.
 - A primeira execução Godot CI (`45851338093`) falhou por uma asserção de teste que exigia posição X estática apesar do movimento de patrulha no primeiro tick; a asserção foi corrigida para verificar a faixa válida da patrulha. Aguardar nova execução.
 - Esta alteração corrige o blockout; não representa playtest humano, balanceamento final nem validação Android.
+
+
+## Incremento W1-L1 — feedback de progressão e validação dos gatilhos
+
+- Base confirmada: main `13105c5422b73e2c362bdf3d4ce9eea45c97fc99`; PR #23 pós-merge Godot run `45851700830` SUCCESS e Docs run `45851700746` SUCCESS.
+- HUD recebe notificação temporizada para eventos de progressão, sem polling por frame: ativação do checkpoint e recuperação de vida.
+- W1-L1 conecta o sinal real do coletável ao HUD; a saída continua usando o resultado de trecho existente.
+- Teste de integração foi ampliado para entrar fisicamente nas áreas de checkpoint, queda, coletável e objetivo, em vez de invocar diretamente os handlers de respawn.
+- Geometria mantida após confirmar que `PlatformBlock` usa origem no canto superior esquerdo e que a saída já está dentro do piso final. Nenhuma alteração geométrica especulativa.
+- Branch: `feat/w1-l1-progression-feedback`. Validação CI desta branch pendente.
+- Limites: protótipo visual e valores continuam provisórios; sem playtest humano, APK, instalação, emulador, aparelho Android ou métricas de performance.
+
+- Segurança de respawn: checkpoint reposicionado em x=980 para manter folga além do alcance horizontal máximo do inimigo; teste calcula a distância mínima com base nas formas de colisão reais. CI do SHA final ainda pendente.

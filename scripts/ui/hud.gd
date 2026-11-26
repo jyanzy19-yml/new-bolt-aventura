@@ -11,6 +11,8 @@ const MAIN_MENU_PATH: String = "res://scenes/ui/main_menu.tscn"
 @onready var _result_title: Label = %ResultTitle
 @onready var _again_button: Button = %AgainButton
 @onready var _health_label: Label = %HealthLabel
+@onready var _progress_notification: Label = %ProgressNotification
+@onready var _progress_notification_timer: Timer = %ProgressNotificationTimer
 
 var _restart_path: String = ""
 
@@ -23,6 +25,7 @@ func _ready() -> void:
 	%PauseMenuButton.pressed.connect(_go_to_menu)
 	%ResultMenuButton.pressed.connect(_go_to_menu)
 	_again_button.pressed.connect(_restart)
+	_progress_notification_timer.timeout.connect(_on_progress_notification_timeout)
 
 
 func _exit_tree() -> void:
@@ -55,6 +58,18 @@ func set_paused(paused: bool) -> void:
 	Actions.release_all_game_actions()
 	if paused:
 		_resume_button.grab_focus()
+
+
+func show_progress_notification(message: String) -> void:
+	if message.is_empty() or _result_overlay.visible:
+		return
+	_progress_notification.text = message
+	_progress_notification.visible = true
+	_progress_notification_timer.start()
+
+
+func _on_progress_notification_timeout() -> void:
+	_progress_notification.visible = false
 
 
 func show_result(title: String) -> void:

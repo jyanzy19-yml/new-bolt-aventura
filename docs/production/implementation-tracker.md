@@ -158,3 +158,14 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - `tests/unit/test_campaign_entry.gd`: cobertura de posição do inimigo/objetivo e fluxo checkpoint → dano → queda/respawn.
 - A primeira execução Godot CI (`45851338093`) encontrou uma asserção excessivamente rígida: o inimigo já havia avançado no primeiro tick. Corrigida para verificar o intervalo de patrulha; nova CI pendente.
 - Status W1-L1 permanece **Em andamento**. Não houve playtest humano nem validação Android.
+
+
+## W1-L1 — feedback de progressão e gatilhos de integração (branch `feat/w1-l1-progression-feedback`)
+
+- `Hud.show_progress_notification(message)`: feedback temporizado via Timer one-shot; não adiciona processamento por frame.
+- `CybercoreW1L1`: conecta `BoltHealthPickup.collected` e apresenta mensagens de checkpoint/recuperação.
+- `tests/unit/test_campaign_entry.gd`: exercita os eventos por sobreposição física real para checkpoint, kill zone, pickup e Goal; verifica vida restaurada e overlay de conclusão.
+- A geometria não foi alterada: revisão confirmou que `PlatformBlock` interpreta `position` como canto superior esquerdo e o Goal está dentro do EndFloor. O teste protege essa relação.
+- Status W1-L1 continua **Em andamento**; ainda faltam playtest humano, arte/áudio finais, save/load de campanha e QA Android.
+
+- Checkpoint da W1-L1 agora em x=980; teste verifica folga entre o ponto de respawn e a área de contato do inimigo usando dimensões das CollisionShape2D.

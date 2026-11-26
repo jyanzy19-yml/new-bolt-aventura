@@ -8,6 +8,7 @@ const CAMERA_LIMITS: Rect2i = Rect2i(0, -360, 2200, 620)
 @onready var _spawn: Marker2D = %SpawnPoint
 @onready var _kill_zone: Area2D = %KillZone
 @onready var _checkpoint: BoltCheckpoint = %Checkpoint
+@onready var _health_pickup: BoltHealthPickup = %HealthPickup
 @onready var _goal: Area2D = %Goal
 @onready var _hud: Hud = %Hud
 
@@ -26,6 +27,7 @@ func _ready() -> void:
 	_player.defeated.connect(_on_player_defeated)
 	_kill_zone.body_entered.connect(_on_kill_zone_body_entered)
 	_checkpoint.activated.connect(_on_checkpoint_activated)
+	_health_pickup.collected.connect(_on_health_pickup_collected)
 	_goal.body_entered.connect(_on_goal_body_entered)
 	_respawn_position = _spawn.global_position
 	_player.respawn(_respawn_position)
@@ -37,6 +39,11 @@ func _on_player_defeated() -> void:
 
 func _on_checkpoint_activated(_checkpoint_id: StringName, respawn_position: Vector2) -> void:
 	_respawn_position = respawn_position
+	_hud.show_progress_notification("CHECKPOINT ATIVADO")
+
+
+func _on_health_pickup_collected(amount: int) -> void:
+	_hud.show_progress_notification("RECUPERAÇÃO +%d" % amount)
 
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
