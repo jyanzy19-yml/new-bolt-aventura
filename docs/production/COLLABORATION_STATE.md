@@ -2,17 +2,17 @@
 
 ## Snapshot operacional vigente — 2026-11-26
 
-- **Main HEAD:** `c64ea0ed5c97d538f665bf2bc0c6fcda754c5c5e` (PR #51 integrada; mapa arquitetural atual).
+- **Main HEAD:** `6f8e9b8fbaaab9c44247050e5f86e4442bd2622f` (PR #52 integrada; mapa arquitetural revisado e sincronizado).
 - **Última correção de gameplay:** PR #47, `TimedEnergyGate.initial_active=false`; CI pós-merge Godot 88 testes/553 verificações/0 falhas, Docs SUCCESS e Android Debug Export SUCCESS.
 - **Último componente de plataforma:** PR #46, `OneWayPlatform`; CI pós-merge Godot 87 testes/548 verificações/0 falhas, Docs e Android Export SUCCESS.
 - **Última entrega de conteúdo:** PR #34, W1-L2 em blockout e progressão W1-L1→W1-L2.
 - **Escritor ativo:** ChatGPT como único escritor, por decisão explícita do usuário; Claude permanece inativo para escrita concorrente.
 - **Plano operacional:** 26 etapas em `docs/production/stage-status.md`; matriz integrada em `docs/production/26-stage-traceability-matrix.md`; registro GAP-001…GAP-022 integrado em `docs/production/requirements-gap-register.md`.
-- **Etapas atuais:** Etapas 01 e 02 CONCLUÍDAS; Etapa 03 EM DESENVOLVIMENTO (revisão do mapa arquitetural integrado pela PR #51); Gate 1 continua em andamento. W1-L1 e W1-L2 são blockouts.
+- **Etapas atuais:** Etapas 01–03 CONCLUÍDAS; Etapa 04 EM DESENVOLVIMENTO (hardening dos sistemas centrais); Gate 1 continua em andamento. W1-L1 e W1-L2 são blockouts.
 - **APK pós-merge PR #47:** artifact `bolt-aventura-android-debug-2636226c4027625649e66c51ff64d7e2e56168a6`, 28.461.057 bytes, SHA-256 `c3ca03958eecf120f1a9f5f1e4fae3851fb7560bca303c8eb5a930f987b58123`, assinatura v2/v3 válida; package ID `com.example.boltaventura` é placeholder; APK não instalado em aparelho.
 - **PR #1:** permanece separada e não deve ser integrada/rebaseada automaticamente.
 - **Dash:** decisão aprovada e vigente: deve permanecer; ver `docs/production/ADR-001-DASH.md`.
-- **Próxima unidade:** concluir revisão do grafo de dependências, sinais e lifecycle da Etapa 03; em seguida escolher a próxima unidade técnica da vertical slice.
+- **Próxima unidade:** auditar Boot, SceneFlow, SaveSystem, CampaignProgress e LoadingOverlay; corrigir edge cases confirmados e adicionar regressões.
 
 
 **Fonte única para o próximo turno.** Antes de editar, confirme este arquivo contra o HEAD, commits, branches e PRs reais do GitHub.

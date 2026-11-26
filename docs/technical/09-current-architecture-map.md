@@ -145,11 +145,14 @@ W1-L1 e W1-L2 possuem scripts de composição de nível próprios. Eles conectam
 - PR #47 APK debug: 28.461.057 bytes, SHA-256 c3ca03958eecf120f1a9f5f1e4fae3851fb7560bca303c8eb5a930f987b58123, assinatura v2/v3 válida.
 - O APK não foi instalado em aparelho. Não há evidência de renderização, touch físico, safe area real, FPS, memória, temperatura ou lifecycle Android.
 
-## 8. Critério de avanço da Etapa 03
+## 8. Resultado da auditoria arquitetural estática — Etapa 03
 
-O mapa atual descreve ownership e dependências principais. A Etapa 03 só pode ser concluída depois de:
-- validar o mapa contra todos os autoloads, cenas e sinais do código;
-- documentar o grafo de dependências entre domínios e confirmar ausência de ciclos;
-- definir contratos de dialogue/audio/AI/inventory somente quando essas features entrarem no escopo;
-- confirmar estratégia de testes e impacto Android para qualquer reorganização;
-- não fazer migração de pastas/módulos apenas por estética.
+- Os quatro autoloads e suas dependências foram conferidos contra project.godot e scripts reais.
+- Os 30 scripts de runtime e 19 cenas foram inventariados/revistos; CI Godot valida compilação dos scripts e carregamento/instanciação das cenas.
+- Fluxos de boot, menu, abertura/tutorial, W1-L1/W1-L2, transições, loading, save/progress, player, combate, HUD, touch e componentes de plataforma foram mapeados.
+- Não foi identificado ciclo entre autoloads/serviços: CampaignProgress depende de SaveSystem; LoadingOverlay observa SceneFlow; SceneFlow depende apenas do contrato Actions; SaveSystem permanece isolado.
+- Um acoplamento de tipo local BoltPlayer↔BoltCombat foi identificado e documentado. É uma composição pai/filho de owner único, sem ciclo de runtime/estado; permanece como exceção consciente. Reavaliar se Combat for extraído/reutilizado ou houver múltiplos owners.
+- Contratos de Dialogue, Audio, Boss, Inventory e IA avançada permanecem como requisitos futuros; não criar abstrações vazias antes de consumidores reais.
+- Nenhuma migração de pastas ou reescrita foi necessária.
+
+**Etapa 03: CONCLUÍDA — baseline arquitetural documentado, com uma exceção local explicitamente registrada.**
