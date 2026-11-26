@@ -93,6 +93,13 @@ jobs:
 
           run_checked godot-tests "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd
 
+          echo "Running 20 real project boots (300 frames each, fixed 60 FPS)."
+          for run in $(seq 1 20); do
+            echo "Boot smoke ${run}/20"
+            run_checked "boot-${run}" "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300
+          done
+          echo "Boot smoke passed: 20/20 process launches."
+
           # Cold-process mutation matrix. The test runner above has already loaded scenes;
           # only a fresh project boot can prove the original startup failure is detected.
           cp scripts/ui/main_menu.gd main-menu-fixed.gd
@@ -179,10 +186,5 @@ jobs:
           echo "Mutation matrix passed: the original combined implementation was detected."
 
 
-          echo "Running 20 real project boots (300 frames each, fixed 60 FPS)."
-          for run in $(seq 1 20); do
-            echo "Boot smoke ${run}/20"
-            run_checked "boot-${run}" "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300
-          done
-          echo "Boot smoke passed: 20/20 process launches."
+
           echo "This does not prove Android export, rendering, touch hardware or physical-device performance."
