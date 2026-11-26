@@ -1,15 +1,15 @@
 ## Snapshot vigente — 2026-11-26
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
-- **Main HEAD:** `09afde26cc2bdb1126202dbfd413fa317f2a3e9d`, após merge squash da PR #33.
-- **PR #33:** MERGED. Corrige mutação de `Area2D.monitoring` no coletável e integra expansão de documentação de produção. CI da PR: Godot 4.7.2, 66 testes/404 verificações/0 falhas; Docs SUCCESS.
+- **Main HEAD:** `c10ca6944bf0047abe694b7c429270a256cfff96`, após merge squash da PR #34.
+- **PR #33:** MERGED. Expansão de documentação e correção do coletável; CI Godot 66 testes/404 verificações/0 falhas e Docs SUCCESS.
+- **PR #34:** MERGED. Adiciona W1-L2 em blockout, `TimedEnergyGate`, checkpoint e progressão persistente W1-L1→W1-L2.
+- **CI pré-merge PR #34:** Godot 4.7.2, 69 testes/439 verificações/0 falhas (`45872508689`); Docs SUCCESS (`45872508675`).
+- **CI pós-merge:** Docs SUCCESS (`45872656798`); Godot run `45872656738` ainda em andamento nesta fotografia.
 - **Escritor ativo:** ChatGPT, seguindo a diretriz vigente do usuário. Não iniciar trabalho concorrente de Claude.
-- **Branch de trabalho:** `feat/w1-l2-energy-network-progression`, criada a partir do HEAD acima.
-- **Unidade atual:** ligar conclusão W1-L1 à W1-L2; avançar o ponteiro de retomada; permitir Continuar em fases implementadas; criar o blockout W1-L2 com campo energético cíclico.
-- **Implementação nesta branch:** `TimedEnergyGate`, cena `cybercore_w1_l2.tscn`, script de fase, botão PRÓXIMA FASE no resultado da W1-L1, mapa de retomada W1-L1/W1-L2 e testes de progressão/ciclo.
-- **Validação desta branch:** ainda NÃO EXECUTADA; aguardar workflows após abertura da PR. Não declarar runtime Android validado.
+- **Unidade integrada:** `TimedEnergyGate`, cena/script `cybercore_w1_l2`, botão PRÓXIMA FASE na conclusão W1-L1, destino salvo W1-L2, retomada de W1-L1/W1-L2 e regressões.
 - **Limites:** W1-L2 é blockout/protótipo de mecânica, não conteúdo final; ciclo, dano e percurso precisam de playtest. Sem APK, emulador, Android físico, touch físico ou medição de desempenho.
-- **Próximo passo:** revisar todos os diffs e recursos, abrir PR, corrigir falhas de CI; após CI verde, revisar pós-merge e atualizar os status com o SHA real.
+- **Próximo passo:** confirmar Godot CI pós-merge; então escolher a próxima unidade da campanha com base no estado real. Manter validação Android física como pendente.
 
 ---
 
