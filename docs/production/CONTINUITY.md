@@ -6,8 +6,8 @@
 - **Input:** ATTACK agora é bufferizado; botão touch TIRO adicionado ao HUD.
 - **Tutorial:** fluxo passa a mover → saltar → Dash → acertar alvo com TIRO → Cybercore.
 - **Limites:** alvo é apenas treinamento, não inimigo de campanha. Valores de cadência, dano, velocidade e alcance são provisórios. Tríplice Prisma, Laser Nexo, seleção de armas, IA inimiga e dano ao jogador ainda não implementados.
-- **Testes:** regressão de ActionBuffer ATTACK, componente de vida/projétil e fluxo real de disparo no tutorial; CI pendente.
-- **Próxima ação:** executar Godot 4.7.2 CI, corrigir regressões e revisar o diff antes da integração.
+- **Testes:** regressão de ActionBuffer ATTACK, componente de vida/projétil e fluxo real de disparo no tutorial; Godot CI #58 (`45846440754`) SUCCESS — Godot 4.7.2, 47 testes / 231 verificações / 0 falhas. Docs CI #179 (`45846440753`) SUCCESS.
+- **Próxima ação:** revisar o diff final e integrar a PR #17 após confirmar os checks; depois avançar para o primeiro inimigo-base e completar a lição de ataque.
 
 ---
 
