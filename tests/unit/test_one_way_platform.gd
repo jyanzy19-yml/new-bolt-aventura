@@ -19,7 +19,7 @@ func test_one_way_platform_configures_upward_pass_through() -> bool:
 	var platform: OneWayPlatform = packed.instantiate() as OneWayPlatform
 	tree.root.add_child(platform)
 	await tree.process_frame
-	var shape: CollisionShape2D = platform.get_node("CollisionShape2D") as CollisionShape2D
+	var shape: CollisionShape2D = platform.get_child(0) as CollisionShape2D
 	check(shape != null, "shape de colisão presente")
 	if shape != null:
 		check(shape.one_way_collision, "colisão unidirecional habilitada")
@@ -55,7 +55,9 @@ func test_character_passes_from_below_and_lands_from_above() -> bool:
 	tree.root.add_child(rising_player)
 	await tree.process_frame
 	rising_player.velocity = Vector2(0.0, -600.0)
+	Input.action_press(Actions.JUMP)
 	await _step_physics(8)
+	Input.action_release(Actions.JUMP)
 	check(rising_player.position.y < 120.0, "BOLT atravessa a plataforma ao subir por baixo")
 	check(not rising_player.is_on_floor(), "passagem ascendente não é tratada como aterrissagem")
 
