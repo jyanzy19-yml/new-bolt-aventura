@@ -274,3 +274,12 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Achados prioritários: documentos raiz descrevem incorretamente a existência do projeto; PR #1 está aberta/não mergeável e precisa de rebase/reconciliação; conflito de escopo sobre Dash; main sem proteção de branch confirmada.
 - Nenhum código de gameplay foi alterado nesta auditoria. Não foram executados Godot local, APK, emulador ou Android físico.
 - Próxima ação de Claude: conferir a main atual, ler a auditoria, continuar o projeto existente sem recriá-lo e evitar alterações de Dash até reconciliação da fonte canônica.
+
+
+## 16. Decisão canônica sobre Dash — 2026-11-26
+
+- O usuário confirmou explicitamente: **Dash deve permanecer no BOLT · AVENTURA**.
+- Decisão formal registrada em [ADR-001-DASH.md](ADR-001-DASH.md). Esta decisão prevalece sobre a exclusão de Dash na diretiva ainda não integrada da PR #1.
+- Preservar a implementação existente em Input Map, `BoltPlayer`, controles touch e testes. Não remover. Alterações de física, tuning, cooldown, controles ou balanceamento exigem tarefa própria.
+- A formalização foi exclusivamente documental; nenhum código de gameplay foi alterado.
+- Próximo passo: validar a atualização documental na PR #11 e, após integração/aceite, entregar a Etapa 2 a Claude com este ADR como fonte canônica.
