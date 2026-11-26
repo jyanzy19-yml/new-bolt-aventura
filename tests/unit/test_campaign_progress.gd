@@ -158,5 +158,11 @@ func test_progress_schema_requires_exact_integer_type() -> bool:
 	state = progress.call("load_state")
 	check_eq(state.get("current_level_id"), "", "schema textual não é convertido para inteiro")
 	check_eq(progress.get("last_error"), "unsupported_progress_schema", "schema textual informa incompatibilidade")
+
+	raw_state["schema_version"] = 1.0
+	check(SaveSystem.save_payload({"campaign_progress": raw_state}), "grava fixture com schema numericamente integral")
+	state = progress.call("load_state")
+	check_eq(state.get("current_level_id"), "W1-L1", "aceita número float exatamente integral")
+	check_eq(progress.get("last_error"), "", "representação numérica integral não gera erro")
 	_cleanup()
 	return true
