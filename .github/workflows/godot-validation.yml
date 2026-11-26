@@ -33,7 +33,7 @@ permissions:
 jobs:
   godot:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -42,8 +42,8 @@ jobs:
         run: |
           set -euo pipefail
           if [[ ! -f project.godot ]]; then
-            echo "::notice::NOT APPLICABLE — project.godot is absent; no engine test was performed."
-            exit 0
+            echo "::error::project.godot is absent; Godot validation cannot be skipped."
+            exit 1
           fi
           if [[ ! -f .godot-version ]]; then
             echo "::error::project.godot exists but .godot-version is missing."
@@ -63,12 +63,37 @@ jobs:
           chmod +x "$GODOT_BIN"
           ACTUAL_VERSION="$("$GODOT_BIN" --headless --version)"
           [[ "$ACTUAL_VERSION" == "$GODOT_VERSION".* ]]
+
+          run_checked() {
+            local label="$1"
+            shift
+            local log="${label}.log"
+            set +e
+            "$@" 2>&1 | tee "$log"
+            local command_status=${PIPESTATUS[0]}
+            set -e
+            if [[ $command_status -ne 0 ]]; then
+              echo "::error::${label} exited with status $command_status."
+              return 1
+            fi
+            if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' "$log" | grep -vF 'SceneFlow: cena inexistente: res://tests/fixtures/scene_flow_missing.tscn'; then
+              echo "::error::Unexpected Godot error in ${label}; see ${log}."
+              return 1
+            fi
+          }
+
           "$GODOT_BIN" --headless --editor --path . --import --quit 2>&1 | tee godot-import.log
-          echo "Headless import/parse passed for Godot $GODOT_VERSION."
-          "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd 2>&1 | tee godot-tests.log
-          if grep -nE "SCRIPT ERROR:|Parse Error:|^ERROR:.*(Function blocked during in/out signal|flushing queries)" godot-import.log godot-tests.log; then
-            echo "::error::Godot reported a script or parse error; refusing a green validation."
+          if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' godot-import.log; then
+            echo "::error::Unexpected import/parse error."
             exit 1
           fi
-          echo "Headless project test suite passed."
+
+          run_checked godot-tests "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd
+
+          echo "Running 20 real project boots (300 frames each, fixed 60 FPS)."
+          for run in $(seq 1 20); do
+            echo "Boot smoke ${run}/20"
+            run_checked "boot-${run}" "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300
+          done
+          echo "Boot smoke passed: 20/20 process launches."
           echo "This does not prove Android export, rendering, touch hardware or physical-device performance."
