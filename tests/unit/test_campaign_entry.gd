@@ -85,6 +85,11 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	check_eq(enemy.global_position.y, -19.0, "inimigo começa apoiado no piso intermediário")
 	check(enemy.global_position.x >= 800.0 and enemy.global_position.x <= 900.0, "inimigo patrulha dentro dos limites seguros do piso")
 	check_eq(enemy.patrol_distance, 50.0, "patrulha fica limitada ao trecho seguro da plataforma")
+	var player_shape: RectangleShape2D = (level_player.get_node("CollisionShape2D") as CollisionShape2D).shape as RectangleShape2D
+	var enemy_contact_shape: RectangleShape2D = (enemy.get_node("ContactArea/CollisionShape2D") as CollisionShape2D).shape as RectangleShape2D
+	var enemy_right_limit: float = enemy.global_position.x + enemy.patrol_distance
+	var respawn_clearance: float = player_shape.size.x * 0.5 + enemy_contact_shape.size.x * 0.5
+	check(checkpoint.global_position.x - enemy_right_limit > respawn_clearance, "respawn do checkpoint fica fora do alcance horizontal do contato inimigo")
 	check(goal.global_position.x >= end_floor.global_position.x and goal.global_position.x <= end_floor.global_position.x + end_floor.size.x, "objetivo está contido no piso final")
 	check(level_player.global_position.distance_to(Vector2(96.0, -24.0)) < 2.0, "BOLT inicia no ponto de entrada da fase")
 
