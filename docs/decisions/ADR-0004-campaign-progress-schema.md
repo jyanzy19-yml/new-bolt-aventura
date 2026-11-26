@@ -26,4 +26,8 @@ O repositório já possui um armazenamento genérico versionado (SaveSystem), ma
 - Checkpoint e conclusão sobrevivem ao encerramento/reabertura do app quando o sistema de arquivos do dispositivo preserva o arquivo.
 - IDs de nível/checkpoint tornam-se contrato persistente; renomeações exigem migração.
 - Inventário, fragmentos, opções, moedas e outros domínios não são definidos por este ADR.
-- A integração atual cobre somente W1-L1; não prova comportamento Android físico, restauração após encerramento forçado ou migrações futuras.\n\n## Emenda de escopo — PR #34 / ADR-0006\n\nA decisão original foi escrita quando apenas W1-L1 existia. A extensão para W1-L2 foi integrada pela PR #34 e está formalizada em [ADR-0006](ADR-0006-campaign-progress-w1-l2.md). O schema v1 permanece inalterado; W1-L1 conclui com next_level_id W1-L2, W1-L2 tem checkpoint próprio e sua conclusão mantém W1-L2 como destino atual até existir uma próxima fase real. As frases históricas deste ADR que dizem que W1-L2 não existe ou que a integração cobre somente W1-L1 descrevem o estado original, não o estado atual.\n
+- A integração atual cobre somente W1-L1; não prova comportamento Android físico, restauração após encerramento forçado ou migrações futuras.
+
+## Emenda de escopo — PR #34 / ADR-0006
+
+A decisão original foi escrita quando apenas W1-L1 existia. A extensão para W1-L2 foi integrada pela PR #34 e está formalizada em [ADR-0006](ADR-0006-campaign-progress-w1-l2.md). O schema v1 permanece inalterado; W1-L1 conclui com next_level_id W1-L2, W1-L2 tem checkpoint próprio e sua conclusão mantém W1-L2 como destino atual até existir uma próxima fase real. As frases históricas deste ADR que dizem que W1-L2 não existe ou que a integração cobre somente W1-L1 descrevem o estado original, não o estado atual.
