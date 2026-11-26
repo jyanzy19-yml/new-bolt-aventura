@@ -1,7 +1,9 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` (PR #11 integrada por squash em `6f97ffc97219bb541e9f36a1c140331c2c621403`; HEAD deve ser confirmado novamente ao iniciar)  
+**Branch de integração:** `main` — base `8c502efaee16a47a31303c77d0efbbd4c847a5e8`.  
+**Branch de trabalho atual:** `feat/checkpoint-respawn-system` — implementação em revisão, CI pendente.  
+**Responsável atual:** ChatGPT, por decisão explícita do usuário; Claude não está no fluxo ativo.  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
 
 ## Estado executável observado
@@ -19,7 +21,7 @@
 | Sandbox | Implementado | Cenário de desenvolvimento; **não é fase da campanha** |
 | Campanha | Não iniciada | Nenhuma das 42 fases está implementada |
 | Combate/inimigos/chefes | Não iniciado | Nenhum sistema de combate ou inimigo integrado |
-| Checkpoint/save | Não iniciado | Sem persistência de campanha |
+| Checkpoint/save | Em andamento | Checkpoint local na sandbox com ativação única e respawn no ponto ativado; estado não persiste entre sessões. SaveSystem/campanha ainda não implementados |
 | Assets finais/áudio | Não identificados como integrados | Placeholders de apresentação permanecem |
 
 ## Validação observada
@@ -37,8 +39,8 @@
 |---|---|---|---|
 | 0 | Claude Code | ACCEPTED | Fundação + protótipo provisório; hardening complementar PR #3 integrado |
 | 1 | ChatGPT | HANDOFF_READY | Correção de reatribuição de ponteiro, regressão e CI executando suíte |
-| 2 | Claude Code | PENDING / aguardando início manual | Auditar HEAD/handoffs e continuar Gate 1 / vertical slice |
-| 3 | ChatGPT | Aguardando | Definir após auditoria e aceite da Etapa 2 |
+| 2 | ChatGPT | IN_PROGRESS | Checkpoint reutilizável e respawn local da sandbox; PR/CI pendentes |
+| 3 | ChatGPT | Aguardando | Próxima unidade após validação da Etapa 2 |
 
 Um único escritor por vez. O usuário aciona manualmente o próximo agente.
 
@@ -63,7 +65,7 @@ Um único escritor por vez. O usuário aciona manualmente o próximo agente.
 
 ## Próximo gate executável
 
-Claude Code assume a Etapa 2 após o usuário iniciar sua sessão. Ponto de partida: [HANDOFF_ETAPA_2_CLAUDE.md](handoffs/HANDOFF_ETAPA_2_CLAUDE.md). Deve auditar o HEAD e os handoffs, preservar correções integradas e selecionar a próxima unidade funcional mínima para avançar a vertical slice conforme as especificações aprovadas. Não tratar a sandbox como fase da campanha nem canonizar parâmetros provisórios. Exportação e Android físico permanecem gates de validação pendentes.
+ChatGPT assume a Etapa 2 por decisão explícita do usuário. A implementação atual está na branch `feat/checkpoint-respawn-system`, baseada no HEAD `8c502efaee16a47a31303c77d0efbbd4c847a5e8`. A primeira unidade é o checkpoint/respawn local da sandbox, sem tratar a sandbox como fase da campanha. Não tratar a sandbox como fase da campanha nem canonizar parâmetros provisórios. Exportação e Android físico permanecem gates de validação pendentes.
 
 ## Referências
 
@@ -101,3 +103,11 @@ Claude Code assume a Etapa 2 após o usuário iniciar sua sessão. Ponto de part
 - PR #11 foi integrada por squash em `6f97ffc97219bb541e9f36a1c140331c2c621403`.
 - Docs CI run #160 (ID `45825228812`) SUCCESS no HEAD `7412e49b27bf135fcaa566bcfce458d19de39cec`; job `Validate project documentation` e todas as etapas concluídos.
 - A sincronização pós-merge está sendo registrada nesta PR documental separada. Godot CI não foi acionado por não haver alterações de gameplay. APK, emulador e Android físico continuam não executados.
+
+
+## Execução solo — atualização de 2026-11-26
+
+- O usuário definiu ChatGPT como único desenvolvedor ativo; Claude Code fica fora do fluxo de escrita até nova decisão.
+- Etapa 2 em andamento na branch `feat/checkpoint-respawn-system`, baseada em `8c502efaee16a47a31303c77d0efbbd4c847a5e8`.
+- Primeira unidade: checkpoint reutilizável e respawn local na sandbox. Não representa checkpoint de campanha nem persistência entre sessões.
+- A validação Godot CI desta branch ainda precisa concluir antes de qualquer aceite/merge. Nenhuma exportação APK ou validação em Android físico foi realizada.
