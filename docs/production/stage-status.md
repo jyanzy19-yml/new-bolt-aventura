@@ -1,9 +1,9 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` — HEAD `783c1d2587ebea39d645a641417e663e561ea710` (PR #15 integrada).  
-**Última entrega:** abertura em storyboard funcional, tutorial guiado e blockout W1-L1 Cybercore (PR #15).  
-**CI da PR:** Godot #56 e Docs #175 SUCCESS; CI pós-merge #57/#176 em execução.  
+**Branch de integração:** `main` — HEAD `e588c2f6a45cda0ec71b14dad815f2359569e3bf` (PR #18 integrada). Branch de trabalho atual: `feat/cybercore-enemy-player-damage` (PR #19).  
+**Última entrega integrada:** Pistola Crono e alvo de treinamento (PR #17), com sincronização documental PR #18. Em revisão: inimigo-base provisório, dano ao jogador e HUD de vida (PR #19).  
+**CI anterior:** Godot #62 e Docs #185 SUCCESS após PR #17/#18. PR #19: Godot Validation em execução no momento deste registro; consultar Actions para resultado atualizado.  
 **Responsável atual:** ChatGPT, por decisão explícita do usuário; Claude não está no fluxo ativo.  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
 
@@ -145,3 +145,15 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - O primeiro loop de ataque está disponível no tutorial; o alvo é estático e exclusivo de treino, não um inimigo de campanha.
 - Valores da Pistola Crono são provisórios. Tríplice Prisma, Laser Nexo, seleção de armas, IA inimiga, dano ao jogador e chefes permanecem pendentes.
 - APK, emulador e Android físico ainda não testados.
+
+
+## Atualização de gameplay — PR #19 (2026-11-26)
+
+- Branch `feat/cybercore-enemy-player-damage`, baseada no HEAD integrado `e588c2f6a45cda0ec71b14dad815f2359569e3bf`.
+- Entrega em revisão: inimigo-base provisório de patrulha em Cybercore W1-L1; vida/dano/knockback/invulnerabilidade para BOLT; restauração de vida no respawn; HUD de vida; tela de derrota.
+- Testes adicionados em `tests/unit/test_enemy_combat.gd` para dano, invulnerabilidade, respawn, patrulha, contato e derrota por Pistola Crono.
+- O inimigo não é um arquétipo canônico. Todos os parâmetros são provisórios; arte geométrica é placeholder.
+- Preservados Dash, buffer de ações, controles touch e Pistola Crono.
+- CI Godot PR #19: run `45848699004` estava em execução na última consulta. Nenhuma alegação de sucesso até o resultado final.
+- APK/exportação, emulador, dispositivo Android, FPS e memória: NÃO EXECUTADOS.
+- Handoff detalhado: [HANDOFF_ENEMY_COMBAT.md](handoffs/HANDOFF_ENEMY_COMBAT.md).
