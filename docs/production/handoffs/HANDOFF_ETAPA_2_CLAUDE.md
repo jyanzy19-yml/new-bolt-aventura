@@ -15,7 +15,7 @@
 - PR #2 — MERGED: expansão das skills, agentes consultivos e validações de qualidade. Merge `6f8bae62018fc2c7efce8fa454c16681599dcbe6`.
 - PR #3 — MERGED: hardening da fundação e correção dos registros de aceite. Merge `4ecaff1d67049155d95bcbb5fc9d1c98187d3767`.
 - PR #4 — MERGED: handoff Etapa 2 e sincronização documental. Merge `9d5381047817ac9fc949583f6645d24eadd88e8c`.
-- Auditoria de polimento: consulte [repository-polish-audit-2026-11-26.md](../repository-polish-audit-2026-11-26.md); branch `chore/repository-polish-audit`/PR pendente.
+- Auditoria de polimento: consulte [repository-polish-audit-2026-11-26.md](../repository-polish-audit-2026-11-26.md); entregue pela PR #5.
 
 ## 2. Hardening recente da Etapa 0
 
