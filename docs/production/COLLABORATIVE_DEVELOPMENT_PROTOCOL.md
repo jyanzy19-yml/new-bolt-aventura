@@ -14,7 +14,7 @@ A alternância é sequencial, nunca simultânea:
 **Claude implementa uma etapa → ChatGPT assume a etapa seguinte → Claude assume a próxima → ChatGPT assume a seguinte → e assim por diante, até a conclusão do jogo.**
 
 O primeiro responsável é Claude Code. Portanto:
-- **Etapa 0: Claude Code** inicia o jogo do zero, inspeciona o repositório, prepara a fundação e implementa o escopo definido para a etapa.
+- **Etapa 0: Claude Code** inspeciona o repositório e estabelece a fundação Godot existente; essa fundação já está integrada à `main` e não deve ser recriada.
 - **Etapa 1: ChatGPT** retoma exatamente o estado deixado por Claude, audita o repositório e a Etapa 0, corrige o que for necessário e implementa a Etapa 1.
 - **Etapa 2: Claude Code** inspeciona o repositório atualizado por ChatGPT, revisa a Etapa 1, corrige problemas encontrados e implementa a Etapa 2.
 - **Etapa 3: ChatGPT** inspeciona o trabalho acumulado, revisa a Etapa 2, corrige problemas encontrados e implementa a Etapa 3.
@@ -44,7 +44,7 @@ O usuário define a visão e prioridades, resolve decisões materiais não cober
 ### 3.2 Claude Code — implementador nas etapas pares a partir da Etapa 0
 
 Claude:
-- inicia o projeto do zero na Etapa 0;
+- inspeciona e estabelece a fundação Godot existente na Etapa 0; a fundação já está integrada à `main` e deve ser continuada;
 - implementa integralmente as etapas que lhe forem atribuídas;
 - ao assumir uma etapa, inspeciona o repositório e audita a entrega anterior;
 - corrige defeitos confirmados antes de ampliar a implementação;
