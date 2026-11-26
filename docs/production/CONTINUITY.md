@@ -1,3 +1,16 @@
+## Estado atual — combate básico em desenvolvimento
+
+- **Main base:** `2b81211e56677a7f4ee1da97e6d1c4d604e87d77` (PR #16 integrada).
+- **Branch:** `feat/chrono-pistol-combat-core`.
+- **Implementação:** componente de vida/dano reutilizável (`BoltHealth`), controlador da Pistola Crono (`BoltCombat`), projétil (`ChronoProjectile`) e alvo estático de treinamento (`BoltTrainingTarget`).
+- **Input:** ATTACK agora é bufferizado; botão touch TIRO adicionado ao HUD.
+- **Tutorial:** fluxo passa a mover → saltar → Dash → acertar alvo com TIRO → Cybercore.
+- **Limites:** alvo é apenas treinamento, não inimigo de campanha. Valores de cadência, dano, velocidade e alcance são provisórios. Tríplice Prisma, Laser Nexo, seleção de armas, IA inimiga e dano ao jogador ainda não implementados.
+- **Testes:** regressão de ActionBuffer ATTACK, componente de vida/projétil e fluxo real de disparo no tutorial; CI pendente.
+- **Próxima ação:** executar Godot 4.7.2 CI, corrigir regressões e revisar o diff antes da integração.
+
+---
+
 ## Estado atual — PR #15 integrada — 2026-11-26
 
 - **Main HEAD:** `783c1d2587ebea39d645a641417e663e561ea710`.
