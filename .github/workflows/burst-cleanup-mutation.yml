@@ -1,5 +1,11 @@
 name: Burst cleanup mutation validation
 on:
+  push:
+    branches: [feat/cybercore-w1-blockout]
+    paths:
+      - 'scripts/vfx/burst.gd'
+      - 'tests/unit/test_cybercore_polish.gd'
+      - '.github/workflows/burst-cleanup-mutation.yml'
   pull_request:
     paths:
       - 'scripts/vfx/burst.gd'
