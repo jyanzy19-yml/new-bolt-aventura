@@ -9,6 +9,7 @@
 - Execução comprovada: Android Debug Export `45879045098` SUCCESS; Godot Validation `45879045282` SUCCESS; Docs Validation `45879045081` SUCCESS.
 - Artifact `bolt-aventura-android-debug-5be706c042fceaa66dadf2509ffafd0833ad3617`, 28.194.385 bytes. Godot 4.7.2; assinatura APK v2/v3 verificada; package ID `com.example.boltaventura` (placeholder); SHA-256 `acbacb86afeb767e293ba357d6749db4bdde55c2d78c05f90779dafc5f438fab`.
 - O artifact é debug/teste, retenção temporária de 14 dias. Não é release nem distribuição. Nenhuma credencial de release foi criada.
+- Segunda execução confirmada na PR #39: Android Debug Export `45881252046` SUCCESS; Godot Validation `45881320136` SUCCESS (72 testes/451 verificações/0 falhas); Docs Validation `45881320133` SUCCESS. Artifact `bolt-aventura-android-debug-7415dfb988faf2dd63f9ff289106e7f7205dcdd1`, 28.194.534 bytes; assinatura v2/v3 válida; package ID `com.example.boltaventura`; SHA-256 `db03a42b909781a1f5e7c94d025615e1aa5f397c8ebd306ba30cddf84eca14b0`.
 
 ## Portões
 
