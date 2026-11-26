@@ -52,7 +52,7 @@ Um único escritor por vez. O usuário aciona manualmente o próximo agente.
 
 ## Auditoria de polimento
 
-- Auditoria abrangente em andamento na branch `chore/repository-polish-audit`; relatório: [repository-polish-audit-2026-11-26.md](repository-polish-audit-2026-11-26.md).
+- Auditoria abrangente concluída; relatório entregue pela PR #5: [repository-polish-audit-2026-11-26.md](repository-polish-audit-2026-11-26.md).
 - Foram identificadas divergências entre documentos raiz e o projeto Godot existente, além de conflito de escopo sobre Dash na PR #1 não integrada. Não alterar mecânica até reconciliação.
 
 ## Próximo gate executável
