@@ -306,10 +306,14 @@ func test_future_format_in_any_slot_blocks_writes_without_mutation() -> bool:
 	check_eq(_read_text(TEST_SAVE_PATH), primary_before, "principal atual permanece intacto")
 	check_eq(_read_text(TEST_SAVE_PATH + ".bak"), future_backup_before, "backup futuro permanece intacto")
 
-	# Um temporário futuro também é preservado em vez de ser removido na preparação.
+	# Um temporário futuro é preservado e bloqueia fallback para backup antigo.
 	system.call("delete_save")
+	check(system.call("save_payload", payload), "cria backup antigo antes de simular temporário futuro")
+	check(DirAccess.rename_absolute(ProjectSettings.globalize_path(TEST_SAVE_PATH), ProjectSettings.globalize_path(TEST_SAVE_PATH + ".bak")) == OK, "move estado antigo para backup")
 	check(_write_future_envelope(TEST_SAVE_PATH + ".tmp"), "grava envelope futuro no temporário")
 	var future_temp_before: String = _read_text(TEST_SAVE_PATH + ".tmp")
+	check_eq(system.call("load_payload"), {}, "temporário futuro impede fallback para backup antigo")
+	check_eq(system.get("last_error"), "unsupported_format_version", "leitura informa formato futuro no temporário")
 	check(not system.call("save_payload", replacement), "recusa gravação quando temporário usa versão futura")
 	check_eq(_read_text(TEST_SAVE_PATH + ".tmp"), future_temp_before, "temporário futuro permanece intacto")
 	_cleanup()
