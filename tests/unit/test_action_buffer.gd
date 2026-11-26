@@ -66,6 +66,26 @@ func test_window_is_game_time_not_wall_clock() -> bool:
 	return true
 
 
+func test_focus_loss_clears_pending_press() -> bool:
+	var buffer: ActionBuffer = _make_buffer()
+	_press_release(Actions.JUMP)
+	check(buffer.has_pending(Actions.JUMP), "pré-condição: jump pendente antes da perda de foco")
+	buffer.notification(Node.NOTIFICATION_APPLICATION_FOCUS_OUT)
+	check(not buffer.has_pending(Actions.JUMP), "perda de foco descarta o jump pendente")
+	buffer.queue_free()
+	return true
+
+
+func test_application_pause_clears_pending_dash() -> bool:
+	var buffer: ActionBuffer = _make_buffer()
+	_press_release(Actions.DASH)
+	check(buffer.has_pending(Actions.DASH), "pré-condição: dash pendente antes da suspensão")
+	buffer.notification(Node.NOTIFICATION_APPLICATION_PAUSED)
+	check(not buffer.has_pending(Actions.DASH), "suspensão do app descarta o dash pendente")
+	buffer.queue_free()
+	return true
+
+
 func test_attack_tap_is_buffered_for_combat() -> bool:
 	var buffer: ActionBuffer = _make_buffer()
 	_press_release(Actions.ATTACK)
