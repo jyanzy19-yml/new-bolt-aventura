@@ -27,10 +27,14 @@ func _ready() -> void:
 	%ResultMenuButton.pressed.connect(_go_to_menu)
 	_again_button.pressed.connect(_restart)
 	_progress_notification_timer.timeout.connect(_on_progress_notification_timeout)
+	SceneFlow.transition_started.connect(_on_scene_transition_started)
+	SceneFlow.transition_failed.connect(_on_scene_transition_failed)
 
 
 func _exit_tree() -> void:
-	get_tree().paused = false
+	# SceneFlow owns pause restoration while a transition is active.
+	if not SceneFlow.is_transitioning():
+		get_tree().paused = false
 
 
 func bind_player(player: BoltPlayer) -> void:
@@ -46,6 +50,8 @@ func set_restart_path(path: String) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if SceneFlow.is_transitioning():
+		return
 	if event.is_action_pressed(Actions.PAUSE, false) and not _result_overlay.visible:
 		set_paused(not get_tree().paused)
 		get_viewport().set_input_as_handled()
@@ -84,6 +90,16 @@ func show_result(title: String, next_path: String = "") -> void:
 	Actions.release_all_game_actions()
 	get_tree().paused = true
 	_again_button.grab_focus()
+
+
+func _on_scene_transition_started(_path: String) -> void:
+	_touch.release_all()
+	_touch.visible = false
+	Actions.release_all_game_actions()
+
+
+func _on_scene_transition_failed(_path: String, _reason: String) -> void:
+	_touch.visible = not get_tree().paused and not _result_overlay.visible
 
 
 func _on_dash_cooldown_changed(ratio: float) -> void:
