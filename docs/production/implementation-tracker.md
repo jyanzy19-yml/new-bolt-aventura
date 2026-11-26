@@ -27,7 +27,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 |---|---|---|---|
 | SYS-001 | Projeto Godot e versão fixada | Implementado | `project.godot`, `.godot-version` = 4.7.2. Evidência L2: `--headless --import` sem erros; `tests/test_runner.gd` 0 falhas (Godot 4.7.2 headless, Linux). Não validado em editor gráfico nem Android. Ver [06-godot-project-foundation.md](../technical/06-godot-project-foundation.md) |
 | SYS-002 | Configuração Android, paisagem e renderer | Implementado | Orientação 4 (sensor landscape), viewport 960×540 (provisório), GL Compatibility (provisório), preset Android com `screen/immersive_mode=true` (ADR-0003), sem segredos; verificado por `tests/unit/test_project_config.gd`. **Export Android NÃO executado** (sem SDK/templates); nenhum APK; nada validado em aparelho |
-| SYS-003 | Arquitetura, cenas e recursos compartilhados | Em andamento | Boot, menu, `SceneFlow`, `SaveSystem`, `CampaignProgress`, `Actions`, `SafeAreaMargin`, `BoltTuning`, `PlatformBlock` e HUD. Menu/retomada reconhece W1-L1 e W1-L2 na branch de progressão; demais contratos pendentes |
+| SYS-003 | Arquitetura, cenas e recursos compartilhados | Em andamento | Boot, menu, `SceneFlow`, `SaveSystem`, `CampaignProgress`, `Actions`, `SafeAreaMargin`, `BoltTuning`, `PlatformBlock` e HUD. Menu/retomada reconhece W1-L1 e W1-L2 na main após PR #34; demais contratos pendentes |
 | SYS-004 | Input abstrato e multitouch | Em andamento | `TouchControls`/`TouchButton` rastreiam ponteiros independentes; botão TIRO adicionado ao HUD e `ActionBuffer` agora rastreia ATTACK. Regressão para toque curto de ataque adicionada; toque físico NÃO EXECUTADO |
 | SYS-005 | BOLT: controller, estados e animação | Em andamento | `BoltPlayer` (GROUNDED/RISING/FALLING/DASHING), vida/dano, knockback, invulnerabilidade e API de cura. Dash preservado. Placeholders e valores provisórios; sem validação física Android |
 | SYS-006 | Movimento, salto, All Jump e dash | Em andamento | Corrida, pulo variável, pulo duplo, coyote, buffer, dash aéreo único (`BoltTuning` provisório). Bot headless completa a sandbox. **Feel não avaliado por humano**; semântica de "All Jump" não confirmada em fonte aprovada — não canonizada |
@@ -38,7 +38,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-011 | Chefes e arenas | Não iniciado | Sem implementação do jogo |
 | SYS-012 | NPCs, interação, diálogo e flags | Não iniciado | Sem implementação do jogo |
 | SYS-013 | Objetivos, colecionáveis e fragmentos | Não iniciado | Sem implementação do jogo |
-| SYS-014 | Checkpoints, respawn e progressão | Em andamento | `CampaignProgress` persiste entrada/checkpoint/conclusão; W1-L1 avança o destino salvo para W1-L2; W1-L2 possui checkpoint próprio na branch atual. CI desta unidade pendente; sandbox permanece ambiente de desenvolvimento |
+| SYS-014 | Checkpoints, respawn e progressão | Em andamento | `CampaignProgress` persiste entrada/checkpoint/conclusão; W1-L1 avança o destino salvo para W1-L2; W1-L2 possui checkpoint próprio e blockout integrado pela PR #34; CI pré-merge passou, CI Godot pós-merge pendente; sandbox permanece ambiente de desenvolvimento |
 | SYS-015 | Save/load, versão e recuperação | Em andamento | `SaveSystem` JSON v1 + `CampaignProgress` v1; reset seletivo, retomada W1-L1, backup/corrupção/schema cobertos. PR #31 CI pós-merge: 66 testes/404 verificações. Encerramento forçado e QA Android pendentes |
 | SYS-016 | Inventário, moedas, melhorias e skins | Não iniciado | Sem implementação do jogo |
 | SYS-017 | Menus, HUD, pausa e configurações | Em andamento | Nova Jornada/Continuar; retomada mapeia W1-L1 e W1-L2; HUD de resultado oferece PRÓXIMA FASE quando existe destino configurado. Configurações completas e validação visual/Android ausentes |
@@ -46,7 +46,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-019 | Áudio, música, buses e opções | Não iniciado | Sem implementação do jogo |
 | SYS-020 | Loading, transições e gestão de memória | Em andamento | `SceneFlow` usa carregamento threaded, bloqueia transições concorrentes e sinaliza sucesso/falha; testado headless. Gestão abrangente de memória/preload ainda não implementada |
 | SYS-021 | Pipeline de assets e proveniência | Não iniciado | Pipeline do jogo a estabelecer |
-| SYS-022 | Testes automatizados e regressão | Em andamento | Workflow Godot 4.7.2 executa import + `tests/test_runner.gd`; pós-merge PR #31: 66 testes, 404 verificações, 0 falhas. Headless não equivale a QA visual ou Android físico |
+| SYS-022 | Testes automatizados e regressão | Em andamento | Workflow Godot 4.7.2 executa import + `tests/test_runner.gd`; PR #34: 69 testes, 439 verificações, 0 falhas; Docs CI SUCCESS. Godot CI pós-merge em andamento. Headless não equivale a QA visual ou Android físico |
 | SYS-023 | Exportação, instalação e QA Android | Não iniciado | Sem APK/build verificada |
 | SYS-024 | Créditos, encerramento e release candidate | Não iniciado | Sem campanha implementada |
 
@@ -56,8 +56,8 @@ A matriz define a estrutura planejada: seis fases por mundo; fases 1–5 de prog
 
 | ID | Mundo | Função planejada | Status inicial | Evidência |
 |---|---|---|---|---|
-| W1-L1 | Cybercore | Entrada e exploração | Em andamento | Blockout com BOLT, HUD/touch, combate, coletável, checkpoint persistente e objetivo; conclusão direciona W1-L2 na branch atual. Placeholders, arte/áudio finais, playtest humano e QA Android pendentes |
-| W1-L2 | Cybercore | Progressão | Em andamento | Blockout em `cybercore_w1_l2.tscn` com campo energético cíclico, plataformas, checkpoint e objetivo; validação CI/playtest pendente |
+| W1-L1 | Cybercore | Entrada e exploração | Em andamento | Blockout com BOLT, HUD/touch, combate, coletável, checkpoint persistente e objetivo; conclusão direciona W1-L2 após integração da PR #34. Placeholders, arte/áudio finais, playtest humano e QA Android pendentes |
+| W1-L2 | Cybercore | Progressão | Em andamento | Blockout integrado pela PR #34 em `cybercore_w1_l2.tscn`, com campo energético cíclico, plataformas, checkpoint e objetivo; CI pré-merge passou, playtest humano/Android pendentes |
 | W1-L3 | Cybercore | Progressão | Não iniciado | Sem cena |
 | W1-L4 | Cybercore | Combinação de mecânicas | Não iniciado | Sem cena |
 | W1-L5 | Cybercore | Domínio e preparação | Não iniciado | Sem cena |
