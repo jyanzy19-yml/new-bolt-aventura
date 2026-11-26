@@ -41,4 +41,6 @@ jobs:
           [[ "$ACTUAL_VERSION" == "$GODOT_VERSION".* ]]
           "$GODOT_BIN" --headless --editor --path . --import --quit
           echo "Headless import/parse passed for Godot $GODOT_VERSION."
-          echo "This does not prove Android export, gameplay correctness or physical-device performance."
+          "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd
+          echo "Headless project test suite passed."
+          echo "This does not prove Android export, rendering, touch hardware or physical-device performance."
