@@ -28,7 +28,7 @@ Transformar W1-L2, já especificada no blueprint de campanha, em um segundo bloc
 5. `CampaignProgress.mark_level_completed` aceita um próximo ID opcional e atualiza o destino de retomada sem alterar o schema do save.
 6. W1-L1 registra W1-L2 como próximo destino e o HUD oferece a ação PRÓXIMA FASE.
 7. Menu Continuar resolve destinos apenas para cenas implementadas (W1-L1 e W1-L2); IDs sem cena continuam indisponíveis.
-8. Testes para avanço do ponteiro de retomada, cena W1-L2, ciclo/dano do campo e fluxo de conclusão.
+8. Testes para avanço do ponteiro de retomada, cena W1-L2, ciclo/dano do campo e fluxo de conclusão; PR #35 reforça o contato com a `Area2D` usando eventos físicos reais.
 
 ## Fora de escopo
 
@@ -52,10 +52,11 @@ Transformar W1-L2, já especificada no blueprint de campanha, em um segundo bloc
 ## Validação
 
 **CI pré-merge PR #34:** Godot 4.7.2 SUCCESS — 69 testes, 439 verificações, 0 falhas (run `45872508689`); Docs SUCCESS (run `45872508675`).  
-**CI pós-merge:** Godot SUCCESS — 69 testes, 439 verificações, 0 falhas (run `45872656738`); Docs SUCCESS (run `45872656798`). Docs CI da sincronização documental seguinte também SUCCESS (run `45872828901`).  
+**CI pós-merge PR #34:** Godot SUCCESS — 69 testes, 439 verificações, 0 falhas (run `45872656738`); Docs SUCCESS (run `45872656798`). Docs CI da sincronização documental seguinte também SUCCESS (run `45872828901`).
+**PR #35:** integrada por squash; o teste de contato físico real passou no Godot CI pré/pós-merge (`45873118202`, `45873234656`), mantendo 69 testes/439 verificações/0 falhas.  
 **Nível máximo comprovado:** L2 — Godot/headless via GitHub Actions.  
 **Não executado:** Godot local/editor gráfico, APK, emulador, Android físico, touch físico, safe area e performance.
 
 ## Resultado
 
-**Resultado:** implementado e integrado pela PR #34, squash merge `c10ca6944bf0047abe694b7c429270a256cfff96`. Godot CI pré/pós-merge e Docs CI passaram. W1-L2 permanece blockout/protótipo e requer playtest humano e validação Android antes de ser considerado conteúdo aprovado.
+**Resultado:** implementado e integrado pela PR #34, squash merge `c10ca6944bf0047abe694b7c429270a256cfff96`. Godot CI pré/pós-merge e Docs CI passaram; PR #35 adicionou a regressão física real e também foi integrada. W1-L2 permanece blockout/protótipo e requer playtest humano e validação Android antes de ser considerado conteúdo aprovado.
