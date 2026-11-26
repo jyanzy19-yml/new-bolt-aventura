@@ -1,19 +1,20 @@
 ## Snapshot vigente — 2026-11-26
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
-- **Main HEAD após PR #46:** `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`. **Última entrega de conteúdo:** PR #34. **Última regressão integrada:** PR #43, restauração do pause state após falha. **Última mudança de loading/input:** PR #42, bloqueio integral durante transições. **Última reconciliação documental:** PR #40. **Última infraestrutura integrada:** PR #38. **Último sistema de plataforma:** PR #46, OneWayPlatform; PR #45 adicionou MovingPlatform.
-- **PR #33:** MERGED. Expansão de documentação e correção do coletável; CI Godot 66 testes/404 verificações/0 falhas e Docs SUCCESS.
-- **PR #34:** MERGED. Adiciona W1-L2 em blockout, `TimedEnergyGate`, checkpoint e progressão persistente W1-L1→W1-L2.
-- **PR #35:** MERGED. Regressão de contato físico real do campo energético. **PR #36:** feedback de checkpoint W1-L2. **PR #37:** teste físico isolado do coletável e filtro CI para erro de mutação física bloqueada. **PR #38:** pipeline Android debug. **PR #39:** limpeza do ActionBuffer no ciclo de vida.
-- **CI pré-merge PR #34:** Godot 4.7.2, 69 testes/439 verificações/0 falhas (`45872508689`); Docs SUCCESS (`45872508675`).
-- **CI pós-merge PR #34:** Godot SUCCESS — 69 testes/439 verificações/0 falhas (`45872656738`); Docs SUCCESS (`45872656798`). Docs CI da sincronização seguinte SUCCESS (`45872828901`).
-- **PR #35:** Godot CI pré/pós-merge SUCCESS — 69 testes/439 verificações/0 falhas (`45873118202`, `45873234656`).
-- **Escritor ativo:** ChatGPT, seguindo a diretriz vigente do usuário. Não iniciar trabalho concorrente de Claude.
-- **Dash:** decisão canônica aprovada; deve permanecer no jogo conforme `docs/production/ADR-001-DASH.md`. Referências documentais antigas que ainda dizem “pendente” estão sendo reconciliadas nesta unidade.
-- **PR #46:** MERGED por squash em `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`; OneWayPlatform integrada à main.
-- **Unidade integrada:** `TimedEnergyGate`, cena/script `cybercore_w1_l2`, botão PRÓXIMA FASE na conclusão W1-L1, destino salvo W1-L2, retomada de W1-L1/W1-L2 e regressões.
-- **Limites:** W1-L2 é blockout/protótipo de mecânica, não conteúdo final; ciclo, dano e percurso precisam de playtest. APK debug exportado em CI, mas não instalado; Android físico, touch físico e profiling continuam pendentes.
-- **Próximo passo:** selecionar a próxima unidade a partir dos sistemas ainda incompletos no tracker e das dependências da vertical slice; OneWayPlatform e MovingPlatform permanecem componentes reutilizáveis, sem inserção em fase até aprovação de level design.
+- **Main HEAD após PR #48:** `e2e4f68b5b21c584c33eba739845adc3c685965e`; PR #48 adicionou e indexou a matriz de rastreabilidade das 26 etapas.
+- **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético e progressão W1-L1→W1-L2.
+- **Última correção de gameplay:** PR #47 — estado inicial `initial_active=false` do `TimedEnergyGate`, merge `2636226c4027625649e66c51ff64d7e2e56168a6`.
+- **Último componente de plataforma:** PR #46 — `OneWayPlatform`, merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`; PR #45 adicionou `MovingPlatform`.
+- **Última unidade documental:** PR #48 — `docs/production/26-stage-traceability-matrix.md`, Docs CI pré/pós-merge SUCCESS.
+- **Escritor ativo:** ChatGPT como único escritor, por decisão explícita do usuário; Claude permanece inativo para escrita concorrente.
+- **Etapas operacionais:** Etapa 01 CONCLUÍDA como auditoria estática; Etapa 02 EM DESENVOLVIMENTO (revisão requisito-a-requisito); etapas 03–26 conforme `stage-status.md`. Gate 1 continua em andamento.
+- **CI pós-merge PR #46:** Godot `45888110305`, Docs `45888110285`, Android Export `45888110166`: SUCCESS; 87 testes/548 verificações/0 falhas.
+- **CI pós-merge PR #47:** Godot `45894802128`, Docs `45894802067`, Android Export `45894802116`: SUCCESS; 88 testes/553 verificações/0 falhas. APK 28.461.057 bytes, SHA-256 `c3ca03958eecf120f1a9f5f1e4fae3851fb7560bca303c8eb5a930f987b58123`, assinatura v2/v3 válida; package ID continua placeholder `com.example.boltaventura`.
+- **CI pós-merge PR #48:** Docs `45895074739` SUCCESS.
+- **PR #1:** continua OPEN, antiga e divergente; não mesclar/rebasear automaticamente. Revisar o diff inteiro e reconciliar documentos raiz antes de qualquer decisão.
+- **Dash:** decisão canônica aprovada e vigente; deve permanecer conforme `docs/production/ADR-001-DASH.md`.
+- **Limites:** W1-L1/W1-L2 continuam blockouts. APK debug exportado, mas não instalado em aparelho. Toque físico, safe area, barras, lifecycle, profiling e performance Android permanecem pendentes.
+- **Próximo passo:** concluir a revisão de requisitos da Etapa 02 usando a matriz, reconciliar lacunas e classificações de canon/proposta; depois selecionar a próxima unidade técnica que avance a vertical slice existente, sem reiniciar o projeto nem repetir PRs já integradas.
 
 ---
 
