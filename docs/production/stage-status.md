@@ -1,16 +1,16 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
+**Main HEAD:** `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.  
 **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente.  
-**Última regressão de gameplay integrada:** PR #37 — contato físico do coletável, merge `39b6db8298542c5057c06f509b20d250a888e289`.  
+**Última regressão de gameplay integrada:** PR #39 — limpeza do ActionBuffer no ciclo de vida Android, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.  
 **Última entrega de infraestrutura integrada:** PR #38 — pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.  
-**Branch de trabalho:** `fix/action-buffer-lifecycle-clear-v2` — regressão de limpeza do ActionBuffer no ciclo de vida, aguardando CI.  
+**Branch de trabalho:** `docs/reconcile-canonical-decisions-2026-11-26` — reconciliação de decisões canônicas e instruções operacionais.  
 **Responsável atual:** ChatGPT, único escritor ativo conforme decisão vigente do usuário.  
-**Estado do Gate 1:** EM ANDAMENTO — W1-L1/W1-L2 seguem blockouts; APK debug foi exportado em CI, mas instalação e validação Android física continuam pendentes.  
-**CI pré-merge PR #34:** Godot run `45872508689` SUCCESS — Godot 4.7.2, 69 testes, 439 verificações, 0 falhas; Docs run `45872508675` SUCCESS.  
-**CI pós-merge PR #34:** Godot run `45872656738` SUCCESS — 69 testes, 439 verificações, 0 falhas; Docs run `45872656798` SUCCESS. **PR #35:** Godot CI pré/pós-merge SUCCESS — 69 testes, 439 verificações, 0 falhas (`45873118202`, `45873234656`). Docs CI da sincronização anterior `45872828901` SUCCESS.  
-**Responsável atual:** ChatGPT, como único escritor ativo conforme a diretriz vigente do usuário.  
-**Estado do Gate 1:** EM ANDAMENTO — W1-L1 e W1-L2 permanecem blockouts; nenhuma validação Android física foi executada.
+**Estado do Gate 1:** EM ANDAMENTO — W1-L1/W1-L2 seguem blockouts; APK debug exportado em CI, instalação e validação Android física pendentes.
+
+**CI da PR #39:** Godot Validation `45881320136` SUCCESS — Godot 4.7.2, 72 testes, 451 verificações, 0 falhas; Docs Validation `45881320133` SUCCESS; Android Debug Export `45881252046` SUCCESS.  
+**Artifact PR #39:** `bolt-aventura-android-debug-7415dfb988faf2dd63f9ff289106e7f7205dcdd1`, 28.194.534 bytes; package ID provisório `com.example.boltaventura`; assinatura v2/v3 verificada; SHA-256 `db03a42b909781a1f5e7c94d025615e1aa5f397c8ebd306ba30cddf84eca14b0`.
 
 ## Estado executável observado
 
