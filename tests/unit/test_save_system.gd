@@ -62,20 +62,33 @@ func test_corrupt_primary_recovers_valid_backup() -> bool:
 		return true
 	system.call("delete_save")
 	var payload: Dictionary = {"level_id": "W1-L1", "checkpoint_id": "cp_01"}
-	check(system.call("save_payload", payload), "cria save de referência")
-	var copy_error: Error = DirAccess.copy_absolute(
-		ProjectSettings.globalize_path(TEST_SAVE_PATH),
-		ProjectSettings.globalize_path(TEST_SAVE_PATH + ".bak")
-	)
-	check_eq(copy_error, OK, "cria backup de recuperação")
+	var newer_payload: Dictionary = {"level_id": "W1-L2", "checkpoint_id": "cp_02"}
+	check(system.call("save_payload", payload), "cria primeiro save de referência")
+	check(system.call("save_payload", newer_payload), "grava uma versão mais recente")
+	check(FileAccess.file_exists(TEST_SAVE_PATH + ".bak"), "mantém backup automático da última versão íntegra")
 	var corrupted: FileAccess = FileAccess.open(TEST_SAVE_PATH, FileAccess.WRITE)
 	check(corrupted != null, "abre o arquivo principal para simular corrupção")
 	if corrupted != null:
 		corrupted.store_string("{invalid-json")
 		corrupted.flush()
 		corrupted.close()
-	check_eq(system.call("load_payload"), payload, "recupera o payload válido do backup")
+	check_eq(system.call("load_payload"), payload, "recupera a versão anterior íntegra do backup")
 	check_eq(system.get("last_error"), "recovered_backup", "registra que houve recuperação do backup")
+
+	# Uma gravação após a recuperação não pode rotacionar a cópia corrompida para cima
+	# da única cópia íntegra: o backup válido é restaurado antes do novo commit.
+	var recovered_update: Dictionary = {"level_id": "W1-L3", "checkpoint_id": "cp_03"}
+	check(system.call("save_payload", recovered_update), "grava após recuperação do backup")
+	check_eq(system.call("load_payload"), recovered_update, "novo estado passa a ser o principal")
+	check(FileAccess.file_exists(TEST_SAVE_PATH + ".bak"), "backup last-known-good continua presente após novo commit")
+	var corrupted_again: FileAccess = FileAccess.open(TEST_SAVE_PATH, FileAccess.WRITE)
+	check(corrupted_again != null, "reabre o principal para validar o backup após a gravação recuperada")
+	if corrupted_again != null:
+		corrupted_again.store_string("{invalid-json-again")
+		corrupted_again.flush()
+		corrupted_again.close()
+	check_eq(system.call("load_payload"), payload, "backup permanece íntegro após recuperação seguida de nova gravação")
+	check_eq(system.get("last_error"), "recovered_backup", "segunda recuperação é identificada")
 	check(system.call("delete_save"), "remove arquivos temporários após o teste")
 	_cleanup()
 	return true
