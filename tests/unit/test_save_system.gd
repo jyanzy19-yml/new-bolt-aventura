@@ -116,4 +116,5 @@ func test_missing_save_is_a_clean_empty_state() -> bool:
 	system.call("delete_save")
 	check_eq(system.call("load_payload"), {}, "slot inexistente é um estado vazio")
 	check_eq(system.get("last_error"), "", "ausência de save não é erro de corrupção")
+	_cleanup()
 	return true
