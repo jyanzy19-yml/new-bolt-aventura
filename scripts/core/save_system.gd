@@ -40,6 +40,21 @@ func save_payload(payload: Dictionary) -> bool:
 		last_error = "payload_not_json_compatible"
 		return false
 
+	# Se a gravação anterior já tinha produzido um temporário íntegro e a
+	# rotação deixou o principal ausente/inválido, consolida esse estado antes
+	# de iniciar outra escrita. Assim uma nova chamada não descarta o commit
+	# pendente mais recente sem primeiro preservá-lo como principal/backup.
+	var current_primary: Dictionary = _decode_file(_primary_path())
+	if not bool(current_primary.get("ok", false)):
+		var pending_temp: Dictionary = _decode_file(_temp_path())
+		if bool(pending_temp.get("ok", false)):
+			load_payload()
+			if last_error != "recovered_temp":
+				if last_error.is_empty():
+					last_error = "temp_recovery_failed"
+				return false
+			last_error = ""
+
 	var payload_json: String = _canonical_json(payload)
 	var checksum: String = _checksum(payload_json)
 	if checksum.is_empty():
