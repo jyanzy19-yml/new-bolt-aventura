@@ -466,3 +466,19 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - **Limites:** W1-L1 continua em andamento; sem encerramento forçado, editor gráfico, APK, emulador, Android físico ou benchmark.
 - **Achado preexistente fora do escopo:** o coletável altera `Area2D.monitoring` sincronicamente durante `body_entered`, gerando erro no log. O mesmo erro consta no CI anterior `45859653809`; não foi introduzido pela PR #31. Registrar para correção isolada.
 - **Próxima ação:** continuar a próxima unidade de produção a partir do HEAD integrado; preservar W1-L1 como blockout e não criar W1-L2 sem implementação real.
+
+
+---
+
+## Sessão ChatGPT — correção de feedback do checkpoint W1-L2 — 2026-11-26
+
+- **Base:** `main`, referência confirmada `4226c5ebe397993e11aa9d23d24e240796e2f6b1`; PR #35 já integrada.
+- **Branch ativa:** `fix/w1-l2-checkpoint-feedback`.
+- **Achado:** `scripts/campaign/cybercore_w1_l2.gd::_on_checkpoint_activated` só apresentava `CHECKPOINT ATIVADO` no ramo de falha de `CampaignProgress.save_checkpoint`. O caminho de sucesso persistia o checkpoint sem feedback visual.
+- **Alteração:** mover a notificação para fora da condição de erro; preservar `push_warning` quando o salvamento falhar.
+- **Regressão:** `tests/unit/test_w1_l2_progression.gd` verifica que `ProgressNotification` fica visível e contém o texto esperado após ativação real do checkpoint.
+- **Plano:** `docs/production/plans/2026-11-26-w1-l2-checkpoint-feedback.md`.
+- **Commits da branch:** correção de gameplay `28d0bdc17f6424917160e4f2ef4ae1e8a100f67f`; regressão `a3b5e3acb611ced259984d643b9a1a244bd3a26c`; plano `17ffdaaa4fde495f1a17b58af744b44a1ade8225`.
+- **Validação:** ainda não confirmada nesta branch. A API de status combinado consultada no HEAD de main não retornou checks; workflows associados a esse commit também não foram retornados por esse endpoint. Aguardar workflows da PR.
+- **Não executado:** Godot local, editor gráfico, APK, emulador, Android físico, touch físico, safe area ou profiling.
+- **Próximo passo:** revisar o conteúdo final da branch, abrir PR, aguardar Godot CI e Docs CI, corrigir qualquer falha e só integrar com checks verdes.
