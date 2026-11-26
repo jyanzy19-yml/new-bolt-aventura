@@ -23,6 +23,16 @@ script = ExtResource("4_safe")
 layout_mode = 2
 mouse_filter = 2
 
+[node name="HealthLabel" type="Label" parent="Safe/Layout"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 260.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 26
+text = "VIDA  3 / 3"
+
 [node name="TouchControls" type="Control" parent="Safe/Layout"]
 unique_name_in_owner = true
 layout_mode = 1
