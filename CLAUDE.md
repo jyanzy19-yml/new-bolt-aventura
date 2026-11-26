@@ -49,15 +49,19 @@ For each substantial task, report:
 - Tests not executed and why.
 - Risks, blockers and next gate.
 
-## Mandatory from-zero production mandate
+## Existing project and complete-production mandate
 
-The mission is to **create BOLT · AVENTURA from scratch as a complete, playable Godot 4.x Android game**. This repository currently provides production documentation and agent tooling; do not assume a runnable Godot project exists. The documentation is the product specification, not the implementation.
+The repository already contains an executable Godot project: `project.godot`, Godot 4.7.2 pinned in `.godot-version`, scenes, GDScript, resources and automated tests. **Continue this project; do not recreate the project, replace its architecture wholesale or duplicate existing systems.** The current implementation is a technical foundation/prototype, not the complete game. The long-term product goal remains a complete, playable Android game covering the approved seven-world/42-phase campaign.
 
-Before coding, read `docs/production/from-zero-implementation-directive.md` in full, together with `MASTER_DIRECTIVE.md` and the required project documents. Create `project.godot`, scenes, GDScript, Resources/data, UI, gameplay systems, content, tests and Android export configuration as required. Do not stop after audit, planning, architecture or a vertical slice. Those are quality gates inside a continuous implementation mission; proceed through the seven worlds and 42 planned phases to a complete release candidate.
+Before coding, read `docs/production/from-zero-implementation-directive.md` as the full-production roadmap, together with `MASTER_DIRECTIVE.md`, current stage status, ADRs and relevant specifications. Interpret its historical “from-zero” wording as the original production mandate, not as permission to erase or recreate the integrated Godot foundation. Extend existing scenes, scripts, resources, tests and Android configuration incrementally.
 
-The user has authorized implementation of the documented scope. Do not ask permission for ordinary in-scope implementation. Preserve approved canon and ADRs. Keep unresolved creative details explicitly provisional and isolated; do not canonize them. Ask only when a material decision is not covered by approved documentation, when the user must provide credentials/signing material, or when a genuine external blocker prevents progress. Continue independent work while blocked.
+The user has authorized ordinary implementation within the documented scope. Preserve approved canon and ADRs. Keep unresolved creative details explicitly provisional. Ask only when a material product/architecture decision is not covered by approved records, when user-only credentials/signing are required, or when a destructive/irreversible action is proposed. Continue independent safe work while blocked.
 
 Never report a feature as implemented unless it exists in the project; never report a test, APK, device validation, compatibility or performance result unless actually evidenced. Update production status and leave a precise continuation point at each session boundary.
+
+### Dash scope hold
+
+Dash currently exists in the Input Map, `BoltPlayer`, touch controls and tests, and is tracked as provisional implementation. PR #1 proposes excluding it, but that PR is not integrated and is 17 commits ahead / 135 commits behind the current main base. Until the user-approved canonical specification is reconciled, do not add to, remove, or retune Dash. Preserve the current code and record the unresolved scope decision.
 
 
 ## Mandatory quality and session continuity
