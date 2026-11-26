@@ -1,12 +1,13 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Main HEAD após PR #46:** `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.  
+**Main HEAD após PR #47:** `2636226c4027625649e66c51ff64d7e2e56168a6`.  
 **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente.  
 **Última regressão de gameplay integrada:** PR #39 — limpeza do ActionBuffer no ciclo de vida Android, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.  
 **Última entrega de infraestrutura integrada:** PR #38 — pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.  
 **Último componente de plataforma integrado:** PR #46 — `OneWayPlatform`, merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.  
-**Branch de trabalho:** `main`; PR #46 já integrada. Próxima branch deve ser criada somente para a unidade aprovada seguinte.  
+**Última correção de gameplay integrada:** PR #47 — estado inicial do `TimedEnergyGate`, merge `2636226c4027625649e66c51ff64d7e2e56168a6`.  
+**Branch de trabalho:** `main`; PR #47 integrada. Próxima branch deve ser criada somente para a unidade aprovada seguinte.  
 **Responsável atual:** ChatGPT, único escritor ativo conforme decisão vigente do usuário.  
 **Estado do Gate 1:** EM ANDAMENTO — W1-L1/W1-L2 seguem blockouts; APK debug exportado em CI, instalação e validação Android física pendentes.
 
@@ -71,7 +72,7 @@ Um único escritor por vez. Por decisão do usuário, ChatGPT conduz sozinho as 
 - [PR #42](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/42): MERGED — pausa da SceneTree e bloqueio integral de input durante loading; Godot 77 testes/479 verificações/0 falhas, Docs e Android export SUCCESS.
 - [PR #43](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/43): MERGED — teste de restauração do pause state após falha; Godot 78 testes/484 verificações/0 falhas, Docs e export Android SUCCESS.
 - [PR #44](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/44): MERGED — contratos de câmera e limites por fase; Godot 81 testes/508 verificações/0 falhas, Docs e Android export SUCCESS.
-- [PR #45](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/45): MERGED — MovingPlatform reutilizável (AnimatableBody2D); Godot 85 testes/533 verificações/0 falhas, Docs e Android export SUCCESS.\n- [PR #46](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/46): MERGED — OneWayPlatform com colisão unidirecional nativa; pré-merge Godot 87 testes/548 verificações/0 falhas, Docs e Android export SUCCESS; sem integração em fase.
+- [PR #45](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/45): MERGED — MovingPlatform reutilizável (AnimatableBody2D); Godot 85 testes/533 verificações/0 falhas, Docs e Android export SUCCESS.\n- [PR #46](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/46): MERGED — OneWayPlatform com colisão unidirecional nativa; pré-merge Godot 87 testes/548 verificações/0 falhas, Docs e Android export SUCCESS; sem integração em fase.\n- [PR #47](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/47): MERGED — corrige `initial_active=false` no TimedEnergyGate e adiciona regressão física; Godot 88 testes/553 verificações/0 falhas, Docs e Android export SUCCESS.
 - [PR #34](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/34): MERGED — W1-L2 Rede Interrompida, campo energético cíclico e progressão W1-L1→W1-L2; Godot CI pré-merge 69 testes/439 verificações/0 falhas; Docs CI SUCCESS.
 - [PR #33](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/33): MERGED — expansão da diretriz de produção e correção do coletável de vida.
 
@@ -325,13 +326,14 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 **Base atualizada:** `main` após PR #46, commit `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`; snapshot documental mais recente `b48553312b2295af618c6900ec8a26688743f095`.  
 **Última unidade integrada:** PR #46 — OneWayPlatform.  
 **CI pré-merge PR #46:** Godot Validation `45887805114` SUCCESS (87 testes/548 verificações/0 falhas), Docs Validation `45887805097` SUCCESS e Android Debug Export `45887805269` SUCCESS.  
-**CI pós-merge PR #46:** consulta de workflow runs para o merge commit retornou zero execuções; não há confirmação de pós-merge.
+**CI pós-merge PR #46:** consulta de workflow runs para o merge commit retornou zero execuções; não há confirmação de pós-merge.  
+**PR #47 pré-merge:** Godot `45894563021` SUCCESS — 88 testes/553 verificações/0 falhas; Docs `45894562989` SUCCESS; Android Debug Export `45894563000` SUCCESS. APK 28.461.057 bytes, SHA-256 `4f5ab64b2c51aaa2c69656854d10e056b4a4881b2f00b1bfb56279bbe5bf0884`, assinatura v2/v3 válida, artifact `bolt-aventura-android-debug-fc0497e94781dd4ec9357190dd43277c14e67c2b`. **Pós-merge PR #47:** consulta ao merge commit não retornou workflow runs; evidência disponível é pré-merge.
 
 ### Estado das 26 etapas
 
 | Etapa | Área | Estado | Evidência / lacuna principal |
 |---:|---|---|---|
-| 01 | Auditoria integral do repositório | EM ANÁLISE | Inventário recursivo atualizado: 288 arquivos (56 GDScript, 19 cenas, 20 arquivos de teste unitário, 39 skills e 11 agentes); fontes mestras, ADRs, PRs e sistemas centrais revisados. Inspeção individual das 19 cenas/56 scripts e reconciliação completa de todos os recursos ainda pendentes |
+| 01 | Auditoria integral do repositório | CONCLUÍDA — estática | Inventário recursivo de 288 arquivos; revisão manual das 19 cenas, 30 scripts runtime, recurso BoltTuning, configuração Android, fontes mestras, ADRs, PRs e branches. CI compila scripts e instancia cenas; 88 testes/553 verificações passaram na PR #47. Limites físicos Android permanecem nos Gates 1/5, não bloqueiam o fechamento da auditoria estática |
 | 02 | Requisitos e planejamento | EM ANÁLISE | Master Directive, bíblias, especificações e roadmap existem; matriz de rastreabilidade específica das 26 etapas ainda precisa ser consolidada |
 | 03 | Arquitetura e organização | EM DESENVOLVIMENTO | Godot 4.7.2, cenas, scripts, autoloads e contratos existentes; arquitetura global ainda parcial |
 | 04 | Infraestrutura e sistemas centrais | EM DESENVOLVIMENTO | Boot, SceneFlow, SaveSystem e CampaignProgress implementados parcialmente |
@@ -349,7 +351,7 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 | 16 | Arquitetura de mundos e fases | EM DESENVOLVIMENTO | Atlas de 42 fases e fluxo de campanha; gerenciamento global de conteúdo ainda parcial |
 | 17 | Construção dos mundos | EM DESENVOLVIMENTO | Cybercore em blockout; mundos 2–7 sem ambientes executáveis |
 | 18 | Construção das fases | EM DESENVOLVIMENTO | W1-L1 e W1-L2 em blockout; demais fases sem cenas |
-| 19 | Obstáculos e exploração | EM DESENVOLVIMENTO | Checkpoint, coletável, campo energético, MovingPlatform e OneWayPlatform integrados como componentes; OneWayPlatform tem CI pré-merge (87 testes/548 verificações), sem pós-merge confirmado nem integração em fase; segredos/rotas opcionais pendentes |
+| 19 | Obstáculos e exploração | EM DESENVOLVIMENTO | Checkpoint, coletável, campo energético, MovingPlatform e OneWayPlatform integrados como componentes; PR #47 corrige estado inicial inativo do campo energético; 88 testes/553 verificações passaram pré-merge; sem integração de plataformas móveis/unidirecionais em fase; segredos/rotas opcionais pendentes |
 | 20 | Narrativa e progressão | EM DESENVOLVIMENTO | Premissa/canon, abertura, tutorial e progressão W1-L1→W1-L2 parciais; campanha narrativa incompleta |
 | 21 | Interface e UX | EM DESENVOLVIMENTO | Menu, HUD, pausa, controles touch e overlay de carregamento básico; lock de input durante transição em validação; configurações, polimento visual e validação Android pendentes |
 | 22 | Arte e efeitos visuais | EM DESENVOLVIMENTO | Placeholders geométricos e feedback básico; arte final e pipeline de assets pendentes |
@@ -487,3 +489,4 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Etapa 01 permanece EM ANÁLISE: nem todos os 56 scripts e 19 cenas foram inspecionados individualmente; não declarar auditoria integral concluída.
 - Etapa 02 permanece EM ANÁLISE: falta matriz de rastreabilidade requisito → sistema → arquivo → teste → critério de aceite para as 26 etapas.
 - `com.example.boltaventura` permanece package ID placeholder. APK de CI é artefato debug; instalação, cold start, barras/safe area, toque físico e performance em aparelho não foram executados.
+\n\n### Fechamento da Etapa 01 — auditoria estática — 2026-11-26\n\n- Revisão manual concluída das 19 cenas Godot, 30 scripts de runtime, `bolt_tuning_provisional.tres`, `project.godot`, `export_presets.cfg`, ícone placeholder, documentação mestra, ADRs, workflows, PRs e branches.\n- Inventário: 288 arquivos versionados, 56 GDScript no total (runtime, testes e fixtures de skills), 19 cenas, 20 arquivos de testes unitários, 39 skills e 11 agentes.\n- Evidência automatizada adicional na PR #47: Godot 4.7.2, 88 testes/553 verificações/0 falhas; Docs SUCCESS; Android Debug Export SUCCESS; 53 scripts compilados e 39 verificações de carregamento/instanciação de cenas no runner.\n- Achado AUD-006: `TimedEnergyGate` ignorava `initial_active=false`; corrigido pela PR #47 com teste que verifica estado lógico, `monitoring`, visual e ausência de dano inicial.\n- Limites registrados: APK debug não foi instalado em aparelho; toque físico, safe area, barras, FPS, memória e lifecycle Android continuam pendentes nos Gates 1/5.\n- **Estado:** Etapa 01 concluída como auditoria estática do repositório; limitações de hardware e QA não são tratadas como defeitos confirmados nem como motivo para manter a auditoria aberta.\n
