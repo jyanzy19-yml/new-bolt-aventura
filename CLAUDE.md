@@ -61,7 +61,7 @@ Never report a feature as implemented unless it exists in the project; never rep
 
 ### Dash scope hold
 
-Dash currently exists in the Input Map, `BoltPlayer`, touch controls and tests, and is tracked as provisional implementation. PR #1 proposes excluding it, but that PR is not integrated and is 17 commits exclusivos e 139 commits atrás da main (fotografia da comparação em 2026-11-26; consultar novamente antes de qualquer reconciliação). Until the user-approved canonical specification is reconciled, do not add to, remove, or retune Dash. Preserve the current code and record the unresolved scope decision.
+Dash currently exists in the Input Map, `BoltPlayer`, touch controls and tests, and is tracked as provisional implementation. PR #1 proposes excluding it, but that PR is not integrated and is 17 commits exclusive to the PR and 139 commits behind main (comparison snapshot from 2026-11-26; re-check before any reconciliation). Until the user-approved canonical specification is reconciled, do not add to, remove, or retune Dash. Preserve the current code and record the unresolved scope decision.
 
 
 ## Mandatory quality and session continuity
