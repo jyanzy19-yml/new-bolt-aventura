@@ -20,7 +20,9 @@ func _on_body_entered(body: Node2D) -> void:
 	if not player.heal(heal_amount):
 		return
 	_available = false
-	monitoring = false
+	# Area2D.monitoring cannot be changed synchronously while physics is flushing
+	# body_entered. Defer the physics-state mutation; hide and queue deletion now.
+	set_deferred("monitoring", false)
 	visible = false
 	collected.emit(heal_amount)
 	queue_free()
