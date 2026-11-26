@@ -1,4 +1,4 @@
-# Estado canônico da colaboração — Claude Code ↔ ChatGPT
+# Estado canônico de desenvolvimento — BOLT · AVENTURA
 
 **Fonte única para o próximo turno.** Antes de editar, confirme este arquivo contra o HEAD, commits, branches e PRs reais do GitHub.
 
@@ -9,7 +9,7 @@
 - **Etapa 0 — Claude Code: ACCEPTED.** Fundação Godot 4.7.2 e protótipo técnico provisório aceitos; hardening integrado pela PR #3.
 - **Etapa 1 — ChatGPT: HANDOFF_READY.** Correção de reatribuição de ponteiro em `TouchControls`, regressão e execução da suíte no CI; entrega original `f3ab682`.
 - **PRs #2–#11: MERGED.** PR #7 reconciliou documentos raiz; PRs #8–#10 sincronizaram auditoria e continuidade; PR #11 concluiu a auditoria documental e registrou o ADR-001. PR #11 foi integrada por squash em `6f97ffc`. Nenhum código de gameplay foi alterado nessas PRs documentais.
-- **Escritor ativo:** ChatGPT, exclusivamente nesta PR curta de sincronização pós-PR #11. Após a integração e confirmação deste handoff, Claude Code assume a Etapa 2; o usuário inicia a sessão manualmente.
+- **Escritor ativo:** ChatGPT como único desenvolvedor, por decisão explícita do usuário em 2026-11-26. Claude Code está inativo no fluxo de escrita.
 - **Projeto executável:** Godot 4.7.2, GDScript, Android em paisagem. A base contém boot/menu, SceneFlow, player, touch/multitouch, HUD, sandbox e testes; não é a campanha completa.
 - **Validação máxima comprovada:** L2 (Godot headless/CI). Não há comprovação de APK exportado/instalado, teste visual, touch físico, safe area real ou desempenho em Android.
 - **PR #1:** continua OPEN e não mergeável (`mergeable_state=dirty`), com 17 commits exclusivos; a comparação atual de 2026-11-26 após PR #10 indica 139 commits de atraso. A contagem é volátil: consultar o compare atual antes de rebasear. Modifica 17 arquivos: quatro documentos de raiz e a diretiva dividida em 12 partes/índice. Não contém implementação de gameplay. Não mesclar automaticamente.
@@ -23,8 +23,8 @@
 |---|---|---|---|---|
 | 0 | Claude Code | ACCEPTED | Fundação e protótipo provisório; hardening PR #3 integrado | ChatGPT |
 | 1 | ChatGPT | HANDOFF_READY | `f3ab682`: correção multitouch, regressão e CI | Claude Code |
-| 2 | Claude Code | PENDING / aguardando início manual | Handoff Etapa 2; continuar Gate 1 / vertical slice | ChatGPT |
-| 3 | ChatGPT | Aguardando | Definir após auditoria e aceite da Etapa 2 | Claude Code |
+| 2 | ChatGPT | IN_PROGRESS | `feat/checkpoint-respawn-system`: checkpoint local e respawn na sandbox; CI pendente | ChatGPT |
+| 3 | ChatGPT | Aguardando | Próxima unidade após revisão/validação da Etapa 2 | ChatGPT |
 
 ## Protocolo de início de turno
 
@@ -86,3 +86,8 @@ Não avançar etapa só porque uma sessão terminou. Não marcar ACCEPTED por au
 - **Etapa 2:** próximo turno de implementação de Claude Code; auditar HEAD e handoff antes de editar.
 - **PR #4:** handoff da Etapa 2 integrado em 2026-11-26.
 - **PR #5:** auditoria integral e sincronização de continuidade integradas em 2026-11-26.
+
+
+## Mudança de responsabilidade — 2026-11-26
+
+O usuário autorizou ChatGPT a assumir sozinho todas as etapas de desenvolvimento do BOLT · AVENTURA, sem depender do Claude Code. Esta decisão substitui o fluxo alternado descrito em registros históricos. ChatGPT é o único escritor ativo; manter uma branch/PR por unidade, revisar os diffs, executar CI e integrar somente após evidência. Claude não deve iniciar trabalho concorrente. Estado atual: Etapa 2 em andamento na branch `feat/checkpoint-respawn-system`, base `8c502efaee16a47a31303c77d0efbbd4c847a5e8`.
