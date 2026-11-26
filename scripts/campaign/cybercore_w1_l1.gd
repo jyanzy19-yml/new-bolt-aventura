@@ -3,6 +3,8 @@ extends Node2D
 
 const LEVEL_PATH: String = "res://scenes/campaign/cybercore_w1_l1.tscn"
 const LEVEL_ID: String = "W1-L1"
+const NEXT_LEVEL_ID: String = "W1-L2"
+const NEXT_LEVEL_PATH: String = "res://scenes/campaign/cybercore_w1_l2.tscn"
 const CAMERA_LIMITS: Rect2i = Rect2i(0, -360, 2200, 620)
 
 @onready var _player: BoltPlayer = %Bolt
@@ -65,6 +67,6 @@ func _on_kill_zone_body_entered(body: Node2D) -> void:
 func _on_goal_body_entered(body: Node2D) -> void:
 	if body == _player and not _section_finished:
 		_section_finished = true
-		if not CampaignProgress.mark_level_completed(LEVEL_ID):
+		if not CampaignProgress.mark_level_completed(LEVEL_ID, NEXT_LEVEL_ID):
 			push_warning("W1-L1: não foi possível persistir a conclusão (%s)." % CampaignProgress.last_error)
-		_hud.show_result("Cybercore — trecho inicial concluído")
+		_hud.show_result("Cybercore — trecho inicial concluído", NEXT_LEVEL_PATH)
