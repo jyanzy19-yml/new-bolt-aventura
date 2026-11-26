@@ -105,13 +105,18 @@ func test_burst_spawns_one_shot_particles_and_releases_them() -> bool:
 
 
 func test_burst_releases_counter_when_parent_is_freed_before_timeout() -> bool:
-	# Reproduz o ownership real: BoltFeedback cria Burst como filho do nível.
-	await tree.create_timer(1.0).timeout
+	# Reproduz o ownership real: BoltFeedback cria Burst como filho do pai do jogador.
 	var save_system: Node = tree.root.get_node_or_null("SaveSystem")
 	check(save_system != null, "autoload SaveSystem disponível")
 	if save_system != null:
 		save_system.set("storage_path_override", "user://burst_teardown_regression.json")
 		save_system.call("delete_save")
+
+	# Drena efeitos de testes anteriores; o teste precisa de um slot no teto global.
+	for attempt in range(6):
+		if Burst.active_count() == 0:
+			break
+		await tree.create_timer(0.5).timeout
 
 	var level: Node = (load(LEVELS[0]) as PackedScene).instantiate()
 	tree.root.add_child(level)
@@ -119,17 +124,21 @@ func test_burst_releases_counter_when_parent_is_freed_before_timeout() -> bool:
 	var player: BoltPlayer = level.get_node("Bolt") as BoltPlayer
 	var feedback: BoltFeedback = player.get_node("Feedback") as BoltFeedback
 	var baseline: int = Burst.active_count()
+	check(baseline < Burst.MAX_ACTIVE, "há capacidade disponível para o efeito de feedback (baseline=%d)" % baseline)
 
-	# Uma partícula é disparada pelo mesmo callback usado no pulo real.
+	# Estado inicial controlado: exercita o mesmo callback de transição usado no pulo.
+	feedback.set("_previous_state", BoltPlayer.State.GROUNDED)
 	feedback.call("_on_state_changed", BoltPlayer.State.RISING)
-	check_eq(Burst.active_count(), baseline + 1, "BoltFeedback cria o Burst de pulo no nível")
-	# Completa o teto para estressar vários timeouts durante a destruição da fase.
-	for index in range(23):
+	check_eq(Burst.active_count(), baseline + 1, "BoltFeedback cria o Burst de pulo no pai do jogador")
+
+	# Preenche o restante do teto para estressar os callbacks durante a destruição da fase.
+	var remaining: int = Burst.MAX_ACTIVE - baseline - 1
+	for index in range(remaining):
 		var particles: CPUParticles2D = Burst.spawn(
 			level, Vector2(float(index) * 8.0, 0.0), Color.WHITE, 4, 50.0, 0.1
 		)
 		check(particles != null, "burst adicional %d criado" % index)
-	check_eq(Burst.active_count(), baseline + 24, "24 efeitos ativos antes do teardown")
+	check_eq(Burst.active_count(), Burst.MAX_ACTIVE, "teto global atingido antes do teardown")
 
 	level.free()
 	await tree.create_timer(0.8).timeout
