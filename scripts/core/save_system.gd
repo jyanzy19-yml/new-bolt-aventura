@@ -25,7 +25,7 @@ func save_payload(payload: Dictionary) -> bool:
 		last_error = "payload_not_json_compatible"
 		return false
 
-	var payload_json: String = JSON.stringify(payload)
+	var payload_json: String = _canonical_json(payload)
 	var checksum: String = _checksum(payload_json)
 	if checksum.is_empty():
 		last_error = "checksum_failed"
@@ -127,7 +127,11 @@ func _decode_file(path: String) -> Dictionary:
 	var raw: String = file.get_as_text()
 	file.close()
 
-	var parsed: Variant = JSON.parse_string(raw)
+	var parser: JSON = JSON.new()
+	var parse_error: Error = parser.parse(raw)
+	if parse_error != OK:
+		return {"ok": false, "error": "invalid_json"}
+	var parsed: Variant = parser.data
 	if typeof(parsed) != TYPE_DICTIONARY:
 		return {"ok": false, "error": "invalid_json"}
 	var envelope: Dictionary = parsed
@@ -137,7 +141,7 @@ func _decode_file(path: String) -> Dictionary:
 	var payload: Variant = envelope.get("payload")
 	if typeof(payload) != TYPE_DICTIONARY:
 		return {"ok": false, "error": "invalid_payload"}
-	var payload_json: String = JSON.stringify(payload)
+	var payload_json: String = _canonical_json(payload)
 	var expected_checksum: String = str(envelope.get("checksum", ""))
 	if expected_checksum.is_empty() or _checksum(payload_json) != expected_checksum:
 		return {"ok": false, "error": "checksum_mismatch"}
@@ -162,6 +166,10 @@ func _is_json_compatible(value: Variant) -> bool:
 			return true
 		_:
 			return false
+
+
+func _canonical_json(payload: Dictionary) -> String:
+	return JSON.stringify(payload, "", true, true)
 
 
 func _checksum(payload_json: String) -> String:
