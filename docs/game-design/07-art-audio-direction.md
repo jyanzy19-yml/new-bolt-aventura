@@ -14,7 +14,7 @@ A direção final de pixel art, resolução-base, escala de sprites, paletas, pr
 - Variações cosméticas não devem confundir leitura de gameplay.
 
 ## 4. Identidade dos mundos
-Cada mundo deve ter guia próprio de paleta, materiais, arquitetura, formas dominantes, fundo, primeiro plano, iluminação, partículas e assinatura sonora. Os temas específicos dos sete mundos permanecem a definir até aprovação.
+Cada mundo deve ter guia próprio de paleta, materiais, arquitetura, formas dominantes, fundo, primeiro plano, iluminação, partículas e assinatura sonora. As identidades centrais dos sete mundos e a ordem dos fragmentos estão definidas em `02-world-bible.md`; paletas finais, materiais, arquitetura detalhada, referências visuais e assinaturas musicais específicas ainda precisam de desenvolvimento e aprovação.
 
 ## 5. Animação
 Manter uma lista de estados e transições: idle, locomotion, start/stop, jump, fall, land, dash, hit, interact, victory/defeat e estados específicos aprovados. Definir duração, loop, cancelamento, prioridade e sincronização com gameplay.
