@@ -503,3 +503,13 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - **Estado de validação:** PENDENTE — nenhum Godot local disponível nesta sessão; clone local não foi possível por indisponibilidade de DNS/rede. Aguardando Godot CI nesta PR. Não declarar causa confirmada, teste por mutação aprovado ou boot 20/20 até observar logs reais.
 - **Limites:** sem alteração em SaveSystem, CampaignProgress, boot scene, Input Map, Dash, controles touch/multitouch, física ou progressão intencional; sem APK/Android físico.
 - **Próximo passo:** revisar os logs da Godot Validation e corrigir qualquer falha real antes de declarar a regressão encerrada.
+
+
+### Atualização após Godot CI #167 — boot ainda não corrigido
+
+- A suíte no runner passou: **93 testes / 1.307 verificações / 0 falhas**. O teste de transição executou 30 ciclos de SceneFlow para menu, W1-L1 e W1-L2 (722 verificações).
+- O smoke de boot falhou em **1/20**, com "Parse Error: Failed. [Resource file res://scenes/ui/main_menu.tscn:12]".
+- O mutation check anterior foi inválido: aceitava um WARNING contendo main_menu.tscn, sem exigir Parse Error/SCRIPT ERROR. Não conta como prova.
+- Nova hipótese em investigação: a primeira transição threaded é iniciada no mesmo ciclo de _ready() da cena Boot. Adicionada barreira de um process_frame antes da primeira chamada a SceneFlow.change_scene.
+- O workflow agora separa mutações: autoload direto com barreira, boot imediato sem barreira e combinação pré-correção; exige que a combinação original reproduza o erro e que a versão corrigida passe 20 boots.
+- **Estado:** PENDENTE. Não declarar causa raiz nem correção validada até os logs da nova execução.
