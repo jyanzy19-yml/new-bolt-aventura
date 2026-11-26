@@ -1,3 +1,15 @@
+## Sessão de desenvolvimento solo — 2026-11-26 (branch em revisão)
+
+- **Responsável:** ChatGPT, por autorização explícita do usuário para conduzir todas as etapas sem Claude.
+- **Base:** `main` em `8c502efaee16a47a31303c77d0efbbd4c847a5e8`.
+- **Branch:** `feat/checkpoint-respawn-system`.
+- **Unidade implementada nesta branch:** `BoltCheckpoint` reutilizável com ativação única, sinal contendo ID/posição de respawn e integração com a sandbox para atualizar o ponto de retorno ao cair. A sandbox continua sendo ambiente de desenvolvimento, não uma fase da campanha.
+- **Teste adicionado:** `tests/unit/test_checkpoints.gd::test_checkpoint_updates_respawn_target_once`; valida ativação única e uso do ponto ativado no respawn. Execução ainda pendente do Godot CI.
+- **Limites:** checkpoint apenas em memória durante a sessão; nenhum SaveSystem, progresso de campanha, APK, emulador ou teste em Android físico foi implementado/executado nesta unidade.
+- **Próxima ação:** revisar o diff completo, confirmar o CI Godot 4.7.2 e corrigir qualquer falha antes de abrir/aceitar a PR.
+
+---
+
 ## Snapshot confirmado após PR #10 — 2026-11-26
 
 - **HEAD real da main:** `1e5294cf112c014c21e43c51b4c8e797beceb9b6` (commit `docs: finalize live-state continuity`; PR #10 integrada por squash).
