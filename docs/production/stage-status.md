@@ -322,15 +322,16 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 
 ## Snapshot operacional — plano de execução em 26 etapas (2026-11-26)
 
-**Base:** `main` após PR #36, commit `afea046b6a481d48299641c9d8e529f6288d5256`.  
-**Unidade em execução:** `test/health-pickup-physical-contact` — regressão de contato físico do coletável de vida.  
-**CI pós-merge PR #36:** Godot Validation run `45877649854` SUCCESS; Docs Validation run `45877649923` SUCCESS. A suíte headless passou; contagem de testes não foi inferida dos metadados do job.
+**Base atualizada:** `main` após PR #46, commit `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`; snapshot documental mais recente `b48553312b2295af618c6900ec8a26688743f095`.  
+**Última unidade integrada:** PR #46 — OneWayPlatform.  
+**CI pré-merge PR #46:** Godot Validation `45887805114` SUCCESS (87 testes/548 verificações/0 falhas), Docs Validation `45887805097` SUCCESS e Android Debug Export `45887805269` SUCCESS.  
+**CI pós-merge PR #46:** consulta de workflow runs para o merge commit retornou zero execuções; não há confirmação de pós-merge.
 
 ### Estado das 26 etapas
 
 | Etapa | Área | Estado | Evidência / lacuna principal |
 |---:|---|---|---|
-| 01 | Auditoria integral do repositório | EM ANÁLISE | Inventário recursivo, fontes mestras, ADRs, estado Git/PRs e sistemas centrais inspecionados; auditoria integral de todos os recursos/cenas ainda em consolidação |
+| 01 | Auditoria integral do repositório | EM ANÁLISE | Inventário recursivo atualizado: 288 arquivos (56 GDScript, 19 cenas, 20 arquivos de teste unitário, 39 skills e 11 agentes); fontes mestras, ADRs, PRs e sistemas centrais revisados. Inspeção individual das 19 cenas/56 scripts e reconciliação completa de todos os recursos ainda pendentes |
 | 02 | Requisitos e planejamento | EM ANÁLISE | Master Directive, bíblias, especificações e roadmap existem; matriz de rastreabilidade específica das 26 etapas ainda precisa ser consolidada |
 | 03 | Arquitetura e organização | EM DESENVOLVIMENTO | Godot 4.7.2, cenas, scripts, autoloads e contratos existentes; arquitetura global ainda parcial |
 | 04 | Infraestrutura e sistemas centrais | EM DESENVOLVIMENTO | Boot, SceneFlow, SaveSystem e CampaignProgress implementados parcialmente |
@@ -348,7 +349,7 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 | 16 | Arquitetura de mundos e fases | EM DESENVOLVIMENTO | Atlas de 42 fases e fluxo de campanha; gerenciamento global de conteúdo ainda parcial |
 | 17 | Construção dos mundos | EM DESENVOLVIMENTO | Cybercore em blockout; mundos 2–7 sem ambientes executáveis |
 | 18 | Construção das fases | EM DESENVOLVIMENTO | W1-L1 e W1-L2 em blockout; demais fases sem cenas |
-| 19 | Obstáculos e exploração | EM DESENVOLVIMENTO | Checkpoint, coletável e campo energético; MovingPlatform (AnimatableBody2D) integrado e validado; OneWayPlatform em implementação; segredos/rotas opcionais pendentes |
+| 19 | Obstáculos e exploração | EM DESENVOLVIMENTO | Checkpoint, coletável, campo energético, MovingPlatform e OneWayPlatform integrados como componentes; OneWayPlatform tem CI pré-merge (87 testes/548 verificações), sem pós-merge confirmado nem integração em fase; segredos/rotas opcionais pendentes |
 | 20 | Narrativa e progressão | EM DESENVOLVIMENTO | Premissa/canon, abertura, tutorial e progressão W1-L1→W1-L2 parciais; campanha narrativa incompleta |
 | 21 | Interface e UX | EM DESENVOLVIMENTO | Menu, HUD, pausa, controles touch e overlay de carregamento básico; lock de input durante transição em validação; configurações, polimento visual e validação Android pendentes |
 | 22 | Arte e efeitos visuais | EM DESENVOLVIMENTO | Placeholders geométricos e feedback básico; arte final e pipeline de assets pendentes |
@@ -476,3 +477,13 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Consulta ao endpoint de workflow runs do commit de merge retornou lista vazia. Não afirmar CI pós-merge; as evidências disponíveis são exclusivamente pré-merge (87 testes/548 verificações, Docs e Android Export SUCCESS).
 - A revisão estática desta sessão cobriu `BoltPlayer`, `TouchControls`, `TouchButton`, `PlatformBlock`, `MovingPlatform`, `OneWayPlatform`, W1-L1 e testes de movimento/toque/plataforma. Isso não substitui execução local nem auditoria de todos os arquivos.
 - Próximo passo obrigatório: concluir inventário/auditoria do repositório e reconciliar o tracker de 26 etapas com o roadmap canônico antes de iniciar uma nova feature de gameplay.
+
+
+### Atualização do snapshot de 26 etapas — 2026-11-26 (após PR #46)
+
+- A base anterior `afea046b6a481d48299641c9d8e529f6288d5256` estava obsoleta. A base de gameplay atual é `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`; o HEAD documental após reconciliação é registrado no histórico Git.
+- A PR #46 foi integrada por squash. `SYS-026`/Etapa 19 deixa de ser “aguardando CI” e passa a componente integrado, com evidência apenas pré-merge: Godot 87 testes/548 verificações/0 falhas, Docs SUCCESS e Android Debug Export SUCCESS. Não há execução pós-merge registrada.
+- O inventário recursivo atual contém 288 arquivos: 56 `.gd`, 19 `.tscn`, 1 `.tres`, 20 testes unitários (`tests/unit/test_*.gd`), 39 skills e 11 agentes. Contagens são do tree Git da `main`, não de uma varredura de assets em runtime.
+- Etapa 01 permanece EM ANÁLISE: nem todos os 56 scripts e 19 cenas foram inspecionados individualmente; não declarar auditoria integral concluída.
+- Etapa 02 permanece EM ANÁLISE: falta matriz de rastreabilidade requisito → sistema → arquivo → teste → critério de aceite para as 26 etapas.
+- `com.example.boltaventura` permanece package ID placeholder. APK de CI é artefato debug; instalação, cold start, barras/safe area, toque físico e performance em aparelho não foram executados.
