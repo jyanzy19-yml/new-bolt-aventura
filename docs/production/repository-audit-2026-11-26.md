@@ -80,3 +80,62 @@ O router foi atualizado para encaminhar essas tarefas sem carregar todas as skil
 3. Durante a Etapa 2, usar bolt-godot-debugging e bolt-regression-engineering apenas nas áreas tocadas pelo Claude.
 4. Executar RISK-001 a RISK-005 com cenas e aparelho reais antes de declarar a vertical slice Android validada.
 5. Manter a PR #1 separada; esta branch não altera nem tenta resolver a divergência histórica dela.
+
+
+## Addendum — snapshot atualizado após PR #46 — 2026-11-26
+
+**Base de código:** `main` em `8ecfe0aa11eb911745bbe5e8e1b2211c03010702` (merge PR #46).  
+**Último HEAD documental observado antes deste adendo:** `603a13a993e8bdf207bfd12b5789edb74a474ffe` (reconciliação do tracker SYS-026).  
+**Método:** árvore Git recursiva via GitHub API, inspeção estática focalizada de scripts/cenas/testes e leitura das fontes mestras/ADRs. Nenhuma execução Godot local ou Android físico.
+
+### Inventário atual da árvore Git
+
+| Tipo | Quantidade |
+|---|---:|
+| Arquivos versionados | 288 |
+| GDScript (.gd) | 56 |
+| Cenas Godot (.tscn) | 19 |
+| Recursos .tres | 1 |
+| Testes unitários `tests/unit/test_*.gd` | 20 |
+| Skills Claude | 39 |
+| Agentes consultivos | 11 |
+
+Essas contagens descrevem a árvore versionada na branch principal no momento da consulta; não são contagens de recursos importados/runtime.
+
+### Estado Git e colaboração
+
+- A branch principal contém as integrações até PR #46.
+- A única PR aberta retornada pela busca é a PR #1 (`docs/master-directive-bolt`). Sua descrição afirma que o repositório seria apenas documental e exclui Dash; ambas as afirmações estão obsoletas em relação ao estado atual. Não mesclar sem rebase, revisão integral do diff e reconciliação dos documentos raiz.
+- Há diversas branches históricas e divergentes. Não tratá-las como trabalho ativo nem mesclar automaticamente.
+- O fluxo vigente mantém ChatGPT como escritor ativo único, conforme decisão do usuário registrada nos documentos de colaboração.
+
+### Sistemas e arquivos inspecionados nesta sessão
+
+- `project.godot`, `export_presets.cfg`, `scripts/core/scene_flow.gd`, `scripts/core/save_system.gd`, `scripts/campaign/campaign_progress.gd`.
+- `scripts/player/bolt_player.gd`, `scripts/input/action_buffer.gd`, `scripts/input/touch_controls.gd`, `scripts/input/touch_button.gd`.
+- `scripts/ui/hud.gd`, `scripts/ui/safe_area_margin.gd`, `scenes/ui/hud.tscn`.
+- `scripts/world/platform_block.gd`, `scripts/world/moving_platform.gd`, `scripts/world/one_way_platform.gd`.
+- `scripts/campaign/cybercore_w1_l1.gd`, testes de movimento, multitouch e plataforma unidirecional; documentos técnicos de touch/display, matriz QA, roadmap e diretriz mestre.
+
+### Achados confirmados / estado de produção
+
+1. **Package ID ainda é placeholder:** `com.example.boltaventura` em `export_presets.cfg`. Não substituir por domínio inventado; a identidade Android definitiva precisa de decisão do proprietário antes de release.
+2. **Validação física Android não existe ainda:** APK debug exportado e assinatura v2/v3 verificada em CI não comprovam instalação, cold start, barras do sistema, safe area, toque, suspensão/retomada, FPS ou memória em aparelho.
+3. **Safe area é risco conhecido, não bug reproduzido:** conversão de coordenadas precisa ser confrontada com valores reais de screen/safe rect/window/viewport em Android, especialmente telas com recorte, navegação por gestos e multi-window.
+4. **Input acumulado global é decisão técnica sem benchmark físico:** `SceneFlow` desativa `Input.use_accumulated_input`; medir latência e custo sob multitouch/arrasto antes de declarar benefício.
+5. **Touch é validado sinteticamente:** testes cobrem multitouch, reatribuição de pointer ID, cancelamento, pausa e transição; não medem digitalizador, latência ou ergonomia.
+6. **Loading/SceneFlow:** threaded loading, overlay, pausa e input lock estão presentes; falha real de carregamento, suspensão durante transição e stress de memória precisam de testes de integração.
+7. **Gameplay segue blockout/provisório:** `BoltPlayer` usa `BoltTuning` provisório; W1-L1/W1-L2 ainda são blockouts; placeholders de arte persistem.
+8. **SYS-026 atualizado:** OneWayPlatform foi integrada na PR #46. Evidência disponível: Godot CI pré-merge 87 testes/548 verificações/0 falhas, Docs SUCCESS e Android Debug Export SUCCESS. A consulta de workflow runs do merge commit retornou zero execuções; não declarar pós-merge CI.
+9. **SYS-025:** MovingPlatform permanece componente reutilizável integrado, com transporte de BOLT coberto por CI pós-merge PR #45; não foi inserido em fase.
+
+### Cobertura ainda incompleta da Etapa 01
+
+A árvore inteira foi inventariada e as fontes mestras/ADRs/PRs foram revisadas, mas esta rodada não inspecionou individualmente todos os 56 scripts e 19 arquivos de cena nem todos os recursos binários/importados. Portanto, **Etapa 01 permanece EM ANÁLISE**. Não declarar auditoria integral concluída até fechar o inventário por subsistema, revisar todas as cenas e conexões de sinais, verificar referências quebradas e reconciliar o resultado com a matriz QA.
+
+### Próxima sequência obrigatória
+
+1. Completar inspeção de cenas e scripts restantes por subsistema, sem alterações de gameplay não relacionadas.
+2. Revisar referências `res://`, sinais/conexões, autoloads, colisões e camadas em todas as cenas.
+3. Consolidar matriz de rastreabilidade das 26 etapas (requisito → fonte canônica → sistema/arquivo → teste → critério de aceite).
+4. Só então fechar Etapa 01 e Etapa 02 com evidências; depois selecionar a próxima unidade técnica.
