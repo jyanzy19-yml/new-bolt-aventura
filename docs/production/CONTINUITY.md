@@ -1,3 +1,17 @@
+## Estado atual — entrada da campanha em desenvolvimento
+
+- **Base main:** `d6301e887c6c3a54ab532fcc2f75cb983c3e9840`.
+- **Branch:** `feat/campaign-opening-tutorial`.
+- **Responsável:** ChatGPT como único desenvolvedor, por decisão explícita do usuário.
+- **Fluxo:** menu principal → storyboard funcional de abertura → tutorial jogável guiado por robô mensageiro provisório → blockout de W1-L1 Cybercore.
+- **Abertura:** quatro páginas baseadas no canon aprovado (Grande Colapso/Núcleo da Eternidade, despertar de BOLT em Cybercore, união com NEXO, sete fragmentos). Ainda não é cinemática final animada e não possui áudio final.
+- **Tutorial:** introduz deslocamento, salto e Dash usando o player/HUD/touch existentes. Textos são instruções funcionais provisórias; não definem a personalidade ou história do mensageiro.
+- **W1-L1:** blockout jogável com BOLT, HUD/touch, checkpoint local, respawn e objetivo de trecho. Ainda faltam inimigos, combate, assets finais, áudio, save/load e validação Android.
+- **Teste:** `tests/unit/test_campaign_entry.gd`, verificando carregamento e contratos estruturais das três cenas. CI pendente.
+- **Próxima ação:** revisar o diff final e integrar a PR #15 após confirmar os checks finais; depois selecionar a próxima unidade da campanha.
+
+---
+
 ## Estado atual após PR #13 — 2026-11-26
 
 - **Main HEAD:** `09317a2c1b7c1113e7ff2f142a82b495998f7578` (PR #13 integrada por squash).

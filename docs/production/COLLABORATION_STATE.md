@@ -4,7 +4,7 @@
 
 ## Estado vigente — revisão de 2026-11-26
 
-**Último merge confirmado na main:** PR #13 integrada por squash no commit `09317a2c1b7c1113e7ff2f142a82b495998f7578` em 2026-11-26; confirmar novamente o SHA antes de cada novo turno.
+**Último merge confirmado na main:** PR #14 integrada por squash; base desta entrega `d6301e887c6c3a54ab532fcc2f75cb983c3e9840`. Confirmar novamente o SHA antes de cada novo turno.
 
 - **Etapa 0 — Claude Code: ACCEPTED.** Fundação Godot 4.7.2 e protótipo técnico provisório aceitos; hardening integrado pela PR #3.
 - **Etapa 1 — ChatGPT: HANDOFF_READY.** Correção de reatribuição de ponteiro em `TouchControls`, regressão e execução da suíte no CI; entrega original `f3ab682`.
@@ -23,7 +23,7 @@
 |---|---|---|---|---|
 | 0 | Claude Code | ACCEPTED | Fundação e protótipo provisório; hardening PR #3 integrado | ChatGPT |
 | 1 | ChatGPT | HANDOFF_READY | `f3ab682`: correção multitouch, regressão e CI | Claude Code |
-| 2 | ChatGPT | IN_PROGRESS | PR #13 integrada em `09317a2`; checkpoint local e respawn na sandbox; Godot CI #50 e Docs CI #167 SUCCESS (43 testes, 179 verificações, 0 falhas) | ChatGPT |
+| 2 | ChatGPT | IN_PROGRESS | PR #13 integrada; sequência de abertura/tutorial/W1-L1 em `feat/campaign-opening-tutorial`; Godot CI #54 e Docs CI #173 SUCCESS (44 testes, 205 verificações, 0 falhas) | ChatGPT |
 | 3 | ChatGPT | Aguardando | Próxima unidade após revisão/validação da Etapa 2 | ChatGPT |
 
 ## Protocolo de início de turno
@@ -100,3 +100,13 @@ O usuário autorizou ChatGPT a assumir sozinho todas as etapas de desenvolviment
 - Responsável exclusivo pelas próximas etapas: ChatGPT, conforme decisão explícita do usuário; Claude Code permanece inativo no fluxo de escrita.
 - Godot CI #50 (`45841890027`) SUCCESS: Godot 4.7.2, 43 testes, 179 verificações, 0 falhas. Docs CI #167 (`45841889890`) SUCCESS.
 - Próximo trabalho: continuar a vertical slice/sistemas centrais sobre a base existente, em branch própria e com testes. Não declarar validação Android sem APK/dispositivo.
+
+
+## Sessão atual — entrada da campanha
+
+- Base confirmada: `main` em `d6301e887c6c3a54ab532fcc2f75cb983c3e9840`.
+- Branch: `feat/campaign-opening-tutorial`.
+- Implementação: storyboard funcional de abertura, tutorial jogável guiado por robô mensageiro provisório e blockout W1-L1 Cybercore.
+- Fluxo: menu → abertura → tutorial → W1-L1. Sandbox permanece ferramenta de desenvolvimento, não fase da campanha.
+- Responsável único: ChatGPT; Claude permanece inativo no fluxo de escrita.
+- CI/revisão pendentes; nenhuma validação Android física foi realizada.
