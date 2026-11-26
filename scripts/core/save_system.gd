@@ -16,11 +16,26 @@ var storage_path_override: String = ""
 
 
 func has_save() -> bool:
-	return FileAccess.file_exists(_primary_path()) or FileAccess.file_exists(_backup_path())
+	return (
+		FileAccess.file_exists(_primary_path())
+		or FileAccess.file_exists(_temp_path())
+		or FileAccess.file_exists(_backup_path())
+	)
 
 
 func save_payload(payload: Dictionary) -> bool:
 	last_error = ""
+
+	# Um envelope de versão futura em qualquer slot pode conter o único estado
+	# recuperável. Não o apaga, não o rotaciona e não o substitui silenciosamente.
+	for path: String in [_primary_path(), _temp_path(), _backup_path()]:
+		if not FileAccess.file_exists(path):
+			continue
+		var existing: Dictionary = _decode_file(path)
+		if str(existing.get("error", "")) == "unsupported_format_version":
+			last_error = "unsupported_format_version"
+			return false
+
 	if not _is_json_compatible(payload):
 		last_error = "payload_not_json_compatible"
 		return false
@@ -54,9 +69,8 @@ func save_payload(payload: Dictionary) -> bool:
 		last_error = "temp_write_failed:%s" % error_string(write_error)
 		return false
 
-	# Se o arquivo principal estiver corrompido, mas o backup for válido, restaura o
-	# último estado íntegro antes de rotacionar. Nunca substitui um backup recuperável
-	# pela cópia corrompida do arquivo principal.
+	# Se o principal estiver corrompido, restaura o backup válido antes de
+	# rotacionar. A cópia corrompida nunca substitui a última cópia íntegra.
 	if FileAccess.file_exists(_primary_path()):
 		var primary_validation: Dictionary = _decode_file(_primary_path())
 		if not bool(primary_validation.get("ok", false)):
@@ -108,8 +122,6 @@ func save_payload(payload: Dictionary) -> bool:
 			last_error = "commit_and_restore_failed:%s" % error_string(restore_error)
 		return false
 
-	# Mantém o backup anterior após o commit. Ele é a cópia last-known-good caso
-	# o arquivo principal seja corrompido ou uma gravação futura seja interrompida.
 	last_error = ""
 	return true
 
@@ -119,15 +131,48 @@ func load_payload() -> Dictionary:
 	var primary: Dictionary = _decode_file(_primary_path())
 	if bool(primary.get("ok", false)):
 		return primary["payload"] as Dictionary
+	if str(primary.get("error", "")) == "unsupported_format_version":
+		last_error = "unsupported_format_version"
+		return {}
+
+	# Um .tmp íntegro representa uma gravação que terminou de ser escrita,
+	# mas pode não ter sido promovida antes de uma interrupção do processo.
+	# Ele é mais recente que o backup e só é considerado quando o principal
+	# não é válido. Uma versão futura no temporário também bloqueia downgrade.
+	var temporary: Dictionary = _decode_file(_temp_path())
+	if str(temporary.get("error", "")) == "unsupported_format_version":
+		last_error = "unsupported_format_version"
+		return {}
+	if bool(temporary.get("ok", false)):
+		var primary_cleanup_error: Error = _remove_if_exists(_primary_path())
+		if primary_cleanup_error != OK:
+			last_error = "recovered_temp_unpromoted:%s" % error_string(primary_cleanup_error)
+			return temporary["payload"] as Dictionary
+		var promotion_error: Error = DirAccess.rename_absolute(
+			ProjectSettings.globalize_path(_temp_path()),
+			ProjectSettings.globalize_path(_primary_path())
+		)
+		if promotion_error != OK:
+			last_error = "recovered_temp_unpromoted:%s" % error_string(promotion_error)
+			return temporary["payload"] as Dictionary
+		last_error = "recovered_temp"
+		return temporary["payload"] as Dictionary
 
 	var backup: Dictionary = _decode_file(_backup_path())
 	if bool(backup.get("ok", false)):
 		last_error = "recovered_backup"
 		return backup["payload"] as Dictionary
-
-	if str(primary.get("error", "")) == "missing" and str(backup.get("error", "")) == "missing":
+	if str(backup.get("error", "")) == "unsupported_format_version":
+		last_error = "unsupported_format_version"
 		return {}
-	last_error = str(primary.get("error", backup.get("error", "load_failed")))
+
+	if (
+		str(primary.get("error", "")) == "missing"
+		and str(temporary.get("error", "")) == "missing"
+		and str(backup.get("error", "")) == "missing"
+	):
+		return {}
+	last_error = str(primary.get("error", temporary.get("error", backup.get("error", "load_failed"))))
 	return {}
 
 
