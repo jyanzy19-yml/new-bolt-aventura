@@ -42,6 +42,33 @@ A hierarquia da fonte é a do MASTER_DIRECTIVE.md e da diretriz mestra de design
 | GAP-021 | P1 | Legado do protótipo | O protótipo HTML histórico continha Blast, Voar e seleção de armas 1–3; o escopo Godot atual não apresenta equivalência explícita para todos esses comandos | Comparar o protótipo legado com o prompt/canon atual e registrar para cada habilidade: preservada, substituída, removida por decisão ou pendente. Não reintroduzir nem descartar silenciosamente | Histórico técnico do projeto; MASTER_DIRECTIVE.md; prompt mestre; ADRs | 02, 06, 07, 11, 12 |
 | GAP-022 | P2 | Release / créditos | Campanha, arte e áudio finais ainda não existem; release candidate não iniciado | Definir créditos, proveniência, assinatura release, versão, changelog, migração e checklist de publicação | definition-of-done.md; android-release-checklist.md; prompt mestre | 02, 22, 23, 25, 26 |
 
+## 2.1 Classificação explícita de cada lacuna
+
+| ID | Classificação da fonte | Observação |
+|---|---|---|
+| GAP-001 | REQUISITO | A vertical slice é obrigatória; os detalhes do level blueprint permanecem a definir |
+| GAP-002 | REQUISITO + PARÂMETROS PROVISÓRIOS | Dash e movimento existem; valores e feel não são canon final |
+| GAP-003 | REQUISITO | Android/touch é plataforma-alvo; evidência física pendente |
+| GAP-004 | REQUISITO | Save/progressão é obrigatório; lifecycle físico e migrações futuras pendentes |
+| GAP-005 | A DEFINIR | Função de preservação é canon; caracterização e origem técnica específica estão abertas |
+| GAP-006 | A DEFINIR / PROPOSTA | NEXO e viagem temporal são canon; detalhes de forma, custo e capacidades ainda não |
+| GAP-007 | A DEFINIR | Identidade/objetivo central do Arquiteto são canon; biografia e métodos específicos não |
+| GAP-008 | A DEFINIR | Ordem/nome dos fragmentos é canon; origem e mecânica detalhada não |
+| GAP-009 | REQUISITO + PROPOSTAS | 7×6 fases é estrutura aprovada; conteúdo detalhado do blueprint continua proposta até aprovação |
+| GAP-010 | REQUISITO + A DEFINIR | Meta de cinco arquétipos distintos por mundo é requisito; catálogo/padrões são conteúdo pendente |
+| GAP-011 | REQUISITO + A DEFINIR | Guardião/fragmento no fim de cada mundo é estrutura aprovada; fichas dos chefes estão pendentes |
+| GAP-012 | PROPOSTA / A DEFINIR | Pistola Crono básica existe; Tríplice Prisma e Laser Nexo permanecem propostas |
+| GAP-013 | A DEFINIR | Direção macro existe; especificação final de arte/asset pipeline ainda não |
+| GAP-014 | REQUISITO + A DEFINIR | Sistema de áudio é requisito de produto; músicas, SFX e mix ainda não especificados |
+| GAP-015 | A DEFINIR / PROPOSTA | Premissa e sequência inicial são canon; elenco/diálogos detalhados ainda não |
+| GAP-016 | REQUISITO + A DEFINIR | UX e acessibilidade são requisitos; opções e especificação final pendentes |
+| GAP-017 | REQUISITO | Hardware e meta preferencial 60 FPS estão documentados; budgets medidos ainda não |
+| GAP-018 | DECISÃO DO PROPRIETÁRIO | Application ID definitivo deve ser escolhido pelo usuário |
+| GAP-019 | A DEFINIR | Inventário/economia não devem ser assumidos como parte do loop sem decisão |
+| GAP-020 | DECISÃO DO PROPRIETÁRIO | Idiomas além de pt-BR dependem de definição de escopo |
+| GAP-021 | A DEFINIR | Disposição das mecânicas do protótipo HTML depende de comparação e decisão explícita |
+| GAP-022 | REQUISITO + A DEFINIR | Release/credits são obrigatórios; dados finais e assinatura dependem de conteúdo e proprietário |
+
 ## 3. Decisões já fechadas — não reabrir sem solicitação
 
 | ID | Decisão | Fonte |
@@ -136,4 +163,4 @@ Os critérios acima são gates de aceite, não resultados já alcançados. A exi
 
 ## 8. Estado de conclusão da Etapa 02
 
-O registro cobre 22 lacunas, oito decisões fechadas, owners, dependências, critérios verificáveis para os quatro requisitos P0 e onze conflitos/documentos obsoletos identificados (DOC-001…DOC-011). Ainda falta revisar cada linha contra o prompt mestre e todas as especificações, confirmar se há lacunas omitidas, registrar aprovação das decisões materiais e manter a matriz/tracker sincronizados. **Etapa 02 permanece EM DESENVOLVIMENTO.**
+O registro cobre 22 lacunas, oito decisões fechadas, owners, dependências, critérios verificáveis para os quatro requisitos P0 e onze conflitos/documentos obsoletos identificados (DOC-001…DOC-011). A revisão cruzada do prompt mestre, bíblias, especificações técnicas, ADRs, código e snapshots foi executada nesta etapa; conflitos encontrados estão registrados em DOC-001…DOC-011 e corrigidos ou historicamente emendados. As decisões de canon e produto que pertencem ao usuário permanecem abertas como GAPs com owner explícito, sem bloquear o fechamento do planejamento. **Etapa 02 permanece EM DESENVOLVIMENTO.**
