@@ -90,6 +90,6 @@ A numeração operacional organiza o trabalho, mas não obriga serialização ab
 ## 6. Estado desta matriz
 
 - **Etapa 01:** concluída como auditoria estática; relatório em `repository-audit-2026-11-26.md`.
-- **Etapa 02:** concluída como rastreabilidade e planejamento; matriz + registro GAP-001…GAP-022, DOC-001…DOC-011, owners, dependências e critérios P0 integrados. Decisões de canon/produto ainda abertas permanecem rastreadas, sem bloquear o planejamento.\n- **Etapa 03:** em desenvolvimento; mapa atual de runtime/ownership em docs/technical/09-current-architecture-map.md.
+- **Etapa 02:** concluída como rastreabilidade e planejamento; matriz + registro GAP-001…GAP-022, DOC-001…DOC-011, owners, dependências e critérios P0 integrados. Decisões de canon/produto ainda abertas permanecem rastreadas, sem bloquear o planejamento.\n- **Etapa 03:** em desenvolvimento; mapa de runtime/ownership integrado pela PR #51 em docs/technical/09-current-architecture-map.md; revisão de dependências/sinais/lifecycle ainda pendente.
 - **Etapas 03–26:** status conforme `stage-status.md`; linhas não significam que o conteúdo final já existe.
 - **Limites conhecidos:** package ID `com.example.boltaventura` é placeholder; instalação Android, toque físico, barras/safe area, profiling e sessão prolongada não foram executados.

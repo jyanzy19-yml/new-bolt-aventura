@@ -1,20 +1,20 @@
 ## Snapshot vigente — 2026-11-26
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
-- **Main HEAD após PR #50 e classificação dos GAPs:** `13dc16625019f9f5c1351daee6ec63406eed4b59`; PR #50 integrou registro de lacunas, ADR-0006 e reconciliação de contratos de campanha.
+- **Main HEAD após PR #51:** `c64ea0ed5c97d538f665bf2bc0c6fcda754c5c5e`; PR #51 integrou o mapa arquitetural atual e fechou a entrega documental da Etapa 02.
 - **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético e progressão W1-L1→W1-L2.
 - **Última correção de gameplay:** PR #47 — estado inicial `initial_active=false` do `TimedEnergyGate`, merge `2636226c4027625649e66c51ff64d7e2e56168a6`.
 - **Último componente de plataforma:** PR #46 — `OneWayPlatform`, merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`; PR #45 adicionou `MovingPlatform`.
-- **Última unidade documental:** PR #50 — registro de 22 lacunas, owners, dependências, critérios P0 e ADR-0006; Docs CI SUCCESS. Commit adicional `13dc166` classificou explicitamente os GAPs e passou Docs CI.
+- **Última unidade documental:** PR #51 — mapa de arquitetura atual, ownership, fluxo de boot e contratos; Docs CI pré/pós-merge SUCCESS. Etapa 02 está concluída.
 - **Escritor ativo:** ChatGPT como único escritor, por decisão explícita do usuário; Claude permanece inativo para escrita concorrente.
-- **Etapas operacionais:** Etapas 01 e 02 CONCLUÍDAS (auditoria estática e planejamento rastreável); Etapa 03 EM DESENVOLVIMENTO (mapa de arquitetura atual); etapas 04–26 conforme `stage-status.md`. Gate 0 estático concluído; Gate 1 continua em andamento.
+- **Etapas operacionais:** Etapas 01 e 02 CONCLUÍDAS; Etapa 03 EM DESENVOLVIMENTO (revisão do grafo arquitetural após mapa PR #51); etapas 04–26 conforme `stage-status.md`. Gate 0 estático concluído; Gate 1 continua em andamento.
 - **CI pós-merge PR #46:** Godot `45888110305`, Docs `45888110285`, Android Export `45888110166`: SUCCESS; 87 testes/548 verificações/0 falhas.
 - **CI pós-merge PR #47:** Godot `45894802128`, Docs `45894802067`, Android Export `45894802116`: SUCCESS; 88 testes/553 verificações/0 falhas. APK 28.461.057 bytes, SHA-256 `c3ca03958eecf120f1a9f5f1e4fae3851fb7560bca303c8eb5a930f987b58123`, assinatura v2/v3 válida; package ID continua placeholder `com.example.boltaventura`.
 - **CI pós-merge PR #48:** Docs `45895074739` SUCCESS.
 - **PR #1:** continua OPEN, antiga e divergente; não mesclar/rebasear automaticamente. Revisar o diff inteiro e reconciliar documentos raiz antes de qualquer decisão.
 - **Dash:** decisão canônica aprovada e vigente; deve permanecer conforme `docs/production/ADR-001-DASH.md`.
 - **Limites:** W1-L1/W1-L2 continuam blockouts. APK debug exportado, mas não instalado em aparelho. Toque físico, safe area, barras, lifecycle, profiling e performance Android permanecem pendentes.
-- **Próximo passo:** revisar o mapa arquitetural da Etapa 03 contra os scripts/cenas reais, fechar ownership e grafo de dependências sem refatoração estética; depois selecionar uma unidade de Gate 1 que avance W1-L1/W1-L2.
+- **Próximo passo:** concluir a auditoria de dependências/sinais/lifecycle da Etapa 03, documentar o acoplamento Player/Combat e confirmar se há ciclos adicionais; depois selecionar uma unidade de Gate 1 que avance W1-L1/W1-L2.
 
 ---
 
