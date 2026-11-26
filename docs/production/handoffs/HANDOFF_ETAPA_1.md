@@ -58,7 +58,7 @@
 |---|---|---|---|---|
 | Revisão estática | Inspeção dos commits, diffs e fontes atuais | GitHub, branch main | Concluída; achado S3 identificado e corrigido | Commits acima |
 | Godot import/headless | `godot --headless --editor --path . --import --quit` | GitHub Actions, Ubuntu, Godot 4.7.2 | SUCCESS | [Godot Run #36](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45801754847) |
-| Testes automatizados | `godot --headless --path . --script res://tests/test_runner.gd` | Mesmo job, Godot 4.7.2 | Exit 0. 42 métodos `test_*` em 9 arquivos; runner não reportou falha | [Godot Run #31](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45801225080) |
+| Testes automatizados | `godot --headless --path . --script res://tests/test_runner.gd` | Mesmo job, Godot 4.7.2 | Exit 0. 42 testes, 171 verificações, 0 falhas (log do runner no GitHub Actions) | [Godot Run #36](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45801754847) |
 | CI documental | Workflow `docs-validation.yml` | GitHub Actions | SUCCESS no commit de implementação | [Docs Run #124](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45801754909) |
 | Editor / emulador | Abrir e observar projeto no editor/emulador | — | **NÃO EXECUTADO**; este ambiente não disponibilizou Godot/editor/emulador | — |
 | Android físico | Instalar e testar toque/imersão | — | **NÃO EXECUTADO**; nenhum aparelho Android foi usado | — |
@@ -66,7 +66,7 @@
 
 - **Nível máximo de validação alcançado (L0–L5):** L2 — importação e testes headless via GitHub Actions.
 - **Testes não executados e por quê:** execução local não disponível (`godot`/ `godot4` não encontrados no ambiente); editor gráfico, emulador, Android físico, exportação APK, toque físico, barras, FPS e memória não foram executados.
-- **Logs/relatórios/capturas:** GitHub Actions Runs #31 e #119; logs detalhados não foram exportados para este handoff.
+- **Logs/relatórios/capturas:** GitHub Actions Runs #36 e #124; logs detalhados não foram exportados para este handoff.
 - **Limitações do ambiente:** sem binário Godot local, SDK Android, export templates, emulador ou aparelho conectado. CI é headless e não comprova UX visual ou hardware.
 
 ## Riscos e continuidade
