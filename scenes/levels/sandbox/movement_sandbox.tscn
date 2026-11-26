@@ -1,9 +1,10 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/movement_sandbox.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/world/platform_block.tscn" id="2_block"]
 [ext_resource type="PackedScene" path="res://scenes/player/bolt.tscn" id="3_player"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
+[ext_resource type="PackedScene" path="res://scenes/levels/checkpoint.tscn" id="5_checkpoint"]
 
 [sub_resource type="RectangleShape2D" id="Shape_kill"]
 size = Vector2(4000, 200)
@@ -64,6 +65,10 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
 shape = SubResource("Shape_kill")
+
+[node name="Checkpoint" parent="." instance=ExtResource("5_checkpoint")]
+unique_name_in_owner = true
+position = Vector2(1120, -24)
 
 [node name="Goal" type="Area2D" parent="."]
 unique_name_in_owner = true
