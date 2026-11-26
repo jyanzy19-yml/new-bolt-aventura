@@ -530,3 +530,19 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - **Causa raiz confirmada:** a primeira compilação/carga do script main_menu.gd dentro do carregamento threaded da PackedScene falha no cold boot Godot 4.7.2. O script deve ser carregado/compilado na thread principal antes da solicitação threaded da cena. As referências diretas aos autoloads não são a causa independente.
 - Removidas as alterações runtime-only de menu/W1/HUD, pois a mutação demonstrou que não eram necessárias. Preservado o código original dessas cenas; permanece apenas o prewarm em Boot.
 - **Revalidação final pendente** após a restauração dos scripts originais e simplificação da mutação CI.
+
+
+### Fechamento técnico do Defeito 1 — Godot Validation #190
+
+<badge>Validado em CI headless</badge>
+
+- Godot Validation run 45907658225: SUCCESS.
+- Suíte: **93 testes / 1.307 verificações / 0 falhas**.
+- SceneFlow repetido: **722 verificações** em 30 ciclos para cada uma das três cenas (menu, W1-L1, W1-L2).
+- Cold boot verbose: exit 0.
+- Boot smoke: **20/20 processos independentes** passaram.
+- Mutação removendo o prewarm do script do menu reproduziu o Parse Error original; o passo de mutação passou.
+- Causa raiz confirmada: a primeira carga de main_menu.gd não deve ocorrer como dependência de PackedScene no carregador threaded; o script é pre-carregado na thread principal antes de SceneFlow solicitar a cena.
+- Referências diretas a autoload não são causa independente; scripts de menu/W1/HUD foram mantidos no estado original.
+- **Limite:** validação headless Linux; Android físico, renderização, touch, FPS, RAM e térmica não foram testados. Android Debug Export foi cancelado neste run.
+- PR #58 OPEN, mergeable, não integrada.
