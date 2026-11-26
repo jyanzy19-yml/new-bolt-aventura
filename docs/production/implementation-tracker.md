@@ -26,9 +26,9 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | ID | Sistema / entrega | Status | Evidência / observação |
 |---|---|---|---|
 | SYS-001 | Projeto Godot e versão fixada | Implementado | `project.godot`, `.godot-version` = 4.7.2. Evidência L2: `--headless --import` sem erros; `tests/test_runner.gd` 0 falhas (Godot 4.7.2 headless, Linux). Não validado em editor gráfico nem Android. Ver [06-godot-project-foundation.md](../technical/06-godot-project-foundation.md) |
-| SYS-002 | Configuração Android, paisagem e renderer | Implementado | Orientação 4 (sensor landscape), viewport 960×540 (provisório), GL Compatibility (provisório), preset Android com `screen/immersive_mode=true` (ADR-0003); PR #38 integrou export Android debug em CI e gerou APK assinado/verificado (run `45879045098`, SHA-256 registrado em CI_AND_VALIDATION_PIPELINE.md). Package ID placeholder; instalação e validação física pendentes |
+| SYS-002 | Configuração Android, paisagem e renderer | Implementado | Orientação 4 (sensor landscape), viewport 960×540 (provisório), GL Compatibility (provisório), preset Android com `screen/immersive_mode=true` (ADR-0003); PR #38 integrou export Android debug em CI. PR #39 repetiu export no commit `0e94f7e4` (run `45881252046`); package ID placeholder, instalação e validação física pendentes |
 | SYS-003 | Arquitetura, cenas e recursos compartilhados | Em andamento | Boot, menu, `SceneFlow`, `SaveSystem`, `CampaignProgress`, `Actions`, `SafeAreaMargin`, `BoltTuning`, `PlatformBlock` e HUD. Menu/retomada reconhece W1-L1 e W1-L2 na main após PR #34; demais contratos pendentes |
-| SYS-004 | Input abstrato e multitouch | Em andamento | `TouchControls`/`TouchButton` rastreiam ponteiros independentes; `ActionBuffer` rastreia JUMP/DASH/ATTACK e a branch `fix/action-buffer-lifecycle-clear-v2` adiciona limpeza de edges em pausa/suspensão/perda de foco com regressões. CI desta branch pendente; toque físico NÃO EXECUTADO |
+| SYS-004 | Input abstrato e multitouch | Em andamento | `TouchControls`/`TouchButton` rastreiam ponteiros independentes; `ActionBuffer` limpa edges em pausa/suspensão/perda de foco. PR #39 integrada; Godot CI: 72 testes/451 verificações/0 falhas, incluindo regressões de JUMP e DASH. Teste de interrupção em Android físico ainda NÃO EXECUTADO |
 | SYS-005 | BOLT: controller, estados e animação | Em andamento | `BoltPlayer` (GROUNDED/RISING/FALLING/DASHING), vida/dano, knockback, invulnerabilidade e API de cura. Dash preservado. Placeholders e valores provisórios; sem validação física Android |
 | SYS-006 | Movimento, salto, All Jump e dash | Em andamento | Corrida, pulo variável, pulo duplo, coyote, buffer, dash aéreo único (`BoltTuning` provisório). Bot headless completa a sandbox. **Feel não avaliado por humano**; semântica de "All Jump" não confirmada em fonte aprovada — não canonizada |
 | SYS-007 | Câmera e limites de fase | Em andamento | `Camera2D` com suavização, drag margins e limites definidos pela sandbox. Não avaliado visualmente/em aparelho |
@@ -47,7 +47,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-020 | Loading, transições e gestão de memória | Em andamento | `SceneFlow` usa carregamento threaded, bloqueia transições concorrentes e sinaliza sucesso/falha; testado headless. Gestão abrangente de memória/preload ainda não implementada |
 | SYS-021 | Pipeline de assets e proveniência | Não iniciado | Pipeline do jogo a estabelecer |
 | SYS-022 | Testes automatizados e regressão | Em andamento | Workflow Godot 4.7.2 executa import + `tests/test_runner.gd`; PRs #34/#35: 69 testes, 439 verificações, 0 falhas em Godot CI pré/pós-merge; PR #35 valida contato físico real da `Area2D`; Docs CI SUCCESS. Headless não equivale a QA visual ou Android físico |
-| SYS-023 | Exportação, instalação e QA Android | Em andamento | PR #38 integrada: pipeline Godot 4.7.2 exportou APK debug, verificou assinatura v2/v3, package ID provisório e SHA-256; artifact `bolt-aventura-android-debug-5be706c042fceaa66dadf2509ffafd0833ad3617`. Instalação, inicialização, touch, safe area e QA físico ainda não executados |
+| SYS-023 | Exportação, instalação e QA Android | Em andamento | PR #38 integrou pipeline Godot 4.7.2. PR #39 repetiu export com artifact `bolt-aventura-android-debug-7415dfb988faf2dd63f9ff289106e7f7205dcdd1`, assinatura v2/v3 e SHA-256 `db03a42b909781a1f5e7c94d025615e1aa5f397c8ebd306ba30cddf84eca14b0`. Package ID provisório; instalação, inicialização, touch, safe area e QA físico ainda não executados |
 | SYS-024 | Créditos, encerramento e release candidate | Não iniciado | Sem campanha implementada |
 
 ## 4. Rastreador das 42 fases
@@ -258,3 +258,13 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - A janela de buffer, a física, os valores de movimento e o Dash não foram alterados.
 - Plano: `docs/production/plans/2026-11-26-action-buffer-lifecycle-clear.md`.
 - **Estado:** implementação escrita; aguardando CI. Notificações simuladas em headless não substituem teste de background/foreground em Android físico.
+
+
+## Pós-merge PR #39 — ActionBuffer lifecycle
+
+- Main merge: `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.
+- `ActionBuffer` limpa edges pendentes em pausa, suspensão e perda de foco.
+- Godot CI `45881320136`: 72 testes / 451 verificações / 0 falhas.
+- Docs CI `45881320133`: SUCCESS.
+- Android Debug Export `45881252046`: SUCCESS; artifact, assinatura, package ID e SHA-256 documentados em `CI_AND_VALIDATION_PIPELINE.md`.
+- A lógica foi testada por notificações simuladas/headless; teste real de background/foreground e multitouch continua pendente em Android físico.
