@@ -355,3 +355,15 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Preservar a implementação existente em Input Map, `BoltPlayer`, controles touch e testes. Não remover. Alterações de física, tuning, cooldown, controles ou balanceamento exigem tarefa própria.
 - A formalização foi exclusivamente documental; nenhum código de gameplay foi alterado.
 - Próximo passo: validar a atualização documental na PR #11 e, após integração/aceite, entregar a Etapa 2 a Claude com este ADR como fonte canônica.
+
+
+## Sessão ChatGPT — W1-L1 progress feedback — 2026-11-26
+
+- Base main confirmada: `13105c5422b73e2c362bdf3d4ce9eea45c97fc99` (PR #23 integrada; Godot pós-merge #45851700830 e Docs #45851700746 SUCCESS).
+- Branch de trabalho: `feat/w1-l1-progression-feedback`.
+- Alterações: HUD com notificação transitória temporizada; integração de feedback para checkpoint e coletável de recuperação; teste W1-L1 atravessa os gatilhos físicos de checkpoint, queda/respawn, cura e objetivo.
+- Revisão geométrica: nenhum ajuste de piso necessário; `PlatformBlock` usa origem superior esquerda e Goal já está sobre EndFloor. O teste verifica essa condição.
+- Dash, ActionBuffer, controles touch, Pistola Crono, inimigo-base e parâmetros de combate não foram retunados.
+- CI desta branch pendente; corrigir falhas até a causa-raiz. Não integrar sem Godot e Docs CI verdes.
+- Não executado: playtest humano, export APK, instalação, emulador, dispositivo Android, FPS, memória ou latência física.
+- Próxima ação: aguardar CI, revisar logs, corrigir falhas, abrir PR e integrar apenas após checks verdes; registrar merge SHA e CI pós-merge.
