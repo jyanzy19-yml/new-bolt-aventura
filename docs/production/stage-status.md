@@ -546,3 +546,10 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Referências diretas a autoload não são causa independente; scripts de menu/W1/HUD foram mantidos no estado original.
 - **Limite:** validação headless Linux; Android físico, renderização, touch, FPS, RAM e térmica não foram testados. Android Debug Export foi cancelado neste run.
 - PR #58 OPEN, mergeable, não integrada.
+
+
+### Correção de evidência Android — run #191
+
+- O run #190 tinha o job Android Debug Export cancelado por concorrência de execução.
+- No head atual da PR #58, o run 45907688455 terminou SUCCESS: exportação Android debug, verificação do APK e upload do artefato concluídos.
+- Isso comprova exportação CI, não instalação, execução ou desempenho em aparelho físico.
