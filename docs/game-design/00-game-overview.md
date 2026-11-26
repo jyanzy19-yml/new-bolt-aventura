@@ -2,61 +2,71 @@
 
 ## 1. Identidade do produto
 - Nome: BOLT · AVENTURA.
-- Gênero: aventura e plataforma 2D.
-- Engine pretendida: Godot 2D; a versão exata deve ser detectada no projeto real.
+- Gênero: aventura, plataforma e ação 2D.
+- Engine: Godot 4.7.2, GDScript, conforme projeto atual.
 - Plataforma-alvo: aplicativo Android empacotado.
-- Hardware-alvo: aparelhos Android com aproximadamente 4 GB de RAM e MediaTek Helio G99 ou inferior.
-- Estado deste repositório: framework de documentação e skills; não presumir que o projeto executável Godot já esteja presente.
+- Orientação: paisagem.
+- Hardware de referência: Android com aproximadamente 4 GB de RAM e MediaTek Helio G99 ou inferior.
+- Estado: projeto executável Godot existente, com menu, abertura, tutorial, sistemas iniciais de combate e W1-L1 em blockout. Consultar `docs/production/stage-status.md` e `docs/production/CONTINUITY.md` para estado real atualizado.
 
-## 2. Premissa central confirmada
-Um robô desperta em um mundo destruído e encontra uma máquina temporal que se une a ele. Essa união permite viajar entre eras e mundos. A missão principal é recuperar um fragmento em cada um dos sete mundos. Os fragmentos são protegidos pelos chefes no final de cada mundo e estão ligados ao mistério da máquina temporal; juntos, são necessários para restaurar o equilíbrio dos universos.
+## 2. Premissa central consolidada
+Um robô desperta em um mundo destruído e encontra uma máquina temporal que se une a ele. A máquina, chamada NEXO, permite viajar entre eras e mundos. A missão é recuperar um fragmento em cada um dos sete mundos; cada fragmento é protegido pelo guardião ao final do mundo e está ligado ao mistério da máquina temporal e ao equilíbrio dos universos. O Grande Colapso rompeu o Núcleo da Eternidade. O antagonista central, o Arquiteto, busca impor uma única realidade. BOLT foi criado para preservar os universos.
 
-O nome da máquina temporal é **NEXO** e o antagonista central é **o Arquiteto**, conforme o prompt mestre. A forma, personalidade, origem detalhada, cronologia completa, causa mais profunda do Colapso e encenação do desfecho devem seguir as Bíblias narrativa/personagens; detalhes adicionais permanecem propostas até aprovação. Não extrapolar a premissa como se detalhes novos fossem canon.
+## 3. Pilares
+1. Aventura com progressão clara.
+2. Movimento expressivo e responsivo.
+3. Mundos distintos em identidade visual, sonora e mecânica.
+4. Narrativa integrada a gameplay e consequências.
+5. Desafio justo e legível.
+6. Personagens com personalidade transmitida por ação.
+7. Qualidade mobile e confiabilidade touch.
+8. Arquitetura sustentável e testável.
+9. Acessibilidade e estabilidade.
+10. Produção baseada em evidências.
 
-## 3. Pilares de experiência
-1. **Aventura com progressão clara:** cada mundo acrescenta compreensão, desafio e domínio.
-2. **Movimento expressivo:** habilidades compreensíveis, responsivas e combináveis.
-3. **Mundos memoráveis:** identidade visual, sonora, mecânica e narrativa próprias.
-4. **Narrativa integrada:** cenas, NPCs, ambientes e chefes avançam a história.
-5. **Desafio justo:** perigos legíveis, telegraphs claros, checkpoints e curva de aprendizagem.
-6. **Personalidade:** BOLT é reconhecível por comportamento, animação e reações.
-7. **Qualidade mobile:** controles touch confiáveis, leitura em telas pequenas e desempenho adequado.
-
-## 4. Escopo de conteúdo desejado
-- História com começo, desenvolvimento, clímax e conclusão.
-- Sete mundos, cada um com fragmento e chefe guardião.
-- Pelo menos cinco arquétipos de inimigos realmente distintos por mundo como meta mínima; recolorações não contam como arquétipos.
+## 4. Escopo
+- Sete mundos, seis fases por mundo, 42 fases planejadas.
+- Cinco fases de exploração/progressão e uma sexta de guardião/fragmento/transição.
+- Meta de ao menos cinco arquétipos de inimigo distintos por mundo.
 - NPCs com função narrativa ou de gameplay.
-- Tutorial integrado em desafios reais e graduais.
-- Menus profissionais: título, pausa, configurações, seleção/progresso e resultados, conforme fluxo aprovado.
-- Checkpoints, segredos, recompensas opcionais e salvamento confiável.
-- Cutscenes com função narrativa, opção de pular e replay quando apropriado.
-- Acessibilidade básica: áudio, legibilidade, remapeamento quando suportado e redução de efeitos intensos.
+- Tutorial integrado.
+- Menus, HUD, pausa, configurações e progressão.
+- Checkpoints, segredos, recompensas e save confiável.
+- Cutscenes com skip e função narrativa.
+- Acessibilidade básica e controles touch robustos.
 
-## 5. Limites
-- Não criar versão de navegador como alvo do produto.
+## 5. Limites e proteção
+- Não criar navegador como plataforma-alvo.
 - Não migrar de engine sem aprovação explícita.
-- Não inventar nomes, diálogos, personagens, mundos ou reviravoltas como canon.
-- Não otimizar por intuição sem perfil, medição ou reprodução.
-- Não sacrificar responsividade touch ou legibilidade por efeitos visuais.
-- Não adicionar sistemas complexos sem justificativa de experiência e manutenção.
+- Não remover Dash; consultar ADR-001-DASH.
+- Não tratar sandbox como fase de campanha.
+- Não criar fases ainda inexistentes como se fossem implementadas.
+- Não canonizar números provisórios.
+- Não otimizar por intuição sem medição.
+- Não afirmar validação Android sem execução física.
 
-## 6. Métricas de qualidade
-| Área | Evidência esperada |
+## 6. Métricas
+| Área | Evidência |
 |---|---|
-| Controle | Ações essenciais registradas, inclusive em multitouch |
-| Movimento | Física previsível, estados sem travamento |
-| Leitura | Ameaças, plataformas, pickups e objetivos distinguíveis |
-| Progressão | Mecânicas ensinadas antes de combinações avançadas |
-| Narrativa | Cenas e diálogos coerentes com canon aprovado |
-| Android | Testes reais ou limitações explicitamente registradas |
-| Performance | Frame time, p95/p99, memória e aquecimento medidos |
-| Robustez | Salvamento, retomada, pausa, perda de foco e transições |
+| Controle | ações registradas, multitouch, buffer e latência |
+| Movimento | física previsível e estados consistentes |
+| Leitura | perigos, plataformas, pickups e objetivos distinguíveis |
+| Progressão | mecânicas ensinadas antes de combinações |
+| Narrativa | causalidade e coerência com bíblias |
+| Android | exportação e testes em dispositivo |
+| Performance | frame time p50/p95/p99, memória e temperatura |
+| Robustez | save/load, pausa, foco e transições |
+| Acessibilidade | contraste, legibilidade e redução de efeitos |
 
-## 7. Status
-- Premissa robô + máquina temporal + sete fragmentos: **confirmado**.
-- Android empacotado: **confirmado**.
-- Godot: **direção confirmada**, versão exata **a detectar**.
-- Meta de cinco inimigos distintos por mundo: **requisito de design**.
-- Sequência, nomes, fragmentos e guardiões dos sete mundos: **confirmados na Bíblia dos Mundos**. Detalhes de NPCs, paletas, mecânicas exclusivas e layouts: **a desenvolver**.
-- Mecânicas finais, números de balanceamento e duração: **a definir**.
+## 7. Classificação do conteúdo
+Separar canon consolidado, expansão autoral proposta, requisito, decisão técnica, hipótese e conteúdo a definir. O usuário autorizou expansão criativa ampla; propostas podem orientar protótipos reversíveis, mas devem ser registradas sem confundir proposta com implementação ou canon aprovado.
+
+## 8. Documentos de autoridade
+- `docs/prompts/master-game-design-and-gameplay-prompt.md`: mandato operacional.
+- `docs/game-design/01-narrative-bible.md`: canon narrativo consolidado.
+- `docs/game-design/02-world-bible.md`: sete mundos, fragmentos e guardiões.
+- `docs/game-design/03-character-bible.md`: personagens.
+- `docs/game-design/04-gameplay-systems.md`: sistemas de gameplay.
+- `docs/game-design/EXPANDED-NARRATIVE-DOSSIER.md`: aprofundamento narrativo proposto.
+- `docs/game-design/EXPANDED-GAMEPLAY-SYSTEMS.md`: especificação expandida de sistemas.
+- `docs/production/stage-status.md` e `CONTINUITY.md`: estado executável e continuidade.
