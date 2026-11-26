@@ -57,3 +57,16 @@ Escopo: somente apresentação e feedback. Mecânicas, tuning, Dash, controles t
 - A primeira execução do workflow de mutação falhou na preparação da mutação (alvo textual não encontrado), não por falha do código fixo. O runner foi alterado para reproduzir 24 efeitos no teardown de W1-L1; o mutador agora substitui a função pelo marcador de assinatura, sem depender de whitespace.
 - **Mutation verification ainda pendente** após essa última alteração. Não declarar S2 totalmente fechado até confirmar que a implementação antiga reproduz o erro e que a implementação corrigida passa.
 - Commit mais recente do workflow de mutação: `3d533bd`; runner de stress e teste unitário de 24 efeitos estão na branch da PR.
+
+
+
+### Resultado final da revisão independente e mutação S2 — 2026-11-26
+
+- **Godot Validation run `45909521308`: SUCCESS — 103 testes / 672 verificações / 0 falhas.** O teste de teardown do Burst passou com 28 verificações.
+- **Mutation workflow run `45909521305`: SUCCESS.** Com a implementação antiga restaurada deliberadamente, a regressão específica `test_burst_releases_counter_when_parent_is_freed_before_timeout` falhou: o contador permaneceu em 24 em vez de voltar ao baseline 6. O log também reproduziu o erro `Error calling from signal 'timeout' to callable: 'GDScript::_release': Cannot convert argument 1 from Object to Object.` O mutante também causou falhas em dois asserts de efeitos de inimigo por saturação do teto global — efeito em cascata da regressão — e não mascarou o teste-alvo. O código corrigido foi restaurado, reimportado e a suíte voltou a passar com 103/672/0.
+- **Revisão estática independente:** não foram identificados outros defeitos P0/P1 nos arquivos funcionais examinados. O defeito S2 de ciclo de vida do Burst foi o achado funcional concreto e está corrigido/testado.
+- **Draw calls:** as contagens 25/23 são documentadas pelo relatório original, mas não foram reproduzidas independentemente nesta revisão. São medições em PC com software GL; não representam Helio G99 e não constituem validação Android.
+- **Android CI:** run `45909521316` terminou SUCCESS para exportação do APK debug. Isso valida a pipeline de exportação, não instalação, execução, FPS, memória, temperatura ou toque em aparelho físico.
+- **Achados residuais de severidade baixa:** direção de arte e parâmetros de efeitos continuam explicitamente provisórios; os arquivos `.uid` gerados aumentam o ruído do diff, mas não constituem defeito funcional. Não há áudio nem alterações de level design, conforme limitações declaradas.
+- **Canon/escopo:** nenhuma alteração de canon, mecânica, Dash, Input Map, touch/multitouch, dano, save, boot ou progressão.
+- **Status:** S2 FECHADO por evidência de teste e mutação nesta branch. PR #57 permanece aberta e não integrada.
