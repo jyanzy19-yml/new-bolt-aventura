@@ -7,6 +7,8 @@
 **Estado inicial:** PENDING  
 **Escopo:** fundação executável Godot; não é a vertical slice nem a implementação da campanha.
 
+> **Retrospectiva (2026-11-26):** Etapa 0 ACCEPTED pelo responsável da Etapa 1. A execução também incluiu protótipo provisório de movimento, touch, HUD e sandbox a pedido explícito do usuário. Essa exceção específica está registrada em [HANDOFF_ETAPA_0.md](handoffs/HANDOFF_ETAPA_0.md); não altera o escopo padrão deste checklist para futuras etapas e não canoniza tuning ou a sandbox como fase.
+
 Este checklist complementa `COLLABORATION_STATE.md`, `COLLABORATIVE_DEVELOPMENT_PROTOCOL.md`, `from-zero-implementation-directive.md` e `roadmap.md`. Em caso de conflito, prevalecem as fontes de autoridade descritas em `MASTER_DIRECTIVE.md` e as ADRs aprovadas.
 
 ## 1. Antes de editar
