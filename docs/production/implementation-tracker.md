@@ -46,7 +46,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-019 | Áudio, música, buses e opções | Não iniciado | Sem implementação do jogo |
 | SYS-020 | Loading, transições e gestão de memória | Em andamento | `SceneFlow` usa carregamento threaded, bloqueia transições concorrentes e sinaliza sucesso/falha; testado headless. Gestão abrangente de memória/preload ainda não implementada |
 | SYS-021 | Pipeline de assets e proveniência | Não iniciado | Pipeline do jogo a estabelecer |
-| SYS-022 | Testes automatizados e regressão | Em andamento | Workflow Godot 4.7.2 executa import + `tests/test_runner.gd`; PR #34: 69 testes, 439 verificações, 0 falhas; Godot CI pós-merge também 69/439/0; Docs CI pré/pós-merge SUCCESS. Headless não equivale a QA visual ou Android físico |
+| SYS-022 | Testes automatizados e regressão | Em andamento | Workflow Godot 4.7.2 executa import + `tests/test_runner.gd`; PRs #34/#35: 69 testes, 439 verificações, 0 falhas em Godot CI pré/pós-merge; PR #35 valida contato físico real da `Area2D`; Docs CI SUCCESS. Headless não equivale a QA visual ou Android físico |
 | SYS-023 | Exportação, instalação e QA Android | Não iniciado | Sem APK/build verificada |
 | SYS-024 | Créditos, encerramento e release candidate | Não iniciado | Sem campanha implementada |
 
