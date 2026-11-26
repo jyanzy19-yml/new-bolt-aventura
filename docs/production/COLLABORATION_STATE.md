@@ -18,12 +18,12 @@ Este arquivo controla a alternância; não substitui código, commits, tracker o
 
 Antes de iniciar, o agente deve atualizar este snapshot com o HEAD atual. Os commits de governança criados depois do snapshot acima são documentação; não alteram a constatação de que o projeto Godot ainda não foi criado.
 
-- **Estado:** HANDOFF_READY — Etapa 0 (Claude Code) entregue; commit-base `16d42de2f2b5b3a52411f7d13db6d37b3a38b9d3`. Handoff: [handoffs/HANDOFF_ETAPA_0.md](handoffs/HANDOFF_ETAPA_0.md). PR #1 não tocada.
-- **Escritor ativo:** nenhum (aguardando o usuário acionar ChatGPT).
-- **Próxima etapa:** 1.
-- **Responsável:** ChatGPT (após inspecionar o commit e aceitar o handoff).
-- **Entrega esperada:** fundação executável Godot do BOLT, conforme a diretiva from-zero e o Gate 1 do roadmap, sem fingir que o jogo completo ou a vertical slice já existem.
-- **Próximo responsável após handoff aceito:** ChatGPT, Etapa 1.
+- **Estado:** HANDOFF_READY — Etapa 1 (ChatGPT) entregue em `main`; implementação principal no commit `f3ab6829228c077b1a3c14eb65385a8a99c34608`. Handoff: [handoffs/HANDOFF_ETAPA_1.md](handoffs/HANDOFF_ETAPA_1.md). Etapa 0 aceita após inspeção.
+- **Escritor ativo:** nenhum; a Etapa 1 foi encerrada e o usuário acionará Claude Code manualmente.
+- **Próxima etapa:** 2.
+- **Responsável:** Claude Code.
+- **Entrega esperada:** auditar a Etapa 1 e continuar o Gate 1/vertical slice conforme roadmap, sem presumir que APK ou validação Android já existem.
+- **Próximo responsável após handoff:** Claude Code, Etapa 2.
 
 ### Escopo inicial da Etapa 0 — Claude Code
 
@@ -65,9 +65,9 @@ Não avançar o número da etapa apenas porque uma sessão terminou. O próximo 
 
 | Etapa | Responsável | Estado | Commit de entrega | Próxima ação |
 |---|---|---|---|---|
-| 0 | Claude Code | HANDOFF_READY | `7057532` + `c32a99d` | ChatGPT inspeciona, roda suíte, decide o conflito de escopo |
-| 1 | ChatGPT | Aguardando | — | Auditar Etapa 0 e implementar a próxima unidade do roadmap |
-| 2 | Claude Code | Aguardando | — | Auditar Etapa 1 e continuar |
+| 0 | Claude Code | ACCEPTED | `7057532` + `c32a99d` + `ab72c58` | Base inspecionada e aceita; valores de gameplay permanecem provisórios |
+| 1 | ChatGPT | HANDOFF_READY | `4700d39` + `317f4ef` + `f3ab682` | Handoff registrado; aguarda Claude Code Etapa 2 |
+| 2 | Claude Code | Aguardando | — | Auditar Etapa 1 e continuar Gate 1 |
 | 3 | ChatGPT | Aguardando | — | Auditar Etapa 2 e continuar |
 
 Atualize esta tabela a cada handoff aceito. Não preencher commits hipotéticos.
@@ -131,3 +131,14 @@ Este snapshot substitui os inventários anteriores para retomadas futuras. Não 
 - O checklist obrigatório da Etapa 0 está em [ETAPA_0_CLAUDE_CHECKLIST.md](ETAPA_0_CLAUDE_CHECKLIST.md); a auditoria está em [PREPRODUCTION_AUDIT.md](PREPRODUCTION_AUDIT.md).
 
 Os commits seguintes desta auditoria alteram apenas documentação e QA. Antes de iniciar a Etapa 0, Claude deve consultar o HEAD real novamente. A atribuição permanece PENDING — Claude Code Etapa 0; nenhum escritor ativo; ChatGPT Etapa 1 após handoff aceito.
+
+
+## Estado autoritativo — Etapa 1 encerrada (2026-11-26)
+
+- HEAD consultado antes do início: `ab72c584522db49ad7b31c80717fd2d6ab7ab73e`; não havia commits posteriores ao handoff de Claude.
+- Etapa 0: **ACCEPTED**. O escopo antecipado de movimento, touch, HUD e sandbox foi aceito como implementação provisória solicitada pelo usuário; a sandbox não é fase da campanha. Não houve canonização dos valores de `BoltTuning`, layout touch ou interpretação de “All Jump”.
+- Etapa 1: **HANDOFF_READY**. Corrigida a reatribuição do mesmo índice de ponteiro em `TouchControls`; teste de regressão adicionado; workflow Godot agora executa a suíte headless após import.
+- Godot CI Run #31: SUCCESS no commit `f3ab682`; import + runner headless exit 0. Docs CI Run #119: SUCCESS no mesmo commit. Validação L2; sem teste de editor, Android, APK, toque físico, FPS ou memória.
+- Achado S3 corrigido: reatribuição inesperada de índice podia deixar ação anterior presa. Nenhum S0–S2 confirmado na revisão estática dos sistemas da Etapa 0.
+- PR #1 permanece aberta/divergente e intocada.
+- Próximo escritor: Claude Code, Etapa 2, após acionamento manual do usuário.
