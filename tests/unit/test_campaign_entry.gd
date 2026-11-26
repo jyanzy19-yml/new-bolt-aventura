@@ -111,13 +111,18 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	check_eq(health.current_health, health.max_health, "respawn da fase restaura a vida")
 
 	# O coletável real deve restaurar vida e emitir feedback no HUD.
+	var pickup_collected: Array[bool] = [false]
+	pickup.collected.connect(func(_amount: int) -> void:
+		pickup_collected[0] = true
+	)
 	check(level_player.take_damage(1, 1.0), "BOLT perde vida antes de recolher energia")
 	level_player.global_position = pickup.global_position
 	level_player.velocity = Vector2.ZERO
 	for _tick in range(3):
 		await tree.physics_frame
 	check_eq(health.current_health, health.max_health, "coletável restaura a vida do jogador")
-	check(pickup.is_queued_for_deletion(), "coletável é consumido após cura válida")
+	check(pickup_collected[0], "coletável emite collected após cura válida")
+	check(cybercore_instance.get_node_or_null("HealthPickup") == null, "coletável é removido após cura válida")
 	check_eq(hud.get_node("%ProgressNotification").text, "RECUPERAÇÃO +1", "HUD comunica a recuperação")
 
 	# A área de objetivo encerra a sequência apenas quando BOLT alcança a saída.
