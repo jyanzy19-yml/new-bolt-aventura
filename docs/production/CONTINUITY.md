@@ -9,6 +9,8 @@
 - **CI pós-merge PR #34:** Godot SUCCESS — 69 testes/439 verificações/0 falhas (`45872656738`); Docs SUCCESS (`45872656798`). Docs CI da sincronização seguinte SUCCESS (`45872828901`).
 - **PR #35:** Godot CI pré/pós-merge SUCCESS — 69 testes/439 verificações/0 falhas (`45873118202`, `45873234656`).
 - **Escritor ativo:** ChatGPT, seguindo a diretriz vigente do usuário. Não iniciar trabalho concorrente de Claude.
+- **Dash:** decisão canônica aprovada; deve permanecer no jogo conforme `docs/production/ADR-001-DASH.md`. Referências documentais antigas que ainda dizem “pendente” estão sendo reconciliadas nesta unidade.
+- **Branch atual:** `docs/reconcile-canonical-decisions-2026-11-26`; tarefa documental, sem alterações de gameplay.
 - **Unidade integrada:** `TimedEnergyGate`, cena/script `cybercore_w1_l2`, botão PRÓXIMA FASE na conclusão W1-L1, destino salvo W1-L2, retomada de W1-L1/W1-L2 e regressões.
 - **Limites:** W1-L2 é blockout/protótipo de mecânica, não conteúdo final; ciclo, dano e percurso precisam de playtest. APK debug exportado em CI, mas não instalado; Android físico, touch físico e profiling continuam pendentes.
 - **Próximo passo:** reconciliar as referências antigas de Dash e alternância de agentes com ADR-001 e a decisão atual de ChatGPT como único escritor; depois continuar sistemas de gameplay e preparar validação física Android quando houver dispositivo disponível.
