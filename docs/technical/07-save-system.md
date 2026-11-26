@@ -12,7 +12,7 @@
 - Envelope: `format_version`, `payload_json` (string JSON canônico), `checksum`.
 - Versão atual do envelope: 1.
 - Checksum SHA-256 sobre a representação JSON do payload.
-- Tipos permitidos: null, bool, int, float finito, String, Array e Dictionary com chaves String. Nodes, Resources, referências de runtime e tipos não JSON são rejeitados.
+- Tipos permitidos: null, bool, int, float finito, String, Array e Dictionary com chaves String. Nodes, Resources, referências de runtime e tipos não JSON são rejeitados. O parser JSON do Godot materializa números como valores numéricos (frequentemente float); o consumidor de domínio deve converter contadores/índices para int conforme seu schema.
 - Ausência de arquivo retorna Dictionary vazio sem erro.
 - Versão desconhecida, JSON inválido, payload inválido ou checksum divergente falham de forma fechada e deixam a causa em `last_error`.
 - Escrita: arquivo temporário, preservação do anterior como backup, promoção do novo arquivo e restauração do backup se a promoção falhar.
