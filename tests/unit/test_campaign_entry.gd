@@ -6,6 +6,14 @@ const TUTORIAL_PATH: String = "res://scenes/tutorial/tutorial.tscn"
 const CYBERCORE_W1_L1_PATH: String = "res://scenes/campaign/cybercore_w1_l1.tscn"
 
 
+func _send_action(action: StringName, pressed: bool) -> void:
+	var event: InputEventAction = InputEventAction.new()
+	event.action = action
+	event.pressed = pressed
+	event.strength = 1.0 if pressed else 0.0
+	Input.parse_input_event(event)
+
+
 func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	var opening: PackedScene = load(OPENING_PATH) as PackedScene
 	var tutorial: PackedScene = load(TUTORIAL_PATH) as PackedScene
@@ -35,6 +43,8 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	var start_button: Button = tutorial_instance.get_node("TutorialUI/Panel/Column/StartButton") as Button
 	check(player != null and not player.is_physics_processing(), "BOLT aguarda início explícito do tutorial")
 	check(tutorial_instance.get_node_or_null("Messenger") is Node2D, "tutorial contém robô mensageiro provisório")
+	var attack_button: TouchButton = tutorial_instance.get_node("Hud/Safe/Layout/TouchControls/Attack") as TouchButton
+	check(attack_button != null and attack_button.action == Actions.ATTACK, "HUD touch expõe o botão TIRO")
 	check(speech.text.contains("ROBÔ MENSAGEIRO"), "mensageiro orienta por balão de fala")
 	tutorial_instance.call("_on_start_or_continue")
 	check(player.is_physics_processing(), "BOLT é liberado ao iniciar o tutorial")
@@ -44,7 +54,16 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	tutorial_instance.call("_on_player_state_changed", BoltPlayer.State.RISING)
 	check(speech.text.contains("DASH"), "tutorial solicita Dash após salto")
 	tutorial_instance.call("_on_player_state_changed", BoltPlayer.State.DASHING)
-	check(start_button.visible and start_button.text == "ENTRAR EM CYBERCORE", "tutorial libera entrada em Cybercore após os comandos")
+	check(speech.text.contains("TIRO"), "tutorial apresenta o ataque básico após o Dash")
+	var target: BoltTrainingTarget = tutorial_instance.get_node("TrainingTarget") as BoltTrainingTarget
+	_send_action(Actions.ATTACK, true)
+	_send_action(Actions.ATTACK, false)
+	for _tick in range(90):
+		await tree.physics_frame
+		if target.is_queued_for_deletion():
+			break
+	check(target.is_queued_for_deletion(), "ataque da Pistola Crono atinge o alvo do tutorial")
+	check(start_button.visible and start_button.text == "ENTRAR EM CYBERCORE", "tutorial libera entrada em Cybercore após o ataque")
 	tutorial_instance.free()
 
 	var cybercore_instance: Node = cybercore.instantiate()

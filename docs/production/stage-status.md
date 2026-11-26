@@ -21,7 +21,7 @@
 | HUD | Implementado parcialmente | HUD de sandbox, pausa e resultado; layout provisório |
 | Sandbox | Implementado | Cenário de desenvolvimento; **não é fase da campanha** |
 | Campanha | Em andamento | Sequência de abertura/tutorial jogável; W1-L1 Cybercore possui blockout inicial, ainda sem inimigos/combate e conteúdo final. Nenhuma fase validada |
-| Combate/inimigos/chefes | Não iniciado | Nenhum sistema de combate ou inimigo integrado |
+| Combate/inimigos/chefes | Em andamento | Pistola Crono básica, componente de vida/dano e alvo estático de treinamento integrados ao tutorial. Ainda sem inimigos com IA, dano ao jogador, chefes ou arsenal completo |
 | Checkpoint/save | Em andamento | PR #13 integrada: `BoltCheckpoint` com ativação única e respawn no último ponto ativo da sandbox. Estado em memória; SaveSystem/campanha ainda não implementados |
 | Assets finais/áudio | Não identificados como integrados | Placeholders de apresentação permanecem |
 
@@ -127,3 +127,11 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Menu principal → storyboard de abertura → tutorial jogável com robô mensageiro → blockout W1-L1 Cybercore.
 - W1-L1 é blockout de gameplay em desenvolvimento, não fase concluída. Inimigos, combate, narrativa ambiental, assets finais, áudio, save/load e QA continuam pendentes.
 - PR #15 integrada em `783c1d2587ebea39d645a641417e663e561ea710`; Godot CI #56 e Docs CI #175 SUCCESS. CI pós-merge #57/#176 em execução.
+
+
+## Próxima unidade — combate básico
+
+- Branch `feat/chrono-pistol-combat-core`, baseada no HEAD atual da main.
+- Pistola Crono é a primeira arma conectada ao input lógico e ao botão touch TIRO. Valores permanecem provisórios.
+- Alvo de treinamento estático valida vida/dano e o tutorial; não deve ser contabilizado como inimigo/arquétipo da campanha.
+- Tríplice Prisma, Laser Nexo, seleção de armas, IA inimiga, dano ao jogador e validação física Android continuam pendentes.

@@ -64,3 +64,14 @@ func test_window_is_game_time_not_wall_clock() -> bool:
 	check(buffer.has_pending(Actions.JUMP), "toque válido após 200 ms de relógio e 1 tick de jogo")
 	buffer.queue_free()
 	return true
+
+
+func test_attack_tap_is_buffered_for_combat() -> bool:
+	var buffer: ActionBuffer = _make_buffer()
+	_press_release(Actions.ATTACK)
+	check(not Input.is_action_pressed(Actions.ATTACK), "ataque já foi solto")
+	check(buffer.has_pending(Actions.ATTACK), "toque curto de ataque fica pendente")
+	check(buffer.consume(Actions.ATTACK), "ataque é consumido uma vez")
+	check(not buffer.consume(Actions.ATTACK), "ataque não é repetido")
+	buffer.queue_free()
+	return true

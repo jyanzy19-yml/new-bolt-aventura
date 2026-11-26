@@ -4,7 +4,7 @@
 
 ## Estado vigente — revisão de 2026-11-26
 
-**Último merge confirmado na main:** PR #15 integrada por squash em `783c1d2587ebea39d645a641417e663e561ea710`. Confirmar novamente o SHA antes de cada novo turno.
+**Último merge confirmado na main:** PR #16 integrada por squash em `2b81211e56677a7f4ee1da97e6d1c4d604e87d77`. Confirmar novamente o SHA antes de cada novo turno.
 
 - **Etapa 0 — Claude Code: ACCEPTED.** Fundação Godot 4.7.2 e protótipo técnico provisório aceitos; hardening integrado pela PR #3.
 - **Etapa 1 — ChatGPT: HANDOFF_READY.** Correção de reatribuição de ponteiro em `TouchControls`, regressão e execução da suíte no CI; entrega original `f3ab682`.
@@ -23,7 +23,7 @@
 |---|---|---|---|---|
 | 0 | Claude Code | ACCEPTED | Fundação e protótipo provisório; hardening PR #3 integrado | ChatGPT |
 | 1 | ChatGPT | HANDOFF_READY | `f3ab682`: correção multitouch, regressão e CI | Claude Code |
-| 2 | ChatGPT | IN_PROGRESS | PR #15 integrada em `783c1d2`; storyboard de abertura, tutorial e blockout W1-L1; Godot CI #56 e Docs CI #175 SUCCESS (44 testes, 205 verificações, 0 falhas) | ChatGPT |
+| 2 | ChatGPT | IN_PROGRESS | PR #15 integrada; próximo sistema em `feat/chrono-pistol-combat-core`: vida/dano, Pistola Crono, botão TIRO e tutorial de ataque; CI pendente | ChatGPT |
 | 3 | ChatGPT | Aguardando | Próxima unidade após revisão/validação da Etapa 2 | ChatGPT |
 
 ## Protocolo de início de turno
@@ -110,3 +110,12 @@ O usuário autorizou ChatGPT a assumir sozinho todas as etapas de desenvolviment
 - Fluxo: menu → abertura → tutorial → W1-L1. Sandbox permanece ferramenta de desenvolvimento, não fase da campanha.
 - Responsável único: ChatGPT; Claude permanece inativo no fluxo de escrita.
 - Godot CI #56 e Docs CI #175 passaram; CI pós-merge #57/#176 está em execução. Nenhuma validação Android física foi realizada.
+
+
+## Sessão atual — combate básico
+
+- Base: `main` após PR #16, commit `2b81211e56677a7f4ee1da97e6d1c4d604e87d77`.
+- Branch: `feat/chrono-pistol-combat-core`.
+- Entrega em desenvolvimento: `BoltHealth`, `BoltCombat`, `ChronoProjectile`, alvo estático de treinamento, botão touch TIRO e lição de ataque no tutorial.
+- Limite de escopo: alvo não é inimigo de campanha; parâmetros da Pistola Crono são provisórios; outras armas, seleção, IA e dano ao jogador não implementados.
+- ChatGPT permanece único escritor; CI/revisão pendentes.
