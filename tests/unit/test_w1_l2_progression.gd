@@ -7,6 +7,41 @@ const LEVEL_SCENE: String = "res://scenes/campaign/cybercore_w1_l2.tscn"
 const TEST_SAVE_PATH: String = "user://bolt_w1_l2_progression_test.json"
 
 
+func test_energy_gate_honors_inactive_initial_state() -> bool:
+	var gate_scene: PackedScene = load(GATE_SCENE) as PackedScene
+	var player_scene: PackedScene = load(PLAYER_SCENE) as PackedScene
+	check(gate_scene != null and player_scene != null, "cena do campo e cena de BOLT carregam")
+	if gate_scene == null or player_scene == null:
+		return true
+
+	var root: Node2D = Node2D.new()
+	tree.root.add_child(root)
+	var gate: TimedEnergyGate = gate_scene.instantiate() as TimedEnergyGate
+	gate.initial_active = false
+	gate.active_duration = 5.0
+	gate.inactive_duration = 5.0
+	var player: BoltPlayer = player_scene.instantiate() as BoltPlayer
+	player.damage_invulnerability = 0.0
+	player.position = Vector2(0.0, -24.0)
+	root.add_child(gate)
+	root.add_child(player)
+	await tree.process_frame
+	await tree.physics_frame
+
+	check(not gate.is_active(), "campo respeita initial_active=false")
+	check(not gate.monitoring, "Area2D não monitora durante estado inicial inativo")
+	var visual: Polygon2D = gate.get_node("%Visual") as Polygon2D
+	check_near(visual.color.a, 0.28, 0.01, "visual inicia com aparência inativa")
+	var health: BoltHealth = player.get_node("%Health") as BoltHealth
+	for _tick in range(3):
+		await tree.physics_frame
+	check_eq(health.current_health, 3, "campo inicialmente inativo não causa dano por contato")
+
+	root.queue_free()
+	await tree.process_frame
+	return true
+
+
 func test_energy_gate_cycles_and_only_damages_while_active() -> bool:
 	var gate_scene: PackedScene = load(GATE_SCENE) as PackedScene
 	var player_scene: PackedScene = load(PLAYER_SCENE) as PackedScene
