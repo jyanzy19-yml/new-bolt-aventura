@@ -655,10 +655,11 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 
 - Main confirmada no início: `54fd48e5f49fba877740265aafa0d8f649c2b1e9`.
 - Branch: `fix/save-system-temp-recovery-2026-11-26`.
-- Arquivos funcionais alterados: `scripts/core/save_system.gd`, `tests/unit/test_save_system.gd`.
+- Arquivos funcionais alterados: `scripts/core/save_system.gd`, `scripts/campaign/campaign_progress.gd`, `tests/unit/test_save_system.gd` e `tests/unit/test_campaign_progress.gd`.
 - `load_payload()` tenta recuperar `.tmp` completo, com checksum/payload válidos, quando o principal está ausente ou inválido; promove o temporário ao principal. A precedência permanece principal válido → `.tmp` válido → backup válido.
 - Um principal/temporário com versão não suportada bloqueia fallback para evitar downgrade silencioso. `save_payload()` verifica os três slots e bloqueia escrita/rotação quando qualquer um contém versão não suportada, preservando os bytes existentes.
 - `has_save()` reconhece `.tmp` pendente. Schema v1, API pública e domínio CampaignProgress não foram alterados.
-- Testes adicionados para recuperação do temporário mais novo que backup e proteção de principal, backup e temporário futuros.
+- `CampaignProgress` reconhece `recovered_temp`/`recovered_temp_unpromoted:*` como recuperação do armazenamento, preservando validação independente do schema de campanha.
+- Testes adicionados para recuperação do temporário mais novo que backup, preservação de temporário em nova gravação, precedência/fallback, proteção dos três slots futuros e continuidade de checkpoint da campanha.
 - **Estado no checkpoint:** commits da implementação e testes presentes na branch; workflows ainda não executados/confirmados. Próximo passo: revisar o diff integral, abrir PR independente, aguardar Godot/Docs/Android CI e corrigir qualquer falha antes de atualizar status para validado.
 - Limites: nenhum teste local Godot, encerramento forçado real, Android físico, APK desta branch, profiling ou acesso ao save real do usuário foi realizado.
