@@ -188,4 +188,5 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Inimigo-base reposicionado integralmente sobre o piso intermediário; patrulha reduzida para permanecer dentro da plataforma.
 - Área de conclusão reposicionada para sobrepor a faixa ocupada pelo jogador quando está sobre o piso final.
 - Teste de integração ampliado para conferir layout, ativação do checkpoint, dano e retorno após queda.
+- A primeira execução Godot CI (`45851338093`) falhou por uma asserção de teste que exigia posição X estática apesar do movimento de patrulha no primeiro tick; a asserção foi corrigida para verificar a faixa válida da patrulha. Aguardar nova execução.
 - Esta alteração corrige o blockout; não representa playtest humano, balanceamento final nem validação Android.
