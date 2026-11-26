@@ -2,17 +2,17 @@
 
 ## Snapshot operacional vigente — 2026-11-26
 
-- **Main HEAD:** `d03cd744b2354bd9711894eab431dbc6912ca9d3` (PR #49 integrada; snapshots e prioridade operacional reconciliados; PR #48 integrou matriz das 26 etapas).
+- **Main HEAD:** `13dc16625019f9f5c1351daee6ec63406eed4b59` (PR #50 integrada; GAP register/ADR-0006 e documentação de progressão reconciliados).
 - **Última correção de gameplay:** PR #47, `TimedEnergyGate.initial_active=false`; CI pós-merge Godot 88 testes/553 verificações/0 falhas, Docs SUCCESS e Android Debug Export SUCCESS.
 - **Último componente de plataforma:** PR #46, `OneWayPlatform`; CI pós-merge Godot 87 testes/548 verificações/0 falhas, Docs e Android Export SUCCESS.
 - **Última entrega de conteúdo:** PR #34, W1-L2 em blockout e progressão W1-L1→W1-L2.
 - **Escritor ativo:** ChatGPT como único escritor, por decisão explícita do usuário; Claude permanece inativo para escrita concorrente.
-- **Plano operacional:** 26 etapas em `docs/production/stage-status.md`; matriz integrada em `docs/production/26-stage-traceability-matrix.md`; registro GAP-001…GAP-022 em revisão na branch `docs/requirements-gap-register`.
-- **Etapas atuais:** Etapa 01 CONCLUÍDA (auditoria estática); Etapa 02 EM DESENVOLVIMENTO (revisão de requisitos e lacunas); Gate 1 continua em andamento. W1-L1 e W1-L2 são blockouts.
+- **Plano operacional:** 26 etapas em `docs/production/stage-status.md`; matriz integrada em `docs/production/26-stage-traceability-matrix.md`; registro GAP-001…GAP-022 integrado em `docs/production/requirements-gap-register.md`.
+- **Etapas atuais:** Etapas 01 e 02 CONCLUÍDAS; Etapa 03 EM DESENVOLVIMENTO (mapa arquitetural atual na branch `docs/current-architecture-map`); Gate 1 continua em andamento. W1-L1 e W1-L2 são blockouts.
 - **APK pós-merge PR #47:** artifact `bolt-aventura-android-debug-2636226c4027625649e66c51ff64d7e2e56168a6`, 28.461.057 bytes, SHA-256 `c3ca03958eecf120f1a9f5f1e4fae3851fb7560bca303c8eb5a930f987b58123`, assinatura v2/v3 válida; package ID `com.example.boltaventura` é placeholder; APK não instalado em aparelho.
 - **PR #1:** permanece separada e não deve ser integrada/rebaseada automaticamente.
 - **Dash:** decisão aprovada e vigente: deve permanecer; ver `docs/production/ADR-001-DASH.md`.
-- **Próxima unidade:** terminar a revisão requisito-a-requisito da Etapa 02, revisar o registro de lacunas e atribuir decisões/owners antes de escolher a próxima implementação de gameplay.
+- **Próxima unidade:** revisar o mapa de arquitetura da Etapa 03 e fechar ownership/dependências; em seguida escolher a próxima unidade técnica da vertical slice.
 
 
 **Fonte única para o próximo turno.** Antes de editar, confirme este arquivo contra o HEAD, commits, branches e PRs reais do GitHub.
