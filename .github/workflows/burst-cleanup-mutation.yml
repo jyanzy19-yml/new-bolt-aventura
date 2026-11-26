@@ -69,6 +69,9 @@ jobs:
           )
           path.write_text(source)
           PY
+          # Rebuild Godot's global script-class cache from the mutated source so the test
+          # process cannot reuse a stale cached Burst class definition.
+          rm -rf .godot
           "$GODOT_BIN" --headless --editor --path . --import --quit > burst-mutation-import.log 2>&1
           set +e
           "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd > burst-mutation-tests.log 2>&1
@@ -90,6 +93,7 @@ jobs:
             echo "::error::Old callback mutation did not reproduce the observed Godot runtime error."
             exit 1
           fi
+          rm -rf .godot
           "$GODOT_BIN" --headless --editor --path . --import --quit
           "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd 2>&1 | tee burst-restored-tests.log
           if grep -F "Error calling from signal 'timeout' to callable: 'GDScript::_release'" burst-restored-tests.log; then
