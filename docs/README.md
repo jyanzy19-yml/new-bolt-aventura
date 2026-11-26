@@ -106,4 +106,5 @@ Atualize este índice quando documentos forem adicionados ou movidos. Use links 
 - [Auditoria de integridade do repositório — 2026-11-26](production/repository-audit-2026-11-26.md)
 - [Matriz de rastreabilidade das 26 etapas](production/26-stage-traceability-matrix.md) — fontes canônicas, sistemas, evidências e critérios de aceite por etapa.
 - [Registro de lacunas e decisões — Etapa 02](production/requirements-gap-register.md) — requisitos ainda a definir, prioridades, dependências e decisões já fechadas.
+- [Mapa da arquitetura atual](technical/09-current-architecture-map.md) — autoloads, fluxo de boot, ownership de estado, contratos e lacunas arquiteturais.
 - [Checklist de release Android](production/android-release-checklist.md)
