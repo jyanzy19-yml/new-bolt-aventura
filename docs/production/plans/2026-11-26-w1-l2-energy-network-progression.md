@@ -51,10 +51,11 @@ Transformar W1-L2, já especificada no blueprint de campanha, em um segundo bloc
 
 ## Validação
 
-**Estado nesta revisão:** CI da branch ainda pendente.  
-**Nível máximo pretendido:** L2 (Godot/headless via GitHub Actions).  
+**CI pré-merge PR #34:** Godot 4.7.2 SUCCESS — 69 testes, 439 verificações, 0 falhas (run `45872508689`); Docs SUCCESS (run `45872508675`).  
+**CI pós-merge:** Docs SUCCESS (run `45872656798`); Godot run `45872656738` estava em andamento no momento desta atualização.  
+**Nível máximo comprovado:** L2 — Godot/headless via GitHub Actions.  
 **Não executado:** Godot local/editor gráfico, APK, emulador, Android físico, touch físico, safe area e performance.
 
 ## Resultado
 
-A implementar/validar pela PR desta branch. Atualizar este documento com SHA, PR e resultados reais após CI.
+**Resultado:** implementado e integrado pela PR #34, squash merge `c10ca6944bf0047abe694b7c429270a256cfff96`. W1-L2 permanece blockout/protótipo e requer playtest humano e validação Android antes de ser considerado conteúdo aprovado.
