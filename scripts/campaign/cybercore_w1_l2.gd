@@ -50,7 +50,7 @@ func _on_checkpoint_activated(_checkpoint_id: StringName, respawn_position: Vect
 	_respawn_position = respawn_position
 	if not CampaignProgress.save_checkpoint(LEVEL_ID, String(_checkpoint.checkpoint_id)):
 		push_warning("W1-L2: não foi possível persistir checkpoint (%s)." % CampaignProgress.last_error)
-		_hud.show_progress_notification("CHECKPOINT ATIVADO")
+	_hud.show_progress_notification("CHECKPOINT ATIVADO")
 
 
 func _on_energy_gate_state_changed(active: bool) -> void:
