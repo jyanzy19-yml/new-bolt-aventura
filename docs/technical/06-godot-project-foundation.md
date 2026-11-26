@@ -48,16 +48,25 @@ Não há bindings de gamepad (não aprovados). `Actions.release_all_game_actions
 ## 6. Estrutura e autoloads
 
 ```
-project.godot  .godot-version  export_presets.cfg  icon.svg (placeholder)
-scenes/boot/        cena de entrada (valida o contrato de input e abre o menu)
-scenes/ui/          menus e HUD
-scripts/core/       fluxo da aplicação (boot, SceneFlow)
-scripts/input/      contrato de ações do Input Map
-scripts/ui/         scripts de interface (menu, SafeAreaMargin)
-tests/              runner headless + testes unitários (tests/unit/test_*.gd)
+project.godot / .godot-version / export_presets.cfg / icon.svg (placeholder)
+scenes/
+  boot/       entrada do app
+  ui/         menu, HUD e loading overlay
+  campaign/   W1-L1 e W1-L2 (blockouts)
+  tutorial/   tutorial guiado
+  player/     BOLT
+  combat/     projétil, pickup e alvo de treino
+  enemies/    inimigo-base Cybercore
+  levels/     sandbox, checkpoint e campo energético
+  world/      plataforma sólida, móvel e unidirecional
+scripts/
+  core/ campaign/ combat/ enemies/ input/ levels/ player/ tutorial/ ui/ world/
+resources/player/  BoltTuning provisório
+tests/              runner headless + testes unitários
+docs/               design, technical, production, QA e ADRs
 ```
 
-Diretórios para player, inimigos, mundos etc. serão criados **quando houver conteúdo real**, não antes. W1-L1 e W1-L2 existem como cenas de campanha em blockout/protótipo; as outras 40 fases planejadas ainda não existem como cenas. A sandbox continua fora da campanha.
+A árvore atual contém 19 cenas e 30 scripts de runtime. W1-L1 e W1-L2 existem em blockout/protótipo; as outras 40 fases planejadas ainda não existem como cenas. A sandbox continua fora da campanha.
 
 **Autoloads atuais:** `SceneFlow`, `SaveSystem`, `CampaignProgress` e `LoadingOverlay` (cena CanvasLayer). `SceneFlow` faz carregamento threaded (`ResourceLoader.load_threaded_*`), emite `transition_started/finished/failed`, bloqueia transições concorrentes e limpa ações; `LoadingOverlay` apresenta estado/progresso real; `SaveSystem` e `CampaignProgress` mantêm persistência e progressão separadas.
 
