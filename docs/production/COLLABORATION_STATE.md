@@ -2,18 +2,17 @@
 
 ## Snapshot operacional vigente — 2026-11-26
 
-- **Main HEAD:** `b24c8624a8ed64816d0131070f440a47f525ba47` (PR #45 integrada; Godot `45886997248`, Docs `45886997138`, Android export `45886997220` pós-merge SUCCESS; 85 testes/533 verificações/0 falhas).
+- **Main HEAD:** `e2e4f68b5b21c584c33eba739845adc3c685965e` (PR #48 integrada; matriz de rastreabilidade das 26 etapas).
+- **Última correção de gameplay:** PR #47, `TimedEnergyGate.initial_active=false`; CI pós-merge Godot 88 testes/553 verificações/0 falhas, Docs SUCCESS e Android Debug Export SUCCESS.
+- **Último componente de plataforma:** PR #46, `OneWayPlatform`; CI pós-merge Godot 87 testes/548 verificações/0 falhas, Docs e Android Export SUCCESS.
 - **Última entrega de conteúdo:** PR #34, W1-L2 em blockout e progressão W1-L1→W1-L2.
-- **Última regressão integrada:** PR #39, limpeza do ActionBuffer em pausa/suspensão/perda de foco, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.
-- **Última infraestrutura integrada:** PR #38, pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.
 - **Escritor ativo:** ChatGPT como único escritor, por decisão explícita do usuário; Claude permanece inativo para escrita concorrente.
-- **Plano operacional:** 26 etapas em `docs/production/stage-status.md`, subordinadas ao MASTER_DIRECTIVE e às especificações canônicas.
-- **Etapas atuais:** Etapa 01 e 02 EM ANÁLISE; Gate 1 continua em andamento. W1-L1 e W1-L2 são blockouts.
-- **PR #39 CI:** Godot 4.7.2 — 72 testes/451 verificações/0 falhas; Docs SUCCESS; Android Debug Export SUCCESS.
-- **APK debug:** artifact `bolt-aventura-android-debug-7415dfb988faf2dd63f9ff289106e7f7205dcdd1`, package ID placeholder `com.example.boltaventura`, SHA-256 `db03a42b909781a1f5e7c94d025615e1aa5f397c8ebd306ba30cddf84eca14b0`. Exportado/assinado, não instalado nem testado em aparelho.
+- **Plano operacional:** 26 etapas em `docs/production/stage-status.md`; matriz detalhada integrada em `docs/production/26-stage-traceability-matrix.md`.
+- **Etapas atuais:** Etapa 01 CONCLUÍDA (auditoria estática); Etapa 02 EM DESENVOLVIMENTO (revisão de requisitos e lacunas); Gate 1 continua em andamento. W1-L1 e W1-L2 são blockouts.
+- **APK pós-merge PR #47:** artifact `bolt-aventura-android-debug-2636226c4027625649e66c51ff64d7e2e56168a6`, 28.461.057 bytes, SHA-256 `c3ca03958eecf120f1a9f5f1e4fae3851fb7560bca303c8eb5a930f987b58123`, assinatura v2/v3 válida; package ID `com.example.boltaventura` é placeholder; APK não instalado em aparelho.
 - **PR #1:** permanece separada e não deve ser integrada/rebaseada automaticamente.
 - **Dash:** decisão aprovada e vigente: deve permanecer; ver `docs/production/ADR-001-DASH.md`.
-- **Próxima unidade:** regressão de restauração do pause state após falha em `test/scene-flow-failure-pause-restoration`; bloqueio integral já integrado pela PR #42.
+- **Próxima unidade:** terminar a revisão requisito-a-requisito da Etapa 02 e registrar decisões/lacunas antes de escolher a próxima implementação de gameplay.
 
 
 **Fonte única para o próximo turno.** Antes de editar, confirme este arquivo contra o HEAD, commits, branches e PRs reais do GitHub.
