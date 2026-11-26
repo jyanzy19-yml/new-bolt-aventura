@@ -39,3 +39,11 @@ Para cada contrato, documentar produtor, consumidor, payload, frequência, ciclo
 - O transporte do `CharacterBody2D` usa a velocidade nativa da plataforma calculada pelo motor. Não somar manualmente a mesma velocidade no controller, evitando duplicação.
 - A plataforma deve respeitar a pausa da SceneTree e não continuar se movendo durante pause.
 - O componente atual é ping-pong e placeholder; dimensões, percurso, duração, pausa de endpoint e eventual colisão one-way permanecem decisões de level design/playtest, não cânone final.
+
+## 11. OneWayPlatform → colisão unidirecional
+
+- `OneWayPlatform` reutiliza a geometria e o desenho de `PlatformBlock`, configurando `CollisionShape2D.one_way_collision = true`.
+- `one_way_collision_direction = Vector2.DOWN` define o sentido bloqueado: o BOLT colide ao descer e pode atravessar a plataforma ao subir por baixo.
+- `one_way_collision_margin` é configurável; o valor default atual é provisório e deve ser ajustado somente após playtest.
+- Não implementar checagem manual de posição/velocidade no controller do player; a decisão de contato pertence ao motor de física.
+- A plataforma não deve ser integrada em uma fase sem critério de level design e validação de gameplay.

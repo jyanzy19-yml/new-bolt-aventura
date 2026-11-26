@@ -1,7 +1,7 @@
 ## Snapshot vigente — 2026-11-26
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
-- **Main HEAD:** `88b753f3b28d6591642a044b76d2d1ec21ad0d73`. **Última entrega de conteúdo:** PR #34. **Última regressão integrada:** PR #43, restauração do pause state após falha. **Última mudança de loading/input:** PR #42, bloqueio integral durante transições. **Última reconciliação documental:** PR #40. **Última infraestrutura integrada:** PR #38. **Último teste de sistema:** PR #44, contratos da câmera.
+- **Main HEAD:** `b24c8624a8ed64816d0131070f440a47f525ba47`. **Última entrega de conteúdo:** PR #34. **Última regressão integrada:** PR #43, restauração do pause state após falha. **Última mudança de loading/input:** PR #42, bloqueio integral durante transições. **Última reconciliação documental:** PR #40. **Última infraestrutura integrada:** PR #38. **Último sistema de plataforma:** PR #45, MovingPlatform.
 - **PR #33:** MERGED. Expansão de documentação e correção do coletável; CI Godot 66 testes/404 verificações/0 falhas e Docs SUCCESS.
 - **PR #34:** MERGED. Adiciona W1-L2 em blockout, `TimedEnergyGate`, checkpoint e progressão persistente W1-L1→W1-L2.
 - **PR #35:** MERGED. Regressão de contato físico real do campo energético. **PR #36:** feedback de checkpoint W1-L2. **PR #37:** teste físico isolado do coletável e filtro CI para erro de mutação física bloqueada. **PR #38:** pipeline Android debug. **PR #39:** limpeza do ActionBuffer no ciclo de vida.
@@ -10,10 +10,10 @@
 - **PR #35:** Godot CI pré/pós-merge SUCCESS — 69 testes/439 verificações/0 falhas (`45873118202`, `45873234656`).
 - **Escritor ativo:** ChatGPT, seguindo a diretriz vigente do usuário. Não iniciar trabalho concorrente de Claude.
 - **Dash:** decisão canônica aprovada; deve permanecer no jogo conforme `docs/production/ADR-001-DASH.md`. Referências documentais antigas que ainda dizem “pendente” estão sendo reconciliadas nesta unidade.
-- **Branch atual:** `feat/moving-platform-system`; componente reutilizável de plataforma móvel para futuras fases.
+- **Branch atual:** `feat/one-way-platform`; componente reutilizável de plataforma unidirecional.
 - **Unidade integrada:** `TimedEnergyGate`, cena/script `cybercore_w1_l2`, botão PRÓXIMA FASE na conclusão W1-L1, destino salvo W1-L2, retomada de W1-L1/W1-L2 e regressões.
 - **Limites:** W1-L2 é blockout/protótipo de mecânica, não conteúdo final; ciclo, dano e percurso precisam de playtest. APK debug exportado em CI, mas não instalado; Android físico, touch físico e profiling continuam pendentes.
-- **Próximo passo:** validar o componente de plataforma móvel; não integrá-lo a fase até passar testes de transporte e colisão.
+- **Próximo passo:** validar o componente OneWayPlatform; MovingPlatform já está integrado, sem inserção em fase até aprovação de level design.
 
 ---
 
@@ -625,3 +625,24 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Pós-merge main: Godot `45885612259`, Docs `45885612332`, Android export `45885612341` SUCCESS; artifact main `bolt-aventura-android-debug-88b753f3b28d6591642a044b76d2d1ec21ad0d73`, SHA-256 `de37ec1b4330f1845eb434f079be92a3c83d661cbfc1aecfd431a9fe75a3fe2d`.
 - Etapa 09: camera rig e limites W1-L1/W1-L2 possuem regressões headless; inspeção visual continua pendente.
 - Próxima unidade: `feat/moving-platform-system`, implementação de `AnimatableBody2D` ping-pong para suporte a plataformas móveis. Sem integração em fase nesta unidade.
+
+
+---
+
+## Sessão ChatGPT — plataforma móvel integrada e plataforma unidirecional — 2026-11-26
+
+- Main HEAD: `b24c8624a8ed64816d0131070f440a47f525ba47` (PR #45 integrada).
+- PR #45 pré-merge e pós-merge: Godot 4.7.2 — 85 testes/533 verificações/0 falhas; Docs SUCCESS; Android debug export SUCCESS.
+- APK main: artifact `bolt-aventura-android-debug-b24c8624a8ed64816d0131070f440a47f525ba47`, 28.460.646 bytes, package ID provisório `com.example.boltaventura`, SHA-256 `3b3be5c8df067c000216bbc3e5ad39b357f0ea70ad3d3a5bc12625724873ffd1`.
+- MovingPlatform está integrado como componente reutilizável, sem uso em fase da campanha.
+- Nova unidade `feat/one-way-platform`: implementar plataforma que permite passagem de baixo para cima e colisão ao aterrissar por cima, conforme Godot 4.7.
+
+
+## Sessão ChatGPT — plataforma unidirecional — 2026-11-26
+
+- Main base: `b24c8624a8ed64816d0131070f440a47f525ba47` (PR #45 integrada).
+- Unidade atual: `feat/one-way-platform`.
+- `OneWayPlatform` estende `PlatformBlock`; direção de bloqueio `Vector2.DOWN` permite atravessar por baixo e aterrissar por cima.
+- Testes adicionados para configuração da shape, passagem ascendente e aterrissagem descendente.
+- Plano: `docs/production/plans/2026-11-26-one-way-platform.md`.
+- **Estado:** aguardando CI. Não integrada em fase.
