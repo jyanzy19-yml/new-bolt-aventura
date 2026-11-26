@@ -3,19 +3,19 @@
 **Função:** handoff obrigatório para retomar trabalho após limite de contexto, troca de sessão ou interrupção.  
 **Fonte de verdade do estado:** repositório e evidências; este arquivo é um índice de retomada, não substitui código, QA, ADRs ou tracker.
 
-## Snapshot vigente — 2026-11-26
+## Snapshot vigente — revisão de 2026-11-26
 
-- **HEAD confirmado da main:** `f5fbff8de138bfec395f45a7fef1ad57c45aa37c` (merge da PR #5).
-- O projeto Godot executável existe na raiz: Godot **4.7.2**, `project.godot`, cenas, scripts e testes. Não recriar o projeto nem duplicar sistemas existentes.
-- Etapa 0: **ACCEPTED**. Etapa 1: **HANDOFF_READY**. PRs #2, #3, #4 e #5: **MERGED**.
-- Próximo turno: **Claude Code — Etapa 2**, iniciado manualmente pelo usuário. Handoff: `handoffs/HANDOFF_ETAPA_2_CLAUDE.md`.
-- Auditoria de polimento integrada: [repository-polish-audit-2026-11-26.md](repository-polish-audit-2026-11-26.md), PR #5; Docs CI #140 SUCCESS.
-- PR #1 continua aberta, baseada em commit antigo e reportada pelo GitHub como não mergeável. Não mesclar sem rebase/reconciliação.
-- **Conflito de escopo pendente:** código/tracker incluem Dash; diretiva proposta na PR #1 o exclui. Não remover nem ampliar essa mecânica silenciosamente.
-- Validação máxima comprovada: **L2** (Godot headless/CI). Godot CI #45 passou na PR #3; Docs CI #135 passou na PR #4. Não há APK, instalação ou validação física/visual/performance Android comprovada.
-- Um único escritor por vez. Claude deve confirmar HEAD e ler a auditoria antes de implementar; ChatGPT não deve iniciar gameplay concorrente.
+- **HEAD da main verificado antes desta rodada:** `75159132a7dc2503df68d8ca1abe57fc7e88019c` (PR #6; Docs CI #143 SUCCESS). Esta revisão documental parte desse commit em branch própria.
+- O projeto Godot executável existe na raiz: Godot **4.7.2**, `project.godot`, cenas, scripts GDScript, recursos e testes. Continuar a base existente; não recriar o projeto.
+- Etapa 0: **ACCEPTED**. Etapa 1: **HANDOFF_READY**. PRs #2–#6: **MERGED**.
+- Próximo turno de gameplay: **Claude Code — Etapa 2**, somente depois da integração desta rodada e confirmação do HEAD atual pelo usuário/Claude.
+- **PR #1:** OPEN, `mergeable_state=dirty`; 17 commits exclusivos, 135 commits atrás da main verificada, 17 arquivos alterados. Contém documentos de raiz e uma diretiva em 12 partes/índice; não contém implementação de gameplay. Preservada sem merge/fechamento.
+- **Dash:** código e testes atuais incluem Dash; a diretiva da PR #1 exclui. Decisão canônica não resolvida. Não adicionar, remover ou retunar a mecânica sem decisão explícita.
+- **Branch protection:** endpoint de leitura retornou 403 para a integração; configuração atual não foi confirmada nesta rodada. A auditoria anterior reportou `protected=false`; proprietário deve verificar/configurar administrativamente.
+- **Validação máxima comprovada:** L2 (Godot headless/CI). Docs CI #143 SUCCESS no HEAD anterior à rodada. Não há APK exportado/instalado, editor gráfico, emulador, toque físico, safe area em aparelho, FPS ou memória medidos.
+- **Escopo desta rodada ChatGPT:** corrigir documentação/continuidade e auditar PR #1, governança, CI e riscos. Não há alterações de gameplay planejadas.
 
-Antes de continuar, verificar branch/HEAD, PRs e mudanças mais recentes. O estado do repositório prevalece sobre handoffs antigos.
+O estado do repositório prevalece sobre handoffs antigos. Confirmar branch/HEAD/PRs antes de qualquer implementação.
 
 ## 1. Protocolo de retomada
 
