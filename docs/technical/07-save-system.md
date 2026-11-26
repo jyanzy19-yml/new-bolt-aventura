@@ -26,6 +26,6 @@ O sistema recebe um Dictionary já preparado pelo produtor de estado. Não mant�
 ## Limites conhecidos
 
 - Não há migração de versões anteriores: a versão 1 é a primeira versão de envelope; mudanças futuras exigem migração explícita e testes.
-- A camada ainda não está conectada ao checkpoint ou ao fluxo de conclusão de W1-L1. Portanto, não declarar persistência de campanha implementada.
+- A camada está conectada ao domínio CampaignProgress em W1-L1 (ADR-0004). Sandbox e demais fases ainda não estão integradas; não declarar persistência global da campanha concluída.
 - CI headless valida o contrato de arquivo em ambiente de teste; não substitui teste de interrupção do processo, permissões, armazenamento e comportamento em Android físico.
 - O teste usa um caminho isolado `user://bolt_save_test.json`; não toca no slot de produção.
