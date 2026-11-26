@@ -58,7 +58,7 @@ func save_checkpoint(level_id: String, checkpoint_id: String) -> bool:
 		last_error = "empty_level_or_checkpoint_id"
 		return false
 	var state: Dictionary = load_state()
-	if not last_error.is_empty() and !_is_save_recovery_status(SaveSystem.last_error):
+	if not last_error.is_empty():
 		return false
 	state["current_level_id"] = level_id
 	state["active_checkpoint_id"] = checkpoint_id
@@ -70,7 +70,7 @@ func mark_level_completed(level_id: String, next_level_id: String = "") -> bool:
 		last_error = "empty_level_id"
 		return false
 	var state: Dictionary = load_state()
-	if not last_error.is_empty() and !_is_save_recovery_status(SaveSystem.last_error):
+	if not last_error.is_empty():
 		return false
 	var completed: Array = state.get("completed_level_ids", [])
 	if not completed.has(level_id):
