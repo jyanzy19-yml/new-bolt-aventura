@@ -18,6 +18,8 @@ var _busy: bool = false
 
 
 func _ready() -> void:
+	# Transições precisam terminar mesmo quando a cena anterior deixou a árvore pausada.
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	set_process(false)
 	# Entrada sem acúmulo: os controles touch convertem eventos em ações via
 	# Input.parse_input_event. Isso evita depender do acúmulo para propagar a borda do evento.
