@@ -419,3 +419,12 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - O objetivo marca W1-L1 como concluída e limpa checkpoint ativo; não tenta carregar W1-L2, que não existe.
 - ADR-0004 registra a decisão técnica. Testes isolam os arquivos user:// para não tocar no slot real.
 - CI da branch ainda pendente. Não executado: APK, instalação, emulador, Android físico, encerramento forçado, filesystem OEM, FPS, memória ou latência.
+
+
+## Pós-merge PR #29 — 2026-11-26
+
+- PR #29 integrada em `44d9e0fcda68200579506b909c8920d4692cdc84`.
+- Godot CI pré-merge `45859492456` SUCCESS: 62 testes, 369 verificações, 0 falhas; Docs CI `45859492355` SUCCESS.
+- W1-L1 persiste o checkpoint quando ativado, restaura estado visual/respawn na reentrada e registra a conclusão da fase no schema CampaignProgress v1.
+- CI pós-merge main Godot `45859653809` e Docs `45859653966` ainda aguardando confirmação final.
+- Persistência ainda não validada em Android físico ou após encerramento forçado. Sandbox e demais fases não integradas.

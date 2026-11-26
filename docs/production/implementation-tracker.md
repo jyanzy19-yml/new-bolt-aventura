@@ -211,3 +211,12 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - W1-L1 grava no evento de checkpoint, restaura indicador/respawn na reentrada e marca conclusão ao alcançar o objetivo; conclusão limpa o checkpoint ativo e não inventa transição para W1-L2.
 - ADR-0004 e docs técnicos `08-campaign-progress.md` formalizam o contrato. Testes de serviço e integração adicionados; CI pendente.
 - SYS-014/SYS-015 continuam **Em andamento** até validação Android, migrações e integração das demais fases.
+
+
+## Pós-merge PR #29 — CampaignProgress em W1-L1
+
+- Main HEAD: `44d9e0fcda68200579506b909c8920d4692cdc84`.
+- Godot CI pré-merge `45859492456` SUCCESS: 62 testes, 369 verificações, 0 falhas; Docs CI `45859492355` SUCCESS.
+- `SYS-014`: checkpoint de W1-L1 agora persiste e restaura em reentrada; demais níveis e sandbox continuam sem integração.
+- `SYS-015`: SaveSystem v1 + CampaignProgress v1 implementados parcialmente; migrações futuras e outros domínios pendentes.
+- W1-L1 segue **Em andamento**: falta conteúdo final, transição real para W1-L2, playtest humano e QA Android.
