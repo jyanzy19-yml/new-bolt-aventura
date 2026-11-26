@@ -6,7 +6,7 @@
 - **Responsável:** Claude Code. **Próxima etapa / responsável:** 1 — ChatGPT.
 - **Repositório / branch:** jyanzy19-yml/new-bolt-aventura, `main`.
 - **Commit-base:** `16d42de2f2b5b3a52411f7d13db6d37b3a38b9d3`.
-- **Commits de entrega:** `7057532` (fundação) + commit de gameplay-base e documentação (hash final em `COLLABORATION_STATE.md`).
+- **Commits de entrega:** `7057532` (fundação) + `c32a99d` (gameplay-base, testes e documentação).
 - **PR #1:** não tocada, não mesclada (divergente).
 - **Estado:** HANDOFF_READY (não significa slice, APK ou campanha prontos).
 
@@ -62,4 +62,4 @@ Package ID; resolução-base; renderer final; ABIs; semântica canônica de "All
 ## Declaração
 
 - [x] Nenhum teste declarado sem execução real.
-- [ ] Commit acessível em `main` — confirmar após push (ver COLLABORATION_STATE).
+- [x] Commit `c32a99d` enviado a `origin/main` (push confirmado).

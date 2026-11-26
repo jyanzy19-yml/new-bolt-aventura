@@ -193,7 +193,7 @@ Ao retomar, consultar o HEAD real; este snapshot descreve a base auditada e não
 
 ## 12. Sessão Etapa 0 — Claude Code — 2026-11-26 (estado mais recente)
 
-- **Commit inicial:** `16d42de`. **Final:** ver `git log` (`7057532` fundação + commit de gameplay-base/docs).
+- **Commit inicial:** `16d42de`. **Final:** `c32a99d` (`7057532` fundação + `c32a99d` gameplay-base/docs).
 - **Gate:** Fundação (com base de movimento/touch/HUD/sandbox a pedido do usuário).
 - **Resultado:** projeto Godot 4.7.2 executável; detalhes em [handoffs/HANDOFF_ETAPA_0.md](handoffs/HANDOFF_ETAPA_0.md).
 - **Testes executados:** import sem erros; suíte headless 41 testes / 167 verificações / 0 falhas; 5 mutações detectadas; boot 20× sem erro; bot completa a sandbox.

@@ -65,7 +65,7 @@ Não avançar o número da etapa apenas porque uma sessão terminou. O próximo 
 
 | Etapa | Responsável | Estado | Commit de entrega | Próxima ação |
 |---|---|---|---|---|
-| 0 | Claude Code | HANDOFF_READY | `7057532` + commit de gameplay-base (hash: ver git log) | ChatGPT inspeciona, roda suíte, decide o conflito de escopo |
+| 0 | Claude Code | HANDOFF_READY | `7057532` + `c32a99d` | ChatGPT inspeciona, roda suíte, decide o conflito de escopo |
 | 1 | ChatGPT | Aguardando | — | Auditar Etapa 0 e implementar a próxima unidade do roadmap |
 | 2 | Claude Code | Aguardando | — | Auditar Etapa 1 e continuar |
 | 3 | ChatGPT | Aguardando | — | Auditar Etapa 2 e continuar |
