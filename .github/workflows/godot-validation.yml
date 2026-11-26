@@ -98,11 +98,15 @@ jobs:
           from pathlib import Path
           path = Path("scripts/ui/main_menu.gd")
           source = path.read_text()
-          old = 'return get_node_or_null("/root/CampaignProgress")'
-          new = 'return CampaignProgress'
-          if old not in source:
-              raise SystemExit("Mutation target not found; refusing a vacuous mutation check.")
-          path.write_text(source.replace(old, new, 1))
+          mutations = {
+              'return get_node_or_null("/root/CampaignProgress")': 'return CampaignProgress',
+              'return get_node_or_null("/root/SaveSystem")': 'return SaveSystem',
+          }
+          for old, new in mutations.items():
+              if old not in source:
+                  raise SystemExit(f"Mutation target not found: {old}")
+              source = source.replace(old, new, 1)
+          path.write_text(source)
           PY
           set +e
           "$GODOT_BIN" --headless --editor --path . --import --quit > mutation-import.log 2>&1
