@@ -9,6 +9,9 @@ signal state_changed(active: bool)
 @export_range(1, 10, 1) var contact_damage: int = 1
 @export var initial_active: bool = true
 
+## Janela (s) antes de ativar em que o campo avisa visualmente.
+const TELEGRAPH_TIME: float = 0.45
+
 var _active: bool = false
 var _state_initialized: bool = false
 
@@ -21,6 +24,16 @@ func _ready() -> void:
 	_cycle_timer.timeout.connect(_on_cycle_timeout)
 	_set_active(initial_active)
 	_cycle_timer.start(_duration_for_current_state())
+
+
+func _process(_delta: float) -> void:
+	# Telégrafo (só visual): na reta final da fase inativa o campo pisca em alerta, para o
+	# jogador ler o ritmo do perigo. Não altera monitoring, tempos nem dano.
+	if _active or _cycle_timer.is_stopped():
+		return
+	if _cycle_timer.time_left <= TELEGRAPH_TIME:
+		var pulse: float = 0.5 + 0.5 * sin(_cycle_timer.time_left * 40.0)
+		_visual.color = Color(1.0, 0.55, 0.3, 0.25 + 0.4 * pulse)
 
 
 func is_active() -> bool:
@@ -43,7 +56,8 @@ func _set_active(active: bool) -> void:
 	_active = active
 	# monitoring pode ser alterado em resposta a eventos de física; adiar a mutação.
 	set_deferred("monitoring", _active)
-	_visual.color = Color(0.18, 0.92, 1.0, 0.92) if _active else Color(0.12, 0.22, 0.34, 0.28)
+	# Perigo ativo = vermelho-alaranjado (mesma leitura do inimigo); ciano fica para o que é seguro.
+	_visual.color = Color(1.0, 0.42, 0.28, 0.92) if _active else Color(0.12, 0.22, 0.34, 0.28)
 	state_changed.emit(_active)
 
 

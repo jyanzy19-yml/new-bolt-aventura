@@ -53,4 +53,6 @@ func _fire() -> void:
 	level_root.add_child(projectile)
 	projectile.global_position = _player.global_position + Vector2(26.0 * float(_player.facing), -4.0)
 	projectile.configure(_player.facing, projectile_speed, projectile_damage, projectile_lifetime)
+	Burst.spawn(level_root, projectile.global_position, Color(0.7, 1.0, 1.0, 1.0), 4, 100.0, 0.12,
+			Vector2(float(_player.facing), 0.0), 60.0, 6.0, 0.0)
 	_cooldown_left = attack_cooldown

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://scripts/player/bolt_player.gd" id="1_player"]
 [ext_resource type="Script" path="res://scripts/input/action_buffer.gd" id="2_buffer"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://scripts/combat/bolt_combat.gd" id="4_combat"]
 [ext_resource type="PackedScene" path="res://scenes/combat/chrono_projectile.tscn" id="5_projectile"]
 [ext_resource type="Script" path="res://scripts/combat/bolt_health.gd" id="6_health"]
+
+[ext_resource type="Script" path="res://scripts/player/bolt_feedback.gd" id="7_feedback"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(24, 40)
@@ -47,6 +49,9 @@ max_health = 3
 unique_name_in_owner = true
 script = ExtResource("4_combat")
 projectile_scene = ExtResource("5_projectile")
+
+[node name="Feedback" type="Node" parent="."]
+script = ExtResource("7_feedback")
 
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true

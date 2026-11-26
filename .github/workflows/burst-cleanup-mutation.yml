@@ -1,0 +1,103 @@
+name: Burst cleanup mutation validation
+on:
+  push:
+    branches: [feat/cybercore-w1-blockout]
+    paths:
+      - 'scripts/vfx/burst.gd'
+      - 'tests/unit/test_cybercore_polish.gd'
+      - 'tests/mutation/**'
+      - '.github/workflows/burst-cleanup-mutation.yml'
+  pull_request:
+    paths:
+      - 'scripts/vfx/burst.gd'
+      - 'tests/unit/test_cybercore_polish.gd'
+      - '.github/workflows/burst-cleanup-mutation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  burst-mutation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install pinned Godot and import
+        shell: bash
+        run: |
+          set -euo pipefail
+          GODOT_VERSION="$(tr -d '[:space:]' < .godot-version)"
+          ARCHIVE="Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          URL="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/${ARCHIVE}"
+          curl --fail --location --retry 3 "$URL" --output godot.zip
+          unzip -q godot.zip -d godot-bin
+          GODOT_BIN="godot-bin/Godot_v${GODOT_VERSION}-stable_linux.x86_64"
+          chmod +x "$GODOT_BIN"
+          "$GODOT_BIN" --headless --editor --path . --import --quit
+          echo "GODOT_BIN=$GODOT_BIN" >> "$GITHUB_ENV"
+      - name: Run regression with fixed implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd 2>&1 | tee burst-fixed.log
+          if grep -F "Error calling from signal 'timeout' to callable: 'GDScript::_release'" burst-fixed.log; then
+            echo "::error::Burst cleanup callback still emits runtime errors."
+            exit 1
+          fi
+      - name: Mutate back to the old freed-Node callback and prove the test fails
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp scripts/vfx/burst.gd burst-fixed.txt
+          trap 'cp burst-fixed.txt scripts/vfx/burst.gd' EXIT
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("scripts/vfx/burst.gd")
+          source = path.read_text()
+          binding = "timeout.connect(_release.bind(particles.get_instance_id()))"
+          old_binding = "timeout.connect(_release.bind(particles))"
+          signature = "static func _release(particles_instance_id: int) -> void:"
+          if binding not in source or signature not in source:
+              raise SystemExit("Mutation target missing; refusing a vacuous mutation check.")
+          source = source.replace(binding, old_binding, 1)
+          start = source.index(signature)
+          source = source[:start] + (
+              "static func _release(particles: CPUParticles2D) -> void:" + chr(10)
+              + chr(9) + "_active = maxi(0, _active - 1)" + chr(10)
+              + chr(9) + "if is_instance_valid(particles):" + chr(10)
+              + chr(9) + chr(9) + "particles.queue_free()" + chr(10)
+          )
+          path.write_text(source)
+          PY
+          # Rebuild Godot's global script-class cache from the mutated source so the test
+          # process cannot reuse a stale cached Burst class definition.
+          rm -rf .godot
+          "$GODOT_BIN" --headless --editor --path . --import --quit > burst-mutation-import.log 2>&1
+          set +e
+          "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd > burst-mutation-tests.log 2>&1
+          mutation_status=$?
+          set -e
+          cp burst-fixed.txt scripts/vfx/burst.gd
+          rm -f burst-fixed.txt
+          trap - EXIT
+          cat burst-mutation-tests.log
+          if [[ $mutation_status -eq 0 ]]; then
+            echo "::error::Burst cleanup regression survived the old-code mutation."
+            exit 1
+          fi
+          if ! grep -F "FAIL res://tests/unit/test_cybercore_polish.gd::test_burst_releases_counter_when_parent_is_freed_before_timeout" burst-mutation-tests.log; then
+            echo "::error::The targeted W1-L1 teardown regression did not fail under the old callback."
+            exit 1
+          fi
+          if ! grep -F "Error calling from signal 'timeout' to callable: 'GDScript::_release'" burst-mutation-tests.log; then
+            echo "::error::Old callback mutation did not reproduce the observed Godot runtime error."
+            exit 1
+          fi
+          rm -rf .godot
+          "$GODOT_BIN" --headless --editor --path . --import --quit
+          "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd 2>&1 | tee burst-restored-tests.log
+          if grep -F "Error calling from signal 'timeout' to callable: 'GDScript::_release'" burst-restored-tests.log; then
+            echo "::error::Fixed callback still emits the old runtime error."
+            exit 1
+          fi
+          echo "Mutation verified: the targeted W1-L1 teardown regression fails with the old callback and passes with the ObjectID callback."
