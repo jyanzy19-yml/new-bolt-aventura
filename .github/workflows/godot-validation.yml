@@ -2,7 +2,31 @@ name: Godot validation
 on:
   push:
     branches: [main]
+    paths:
+      - 'project.godot'
+      - '.godot-version'
+      - 'export_presets.cfg'
+      - 'icon.svg'
+      - 'scenes/**'
+      - 'scripts/**'
+      - 'resources/**'
+      - 'tests/**'
+      - 'assets/**'
+      - 'addons/**'
+      - '.github/workflows/godot-validation.yml'
   pull_request:
+    paths:
+      - 'project.godot'
+      - '.godot-version'
+      - 'export_presets.cfg'
+      - 'icon.svg'
+      - 'scenes/**'
+      - 'scripts/**'
+      - 'resources/**'
+      - 'tests/**'
+      - 'assets/**'
+      - 'addons/**'
+      - '.github/workflows/godot-validation.yml'
   workflow_dispatch:
 permissions:
   contents: read
@@ -39,8 +63,12 @@ jobs:
           chmod +x "$GODOT_BIN"
           ACTUAL_VERSION="$("$GODOT_BIN" --headless --version)"
           [[ "$ACTUAL_VERSION" == "$GODOT_VERSION".* ]]
-          "$GODOT_BIN" --headless --editor --path . --import --quit
+          "$GODOT_BIN" --headless --editor --path . --import --quit 2>&1 | tee godot-import.log
           echo "Headless import/parse passed for Godot $GODOT_VERSION."
-          "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd
+          "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd 2>&1 | tee godot-tests.log
+          if grep -nE "SCRIPT ERROR:|Parse Error:" godot-import.log godot-tests.log; then
+            echo "::error::Godot reported a script or parse error; refusing a green validation."
+            exit 1
+          fi
           echo "Headless project test suite passed."
           echo "This does not prove Android export, rendering, touch hardware or physical-device performance."
