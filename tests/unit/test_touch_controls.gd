@@ -150,6 +150,19 @@ func test_pause_releases_everything_and_hides_controls() -> bool:
 	return true
 
 
+func test_transition_started_releases_and_hides_touch_controls() -> bool:
+	await _setup()
+	_touch(0, _center(Actions.JUMP), true)
+	check(Input.is_action_pressed(Actions.JUMP), "jump pressionado antes da transição")
+	SceneFlow.transition_started.emit("res://scenes/campaign/cybercore_w1_l1.tscn")
+	check(not Input.is_action_pressed(Actions.JUMP), "jump liberado no início da transição")
+	check(not _controls.visible, "controles touch ocultos durante transição")
+	SceneFlow.transition_failed.emit("res://scenes/campaign/cybercore_w1_l1.tscn", "test")
+	check(_controls.visible, "controles restaurados quando a transição falha")
+	await _teardown()
+	return true
+
+
 func test_visual_state_follows_logical_state() -> bool:
 	await _setup()
 	var button: TouchButton = _controls.get_button(Actions.JUMP)
