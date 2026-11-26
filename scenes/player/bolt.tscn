@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/player/bolt_player.gd" id="1_player"]
 [ext_resource type="Script" path="res://scripts/input/action_buffer.gd" id="2_buffer"]
 [ext_resource type="Resource" path="res://resources/player/bolt_tuning_provisional.tres" id="3_tuning"]
 [ext_resource type="Script" path="res://scripts/combat/bolt_combat.gd" id="4_combat"]
 [ext_resource type="PackedScene" path="res://scenes/combat/chrono_projectile.tscn" id="5_projectile"]
+[ext_resource type="Script" path="res://scripts/combat/bolt_health.gd" id="6_health"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(24, 40)
@@ -36,6 +37,11 @@ polygon = PackedVector2Array(0, -12, 10, -12, 10, -4, 0, -4)
 [node name="Bolt" type="Polygon2D" parent="PlaceholderVisual"]
 color = Color(1, 0.95, 0.4, 1)
 polygon = PackedVector2Array(-3, 2, 3, 2, 0, 8, 4, 8, -4, 18, -2, 10, -6, 10)
+
+[node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("6_health")
+max_health = 3
 
 [node name="Combat" type="Node" parent="."]
 unique_name_in_owner = true
