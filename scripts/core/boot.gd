@@ -2,8 +2,11 @@ extends Control
 ## Cena de entrada do projeto. Valida o contrato de input e entrega o fluxo ao menu principal.
 
 const MAIN_MENU_PATH: String = "res://scenes/ui/main_menu.tscn"
+const MAIN_MENU_SCRIPT_PATH: String = "res://scripts/ui/main_menu.gd"
 
 @onready var _status: Label = %StatusLabel
+
+var _main_menu_script: Script
 
 
 func _ready() -> void:
@@ -13,12 +16,14 @@ func _ready() -> void:
 		push_error("Boot: ações ausentes no Input Map: %s" % [missing])
 		_status.text = "Erro de configuração: Input Map incompleto."
 		return
-	SceneFlow.transition_failed.connect(_on_transition_failed, CONNECT_ONE_SHOT)
-	# Não iniciar o primeiro carregamento threaded dentro do mesmo ciclo de _ready
-	# da cena principal. A barreira de um frame permite concluir a inicialização da árvore.
-	await get_tree().process_frame
-	if not is_inside_tree():
+	# Compila/carrega o script leve do menu na thread principal antes do PackedScene
+	# ser solicitado por SceneFlow via ResourceLoader threaded.
+	_main_menu_script = load(MAIN_MENU_SCRIPT_PATH) as Script
+	if _main_menu_script == null:
+		push_error("Boot: falha ao carregar o script do menu.")
+		_status.text = "Falha ao preparar o menu principal."
 		return
+	SceneFlow.transition_failed.connect(_on_transition_failed, CONNECT_ONE_SHOT)
 	SceneFlow.change_scene(MAIN_MENU_PATH)
 
 
