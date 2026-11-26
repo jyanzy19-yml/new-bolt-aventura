@@ -5,11 +5,11 @@
 - **PR #33:** MERGED. Expansão de documentação e correção do coletável; CI Godot 66 testes/404 verificações/0 falhas e Docs SUCCESS.
 - **PR #34:** MERGED. Adiciona W1-L2 em blockout, `TimedEnergyGate`, checkpoint e progressão persistente W1-L1→W1-L2.
 - **CI pré-merge PR #34:** Godot 4.7.2, 69 testes/439 verificações/0 falhas (`45872508689`); Docs SUCCESS (`45872508675`).
-- **CI pós-merge:** Docs SUCCESS (`45872656798`); Godot run `45872656738` ainda em andamento nesta fotografia.
+- **CI pós-merge PR #34:** Godot SUCCESS — 69 testes/439 verificações/0 falhas (`45872656738`); Docs SUCCESS (`45872656798`). Docs CI da sincronização seguinte SUCCESS (`45872828901`).
 - **Escritor ativo:** ChatGPT, seguindo a diretriz vigente do usuário. Não iniciar trabalho concorrente de Claude.
 - **Unidade integrada:** `TimedEnergyGate`, cena/script `cybercore_w1_l2`, botão PRÓXIMA FASE na conclusão W1-L1, destino salvo W1-L2, retomada de W1-L1/W1-L2 e regressões.
 - **Limites:** W1-L2 é blockout/protótipo de mecânica, não conteúdo final; ciclo, dano e percurso precisam de playtest. Sem APK, emulador, Android físico, touch físico ou medição de desempenho.
-- **Próximo passo:** confirmar Godot CI pós-merge; então escolher a próxima unidade da campanha com base no estado real. Manter validação Android física como pendente.
+- **Próximo passo:** manter W1-L2 classificada como blockout; a próxima unidade deve partir de revisão de gameplay/level design e não de expansão automática do número de fases. Manter validação Android física como pendente.
 
 ---
 
