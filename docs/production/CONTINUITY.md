@@ -1,3 +1,18 @@
+## Snapshot vigente — 2026-11-26
+
+- **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
+- **Main HEAD:** `09afde26cc2bdb1126202dbfd413fa317f2a3e9d`, após merge squash da PR #33.
+- **PR #33:** MERGED. Corrige mutação de `Area2D.monitoring` no coletável e integra expansão de documentação de produção. CI da PR: Godot 4.7.2, 66 testes/404 verificações/0 falhas; Docs SUCCESS.
+- **Escritor ativo:** ChatGPT, seguindo a diretriz vigente do usuário. Não iniciar trabalho concorrente de Claude.
+- **Branch de trabalho:** `feat/w1-l2-energy-network-progression`, criada a partir do HEAD acima.
+- **Unidade atual:** ligar conclusão W1-L1 à W1-L2; avançar o ponteiro de retomada; permitir Continuar em fases implementadas; criar o blockout W1-L2 com campo energético cíclico.
+- **Implementação nesta branch:** `TimedEnergyGate`, cena `cybercore_w1_l2.tscn`, script de fase, botão PRÓXIMA FASE no resultado da W1-L1, mapa de retomada W1-L1/W1-L2 e testes de progressão/ciclo.
+- **Validação desta branch:** ainda NÃO EXECUTADA; aguardar workflows após abertura da PR. Não declarar runtime Android validado.
+- **Limites:** W1-L2 é blockout/protótipo de mecânica, não conteúdo final; ciclo, dano e percurso precisam de playtest. Sem APK, emulador, Android físico, touch físico ou medição de desempenho.
+- **Próximo passo:** revisar todos os diffs e recursos, abrir PR, corrigir falhas de CI; após CI verde, revisar pós-merge e atualizar os status com o SHA real.
+
+---
+
 ## Estado atual — PR #17 integrada — 2026-11-26
 
 - **Main HEAD:** `33fe452d0a6aad2fc87ea19da789dfde9999c93a`.
