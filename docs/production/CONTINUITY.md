@@ -1,7 +1,7 @@
 ## Snapshot vigente — 2026-11-26
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
-- **Main HEAD após PR #52:** `6f8e9b8fbaaab9c44247050e5f86e4442bd2622f`; PR #51/#52 integraram e revisaram o mapa arquitetural atual.
+- **Main HEAD verificada nesta atualização:** `54fd48e5f49fba877740265aafa0d8f649c2b1e9`; PR #51/#52 integraram e revisaram o mapa arquitetural atual.
 - **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético e progressão W1-L1→W1-L2.
 - **Última correção de gameplay:** PR #47 — estado inicial `initial_active=false` do `TimedEnergyGate`, merge `2636226c4027625649e66c51ff64d7e2e56168a6`.
 - **Último componente de plataforma:** PR #46 — `OneWayPlatform`, merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`; PR #45 adicionou `MovingPlatform`.
@@ -647,7 +647,15 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Testes adicionados para configuração da shape, passagem ascendente e aterrissagem descendente.
 - Plano: `docs/production/plans/2026-11-26-one-way-platform.md`.
 - **Estado:** aguardando CI. Não integrada em fase.
-\n\n## Sessão ChatGPT — integração da PR #46 — 2026-11-26\n\n- PR #46 `feat: add reusable one-way platform` integrada por squash; merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.\n- Implementação: `scripts/world/one_way_platform.gd`, `scenes/world/one_way_platform.tscn`; teste `tests/unit/test_one_way_platform.gd`; contrato atualizado em `docs/technical/05-system-contracts.md`.\n- Godot CI pré-merge `45887805114`: SUCCESS — 87 testes/548 verificações/0 falhas. Docs CI `45887805097`: SUCCESS. Android Debug Export `45887805269`: SUCCESS; artifact e hash registrados em `stage-status.md`.\n- Não houve integração em fase; margin 2 px e dimensões são provisórias. Sem playtest visual ou Android físico. Pós-merge CI da main não confirmado no momento do registro.\n
+
+
+## Sessão ChatGPT — integração da PR #46 — 2026-11-26
+
+- PR #46 `feat: add reusable one-way platform` integrada por squash; merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.
+- Implementação: `scripts/world/one_way_platform.gd`, `scenes/world/one_way_platform.tscn`; teste `tests/unit/test_one_way_platform.gd`; contrato atualizado em `docs/technical/05-system-contracts.md`.
+- Godot CI pré-merge `45887805114`: SUCCESS — 87 testes/548 verificações/0 falhas. Docs CI `45887805097`: SUCCESS. Android Debug Export `45887805269`: SUCCESS; artifact e hash registrados em `stage-status.md`.
+- Não houve integração em fase; margin 2 px e dimensões são provisórias. Sem playtest visual ou Android físico. Pós-merge CI da main não confirmado no momento do registro.
+
 
 ---
 
@@ -738,3 +746,20 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - No head atual da PR #58, Android Debug Export run 45907688455 terminou SUCCESS: Godot exportou o APK debug, verificou o arquivo/proveniência e fez upload do artefato.
 - O cancelamento mencionado anteriormente referia-se somente ao run #190, substituído pela execução bem-sucedida #191.
 - Nenhum aparelho físico ou emulador foi usado; não afirmar validação Android em runtime, FPS, memória, touch ou térmica.
+
+
+---
+
+## Sessão ChatGPT — revalidação final do cold boot / PR #58
+
+- **Main HEAD base:** `54fd48e5f49fba877740265aafa0d8f649c2b1e9`.
+- **Branch:** `fix/threaded-boot-smoke-2026-11-26`; head `893553584408ed6e1c8fd3f51b372a18f772862b`; PR #58 OPEN, sem merge.
+- **Runtime:** `scripts/core/boot.gd` pre-carrega `main_menu.gd` na thread principal; menu e scripts de W1/HUD não foram alterados.
+- **Godot Validation run 45908170078:** SUCCESS — 93 testes, 1.307 verificações, 0 falhas.
+- **SceneFlow:** 30 ciclos para cada uma de três cenas (menu, W1-L1, W1-L2), 90 transições e 722 verificações.
+- **Boot:** diagnóstico verbose exit 0; 20/20 processos independentes passaram.
+- **Mutation:** remover o prewarm reproduziu o Parse Error original em `main_menu.tscn:12`.
+- **Docs Validation 45908170019:** SUCCESS.
+- **Android Debug Export 45908170050:** SUCCESS; APK debug exportado, verificado e publicado como artifact CI.
+- **Limitações:** sem aparelho físico/emulador; não foram validados FPS, memória, touch físico, safe areas, ciclo de vida real ou comportamento térmico.
+- **Próxima ação:** terminar e validar a mutação do Burst no head atual da PR #57; manter ambas as PRs abertas até revisão independente. Não fazer merge automático.
