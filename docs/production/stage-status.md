@@ -2,7 +2,7 @@
 
 **Atualização:** 2026-11-26  
 **Último merge de gameplay:** PR #34 integrada por squash em `c10ca6944bf0047abe694b7c429270a256cfff96`. **Última regressão integrada:** PR #35, teste de contato físico do campo energético, merge `e1f66cec92dae678dacfc6d35eb6a1abb3cad811`.  
-**Branch de trabalho:** nenhuma pendente; a unidade W1-L1 → W1-L2 foi integrada à `main`.  
+**Branch de trabalho:** `test/health-pickup-physical-contact` — regressão física do coletável em validação.  
 **Última entrega integrada:** W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente da campanha (PR #34).  
 **CI pré-merge PR #34:** Godot run `45872508689` SUCCESS — Godot 4.7.2, 69 testes, 439 verificações, 0 falhas; Docs run `45872508675` SUCCESS.  
 **CI pós-merge PR #34:** Godot run `45872656738` SUCCESS — 69 testes, 439 verificações, 0 falhas; Docs run `45872656798` SUCCESS. **PR #35:** Godot CI pré/pós-merge SUCCESS — 69 testes, 439 verificações, 0 falhas (`45873118202`, `45873234656`). Docs CI da sincronização anterior `45872828901` SUCCESS.  
@@ -294,3 +294,61 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - **Plano:** [w1-l2-checkpoint-feedback](plans/2026-11-26-w1-l2-checkpoint-feedback.md).
 - **Estado:** implementação registrada; CI da nova branch/PR ainda não executada ou confirmada. Não integrar até Godot CI e Docs CI passarem.
 - **Limites:** nenhuma validação local, APK, emulador, Android físico, toque físico ou profiling nesta unidade.
+
+
+---
+
+## Snapshot operacional — plano de execução em 26 etapas (2026-11-26)
+
+**Base:** `main` após PR #36, commit `afea046b6a481d48299641c9d8e529f6288d5256`.  
+**Unidade em execução:** `test/health-pickup-physical-contact` — regressão de contato físico do coletável de vida.  
+**CI pós-merge PR #36:** Godot Validation run `45877649854` SUCCESS; Docs Validation run `45877649923` SUCCESS. A suíte headless passou; contagem de testes não foi inferida dos metadados do job.
+
+### Estado das 26 etapas
+
+| Etapa | Área | Estado | Evidência / lacuna principal |
+|---:|---|---|---|
+| 01 | Auditoria integral do repositório | EM ANÁLISE | Inventário recursivo, fontes mestras, ADRs, estado Git/PRs e sistemas centrais inspecionados; auditoria integral de todos os recursos/cenas ainda em consolidação |
+| 02 | Requisitos e planejamento | EM ANÁLISE | Master Directive, bíblias, especificações e roadmap existem; matriz de rastreabilidade específica das 26 etapas ainda precisa ser consolidada |
+| 03 | Arquitetura e organização | EM DESENVOLVIMENTO | Godot 4.7.2, cenas, scripts, autoloads e contratos existentes; arquitetura global ainda parcial |
+| 04 | Infraestrutura e sistemas centrais | EM DESENVOLVIMENTO | Boot, SceneFlow, SaveSystem e CampaignProgress implementados parcialmente |
+| 05 | Recursos e carregamento | EM DESENVOLVIMENTO | SceneFlow threaded e transições; gestão abrangente de preload/memória e assets pendente |
+| 06 | Personagem principal | EM DESENVOLVIMENTO | BoltPlayer e BoltTuning provisório; arte/animações finais e validação humana pendentes |
+| 07 | Física e movimentação | EM DESENVOLVIMENTO | Corrida, salto, pulo duplo provisório, coyote, buffer, Dash e colisões; feel e Android físico não validados |
+| 08 | Animações e feedback | EM DESENVOLVIMENTO | Feedback HUD e hit flash; pipeline de animação final ainda não implementado |
+| 09 | Câmera e sistemas espaciais | EM DESENVOLVIMENTO | Camera2D e limites de blockout; revisão visual em proporções/dispositivos pendente |
+| 10 | Interações e sobrevivência | EM DESENVOLVIMENTO | Vida, dano, invulnerabilidade, derrota, retry, checkpoints e cura parcial |
+| 11 | Arquitetura de combate | EM DESENVOLVIMENTO | BoltHealth, BoltCombat, projéteis e alvo/inimigo provisórios |
+| 12 | Armas e arsenal | EM DESENVOLVIMENTO | Pistola Crono conectada; demais armas, seleção e balanceamento pendentes |
+| 13 | Arquitetura de inimigos | EM DESENVOLVIMENTO | Inimigo-base de patrulha Cybercore; arquétipos canônicos e variedade pendentes |
+| 14 | Inteligência artificial | EM DESENVOLVIMENTO | Patrulha simples provisória; percepção e comportamentos avançados pendentes |
+| 15 | Chefes e confrontos | NÃO INICIADA | Nenhum chefe/arena implementado |
+| 16 | Arquitetura de mundos e fases | EM DESENVOLVIMENTO | Atlas de 42 fases e fluxo de campanha; gerenciamento global de conteúdo ainda parcial |
+| 17 | Construção dos mundos | EM DESENVOLVIMENTO | Cybercore em blockout; mundos 2–7 sem ambientes executáveis |
+| 18 | Construção das fases | EM DESENVOLVIMENTO | W1-L1 e W1-L2 em blockout; demais fases sem cenas |
+| 19 | Obstáculos e exploração | EM DESENVOLVIMENTO | Plataformas, checkpoint, coletável e campo energético; segredos/rotas opcionais ainda ausentes |
+| 20 | Narrativa e progressão | EM DESENVOLVIMENTO | Premissa/canon, abertura, tutorial e progressão W1-L1→W1-L2 parciais; campanha narrativa incompleta |
+| 21 | Interface e UX | EM DESENVOLVIMENTO | Menu, HUD, pausa e controles touch parciais; configurações e validação visual/Android pendentes |
+| 22 | Arte e efeitos visuais | EM DESENVOLVIMENTO | Placeholders geométricos e feedback básico; arte final e pipeline de assets pendentes |
+| 23 | Áudio e apresentação | NÃO INICIADA | Música, SFX, buses e opções de áudio não integrados |
+| 24 | Android e touchscreen | EM DESENVOLVIMENTO | Preset Android, landscape, política imersiva e touch implementados parcialmente; APK e dispositivo físico não validados |
+| 25 | Otimização e garantia de qualidade | EM DESENVOLVIMENTO | CI Godot headless e regressões; profiling CPU/GPU/memória, sessões longas e QA físico pendentes |
+| 26 | Polimento e consolidação final | NÃO INICIADA | Produto ainda é protótipo técnico/blockout, sem campanha completa ou release candidate |
+
+**Regra de interpretação:** nenhuma etapa foi marcada como CONCLUÍDA neste baseline. “EM DESENVOLVIMENTO” indica existência de implementação parcial, não aprovação final. O status deve ser atualizado somente com evidência do branch/commit atual.
+
+### Pós-merge PR #36 — feedback de checkpoint W1-L2
+
+- Merge commit: `afea046b6a481d48299641c9d8e529f6288d5256`.
+- PR #36 integrada por squash após Godot e Docs CI pré-merge SUCCESS.
+- CI pós-merge: Godot run `45877649854` SUCCESS; Docs run `45877649923` SUCCESS.
+- A notificação de ativação do checkpoint agora aparece também no caminho de salvamento bem-sucedido; a regressão verifica visibilidade e texto.
+- W1-L2 permanece blockout. Nenhum teste local, APK, emulador ou Android físico foi realizado.
+
+### Unidade seguinte em andamento — contato físico do coletável
+
+- Branch: `test/health-pickup-physical-contact`.
+- Diagnóstico: teste anterior chamava `_on_body_entered` diretamente e não comprovava a detecção real de `Area2D.body_entered`.
+- A implementação atual usa `set_deferred("monitoring", false)`; o objetivo desta unidade é proteger o caminho físico e detectar o erro de mutação de física bloqueada no log.
+- Teste de sobreposição física e filtro CI direcionado estão na branch; CI da PR ainda pendente.
+- Plano: [health-pickup-physical-contact](plans/2026-11-26-health-pickup-physical-contact.md).

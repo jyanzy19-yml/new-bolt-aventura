@@ -129,3 +129,16 @@ O usuário autorizou ChatGPT a assumir sozinho todas as etapas de desenvolviment
 - Entrega em desenvolvimento: `BoltHealth`, `BoltCombat`, `ChronoProjectile`, alvo estático de treinamento, botão touch TIRO e lição de ataque no tutorial.
 - Limite de escopo: alvo não é inimigo de campanha; parâmetros da Pistola Crono são provisórios; outras armas, seleção, IA e dano ao jogador não implementados.
 - ChatGPT permanece único escritor; Godot CI #61 e Docs CI #182 passaram. CI pós-merge #62/#183 em execução.
+
+
+---
+
+## Atualização operacional — plano de 26 etapas e PR #36 — 2026-11-26
+
+- Último merge confirmado: PR #36, squash `afea046b6a481d48299641c9d8e529f6288d5256`.
+- CI pós-merge main: Godot run `45877649854` SUCCESS; Docs run `45877649923` SUCCESS.
+- ChatGPT continua como único escritor ativo; Claude permanece inativo para escrita concorrente.
+- A diretriz operacional de 26 etapas organiza a sequência do trabalho e não substitui MASTER_DIRECTIVE, canon, ADRs ou especificações do repositório.
+- O baseline de 26 etapas está em `docs/production/stage-status.md`; nenhuma etapa foi marcada como CONCLUÍDA. Etapa 01 e Etapa 02 permanecem EM ANÁLISE; as demais refletem implementação parcial ou ausência de sistemas.
+- Unidade ativa: branch `test/health-pickup-physical-contact`, baseada no merge da PR #36. Objetivo: validar a coleta do item por contato físico real e fazer CI detectar erros específicos de mutação de estado físico.
+- Próxima ação: aguardar/revisar CI da branch/PR e atualizar stage-status, tracker e continuidade com resultados efetivos.
