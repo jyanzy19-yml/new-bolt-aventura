@@ -648,3 +648,20 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Plano: `docs/production/plans/2026-11-26-one-way-platform.md`.
 - **Estado:** aguardando CI. Não integrada em fase.
 \n\n## Sessão ChatGPT — integração da PR #46 — 2026-11-26\n\n- PR #46 `feat: add reusable one-way platform` integrada por squash; merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.\n- Implementação: `scripts/world/one_way_platform.gd`, `scenes/world/one_way_platform.tscn`; teste `tests/unit/test_one_way_platform.gd`; contrato atualizado em `docs/technical/05-system-contracts.md`.\n- Godot CI pré-merge `45887805114`: SUCCESS — 87 testes/548 verificações/0 falhas. Docs CI `45887805097`: SUCCESS. Android Debug Export `45887805269`: SUCCESS; artifact e hash registrados em `stage-status.md`.\n- Não houve integração em fase; margin 2 px e dimensões são provisórias. Sem playtest visual ou Android físico. Pós-merge CI da main não confirmado no momento do registro.\n
+
+---
+
+## Sessão ChatGPT — correção de boot threaded (2026-11-26)
+
+- **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
+- **Base main confirmada:** `54fd48e5f49fba877740265aafa0d8f649c2b1e9`.
+- **Branch:** `fix/threaded-boot-smoke-2026-11-26`.
+- **PR #57:** OPEN, não integrada e preservada. Esta unidade não altera sua branch nem seu diff.
+- **Escopo implementado na branch:** referências a autoloads de menu/fases/HUD resolvidas por caminho runtime; teste de carga threaded repetida (30 ciclos × menu/W1-L1/W1-L2); workflow com importação, suíte, mutação da referência antiga do menu e 20 inicializações reais de 300 frames.
+- **Arquivos de runtime/teste/CI:** `scripts/ui/main_menu.gd`, `scripts/campaign/cybercore_w1_l1.gd`, `scripts/campaign/cybercore_w1_l2.gd`, `scripts/ui/hud.gd`, `tests/unit/test_threaded_scene_loading.gd`, `.github/workflows/godot-validation.yml`.
+- **Validação local:** NÃO EXECUTADA. Não há binário Godot local; tentativa de clone Git falhou por DNS indisponível. Nenhum resultado local deve ser inferido.
+- **Causa raiz:** ainda não declarada como comprovada até os logs do teste threaded e da etapa de mutação. A referência direta a autoload é a hipótese que o teste tenta reproduzir.
+- **Boot em laço:** NÃO EXECUTADO nesta sessão; o CI foi configurado para 20 execuções independentes e deve fornecer a evidência.
+- **Dash/Input/touch/save/progressão:** preservados por escopo; sem alteração deliberada desses contratos.
+- **Android:** sem APK, emulador, aparelho físico, FPS, memória ou térmica nesta unidade.
+- **Próxima ação:** abrir PR independente, aguardar Godot Validation, examinar logs (inclusive mutation-import/mutation-tests e boot-01…boot-20), corrigir erros observados e só então registrar resultados reais. Não integrar automaticamente.
