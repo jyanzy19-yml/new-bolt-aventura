@@ -139,7 +139,7 @@ func test_new_campaign_does_not_overwrite_unreadable_save() -> bool:
 	return true
 
 
-func test_progress_schema_requires_exact_integer_type() -> bool:
+func test_progress_schema_rejects_fractional_and_textual_values() -> bool:
 	var progress: Node = _prepare()
 	var raw_state: Dictionary = {
 		"campaign_id": "main",
