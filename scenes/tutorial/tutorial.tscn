@@ -42,7 +42,7 @@ unique_name_in_owner = true
 
 [node name="TrainingTarget" parent="." instance=ExtResource("5_target")]
 unique_name_in_owner = true
-position = Vector2(650, -24)
+position = Vector2(420, -24)
 
 [node name="Messenger" type="Node2D" parent="."]
 unique_name_in_owner = true
