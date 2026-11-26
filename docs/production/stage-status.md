@@ -58,7 +58,6 @@ Um único escritor por vez. Por decisão do usuário, ChatGPT conduz sozinho as 
 - [PR #37](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/37): MERGED — regressão física isolada do coletável e filtro de erro de física no CI.
 - [PR #38](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/38): MERGED — pipeline Android debug; Godot, Docs e export SUCCESS, artifact publicado.
 - [PR #39](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/39): MERGED — limpeza do ActionBuffer em notificações de pausa/suspensão/perda de foco; Godot 72 testes/451 verificações/0 falhas, Docs e export Android SUCCESS.
-- [PR #39](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/39): OPEN — limpeza do ActionBuffer em interrupções do ciclo de vida Android; aguardando CI.
 - [PR #34](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/34): MERGED — W1-L2 Rede Interrompida, campo energético cíclico e progressão W1-L1→W1-L2; Godot CI pré-merge 69 testes/439 verificações/0 falhas; Docs CI SUCCESS.
 - [PR #33](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/33): MERGED — expansão da diretriz de produção e correção do coletável de vida.
 
