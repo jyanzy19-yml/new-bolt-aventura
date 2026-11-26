@@ -378,3 +378,13 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Próxima branch: `test/w1-l1-live-combat-encounter`, baseada na main pós-merge.
 - Escopo: ampliar `test_campaign_entry.gd` para validar o disparo ATTACK através de InputEvent → ActionBuffer → BoltCombat → ChronoProjectile → CybercorePatrolEnemy real, sem retunar o combate.
 - Não executado: playtest humano, APK, instalação, emulador, Android físico ou métricas de performance.
+
+
+## Pós-merge PR #25 e próximo gate — 2026-11-26
+
+- PR #25 integrada em `92b35d52723f5fa1b05a8e53921a2d8605c6f1cf`.
+- Godot CI pré-merge `45855173247` SUCCESS: 53 testes, 298 verificações, 0 falhas. Docs CI `45855173229` SUCCESS.
+- Entrega: integração verificada do disparo da Pistola Crono no inimigo real de W1-L1 via InputEvent → ActionBuffer → BoltCombat → ChronoProjectile → CybercorePatrolEnemy.
+- Pós-merge main CI ainda precisa de verificação final: Godot `45855371627` / `45855463491`, Docs `45855371706` / `45855463599`.
+- Próxima branch: `test/w1-l1-defeat-retry-flow`, com cobertura do overlay de derrota e do contrato do botão de reinício, sem alterar gameplay.
+- Não executado: playtest humano, APK, instalação, emulador, Android físico, FPS, memória ou latência física.
