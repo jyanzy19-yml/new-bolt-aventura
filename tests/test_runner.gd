@@ -6,6 +6,8 @@ extends SceneTree
 ## NÃO mudam o exit code, por isso cada teste precisa terminar com `return true`.
 
 const UNIT_DIR: String = "res://tests/unit"
+## Save usado pelo autoload GameState durante os testes (isolado do save real do jogador).
+const TEST_SAVE_PATH: String = "user://test_runner_progress.save"
 
 var _checks: int = 0
 var _failed_checks: int = 0
@@ -15,7 +17,9 @@ var _tests: int = 0
 
 func _initialize() -> void:
 	await process_frame  # a raiz só entra na árvore no primeiro frame
+	_isolate_progress()
 	await _run_all()
+	_remove_test_saves()
 	if _tests == 0:
 		_failed_tests += 1
 		push_error("FAIL: nenhum teste foi descoberto em %s; recusando resultado verde vazio." % UNIT_DIR)
@@ -25,6 +29,20 @@ func _initialize() -> void:
 	print("RESULT: %d testes, %d verificações, %d testes com falha, %d verificações falhas"
 			% [_tests, _checks, _failed_tests, _failed_checks])
 	quit(1 if _failed_tests > 0 or _failed_checks > 0 else 0)
+
+
+## Aponta o autoload GameState para um arquivo de teste limpo: nenhum teste lê ou escreve o save real.
+func _isolate_progress() -> void:
+	_remove_test_saves()
+	var state: ProgressState = root.get_node_or_null("/root/GameState") as ProgressState
+	if state != null:
+		state.setup(TEST_SAVE_PATH)
+
+
+func _remove_test_saves() -> void:
+	for suffix: String in ["", ".tmp", ".bak"]:
+		if FileAccess.file_exists(TEST_SAVE_PATH + suffix):
+			DirAccess.remove_absolute(TEST_SAVE_PATH + suffix)
 
 
 func _run_all() -> void:

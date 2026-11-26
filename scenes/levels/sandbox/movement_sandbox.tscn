@@ -1,9 +1,10 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/movement_sandbox.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/world/platform_block.tscn" id="2_block"]
 [ext_resource type="PackedScene" path="res://scenes/player/bolt.tscn" id="3_player"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
+[ext_resource type="PackedScene" path="res://scenes/world/checkpoint.tscn" id="5_cp"]
 
 [sub_resource type="RectangleShape2D" id="Shape_kill"]
 size = Vector2(4000, 200)
@@ -55,6 +56,14 @@ size = Vector2(32, 640)
 [node name="SpawnPoint" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(96, -24)
+
+[node name="CheckpointA" parent="." instance=ExtResource("5_cp")]
+position = Vector2(1000, -24)
+checkpoint_id = &"cp_a"
+
+[node name="CheckpointB" parent="." instance=ExtResource("5_cp")]
+position = Vector2(1700, -24)
+checkpoint_id = &"cp_b"
 
 [node name="KillZone" type="Area2D" parent="."]
 unique_name_in_owner = true
