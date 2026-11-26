@@ -37,7 +37,7 @@ func _ready() -> void:
 func _notification(what: int) -> void:
 	# Insets podem mudar após suspensão/retomada ou mudança de orientação sem alteração
 	# perceptível no tamanho lógico da janela. Recalcular ao recuperar foco evita margens antigas.
-	if what == NOTIFICATION_APPLICATION_FOCUS_IN or what == NOTIFICATION_WM_WINDOW_FOCUS_IN:
+	if what == NOTIFICATION_APPLICATION_RESUMED or what == NOTIFICATION_APPLICATION_FOCUS_IN or what == NOTIFICATION_WM_WINDOW_FOCUS_IN:
 		_apply_safe_area()
 
 
