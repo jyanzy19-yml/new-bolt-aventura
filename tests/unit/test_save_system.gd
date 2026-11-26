@@ -145,6 +145,7 @@ func test_future_format_is_rejected_and_non_json_values_are_blocked() -> bool:
 	check(_write_future_envelope(TEST_SAVE_PATH), "cria fixture com versão futura")
 	check_eq(system.call("load_payload"), {}, "não interpreta formato futuro como save atual")
 	check_eq(system.get("last_error"), "unsupported_format_version", "expõe erro de versão incompatível")
+	system.call("delete_save")
 
 	var runtime_node: Node = Node.new()
 	check(not system.call("save_payload", {"runtime_node": runtime_node}), "recusa referências a Nodes no payload")
