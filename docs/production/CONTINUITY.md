@@ -1,17 +1,17 @@
 ## Snapshot vigente — 2026-11-26
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
-- **Último merge de gameplay:** PR #34, commit `c10ca6944bf0047abe694b7c429270a256cfff96`; commits posteriores sincronizam documentação.
+- **Último merge de conteúdo de gameplay:** PR #34, commit `c10ca6944bf0047abe694b7c429270a256cfff96`. **Última correção/regressão integrada:** PR #37, commit `39b6db8298542c5057c06f509b20d250a888e289`.
 - **PR #33:** MERGED. Expansão de documentação e correção do coletável; CI Godot 66 testes/404 verificações/0 falhas e Docs SUCCESS.
 - **PR #34:** MERGED. Adiciona W1-L2 em blockout, `TimedEnergyGate`, checkpoint e progressão persistente W1-L1→W1-L2.
-- **PR #35:** MERGED. Substitui a chamada direta do callback do campo por uma regressão com contato físico real entre BOLT e a `Area2D`.
+- **PR #35:** MERGED. Regressão de contato físico real do campo energético. **PR #36:** feedback de checkpoint W1-L2. **PR #37:** teste físico isolado do coletável e filtro CI para erro de mutação física bloqueada.
 - **CI pré-merge PR #34:** Godot 4.7.2, 69 testes/439 verificações/0 falhas (`45872508689`); Docs SUCCESS (`45872508675`).
 - **CI pós-merge PR #34:** Godot SUCCESS — 69 testes/439 verificações/0 falhas (`45872656738`); Docs SUCCESS (`45872656798`). Docs CI da sincronização seguinte SUCCESS (`45872828901`).
 - **PR #35:** Godot CI pré/pós-merge SUCCESS — 69 testes/439 verificações/0 falhas (`45873118202`, `45873234656`).
 - **Escritor ativo:** ChatGPT, seguindo a diretriz vigente do usuário. Não iniciar trabalho concorrente de Claude.
 - **Unidade integrada:** `TimedEnergyGate`, cena/script `cybercore_w1_l2`, botão PRÓXIMA FASE na conclusão W1-L1, destino salvo W1-L2, retomada de W1-L1/W1-L2 e regressões.
 - **Limites:** W1-L2 é blockout/protótipo de mecânica, não conteúdo final; ciclo, dano e percurso precisam de playtest. Sem APK, emulador, Android físico, touch físico ou medição de desempenho.
-- **Próximo passo:** manter W1-L2 classificada como blockout; a próxima unidade deve partir de revisão de gameplay/level design e não de expansão automática do número de fases. Manter validação Android física como pendente.
+- **Próximo passo:** continuar a vertical slice existente sem criar novas fases por volume. A próxima unidade ativa é a pipeline de exportação Android debug; APK, instalação e validação Android física continuam pendentes.
 
 ---
 
@@ -507,3 +507,17 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - **Implementação:** adicionado teste com player/coletável instanciados e sobrepostos; CI agora procura o erro Godot de mutação física bloqueada durante callbacks de entrada/saída e flush de queries.
 - **Validação:** ainda não executada nesta branch; aguardar Godot CI e Docs CI. Nenhum Godot local, editor gráfico, APK, emulador ou Android físico foi executado.
 - **Próximo passo:** revisar diff/compare, abrir PR, analisar os checks, corrigir falhas e integrar somente com CI verde.
+
+
+---
+
+## Sessão ChatGPT — pipeline de exportação Android debug — 2026-11-26
+
+- **Base main:** `39b6db8298542c5057c06f509b20d250a888e289` (PR #37 integrada).
+- **Branch:** `ci/android-debug-export`.
+- **Objetivo:** criar exportação automatizada de APK debug usando o preset Android existente e versões pareadas do Godot/export templates.
+- **Configuração:** JDK 17, Android SDK Platform 35 / Build Tools 35.0.1, NDK r28b, CMake 3.10.2.4988404, chave debug efêmera e variáveis oficiais de exportação Android.
+- **Segurança:** nenhuma credencial de release, keystore persistente, package ID definitivo ou segredo foi criado. `com.example.boltaventura` continua placeholder.
+- **Workflow:** `.github/workflows/android-debug-export.yml`; plano `docs/production/plans/2026-11-26-android-debug-export-pipeline.md`.
+- **Validação:** aguardando execução do workflow na PR. Não há APK confirmado, hash de artefato, instalação, emulador ou teste em dispositivo físico nesta sessão.
+- **Próximo passo:** abrir PR, revisar o workflow e corrigir qualquer falha real; após sucesso, confirmar artifact e metadados; atualizar continuidade e distinguir exportação de validação no dispositivo.
