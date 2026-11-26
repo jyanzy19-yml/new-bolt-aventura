@@ -657,3 +657,14 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Revisão visual independente: sem outros achados P0/P1 nos arquivos funcionais examinados. Parâmetros/arte são provisórios; contagens draw-call 25/23 não reproduzidas independentemente e não validam Android. Android export da PR #57 run `45909521316` SUCCESS, sem teste em aparelho físico.
 - Preserve Dash, Input Map, touch/multitouch, física, dano, save, boot e progressão. Não apagar `stage2/checkpoints-and-save`; não tocar PR #1.
 - Próxima ação: reconfirmar o estado terminal do Android Debug Export de PR #58, revisar checks de ambas as PRs e entregar relatório final sem merge automático.
+
+
+
+### Auditoria read-only — branch stage2/checkpoints-and-save — 2026-11-26
+
+- Branch remota `stage2/checkpoints-and-save` permanece preservada; comparação `main...stage2/checkpoints-and-save`: 1 commit à frente e 75 atrás, com sistema alternativo e alterações em sandbox/testes. Nenhum merge, exclusão ou cherry-pick foi feito.
+- Duplicação confirmada: `ProgressState` (autoload GameState) + `SaveData` + `SaveStore` + `LevelSession/Checkpoint` duplicam domínios cobertos em main por `SaveSystem` + `CampaignProgress` + `BoltCheckpoint`.
+- O `SaveStore` legado tem duas ideias úteis: (1) grava e relê/verifica o `.tmp`, carrega em ordem principal → tmp → backup; (2) recusa salvar se encontra versão futura e tem teste `test_newer_version_is_reported_and_never_overwritten`.
+- O `SaveSystem` atual já usa tmp + backup e SHA-256, mas a leitura só tenta principal e backup (não recupera tmp). Além disso, `save_payload()` não interrompe a escrita quando a validação do principal retorna `unsupported_format_version`; a rotação pode mover o arquivo futuro para backup e substituí-lo. O teste atual prova somente que `load_payload()` rejeita formato futuro, não que uma tentativa de gravação o preserve.
+- **PROPOSTA, não implementada:** escopo próprio para validar tmp, recuperar após cada ponto de interrupção e bloquear gravação/rotação quando principal ou backup contiver versão futura. Criar testes de mutação antes de qualquer alteração. Não integrar a arquitetura duplicada.
+- Não apagar a branch sem autorização explícita.
