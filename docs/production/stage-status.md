@@ -24,9 +24,9 @@
 
 ## Validação observada
 
-- **Godot CI Run #31:** [SUCCESS](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45801225080), commit `f3ab682`. O workflow executou Godot 4.7.2 headless, importação do projeto e `tests/test_runner.gd`; exit code 0.
+- **Godot CI Run #36:** [SUCCESS](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45801754847), commit `624edce`. O workflow executou Godot 4.7.2 headless, importação do projeto e `tests/test_runner.gd`; exit code 0.
 - A árvore de testes contém 42 métodos `test_*` em 9 arquivos. O sucesso do runner comprova que não houve falhas segundo seu critério de saída.
-- **Docs CI Run #119:** [SUCCESS](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45801225270), commit `f3ab682`.
+- **Docs CI Run #124:** [SUCCESS](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45801754909), commit `624edce`.
 - Validação máxima observada nesta etapa: **L2 — Godot/headless via GitHub Actions**.
 - Godot local neste ambiente: **NÃO EXECUTADO**, binário não instalado.
 - Editor gráfico/emulador: **NÃO EXECUTADO**.
