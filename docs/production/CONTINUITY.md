@@ -3,6 +3,17 @@
 **Função:** handoff obrigatório para retomar trabalho após limite de contexto, troca de sessão ou interrupção.  
 **Fonte de verdade do estado:** repositório e evidências; este arquivo é um índice de retomada, não substitui código, QA, ADRs ou tracker.
 
+## Snapshot vigente — 2026-11-26
+
+- O projeto Godot executável existe na `main`; versão fixada: **4.7.2** (`.godot-version`). Não reutilizar snapshots antigos que afirmam ausência de `project.godot`.
+- Etapa 0: **ACCEPTED**. Etapa 1: **HANDOFF_READY** após correção de reatribuição de ponteiro e ampliação da CI para executar testes headless.
+- Validação comprovada: Godot 4.7.2 headless/import + runner de testes, e Docs CI, até nível **L2**. Nenhuma exportação APK, instalação, validação física, visual ou de desempenho Android foi comprovada.
+- Próximo turno atribuído: **Claude Code — Etapa 2**, acionado manualmente pelo usuário. Um único escritor por vez; ChatGPT não deve competir com Claude na implementação de gameplay.
+- Inventário atual registrado em `stage-status.md` e `COLLABORATION_STATE.md`; snapshots mais antigos abaixo são históricos e não descrevem o estado atual.
+- PR #1 continua aberta/divergente e não deve ser mesclada automaticamente.
+
+Antes de continuar, verificar branch/HEAD, PRs e mudanças mais recentes. Se o repositório divergir deste snapshot, atualizar este bloco com evidências atuais antes de implementar.
+
 ## 1. Protocolo de retomada
 
 Ao iniciar uma sessão:
