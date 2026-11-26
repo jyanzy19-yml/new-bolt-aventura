@@ -74,3 +74,59 @@ Etapa 02 só pode ser marcada como concluída quando:
 - requisitos P0 do Gate 1 têm critérios de aceite verificáveis;
 - a matriz de 26 etapas e o tracker apontam para as mesmas evidências;
 - não há instrução operacional obsoleta contradizendo o estado real do repositório.
+
+
+## 6. Owners, dependencies e aceite dos requisitos P0
+
+### 6.1 Ownership e dependências
+
+O escritor operacional é ChatGPT. O usuário mantém autoridade final sobre canon, identidade, escopo de produto, package ID e decisões materiais. Para QA físico, ChatGPT prepara build/checklist e interpreta evidência; a execução no aparelho depende de dispositivo disponível e participação do usuário.
+
+| ID | Responsável pela preparação/implementação | Autoridade de decisão / validação | Dependências principais |
+|---|---|---|---|
+| GAP-001 | ChatGPT — blueprint, blockout e regressões | Usuário aprova experiência e decisões de design; QA humano valida | GAP-002, GAP-003, GAP-004, GAP-010, GAP-012, GAP-016 |
+| GAP-002 | ChatGPT — tuning, instrumentação e testes | Usuário avalia sensação; aprovação de mudanças de física | GAP-003 |
+| GAP-003 | ChatGPT — build, checklist e correções | Usuário executa/observa teste físico; resultados vinculados ao aparelho | GAP-018 apenas para release |
+| GAP-004 | ChatGPT — save schema, migrações e testes | Usuário valida recuperação e política de progresso; dados não podem ser apagados sem decisão | GAP-003 |
+| GAP-005 | ChatGPT — proposta de personagem e documentação | Usuário aprova canon | GAP-008 |
+| GAP-006 | ChatGPT — proposta de NEXO e regras de viagem | Usuário aprova canon | GAP-008, GAP-015 |
+| GAP-007 | ChatGPT — proposta de antagonista e estrutura de revelações | Usuário aprova canon | GAP-008, GAP-015 |
+| GAP-008 | ChatGPT — proposta de funcionamento dos fragmentos | Usuário aprova canon | GAP-005, GAP-006, GAP-007 |
+| GAP-009 | ChatGPT — fichas das 42 fases | Usuário aprova alterações de canon/títulos finais | GAP-005…GAP-017 conforme a fase |
+| GAP-010 | ChatGPT — catálogo de inimigos e protótipos | Usuário aprova conteúdo autoral relevante | GAP-005, GAP-009, GAP-013 |
+| GAP-011 | ChatGPT — fichas de chefes e protótipos | Usuário aprova conteúdo autoral relevante | GAP-008, GAP-009, GAP-010, GAP-012 |
+| GAP-012 | ChatGPT — proposta de armas, contratos e testes | Usuário aprova arsenal/loop de progressão | GAP-002, GAP-005, GAP-006 |
+| GAP-013 | ChatGPT — pipeline, proveniência e propostas visuais | Usuário aprova direção visual final | GAP-005, GAP-006, GAP-009 |
+| GAP-014 | ChatGPT — arquitetura de áudio e especificação | Usuário aprova direção musical/sonora | GAP-013, GAP-015 |
+| GAP-015 | ChatGPT — estrutura de cenas, NPCs e diálogos | Usuário aprova canon e diálogos definitivos | GAP-005, GAP-006, GAP-007, GAP-008 |
+| GAP-016 | ChatGPT — fluxos, componentes e QA de UI | Usuário aprova opções de produto/acessibilidade material | GAP-003, GAP-005 |
+| GAP-017 | ChatGPT — budgets, captura e análise | Usuário disponibiliza aparelho; critérios de release aprovados pelo proprietário | GAP-003, GAP-013, GAP-014 |
+| GAP-018 | ChatGPT — documentar e preparar export | Usuário escolhe application ID definitivo | GAP-022 |
+| GAP-019 | ChatGPT — estudo de loop e alternativas | Usuário decide se economia/inventário fazem parte do produto | GAP-009, GAP-012 |
+| GAP-020 | ChatGPT — avaliar pipeline e custo | Usuário define idiomas-alvo | GAP-015, GAP-016 |
+| GAP-021 | ChatGPT — comparar escopo legado com fontes disponíveis | Usuário decide preservação, substituição ou retirada de cada habilidade | GAP-002, GAP-012 |
+| GAP-022 | ChatGPT — checklist e proveniência | Usuário controla assinatura/credenciais e aprovação de release | GAP-013, GAP-014, GAP-017, GAP-018 |
+
+### 6.2 Critérios de aceite verificáveis dos P0 do Gate 1
+
+| ID | Critério verificável | Evidência obrigatória |
+|---|---|---|
+| GAP-001 | W1-L1 e W1-L2 possuem blueprints versionados; rota principal concluível; objetivos claros; checkpoints recuperáveis; sem softlock; encontros usam somente regras ensinadas; blockout e final art não são confundidos | Fichas de fase aprovadas, testes de cena/integração, playtest registrado e captura de issues |
+| GAP-002 | Movimento independente do FPS renderizado; regras de salto/Dash/coyote/buffer determinísticas; input simultâneo e cancelamento definidos; nenhuma ação essencial perdida ou presa | Testes headless de borda, captura comparativa de física, playtest touch e frame pacing no aparelho de referência |
+| GAP-003 | APK instala e abre; orientação paisagem; barras seguem ADR-0003; botões essenciais permanecem tocáveis; multitouch funciona; pause/focus/background/retomada não deixam input preso | Matriz por modelo/Android/build, vídeo/capturas, checklist preenchido e logs de falha |
+| GAP-004 | Save válido persiste após encerramento normal e forçado; backup recupera corrupção; versão futura não sobrescreve dados; Nova Jornada reseta apenas o domínio aprovado; checkpoint não produz estado impossível | Testes automatizados de serialização/migração, teste de lifecycle Android e evidência de save antes/depois |
+
+Os critérios acima são gates de aceite, não resultados já alcançados. A existência de CI headless e APK exportado não satisfaz, por si só, os itens de playtest e dispositivo.
+
+## 7. Conflitos e lacunas de documentação identificados
+
+| ID | Observação | Tratamento |
+|---|---|---|
+| DOC-001 | Direção de arte dizia que os temas específicos dos sete mundos ainda seriam definidos, embora a Bíblia dos Mundos já fixe suas identidades centrais | Clarificado em game-design/07-art-audio-direction.md: identidade central aprovada; paletas, materiais e assinaturas detalhadas ainda a aprovar |
+| DOC-002 | Character Bible listava a origem de BOLT como pendente sem separar sua função original já canonizada | Clarificado em game-design/03-character-bible.md: função de preservação dos universos é canon; origem técnica específica permanece pendente |
+| DOC-003 | Seção 50 do prompt mestre apontava como próxima prioridade um bug de coletável já resolvido e dizia para não criar W1-L2, embora W1-L2 exista em blockout | Corrigido pela PR #49; próxima prioridade passou a consultar a matriz/Etapa 02 e a vertical slice real |
+| DOC-004 | Snapshot de continuidade e colaboração estava em PR #45/#46 e não refletia PR #47/#48 | Corrigido pela PR #49; snapshots passam a refletir HEAD atual e evidências pós-merge |
+
+## 8. Estado de conclusão da Etapa 02
+
+O registro cobre 22 lacunas, oito decisões fechadas, owners, dependências e critérios verificáveis para os quatro requisitos P0. Ainda falta revisar cada linha contra o prompt mestre e todas as especificações, confirmar se há lacunas omitidas, registrar aprovação das decisões materiais e manter a matriz/tracker sincronizados. **Etapa 02 permanece EM DESENVOLVIMENTO.**
