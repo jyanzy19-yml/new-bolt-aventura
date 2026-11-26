@@ -81,6 +81,14 @@ func test_corrupt_primary_recovers_valid_backup() -> bool:
 	check(system.call("save_payload", recovered_update), "grava após recuperação do backup")
 	check_eq(system.call("load_payload"), recovered_update, "novo estado passa a ser o principal")
 	check(FileAccess.file_exists(TEST_SAVE_PATH + ".bak"), "backup last-known-good continua presente após novo commit")
+	var corrupted_again: FileAccess = FileAccess.open(TEST_SAVE_PATH, FileAccess.WRITE)
+	check(corrupted_again != null, "reabre o principal para validar o backup após a gravação recuperada")
+	if corrupted_again != null:
+		corrupted_again.store_string("{invalid-json-again")
+		corrupted_again.flush()
+		corrupted_again.close()
+	check_eq(system.call("load_payload"), payload, "backup permanece íntegro após recuperação seguida de nova gravação")
+	check_eq(system.get("last_error"), "recovered_backup", "segunda recuperação é identificada")
 	check(system.call("delete_save"), "remove arquivos temporários após o teste")
 	_cleanup()
 	return true
