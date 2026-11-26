@@ -35,9 +35,10 @@
 - **Godot CI Run #45:** [SUCCESS](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45808858828), commit da PR #3 `373d5170362ded16d7054aeacf3daeb6b649d751`. O job Godot e as etapas de importação condicional/análise de scripts concluíram com sucesso.
 - **Docs CI Run #133:** [SUCCESS](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45808858862), commit da PR #3.
 - **Suíte anterior:** Godot CI #36 passou com 42 testes, 171 verificações e 0 falhas; essa evidência é anterior ao hardening PR #3 e não deve ser atribuída à Run #45 sem log que confirme execução do runner.
-- Validação máxima comprovada: **L2 — Godot/headless via GitHub Actions**.
+- Validação máxima comprovada: **G3 — exportação APK debug via GitHub Actions**, além de Godot/headless (L2).
 - Godot local/editor gráfico/emulador: **NÃO EXECUTADO** nesta rodada.
-- Exportação APK/instalação Android/toque físico/barras/FPS/memória: **NÃO EXECUTADO**.
+- Exportação APK: **EXECUTADA** no run `45879045098`, assinatura v2/v3 verificada, artifact e SHA-256 registrados.
+- Instalação Android, cold start, toque físico, barras/safe area em aparelho, FPS e memória: **NÃO EXECUTADOS**.
 
 ## Etapas e colaboração
 
@@ -53,6 +54,10 @@ Um único escritor por vez. Por decisão do usuário, ChatGPT conduz sozinho as 
 ## Pull requests
 
 - [PR #35](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/35): MERGED — substitui chamada direta do handler por teste real de contato físico da `Area2D`; Godot CI pré/pós-merge: 69 testes/439 verificações/0 falhas.
+- [PR #36](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/36): MERGED — feedback de ativação do checkpoint W1-L2; CI pré/pós-merge SUCCESS.
+- [PR #37](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/37): MERGED — regressão física isolada do coletável e filtro de erro de física no CI.
+- [PR #38](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/38): MERGED — pipeline Android debug; Godot, Docs e export SUCCESS, artifact publicado.
+- [PR #39](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/39): OPEN — limpeza do ActionBuffer em interrupções do ciclo de vida Android; aguardando CI.
 - [PR #34](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/34): MERGED — W1-L2 Rede Interrompida, campo energético cíclico e progressão W1-L1→W1-L2; Godot CI pré-merge 69 testes/439 verificações/0 falhas; Docs CI SUCCESS.
 - [PR #33](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/33): MERGED — expansão da diretriz de produção e correção do coletável de vida.
 
