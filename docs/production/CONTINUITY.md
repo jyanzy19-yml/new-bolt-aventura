@@ -482,3 +482,28 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - **Validação:** ainda não confirmada nesta branch. A API de status combinado consultada no HEAD de main não retornou checks; workflows associados a esse commit também não foram retornados por esse endpoint. Aguardar workflows da PR.
 - **Não executado:** Godot local, editor gráfico, APK, emulador, Android físico, touch físico, safe area ou profiling.
 - **Próximo passo:** revisar o conteúdo final da branch, abrir PR, aguardar Godot CI e Docs CI, corrigir qualquer falha e só integrar com checks verdes.
+
+
+---
+
+## Sessão ChatGPT — baseline de 26 etapas e regressão física do coletável — 2026-11-26
+
+### Estado confirmado do repositório
+
+- Repositório: `jyanzy19-yml/new-bolt-aventura`.
+- `main` confirmada no merge commit da PR #36: `afea046b6a481d48299641c9d8e529f6288d5256`.
+- PR #36 fechada e integrada por squash. Godot CI pré-merge e Docs CI pré-merge SUCCESS; CI pós-merge Godot run `45877649854` SUCCESS e Docs run `45877649923` SUCCESS.
+- A única PR aberta identificada na consulta é a PR #1 documental, antiga e divergente; não integrar nem rebasear automaticamente.
+- Projeto atual confirmado: Godot 4.7.2, GDScript, aplicativo Android empacotado em paisagem. W1-L1 e W1-L2 seguem blockouts; campanha completa não existe.
+- A auditoria examinou árvore recursiva (383 entradas), documentos mestrais, ADRs, bíblias, especificações, estado de produção, testes, workflows e sistemas executáveis pertinentes. A Etapa 01 das 26 permanece **EM ANÁLISE** até a consolidação de todas as dependências e cobertura documental.
+
+### Unidade em execução
+
+- **Branch:** `test/health-pickup-physical-contact`.
+- **Base:** `afea046b6a481d48299641c9d8e529f6288d5256`.
+- **Commits:** teste físico `e139825a11e1f4bb77c194faf27109f7465cd1b9`; filtro CI para erro físico `7525a7db38d9771b1aad6ff8fec524aaa0689820`; plano `0a85dcc6d02968d8c0c021f01f5c05b46e9c6e92`.
+- **Arquivos alterados:** `tests/unit/test_enemy_combat.gd`, `.github/workflows/godot-validation.yml`, `docs/production/plans/2026-11-26-health-pickup-physical-contact.md`, `docs/production/stage-status.md`, `docs/production/implementation-tracker.md`, `docs/production/CONTINUITY.md`.
+- **Diagnóstico:** teste antigo chamava `_on_body_entered` diretamente; não comprovava `Area2D.body_entered` por contato real. O script de produção já usa `set_deferred("monitoring", false)`.
+- **Implementação:** adicionado teste com player/coletável instanciados e sobrepostos; CI agora procura o erro Godot de mutação física bloqueada durante callbacks de entrada/saída e flush de queries.
+- **Validação:** ainda não executada nesta branch; aguardar Godot CI e Docs CI. Nenhum Godot local, editor gráfico, APK, emulador ou Android físico foi executado.
+- **Próximo passo:** revisar diff/compare, abrir PR, analisar os checks, corrigir falhas e integrar somente com CI verde.
