@@ -46,6 +46,7 @@ func test_transition_loads_scene_and_blocks_concurrent_transition() -> bool:
 	var started: bool = flow.change_scene(MAIN_MENU)
 	check(started, "primeira transição aceita")
 	check(flow.is_transitioning(), "em transição logo após o pedido")
+	check(tree.paused, "simulação pausada durante o carregamento")
 	var second: bool = flow.change_scene(MAIN_MENU)
 	check(not second, "segunda transição simultânea rejeitada")
 	var frames: int = 0
@@ -54,6 +55,7 @@ func test_transition_loads_scene_and_blocks_concurrent_transition() -> bool:
 		frames += 1
 	flow.transition_finished.disconnect(on_finished)
 	check(not flow.is_transitioning(), "transição concluiu em até 600 frames")
+	check(not tree.paused, "simulação retomada após carregar a nova cena")
 	check_eq(finished.size(), 1, "transition_finished emitido uma vez")
 	check(tree.current_scene != null and tree.current_scene.scene_file_path == MAIN_MENU, "cena atual é o menu principal")
 	if tree.current_scene != null:
