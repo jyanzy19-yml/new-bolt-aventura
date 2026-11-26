@@ -11,7 +11,7 @@ tests/unit/test_save_system.gd configura SaveSystem.storage_path_override para u
 ## Escopo
 
 - Adicionar teardown explícito aos testes de SaveSystem para remover apenas o slot temporário e restaurar storage_path_override vazio.
-- Adicionar fallback de isolamento no test_runner.gd após cada método test_*; só apagar o arquivo quando storage_path_override não estiver vazio, nunca tocar no save real.
+- Adicionar fallback de isolamento no test_runner.gd após cada método test_*; só apagar o arquivo quando storage_path_override não estiver vazio, nunca tocar no save real.\n- Adicionar teste de integração do próprio runner: um método cria um override intencionalmente e o método seguinte confirma que o teardown removeu o fixture e restaurou o estado.
 - Preservar o comportamento do jogo e os caminhos de produção.
 - Não resetar estado global de forma ampla nem esconder falhas de teardown.
 
@@ -20,8 +20,8 @@ tests/unit/test_save_system.gd configura SaveSystem.storage_path_override para u
 1. Cada teste de SaveSystem termina com override vazio e fixture removido.
 2. O runner recupera o override caso um teste falhe antes do teardown.
 3. O fallback nunca chama delete_save quando override está vazio.
-4. A suíte headless completa passa sem regressões.
-5. Docs CI passa; nenhum APK ou gameplay muda.
+4. O teste test_z_runner_isolation prova que o fallback limpa o override entre métodos.\n5. A suíte headless completa passa sem regressões.
+6. Docs CI passa; nenhum APK ou gameplay muda.
 
 ## Limites
 
