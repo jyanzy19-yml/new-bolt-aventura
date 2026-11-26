@@ -37,8 +37,8 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 ## Skills e agentes
 
 - [Catálogo de skills](skills-catalog.md) — conjunto selecionado, regras de carregamento e proveniência.
-- Skills Claude Code: .claude/skills/; carregar apenas as necessárias.
-- Agentes consultivos: .claude/agents/.
+- **39 skills Claude Code:** `.claude/skills/`; carregar apenas as necessárias. Inclui diagnóstico Godot, engenharia de regressão e prontidão de release Android.
+- **11 agentes consultivos read-only:** `.claude/agents/`; incluem revisão de integração Godot, release Android e integridade de persistência.
 
 ## Engenharia
 
@@ -98,4 +98,5 @@ Atualize este índice quando documentos forem adicionados ou movidos. Use links 
 ## Referências complementares
 
 - [Relatório de validação estrutural](production/validation-report.md)
+- [Auditoria de integridade do repositório — 2026-11-26](production/repository-audit-2026-11-26.md)
 - [Checklist de release Android](production/android-release-checklist.md)

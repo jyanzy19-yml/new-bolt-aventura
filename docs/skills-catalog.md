@@ -44,6 +44,14 @@
 |---|---|---|
 | `godot-project-structure` | Abordagem Function First descrita em [grndctrl/godot-skills](https://github.com/grndctrl/godot-skills) | Skill original reescrita para BOLT: organização por responsabilidade, dependências, posicionamento de arquivos e migrações seguras. Não copia scripts nem o texto da skill upstream; não impõe estrutura antes de existir um projeto Godot real. |
 
+## New BOLT engineering skills (3)
+
+| Skill | Use |
+|---|---|
+| `bolt-godot-debugging` | Diagnóstico reproduzível de erros Godot, lifecycle, sinais, recursos, profiler e falhas intermitentes. |
+| `bolt-regression-engineering` | Testes determinísticos, cobertura de bordas, validação do runner e prevenção de CI falso-verde. |
+| `bolt-android-release-readiness` | Export Android, metadados, permissões, segurança de assinatura, hash e validação de instalação. |
+
 ## How Claude should load skills
 1. At the beginning of a new game-development task, read `router/SKILL.md`.
 2. Identify the project's actual engine/version from its files. If there is no Godot project yet, report that and treat engine API details as provisional.
@@ -72,7 +80,7 @@ O exemplo binário player-idle.png citado pela skill de arte não estava dispon�
 
 ## Agentes consultivos do projeto
 
-Em .claude/agents/ existem oito revisores especializados, todos configurados como read-only:
+Em .claude/agents/ existem onze revisores especializados, todos configurados como read-only:
 - game-architect
 - gameplay-engineer
 - narrative-designer
@@ -81,6 +89,9 @@ Em .claude/agents/ existem oito revisores especializados, todos configurados com
 - qa-engineer
 - ui-ux-designer
 - art-audio-director
+- godot-integration-reviewer
+- android-release-auditor
+- persistence-integrity-auditor
 
 Eles apoiam auditorias e recomendações; não substituem aprovação do usuário nem executam mudanças por conta própria.
 
@@ -102,7 +113,7 @@ O índice em docs/README.md conecta as bíblias de design, especificações Andr
 | `bolt-content-pipeline` | Proveniência, licenças, importação, sprites, áudio e orçamento de memória. |
 | `bolt-production-gates` | Planejamento incremental, aprovações, evidências e critérios de conclusão. |
 
-Total atual: **36 skills** (26 skills selecionadas da coleção Apache-2.0 + 1 skill de estrutura original adaptada com referência comunitária + 9 originais BOLT). Total de comandos Claude Code: **6**.
+Total atual: **39 skills** (26 skills selecionadas da coleção Apache-2.0 + 1 skill de estrutura original adaptada com referência comunitária + 12 originais BOLT). Total de comandos Claude Code: **6**.
 
 ## Comandos de projeto
 - `/bolt-audit` — auditoria read-only do estado real do repositório/projeto.

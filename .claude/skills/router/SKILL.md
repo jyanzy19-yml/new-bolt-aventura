@@ -160,7 +160,21 @@ File signals sharpen this: `*.yarn`/`*.ink` → `dialogue-systems`/`visual-novel
 | HUD, menu, UI layout, scaling, safe area, focus nav | `game-ui-ux` | `godot-ui-control` / `roblox-ui` / Unity UI (load both) |
 | low FPS, stutter, first-use hitch, slows after minutes, draw calls, GC spike | `performance-optimization` | engine profiler + `physics-tuning` |
 
-### 3c. Ownership on shared requests
+### 3c. BOLT-specific engineering routes
+
+Load these project-specific skills in addition to the relevant Godot/discipline skill:
+
+| Task signal | BOLT skill | Pair with |
+|---|---|---|
+| Intermittent runtime bug, invalid instance, scene lifecycle, signal leak, profiler trace | `bolt-godot-debugging` | `godot-gdscript-headless-testing` and the owning system skill |
+| Regression coverage, flaky tests, false-green CI, test runner changes | `bolt-regression-engineering` | `godot-gdscript-headless-testing` |
+| APK/AAB, export preset, package metadata, permissions, signing or install checks | `bolt-android-release-readiness` | `godot-export` + `bolt-performance-validation` when profiling is relevant |
+| Android touch, multitouch, jump/dash reliability | `bolt-android-touch` | `input-systems` + `godot-ui-control` |
+| Save schema, migration, checkpoint integrity | `bolt-save-integrity` | `save-systems` + `godot-resources` |
+
+For cross-system review, consult the matching read-only agent: `godot-integration-reviewer`, `android-release-auditor` or `persistence-integrity-auditor`. Agents review; they do not implement or approve decisions.
+
+### 3d. Ownership on shared requests
 
 When two skills could answer, the owner below leads and the other joins only for its part.
 

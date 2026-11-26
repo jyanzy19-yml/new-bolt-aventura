@@ -3,8 +3,8 @@
 Framework de produção para apoiar o desenvolvimento de BOLT · AVENTURA com Claude Code.
 
 ## Conteúdo do repositório
-- **36 skills:** 26 skills selecionadas da coleção comunitária de game development, 1 skill BOLT de estrutura Godot adaptada com referência comunitária e 9 skills originais específicas do BOLT.
-- **8 agentes consultivos read-only:** arquitetura, gameplay, narrativa, level design, Android/performance, QA, UI/UX e direção de arte/áudio.
+- **39 skills:** 26 skills selecionadas da coleção comunitária de game development, 1 skill BOLT de estrutura Godot adaptada com referência comunitária e 12 skills originais específicas do BOLT.
+- **11 agentes consultivos read-only:** arquitetura, gameplay, narrativa, level design, Android/performance, QA, UI/UX direção de arte/áudio, integração Godot, release Android e integridade de persistência.
 - **6 comandos de fluxo de trabalho:** auditoria, planejamento, QA, revisão Android, continuidade e prontidão de release.
 - **CI:** validação documental; workflow Godot headless condicional após project.godot e versão fixada.
 - **Colaboração:** formulários GitHub para bugs/propostas e template de pull request.

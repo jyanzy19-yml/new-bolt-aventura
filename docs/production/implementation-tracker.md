@@ -19,7 +19,7 @@ Não usar percentuais subjetivos. Não inferir "validado" a partir de arquivos e
 
 ## 2. Baseline inicial
 
-Na inspeção documental de 2026-11-25, não havia project.godot, cenas .tscn ou código de gameplay BOLT. Portanto, os sistemas abaixo começam como **Não iniciado** até nova inspeção confirmar uma alteração. O baseline inicial era "Não iniciado" para todos os sistemas; a coluna Status é atualizada a partir de evidência (Etapa 0 em andamento, ver COLLABORATION_STATE.md).
+Este parágrafo registra somente o baseline histórico de pré-produção de 2026-11-25. Ele não descreve o estado atual: a fundação Godot e parte dos sistemas SYS-001 a SYS-007 e SYS-017/SYS-020/SYS-022 foram implementados parcialmente e estão descritos nas linhas atuais da tabela. A coluna Status deve sempre refletir evidência do branch atual, nunca o baseline histórico.
 
 ## 3. Sistemas globais
 

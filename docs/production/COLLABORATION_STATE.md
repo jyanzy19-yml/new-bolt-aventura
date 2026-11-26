@@ -3,6 +3,17 @@
 **Fonte única para descobrir quem trabalha agora, qual etapa está ativa e quem recebe a próxima entrega.**
 Este arquivo controla a alternância; não substitui código, commits, tracker ou evidências de QA.
 
+## Estado vigente — fonte prioritária (2026-11-26)
+
+- **Etapa 0 — Claude Code:** ACCEPTED.
+- **Etapa 1 — ChatGPT:** HANDOFF_READY, entregue e validada até L2 no commit `624edce` (Godot/headless + Docs CI). O handoff completo está em `docs/production/handoffs/HANDOFF_ETAPA_1.md`.
+- **Próximo turno:** Etapa 2 — Claude Code. Nenhum escritor deve editar `main` em paralelo; o usuário aciona Claude manualmente.
+- **Projeto executável:** existe `project.godot`; versão fixada em `.godot-version` = 4.7.2. Há cenas, scripts e testes de gameplay em andamento.
+- **Limite de validação:** sem exportação APK, instalação, toque físico, validação visual ou medição de performance Android comprovados nesta etapa.
+- **PR #1:** continua separada e divergente; não integrar automaticamente.
+
+As seções de snapshots anteriores abaixo são histórico. Quando houver divergência, este bloco vigente e os arquivos atuais `stage-status.md`, `CONTINUITY.md`, tracker e commits mais recentes prevalecem. Antes de editar, reconfirmar o HEAD e o estado real do GitHub.
+
 ## Snapshot histórico de auditoria antes dos controles colaborativos
 
 - **Repositório:** jyanzy19-yml/new-bolt-aventura (privado).
