@@ -32,6 +32,8 @@ func _ready() -> void:
 	_goal.body_entered.connect(_on_goal_body_entered)
 	_respawn_position = _spawn.global_position
 	var saved_checkpoint_id: String = CampaignProgress.get_checkpoint_id(LEVEL_ID)
+	if not CampaignProgress.last_error.is_empty():
+		push_warning("W1-L1: progresso persistente indisponível (%s)." % CampaignProgress.last_error)
 	if saved_checkpoint_id == String(_checkpoint.checkpoint_id):
 		_checkpoint.restore_activation()
 		_respawn_position = _checkpoint.get_respawn_position()
