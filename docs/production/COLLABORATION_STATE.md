@@ -163,4 +163,7 @@ O usuário autorizou ChatGPT a assumir sozinho todas as etapas de desenvolviment
 - Objetivo: exportar APK Android debug via preset existente, Godot 4.7.2 e templates pareados; não é release e não valida dispositivo.
 - Package ID `com.example.boltaventura` permanece placeholder. Nenhuma chave/credencial de release foi criada.
 - Próxima ação: validar a pipeline na PR e só registrar exportação após confirmar artifact, assinatura, package ID e hash.
-\n\n- **PR #54:** fixture isolation do SaveSystem; pós-merge main 90 testes/558 verificações/0 falhas, Docs e Android Export SUCCESS.\n- **PR #55:** strict save/progress version validation; pré-merge 92 testes/577 verificações/0 falhas, Docs e Android Export SUCCESS. Pós-merge main em validação.\n
+
+
+- **PR #54:** fixture isolation do SaveSystem; pós-merge main 90 testes/558 verificações/0 falhas, Docs e Android Export SUCCESS.
+- **PR #55:** strict save/progress version validation; pré-merge 92 testes/577 verificações/0 falhas, Docs e Android Export SUCCESS. Pós-merge main em validação.
