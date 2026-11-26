@@ -108,13 +108,43 @@ jobs:
           done
           echo "Boot smoke passed: 20/20 process launches."
 
-          # Cold-process mutation matrix. The test runner above has already loaded scenes;
-          # only a fresh project boot can prove the original startup failure is detected.
+          # Cold-process mutation matrix. The boot smoke above runs before any mutation.
           cp scripts/ui/main_menu.gd main-menu-fixed.gd
           cp scripts/core/boot.gd boot-fixed.gd
           trap 'cp main-menu-fixed.gd scripts/ui/main_menu.gd; cp boot-fixed.gd scripts/core/boot.gd' EXIT
 
-          # Mutation A: restore the original direct autoload identifiers, keeping the boot barrier.
+          # Mutation A: remove only the synchronous script prewarm.
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("scripts/core/boot.gd")
+          source = path.read_text()
+          tab = chr(9)
+          nl = chr(10)
+          block = (
+              tab + '# Compila/carrega o script leve do menu na thread principal antes do PackedScene' + nl
+              + tab + '# ser solicitado por SceneFlow via ResourceLoader threaded.' + nl
+              + tab + '_main_menu_script = load(MAIN_MENU_SCRIPT_PATH) as Script' + nl
+              + tab + 'if _main_menu_script == null:' + nl
+              + tab + tab + 'push_error("Boot: falha ao carregar o script do menu.")' + nl
+              + tab + tab + '_status.text = "Falha ao preparar o menu principal."' + nl
+              + tab + tab + 'return' + nl
+          )
+          if block not in source:
+              raise SystemExit("Menu script prewarm mutation target missing.")
+          path.write_text(source.replace(block, "", 1))
+          PY
+          set +e
+          "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300 > mutation-no-prewarm.log 2>&1
+          no_prewarm_status=$?
+          set -e
+          if grep -qE 'Parse Error: Failed.*main_menu.tscn|Failed loading resource: res://scenes/ui/main_menu.tscn' mutation-no-prewarm.log; then
+            echo "Removing main-thread script prewarm reproduced the menu failure (status $no_prewarm_status)."
+          else
+            echo "Removing main-thread script prewarm alone did not reproduce."
+          fi
+
+          # Restore Boot; Mutation B restores direct autoload identifiers in the menu.
+          cp boot-fixed.gd scripts/core/boot.gd
           python3 - <<'PY'
           from pathlib import Path
           path = Path("scripts/ui/main_menu.gd")
@@ -130,46 +160,39 @@ jobs:
           path.write_text(source)
           PY
           set +e
-          "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300 > mutation-menu-delayed.log 2>&1
-          menu_mutation_status=$?
+          "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300 > mutation-direct-autoload.log 2>&1
+          direct_autoload_status=$?
           set -e
-          if grep -qE 'Parse Error: Failed.*main_menu.tscn|Failed loading resource: res://scenes/ui/main_menu.tscn' mutation-menu-delayed.log; then
-            echo "Direct-autoload mutation reproduced the cold menu failure (status $menu_mutation_status)."
+          if grep -qE 'Parse Error: Failed.*main_menu.tscn|Failed loading resource: res://scenes/ui/main_menu.tscn' mutation-direct-autoload.log; then
+            echo "Direct-autoload mutation reproduced the menu failure (status $direct_autoload_status)."
           else
-            echo "Direct-autoload mutation alone did not reproduce with the first-frame barrier."
+            echo "Direct-autoload mutation alone did not reproduce with main-thread script prewarm."
           fi
 
-          # Restore the menu; Mutation B removes only the first-frame barrier from Boot.
-          cp main-menu-fixed.gd scripts/ui/main_menu.gd
+          # Combined original behavior must reproduce the reported defect.
           python3 - <<'PY'
           from pathlib import Path
           path = Path("scripts/core/boot.gd")
           source = path.read_text()
           tab = chr(9)
           nl = chr(10)
-          barrier = tab + 'await get_tree().process_frame' + nl + tab + 'if not is_inside_tree():' + nl + tab + tab + 'return' + nl
-          if barrier not in source:
-              raise SystemExit("Boot first-frame barrier mutation target missing.")
-          path.write_text(source.replace(barrier, "", 1))
-          PY
-          set +e
-          "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300 > mutation-boot-immediate.log 2>&1
-          boot_mutation_status=$?
-          set -e
-          if grep -qE 'Parse Error: Failed.*main_menu.tscn|Failed loading resource: res://scenes/ui/main_menu.tscn' mutation-boot-immediate.log; then
-            echo "Same-frame boot mutation reproduced the cold menu failure (status $boot_mutation_status)."
-          else
-            echo "Same-frame boot mutation alone did not reproduce."
-          fi
-
-          # Combined original behavior must reproduce the reported defect.
-          python3 - <<'PY'
-          from pathlib import Path
-          path = Path("scripts/ui/main_menu.gd")
-          source = path.read_text()
-          source = source.replace('return get_node_or_null("/root/CampaignProgress")', 'return CampaignProgress', 1)
-          source = source.replace('return get_node_or_null("/root/SaveSystem")', 'return SaveSystem', 1)
-          path.write_text(source)
+          block = (
+              tab + '# Compila/carrega o script leve do menu na thread principal antes do PackedScene' + nl
+              + tab + '# ser solicitado por SceneFlow via ResourceLoader threaded.' + nl
+              + tab + '_main_menu_script = load(MAIN_MENU_SCRIPT_PATH) as Script' + nl
+              + tab + 'if _main_menu_script == null:' + nl
+              + tab + tab + 'push_error("Boot: falha ao carregar o script do menu.")' + nl
+              + tab + tab + '_status.text = "Falha ao preparar o menu principal."' + nl
+              + tab + tab + 'return' + nl
+          )
+          if block not in source:
+              raise SystemExit("Combined mutation could not remove script prewarm.")
+          path.write_text(source.replace(block, "", 1))
+          menu_path = Path("scripts/ui/main_menu.gd")
+          menu = menu_path.read_text()
+          menu = menu.replace('return get_node_or_null("/root/CampaignProgress")', 'return CampaignProgress', 1)
+          menu = menu.replace('return get_node_or_null("/root/SaveSystem")', 'return SaveSystem', 1)
+          menu_path.write_text(menu)
           PY
           set +e
           "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300 > mutation-original-combined.log 2>&1
@@ -177,7 +200,7 @@ jobs:
           set -e
           if ! grep -qE 'Parse Error: Failed.*main_menu.tscn|Failed loading resource: res://scenes/ui/main_menu.tscn' mutation-original-combined.log; then
             echo "::error::Combined pre-fix implementation did not reproduce the reported main-menu failure."
-            cat mutation-menu-delayed.log mutation-boot-immediate.log mutation-original-combined.log
+            cat mutation-no-prewarm.log mutation-direct-autoload.log mutation-original-combined.log
             exit 1
           fi
           echo "Original combined implementation reproduced the main-menu failure (status $combined_mutation_status)."
