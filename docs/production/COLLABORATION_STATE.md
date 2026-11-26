@@ -4,11 +4,11 @@
 
 ## Estado vigente — revisão de 2026-11-26
 
-**HEAD da main verificado antes desta rodada:** `75159132a7dc2503df68d8ca1abe57fc7e88019c` (PR #6 integrada; Docs CI #143 SUCCESS). A branch de correção documental atual parte exatamente desse commit.
+**HEAD de integração da correção documental:** `b8def7a22feee9573c8e4c46c99ed89cb92967c` (PR #7 MERGED; Docs CI #144 e #145 SUCCESS). A PR #7 partiu do HEAD `75159132a7dc2503df68d8ca1abe57fc7e88019c`.
 
 - **Etapa 0 — Claude Code: ACCEPTED.** Fundação Godot 4.7.2 e protótipo técnico provisório aceitos; hardening integrado pela PR #3.
 - **Etapa 1 — ChatGPT: HANDOFF_READY.** Correção de reatribuição de ponteiro em `TouchControls`, regressão e execução da suíte no CI; entrega original `f3ab682`.
-- **PRs #2–#6: MERGED.** Incluem tooling de qualidade, hardening, handoff da Etapa 2, auditoria de polimento e sincronização final.
+- **PRs #2–#7: MERGED.** A PR #7 (`b8def7a`) corrigiu a documentação obsoleta sobre a existência do projeto e sincronizou o handoff; Docs CI #144/#145 SUCCESS. Nenhum código de gameplay foi alterado.
 - **Próximo turno de gameplay: Etapa 2 — Claude Code**, após integração desta rodada de correções documentais/governança. O usuário inicia Claude manualmente; não iniciar trabalho concorrente.
 - **Projeto executável:** Godot 4.7.2, GDScript, Android em paisagem. A base contém boot/menu, SceneFlow, player, touch/multitouch, HUD, sandbox e testes; não é a campanha completa.
 - **Validação máxima comprovada:** L2 (Godot headless/CI). Não há comprovação de APK exportado/instalado, teste visual, touch físico, safe area real ou desempenho em Android.

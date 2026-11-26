@@ -141,3 +141,13 @@ A árvore Git confirma project.godot, .godot-version, cenas, scripts, recursos e
 ### 7.4 Decisões mantidas em aberto
 
 O código atual contém Dash (Actions.DASH, estado DASHING, touch e testes), enquanto a PR #1 o exclui. A divergência não foi resolvida por fonte canônica confirmada. Nenhuma mecânica foi alterada; não adicionar, remover ou retunar Dash sem decisão explícita do usuário.
+
+
+### 7.5 Resultado da reconciliação — PR #7
+
+- PR #7 foi integrada por squash em `b8def7a22feee9573c8e4c46c99ed89cb92967c`. Docs CI #144 (PR) e #145 (push após merge) passaram.
+- A correção removeu a instrução falsa de que o repositório seria apenas documental e substituiu a criação do projeto “do zero” por continuidade incremental da fundação Godot existente.
+- A PR #1 contém princípios úteis sobre autonomia segura, proteção de saves, performance medida, validação Android e QA; esses temas já se sobrepõem em grande parte a especificações e workflows da main e devem permanecer centralizados nos documentos existentes, sem duplicação automática.
+- A PR #1 também acrescenta detalhes de lore/encerramento, sequência de produção, requisitos de inimigos, skins/armas e vertical slice Cybercore. Esses detalhes exigem comparação com as bíblias/ADRs atuais antes de serem promovidos a canon; não foram incorporados automaticamente.
+- O README da PR #1 declara que a diretiva foi fornecida pelo usuário em 2026-11-25 e a apresenta como autoridade mais recente. O GitHub confirma a existência do texto e do PR, mas não comprova por si só a proveniência dessa decisão no diálogo do usuário. Por isso, a exclusão de Dash continua aguardando confirmação explícita do usuário, apesar da alegação documental.
+- PR #1 permanece OPEN, sem rebase/merge/fechamento. Nenhum código ou mecânica foi alterado.

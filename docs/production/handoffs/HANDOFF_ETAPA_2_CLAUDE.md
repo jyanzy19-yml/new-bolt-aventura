@@ -16,6 +16,7 @@
 - PR #3 — MERGED: hardening da fundação e correção dos registros de aceite. Merge `4ecaff1d67049155d95bcbb5fc9d1c98187d3767`.
 - PR #4 — MERGED: handoff Etapa 2 e sincronização documental. Merge `9d5381047817ac9fc949583f6645d24eadd88e8c`.
 - PR #5 — MERGED: auditoria integral e polimento da continuidade; Docs CI #140 SUCCESS. Relatório: [repository-polish-audit-2026-11-26.md](../repository-polish-audit-2026-11-26.md).
+- PR #7 — MERGED: correção de documentação obsoleta e sincronização do handoff; merge `b8def7a`; Docs CI #144 (PR) e #145 (main) SUCCESS. Nenhum código de gameplay foi alterado.
 
 ## 2. Hardening recente da Etapa 0
 
