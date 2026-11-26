@@ -76,7 +76,7 @@ jobs:
               echo "::error::${label} exited with status $command_status."
               return 1
             fi
-            if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' "$log" | grep -vF 'SceneFlow: cena inexistente: res://tests/fixtures/scene_flow_missing.tscn'; then
+            if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' "$log" | grep -vF 'SceneFlow: cena inexistente: res://nao_existe.tscn'; then
               echo "::error::Unexpected Godot error in ${label}; see ${log}."
               return 1
             fi
@@ -89,6 +89,45 @@ jobs:
           fi
 
           run_checked godot-tests "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd
+
+          # Mutation check: restore the pre-fix direct autoload reference in the menu.
+          # The threaded-scene regression must reject this old implementation.
+          cp scripts/ui/main_menu.gd main-menu-fixed.gd
+          trap 'cp main-menu-fixed.gd scripts/ui/main_menu.gd' EXIT
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("scripts/ui/main_menu.gd")
+          source = path.read_text()
+          old = 'return get_node_or_null("/root/CampaignProgress")'
+          new = 'return CampaignProgress'
+          if old not in source:
+              raise SystemExit("Mutation target not found; refusing a vacuous mutation check.")
+          path.write_text(source.replace(old, new, 1))
+          PY
+          set +e
+          "$GODOT_BIN" --headless --editor --path . --import --quit > mutation-import.log 2>&1
+          import_status=$?
+          "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd > mutation-tests.log 2>&1
+          mutation_status=$?
+          set -e
+          cp main-menu-fixed.gd scripts/ui/main_menu.gd
+          rm -f main-menu-fixed.gd
+          trap - EXIT
+          cat mutation-import.log mutation-tests.log
+          if [[ $import_status -eq 0 && $mutation_status -eq 0 ]] && ! grep -nE 'main_menu.tscn|Parse Error:|SCRIPT ERROR:' mutation-import.log mutation-tests.log; then
+            echo "::error::Threaded autoload regression survived the old-code mutation."
+            exit 1
+          fi
+          if ! grep -nE 'main_menu.tscn|Parse Error:|SCRIPT ERROR:' mutation-import.log mutation-tests.log; then
+            echo "::error::Mutation failed for an unrelated reason; no evidence that the regression detected the old menu code."
+            exit 1
+          fi
+          "$GODOT_BIN" --headless --editor --path . --import --quit > godot-restore-import.log 2>&1
+          if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' godot-restore-import.log; then
+            echo "::error::Restored source did not import cleanly after mutation verification."
+            exit 1
+          fi
+          echo "Mutation check passed: the pre-fix direct-autoload menu implementation was detected."
 
           echo "Running 20 real project boots (300 frames each, fixed 60 FPS)."
           for run in $(seq 1 20); do
