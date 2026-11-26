@@ -54,6 +54,28 @@ func save_payload(payload: Dictionary) -> bool:
 		last_error = "temp_write_failed:%s" % error_string(write_error)
 		return false
 
+	# Se o arquivo principal estiver corrompido, mas o backup for válido, restaura o
+	# último estado íntegro antes de rotacionar. Nunca substitui um backup recuperável
+	# pela cópia corrompida do arquivo principal.
+	if FileAccess.file_exists(_primary_path()):
+		var primary_validation: Dictionary = _decode_file(_primary_path())
+		if not bool(primary_validation.get("ok", false)):
+			var backup_validation: Dictionary = _decode_file(_backup_path())
+			if bool(backup_validation.get("ok", false)):
+				var corrupt_cleanup_error: Error = _remove_if_exists(_primary_path())
+				if corrupt_cleanup_error != OK:
+					_remove_if_exists(_temp_path())
+					last_error = "corrupt_primary_cleanup_failed"
+					return false
+				var recovery_error: Error = DirAccess.rename_absolute(
+					ProjectSettings.globalize_path(_backup_path()),
+					ProjectSettings.globalize_path(_primary_path())
+				)
+				if recovery_error != OK:
+					_remove_if_exists(_temp_path())
+					last_error = "backup_recovery_stage_failed:%s" % error_string(recovery_error)
+					return false
+
 	var had_primary: bool = FileAccess.file_exists(_primary_path())
 	if had_primary:
 		var backup_cleanup_error: Error = _remove_if_exists(_backup_path())
@@ -86,7 +108,8 @@ func save_payload(payload: Dictionary) -> bool:
 			last_error = "commit_and_restore_failed:%s" % error_string(restore_error)
 		return false
 
-	_remove_if_exists(_backup_path())
+	# Mantém o backup anterior após o commit. Ele é a cópia last-known-good caso
+	# o arquivo principal seja corrompido ou uma gravação futura seja interrompida.
 	last_error = ""
 	return true
 
