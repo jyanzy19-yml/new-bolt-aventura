@@ -220,3 +220,11 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - `SYS-014`: checkpoint de W1-L1 agora persiste e restaura em reentrada; demais níveis e sandbox continuam sem integração.
 - `SYS-015`: SaveSystem v1 + CampaignProgress v1 implementados parcialmente; migrações futuras e outros domínios pendentes.
 - W1-L1 segue **Em andamento**: falta conteúdo final, transição real para W1-L2, playtest humano e QA Android.
+
+
+## Correção transversal de feedback — W1-L2 checkpoint (2026-11-26)
+
+- `SYS-014` / W1-L2: corrigido na branch `fix/w1-l2-checkpoint-feedback` o caminho em que a notificação visual só aparecia quando o salvamento falhava.
+- O caminho normal agora também deve informar `CHECKPOINT ATIVADO`; regressão verifica visibilidade e texto no HUD.
+- **Estado:** implementado na branch, aguardando Godot CI e Docs CI. Não classificar como validado nem integrado até os checks e o merge serem confirmados.
+- A correção não altera a persistência nem o comportamento do checkpoint.

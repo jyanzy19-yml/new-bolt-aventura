@@ -82,6 +82,8 @@ func test_w1_l2_registers_progress_checkpoint_and_completion() -> bool:
 	for _tick in range(3):
 		await tree.physics_frame
 	check(checkpoint.is_activated(), "checkpoint de W1-L2 pode ser ativado")
+	check(hud.get_node("%ProgressNotification").visible, "ativação do checkpoint apresenta feedback visual")
+	check_eq(hud.get_node("%ProgressNotification").text, "CHECKPOINT ATIVADO", "notificação identifica o checkpoint")
 	check_eq(CampaignProgress.get_checkpoint_id("W1-L2"), "cybercore_w1_l2_checkpoint", "checkpoint de W1-L2 persiste com ID próprio")
 	player.global_position = goal.global_position
 	player.velocity = Vector2.ZERO

@@ -283,3 +283,14 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - **CI pós-merge:** Godot run `45862459941` SUCCESS — 66 testes, 404 verificações, 0 falhas; Docs run `45862459947` SUCCESS.
 - **Limites:** W1-L2 não existe nem foi presumida; W1-L1 continua Em andamento. Sem editor gráfico, APK, emulador, Android físico, encerramento forçado ou benchmark.
 - **Observação preexistente:** log do teste de coletável registra alteração síncrona de `Area2D.monitoring` durante `body_entered`; o mesmo erro aparece no CI anterior `45859653809`, portanto não foi introduzido pela PR #31. Correção fica como tarefa separada.
+
+
+## Unidade corretiva em andamento — feedback de checkpoint W1-L2 (2026-11-26)
+
+- **Branch:** `fix/w1-l2-checkpoint-feedback`, criada a partir de `main` após PR #35.
+- **Diagnóstico confirmado:** W1-L2 só chamava `show_progress_notification("CHECKPOINT ATIVADO")` quando `CampaignProgress.save_checkpoint` falhava; no caminho normal de sucesso, o jogador não recebia feedback. W1-L1 já exibe a notificação após a ativação.
+- **Correção aplicada na branch:** a notificação passa a ser exibida após a ativação, mantendo o warning exclusivo para falha de persistência.
+- **Regressão adicionada:** `tests/unit/test_w1_l2_progression.gd` verifica visibilidade e texto do feedback.
+- **Plano:** [w1-l2-checkpoint-feedback](plans/2026-11-26-w1-l2-checkpoint-feedback.md).
+- **Estado:** implementação registrada; CI da nova branch/PR ainda não executada ou confirmada. Não integrar até Godot CI e Docs CI passarem.
+- **Limites:** nenhuma validação local, APK, emulador, Android físico, toque físico ou profiling nesta unidade.
