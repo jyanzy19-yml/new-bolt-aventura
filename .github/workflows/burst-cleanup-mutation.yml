@@ -73,7 +73,7 @@ jobs:
           PY
           "$GODOT_BIN" --headless --editor --path . --import --quit > burst-mutation-import.log 2>&1
           set +e
-          "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd > burst-mutation-tests.log 2>&1
+          "$GODOT_BIN" --headless --path . --script res://tests/mutation/burst_cleanup_mutation_runner.gd > burst-mutation-tests.log 2>&1
           mutation_status=$?
           set -e
           cp burst-fixed.gd scripts/vfx/burst.gd
@@ -84,10 +84,10 @@ jobs:
             echo "::error::Burst cleanup regression survived the old-code mutation."
             exit 1
           fi
-          if ! grep -F "callback do timer libera contador mesmo após destruição do pai" burst-mutation-tests.log; then
-            echo "::error::Mutation failed for an unrelated reason; expected cleanup assertion was not observed."
+          if ! grep -F "BURST_CLEANUP_REGRESSION_FAIL" burst-mutation-tests.log; then
+            echo "::error::Mutation failed for an unrelated reason; expected cleanup marker was not observed."
             exit 1
           fi
           "$GODOT_BIN" --headless --editor --path . --import --quit
           "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd
-          echo "Mutation verified: old callback fails the parent-destruction cleanup assertion."
+          echo "Mutation verified: old callback fails the isolated parent-destruction cleanup runner."
