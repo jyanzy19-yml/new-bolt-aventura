@@ -657,7 +657,7 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Branch: `fix/save-system-temp-recovery-2026-11-26`.
 - Arquivos funcionais alterados: `scripts/core/save_system.gd`, `scripts/campaign/campaign_progress.gd`, `tests/unit/test_save_system.gd` e `tests/unit/test_campaign_progress.gd`.
 - `load_payload()` tenta recuperar `.tmp` completo, com checksum/payload válidos, quando o principal está ausente ou inválido; promove o temporário ao principal. A precedência permanece principal válido → `.tmp` válido → backup válido.
-- Um principal/temporário com versão não suportada bloqueia fallback para evitar downgrade silencioso. `save_payload()` verifica os três slots e bloqueia escrita/rotação quando qualquer um contém versão não suportada, preservando os bytes existentes.
+- Um envelope de versão não suportada em qualquer slot (principal, temporário ou backup) bloqueia a seleção de uma cópia para evitar downgrade silencioso. `save_payload()` verifica os três slots e bloqueia escrita/rotação quando qualquer um contém versão não suportada, preservando os bytes existentes.
 - `has_save()` reconhece `.tmp` pendente. Schema v1, API pública e domínio CampaignProgress não foram alterados.
 - `CampaignProgress` reconhece `recovered_temp`/`recovered_temp_unpromoted:*` como recuperação do armazenamento, preservando validação independente do schema de campanha.
 - Testes adicionados para recuperação do temporário mais novo que backup, preservação de temporário em nova gravação, precedência/fallback, proteção dos três slots futuros e continuidade de checkpoint da campanha.
