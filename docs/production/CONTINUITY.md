@@ -1,3 +1,14 @@
+## Estado atual após PR #13 — 2026-11-26
+
+- **Main HEAD:** `09317a2c1b7c1113e7ff2f142a82b495998f7578` (PR #13 integrada por squash).
+- **Responsável:** ChatGPT como único desenvolvedor, por autorização explícita do usuário.
+- **Entrega:** checkpoint reutilizável (`BoltCheckpoint`) e respawn local no último ponto ativado da sandbox; PR #13 integrada.
+- **Testes:** Godot CI #50 (`45841890027`) SUCCESS — Godot 4.7.2, 43 testes / 179 verificações / 0 falhas. Docs CI #167 (`45841889890`) SUCCESS.
+- **Limites:** checkpoint é apenas em memória na sandbox; SaveSystem e checkpoints de campanha ainda não implementados. APK, emulador, teste físico, safe area e desempenho Android não executados.
+- **Próxima ação:** implementar a próxima unidade dos sistemas centrais da vertical slice, após reauditar o HEAD `09317a2`; preservar Dash, touch e política Android.
+
+---
+
 ## Sessão de desenvolvimento solo — 2026-11-26 (branch em revisão)
 
 - **Responsável:** ChatGPT, por autorização explícita do usuário para conduzir todas as etapas sem Claude.
