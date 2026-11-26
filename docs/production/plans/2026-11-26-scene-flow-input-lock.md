@@ -30,3 +30,12 @@ A PR #41 adicionou o overlay persistente e um `Control` full-screen que captura 
 
 - Testes headless simulam sinais e fluxo de cena; não substituem teste de teclado/touch físico durante carregamento em Android.
 - Não adiciona cancelamento do carregamento.
+
+
+## Follow-up — regressão da restauração em falha
+
+A implementação foi integrada pela PR #42. A revisão de testes adiciona cobertura direta para os dois estados anteriores:
+- transição iniciada com SceneTree despausada e falha: deve voltar a despausada;
+- transição iniciada com SceneTree pausada e falha: deve continuar pausada.
+
+A branch `test/scene-flow-failure-pause-restoration` adiciona essa regressão a `test_scene_flow.gd`. O teste é headless e valida a restauração do estado; ainda não substitui simulação de falha de I/O em Android físico.

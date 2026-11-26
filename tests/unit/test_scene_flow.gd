@@ -18,6 +18,39 @@ func test_scene_flow_processes_while_tree_is_paused() -> bool:
 	return true
 
 
+func test_failed_transition_restores_previous_pause_state() -> bool:
+	var flow: Node = _flow()
+	check(flow != null, "autoload SceneFlow presente")
+	if flow == null:
+		return true
+	var previous_pause: bool = tree.paused
+	var previous_busy: bool = flow._busy
+	var previous_target: String = flow._target_path
+	var previous_was_paused: bool = flow._was_paused
+
+	tree.paused = true
+	flow._busy = true
+	flow._target_path = "res://test_failure_from_unpaused_state.tscn"
+	flow._was_paused = false
+	flow._fail("test_failure")
+	check(not tree.paused, "falha restaura estado anteriormente despausado")
+	check(not flow.is_transitioning(), "falha encerra estado de transição")
+
+	tree.paused = true
+	flow._busy = true
+	flow._target_path = "res://test_failure_from_paused_state.tscn"
+	flow._was_paused = true
+	flow._fail("test_failure")
+	check(tree.paused, "falha preserva estado anteriormente pausado")
+	check(not flow.is_transitioning(), "segunda falha encerra estado de transição")
+
+	tree.paused = previous_pause
+	flow._busy = previous_busy
+	flow._target_path = previous_target
+	flow._was_paused = previous_was_paused
+	return true
+
+
 func test_missing_scene_is_rejected_without_side_effects() -> bool:
 	var flow: Node = _flow()
 	check(flow != null, "autoload SceneFlow presente")

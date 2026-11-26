@@ -2,7 +2,7 @@
 
 ## Snapshot operacional vigente — 2026-11-26
 
-- **Main HEAD:** `66b3c0e060762ebe1f3c4b6af84c84a79f0cd781` (PR #41 integrada; Godot `45883137849`, Docs `45883137856` e Android export `45883137961` pós-merge SUCCESS).
+- **Main HEAD:** `68b677aa7860894928a690861ef63b300f8175fb` (PR #42 integrada; Godot `45883759266`, Docs `45883759252` e Android export `45883759260` SUCCESS na PR).
 - **Última entrega de conteúdo:** PR #34, W1-L2 em blockout e progressão W1-L1→W1-L2.
 - **Última regressão integrada:** PR #39, limpeza do ActionBuffer em pausa/suspensão/perda de foco, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.
 - **Última infraestrutura integrada:** PR #38, pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.
@@ -13,7 +13,7 @@
 - **APK debug:** artifact `bolt-aventura-android-debug-7415dfb988faf2dd63f9ff289106e7f7205dcdd1`, package ID placeholder `com.example.boltaventura`, SHA-256 `db03a42b909781a1f5e7c94d025615e1aa5f397c8ebd306ba30cddf84eca14b0`. Exportado/assinado, não instalado nem testado em aparelho.
 - **PR #1:** permanece separada e não deve ser integrada/rebaseada automaticamente.
 - **Dash:** decisão aprovada e vigente: deve permanecer; ver `docs/production/ADR-001-DASH.md`.
-- **Próxima unidade:** bloqueio integral de input durante transições em `fix/scene-flow-input-lock`; overlay persistente já integrado pela PR #41.
+- **Próxima unidade:** regressão de restauração do pause state após falha em `test/scene-flow-failure-pause-restoration`; bloqueio integral já integrado pela PR #42.
 
 
 **Fonte única para o próximo turno.** Antes de editar, confirme este arquivo contra o HEAD, commits, branches e PRs reais do GitHub.
