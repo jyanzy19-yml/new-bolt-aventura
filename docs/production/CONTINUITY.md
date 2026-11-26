@@ -369,3 +369,12 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Próxima ação: aguardar CI, revisar logs, corrigir falhas, abrir PR e integrar apenas após checks verdes; registrar merge SHA e CI pós-merge.
 
 - Achado adicional: checkpoint original ficava próximo o suficiente do limite da área de contato do inimigo para permitir dano imediato no respawn. Reposicionado para x=980; teste de integração calcula e exige separação superior à soma dos semilarguras das formas de colisão. CI do SHA final pendente.
+
+
+## Pós-merge PR #24 e continuação — 2026-11-26
+
+- PR #24 integrada por squash em `532320ec9c5b3507d880717e4437603a984b7808`.
+- Godot CI pré-merge `45854657846` SUCCESS: 53 testes, 296 verificações, 0 falhas; Docs CI `45854657850` SUCCESS. CI pós-merge main Godot `45854849226` e Docs `45854849212` SUCCESS.
+- Próxima branch: `test/w1-l1-live-combat-encounter`, baseada na main pós-merge.
+- Escopo: ampliar `test_campaign_entry.gd` para validar o disparo ATTACK através de InputEvent → ActionBuffer → BoltCombat → ChronoProjectile → CybercorePatrolEnemy real, sem retunar o combate.
+- Não executado: playtest humano, APK, instalação, emulador, Android físico ou métricas de performance.

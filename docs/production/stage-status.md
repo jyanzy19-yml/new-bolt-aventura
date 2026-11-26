@@ -1,8 +1,8 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` — HEAD `13105c5422b73e2c362bdf3d4ce9eea45c97fc99` (PR #23 integrada).  
-**Última entrega integrada:** correção de layout e integração de checkpoint/queda/respawn W1-L1 (PR #23); feedback de progressão e testes de gatilhos reais em desenvolvimento na branch `feat/w1-l1-progression-feedback`.  
+**Branch de integração:** `main` — HEAD `532320ec9c5b3507d880717e4437603a984b7808` (PR #24 integrada).  
+**Última entrega integrada:** feedback de progressão, checkpoint seguro e testes dos gatilhos W1-L1 (PR #24).  
 **CI da PR #21:** Godot run #45849915250 SUCCESS em Godot 4.7.2; 53 testes, 276 verificações, 0 falhas. CI pós-merge da PR #21 deve ser consultado separadamente.  
 **Responsável atual:** ChatGPT, por decisão explícita do usuário; Claude não está no fluxo ativo.  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
@@ -203,3 +203,14 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Limites: protótipo visual e valores continuam provisórios; sem playtest humano, APK, instalação, emulador, aparelho Android ou métricas de performance.
 
 - Segurança de respawn: checkpoint reposicionado em x=980 para manter folga além do alcance horizontal máximo do inimigo; teste calcula a distância mínima com base nas formas de colisão reais. CI do SHA final ainda pendente.
+
+
+## Pós-merge PR #24 — W1-L1 progress feedback — 2026-11-26
+
+- PR #24 integrada por squash em `532320ec9c5b3507d880717e4437603a984b7808`.
+- Godot CI pré-merge no HEAD final da PR: run `45854657846` SUCCESS — Godot 4.7.2, import/parse headless aprovado, **53 testes, 296 verificações, 0 falhas**.
+- Docs CI pré-merge: run `45854657850` SUCCESS. Pós-merge main: Godot run `45854849226` SUCCESS; Docs run `45854849212` SUCCESS.
+- HUD agora comunica ativação do checkpoint e recuperação com notificação temporizada. Testes atravessam checkpoint, queda/respawn, coletável e objetivo por áreas físicas reais.
+- Checkpoint em x=980; teste calcula folga em relação ao limite da patrulha e às dimensões das formas de colisão do player/inimigo.
+- W1-L1 permanece **Em andamento**. Próximo incremento: comprovar no teste de integração que o input ATTACK e a Pistola Crono atingem o inimigo real instanciado na fase.
+- Sem playtest humano, export APK, instalação, emulador, aparelho Android ou medições de performance.
