@@ -388,3 +388,12 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Pós-merge main CI ainda precisa de verificação final: Godot `45855371627` / `45855463491`, Docs `45855371706` / `45855463599`.
 - Próxima branch: `test/w1-l1-defeat-retry-flow`, com cobertura do overlay de derrota e do contrato do botão de reinício, sem alterar gameplay.
 - Não executado: playtest humano, APK, instalação, emulador, Android físico, FPS, memória ou latência física.
+
+
+## Pós-merge PR #26 — 2026-11-26
+
+- PR #26 integrada por squash em `3428851c774f989d3522da1ed0430e9d39f7a680`.
+- Godot CI pré-merge `45855625278` SUCCESS: Godot 4.7.2, 54 testes, 304 verificações, 0 falhas. Docs CI `45855625442` SUCCESS.
+- CI pós-merge main: Godot `45855795164` SUCCESS (54 testes / 304 verificações / 0 falhas); Docs `45855795173` SUCCESS.
+- W1-L1 agora tem cobertura de integração para a cadeia real de disparo no inimigo, checkpoint/queda/respawn, coletável/recuperação, saída, derrota e contrato de retry.
+- Nenhum APK, instalação, emulador, Android físico, FPS, memória ou latência foi testado. W1-L1 permanece Em andamento; ainda falta conteúdo final, persistência de campanha e playtest/QA Android.
