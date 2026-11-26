@@ -10,6 +10,7 @@ signal state_changed(active: bool)
 @export var initial_active: bool = true
 
 var _active: bool = false
+var _state_initialized: bool = false
 
 @onready var _cycle_timer: Timer = %CycleTimer
 @onready var _visual: Polygon2D = %Visual
@@ -36,8 +37,9 @@ func _duration_for_current_state() -> float:
 
 
 func _set_active(active: bool) -> void:
-	if _active == active:
+	if _state_initialized and _active == active:
 		return
+	_state_initialized = true
 	_active = active
 	# monitoring pode ser alterado em resposta a eventos de física; adiar a mutação.
 	set_deferred("monitoring", _active)
