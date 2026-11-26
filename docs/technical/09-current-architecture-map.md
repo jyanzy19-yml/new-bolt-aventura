@@ -134,7 +134,8 @@ W1-L1 e W1-L2 possuem scripts de composição de nível próprios. Eles conectam
 | Enemy AI | Patrulha simples provisória | Percepção, estados, navegação, telegraphs e limites |
 | Asset catalog | Parcial; placeholders | IDs, proveniência/licença, import settings, budgets e estado |
 | Save migration | Schema v1 sem migração futura | Migrações explícitas e regressões quando novos campos forem aprovados |
-| Android lifecycle | CI exporta APK debug | Teste físico de foco, background, encerramento, retomada e persistência |\n| Acoplamento Player/Combat | BoltPlayer referencia BoltCombat e BoltCombat referencia BoltPlayer | Manter enquanto composição é local; reavaliar antes de extrair/reutilizar Combat ou adicionar múltiplos owners |
+| Android lifecycle | CI exporta APK debug | Teste físico de foco, background, encerramento, retomada e persistência |
+| Acoplamento Player/Combat | BoltPlayer referencia BoltCombat e BoltCombat referencia BoltPlayer | Manter enquanto composição é local; reavaliar antes de extrair/reutilizar Combat ou adicionar múltiplos owners |
 | Safe area / touch físico | Testes sintéticos | Validação em aparelhos identificados, barras/gestos e recortes |
 
 ## 7. Evidência e limites
