@@ -19,6 +19,7 @@ func test_energy_gate_cycles_and_only_damages_while_active() -> bool:
 	var player: BoltPlayer = player_scene.instantiate() as BoltPlayer
 	var gate: TimedEnergyGate = gate_scene.instantiate() as TimedEnergyGate
 	player.damage_invulnerability = 0.0
+	player.global_position = Vector2(300.0, -24.0)
 	root.add_child(player)
 	root.add_child(gate)
 	await tree.process_frame
