@@ -210,7 +210,7 @@ Ao retomar, consultar o HEAD real; este snapshot descreve a base auditada e não
 - **Gate/unidade:** Gate 1 em andamento; integridade de input multitouch e execução automática da suíte headless.
 - **Revisão Etapa 0:** commits `7057532`, `c32a99d`, `ab72c58` e handoff inspecionados. Conflito de escopo aceito explicitamente: movimento/touch/HUD/sandbox ficam como base provisória solicitada; sandbox não é fase de campanha.
 - **Achado:** S3 em `TouchControls._bind`: o mesmo índice de ponteiro podia ser reassociado sem liberar o botão anterior, deixando ação lógica presa. Corrigido com unbind defensivo; teste sintético de regressão adicionado.
-- **CI:** Godot Run #31 SUCCESS (`f3ab682`): Godot 4.7.2 headless, import e `tests/test_runner.gd` exit 0. 42 métodos de teste identificados em 9 arquivos. Docs Run #119 SUCCESS. Nível L2.
+- **CI:** Godot Run #36 SUCCESS (`624edce`): Godot 4.7.2 headless, import e `tests/test_runner.gd` exit 0. 42 métodos de teste identificados em 9 arquivos. Docs Run #124 SUCCESS. Nível L2.
 - **Ambiente local:** Godot não instalado; execução local NÃO EXECUTADA. Editor gráfico, APK, Android físico, toque real, barras, FPS e memória NÃO EXECUTADOS.
 - **Mutação:** não executada nesta sessão para a nova regressão; não declarar cobertura por mutação adicional.
 - **Arquivos de implementação:** `scripts/input/touch_controls.gd`, `tests/unit/test_touch_controls.gd`, `.github/workflows/godot-validation.yml`.
