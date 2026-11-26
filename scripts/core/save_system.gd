@@ -33,7 +33,7 @@ func save_payload(payload: Dictionary) -> bool:
 
 	var envelope: Dictionary = {
 		"format_version": FORMAT_VERSION,
-		"payload": payload,
+		"payload_json": payload_json,
 		"checksum": checksum,
 	}
 	var temp_cleanup_error: Error = _remove_if_exists(_temp_path())
@@ -138,15 +138,18 @@ func _decode_file(path: String) -> Dictionary:
 	var version: int = int(envelope.get("format_version", 0))
 	if version != FORMAT_VERSION:
 		return {"ok": false, "error": "unsupported_format_version"}
-	var payload: Variant = envelope.get("payload")
+	var payload_json: String = str(envelope.get("payload_json", ""))
+	if payload_json.is_empty():
+		return {"ok": false, "error": "invalid_payload"}
+	var expected_checksum: String = str(envelope.get("checksum", ""))
+	if expected_checksum.is_empty() or _checksum(payload_json) != expected_checksum:
+		return {"ok": false, "error": "checksum_mismatch"}
+	var payload_parser: JSON = JSON.new()
+	if payload_parser.parse(payload_json) != OK:
+		return {"ok": false, "error": "invalid_payload"}
+	var payload: Variant = payload_parser.data
 	if typeof(payload) != TYPE_DICTIONARY:
 		return {"ok": false, "error": "invalid_payload"}
-	var payload_json: String = _canonical_json(payload)
-	var expected_checksum: String = str(envelope.get("checksum", ""))
-	var actual_checksum: String = _checksum(payload_json)
-	print("SaveSystem checksum diagnostic: expected=%s actual=%s canonical=%s" % [expected_checksum, actual_checksum, payload_json])
-	if expected_checksum.is_empty() or actual_checksum != expected_checksum:
-		return {"ok": false, "error": "checksum_mismatch"}
 	return {"ok": true, "payload": payload, "error": ""}
 
 
