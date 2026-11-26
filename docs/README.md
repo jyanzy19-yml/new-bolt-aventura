@@ -1,10 +1,10 @@
 # BOLT · AVENTURA — Documentação de produção
 
-Este índice organiza a documentação de design, narrativa, tecnologia, produção e qualidade. Os documentos distinguem decisões confirmadas, requisitos, propostas e informações ainda pendentes.
+Este índice organiza a documentação de design, narrativa, tecnologia, produção e qualidade. O repositório também contém o projeto Godot 4.7.2 executável em estágio de fundação/protótipo (`project.godot`, `scenes/`, `scripts/`, `resources/` e `tests/`). Continue a base existente; os documentos distinguem decisões confirmadas, requisitos, propostas e pendências.
 
 ## Ponto de entrada obrigatório
 
-- [Diretiva obrigatória de implementação do zero](production/from-zero-implementation-directive.md)
+- [Diretiva de implementação integral e continuidade](production/from-zero-implementation-directive.md) — mandato completo de produção aplicado à base Godot existente; não recriar o projeto.
 - [MASTER_DIRECTIVE.md](../MASTER_DIRECTIVE.md) — diretriz central para criação, produção, implementação e validação. Leia primeiro.
 - [Master Game Design & Gameplay Prompt](prompts/master-game-design-and-gameplay-prompt.md) — diretiva detalhada de design e gameplay; deve ser lida em conjunto com as bíblias e decisões.
 - [CLAUDE.md](../CLAUDE.md) — regras permanentes de trabalho do Claude Code.
