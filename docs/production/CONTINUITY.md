@@ -685,3 +685,16 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Implementa `SaveData`, `SaveStore`, `ProgressState` (`GameState`) e `LevelSession`, duplicando os domínios atuais `SaveSystem`, `CampaignProgress` e `BoltCheckpoint`.
 - Não foi alterada nem apagada; exclusão permanece dependente de autorização explícita.
 - **PROPOSTA técnica, sem implementação:** avaliar recuperação de `.tmp` íntegro após interrupção e bloqueio explícito de escrita quando o arquivo principal/backup contém versão futura. Main já possui temporário, backup, checksum SHA-256 e recuperação de backup; a proposta deve ser tratada como hardening incremental do serviço existente, não como adoção de SaveStore/GameState.
+
+
+### Diagnóstico atualizado do Defeito 1 — após CI #167
+
+- Godot Validation run 45906475220 (commit de workflow 6df8989) terminou FAILURE no boot-1/20.
+- Evidência real da suíte: 93 testes / 1.307 verificações / 0 falhas; test_threaded_scene_loading.gd passou 722 verificações, mas não era cold-start confiável porque outros testes anteriores já carregavam cenas e aqueciam o cache.
+- Boot frio falhou com:
+  - ERROR: Parse Error: Failed. [Resource file res://scenes/ui/main_menu.tscn:12]
+  - ERROR: Failed loading resource: res://scenes/ui/main_menu.tscn.
+- A mutação de autoload anterior não foi prova: o grep aceitava WARNING: SceneFlow: transição ignorada ... main_menu.tscn. Não declarar causa raiz a partir dela.
+- Alteração de diagnóstico: scripts/core/boot.gd aguarda um process_frame antes de iniciar a primeira carga threaded. A ideia é testar se o request no mesmo ciclo de _ready() é a condição de corrida.
+- Workflow de CI atualizado com três cenários cold-process: (A) menu com identificadores diretos e barreira mantida; (B) boot sem barreira e menu runtime; (C) combinação pré-correção. O cenário combinado precisa reproduzir especificamente o erro de parse; a implementação corrigida deve passar 20 boots independentes.
+- **Não validado ainda:** causa raiz, eficácia da barreira, mutation matrix, 20 boots e Android físico. Aguardando nova execução do workflow.
