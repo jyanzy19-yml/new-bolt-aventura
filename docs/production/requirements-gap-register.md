@@ -80,7 +80,8 @@ A hierarquia da fonte é a do MASTER_DIRECTIVE.md e da diretriz mestra de design
 | DEC-005 | Sete mundos, ordem e fragmentos fixos; 42 fases planejadas, seis por mundo | 02-world-bible.md; prompt mestre |
 | DEC-006 | Abertura → tutorial guiado por robô mensageiro → campanha em Cybercore | narrativa bíblia; prompt mestre |
 | DEC-007 | BOLT foi criado para preservar os universos; Arquiteto busca impor uma única realidade | narrativa bíblia; prompt mestre |
-| DEC-008 | Um único escritor ativo; ChatGPT conduz até decisão diferente do usuário | COLLABORATION_STATE.md |\n| DEC-009 | CampaignProgress v1 persiste W1-L1→W1-L2; sem destino W1-L3 até existir cena e integração reais | ADR-0006 |
+| DEC-008 | Um único escritor ativo; ChatGPT conduz até decisão diferente do usuário | COLLABORATION_STATE.md |
+| DEC-009 | CampaignProgress v1 persiste W1-L1→W1-L2; sem destino W1-L3 até existir cena e integração reais | ADR-0006 |
 
 ## 4. Sequência de resolução
 
