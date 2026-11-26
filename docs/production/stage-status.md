@@ -513,3 +513,11 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Nova hipótese em investigação: a primeira transição threaded é iniciada no mesmo ciclo de _ready() da cena Boot. Adicionada barreira de um process_frame antes da primeira chamada a SceneFlow.change_scene.
 - O workflow agora separa mutações: autoload direto com barreira, boot imediato sem barreira e combinação pré-correção; exige que a combinação original reproduza o erro e que a versão corrigida passe 20 boots.
 - **Estado:** PENDENTE. Não declarar causa raiz nem correção validada até os logs da nova execução.
+
+
+### Revisão da hipótese de boot — prewarm do script (2026-11-26)
+
+- A barreira de um frame foi testada em CI #180 e **não resolveu**: o boot frio continuou falhando em main_menu.tscn:12. A alteração foi substituída.
+- Nova hipótese em teste: o recurso GDScript do menu precisa ser compilado/carregado na thread principal antes de SceneFlow solicitar a PackedScene em thread. Boot agora faz load() de main_menu.gd e só então inicia a transição threaded.
+- A matriz de mutações foi atualizada para comparar: remoção do prewarm; autoloads diretos com prewarm; combinação original sem prewarm + autoloads diretos.
+- Estado permanece PENDENTE até 20/20 boots e logs de mutação válidos.
