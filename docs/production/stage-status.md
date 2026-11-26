@@ -1,7 +1,7 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` (último HEAD verificado antes desta sincronização: `caedfee2f790cc78222b281a5b602110d7229043`; confirmar novamente ao iniciar)  
+**Branch de integração:** `main` (HEAD confirmado em 2026-11-26: `1e5294cf112c014c21e43c51b4c8e797beceb9b6`; confirmar novamente ao iniciar)  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
 
 ## Estado executável observado
@@ -75,3 +75,14 @@ Claude Code assume a Etapa 2 após o usuário iniciar sua sessão. Ponto de part
 - [Handoff Etapa 2 — Claude](handoffs/HANDOFF_ETAPA_2_CLAUDE.md)
 - [Auditoria de hardening da Etapa 0](stage-0-hardening-audit.md)
 - [Protocolo de qualidade](quality-control-protocol.md)
+
+
+## Auditoria corretiva — snapshot após PR #10 (2026-11-26)
+
+- HEAD confirmado: `1e5294cf112c014c21e43c51b4c8e797beceb9b6`.
+- PR #1 permanece OPEN e não mergeável; compare atual: 17 commits exclusivos e 139 commits atrás. Os 17 arquivos continuam exclusivamente documentais.
+- PRs #2–#10 estão integradas. A PR #10 é o último merge observado.
+- Godot 4.7.2, GDScript, Android empacotado em paisagem; projeto real com cenas, scripts, recursos e testes.
+- Nenhum defeito S0–S2 de gameplay foi confirmado pela inspeção estática focalizada nesta rodada. Isso não substitui execução Godot local nem teste físico.
+- O conflito do Dash continua pendente; implementação preservada sem alteração.
+- A validação CI deste novo snapshot deve ser registrada pela execução da PR desta auditoria; o status consultado para o HEAD atual não retornou checks.
