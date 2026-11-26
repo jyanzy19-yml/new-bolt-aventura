@@ -56,20 +56,17 @@ jobs:
           source = path.read_text()
           binding = "timeout.connect(_release.bind(particles.get_instance_id()))"
           old_binding = "timeout.connect(_release.bind(particles))"
-          fixed_function = """static func _release(particles_instance_id: int) -> void:
-          \t_active = maxi(0, _active - 1)
-          \tvar particle_object: Object = instance_from_id(particles_instance_id)
-          \tif particle_object is CPUParticles2D:
-          \t\t(particle_object as CPUParticles2D).queue_free()
-          """
-          old_function = """static func _release(particles: CPUParticles2D) -> void:
-          \t_active = maxi(0, _active - 1)
-          \tif is_instance_valid(particles):
-          \t\tparticles.queue_free()
-          """
-          if binding not in source or fixed_function not in source:
+          signature = "static func _release(particles_instance_id: int) -> void:"
+          if binding not in source or signature not in source:
               raise SystemExit("Mutation target missing; refusing a vacuous mutation check.")
-          source = source.replace(binding, old_binding, 1).replace(fixed_function, old_function, 1)
+          source = source.replace(binding, old_binding, 1)
+          start = source.index(signature)
+          source = source[:start] + (
+              "static func _release(particles: CPUParticles2D) -> void:" + chr(10)
+              + chr(9) + "_active = maxi(0, _active - 1)" + chr(10)
+              + chr(9) + "if is_instance_valid(particles):" + chr(10)
+              + chr(9) + chr(9) + "particles.queue_free()" + chr(10)
+          )
           path.write_text(source)
           PY
           "$GODOT_BIN" --headless --editor --path . --import --quit > burst-mutation-import.log 2>&1
