@@ -74,7 +74,7 @@ A fundação não é apenas documental, mas o jogo completo ainda não existe: a
 ### POL-006 — Validação automatizada e validação física são níveis diferentes
 
 **Severidade:** informativo / risco de release.  
-**Evidência:** Docs CI #135 passou para a PR #4. Docs CI #137 passou para esta auditoria (PR #5). Godot CI #45 passou no commit da PR #3. A PR #4 alterou somente documentação; não executou nova validação Godot. A suíte 42 testes/171 verificações/0 falhas está comprovada na execução anterior Godot CI #36, não deve ser atribuída à Run #45.  
+**Evidência:** Docs CI #135 passou para a PR #4. Docs CI #137 passou na primeira versão da auditoria e Docs CI #138 passou no HEAD final da PR #5. Godot CI #45 passou no commit da PR #3. A PR #4 alterou somente documentação; não executou nova validação Godot. A suíte 42 testes/171 verificações/0 falhas está comprovada na execução anterior Godot CI #36, não deve ser atribuída à Run #45.  
 **Risco:** confundir import/parse/headless com funcionamento visual, touch, safe area ou performance Android.  
 **Tratamento:** limites registrados no status e handoff.  
 **Ação necessária:** executar APK debug e matriz física Android antes de declarar a vertical slice validada.
@@ -99,7 +99,7 @@ A fundação não é apenas documental, mas o jogo completo ainda não existe: a
 
 ## 6. Estado de validação desta auditoria
 
-- **Docs CI #137:** SUCCESS na PR #5; job `Validate project documentation`, incluindo `Validate Claude metadata and local links`, concluído sem falhas.
+- ****Docs CI #137:** SUCCESS na PR #5; job `Validate project documentation`, incluindo `Validate Claude metadata and local links`, concluído sem falhas.
 
 - Inspeção GitHub da árvore recursiva, branches, PRs e arquivos: concluída.
 - Contagem de skills/agentes/comandos/testes: calculada a partir da árvore da main.
