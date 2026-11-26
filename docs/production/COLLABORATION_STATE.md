@@ -2,20 +2,19 @@
 
 ## Snapshot operacional vigente — 2026-11-26
 
-- Main HEAD: `09afde26cc2bdb1126202dbfd413fa317f2a3e9d` (PR #33 merged).
+- Main HEAD: `c10ca6944bf0047abe694b7c429270a256cfff96` (PR #34 merged).
 - ChatGPT é o único escritor ativo conforme a decisão vigente do usuário; Claude permanece inativo para escrita concorrente.
 - Etapa de produção atual: continuação do Gate 1/vertical slice e expansão incremental da campanha.
-- Branch atual: `feat/w1-l2-energy-network-progression`.
-- Escopo: W1-L1 aponta para W1-L2; o save registra W1-L2 como destino de retomada; menu Continuar reconhece somente W1-L1/W1-L2 quando as cenas existem; W1-L2 é um blockout com campo energético cíclico, checkpoint e saída.
-- PR #33 está integrada. A PR #1 permanece separada e não deve ser mesclada automaticamente.
-- CI da nova branch ainda não executado nesta atualização; Android físico não validado.
+- PR #34 integrada: W1-L1 encaminha para W1-L2; save e menu Continuar reconhecem ambas as fases existentes; W1-L2 possui blockout, campo energético cíclico, checkpoint e saída.
+- CI pré-merge da PR #34: Godot 4.7.2, 69 testes/439 verificações/0 falhas; Docs SUCCESS. Docs pós-merge SUCCESS; Godot pós-merge em andamento nesta fotografia.
+- A PR #1 permanece separada e não deve ser mesclada automaticamente. Android físico não validado.
 
 
 **Fonte única para o próximo turno.** Antes de editar, confirme este arquivo contra o HEAD, commits, branches e PRs reais do GitHub.
 
 ## Estado vigente — revisão de 2026-11-26
 
-**Último merge confirmado na main:** PR #33 integrada por squash em `09afde26cc2bdb1126202dbfd413fa317f2a3e9d`. Confirmar novamente o SHA antes de cada novo turno.
+**Último merge confirmado na main:** PR #34 integrada por squash em `c10ca6944bf0047abe694b7c429270a256cfff96`. Confirmar novamente o SHA antes de cada novo turno.
 
 - **Etapa 0 — Claude Code: ACCEPTED.** Fundação Godot 4.7.2 e protótipo técnico provisório aceitos; hardening integrado pela PR #3.
 - **Etapa 1 — ChatGPT: HANDOFF_READY.** Correção de reatribuição de ponteiro em `TouchControls`, regressão e execução da suíte no CI; entrega original `f3ab682`.
@@ -26,7 +25,7 @@
 - **PR #1:** continua OPEN e não mergeável (`mergeable_state=dirty`), com 17 commits exclusivos; a comparação atual de 2026-11-26 após PR #10 indica 139 commits de atraso. A contagem é volátil: consultar o compare atual antes de rebasear. Modifica 17 arquivos: quatro documentos de raiz e a diretiva dividida em 12 partes/índice. Não contém implementação de gameplay. Não mesclar automaticamente.
 - **Dash:** decisão explícita do usuário em 2026-11-26: DEVE PERMANECER no jogo. Preservar implementação, Input Map, controles e testes. A exclusão na diretiva não integrada da PR #1 está superada; ver `ADR-001-DASH.md`. Não retunar ou redesenhar sem escopo próprio.
 - **Governança da main:** o endpoint de branches confirmou `protected=false` para `main`. A integração não disponibiliza operação administrativa para habilitar proteção/ruleset; o proprietário deve configurar as regras manualmente. Não presumir checks obrigatórios antes de resolver os filtros por caminhos dos workflows.
-- **Escritor desta rodada:** ChatGPT, único escritor ativo conforme a diretriz vigente do usuário; implementação de gameplay ocorre na branch `feat/w1-l2-energy-network-progression`.
+- **Escritor desta rodada:** ChatGPT, único escritor ativo conforme a diretriz vigente do usuário; PR #34 integrada à main. Criar uma nova branch para a próxima unidade após confirmar o estado pós-merge.
 
 ## Estado por etapa
 
@@ -34,7 +33,7 @@
 |---|---|---|---|---|
 | 0 | Claude Code | ACCEPTED | Fundação e protótipo provisório; hardening PR #3 integrado | ChatGPT |
 | 1 | ChatGPT | HANDOFF_READY | `f3ab682`: correção multitouch, regressão e CI | Claude Code |
-| 2 | ChatGPT | IN_PROGRESS | PRs #13–#33 integradas; branch `feat/w1-l2-energy-network-progression` implementa rota W1-L1→W1-L2, retomada e blockout W1-L2; CI pendente | ChatGPT |
+| 2 | ChatGPT | IN_PROGRESS | PR #34 integrada (`c10ca69`); rota W1-L1→W1-L2, retomada e blockout W1-L2. CI pré-merge 69 testes/439 verificações/0 falhas; Godot CI pós-merge pendente | ChatGPT |
 | 3 | ChatGPT | Aguardando | Próxima unidade após revisão/validação da Etapa 2 | ChatGPT |
 
 ## Protocolo de início de turno
