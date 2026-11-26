@@ -565,3 +565,12 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Docs Validation run `45909374561` (#396): SUCCESS.
 - Android Debug Export run `45909374622` (#103): SUCCESS; APK debug exportado, verificado e enviado como artifact CI.
 - Limite: exportação CI não comprova instalação, execução, FPS, RAM, touch físico, safe areas ou comportamento térmico em aparelho Android.
+
+
+
+### Atualização de CI — PR #58 / head `63a28d9` — 2026-11-26
+
+- Godot Validation run `45909667893`: SUCCESS — 93 testes / 1.787 verificações / 0 falhas.
+- SceneFlow: 30 ciclos em cinco cenas (menu, abertura, tutorial, W1-L1, W1-L2), 150 transições / 1.202 verificações.
+- Cold boot: diagnóstico verbose exit 0; smoke 20/20 processos; mutação sem prewarm reproduz o erro original.
+- Android Debug Export run `45909667948`: SUCCESS; APK debug exportado, verificado e enviado como artefato CI. Sem validação em aparelho físico.
