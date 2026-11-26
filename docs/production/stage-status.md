@@ -1,11 +1,11 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Último merge de gameplay:** PR #34 integrada por squash em `c10ca6944bf0047abe694b7c429270a256cfff96`; commits posteriores sincronizam documentação.  
+**Último merge de gameplay:** PR #34 integrada por squash em `c10ca6944bf0047abe694b7c429270a256cfff96`. **Última regressão integrada:** PR #35, teste de contato físico do campo energético, merge `e1f66cec92dae678dacfc6d35eb6a1abb3cad811`.  
 **Branch de trabalho:** nenhuma pendente; a unidade W1-L1 → W1-L2 foi integrada à `main`.  
 **Última entrega integrada:** W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente da campanha (PR #34).  
 **CI pré-merge PR #34:** Godot run `45872508689` SUCCESS — Godot 4.7.2, 69 testes, 439 verificações, 0 falhas; Docs run `45872508675` SUCCESS.  
-**CI pós-merge PR #34:** Godot run `45872656738` SUCCESS — 69 testes, 439 verificações, 0 falhas; Docs run `45872656798` SUCCESS. Docs CI da sincronização seguinte `45872828901` SUCCESS.  
+**CI pós-merge PR #34:** Godot run `45872656738` SUCCESS — 69 testes, 439 verificações, 0 falhas; Docs run `45872656798` SUCCESS. **PR #35:** Godot CI pré/pós-merge SUCCESS — 69 testes, 439 verificações, 0 falhas (`45873118202`, `45873234656`). Docs CI da sincronização anterior `45872828901` SUCCESS.  
 **Responsável atual:** ChatGPT, como único escritor ativo conforme a diretriz vigente do usuário.  
 **Estado do Gate 1:** EM ANDAMENTO — W1-L1 e W1-L2 permanecem blockouts; nenhuma validação Android física foi executada.
 
@@ -49,6 +49,7 @@ Um único escritor por vez. Por decisão do usuário, ChatGPT conduz sozinho as 
 
 ## Pull requests
 
+- [PR #35](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/35): MERGED — substitui chamada direta do handler por teste real de contato físico da `Area2D`; Godot CI pré/pós-merge: 69 testes/439 verificações/0 falhas.
 - [PR #34](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/34): MERGED — W1-L2 Rede Interrompida, campo energético cíclico e progressão W1-L1→W1-L2; Godot CI pré-merge 69 testes/439 verificações/0 falhas; Docs CI SUCCESS.
 - [PR #33](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/33): MERGED — expansão da diretriz de produção e correção do coletável de vida.
 
