@@ -668,3 +668,10 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - O `SaveSystem` atual já usa tmp + backup e SHA-256, mas a leitura só tenta principal e backup (não recupera tmp). Além disso, `save_payload()` não interrompe a escrita quando a validação do principal retorna `unsupported_format_version`; a rotação pode mover o arquivo futuro para backup e substituí-lo. O teste atual prova somente que `load_payload()` rejeita formato futuro, não que uma tentativa de gravação o preserve.
 - **PROPOSTA, não implementada:** escopo próprio para validar tmp, recuperar após cada ponto de interrupção e bloquear gravação/rotação quando principal ou backup contiver versão futura. Criar testes de mutação antes de qualquer alteração. Não integrar a arquitetura duplicada.
 - Não apagar a branch sem autorização explícita.
+
+
+
+### Revalidação repetida — PR #57 / Burst
+
+- Mutation run `45909945401`: SUCCESS; implementação antiga reproduziu erro e falhou na regressão de teardown; implementação corrigida restaurada, suíte 103 testes / 672 verificações / 0 falhas.
+- PR #57 head atual antes deste adendo: `dea9bec`; PR aberta, mergeable, sem merge. Android export run `45909521316` SUCCESS no commit de código; run posterior cancelado por concorrência após alterações somente documentais.
