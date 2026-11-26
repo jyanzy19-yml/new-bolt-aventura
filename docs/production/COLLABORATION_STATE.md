@@ -4,11 +4,11 @@
 
 ## Estado vigente — revisão de 2026-11-26
 
-**Último merge confirmado na main:** PR #11 integrada por squash no commit `6f97ffc97219bb541e9f36a1c140331c2c621403` em 2026-11-26; confirmar novamente o SHA antes de cada novo turno.
+**Último merge confirmado na main:** PR #13 integrada por squash no commit `09317a2c1b7c1113e7ff2f142a82b495998f7578` em 2026-11-26; confirmar novamente o SHA antes de cada novo turno.
 
 - **Etapa 0 — Claude Code: ACCEPTED.** Fundação Godot 4.7.2 e protótipo técnico provisório aceitos; hardening integrado pela PR #3.
 - **Etapa 1 — ChatGPT: HANDOFF_READY.** Correção de reatribuição de ponteiro em `TouchControls`, regressão e execução da suíte no CI; entrega original `f3ab682`.
-- **PRs #2–#11: MERGED.** PR #7 reconciliou documentos raiz; PRs #8–#10 sincronizaram auditoria e continuidade; PR #11 concluiu a auditoria documental e registrou o ADR-001. PR #11 foi integrada por squash em `6f97ffc`. Nenhum código de gameplay foi alterado nessas PRs documentais.
+- **PRs #2–#13: MERGED.** PR #7 reconciliou documentos raiz; PRs #8–#10 sincronizaram auditoria e continuidade; PR #11 concluiu a auditoria documental e registrou o ADR-001; PR #12 sincronizou o handoff; PR #13 implementou checkpoint/respawn local na sandbox e foi integrada por squash em `09317a2`. PR #13 é a primeira entrega de gameplay desta sequência de PRs.
 - **Escritor ativo:** ChatGPT como único desenvolvedor, por decisão explícita do usuário em 2026-11-26. Claude Code está inativo no fluxo de escrita.
 - **Projeto executável:** Godot 4.7.2, GDScript, Android em paisagem. A base contém boot/menu, SceneFlow, player, touch/multitouch, HUD, sandbox e testes; não é a campanha completa.
 - **Validação máxima comprovada:** L2 (Godot headless/CI). Não há comprovação de APK exportado/instalado, teste visual, touch físico, safe area real ou desempenho em Android.
@@ -23,7 +23,7 @@
 |---|---|---|---|---|
 | 0 | Claude Code | ACCEPTED | Fundação e protótipo provisório; hardening PR #3 integrado | ChatGPT |
 | 1 | ChatGPT | HANDOFF_READY | `f3ab682`: correção multitouch, regressão e CI | Claude Code |
-| 2 | ChatGPT | IN_PROGRESS | `feat/checkpoint-respawn-system`: checkpoint local e respawn na sandbox; Godot CI #47 e Docs CI #164 SUCCESS (43 testes, 179 verificações, 0 falhas) | ChatGPT |
+| 2 | ChatGPT | IN_PROGRESS | PR #13 integrada em `09317a2`; checkpoint local e respawn na sandbox; Godot CI #50 e Docs CI #167 SUCCESS (43 testes, 179 verificações, 0 falhas) | ChatGPT |
 | 3 | ChatGPT | Aguardando | Próxima unidade após revisão/validação da Etapa 2 | ChatGPT |
 
 ## Protocolo de início de turno
@@ -91,3 +91,12 @@ Não avançar etapa só porque uma sessão terminou. Não marcar ACCEPTED por au
 ## Mudança de responsabilidade — 2026-11-26
 
 O usuário autorizou ChatGPT a assumir sozinho todas as etapas de desenvolvimento do BOLT · AVENTURA, sem depender do Claude Code. Esta decisão substitui o fluxo alternado descrito em registros históricos. ChatGPT é o único escritor ativo; manter uma branch/PR por unidade, revisar os diffs, executar CI e integrar somente após evidência. Claude não deve iniciar trabalho concorrente. Estado atual: Etapa 2 em andamento na branch `feat/checkpoint-respawn-system`, base `8c502efaee16a47a31303c77d0efbbd4c847a5e8`.
+
+
+## Estado pós-PR #13 — 2026-11-26
+
+- `main` HEAD: `09317a2c1b7c1113e7ff2f142a82b495998f7578`.
+- PR #13 MERGED: checkpoint reutilizável e respawn local da sandbox. Não implementa persistência de campanha.
+- Responsável exclusivo pelas próximas etapas: ChatGPT, conforme decisão explícita do usuário; Claude Code permanece inativo no fluxo de escrita.
+- Godot CI #50 (`45841890027`) SUCCESS: Godot 4.7.2, 43 testes, 179 verificações, 0 falhas. Docs CI #167 (`45841889890`) SUCCESS.
+- Próximo trabalho: continuar a vertical slice/sistemas centrais sobre a base existente, em branch própria e com testes. Não declarar validação Android sem APK/dispositivo.
