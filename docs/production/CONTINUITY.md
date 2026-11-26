@@ -718,3 +718,16 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - **Conclusão técnica:** em cold boot Godot 4.7.2, a primeira compilação/carga de main_menu.gd não deve ocorrer dentro do carregamento threaded da PackedScene. O Boot deve carregar o Script na thread principal antes de chamar SceneFlow.change_scene. As referências diretas a autoload não são a causa independente.
 - Revertidos os helpers runtime-only no menu, W1-L1/W1-L2 e HUD para preservar o código original, pois não eram necessários para a correção demonstrada.
 - O workflow agora valida a versão mínima: prewarm fixo → 20 boots; mutação removendo prewarm → erro original. **Aguardar novo CI após estas reversões para fechar a validação final.**
+
+
+### Fechamento do Defeito 1 — evidência final
+
+- **Godot Validation run:** 45907658225 — SUCCESS.
+- **Suíte:** 93 testes, 1.307 verificações, 0 falhas.
+- **Teste de transições:** 722 verificações em 30 ciclos para cada cena (menu, W1-L1, W1-L2).
+- **Cold boot:** diagnóstico verbose exit 0; 20/20 processos independentes passaram.
+- **Mutation:** retirar o prewarm de main_menu.gd reproduz o Parse Error original em main_menu.tscn:12. A verificação de mutação passou.
+- **Causa raiz confirmada:** o script GDScript do menu falha quando sua primeira compilação ocorre como dependência da PackedScene carregada em thread no cold boot Godot 4.7.2. Boot carrega o Script na thread principal antes da solicitação threaded da cena.
+- Mutação adicional: referências diretas CampaignProgress/SaveSystem com prewarm não reproduziram o erro; os helpers exploratórios foram revertidos.
+- **PR #58:** OPEN, mergeable, não integrada. Não houve merge automático.
+- **Limitações:** Android Debug Export foi cancelado neste run; não há APK, emulador ou dispositivo físico testado. Não afirmar FPS, RAM, touch, térmica ou desempenho Android.
