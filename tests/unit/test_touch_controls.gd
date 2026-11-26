@@ -162,3 +162,17 @@ func test_visual_state_follows_logical_state() -> bool:
 	check(not button.visual_pressed, "destaque some quando todos soltam")
 	await _teardown()
 	return true
+
+func test_reused_pointer_id_releases_previous_action() -> bool:
+	await _setup()
+	# Simula recuperação de estado: o mesmo índice reaparece em outro botão sem UP prévio.
+	# A ação anterior precisa ser liberada antes de o ponteiro assumir a nova ação.
+	_touch(0, _center(Actions.JUMP), true)
+	check(Input.is_action_pressed(Actions.JUMP), "jump pressionado pelo ponteiro 0")
+	_touch(0, _center(Actions.MOVE_RIGHT), true)
+	check(not Input.is_action_pressed(Actions.JUMP), "jump liberado ao reatribuir o ponteiro")
+	check(Input.is_action_pressed(Actions.MOVE_RIGHT), "move_right assumido pelo mesmo ponteiro")
+	_touch(0, _center(Actions.MOVE_RIGHT), false)
+	check(not Input.is_action_pressed(Actions.MOVE_RIGHT), "nova ação liberada no UP")
+	await _teardown()
+	return true
