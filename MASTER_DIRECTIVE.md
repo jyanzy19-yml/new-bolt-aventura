@@ -323,25 +323,28 @@ BOLT · AVENTURA só pode ser declarado completo quando:
 
 **Regra final:** criar um jogo memorável, não apenas um conjunto de funcionalidades. Cada mundo deve ter personalidade; cada fase, propósito; cada habilidade, utilidade; cada chefe, leitura justa; cada menu, função clara; e cada revelação, consequência. Preservar o canon, respeitar decisões, medir o que for técnico e nunca confundir plano, código e validação.
 
-## 16. Mandato explícito: criar o jogo do zero
+## 16. Mandato de produção integral sobre a base existente
 
-A missão de produção é **criar BOLT · AVENTURA integralmente do zero como jogo Godot 4.x funcional e exportável para Android**. O repositório é atualmente um ecossistema documental; não presumir que exista `project.godot`, cenas ou gameplay implementados. A documentação especifica o produto; somente arquivos Godot executáveis constituem implementação.
+A missão de longo prazo é entregar **BOLT · AVENTURA como jogo Godot 4.x completo, funcional e exportável para Android**, com os sete mundos e 42 fases planejados. A fundação executável já está integrada à `main`: `project.godot`, Godot 4.7.2 fixado em `.godot-version`, cenas, scripts GDScript, recursos e testes. Portanto, a instrução operacional é **continuar e evoluir o projeto existente**, nunca recriá-lo do zero nem duplicar sistemas já implementados.
 
-A diretiva operacional obrigatória está em [docs/production/from-zero-implementation-directive.md](docs/production/from-zero-implementation-directive.md). Claude deve lê-la integralmente e executá-la. Criar projeto, cenas, scripts, Resources, dados, assets licenciados, UI, sistemas, testes e configuração Android. Não parar após auditoria, planejamento, arquitetura ou vertical slice: esses são gates internos e o trabalho deve prosseguir até a campanha completa, respeitando bloqueios materiais e aprovações de canon.
+A diretiva operacional está em [docs/production/from-zero-implementation-directive.md](docs/production/from-zero-implementation-directive.md). Leia-a como o mandato de produção integral e roadmap de longo prazo; referências históricas a “criar do zero” descrevem a origem do projeto, não o estado atual. Antes de implementar, inspecione a estrutura e os contratos reais. Estenda cenas, scripts, Resources, dados, assets licenciados, UI, sistemas, testes e configuração Android de forma incremental.
 
-A autorização cobre a implementação do escopo já documentado, não autoriza alterar canon, engine, plataforma, controles ou decisões aprovadas. Lacunas devem ser isoladas como propostas provisórias e não podem bloquear trabalho independente. A execução deve distinguir claramente implementado, testado e validado em dispositivo real. Nunca declarar APK, FPS ou compatibilidade sem evidência.
+A autorização cobre implementação normal dentro do escopo documentado, mas não autoriza alterar canon, engine, plataforma, controles ou decisões aprovadas. Lacunas devem ser isoladas como propostas provisórias. Diferencie claramente implementado, testado e validado em dispositivo real. Nunca declarar APK, FPS ou compatibilidade sem evidência.
 
-### 16.1 Sequência mínima de produção
-1. Descobrir estado real e fixar versão Godot 4.x compatível.
-2. Criar projeto executável e fundação Android.
-3. Implementar vertical slice representativa e validá-la.
-4. Consolidar sistemas reutilizáveis e contratos.
-5. Produzir os sete mundos e 42 fases com conteúdo distinto.
-6. Integrar narrativa, arte, áudio, menus, saves e progressão.
-7. Executar QA, otimização, exportação e checklist Android.
+### 16.1 Sequência de produção a partir do estado atual
+1. Confirmar HEAD, estrutura, Godot 4.7.2, cenas, scripts, contratos e decisões existentes.
+2. Auditar a fundação e escolher a próxima unidade funcional mínima do Gate 1/vertical slice.
+3. Corrigir defeitos confirmados e ampliar sistemas existentes sem reescrita desnecessária.
+4. Completar e validar a vertical slice Android conforme os gates disponíveis.
+5. Consolidar sistemas reutilizáveis e contratos antes de escalar conteúdo.
+6. Produzir os sete mundos e 42 fases, integrando narrativa, arte, áudio, menus, saves e progressão.
+7. Executar QA, otimização, exportação e checklist Android, sem alegar validação física não realizada.
 
-### 16.2 Regra de continuidade
-Não solicitar autorização para tarefas normais dentro do escopo. Solicitar decisão somente quando houver mudança material não coberta por canon/ADR, credencial/assinatura exclusiva do usuário, risco destrutivo ou bloqueio externo real. Continuar trabalho independente durante bloqueios. Ao encerrar uma sessão, registrar arquivos alterados, testes, estado real e próximo passo executável.
+### 16.2 Pendência de escopo — Dash
+O código atual inclui `Actions.DASH`, estado `DASHING`, suporte em controles touch e testes; o tracker registra SYS-005/SYS-006 com Dash. A PR #1 não integrada propõe excluir a mecânica. O conflito não está resolvido por uma decisão canônica confirmada nesta revisão. Até decisão explícita do usuário ou fonte aprovada inequívoca, preservar o código existente e **não adicionar, remover ou retunar Dash**. Não mesclar a PR #1 automaticamente.
+
+### 16.3 Regra de continuidade
+Não solicitar autorização para tarefas normais e reversíveis dentro do escopo. Solicitar decisão somente quando houver mudança material não coberta por canon/ADR, credencial/assinatura exclusiva do usuário, risco destrutivo ou bloqueio externo real. Continuar trabalho independente durante bloqueios. Ao encerrar uma sessão, registrar arquivos alterados, testes, estado real e próximo passo executável.
 
 
 ---
