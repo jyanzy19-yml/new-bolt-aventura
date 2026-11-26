@@ -113,3 +113,8 @@ Só muda para **Validado** quando inicia e termina corretamente; não possui sof
 - Não usar "80%" ou "quase pronta"; registrar critérios que faltam.
 - Se um mundo ou sistema for dividido em subtarefas, criar IDs filhos sem apagar o ID pai.
 - Sincronizar este arquivo com stage-status.md, CONTINUITY.md e QA.
+
+
+## 5. Nota de reconciliação de escopo — auditoria 2026-11-26
+
+A auditoria estática da main confirmou que o código atual e os registros SYS-005/SYS-006 incluem Dash. A PR #1, ainda aberta e não integrada, contém uma diretiva que exclui Dash; o `MASTER_DIRECTIVE.md` da main ainda usa linguagem condicional sobre dash. Até a revisão/reconciliação da PR #1 e confirmação da fonte canônica, não ampliar nem remover essa mecânica silenciosamente. Estado e evidências completas: [auditoria de polimento](repository-polish-audit-2026-11-26.md).
