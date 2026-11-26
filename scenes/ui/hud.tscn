@@ -92,6 +92,20 @@ script = ExtResource("3_button")
 action = &"dash"
 label_text = "DASH"
 
+[node name="Attack" type="Control" parent="Safe/Layout/TouchControls"]
+layout_mode = 1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -276.0
+offset_right = -24.0
+offset_bottom = -156.0
+script = ExtResource("3_button")
+action = &"attack"
+label_text = "TIRO"
+
 [node name="Pause" type="Control" parent="Safe/Layout/TouchControls"]
 layout_mode = 1
 anchor_left = 1.0
