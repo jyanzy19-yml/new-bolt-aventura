@@ -351,3 +351,10 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - A mutação anterior do autoload foi falsa positiva por casar um WARNING contendo o nome do menu. Descartada como evidência.
 - Implementado na branch um atraso de um frame antes da primeira transição de Boot e uma matriz de mutações em processo frio para separar a hipótese de autoload da hipótese de ordem de inicialização.
 - **Estado:** em investigação / validação pendente; nenhum boot 20/20 registrado.
+
+
+### SYS-003 — hipótese revisada
+
+- O atraso de um frame foi testado e não resolveu o erro de parse; removido.
+- Candidata atual: precompilar/carregar main_menu.gd sincronamente na thread principal antes de SceneFlow solicitar main_menu.tscn de forma threaded.
+- A CI compara mutações separadas de prewarm/autoload e a combinação original. Causa raiz não confirmada até resultados reais.
