@@ -50,7 +50,7 @@ func save_payload(payload: Dictionary) -> bool:
 	var write_error: Error = file.get_error()
 	file.close()
 	if write_error != OK:
-		_remove_if_exists(TEMP_PATH)
+		_remove_if_exists(_temp_path())
 		last_error = "temp_write_failed:%s" % error_string(write_error)
 		return false
 
@@ -58,7 +58,7 @@ func save_payload(payload: Dictionary) -> bool:
 	if had_primary:
 		var backup_cleanup_error: Error = _remove_if_exists(_backup_path())
 		if backup_cleanup_error != OK:
-			_remove_if_exists(TEMP_PATH)
+			_remove_if_exists(_temp_path())
 			last_error = "backup_cleanup_failed"
 			return false
 		var backup_error: Error = DirAccess.rename_absolute(
@@ -66,27 +66,27 @@ func save_payload(payload: Dictionary) -> bool:
 			ProjectSettings.globalize_path(_backup_path())
 		)
 		if backup_error != OK:
-			_remove_if_exists(TEMP_PATH)
+			_remove_if_exists(_temp_path())
 			last_error = "backup_stage_failed:%s" % error_string(backup_error)
 			return false
 
 	var commit_error: Error = DirAccess.rename_absolute(
 		ProjectSettings.globalize_path(_temp_path()),
-		ProjectSettings.globalize_path(SAVE_PATH)
+		ProjectSettings.globalize_path(_primary_path())
 	)
 	if commit_error != OK:
 		var restore_error: Error = OK
 		if had_primary and FileAccess.file_exists(_backup_path()):
 			restore_error = DirAccess.rename_absolute(
-				ProjectSettings.globalize_path(BACKUP_PATH),
-				ProjectSettings.globalize_path(SAVE_PATH)
+				ProjectSettings.globalize_path(_backup_path()),
+				ProjectSettings.globalize_path(_primary_path())
 			)
 		last_error = "commit_failed:%s" % error_string(commit_error)
 		if restore_error != OK:
 			last_error = "commit_and_restore_failed:%s" % error_string(restore_error)
 		return false
 
-	_remove_if_exists(BACKUP_PATH)
+	_remove_if_exists(_backup_path())
 	last_error = ""
 	return true
 
