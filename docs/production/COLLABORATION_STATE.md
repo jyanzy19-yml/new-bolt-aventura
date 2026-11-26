@@ -11,7 +11,7 @@
 - **PR #2 — qualidade e especialistas: MERGED.** Merge `6f8bae62018fc2c7efce8fa454c16681599dcbe6`; adiciona skills, agentes consultivos e validações.
 - **PR #3 — hardening da Etapa 0: MERGED.** Merge `4ecaff1d67049155d95bcbb5fc9d1c98187d3767`; runner não aceita suíte vazia, Safe Area responde ao ciclo de vida e registros de aceite/continuidade foram corrigidos. Auditoria: [stage-0-hardening-audit.md](stage-0-hardening-audit.md).
 - **PR #4 — handoff e sincronização documental: MERGED.** Merge `9d5381047817ac9fc949583f6645d24eadd88e8c`; registra a transferência para Claude Etapa 2.
-- **Auditoria de polimento:** branch `chore/repository-polish-audit`; PR pendente. Relatório: [repository-polish-audit-2026-11-26.md](repository-polish-audit-2026-11-26.md).
+- **Auditoria de polimento:** relatório completo em [repository-polish-audit-2026-11-26.md](repository-polish-audit-2026-11-26.md), entregue pela PR #5.
 - **Próximo turno: Etapa 2 — Claude Code.** Aguardando o usuário iniciar Claude manualmente. Este handoff é o ponto de partida: [HANDOFF_ETAPA_2_CLAUDE.md](handoffs/HANDOFF_ETAPA_2_CLAUDE.md).
 - **Branch oficial:** `main`. Um único escritor ativo. Implementações substanciais em branch/PR; só passar o turno após integração e handoff.
 - **Projeto:** Godot 4.7.2, GDScript, Android em paisagem.
