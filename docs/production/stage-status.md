@@ -1,9 +1,9 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` — HEAD `e588c2f6a45cda0ec71b14dad815f2359569e3bf` (PR #18 integrada). Branch de trabalho atual: `feat/cybercore-enemy-player-damage` (PR #19).  
-**Última entrega integrada:** Pistola Crono e alvo de treinamento (PR #17), com sincronização documental PR #18. Em revisão: inimigo-base provisório, dano ao jogador e HUD de vida (PR #19).  
-**CI anterior:** Godot #62 e Docs #185 SUCCESS após PR #17/#18. PR #19: Godot Validation em execução no momento deste registro; consultar Actions para resultado atualizado.  
+**Branch de integração:** `main` — HEAD `96bf49a659fecc3ca280ceb140613add808dcdda` (PR #19 integrada).  
+**Última entrega integrada:** inimigo-base provisório de Cybercore, dano/vida do jogador, invulnerabilidade, respawn e HUD de vida (PR #19).  
+**CI da PR #19:** Godot #45848858668 e Docs #45848858475 SUCCESS; 50 testes, 252 verificações, 0 falhas. CI pós-merge #45849033538/#45849033502 em execução no momento deste registro.  
 **Responsável atual:** ChatGPT, por decisão explícita do usuário; Claude não está no fluxo ativo.  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
 
@@ -157,3 +157,15 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - CI Godot PR #19: run `45848699004` estava em execução na última consulta. Nenhuma alegação de sucesso até o resultado final.
 - APK/exportação, emulador, dispositivo Android, FPS e memória: NÃO EXECUTADOS.
 - Handoff detalhado: [HANDOFF_ENEMY_COMBAT.md](handoffs/HANDOFF_ENEMY_COMBAT.md).
+
+
+## Pós-merge PR #19 — 2026-11-26
+
+- PR #19 integrada por squash em `96bf49a659fecc3ca280ceb140613add808dcdda`.
+- Godot Validation da PR #19: run `45848858668` SUCCESS em Godot 4.7.2; import/parse headless aprovado; suíte com **50 testes, 252 verificações, 0 falhas**.
+- Docs Validation da PR #19: run `45848858475` SUCCESS.
+- CI pós-merge main: Godot run `45849033538` e Docs run `45849033502` estavam em execução no momento da atualização; verificar resultados finais antes de declarar main validada.
+- Conteúdo: inimigo-base de patrulha provisório em W1-L1, dano/knockback/invulnerabilidade para BOLT, restauração de vida no respawn, HUD de vida e tela de derrota.
+- Dash, ActionBuffer, controles touch e Pistola Crono preservados. Inimigo e parâmetros continuam protótipos, não canon.
+- Handoff: [HANDOFF_ENEMY_COMBAT.md](handoffs/HANDOFF_ENEMY_COMBAT.md).
+- APK/exportação, instalação, emulador, aparelho Android, FPS e memória: NÃO EXECUTADOS.
