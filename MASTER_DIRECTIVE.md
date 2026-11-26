@@ -340,8 +340,8 @@ A autorização cobre implementação normal dentro do escopo documentado, mas n
 6. Produzir os sete mundos e 42 fases, integrando narrativa, arte, áudio, menus, saves e progressão.
 7. Executar QA, otimização, exportação e checklist Android, sem alegar validação física não realizada.
 
-### 16.2 Pendência de escopo — Dash
-O código atual inclui `Actions.DASH`, estado `DASHING`, suporte em controles touch e testes; o tracker registra SYS-005/SYS-006 com Dash. A PR #1 não integrada propõe excluir a mecânica. O conflito não está resolvido por uma decisão canônica confirmada nesta revisão. Até decisão explícita do usuário ou fonte aprovada inequívoca, preservar o código existente e **não adicionar, remover ou retunar Dash**. Não mesclar a PR #1 automaticamente.
+### 16.2 Decisão canônica — Dash permanece
+O usuário confirmou explicitamente em 2026-11-26 que **Dash deve permanecer no BOLT · AVENTURA**. A decisão está registrada em `docs/production/ADR-001-DASH.md` e prevalece sobre a exclusão proposta na PR #1, que permanece não integrada. Preservar a implementação existente, Input Map, `Actions.DASH`, estado `DASHING`, controles touch e testes. Não remover a mecânica. Retuning, redesign ou mudanças de física/controles exigem tarefa própria e validação; não mesclar a PR #1 automaticamente.
 
 ### 16.3 Regra de continuidade
 Não solicitar autorização para tarefas normais e reversíveis dentro do escopo. Solicitar decisão somente quando houver mudança material não coberta por canon/ADR, credencial/assinatura exclusiva do usuário, risco destrutivo ou bloqueio externo real. Continuar trabalho independente durante bloqueios. Ao encerrar uma sessão, registrar arquivos alterados, testes, estado real e próximo passo executável.
