@@ -339,6 +339,6 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - `save_payload()` verifica principal, temporário e backup antes de qualquer limpeza/rotação e recusa escrita se encontrar versão não suportada. `load_payload()` também evita downgrade silencioso quando qualquer slot (principal, temporário ou backup) é de versão não suportada.
 - `CampaignProgress` aceita os estados de recuperação do armazenamento (`recovered_temp`, `recovered_temp_unpromoted:*`) sem tratar erro de schema como recuperação válida.
 - Testes novos cobrem temporário interrompido, preservação dos três slots de formato futuro e continuidade do checkpoint de campanha após recuperação.
-- Godot Validation `45913414993`: SUCCESS — 95 testes/652 verificações/0 falhas; Docs Validation `45913423553`: SUCCESS.
-- Android Debug Export `45913415032` attempt 2: SUCCESS; APK 28.465.153 bytes, SHA-256 `2b66a5408c6afdaaeda25b3b4a6277f1926decb39a6f0b37a3fbb7ef71ff9894`, assinatura v2/v3 válida; package ID provisório `com.example.boltaventura`; artifact registrado no stage-status.
+- Godot Validation `45913709017`: SUCCESS — 95 testes/652 verificações/0 falhas; Docs Validation `45913709173`: SUCCESS.
+- Android Debug Export `45913709027`: SUCCESS; APK 28.465.153 bytes, SHA-256 `2f9ae799db84dbcf648566c8953c5fede9bcb91800417edb9586005092ad358f`, assinatura v2/v3 válida; package ID provisório `com.example.boltaventura`; artifact registrado no stage-status.
 - **Estado:** implementação validada em CI headless e exportação debug; PR #59 aberta, sem merge. Não altera schema v1, API pública, CampaignProgress, IDs de fase/checkpoint ou payload de domínio. Sem instalação Android física.
