@@ -23,7 +23,7 @@
 |---|---|---|---|---|
 | 0 | Claude Code | ACCEPTED | Fundação e protótipo provisório; hardening PR #3 integrado | ChatGPT |
 | 1 | ChatGPT | HANDOFF_READY | `f3ab682`: correção multitouch, regressão e CI | Claude Code |
-| 2 | ChatGPT | IN_PROGRESS | PR #13 integrada; sequência de abertura/tutorial/W1-L1 em `feat/campaign-opening-tutorial`; CI pendente | ChatGPT |
+| 2 | ChatGPT | IN_PROGRESS | PR #13 integrada; sequência de abertura/tutorial/W1-L1 em `feat/campaign-opening-tutorial`; Godot CI #54 e Docs CI #173 SUCCESS (44 testes, 205 verificações, 0 falhas) | ChatGPT |
 | 3 | ChatGPT | Aguardando | Próxima unidade após revisão/validação da Etapa 2 | ChatGPT |
 
 ## Protocolo de início de turno
