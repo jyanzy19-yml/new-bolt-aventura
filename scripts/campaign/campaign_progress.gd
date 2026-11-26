@@ -58,7 +58,7 @@ func save_checkpoint(level_id: String, checkpoint_id: String) -> bool:
 	return _persist_state(state)
 
 
-func mark_level_completed(level_id: String) -> bool:
+func mark_level_completed(level_id: String, next_level_id: String = "") -> bool:
 	if level_id.is_empty():
 		last_error = "empty_level_id"
 		return false
@@ -69,7 +69,7 @@ func mark_level_completed(level_id: String) -> bool:
 	if not completed.has(level_id):
 		completed.append(level_id)
 	state["completed_level_ids"] = completed
-	state["current_level_id"] = level_id
+	state["current_level_id"] = next_level_id if not next_level_id.is_empty() else level_id
 	state["active_checkpoint_id"] = ""
 	return _persist_state(state)
 

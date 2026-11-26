@@ -1,11 +1,12 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` — HEAD `42b60c06615c1d1bd8059e315f34fcedcff04d81` (PR #31 integrada).  
-**Última entrega integrada:** fluxo Nova Jornada/Continuar, registro da entrada em W1-L1 e persistência existente de checkpoint/conclusão (PR #31; sobre PRs #28–#30).  
-**CI pós-merge PR #31:** Godot run `45862459941` SUCCESS — Godot 4.7.2, 66 testes, 404 verificações, 0 falhas. Docs run `45862459947` SUCCESS.  
-**Responsável atual:** ChatGPT, por decisão explícita do usuário; Claude não está no fluxo ativo.  
-**Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
+**Main HEAD:** `09afde26cc2bdb1126202dbfd413fa317f2a3e9d` — PR #33 integrada.  
+**Branch de trabalho:** `feat/w1-l2-energy-network-progression` — continuação da campanha W1-L1 → W1-L2; CI da branch ainda pendente nesta fotografia.  
+**Última entrega integrada:** expansão da diretriz de produção e correção do coletável de vida (PR #33).  
+**CI da PR #33:** Godot run `45866746478` SUCCESS — 66 testes, 404 verificações, 0 falhas; Docs run `45866747521` SUCCESS.  
+**Responsável atual:** ChatGPT, como único escritor ativo conforme a diretriz vigente do usuário.  
+**Estado do Gate 1:** EM ANDAMENTO — W1-L1 segue em blockout; W1-L2 foi iniciada como blockout com campo energético cíclico; nenhuma validação Android física foi executada.
 
 ## Estado executável observado
 
@@ -13,16 +14,16 @@
 |---|---|---|
 | Projeto Godot | Implementado | `project.godot`, Godot 4.7.2 fixado em `.godot-version` |
 | Android/paisagem | Configurado | Preset Android, orientação sensor landscape e política imersiva ADR-0003; exportação não executada |
-| Inicialização/menu | Implementado parcialmente | Boot e menu com Nova Jornada/Continuar integrados; Continuar limitado à W1-L1 existente. Fluxo aprovado em CI headless; validação visual/Android ainda pendente |
+| Inicialização/menu | Implementado parcialmente | Boot e menu com Nova Jornada/Continuar; retomada mapeia W1-L1 e W1-L2 quando a cena existe. A validação da nova rota aguarda CI desta branch; validação visual/Android pendente |
 | SceneFlow/loading | Implementado parcialmente | Carregamento threaded, bloqueio de transições concorrentes e sinais; headless |
 | Player/movimento | Implementado parcialmente | Corrida, salto variável, pulo duplo provisório, coyote, buffer e dash; parâmetros provisórios |
 | Touch/multitouch | Implementado parcialmente | Controles por ponteiro, liberação de ações e regressão de reatribuição de índice; eventos sintéticos |
 | Safe Area | Implementado parcialmente | Recalcula em resize/viewport e eventos de retomada/foco; comportamento real ainda não validado em Android |
 | HUD | Implementado parcialmente | HUD de sandbox, pausa e resultado; layout provisório |
 | Sandbox | Implementado | Cenário de desenvolvimento; **não é fase da campanha** |
-| Campanha | Em andamento | Abertura/tutorial jogável; W1-L1 Cybercore tem blockout, inimigo-base provisório, Pistola Crono, dano ao jogador e coletável de cura. Conteúdo e apresentação finais pendentes; nenhuma fase validada |
+| Campanha | Em andamento | Abertura/tutorial; W1-L1 em blockout com combate, checkpoint e persistência; W1-L2 em blockout com campo energético cíclico, checkpoint e objetivo. Conteúdo/arte/áudio finais e playtest humano pendentes |
 | Combate/inimigos/chefes | Em andamento | Pistola Crono, inimigo-base de patrulha provisório, vida/dano, invulnerabilidade, feedback visual de impacto e coletável de cura. Sem chefes, IA avançada ou arsenal completo |
-| Checkpoint/save | Em andamento | `SaveSystem` v1 + `CampaignProgress` v1 com checkpoint/conclusão, registro de entrada e reset explícito da campanha (PR #31). CI pós-merge: 66 testes/404 verificações; persistência após encerramento e em Android físico ainda não testada |
+| Checkpoint/save | Em andamento | `SaveSystem` v1 + `CampaignProgress` v1; checkpoint persistente em W1-L1 e W1-L2; conclusão de W1-L1 avança o destino salvo para W1-L2. Persistência após encerramento e em Android físico ainda não testada |
 | Assets finais/áudio | Não identificados como integrados | Placeholders de apresentação permanecem |
 
 ## Validação observada
@@ -40,7 +41,7 @@
 |---|---|---|---|
 | 0 | Claude Code | ACCEPTED | Fundação + protótipo provisório; hardening complementar PR #3 integrado |
 | 1 | ChatGPT | HANDOFF_READY | Correção de reatribuição de ponteiro, regressão e CI executando suíte |
-| 2 | ChatGPT | IN_PROGRESS | PR #13 integrada (`09317a2`); Godot CI #50 e Docs CI #167 SUCCESS; próxima unidade da vertical slice ainda em execução |
+| 2 | ChatGPT | IN_PROGRESS | PRs #13–#33 integradas; unidade atual na branch `feat/w1-l2-energy-network-progression`: transição W1-L1→W1-L2, retomada e blockout W1-L2; CI pendente |
 | 3 | ChatGPT | Aguardando | Próxima unidade após validação da Etapa 2 |
 
 Um único escritor por vez. Por decisão do usuário, ChatGPT conduz sozinho as próximas etapas; Claude permanece inativo no fluxo de escrita.
