@@ -1,3 +1,14 @@
+## Snapshot confirmado após PR #10 — 2026-11-26
+
+- **HEAD real da main:** `1e5294cf112c014c21e43c51b4c8e797beceb9b6` (commit `docs: finalize live-state continuity`; PR #10 integrada por squash).
+- **PRs #2–#10:** integradas; PR #1 permanece aberta, sem rebase, fechamento ou merge.
+- **PR #1 vs main:** 17 commits exclusivos, 139 commits atrás; comparação executada em 2026-11-26. Métrica volátil, não reutilizar sem novo compare.
+- **Estado do projeto:** Godot 4.7.2/GDScript, cenas/scripts/testes reais, Android empacotado em paisagem; fundação técnica, não campanha completa.
+- **Dash:** existe em Input Map, `BoltPlayer`, touch e testes; PR #1 o exclui. Não adicionar, remover ou retunar até decisão canônica explícita.
+- **Validação:** o status combinado consultado para este HEAD não retornou checks; a última execução documental confirmada permanece Docs CI run `45817363134` no commit anterior `caedfee2f790cc78222b281a5b602110d7229043`. Esta auditoria abrirá PR para nova execução documental. Godot CI mais recente com números detalhados continua sendo run `45809258952` no commit `4ecaff1d67049155d95bcbb5fc9d1c98187d3767` (42 testes, 171 verificações, 0 falhas).
+- **Limites:** nenhuma exportação APK, instalação, emulador, editor gráfico, toque físico, safe area em aparelho ou medição de FPS/RAM/temperatura foi executada nesta auditoria.
+- **Colaboração:** ChatGPT é o único escritor desta auditoria/branch. Claude Code não deve iniciar Etapa 2 até esta PR ser concluída e o handoff atualizado; depois disso, Claude é o próximo escritor.
+
 # BOLT · AVENTURA — Registro de continuidade entre sessões
 
 **Função:** handoff obrigatório para retomar trabalho após limite de contexto, troca de sessão ou interrupção.  
@@ -5,16 +16,16 @@
 
 ## Snapshot vigente — revisão de 2026-11-26
 
-- **Última verificação completa da main:** HEAD `caedfee2f790cc78222b281a5b602110d7229043` após merge da PR #9; Docs CI run `45817363134` SUCCESS. Confirmar o SHA real da main antes de iniciar, pois novos merges alteram o HEAD.
+- **Última verificação completa da main:** HEAD `1e5294cf112c014c21e43c51b4c8e797beceb9b6` após PR #10. O HEAD muda a cada integração; confirmar novamente antes de iniciar.
 - **PR #7 integrada:** merge `b8def7a22feee9573c8e4c46c99ed89cb92967c`; Docs CI #144 (PR) e #145 (push após merge) SUCCESS. A PR partiu do HEAD `75159132a7dc2503df68d8ca1abe57fc7e88019c`.
 - O projeto Godot executável existe na raiz: Godot **4.7.2**, `project.godot`, cenas, scripts GDScript, recursos e testes. Continuar a base existente; não recriar o projeto.
-- Etapa 0: **ACCEPTED**. Etapa 1: **HANDOFF_READY**. PRs #2–#7: **MERGED**.
+- Etapa 0: **ACCEPTED**. Etapa 1: **HANDOFF_READY**. PRs #2–#10: **MERGED**.
 - Próximo turno de gameplay: **Claude Code — Etapa 2**, somente depois da integração desta rodada e confirmação do HEAD atual pelo usuário/Claude.
 - **PR #1:** OPEN, `mergeable_state=dirty`; 17 commits exclusivos e 17 arquivos alterados; o compare de 2026-11-26 após PR #9 indicava 138 commits atrás. A contagem muda com cada merge; consultar o compare atual antes de qualquer rebase. Contém documentos de raiz e uma diretiva em 12 partes/índice; não contém implementação de gameplay. Preservada sem merge/fechamento.
 - **Dash:** código e testes atuais incluem Dash; a diretiva da PR #1 exclui. Decisão canônica não resolvida. Não adicionar, remover ou retunar a mecânica sem decisão explícita.
 - **Branch protection:** GitHub confirmou `protected=false` para `main`. A integração não oferece operação administrativa para ativar proteção/ruleset; o proprietário deve configurar manualmente. Como os workflows usam filtros por caminhos, não tornar checks condicionais obrigatórios sem um check agregador que sempre execute.
-- **Validação máxima comprovada:** L2 (Godot headless/CI). Docs CI #143 SUCCESS no HEAD anterior à rodada. Não há APK exportado/instalado, editor gráfico, emulador, toque físico, safe area em aparelho, FPS ou memória medidos.
-- **Escopo concluído pelo ChatGPT nesta rodada:** reconciliação documental, revisão estática focalizada, análise da PR #1 e atualização do handoff. PR #7 integrada sem alterações de gameplay. Claude Code é o próximo escritor da Etapa 2 após o usuário iniciar a sessão e confirmar o HEAD real.
+- **Validação máxima comprovada:** L2 (Godot headless/CI). Docs CI run #45817363134 SUCCESS no commit anterior `caedfee`; para o HEAD `1e5294c`, o status combinado consultado não retornou checks. Nova validação documental será disparada pela PR desta auditoria. Não há APK exportado/instalado, editor gráfico, emulador, toque físico, safe area em aparelho, FPS ou memória medidos.
+- **Escopo concluído pelo ChatGPT nesta rodada:** reconciliação documental, revisão estática focalizada, análise da PR #1 e atualização do handoff. PR #7–#10 integradas sem alterações de gameplay. Claude Code é o próximo escritor da Etapa 2 após o usuário iniciar a sessão e confirmar o HEAD real.
 
 O estado do repositório prevalece sobre handoffs antigos. Confirmar branch/HEAD/PRs antes de qualquer implementação.
 
