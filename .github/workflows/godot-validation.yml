@@ -76,6 +76,8 @@ jobs:
               echo "::error::${label} exited with status $command_status."
               return 1
             fi
+            # Expected diagnostics only: test_scene_flow.gd intentionally requests res://nao_existe.tscn;
+            # headless runners may also report missing ALSA audio hardware. All other errors fail CI.
             if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' "$log" | grep -vE 'SceneFlow: cena inexistente: res://nao_existe.tscn|audio_driver_alsa|ERR_CANT_OPEN.*audio'; then
               echo "::error::Unexpected Godot error in ${label}; see ${log}."
               return 1
@@ -83,7 +85,7 @@ jobs:
           }
 
           "$GODOT_BIN" --headless --editor --path . --import --quit 2>&1 | tee godot-import.log
-          if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' godot-import.log; then
+          if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' godot-import.log | grep -vE 'audio_driver_alsa|ERR_CANT_OPEN.*audio'; then
             echo "::error::Unexpected import/parse error."
             exit 1
           fi
@@ -127,7 +129,7 @@ jobs:
             exit 1
           fi
           "$GODOT_BIN" --headless --editor --path . --import --quit > godot-restore-import.log 2>&1
-          if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' godot-restore-import.log; then
+          if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' godot-restore-import.log | grep -vE 'audio_driver_alsa|ERR_CANT_OPEN.*audio'; then
             echo "::error::Restored source did not import cleanly after mutation verification."
             exit 1
           fi
