@@ -56,7 +56,7 @@ Validação máxima comprovada: L2 (Godot headless/CI). Não há APK exportado, 
 - Package ID `com.example.boltaventura` é placeholder; não inventar identificador definitivo.
 - Não declarar exportação, instalação ou validação Android sem evidência.
 - PR #1 permanece OPEN, `mergeable_state=dirty`, 17 commits exclusivos; o compare após PR #10 indica 139 commits atrás (fotografia de 2026-11-26; consultar novamente antes de rebasear); altera 17 arquivos documentais e não contém código de gameplay. Não mesclar automaticamente. Revisar cada um dos quatro documentos raiz e a diretiva em 12 partes; recuperar somente conteúdo compatível com as fontes aprovadas.
-- Dash existe no Input Map, em `BoltPlayer`, controles e testes; a diretiva proposta na PR #1 o exclui. A fonte canônica ainda não foi resolvida. Não adicionar, remover ou retunar até decisão explícita do usuário.
+- Dash existe no Input Map, em `BoltPlayer`, controles e testes; o usuário decidiu explicitamente em 2026-11-26 que deve permanecer. A exclusão na diretiva não integrada da PR #1 está superada. Preservar a mecânica; ver `../ADR-001-DASH.md`. Não remover ou retunar sem escopo próprio.
 - Um único escritor ativo. O usuário inicia Claude manualmente; não há transferência automática de sessão.
 
 ## 6. Próximo responsável e critério de transferência
