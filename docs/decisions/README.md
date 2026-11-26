@@ -6,6 +6,7 @@ Registre decisões que afetam canon, escopo, engine, arquitetura, plataformas, d
 - ADR-0001 — Android como plataforma-alvo.
 - ADR-0002 — Godot como direção de engine, versão ainda não fixada.
 - ADR-0003 — Política imersiva das barras do sistema Android.
+- ADR-0004 — Schema mínimo de progresso persistente da campanha.
 
 ## Como usar
 1. Criar o próximo número sequencial usando o template em ../templates/decision-record.md.
