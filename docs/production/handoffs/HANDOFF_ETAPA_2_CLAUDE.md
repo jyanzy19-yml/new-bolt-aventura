@@ -6,7 +6,7 @@
 **Repositório:** `jyanzy19-yml/new-bolt-aventura`  
 **Branch de integração:** `main`  
 **Commit-base confirmado:** `9d5381047817ac9fc949583f6645d24eadd88e8c` (HEAD da main após PR #4).  
-**Estado:** pronto para Claude iniciar após integração deste handoff.
+**Estado:** handoff integrado na PR #4; Claude pode iniciar após o usuário ativar a sessão e confirmar o HEAD atual.
 
 ## 1. O que já está integrado
 
