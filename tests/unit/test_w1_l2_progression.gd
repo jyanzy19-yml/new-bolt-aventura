@@ -22,20 +22,34 @@ func test_energy_gate_cycles_and_only_damages_while_active() -> bool:
 	player.global_position = Vector2(300.0, -24.0)
 	root.add_child(player)
 	root.add_child(gate)
-	await tree.process_frame
+	await tree.physics_frame
 	var health: BoltHealth = player.get_node("%Health") as BoltHealth
 	check(gate.is_active(), "campo começa ativo")
-	gate.call("_on_body_entered", player)
-	check_eq(health.current_health, 2, "campo ativo causa dano de contato")
+
+	# Usa o sinal body_entered real da Area2D, não chama o handler diretamente.
+	player.global_position = Vector2(0.0, -24.0)
+	for _tick in range(3):
+		await tree.physics_frame
+	check_eq(health.current_health, 2, "contato físico com o campo ativo causa dano")
+
 	player.respawn(Vector2(300.0, -24.0))
 	gate.call("_on_cycle_timeout")
+	await tree.physics_frame
 	check(not gate.is_active(), "primeiro ciclo abre uma janela inativa")
-	gate.call("_on_body_entered", player)
-	check_eq(health.current_health, 3, "campo inativo não causa dano")
+	player.global_position = Vector2(0.0, -24.0)
+	for _tick in range(3):
+		await tree.physics_frame
+	check_eq(health.current_health, 3, "contato físico com o campo inativo não causa dano")
+
+	player.global_position = Vector2(300.0, -24.0)
+	await tree.physics_frame
 	gate.call("_on_cycle_timeout")
+	await tree.physics_frame
 	check(gate.is_active(), "segundo ciclo reativa o campo")
-	gate.call("_on_body_entered", player)
-	check_eq(health.current_health, 2, "campo reativado volta a causar dano")
+	player.global_position = Vector2(0.0, -24.0)
+	for _tick in range(3):
+		await tree.physics_frame
+	check_eq(health.current_health, 2, "contato físico volta a causar dano após reativação")
 	root.queue_free()
 	await tree.process_frame
 	return true
