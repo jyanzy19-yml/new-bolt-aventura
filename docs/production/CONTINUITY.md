@@ -731,3 +731,10 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Mutação adicional: referências diretas CampaignProgress/SaveSystem com prewarm não reproduziram o erro; os helpers exploratórios foram revertidos.
 - **PR #58:** OPEN, mergeable, não integrada. Não houve merge automático.
 - **Limitações:** Android Debug Export foi cancelado neste run; não há APK, emulador ou dispositivo físico testado. Não afirmar FPS, RAM, touch, térmica ou desempenho Android.
+
+
+### Atualização final do Android Debug Export — PR #58
+
+- No head atual da PR #58, Android Debug Export run 45907688455 terminou SUCCESS: Godot exportou o APK debug, verificou o arquivo/proveniência e fez upload do artefato.
+- O cancelamento mencionado anteriormente referia-se somente ao run #190, substituído pela execução bem-sucedida #191.
+- Nenhum aparelho físico ou emulador foi usado; não afirmar validação Android em runtime, FPS, memória, touch ou térmica.
