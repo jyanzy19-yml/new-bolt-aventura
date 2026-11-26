@@ -27,12 +27,14 @@
 - **Governança da main:** o endpoint de branches confirmou `protected=false` para `main`. A integração não disponibiliza operação administrativa para habilitar proteção/ruleset; o proprietário deve configurar as regras manualmente. Não presumir checks obrigatórios antes de resolver os filtros por caminhos dos workflows.
 - **Escritor desta rodada:** ChatGPT, único escritor ativo conforme a diretriz vigente do usuário; PR #34 integrada à main. Criar uma nova branch para a próxima unidade após confirmar o estado pós-merge.
 
-## Estado por etapa
+## Estado por etapa — protocolo legado 0–3
+
+**Nota vigente:** este quadro preserva o histórico do antigo fluxo de handoff. A sequência operacional atual é o plano de 26 etapas em `stage-status.md`; ChatGPT permanece como único escritor ativo. Não existe handoff pendente para Claude.
 
 | Etapa | Responsável | Estado | Evidência/entrega | Próximo responsável |
 |---|---|---|---|---|
 | 0 | Claude Code | ACCEPTED | Fundação e protótipo provisório; hardening PR #3 integrado | ChatGPT |
-| 1 | ChatGPT | HANDOFF_READY | `f3ab682`: correção multitouch, regressão e CI | Claude Code |
+| 1 | ChatGPT | HANDOFF_READY (histórico) | `f3ab682`: correção multitouch, regressão e CI | ChatGPT |
 | 2 | ChatGPT | IN_PROGRESS | PR #34 integrada (`c10ca69`); rota W1-L1→W1-L2, retomada e blockout W1-L2. CI Godot pré/pós-merge 69 testes/439 verificações/0 falhas; Docs CI SUCCESS | ChatGPT |
 | 3 | ChatGPT | Aguardando | Próxima unidade após revisão/validação da Etapa 2 | ChatGPT |
 
