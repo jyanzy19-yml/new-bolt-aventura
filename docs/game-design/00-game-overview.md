@@ -7,7 +7,7 @@
 - Plataforma-alvo: aplicativo Android empacotado.
 - Orientação: paisagem.
 - Hardware de referência: Android com aproximadamente 4 GB de RAM e MediaTek Helio G99 ou inferior.
-- Estado: projeto executável Godot existente, com menu, abertura, tutorial, sistemas iniciais de combate e W1-L1 em blockout. Consultar `docs/production/stage-status.md` e `docs/production/CONTINUITY.md` para estado real atualizado.
+- Estado: projeto executável Godot existente, com menu, abertura, tutorial, sistemas iniciais de combate e W1-L1/W1-L2 em blockout. Consultar `docs/production/stage-status.md` e `docs/production/CONTINUITY.md` para estado real atualizado.
 
 ## 2. Premissa central consolidada
 Um robô desperta em um mundo destruído e encontra uma máquina temporal que se une a ele. A máquina, chamada NEXO, permite viajar entre eras e mundos. A missão é recuperar um fragmento em cada um dos sete mundos; cada fragmento é protegido pelo guardião ao final do mundo e está ligado ao mistério da máquina temporal e ao equilíbrio dos universos. O Grande Colapso rompeu o Núcleo da Eternidade. O antagonista central, o Arquiteto, busca impor uma única realidade. BOLT foi criado para preservar os universos.

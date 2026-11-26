@@ -1,4 +1,4 @@
-# Fundação do projeto Godot — estado real (Etapa 0)
+# Fundação do projeto Godot — estado real (baseline técnico atual)
 
 **Escopo:** descreve o projeto Godot que **existe** no repositório. Complementa os princípios de [00-architecture-principles.md](00-architecture-principles.md) e os contratos de [05-system-contracts.md](05-system-contracts.md). Tudo marcado como **provisório** é decisão técnica reversível, não canon, e precisa de medição em aparelho Android antes de ser congelada.
 
@@ -9,7 +9,7 @@
 | Godot | **4.7.2 estável** (`4.7.2.stable.official.ed1daf0bf`) | `.godot-version`; `--headless --version` executado no ambiente de desenvolvimento |
 | Renderer | **GL Compatibility** (desktop e mobile) | Decisão técnica provisória. Justificativa: jogo 2D, menor sobrecarga e maior compatibilidade em GPUs Android modestas (Mali-G57 do Helio G99). **Não medido em aparelho.** Reavaliar Mobile/Vulkan só com medição (ADR futura) |
 | Linguagem | GDScript tipado | ADR-0002 |
-| Export templates | **Não instalados** no ambiente de desenvolvimento | Exportação Android **não executada** (ver §7) |
+| Export templates | O ambiente local de desenvolvimento pode não ter templates instalados; o workflow Android CI baixa os templates compatíveis com Godot 4.7.2 | Exportação Android debug **executada em CI** (ver §7); exportação local/editor gráfico não comprovada |
 
 O CI (`.github/workflows/godot-validation.yml`) baixa exatamente a versão de `.godot-version`. Atualizar a versão exige alterar esse arquivo, rodar os testes e registrar a mudança.
 
@@ -39,7 +39,7 @@ Fonte única dos nomes: `scripts/input/actions.gd` (`class_name Actions`). Tecla
 | `move_left` / `move_right` | A/← · D/→ | |
 | `jump` | Espaço · W · ↑ | |
 | `dash` | Shift · K | Dash é habilidade obrigatória aprovada |
-| `attack` | J | Reservada (ataque básico aprovado); sem consumidor ainda |
+| `attack` | J | Consumida pelo `BoltCombat` para Pistola Crono básica; valores provisórios |
 | `interact` | E | Reservada |
 | `pause` | Esc · P | |
 
@@ -48,18 +48,27 @@ Não há bindings de gamepad (não aprovados). `Actions.release_all_game_actions
 ## 6. Estrutura e autoloads
 
 ```
-project.godot  .godot-version  export_presets.cfg  icon.svg (placeholder)
-scenes/boot/        cena de entrada (valida o contrato de input e abre o menu)
-scenes/ui/          menus e HUD
-scripts/core/       fluxo da aplicação (boot, SceneFlow)
-scripts/input/      contrato de ações do Input Map
-scripts/ui/         scripts de interface (menu, SafeAreaMargin)
-tests/              runner headless + testes unitários (tests/unit/test_*.gd)
+project.godot / .godot-version / export_presets.cfg / icon.svg (placeholder)
+scenes/
+  boot/       entrada do app
+  ui/         menu, HUD e loading overlay
+  campaign/   W1-L1 e W1-L2 (blockouts)
+  tutorial/   tutorial guiado
+  player/     BOLT
+  combat/     projétil, pickup e alvo de treino
+  enemies/    inimigo-base Cybercore
+  levels/     sandbox, checkpoint e campo energético
+  world/      plataforma sólida, móvel e unidirecional
+scripts/
+  core/ campaign/ combat/ enemies/ input/ levels/ player/ tutorial/ ui/ world/
+resources/player/  BoltTuning provisório
+tests/              runner headless + testes unitários
+docs/               design, technical, production, QA e ADRs
 ```
 
-Diretórios para player, inimigos, mundos etc. serão criados **quando houver conteúdo real**, não antes. Nenhuma das 42 fases existe como cena.
+A árvore atual contém 19 cenas e 30 scripts de runtime. W1-L1 e W1-L2 existem em blockout/protótipo; as outras 40 fases planejadas ainda não existem como cenas. A sandbox continua fora da campanha.
 
-**Autoload único:** `SceneFlow` (contrato Scene Flow → Loading): carregamento real em thread (`ResourceLoader.load_threaded_*`), sinais `transition_started/finished/failed`, bloqueio de transições simultâneas, soltura de ações ao trocar de cena. Sem espera artificial.
+**Autoloads atuais:** `SceneFlow`, `SaveSystem`, `CampaignProgress` e `LoadingOverlay` (cena CanvasLayer). `SceneFlow` faz carregamento threaded (`ResourceLoader.load_threaded_*`), emite `transition_started/finished/failed`, bloqueia transições concorrentes e limpa ações; `LoadingOverlay` apresenta estado/progresso real; `SaveSystem` e `CampaignProgress` mantêm persistência e progressão separadas.
 
 ## 7. Verificação executada e limites
 
@@ -71,9 +80,7 @@ godot --headless --path . --script res://tests/test_runner.gd     # exit 0 = pas
 godot --headless --path . --fixed-fps 60 --quit-after 300         # smoke da cena principal; conferir o log
 ```
 
-O runner foi validado com falha proposital (exit code 1) antes de ser considerado confiável. Também falha se não descobrir testes ou não executar verificações, evitando CI verde com suíte vazia. **O que isto prova:** o projeto importa, os scripts compilam, as cenas instanciam, o Input Map e as configurações declaradas coincidem com a decisão, e o `SceneFlow` troca de cena. **O que isto não prova:** renderização, toque real, multitouch, barras do sistema, desempenho, memória, exportação ou instalação no Android.
-
-Exportação Android: tentativa de `--export-debug` falha neste ambiente por ausência de Android SDK (`build-tools`/`apksigner`) e de export templates. Estado: **NÃO EXECUTADO/BLOQUEADO pelo ambiente**; nenhum APK existe.
+O runner foi validado com falha proposital (exit code 1) e falha se não descobrir testes ou não executar verificações. **Evidência atual pós-merge PR #47:** Godot 4.7.2; 88 testes/553 verificações/0 falhas; teste de compilação de scripts (53 verificações) e carregamento/instanciação de cenas (39 verificações). Android Debug Export CI SUCCESS; APK 28.461.057 bytes, assinatura v2/v3 válida, SHA-256 `c3ca03958eecf120f1a9f5f1e4fae3851fb7560bca303c8eb5a930f987b58123`; artifact `bolt-aventura-android-debug-2636226c4027625649e66c51ff64d7e2e56168a6`. **O que isto prova:** import/parse headless, testes, carregamento/instanciação de cenas e exportação debug no runner CI. **O que isto não prova:** renderização visual em aparelho, toque físico, barras/safe area, desempenho, memória, lifecycle Android ou instalação/uso no dispositivo.
 
 ## 8. Decisões pendentes do usuário
 
@@ -82,19 +89,21 @@ Exportação Android: tentativa de `--export-debug` falha neste ambiente por aus
 3. Renderer final após medição em aparelho (hoje GL Compatibility, provisório).
 4. Arquiteturas ABI além de `arm64-v8a`, se houver aparelhos 32-bit na meta.
 
-## 9. Base de gameplay da Etapa 0 (adição a pedido do usuário — PROVISÓRIO)
+## 9. Base de gameplay atual — evolução desde a Etapa 0
 
-A ordem de execução do usuário pediu, além da fundação, movimento, câmera, controles touch, HUD e um primeiro nível funcional. Isto **excede** o §5 do `ETAPA_0_CLAUDE_CHECKLIST.md` (que proíbe antecipar gameplay); o conflito é registrado no handoff. Seguiu-se a ordem do usuário; os itens abaixo estão como "Em andamento", não "Implementado".
+A tabela descreve componentes existentes, não a conclusão da vertical slice. Os parâmetros de movimento/combate permanecem provisórios; W1-L1/W1-L2 continuam blockouts e a sandbox não é fase de campanha.
 
-| Peça | Arquivos | Notas |
+| Sistema | Arquivos / cenas | Estado real |
 |---|---|---|
-| Buffer de ações | `scripts/input/action_buffer.gd` | Idade medida em **ticks de física** (tempo de jogo), não em relógio: um pico de quadros não expira um toque válido. Janela 0,12 s (provisória) |
-| Touch | `scripts/input/touch_controls.gd`, `touch_button.gd` | Rastreio por dedo; ação solta só quando nenhum dedo a segura; deslize entre ←/→; soltura em pausa, perda de foco, ocultação, cancelamento |
-| Entrada imediata | `scripts/core/scene_flow.gd` | `Input.use_accumulated_input = false`: com acúmulo, `Input.parse_input_event` só valia 1 quadro depois (latência extra no toque). Há teste de regressão |
-| Jogador | `scripts/player/bolt_player.gd`, `bolt_tuning.gd`, `resources/player/bolt_tuning_provisional.tres`, `scenes/player/bolt.tscn` | Todos os números de `BoltTuning` são **provisórios**; visual = polígonos placeholder |
-| Sandbox | `scenes/levels/sandbox/movement_sandbox.tscn`, `scripts/levels/movement_sandbox.gd`, `scenes/world/platform_block.tscn` | **Cenário de desenvolvimento, NÃO é fase da campanha** (sem ID W#-L#); serve para exercitar o movimento |
-| HUD | `scripts/ui/hud.gd`, `scenes/ui/hud.tscn` | Botões touch, pausa, resultado, safe area. Layout provisório |
+| Input / buffer | Actions, ActionBuffer, TouchControls, TouchButton | Ações lógicas, multitouch, cancelamento, limpeza em pause/foco/transição; toque físico ainda não validado |
+| Player / movimento | BoltPlayer, BoltTuning, bolt.tscn | Corrida, salto, pulo duplo provisório, coyote, buffer e Dash; valores provisórios, visual placeholder |
+| Combate | BoltHealth, BoltCombat, ChronoProjectile, BoltTrainingTarget | Pistola Crono básica, vida/dano, alvo de treino; arsenal e balanceamento incompletos |
+| Campanha | cybercore_w1_l1.tscn, cybercore_w1_l2.tscn, CampaignProgress | W1-L1/W1-L2 em blockout; checkpoints e progressão persistente; não são fases finais |
+| Obstáculos | PlatformBlock, MovingPlatform, OneWayPlatform, TimedEnergyGate, BoltCheckpoint, pickups | Componentes reutilizáveis e testes; integração/posicionamento segue design da fase |
+| Persistência | SaveSystem, CampaignProgress | JSON versionado v1, backup/recuperação e progressão; QA Android lifecycle pendente |
+| UI / loading | Menu, HUD, LoadingOverlay, SafeAreaMargin | Nova Jornada/Continuar, pausa, resultado, loading e safe area; UX final e teste em aparelho pendentes |
+| Sandbox | movement_sandbox.tscn | Ambiente de desenvolvimento, fora da campanha |
 
-Armadilha encontrada: identificador de autoload usado diretamente em script compilado durante `load_threaded` causou erro de parse intermitente; scripts de UI resolvem `/root/SceneFlow` em tempo de execução (0/40 falhas de boot após a correção).
+O projeto tem quatro autoloads: SceneFlow, SaveSystem, CampaignProgress e LoadingOverlay. O Input Map attack é consumido por BoltCombat; interact permanece reservado. Não há bindings de gamepad aprovados. O inventário de comandos do protótipo HTML legado (Blast, Voar e seleção de armas) está em reconciliação no GAP-021 e não deve ser presumido como removido ou reintroduzido.
 
-Evidência (Godot 4.7.2 headless, Linux): suíte `tests/test_runner.gd` = 41 testes, 167 verificações, 0 falhas; 5 mutações deliberadas foram detectadas pelos testes; laço de boot 20× sem erros; um bot com entrada sintética completa a sandbox sem quedas. **Não prova** sensação de controle, renderização, toque físico, barras do Android, FPS, memória ou exportação.
+Evidência atual: PR #47 pós-merge, Godot 4.7.2, 88 testes/553 verificações/0 falhas; Android debug export CI SUCCESS. Isso não prova sensação de controle, renderização, toque físico, barras do Android, FPS, memória, instalação ou lifecycle em aparelho.

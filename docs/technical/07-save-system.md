@@ -2,7 +2,7 @@
 
 ## Escopo desta entrega
 
-`SaveSystem` é uma camada de armazenamento local de baixo nível. Ela não define o modelo de campanha, IDs de progressão, política de autosave ou quando um checkpoint deve ser persistido. Esses dados pertencem aos sistemas de domínio que ainda serão integrados.
+`SaveSystem` é uma camada de armazenamento local de baixo nível. Ela não define o modelo de campanha, IDs de progressão, política de autosave ou quando um checkpoint deve ser persistido. O domínio CampaignProgress já prepara e consome o payload de campanha; outros domínios (inventário, fragmentos, opções e economia) ainda não estão integrados.
 
 ## Contrato
 
@@ -21,11 +21,11 @@
 
 ## Propriedade e integração
 
-O sistema recebe um Dictionary já preparado pelo produtor de estado. Não mantém referências a Nodes nem conhece player, HUD, fase ou inventário. O modelo de campanha deve definir seus campos e IDs estáveis antes de conectar checkpoints e progressão a este serviço.
+O sistema recebe um Dictionary já preparado pelo produtor de estado. Não mantém referências a Nodes nem conhece player, HUD, fase ou inventário. CampaignProgress define os campos/IDs estáveis e integra checkpoints e progressão em W1-L1/W1-L2 (ADR-0004 e ADR-0006). SaveSystem permanece agnóstico a esses campos.
 
 ## Limites conhecidos
 
 - Não há migração de versões anteriores: a versão 1 é a primeira versão de envelope; mudanças futuras exigem migração explícita e testes.
-- A camada está conectada ao domínio CampaignProgress em W1-L1 (ADR-0004). Sandbox e demais fases ainda não estão integradas; não declarar persistência global da campanha concluída.
+- A camada está conectada ao domínio CampaignProgress em W1-L1 e W1-L2 (ADR-0004/0006). Sandbox e as outras 40 fases planejadas ainda não estão integradas; não declarar persistência global da campanha concluída.
 - CI headless valida o contrato de arquivo em ambiente de teste; não substitui teste de interrupção do processo, permissões, armazenamento e comportamento em Android físico.
 - O teste usa um caminho isolado `user://bolt_save_test.json`; não toca no slot de produção.

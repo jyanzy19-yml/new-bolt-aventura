@@ -10,18 +10,20 @@ O payload raiz de SaveSystem contém a chave campaign_progress:
 
 - campaign_id: main
 - schema_version: 1
-- current_level_id: string, atualmente W1-L1
+- current_level_id: string; vazio no estado padrão de campanha nova e W1-L1/W1-L2 após entrada/progressão
 - active_checkpoint_id: string estável ou vazia
 - completed_level_ids: array de strings sem duplicatas
 
-A estrutura e a política estão registradas em ADR-0004.
+A estrutura base está em ADR-0004; a extensão W1-L1→W1-L2 está registrada em ADR-0006.
 
 ## Eventos persistidos
 
-- BoltCheckpoint.activated na W1-L1 chama CampaignProgress.save_checkpoint("W1-L1", checkpoint_id).
-- Ao reentrar em W1-L1, o ID salvo é comparado com o checkpoint existente. Se corresponder, o indicador é restaurado e BOLT nasce no ponto de retorno. A restauração não reemite activated.
-- O objetivo chama CampaignProgress.mark_level_completed("W1-L1"), adiciona o ID uma única vez e limpa o checkpoint ativo.
-- A conclusão não carrega W1-L2; essa fase ainda não existe.
+- BoltCheckpoint.activated em W1-L1 chama CampaignProgress.save_checkpoint("W1-L1", checkpoint_id).
+- Ao reentrar em W1-L1, o ID salvo é comparado com o checkpoint existente; se corresponder, a ativação é restaurada e BOLT nasce no ponto de retorno, sem reemitir activated.
+- O objetivo de W1-L1 chama CampaignProgress.mark_level_completed("W1-L1", "W1-L2"), registra a conclusão e define W1-L2 como destino salvo. A transição ocorre pela ação PRÓXIMA FASE, não automaticamente.
+- W1-L2 chama begin_level("W1-L2"), possui checkpoint próprio e persiste sua ativação no mesmo domínio.
+- O objetivo de W1-L2 chama mark_level_completed("W1-L2") sem próximo ID. current_level_id permanece W1-L2; W1-L3 não existe e não é inferida.
+- O menu Continuar só habilita W1-L1 ou W1-L2 quando o ID está no mapa de cenas e a PackedScene existe.
 
 ## Falhas e validação
 

@@ -6,7 +6,7 @@ Todo personagem deve ter função narrativa, função de gameplay ou ambas. Silh
 ## 2. Protagonista — BOLT
 **Confirmado:** protagonista robô que desperta em um mundo destruído e se une a uma máquina temporal.
 
-**A definir/recuperar:** nome completo e origem; aparência final; personalidade; voz ou ausência de voz; motivações específicas; limitações; relações; arco emocional; expressões e animações canônicas.
+**A definir/recuperar:** nome completo e origem técnica específica/circunstâncias de criação; aparência final; personalidade; voz ou ausência de voz; motivações específicas; limitações; relações; arco emocional; expressões e animações canônicas. A função original de BOLT ligada à preservação dos universos já é canon e não deve ser tratada como lacuna.
 
 ### Ficha de personagem
 - ID estável e nome aprovado:

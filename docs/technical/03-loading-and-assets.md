@@ -29,7 +29,7 @@ Medir tempo de entrada, pico de memória, frame time após transição e primeir
 
 - `SceneFlow` faz `ResourceLoader.load_threaded_request()`, publica progresso disponível e impede transições concorrentes.
 - O autoload `LoadingOverlay` acompanha `transition_started`, `transition_finished` e `transition_failed`; permanece acima das cenas, captura input GUI/touch e apresenta estado/progresso real.
-- A unidade `fix/scene-flow-input-lock` também pausa a SceneTree e oculta os controles touch durante a transição, para impedir ações de gameplay via teclado/touch; a retomada ocorre após `scene_changed`, e falha restaura o estado de pausa anterior.
+- A PR #42 integrou o input lock: pausa a SceneTree e oculta os controles touch durante a transição, para impedir ações de gameplay via teclado/touch; a retomada ocorre após `scene_changed`, e falha restaura o estado de pausa anterior.
 - A porcentagem só aparece quando o `ResourceLoader` fornece progresso real. Sem esse dado, a interface mostra apenas estado de carregamento, sem estimativa inventada.
 - O overlay não força duração mínima. Se o recurso carregar rápido, a transição termina rápido; se houver trabalho real, a interface permanece visível até sucesso/falha.
 - **Pendências:** cancelamento explícito, política de preload, descarregamento seletivo e medições de tempo/memória/frame time em Android físico.

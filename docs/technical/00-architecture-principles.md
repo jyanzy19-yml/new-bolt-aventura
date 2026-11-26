@@ -1,14 +1,9 @@
 # Arquitetura técnica — princípios para Godot
 
 ## 1. Estado e descoberta
-A direção do projeto é Godot 2D, mas este repositório ainda não comprova a versão instalada nem contém, por si só, um projeto executável. Antes de implementar:
-1. procurar project.godot e ler config/features;
-2. verificar renderer, resolução, orientação e configurações de input;
-3. identificar versão exata do editor, runtime e export templates;
-4. inspecionar estrutura existente e documentos aprovados;
-5. registrar o que está confirmado e o que é hipótese.
+**Estado atual confirmado:** o repositório contém projeto Godot executável, project.godot, .godot-version = 4.7.2, cenas, scripts, Resources, testes e pipeline de exportação Android debug via CI. Antes de cada implementação, reconfirmar o HEAD e inspecionar os arquivos/consumidores reais, porque este estado evolui por PR. Ver technical/06-godot-project-foundation.md e production/stage-status.md.
 
-Não criar uma estrutura de diretórios definitiva antes dessa auditoria.
+A sequência de auditoria continua obrigatória para qualquer mudança: verificar renderer, resolução, orientação, Input Map, versão do editor/runtime/templates, autoloads, estrutura e documentos aprovados; separar fatos, hipóteses e decisões provisórias. Não criar estrutura definitiva ou migrar módulos por preferência.
 
 ## 2. Princípios de arquitetura
 - Separar regras de gameplay, apresentação, input, UI e persistência.

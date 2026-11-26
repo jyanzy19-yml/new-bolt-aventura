@@ -1,11 +1,11 @@
 ## Snapshot vigente — 2026-11-26
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
-- **Main HEAD após PR #48:** `e2e4f68b5b21c584c33eba739845adc3c685965e`; PR #48 adicionou e indexou a matriz de rastreabilidade das 26 etapas.
+- **Main HEAD após PR #49:** `d03cd744b2354bd9711894eab431dbc6912ca9d3`; PR #48 adicionou a matriz das 26 etapas e PR #49 reconciliou snapshots e prioridade operacional.
 - **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético e progressão W1-L1→W1-L2.
 - **Última correção de gameplay:** PR #47 — estado inicial `initial_active=false` do `TimedEnergyGate`, merge `2636226c4027625649e66c51ff64d7e2e56168a6`.
 - **Último componente de plataforma:** PR #46 — `OneWayPlatform`, merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`; PR #45 adicionou `MovingPlatform`.
-- **Última unidade documental:** PR #48 — `docs/production/26-stage-traceability-matrix.md`, Docs CI pré/pós-merge SUCCESS.
+- **Última unidade documental:** PR #49 — reconciliação de continuidade, colaboração, tracker e diretriz mestra; Docs CI pré/pós-merge SUCCESS. PR #48 integrou a matriz de 26 etapas.
 - **Escritor ativo:** ChatGPT como único escritor, por decisão explícita do usuário; Claude permanece inativo para escrita concorrente.
 - **Etapas operacionais:** Etapa 01 CONCLUÍDA como auditoria estática; Etapa 02 EM DESENVOLVIMENTO (revisão requisito-a-requisito); etapas 03–26 conforme `stage-status.md`. Gate 1 continua em andamento.
 - **CI pós-merge PR #46:** Godot `45888110305`, Docs `45888110285`, Android Export `45888110166`: SUCCESS; 87 testes/548 verificações/0 falhas.
@@ -14,7 +14,7 @@
 - **PR #1:** continua OPEN, antiga e divergente; não mesclar/rebasear automaticamente. Revisar o diff inteiro e reconciliar documentos raiz antes de qualquer decisão.
 - **Dash:** decisão canônica aprovada e vigente; deve permanecer conforme `docs/production/ADR-001-DASH.md`.
 - **Limites:** W1-L1/W1-L2 continuam blockouts. APK debug exportado, mas não instalado em aparelho. Toque físico, safe area, barras, lifecycle, profiling e performance Android permanecem pendentes.
-- **Próximo passo:** concluir a revisão de requisitos da Etapa 02 usando a matriz, reconciliar lacunas e classificações de canon/proposta; depois selecionar a próxima unidade técnica que avance a vertical slice existente, sem reiniciar o projeto nem repetir PRs já integradas.
+- **Próximo passo:** concluir a revisão de requisitos da Etapa 02 usando a matriz e o registro GAP-001…GAP-022 (em branch `docs/requirements-gap-register`), atribuir owners e classificar canon/propostas; depois selecionar a próxima unidade técnica que avance a vertical slice existente, sem reiniciar o projeto nem repetir PRs já integradas.
 
 ---
 
