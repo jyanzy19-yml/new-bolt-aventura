@@ -19,10 +19,9 @@ var _busy: bool = false
 
 func _ready() -> void:
 	set_process(false)
-	# Entrada sem acúmulo: com o acúmulo ligado (padrão), `Input.parse_input_event` — usado pelos
-	# controles touch para virar ações — só aplica o estado no QUADRO SEGUINTE (~16 ms a 60 FPS de
-	# latência extra, medido em headless). Desligado, o estado muda na hora. Custo: mais eventos de
-	# arrasto por quadro (irrelevante: só botões). Impacto em aparelho real NÃO medido.
+	# Entrada sem acúmulo: os controles touch convertem eventos em ações via
+	# Input.parse_input_event. Isso evita depender do acúmulo para propagar a borda do evento.
+	# Custo e latência devem ser medidos em Android físico; testes headless não medem latência real.
 	Input.use_accumulated_input = false
 
 

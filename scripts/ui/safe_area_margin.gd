@@ -25,8 +25,20 @@ static func compute_insets(screen_size: Vector2i, safe_rect: Rect2i, window_size
 
 
 func _ready() -> void:
-	get_window().size_changed.connect(_apply_safe_area)
+	var window: Window = get_window()
+	if not window.size_changed.is_connected(_apply_safe_area):
+		window.size_changed.connect(_apply_safe_area)
+	var viewport: Viewport = get_viewport()
+	if not viewport.size_changed.is_connected(_apply_safe_area):
+		viewport.size_changed.connect(_apply_safe_area)
 	_apply_safe_area()
+
+
+func _notification(what: int) -> void:
+	# Insets podem mudar após suspensão/retomada ou mudança de orientação sem alteração
+	# perceptível no tamanho lógico da janela. Recalcular ao recuperar foco evita margens antigas.
+	if what == NOTIFICATION_APPLICATION_RESUMED or what == NOTIFICATION_APPLICATION_FOCUS_IN or what == NOTIFICATION_WM_WINDOW_FOCUS_IN:
+		_apply_safe_area()
 
 
 func _apply_safe_area() -> void:

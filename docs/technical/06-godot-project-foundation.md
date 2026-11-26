@@ -71,7 +71,7 @@ godot --headless --path . --script res://tests/test_runner.gd     # exit 0 = pas
 godot --headless --path . --fixed-fps 60 --quit-after 300         # smoke da cena principal; conferir o log
 ```
 
-O runner foi validado com falha proposital (exit code 1) antes de ser considerado confiável. **O que isto prova:** o projeto importa, os scripts compilam, as cenas instanciam, o Input Map e as configurações declaradas coincidem com a decisão, e o `SceneFlow` troca de cena. **O que isto não prova:** renderização, toque real, multitouch, barras do sistema, desempenho, memória, exportação ou instalação no Android.
+O runner foi validado com falha proposital (exit code 1) antes de ser considerado confiável. Também falha se não descobrir testes ou não executar verificações, evitando CI verde com suíte vazia. **O que isto prova:** o projeto importa, os scripts compilam, as cenas instanciam, o Input Map e as configurações declaradas coincidem com a decisão, e o `SceneFlow` troca de cena. **O que isto não prova:** renderização, toque real, multitouch, barras do sistema, desempenho, memória, exportação ou instalação no Android.
 
 Exportação Android: tentativa de `--export-debug` falha neste ambiente por ausência de Android SDK (`build-tools`/`apksigner`) e de export templates. Estado: **NÃO EXECUTADO/BLOQUEADO pelo ambiente**; nenhum APK existe.
 

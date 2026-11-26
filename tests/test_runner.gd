@@ -16,6 +16,12 @@ var _tests: int = 0
 func _initialize() -> void:
 	await process_frame  # a raiz só entra na árvore no primeiro frame
 	await _run_all()
+	if _tests == 0:
+		_failed_tests += 1
+		push_error("FAIL: nenhum teste foi descoberto em %s; recusando resultado verde vazio." % UNIT_DIR)
+	if _checks == 0:
+		_failed_checks += 1
+		push_error("FAIL: nenhum check foi executado; a suíte não validou comportamento.")
 	print("RESULT: %d testes, %d verificações, %d testes com falha, %d verificações falhas"
 			% [_tests, _checks, _failed_tests, _failed_checks])
 	quit(1 if _failed_tests > 0 or _failed_checks > 0 else 0)
