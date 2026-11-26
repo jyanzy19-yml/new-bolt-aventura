@@ -14,7 +14,7 @@ enum Step { INTRO, MOVE, JUMP, DASH, ATTACK, COMPLETE }
 @onready var _speech: Label = %SpeechLabel
 @onready var _start_button: Button = %StartButton
 @onready var _target: BoltTrainingTarget = %TrainingTarget
-@onready var _combat: BoltCombat = %Bolt/Combat
+@onready var _combat: BoltCombat = _player.get_node("Combat") as BoltCombat
 
 var _step: Step = Step.INTRO
 var _spawn_position: Vector2 = Vector2.ZERO
