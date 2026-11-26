@@ -521,3 +521,12 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Nova hipótese em teste: o recurso GDScript do menu precisa ser compilado/carregado na thread principal antes de SceneFlow solicitar a PackedScene em thread. Boot agora faz load() de main_menu.gd e só então inicia a transição threaded.
 - A matriz de mutações foi atualizada para comparar: remoção do prewarm; autoloads diretos com prewarm; combinação original sem prewarm + autoloads diretos.
 - Estado permanece PENDENTE até 20/20 boots e logs de mutação válidos.
+
+
+### Evidência da causa raiz — Godot Validation #183
+
+- A implementação com prewarm do script na thread principal passou **20/20 boots frios** e a suíte passou **93 testes / 1.307 verificações / 0 falhas**.
+- A matriz de mutações demonstrou: remover o prewarm reproduz o erro de parse em main_menu.tscn; restaurar referências diretas a CampaignProgress/SaveSystem com o prewarm mantido NÃO reproduz.
+- **Causa raiz confirmada:** a primeira compilação/carga do script main_menu.gd dentro do carregamento threaded da PackedScene falha no cold boot Godot 4.7.2. O script deve ser carregado/compilado na thread principal antes da solicitação threaded da cena. As referências diretas aos autoloads não são a causa independente.
+- Removidas as alterações runtime-only de menu/W1/HUD, pois a mutação demonstrou que não eram necessárias. Preservado o código original dessas cenas; permanece apenas o prewarm em Boot.
+- **Revalidação final pendente** após a restauração dos scripts originais e simplificação da mutação CI.
