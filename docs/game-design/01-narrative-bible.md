@@ -3,7 +3,7 @@
 ## 1. Canon disponível
 A história acompanha um robô que desperta em um mundo destruído. Ele encontra uma máquina temporal que se une a ele. A união permite viajar por eras e mundos. O protagonista precisa recuperar um fragmento em cada um dos sete mundos; cada fragmento é protegido por um chefe ao final do respectivo mundo. Os fragmentos estão conectados ao mistério da máquina temporal e são necessários para restaurar o equilíbrio dos universos.
 
-Não extrapolar esta premissa para declarar quem destruiu o mundo, por que a máquina se uniu ao robô, quem criou os fragmentos ou qual é a natureza exata do antagonismo. Esses pontos precisam vir de material aprovado ou ser apresentados como propostas.
+Não extrapolar esta premissa para declarar quem causou diretamente o Grande Colapso, por que a máquina se uniu ao robô ou quem criou os fragmentos. A identidade do antagonista central e seu objetivo — o Arquiteto, que busca impor uma única realidade — estão definidos na seção 7; sua história completa, métodos e motivações secundárias ainda precisam vir de material aprovado ou ser apresentados como propostas.
 
 ## 2. Promessa narrativa
 O jogador deve sentir que acordou em um lugar que precisa compreender; que a máquina temporal é parte importante da jornada; que cada mundo revela uma parte nova do mistério; que cada fragmento representa uma conquista; que NPCs e ambientes têm histórias próprias; e que a conclusão recompensa a jornada e fecha o conflito central.

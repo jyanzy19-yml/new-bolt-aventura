@@ -646,7 +646,7 @@ Uma tarefa só está concluída quando:
 
 ## 50. Próxima prioridade técnica
 
-Após a integração do fluxo Nova Jornada/Continuar, a próxima unidade técnica identificada é corrigir a alteração síncrona de `Area2D.monitoring` dentro do callback `body_entered` no coletável de vida. Aplicar desativação deferred, preservar a semântica de cura válida, acrescentar regressão e verificar a suíte. Em seguida, continuar a vertical slice W1-L1 a partir do estado real, sem criar W1-L2 artificialmente.
+O item histórico sobre a alteração síncrona de `Area2D.monitoring` no coletável de vida já foi resolvido e integrado pela PR #37; não repetir essa tarefa. A PR #34 já criou W1-L2 como blockout jogável, portanto não afirmar que essa fase inexiste nem recriá-la. A correção de estado inicial do `TimedEnergyGate` foi integrada pela PR #47, e a matriz operacional de 26 etapas foi integrada pela PR #48. **Prioridade operacional atual:** consultar `docs/production/stage-status.md`, `docs/production/implementation-tracker.md` e `docs/production/26-stage-traceability-matrix.md`; concluir a revisão de requisitos da Etapa 02, classificar canon/propostas/lacunas e selecionar a próxima unidade que avance o Gate 1 usando W1-L1/W1-L2 e os sistemas reais existentes. Não reiniciar o projeto, não reimplementar trabalho já integrado e não criar fases fictícias.
 
 ---
 
