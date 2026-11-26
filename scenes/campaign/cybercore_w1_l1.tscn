@@ -60,6 +60,7 @@ position = Vector2(850, -19)
 patrol_distance = 50.0
 
 [node name="HealthPickup" parent="." instance=ExtResource("7_pickup")]
+unique_name_in_owner = true
 position = Vector2(1040, -32)
 
 [node name="Hud" parent="." instance=ExtResource("4_hud")]
