@@ -763,3 +763,14 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - **Android Debug Export #103 / run 45909374622:** SUCCESS; APK debug exportado, verificado e enviado como artifact CI.
 - **Limitações:** nenhum aparelho físico/emulador; FPS, memória, touch físico, safe areas, lifecycle real e comportamento térmico não validados.
 - **Próxima ação:** fechar a mutação do Burst na PR #57; manter ambas as PRs abertas até revisão final. Não fazer merge automático.
+
+
+
+### Atualização final — PR #58 head `63a28d9` — 2026-11-26
+
+- Godot Validation run `45909667893`: SUCCESS — 93 testes / 1.787 verificações / 0 falhas.
+- SceneFlow: 30 ciclos em cinco cenas (menu, abertura, tutorial, W1-L1, W1-L2), 150 transições / 1.202 verificações.
+- Cold boot verbose exit 0; smoke 20/20; mutação removendo prewarm reproduz Parse Error original.
+- Docs Validation `45909667933`: SUCCESS.
+- Android Debug Export `45909667948`: SUCCESS; APK debug exportado, verificado e enviado como artefato CI.
+- PR #58 continua aberta, sem merge. Nenhum dispositivo físico/emulador foi testado.
