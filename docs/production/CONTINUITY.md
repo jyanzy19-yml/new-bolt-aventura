@@ -189,3 +189,15 @@ Este snapshot substitui os inventários anteriores. A auditoria continua estrutu
 - As mudanças de pré-produção após o commit-base são documentais: corrigem coerência de ADR/orientação/narrativa, adicionam checklist e auditoria e reforçam QA Android. Não criam projeto Godot, gameplay ou assets.
 
 Ao retomar, consultar o HEAD real; este snapshot descreve a base auditada e não substitui a inspeção atual do Git.
+
+
+## 12. Sessão Etapa 0 — Claude Code — 2026-11-26 (estado mais recente)
+
+- **Commit inicial:** `16d42de`. **Final:** ver `git log` (`7057532` fundação + commit de gameplay-base/docs).
+- **Gate:** Fundação (com base de movimento/touch/HUD/sandbox a pedido do usuário).
+- **Resultado:** projeto Godot 4.7.2 executável; detalhes em [handoffs/HANDOFF_ETAPA_0.md](handoffs/HANDOFF_ETAPA_0.md).
+- **Testes executados:** import sem erros; suíte headless 41 testes / 167 verificações / 0 falhas; 5 mutações detectadas; boot 20× sem erro; bot completa a sandbox.
+- **Nível de validação:** L2 (headless). Nada em editor gráfico, aparelho, FPS, memória ou export.
+- **Bugs abertos:** nenhum conhecido reproduzível; riscos em handoff (feel e toque real não avaliados).
+- **Bloqueios:** export Android (sem SDK/templates); decisões do usuário (package ID, resolução, renderer, ABIs, "All Jump").
+- **Próxima ação executável:** Etapa 1 (ChatGPT) — inspecionar HEAD, rodar `--import` e a suíte, auditar o conflito de escopo e escolher a próxima unidade do roadmap.

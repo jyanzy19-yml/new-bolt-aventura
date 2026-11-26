@@ -69,3 +69,8 @@ Não antecipar gameplay de etapas posteriores. Não inventar versão, build, tes
 - [Roadmap](roadmap.md)
 - [Tracker de 24 sistemas e 42 fases](implementation-tracker.md)
 - [Auditoria de pré-produção](PREPRODUCTION_AUDIT.md)
+
+
+## Atualização — Etapa 0 entregue (2026-11-26)
+
+Etapa 0: HANDOFF_READY. Existe projeto Godot 4.7.2 executável com base de movimento/touch/HUD e sandbox de desenvolvimento (não é fase da campanha). Validação: L2 headless. Sem APK, sem validação em aparelho, sem fases W#-L#. Ver [handoff](handoffs/HANDOFF_ETAPA_0.md) e [tracker](implementation-tracker.md).

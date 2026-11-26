@@ -19,6 +19,11 @@ var _busy: bool = false
 
 func _ready() -> void:
 	set_process(false)
+	# Entrada sem acúmulo: com o acúmulo ligado (padrão), `Input.parse_input_event` — usado pelos
+	# controles touch para virar ações — só aplica o estado no QUADRO SEGUINTE (~16 ms a 60 FPS de
+	# latência extra, medido em headless). Desligado, o estado muda na hora. Custo: mais eventos de
+	# arrasto por quadro (irrelevante: só botões). Impacto em aparelho real NÃO medido.
+	Input.use_accumulated_input = false
 
 
 func is_transitioning() -> bool:

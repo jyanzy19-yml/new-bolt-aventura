@@ -81,3 +81,20 @@ Exportação Android: tentativa de `--export-debug` falha neste ambiente por aus
 2. Resolução-base e escala de pixel art (hoje 960×540, provisória).
 3. Renderer final após medição em aparelho (hoje GL Compatibility, provisório).
 4. Arquiteturas ABI além de `arm64-v8a`, se houver aparelhos 32-bit na meta.
+
+## 9. Base de gameplay da Etapa 0 (adição a pedido do usuário — PROVISÓRIO)
+
+A ordem de execução do usuário pediu, além da fundação, movimento, câmera, controles touch, HUD e um primeiro nível funcional. Isto **excede** o §5 do `ETAPA_0_CLAUDE_CHECKLIST.md` (que proíbe antecipar gameplay); o conflito é registrado no handoff. Seguiu-se a ordem do usuário; os itens abaixo estão como "Em andamento", não "Implementado".
+
+| Peça | Arquivos | Notas |
+|---|---|---|
+| Buffer de ações | `scripts/input/action_buffer.gd` | Idade medida em **ticks de física** (tempo de jogo), não em relógio: um pico de quadros não expira um toque válido. Janela 0,12 s (provisória) |
+| Touch | `scripts/input/touch_controls.gd`, `touch_button.gd` | Rastreio por dedo; ação solta só quando nenhum dedo a segura; deslize entre ←/→; soltura em pausa, perda de foco, ocultação, cancelamento |
+| Entrada imediata | `scripts/core/scene_flow.gd` | `Input.use_accumulated_input = false`: com acúmulo, `Input.parse_input_event` só valia 1 quadro depois (latência extra no toque). Há teste de regressão |
+| Jogador | `scripts/player/bolt_player.gd`, `bolt_tuning.gd`, `resources/player/bolt_tuning_provisional.tres`, `scenes/player/bolt.tscn` | Todos os números de `BoltTuning` são **provisórios**; visual = polígonos placeholder |
+| Sandbox | `scenes/levels/sandbox/movement_sandbox.tscn`, `scripts/levels/movement_sandbox.gd`, `scenes/world/platform_block.tscn` | **Cenário de desenvolvimento, NÃO é fase da campanha** (sem ID W#-L#); serve para exercitar o movimento |
+| HUD | `scripts/ui/hud.gd`, `scenes/ui/hud.tscn` | Botões touch, pausa, resultado, safe area. Layout provisório |
+
+Armadilha encontrada: identificador de autoload usado diretamente em script compilado durante `load_threaded` causou erro de parse intermitente; scripts de UI resolvem `/root/SceneFlow` em tempo de execução (0/40 falhas de boot após a correção).
+
+Evidência (Godot 4.7.2 headless, Linux): suíte `tests/test_runner.gd` = 41 testes, 167 verificações, 0 falhas; 5 mutações deliberadas foram detectadas pelos testes; laço de boot 20× sem erros; um bot com entrada sintética completa a sandbox sem quedas. **Não prova** sensação de controle, renderização, toque físico, barras do Android, FPS, memória ou exportação.

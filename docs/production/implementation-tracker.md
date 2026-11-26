@@ -27,11 +27,11 @@ Na inspeção documental de 2026-11-25, não havia project.godot, cenas .tscn ou
 |---|---|---|---|
 | SYS-001 | Projeto Godot e versão fixada | Implementado | `project.godot`, `.godot-version` = 4.7.2. Evidência L2: `--headless --import` sem erros; `tests/test_runner.gd` 0 falhas (Godot 4.7.2 headless, Linux). Não validado em editor gráfico nem Android. Ver [06-godot-project-foundation.md](../technical/06-godot-project-foundation.md) |
 | SYS-002 | Configuração Android, paisagem e renderer | Implementado | Orientação 4 (sensor landscape), viewport 960×540 (provisório), GL Compatibility (provisório), preset Android com `screen/immersive_mode=true` (ADR-0003), sem segredos; verificado por `tests/unit/test_project_config.gd`. **Export Android NÃO executado** (sem SDK/templates); nenhum APK; nada validado em aparelho |
-| SYS-003 | Arquitetura, cenas e recursos compartilhados | Em andamento | Existem: boot, menu (sem ação), autoload `SceneFlow` (carregamento em thread, testado headless), `Actions`, `SafeAreaMargin`. Faltam player, fases, recursos compartilhados e demais contratos |
-| SYS-004 | Input abstrato e multitouch | Não iniciado | Sem implementação do jogo |
-| SYS-005 | BOLT: controller, estados e animação | Não iniciado | Sem implementação do jogo |
-| SYS-006 | Movimento, salto, All Jump e dash | Não iniciado | Sem implementação do jogo |
-| SYS-007 | Câmera e limites de fase | Não iniciado | Sem implementação do jogo |
+| SYS-003 | Arquitetura, cenas e recursos compartilhados | Em andamento | Existem: boot, menu, autoload `SceneFlow` (thread, `use_accumulated_input=false`), `Actions`, `SafeAreaMargin`, `BoltTuning` (Resource), `PlatformBlock`, HUD. Testado só em headless. Faltam inimigos, mundos, save, áudio e demais contratos |
+| SYS-004 | Input abstrato e multitouch | Em andamento | `TouchControls`/`TouchButton` (por dedo, soltura só sem dedos, deslize entre direções, soltura em pausa/foco), `ActionBuffer` em ticks de física. 10+4 testes headless com eventos sintéticos. **Layout e tamanhos provisórios; NÃO testado em toque real/aparelho** |
+| SYS-005 | BOLT: controller, estados e animação | Em andamento | `BoltPlayer` (GROUNDED/RISING/FALLING/DASHING) + placeholders. ~11 testes headless. Sem animação final, dano, wall slide/jump. Valores provisórios; não validado em aparelho |
+| SYS-006 | Movimento, salto, All Jump e dash | Em andamento | Corrida, pulo variável, pulo duplo, coyote, buffer, dash aéreo único (`BoltTuning` provisório). Bot headless completa a sandbox. **Feel não avaliado por humano**; semântica de "All Jump" não confirmada em fonte aprovada — não canonizada |
+| SYS-007 | Câmera e limites de fase | Em andamento | `Camera2D` com suavização, drag margins e limites definidos pela sandbox. Não avaliado visualmente/em aparelho |
 | SYS-008 | Combate, dano e armas | Não iniciado | Sem implementação do jogo |
 | SYS-009 | Habilidades e cooldowns | Não iniciado | Sem implementação do jogo |
 | SYS-010 | IA e arquétipos de inimigos | Não iniciado | Sem implementação do jogo |

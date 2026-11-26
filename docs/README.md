@@ -62,6 +62,7 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - [Estado canônico da colaboração](production/COLLABORATION_STATE.md) — etapa atual, responsável, commit-base e próximo turno.
 - [Configuração de acesso dos agentes](production/AGENT_ACCESS_SETUP.md) — diferença entre contexto de leitura e acesso real de escrita/commit.
 - [Template obrigatório de handoff](production/HANDOFF_TEMPLATE.md) — transferência verificável entre os agentes.
+- [Handoff da Etapa 0](production/handoffs/HANDOFF_ETAPA_0.md) — entrega da fundação Godot (Claude Code → ChatGPT).
 - [Continuidade entre sessões](production/CONTINUITY.md)
 - [Rastreador de implementação — 24 sistemas e 42 fases](production/implementation-tracker.md)
 - [Gestão de mudanças](production/change-management.md)

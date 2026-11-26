@@ -18,3 +18,16 @@ func test_release_all_game_actions_clears_pressed_state() -> bool:
 	check(not Input.is_action_pressed(Actions.MOVE_RIGHT), "move_right solta")
 	check(not Input.is_action_pressed(Actions.JUMP), "jump solta")
 	return true
+
+
+func test_touch_generated_actions_apply_immediately() -> bool:
+	# Regressão: com entrada acumulada, parse_input_event atrasava o estado em 1 quadro.
+	check_eq(Input.use_accumulated_input, false, "entrada sem acúmulo (SceneFlow)")
+	var press: InputEventAction = InputEventAction.new()
+	press.action = Actions.JUMP
+	press.pressed = true
+	press.strength = 1.0
+	Input.parse_input_event(press)
+	check(Input.is_action_pressed(Actions.JUMP), "ação pressionada no mesmo instante, sem esperar um quadro")
+	Actions.release_all_game_actions()
+	return true
