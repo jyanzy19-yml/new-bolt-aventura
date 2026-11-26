@@ -15,6 +15,7 @@ var progress: float = 0.0
 
 var _target_path: String = ""
 var _busy: bool = false
+var _was_paused: bool = false
 
 
 func _ready() -> void:
@@ -49,6 +50,8 @@ func change_scene(path: String) -> bool:
 	_busy = true
 	_target_path = path
 	progress = 0.0
+	_was_paused = get_tree().paused
+	get_tree().paused = true
 	Actions.release_all_game_actions()
 	transition_started.emit(path)
 	set_process(true)
@@ -91,6 +94,8 @@ func _complete() -> void:
 		_fail("change_failed")
 		return
 	await get_tree().scene_changed
+	get_tree().paused = false
+	_was_paused = false
 	Actions.release_all_game_actions()
 	progress = 1.0
 	var finished_path: String = _target_path
@@ -104,4 +109,7 @@ func _fail(reason: String) -> void:
 	push_error("SceneFlow: transição para '%s' falhou (%s)." % [failed_path, reason])
 	_busy = false
 	_target_path = ""
+	get_tree().paused = _was_paused
+	_was_paused = false
+	Actions.release_all_game_actions()
 	transition_failed.emit(failed_path, reason)

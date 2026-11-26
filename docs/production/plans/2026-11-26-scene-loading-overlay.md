@@ -33,3 +33,11 @@
 - Não adiciona espera mínima artificial de 4 segundos; o tempo de carregamento continua determinado pelo trabalho real do engine.
 - Não implementa cancelamento de transição nem descarregamento/preload avançado; esses itens continuam pendentes no contrato técnico.
 - Testes headless não comprovam legibilidade, animação, frame time ou safe area em aparelho Android. A validação visual/física permanece pendente.
+
+
+## Resultado da integração — PR #41
+
+- PR #41 integrada por squash em `66b3c0e060762ebe1f3c4b6af84c84a79f0cd781`.
+- Godot CI: 75 testes/470 verificações/0 falhas; Docs CI SUCCESS; Android Debug Export SUCCESS.
+- O overlay e a apresentação de progresso real estão integrados.
+- Revisão pós-merge identificou que GUI capture não bloqueia ações de teclado; o bloqueio integral foi separado no plano `2026-11-26-scene-flow-input-lock.md`.

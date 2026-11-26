@@ -11,6 +11,7 @@
 - O artifact é debug/teste, retenção temporária de 14 dias. Não é release nem distribuição. Nenhuma credencial de release foi criada.
 - Segunda execução confirmada na PR #39: Android Debug Export `45881252046` SUCCESS; Godot Validation `45881320136` SUCCESS (72 testes/451 verificações/0 falhas); Docs Validation `45881320133` SUCCESS. Artifact `bolt-aventura-android-debug-7415dfb988faf2dd63f9ff289106e7f7205dcdd1`, 28.194.534 bytes; assinatura v2/v3 válida; package ID `com.example.boltaventura`; SHA-256 `db03a42b909781a1f5e7c94d025615e1aa5f397c8ebd306ba30cddf84eca14b0`.
 - **Pós-merge PR #39 na main:** Godot Validation `45881703643` SUCCESS — 72 testes/451 verificações/0 falhas; Docs Validation `45881703650` SUCCESS; Android Debug Export `45881703604` SUCCESS. Artifact `bolt-aventura-android-debug-50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`, 28.194.560 bytes; APK 28.447.553 bytes; assinatura v2/v3 válida; package ID `com.example.boltaventura`; SHA-256 `edb88f43f407241e5716d6b7d327272c22e40f1025a00637d7393573e320c6d7`.
+- **Pós-merge PR #41 na main:** Godot Validation `45883137849` SUCCESS — 75 testes/470 verificações/0 falhas; Docs Validation `45883137856` SUCCESS; Android Debug Export `45883137961` SUCCESS. Artifact `bolt-aventura-android-debug-66b3c0e060762ebe1f3c4b6af84c84a79f0cd781`, 28.197.105 bytes; APK 28.456.143 bytes; assinatura v2/v3 válida; package ID `com.example.boltaventura`; SHA-256 `5c630ba464bdd34617aface29e86da721eb1b9578f5f82d717b15b619941f213`.
 
 ## Portões
 

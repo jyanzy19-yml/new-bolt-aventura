@@ -28,7 +28,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-001 | Projeto Godot e versão fixada | Implementado | `project.godot`, `.godot-version` = 4.7.2. Evidência L2: `--headless --import` sem erros; `tests/test_runner.gd` 0 falhas (Godot 4.7.2 headless, Linux). Não validado em editor gráfico nem Android. Ver [06-godot-project-foundation.md](../technical/06-godot-project-foundation.md) |
 | SYS-002 | Configuração Android, paisagem e renderer | Implementado | Orientação 4 (sensor landscape), viewport 960×540 (provisório), GL Compatibility (provisório), preset Android com `screen/immersive_mode=true` (ADR-0003); PR #38 integrou export Android debug em CI. PR #39 repetiu export no commit `0e94f7e4` (run `45881252046`); package ID placeholder, instalação e validação física pendentes |
 | SYS-003 | Arquitetura, cenas e recursos compartilhados | Em andamento | Boot, menu, `SceneFlow`, `SaveSystem`, `CampaignProgress`, `Actions`, `SafeAreaMargin`, `BoltTuning`, `PlatformBlock` e HUD. Menu/retomada reconhece W1-L1 e W1-L2 na main após PR #34; demais contratos pendentes |
-| SYS-004 | Input abstrato e multitouch | Em andamento | `TouchControls`/`TouchButton` rastreiam ponteiros independentes; `ActionBuffer` limpa edges em pausa/suspensão/perda de foco. PR #39 integrada; Godot CI: 72 testes/451 verificações/0 falhas, incluindo regressões de JUMP e DASH. Teste de interrupção em Android físico ainda NÃO EXECUTADO |
+| SYS-004 | Input abstrato e multitouch | Em andamento | `TouchControls`/`TouchButton` rastreiam ponteiros independentes; `ActionBuffer` limpa edges em pausa/suspensão/perda de foco. PR #39 integrada; branch `fix/scene-flow-input-lock` pausa a simulação e oculta touch durante transições, aguardando CI. Teste físico pendente |
 | SYS-005 | BOLT: controller, estados e animação | Em andamento | `BoltPlayer` (GROUNDED/RISING/FALLING/DASHING), vida/dano, knockback, invulnerabilidade e API de cura. Dash preservado. Placeholders e valores provisórios; sem validação física Android |
 | SYS-006 | Movimento, salto, All Jump e dash | Em andamento | Corrida, pulo variável, pulo duplo, coyote, buffer, dash aéreo único (`BoltTuning` provisório). Bot headless completa a sandbox. **Feel não avaliado por humano**; semântica de "All Jump" não confirmada em fonte aprovada — não canonizada |
 | SYS-007 | Câmera e limites de fase | Em andamento | `Camera2D` com suavização, drag margins e limites definidos pela sandbox. Não avaliado visualmente/em aparelho |
@@ -44,7 +44,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-017 | Menus, HUD, pausa e configurações | Em andamento | Nova Jornada/Continuar; retomada mapeia W1-L1 e W1-L2; HUD de resultado oferece PRÓXIMA FASE; overlay de carregamento persistente básico adicionado em branch. Configurações completas e validação visual/Android ausentes |
 | SYS-018 | Cutscenes, legendas e replay/pulo | Em andamento | Nova Jornada segue abertura/tutorial; Continuar retoma W1-L1 ou W1-L2 conforme o progresso persistido. PR #34 integrada; storyboard/tutorial provisórios, animação final, áudio e replay persistente pendentes |
 | SYS-019 | Áudio, música, buses e opções | Não iniciado | Sem implementação do jogo |
-| SYS-020 | Loading, transições e gestão de memória | Em andamento | `SceneFlow` usa carregamento threaded, bloqueia transições concorrentes e sinaliza sucesso/falha; novo autoload `LoadingOverlay` exibe estado e progresso real sem espera artificial; regressões de sucesso/falha/progresso adicionadas. Cancelamento, preload e gestão abrangente de memória ainda pendentes; CI da branch em validação |
+| SYS-020 | Loading, transições e gestão de memória | Em andamento | PR #41 integrou `LoadingOverlay` com progresso real, sucesso/falha; 75 testes/470 verificações/0 falhas e export Android SUCCESS. Branch `fix/scene-flow-input-lock` adiciona pausa real da SceneTree, ocultação touch e restauração em falha; CI pendente. Cancelamento, preload e gestão de memória pendentes |
 | SYS-021 | Pipeline de assets e proveniência | Não iniciado | Pipeline do jogo a estabelecer |
 | SYS-022 | Testes automatizados e regressão | Em andamento | Workflow Godot 4.7.2 executa import + `tests/test_runner.gd`; PRs #34/#35: 69 testes, 439 verificações, 0 falhas em Godot CI pré/pós-merge; PR #35 valida contato físico real da `Area2D`; Docs CI SUCCESS. Headless não equivale a QA visual ou Android físico |
 | SYS-023 | Exportação, instalação e QA Android | Em andamento | PR #38 integrou pipeline Godot 4.7.2. PR #39 repetiu export com artifact `bolt-aventura-android-debug-7415dfb988faf2dd63f9ff289106e7f7205dcdd1`, assinatura v2/v3 e SHA-256 `db03a42b909781a1f5e7c94d025615e1aa5f397c8ebd306ba30cddf84eca14b0`. Package ID provisório; instalação, inicialização, touch, safe area e QA físico ainda não executados |
@@ -279,3 +279,13 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - Testes adicionados: autoload no project config, estado inicial, progresso real, conclusão, falha e processamento durante pausa.
 - Plano: `docs/production/plans/2026-11-26-scene-loading-overlay.md`.
 - **Estado:** aguardando CI; não há validação visual ou Android físico.
+
+
+## SYS-020 — bloqueio integral de input durante carregamento (2026-11-26)
+
+- Base: main após PR #41, commit `66b3c0e060762ebe1f3c4b6af84c84a79f0cd781`.
+- Revisão da PR #41 identificou que `Control.MOUSE_FILTER_STOP` captura input GUI/touch, mas não bloqueia ações de teclado no InputMap.
+- Branch `fix/scene-flow-input-lock`: SceneFlow pausa a SceneTree ao aceitar a transição, continua processando em `PROCESS_MODE_ALWAYS`, retoma após `scene_changed` e restaura a pausa anterior em falha; HUD oculta/libera TouchControls e ignora pause durante transição.
+- Regressões: pausa/retomada da SceneTree na troca real; touch liberado/oculto e restaurado quando a transição falha.
+- Plano: `docs/production/plans/2026-11-26-scene-flow-input-lock.md`.
+- **Estado:** aguardando CI; teste Android físico pendente.

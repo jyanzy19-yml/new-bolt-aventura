@@ -1,11 +1,11 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Main HEAD:** `85412c3bdd5c6eefd27f25bf2a56af4b38fcdfed`.  
+**Main HEAD:** `66b3c0e060762ebe1f3c4b6af84c84a79f0cd781`.  
 **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente.  
 **Última regressão de gameplay integrada:** PR #39 — limpeza do ActionBuffer no ciclo de vida Android, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.  
 **Última entrega de infraestrutura integrada:** PR #38 — pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.  
-**Branch de trabalho:** `feat/scene-loading-overlay` — overlay persistente e honesto de carregamento em transições.  
+**Branch de trabalho:** `fix/scene-flow-input-lock` — pausa da simulação e bloqueio de input durante transições.  
 **Responsável atual:** ChatGPT, único escritor ativo conforme decisão vigente do usuário.  
 **Estado do Gate 1:** EM ANDAMENTO — W1-L1/W1-L2 seguem blockouts; APK debug exportado em CI, instalação e validação Android física pendentes.
 
@@ -323,7 +323,7 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 | 02 | Requisitos e planejamento | EM ANÁLISE | Master Directive, bíblias, especificações e roadmap existem; matriz de rastreabilidade específica das 26 etapas ainda precisa ser consolidada |
 | 03 | Arquitetura e organização | EM DESENVOLVIMENTO | Godot 4.7.2, cenas, scripts, autoloads e contratos existentes; arquitetura global ainda parcial |
 | 04 | Infraestrutura e sistemas centrais | EM DESENVOLVIMENTO | Boot, SceneFlow, SaveSystem e CampaignProgress implementados parcialmente |
-| 05 | Recursos e carregamento | EM DESENVOLVIMENTO | SceneFlow threaded e overlay persistente em implementação; progresso real sem porcentagem falsa; cancelamento, preload abrangente e gestão de memória pendentes |
+| 05 | Recursos e carregamento | EM DESENVOLVIMENTO | SceneFlow threaded e LoadingOverlay integrados; progresso real sem porcentagem falsa; pausa/input lock em validação; cancelamento, preload abrangente e gestão de memória pendentes |
 | 06 | Personagem principal | EM DESENVOLVIMENTO | BoltPlayer e BoltTuning provisório; arte/animações finais e validação humana pendentes |
 | 07 | Física e movimentação | EM DESENVOLVIMENTO | Corrida, salto, pulo duplo provisório, coyote, buffer, Dash e colisões; feel e Android físico não validados |
 | 08 | Animações e feedback | EM DESENVOLVIMENTO | Feedback HUD e hit flash; pipeline de animação final ainda não implementado |
@@ -339,7 +339,7 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 | 18 | Construção das fases | EM DESENVOLVIMENTO | W1-L1 e W1-L2 em blockout; demais fases sem cenas |
 | 19 | Obstáculos e exploração | EM DESENVOLVIMENTO | Plataformas, checkpoint, coletável e campo energético; segredos/rotas opcionais ainda ausentes |
 | 20 | Narrativa e progressão | EM DESENVOLVIMENTO | Premissa/canon, abertura, tutorial e progressão W1-L1→W1-L2 parciais; campanha narrativa incompleta |
-| 21 | Interface e UX | EM DESENVOLVIMENTO | Menu, HUD, pausa, controles touch e overlay de carregamento básico; configurações, polimento visual e validação Android pendentes |
+| 21 | Interface e UX | EM DESENVOLVIMENTO | Menu, HUD, pausa, controles touch e overlay de carregamento básico; lock de input durante transição em validação; configurações, polimento visual e validação Android pendentes |
 | 22 | Arte e efeitos visuais | EM DESENVOLVIMENTO | Placeholders geométricos e feedback básico; arte final e pipeline de assets pendentes |
 | 23 | Áudio e apresentação | NÃO INICIADA | Música, SFX, buses e opções de áudio não integrados |
 | 24 | Android e touchscreen | EM DESENVOLVIMENTO | Preset e pipeline Android debug integrados; APK exportado/assinado/verificado em CI; instalação, touch, safe area e lifecycle físico pendentes |
@@ -407,3 +407,12 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Não há espera artificial mínima; cancelamento e preload avançado permanecem pendentes.
 - Plano: [scene-loading-overlay](plans/2026-11-26-scene-loading-overlay.md).
 - **Estado:** implementação escrita; aguardando Godot CI e Docs CI. Validação visual e Android físico pendentes.
+
+
+### Pós-merge PR #41 — overlay de carregamento
+
+- Merge commit: `66b3c0e060762ebe1f3c4b6af84c84a79f0cd781`.
+- Godot CI `45883137849`: SUCCESS — 75 testes/470 verificações/0 falhas.
+- Docs CI `45883137856`: SUCCESS.
+- Android Debug Export `45883137961`: SUCCESS; artifact `bolt-aventura-android-debug-66b3c0e060762ebe1f3c4b6af84c84a79f0cd781`, APK 28.456.143 bytes, package ID placeholder, SHA-256 `5c630ba464bdd34617aface29e86da721eb1b9578f5f82d717b15b619941f213`.
+- O overlay foi integrado; a revisão seguinte encontrou que GUI capture não bloqueava teclado. A branch `fix/scene-flow-input-lock` está fechando o bloqueio integral e a restauração em falha.
