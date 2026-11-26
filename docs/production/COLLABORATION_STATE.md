@@ -25,7 +25,7 @@
 - **PR #57:** `feat/cybercore-w1-blockout`, aberta e não integrada; polimento W1-L1/W1-L2, revisão independente e hardening do Burst em andamento.
 - **PR #1:** permanece aberta/divergente; não editar, rebasear ou integrar automaticamente.
 - **Branch `stage2/checkpoints-and-save`:** preservada; não integrar nem apagar sem autorização explícita.
-- **Evidência atual da PR #58:** Godot Validation #199 (93 testes/1.307 verificações/0 falhas; 20/20 boots e mutação do prewarm aprovados), Docs #380 SUCCESS e Android Debug Export #87 SUCCESS. Sem teste Android físico.
+- **Evidência atual da PR #58:** head `97f0eeed54f722e3d83701928ab5a61dd55d3731`; Godot Validation #215 (93 testes/1.787 verificações/0 falhas; 150 transições SceneFlow e 20/20 boots; mutação do prewarm reproduz o erro), Docs #396 SUCCESS e Android Debug Export #103 SUCCESS com APK verificado/uploaded. Sem teste Android físico.
 - **Próxima ação:** concluir a mutação direcionada do Burst na PR #57; revisar novamente os checks após o novo teste de teardown real W1-L1.
 
 ---
