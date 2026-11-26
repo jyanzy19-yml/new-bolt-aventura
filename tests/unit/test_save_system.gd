@@ -120,7 +120,7 @@ func test_missing_save_is_a_clean_empty_state() -> bool:
 	return true
 
 
-func test_format_version_requires_exact_integer_type() -> bool:
+func test_format_version_rejects_fractional_and_textual_values() -> bool:
 	var system: Node = _system()
 	check(system != null, "autoload SaveSystem presente")
 	if system == null:
