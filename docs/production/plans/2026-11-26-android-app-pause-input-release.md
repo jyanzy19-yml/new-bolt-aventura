@@ -24,3 +24,12 @@
 ## Limitações
 
 Os testes headless verificam o tratamento da notificação, não a entrega real da notificação por Android OEM nem o comportamento de retomada em aparelho físico. A validação Android física permanece necessária.
+
+## Evidência de CI — 2026-11-26
+
+- Godot Validation run `45913912147`: SUCCESS — 94 testes, 593 verificações, 0 falhas.
+- Documentation Validation run `45913912177`: SUCCESS.
+- Android Debug Export run `45913912153`: SUCCESS.
+- APK debug: 28.465.153 bytes; package ID provisório `com.example.boltaventura`; assinatura v2/v3 válida; SHA-256 `4e91a70b405b32916b6a43e5d3c4055cc432398215395ef3869069208a095e88`.
+- Artifact: `bolt-aventura-android-debug-555c8307ebe8ddeb5f8eeb64a9da51c1e6beab0b`.
+- Limite: CI headless confirma o tratamento programático da notificação; não comprova entrega OEM nem retomada real em aparelho.
