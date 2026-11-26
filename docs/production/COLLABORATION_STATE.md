@@ -23,7 +23,7 @@
 |---|---|---|---|---|
 | 0 | Claude Code | ACCEPTED | Fundação e protótipo provisório; hardening PR #3 integrado | ChatGPT |
 | 1 | ChatGPT | HANDOFF_READY | `f3ab682`: correção multitouch, regressão e CI | Claude Code |
-| 2 | ChatGPT | IN_PROGRESS | `feat/checkpoint-respawn-system`: checkpoint local e respawn na sandbox; CI pendente | ChatGPT |
+| 2 | ChatGPT | IN_PROGRESS | `feat/checkpoint-respawn-system`: checkpoint local e respawn na sandbox; Godot CI #47 e Docs CI #164 SUCCESS (43 testes, 179 verificações, 0 falhas) | ChatGPT |
 | 3 | ChatGPT | Aguardando | Próxima unidade após revisão/validação da Etapa 2 | ChatGPT |
 
 ## Protocolo de início de turno
