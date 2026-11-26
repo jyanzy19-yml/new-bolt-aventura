@@ -181,3 +181,12 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Dash, ActionBuffer, controles touch, Pistola Crono, invulnerabilidade e fluxo de derrota preservados.
 - APK/exportação, instalação, emulador, aparelho Android, FPS e memória: NÃO EXECUTADOS.
 - Handoff: [HANDOFF_HEALTH_PICKUP_FEEDBACK.md](handoffs/HANDOFF_HEALTH_PICKUP_FEEDBACK.md).
+
+
+## W1-L1 — correção de layout e integração (PR em revisão)
+
+- Inimigo-base reposicionado integralmente sobre o piso intermediário; patrulha reduzida para permanecer dentro da plataforma.
+- Área de conclusão reposicionada para sobrepor a faixa ocupada pelo jogador quando está sobre o piso final.
+- Teste de integração ampliado para conferir layout, ativação do checkpoint, dano e retorno após queda.
+- A primeira execução Godot CI (`45851338093`) falhou por uma asserção de teste que exigia posição X estática apesar do movimento de patrulha no primeiro tick; a asserção foi corrigida para verificar a faixa válida da patrulha. Aguardar nova execução.
+- Esta alteração corrige o blockout; não representa playtest humano, balanceamento final nem validação Android.

@@ -149,3 +149,12 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - `CybercorePatrolEnemy` emite feedback visual temporário ao receber dano e restaura a cor-base no tick fixo.
 - Godot CI run `45849915250` SUCCESS: Godot 4.7.2, 53 testes, 276 verificações, 0 falhas. Uma execução anterior falhou e foi corrigida antes do merge.
 - Sem exportação APK, instalação, emulador, aparelho físico ou medições de desempenho.
+
+
+## Correção de integração W1-L1 — branch `fix/w1-l1-layout-checkpoint-integration`
+
+- Inimigo-base em `scenes/campaign/cybercore_w1_l1.tscn`: posição alinhada ao piso intermediário e patrulha limitada à plataforma.
+- Área `Goal`: altura corrigida para cruzar a área de colisão do jogador sobre o piso final.
+- `tests/unit/test_campaign_entry.gd`: cobertura de posição do inimigo/objetivo e fluxo checkpoint → dano → queda/respawn.
+- A primeira execução Godot CI (`45851338093`) encontrou uma asserção excessivamente rígida: o inimigo já havia avançado no primeiro tick. Corrigida para verificar o intervalo de patrulha; nova CI pendente.
+- Status W1-L1 permanece **Em andamento**. Não houve playtest humano nem validação Android.
