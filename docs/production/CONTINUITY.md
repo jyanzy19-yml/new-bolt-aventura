@@ -367,3 +367,5 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - CI desta branch pendente; corrigir falhas até a causa-raiz. Não integrar sem Godot e Docs CI verdes.
 - Não executado: playtest humano, export APK, instalação, emulador, dispositivo Android, FPS, memória ou latência física.
 - Próxima ação: aguardar CI, revisar logs, corrigir falhas, abrir PR e integrar apenas após checks verdes; registrar merge SHA e CI pós-merge.
+
+- Achado adicional: checkpoint original ficava próximo o suficiente do limite da área de contato do inimigo para permitir dano imediato no respawn. Reposicionado para x=980; teste de integração calcula e exige separação superior à soma dos semilarguras das formas de colisão. CI do SHA final pendente.
