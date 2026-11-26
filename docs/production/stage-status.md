@@ -11,6 +11,7 @@
 
 **CI da PR #39:** Godot Validation `45881320136` SUCCESS — Godot 4.7.2, 72 testes, 451 verificações, 0 falhas; Docs Validation `45881320133` SUCCESS; Android Debug Export `45881252046` SUCCESS.  
 **Artifact PR #39:** `bolt-aventura-android-debug-7415dfb988faf2dd63f9ff289106e7f7205dcdd1`, 28.194.534 bytes; package ID provisório `com.example.boltaventura`; assinatura v2/v3 verificada; SHA-256 `db03a42b909781a1f5e7c94d025615e1aa5f397c8ebd306ba30cddf84eca14b0`.
+**PR #40:** reconciliação de Dash e autoridade do escritor integrada em `85412c3bdd5c6eefd27f25bf2a56af4b38fcdfed`; Docs CI PR `45882294553` e pós-merge main `45882348474`: SUCCESS.
 **CI pós-merge main:** Godot `45881703643`, Docs `45881703650` e Android Export `45881703604`: SUCCESS. A execução da main repetiu 72 testes/451 verificações/0 falhas e gerou artifact `bolt-aventura-android-debug-50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`; SHA-256 do APK `edb88f43f407241e5716d6b7d327272c22e40f1025a00637d7393573e320c6d7`.
 
 ## Estado executável observado
@@ -59,6 +60,7 @@ Um único escritor por vez. Por decisão do usuário, ChatGPT conduz sozinho as 
 - [PR #37](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/37): MERGED — regressão física isolada do coletável e filtro de erro de física no CI.
 - [PR #38](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/38): MERGED — pipeline Android debug; Godot, Docs e export SUCCESS, artifact publicado.
 - [PR #39](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/39): MERGED — limpeza do ActionBuffer em notificações de pausa/suspensão/perda de foco; Godot 72 testes/451 verificações/0 falhas, Docs e export Android SUCCESS.
+- [PR #40](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/40): MERGED — reconcilia decisão canônica de Dash e autoridade atual do escritor; Docs CI SUCCESS.
 - [PR #34](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/34): MERGED — W1-L2 Rede Interrompida, campo energético cíclico e progressão W1-L1→W1-L2; Godot CI pré-merge 69 testes/439 verificações/0 falhas; Docs CI SUCCESS.
 - [PR #33](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/33): MERGED — expansão da diretriz de produção e correção do coletável de vida.
 
