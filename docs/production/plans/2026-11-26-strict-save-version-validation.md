@@ -10,18 +10,18 @@ SaveSystem._decode_file converte format_version para int antes de comparar. Camp
 
 ## Escopo
 
-- Validar tipo e valor exatos de format_version e schema_version.
-- Rejeitar float, string, boolean, null e versões desconhecidas com os erros existentes de versão incompatível.
+- Validar tipo e valor exatos de format_version e schema_version, aceitando TYPE_INT ou TYPE_FLOAT finito que seja exatamente igual ao inteiro esperado.
+- Rejeitar float fracionário, string, boolean, null e versões desconhecidas; aceitar representação numérica integral 1.0 porque o parser JSON do Godot pode materializar números inteiros como float.
 - Preservar payloads legítimos v1 gravados pelo próprio SaveSystem.
 - Acrescentar regressões para envelope e progresso com versões de tipo incorreto.
 - Não alterar schema, payload, checksum, migrações ou dados do usuário.
 
 ## Critérios de aceite
 
-1. format_version só aceita TYPE_INT com valor FORMAT_VERSION.
-2. schema_version só aceita TYPE_INT com valor PROGRESS_SCHEMA_VERSION.
-3. Float 1.5 e string "1" são rejeitados sem serem truncados/coagidos.
-4. Dados v1 válidos continuam round-trip.
+1. format_version aceita TYPE_INT igual a FORMAT_VERSION ou TYPE_FLOAT finito exatamente igual ao inteiro; não converte strings.
+2. schema_version aceita TYPE_INT igual a PROGRESS_SCHEMA_VERSION ou TYPE_FLOAT finito exatamente igual ao inteiro; não converte strings.
+3. Float 1.5 e string "1" são rejeitados sem truncamento/coerção.
+4. Representação numérica integral 1.0 e dados v1 válidos continuam round-trip.
 5. Godot CI, Docs CI e Android Debug Export passam.
 
 ## Limites
