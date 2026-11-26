@@ -256,7 +256,9 @@ func test_complete_temp_is_recovered_before_older_backup() -> bool:
 	var stale_temp_payload: Dictionary = {"level_id": "W1-L5", "revision": 5}
 	check(system.call("save_payload", authoritative_payload), "grava principal autoritativo")
 	check(_write_envelope(TEST_SAVE_PATH + ".tmp", stale_temp_payload), "prepara temporário residual")
-	check_eq(system.call("load_payload"), authoritative_payload, "principal íntegro tem precedência sobre temporário residual")
+	var authoritative_loaded: Dictionary = system.call("load_payload")
+	check_eq(authoritative_loaded.get("level_id"), "W1-L6", "principal íntegro tem precedência sobre temporário residual")
+	check_eq(int(authoritative_loaded.get("revision", -1)), 6, "principal autoritativo preserva revisão")
 	check(FileAccess.file_exists(TEST_SAVE_PATH + ".tmp"), "leitura do principal não consome temporário não confirmado")
 
 	# Um temporário inválido não impede a recuperação do backup válido.
@@ -273,7 +275,9 @@ func test_complete_temp_is_recovered_before_older_backup() -> bool:
 	if invalid_temp != null:
 		invalid_temp.store_string("{broken-temp")
 		invalid_temp.close()
-	check_eq(system.call("load_payload"), backup_payload, "temporário inválido é ignorado e backup válido recuperado")
+	var recovered_backup: Dictionary = system.call("load_payload")
+	check_eq(recovered_backup.get("level_id"), "W1-L1", "temporário inválido é ignorado e backup válido recuperado")
+	check_eq(int(recovered_backup.get("revision", -1)), 1, "backup recuperado preserva revisão")
 	check_eq(system.get("last_error"), "recovered_backup", "fallback para backup informa recuperação")
 	_cleanup()
 	return true
