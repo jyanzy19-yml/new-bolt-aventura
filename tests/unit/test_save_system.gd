@@ -244,6 +244,32 @@ func test_complete_temp_is_recovered_before_older_backup() -> bool:
 		corrupt_after_write.close()
 	check_eq(system.call("load_payload"), pending_payload, "backup preserva o temporário que existia antes da nova gravação")
 	check_eq(system.get("last_error"), "recovered_backup", "identifica recuperação do estado pendente preservado")
+
+	# Um principal íntegro continua sendo autoridade sobre qualquer .tmp residual.
+	system.call("delete_save")
+	var authoritative_payload: Dictionary = {"level_id": "W1-L6", "revision": 6}
+	var stale_temp_payload: Dictionary = {"level_id": "W1-L5", "revision": 5}
+	check(system.call("save_payload", authoritative_payload), "grava principal autoritativo")
+	check(_write_envelope(TEST_SAVE_PATH + ".tmp", stale_temp_payload), "prepara temporário residual")
+	check_eq(system.call("load_payload"), authoritative_payload, "principal íntegro tem precedência sobre temporário residual")
+	check(FileAccess.file_exists(TEST_SAVE_PATH + ".tmp"), "leitura do principal não consome temporário não confirmado")
+
+	# Um temporário inválido não impede a recuperação do backup válido.
+	system.call("delete_save")
+	check(system.call("save_payload", backup_payload), "cria backup íntegro para fallback")
+	check(system.call("save_payload", authoritative_payload), "cria principal mais recente")
+	var invalid_primary: FileAccess = FileAccess.open(TEST_SAVE_PATH, FileAccess.WRITE)
+	check(invalid_primary != null, "abre principal para simular corrupção")
+	if invalid_primary != null:
+		invalid_primary.store_string("{broken-primary")
+		invalid_primary.close()
+	var invalid_temp: FileAccess = FileAccess.open(TEST_SAVE_PATH + ".tmp", FileAccess.WRITE)
+	check(invalid_temp != null, "cria temporário incompleto")
+	if invalid_temp != null:
+		invalid_temp.store_string("{broken-temp")
+		invalid_temp.close()
+	check_eq(system.call("load_payload"), backup_payload, "temporário inválido é ignorado e backup válido recuperado")
+	check_eq(system.get("last_error"), "recovered_backup", "fallback para backup informa recuperação")
 	_cleanup()
 	return true
 
