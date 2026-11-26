@@ -5,7 +5,7 @@
 
 **Projeto:** BOLT · AVENTURA  
 **Repositório:** `jyanzy19-yml/new-bolt-aventura`  
-**Engine de direção:** Godot 4.x com GDScript — confirmar a versão real antes de usar APIs.  
+**Engine/versão confirmada no projeto atual:** Godot 4.7.2 com GDScript (`.godot-version` e `project.godot`); confirmar novamente o ambiente real antes de usar APIs.  
 **Produto-alvo:** aplicativo Android empacotado, em orientação paisagem.  
 **Estado do projeto:** consultar sempre `docs/production/stage-status.md`; nunca presumir que documentação equivale a jogo implementado.
 

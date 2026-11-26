@@ -174,3 +174,65 @@ O código atual contém Dash (Actions.DASH, estado DASHING, touch e testes), enq
 - **Godot CI:** run `45809258952`, commit `4ecaff1d67049155d95bcbb5fc9d1c98187d3767`, SUCCESS; Godot 4.7.2, import/parse headless, 42 testes, 171 verificações, zero falhas. Nenhuma alteração de gameplay ocorreu nas PRs #5–#9.
 - **Docs CI:** run `45817363134`, commit `caedfee2f790cc78222b281a5b602110d7229043`, SUCCESS.
 - **Limite de validação:** não houve execução no editor gráfico, exportação/instalação APK, emulador ou Android físico; toque real, safe area, FPS, RAM e temperatura seguem sem evidência de dispositivo.
+
+
+## 8. Auditoria corretiva e reconciliação — 2026-11-26 (HEAD após PR #10)
+
+### 8.1 Estado inicial confirmado
+
+- Repositório privado `jyanzy19-yml/new-bolt-aventura`; branch padrão `main`; permissão administrativa/push disponível.
+- HEAD real: `1e5294cf112c014c21e43c51b4c8e797beceb9b6`. A comparação entre o HEAD histórico `7afb58b` e `main` confirmou dois commits de avanço para PR #9 e PR #10; o commit de ponta é o merge da PR #10.
+- Branches consultadas incluem `main`, branches históricas de auditoria/handoff e a branch de documentação da PR #1.
+- PRs #1–#10 foram listadas; #2–#10 estão integradas. PR #1 segue aberta, base antiga e `mergeable=false`.
+- Compare PR #1 → main: **17 commits exclusivos da PR, 139 commits atrás**, 17 arquivos alterados. Todos os arquivos são documentação; não há scripts/cenas de gameplay no diff.
+
+### 8.2 Documentação e continuidade
+
+- `README.md`, `docs/README.md`, `MASTER_DIRECTIVE.md`, `CLAUDE.md` e `AGENTS.md` descrevem a existência do projeto Godot e orientam a continuidade incremental. O título histórico “from-zero” foi interpretado como mandato de produção, não reinicialização.
+- Encontrada instrução contraditória em `COLLABORATIVE_DEVELOPMENT_PROTOCOL.md` dizendo que Claude “inicia o jogo do zero” na Etapa 0; corrigida para reconhecer a fundação Godot já integrada.
+- Atualizados os snapshots de colaboração, continuidade, status e handoff para HEAD `1e5294cf112c014c21e43c51b4c8e797beceb9b6` e PR #10.
+- Atualizada a referência volátil de divergência da PR #1 em `CLAUDE.md`; não rebasear nem mesclar PR #1 nesta missão.
+
+### 8.3 Dash — decisão posterior e canônica
+
+A inspeção inicial registrou corretamente o conflito documental, mas a decisão foi resolvida depois pelo usuário em 2026-11-26: **Dash deve permanecer**. O ADR `ADR-001-DASH.md` é a fonte canônica e supera as anotações anteriores de pendência e a exclusão na PR #1. Nenhuma alteração na mecânica, controles, tuning ou testes foi feita nesta auditoria.
+
+### 8.4 Inspeção técnica e classificação
+
+Arquivos relidos: `project.godot`, `.gitignore`, `export_presets.cfg`, `TouchControls`, `SafeAreaMargin`, `SceneFlow`, `BoltPlayer`, `ActionBuffer`, runner de testes, workflows e validador documental.
+
+- **S0:** nenhum defeito confirmado nesta inspeção.
+- **S1:** nenhum defeito confirmado nesta inspeção.
+- **S2:** divergência documental de escopo Dash, resolvida por decisão explícita e ADR-001; divergência histórica sobre “começar do zero” no protocolo colaborativo (corrigida).
+- **S3:** métricas e snapshots de continuidade estavam desatualizados após PR #10 (corrigidos); branch protection da main permanece sem confirmação administrativa nova nesta rodada.
+- Não foi identificado defeito reproduzível de runtime/input na inspeção estática. Não inventar bug a partir de risco não testado.
+
+### 8.5 CI, segurança e Android
+
+- `.gitignore` exclui cache Godot, builds, APK/AAB, árvore Android e extensões comuns de chaves/certificados. A revisão estática não encontrou segredo em `.gitignore` ou `export_presets.cfg`; isso não equivale a varredura integral de histórico/segredos.
+- `export_presets.cfg` mantém package ID provisório `com.example.boltaventura`, ABI arm64-v8a e immersive mode; não contém caminho de APK nem credenciais de assinatura. Nada foi alterado.
+- Godot CI executa import/parse e `tests/test_runner.gd`; o runner falha com zero testes ou zero verificações. Docs CI verifica metadados, unicidade, arquivos requeridos e links Markdown locais.
+- A consulta de status combinado do HEAD `1e5294cf112c014c21e43c51b4c8e797beceb9b6` retornou lista vazia; `fetch_commit_workflow_runs` não expôs runs de push para esse SHA. Última evidência Docs CI confirmada: run `45817363134` no commit anterior `caedfee`. Última evidência detalhada Godot CI: run `45809258952`, commit `4ecaff1`, 42 testes, 171 verificações, zero falhas. Não atribuir resultados antigos ao HEAD atual.
+- Não foi possível confirmar/configurar branch protection/rulesets com as operações administrativas expostas. Auditoria anterior registrou `protected=false`; proprietário deve verificar na UI GitHub.
+- Nenhum APK exportado/instalado, emulador, editor gráfico, Android físico, toque real, safe area, FPS, RAM ou temperatura foi testado.
+
+### 8.6 Resultado e limites desta rodada
+
+As correções documentais confirmadas foram implementadas em branch separada. Nenhum arquivo de gameplay, cena, física, input map, Dash, configuração de exportação ou secret foi modificado. A validação final depende dos checks disparados pela PR desta branch. Claude Etapa 2 deve aguardar a integração/fechamento desta rodada.
+
+
+### 8.7 Decisão explícita do usuário — Dash permanece (2026-11-26)
+
+- **Decisão:** o usuário confirmou explicitamente que Dash deve permanecer no BOLT · AVENTURA.
+- **Registro canônico:** `docs/production/ADR-001-DASH.md`.
+- A implementação existente (Input Map, `Actions.DASH`, estado `DASHING`, controles touch e testes) deve ser preservada. A diretiva ainda não integrada da PR #1 que exclui Dash está superada neste ponto e não pode ser usada para remover a mecânica.
+- Esta decisão não autoriza retuning, redesign, expansão ou alteração de física/controles; essas mudanças continuam exigindo escopo próprio e testes.
+- Nenhum código de gameplay foi alterado para registrar esta decisão.
+
+
+### 8.8 Consistência final após decisão Dash e CI — 2026-11-26
+
+- A decisão explícita do usuário de manter Dash, registrada em `ADR-001-DASH.md`, substitui todas as observações anteriores deste relatório que diziam que a decisão estava pendente. As seções 7.x preservam a cronologia da auditoria; não são instruções atuais.
+- A PR #1 permanece intacta e não integrada. Sua diretiva ainda exclui Dash, mas essa exclusão não tem autoridade para remover a mecânica aprovada.
+- A PR #11 recebeu Docs CI run #157 (ID `45822873097`) com conclusão SUCCESS no HEAD `bfec6e20e767477302801d46a50a637cfd4f30ad`.
+- A aprovação de CI valida a documentação segundo o workflow; não valida gameplay, exportação APK ou Android físico.

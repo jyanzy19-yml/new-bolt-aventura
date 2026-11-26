@@ -59,9 +59,9 @@ The user has authorized ordinary implementation within the documented scope. Pre
 
 Never report a feature as implemented unless it exists in the project; never report a test, APK, device validation, compatibility or performance result unless actually evidenced. Update production status and leave a precise continuation point at each session boundary.
 
-### Dash scope hold
+### Dash — decisão canônica
 
-Dash currently exists in the Input Map, `BoltPlayer`, touch controls and tests, and is tracked as provisional implementation. PR #1 proposes excluding it, but that PR is not integrated and is 17 commits ahead / 135 commits behind the current main base. Until the user-approved canonical specification is reconciled, do not add to, remove, or retune Dash. Preserve the current code and record the unresolved scope decision.
+Dash deve permanecer no BOLT · AVENTURA, por decisão explícita do usuário em 2026-11-26. A decisão está registrada em `docs/production/ADR-001-DASH.md` e prevalece sobre a exclusão na diretiva ainda não integrada da PR #1. Preserve implementação, Input Map, controles touch e testes. Não remova a mecânica. Retuning, redesign ou mudanças de física/controles exigem escopo próprio e testes.
 
 
 ## Mandatory quality and session continuity

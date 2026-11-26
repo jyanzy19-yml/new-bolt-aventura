@@ -4,16 +4,16 @@
 
 ## Estado vigente — revisão de 2026-11-26
 
-**Última verificação completa da main:** HEAD `caedfee2f790cc78222b281a5b602110d7229043` após merge da PR #9; Docs CI run `45817363134` SUCCESS. O HEAD muda a cada integração: confirmar o SHA real de `main` antes de iniciar qualquer alteração.
+**Última verificação completa da main:** HEAD `1e5294cf112c014c21e43c51b4c8e797beceb9b6` após PR #10; confirmar novamente o SHA antes de cada novo turno.
 
 - **Etapa 0 — Claude Code: ACCEPTED.** Fundação Godot 4.7.2 e protótipo técnico provisório aceitos; hardening integrado pela PR #3.
 - **Etapa 1 — ChatGPT: HANDOFF_READY.** Correção de reatribuição de ponteiro em `TouchControls`, regressão e execução da suíte no CI; entrega original `f3ab682`.
-- **PRs #2–#7: MERGED.** A PR #7 (`b8def7a`) corrigiu a documentação obsoleta sobre a existência do projeto e sincronizou o handoff; Docs CI #144/#145 SUCCESS. Nenhum código de gameplay foi alterado.
-- **Próximo turno de gameplay: Etapa 2 — Claude Code**, após integração desta rodada de correções documentais/governança. O usuário inicia Claude manualmente; não iniciar trabalho concorrente.
+- **PRs #2–#10: MERGED.** PR #7 reconciliou documentos raiz; PRs #8–#10 sincronizaram auditoria e continuidade. PR #10 foi integrada em `1e5294c`. Nenhum código de gameplay foi alterado nessas PRs documentais.
+- **Escritor ativo:** ChatGPT, exclusivamente nesta branch de auditoria/correção. Claude Code deve aguardar a conclusão da PR e o handoff atualizado. Depois da integração e aceite, Claude assume a Etapa 2; o usuário inicia a sessão manualmente.
 - **Projeto executável:** Godot 4.7.2, GDScript, Android em paisagem. A base contém boot/menu, SceneFlow, player, touch/multitouch, HUD, sandbox e testes; não é a campanha completa.
 - **Validação máxima comprovada:** L2 (Godot headless/CI). Não há comprovação de APK exportado/instalado, teste visual, touch físico, safe area real ou desempenho em Android.
-- **PR #1:** continua OPEN e não mergeável (`mergeable_state=dirty`), com 17 commits exclusivos; a comparação de 2026-11-26 após PR #9 indicava 138 commits de atraso. A contagem é volátil: consultar o compare atual antes de rebasear. Modifica 17 arquivos: quatro documentos de raiz e a diretiva dividida em 12 partes/índice. Não contém implementação de gameplay. Não mesclar automaticamente.
-- **Dash:** código, Input Map, controles e testes atuais incluem a mecânica; PR #1 a exclui. A decisão canônica permanece pendente. Preservar a implementação existente sem ampliar, remover ou retunar até decisão explícita.
+- **PR #1:** continua OPEN e não mergeável (`mergeable_state=dirty`), com 17 commits exclusivos; a comparação atual de 2026-11-26 após PR #10 indica 139 commits de atraso. A contagem é volátil: consultar o compare atual antes de rebasear. Modifica 17 arquivos: quatro documentos de raiz e a diretiva dividida em 12 partes/índice. Não contém implementação de gameplay. Não mesclar automaticamente.
+- **Dash:** decisão explícita do usuário em 2026-11-26: DEVE PERMANECER no jogo. Preservar implementação, Input Map, controles e testes. A exclusão na diretiva não integrada da PR #1 está superada; ver `ADR-001-DASH.md`. Não retunar ou redesenhar sem escopo próprio.
 - **Governança da main:** o endpoint de branches confirmou `protected=false` para `main`. A integração não disponibiliza operação administrativa para habilitar proteção/ruleset; o proprietário deve configurar as regras manualmente. Não presumir checks obrigatórios antes de resolver os filtros por caminhos dos workflows.
 - **Escritor desta rodada:** ChatGPT, restrito a documentação, governança e auditoria. Nenhuma alteração de gameplay está autorizada nesta rodada. Claude deve aguardar a conclusão/integração e o handoff atualizado.
 

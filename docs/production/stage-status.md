@@ -1,7 +1,7 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` (último HEAD verificado antes desta sincronização: `caedfee2f790cc78222b281a5b602110d7229043`; confirmar novamente ao iniciar)  
+**Branch de integração:** `main` (HEAD confirmado em 2026-11-26: `1e5294cf112c014c21e43c51b4c8e797beceb9b6`; confirmar novamente ao iniciar)  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
 
 ## Estado executável observado
@@ -57,7 +57,7 @@ Um único escritor por vez. O usuário aciona manualmente o próximo agente.
 - Auditoria abrangente anterior: [repository-polish-audit-2026-11-26.md](repository-polish-audit-2026-11-26.md), integrada pela PR #5.
 - Revisão atual confirmou PR #1 OPEN, `mergeable_state=dirty`, 17 commits exclusivos; a comparação de 2026-11-26 após PR #9 indicava 138 commits de atraso. Consultar o compare atual antes de rebasear.; 17 arquivos modificados, todos documentais. Não contém gameplay. Não mesclar automaticamente.
 - Documentos raiz foram identificados como obsoletos quanto à existência do projeto Godot. Esta rodada atualiza o mandato para continuar a base existente, sem recriá-la.
-- Conflito de escopo do Dash permanece pendente; preservar implementação atual sem ampliar/remover/retunar.
+- Dash: decisão do usuário em 2026-11-26 resolvida e registrada em `ADR-001-DASH.md`; deve permanecer. Preservar implementação e testes; mudanças de tuning/controles exigem escopo próprio.
 - GitHub confirmou `protected=false` para `main`. A integração não tem operação administrativa para ativar proteção/ruleset; o proprietário precisa configurar manualmente. Verificar também os filtros por caminhos antes de exigir checks específicos.
 
 ## Próximo gate executável
@@ -75,3 +75,28 @@ Claude Code assume a Etapa 2 após o usuário iniciar sua sessão. Ponto de part
 - [Handoff Etapa 2 — Claude](handoffs/HANDOFF_ETAPA_2_CLAUDE.md)
 - [Auditoria de hardening da Etapa 0](stage-0-hardening-audit.md)
 - [Protocolo de qualidade](quality-control-protocol.md)
+
+
+## Auditoria corretiva — snapshot após PR #10 (2026-11-26)
+
+- HEAD confirmado: `1e5294cf112c014c21e43c51b4c8e797beceb9b6`.
+- PR #1 permanece OPEN e não mergeável; compare atual: 17 commits exclusivos e 139 commits atrás. Os 17 arquivos continuam exclusivamente documentais.
+- PRs #2–#10 estão integradas. A PR #10 é o último merge observado.
+- Godot 4.7.2, GDScript, Android empacotado em paisagem; projeto real com cenas, scripts, recursos e testes.
+- Nenhum defeito S0–S2 de gameplay foi confirmado pela inspeção estática focalizada nesta rodada. Isso não substitui execução Godot local nem teste físico.
+- Dash deve permanecer por decisão explícita do usuário; ver `ADR-001-DASH.md`. A exclusão documental na PR #1 não integrada está superada.
+- A validação CI deste novo snapshot deve ser registrada pela execução da PR desta auditoria; o status consultado para o HEAD atual não retornou checks.
+
+
+## Decisão canônica sobre Dash — 2026-11-26
+
+- **Decisão:** Dash deve permanecer no BOLT · AVENTURA, conforme confirmação explícita do usuário.
+- **Fonte canônica:** [ADR-001-DASH.md](ADR-001-DASH.md). A exclusão na diretiva ainda não integrada da PR #1 está superada e não autoriza remover a mecânica.
+- Preservar código, Input Map, controles touch e testes existentes. Alterações de física, cooldown, velocidade, duração, controles ou balanceamento exigem tarefa própria.
+- Esta atualização é documental; não altera gameplay.
+
+## Estado desta auditoria — PR #11
+
+- PR #11 permanece aberta e mergeable, sem merge automático.
+- Docs CI run #157 (ID `45822873097`) SUCCESS no HEAD `bfec6e20e767477302801d46a50a637cfd4f30ad`; job `Validate project documentation` concluiu todas as etapas. As correções posteriores de consistência em continuidade, handoff e relatório precisam de nova execução CI.
+- Godot CI não foi acionado porque os arquivos alterados são documentais. Não houve execução local de Godot, exportação APK ou teste Android físico.

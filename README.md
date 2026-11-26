@@ -22,7 +22,7 @@ O alvo técnico inclui aparelhos Android com aproximadamente 4 GB de RAM e Media
 
 ## Comece por aqui
 1. Leia `MASTER_DIRECTIVE.md`, `CLAUDE.md` e `AGENTS.md`.
-2. Leia a [diretiva obrigatória de implementação do zero](docs/production/from-zero-implementation-directive.md).
+2. Leia a [diretiva de implementação integral e continuidade](docs/production/from-zero-implementation-directive.md).
 3. Abra [o índice de documentação](docs/README.md) e o [prompt mestre de design/gameplay](docs/prompts/master-game-design-and-gameplay-prompt.md).
 4. Consulte [o catálogo de skills](docs/skills-catalog.md) e as decisões aprovadas.
 5. Verifique [o estado real](docs/production/stage-status.md), [a colaboração Claude ↔ ChatGPT](docs/production/COLLABORATION_STATE.md), [o pipeline CI](docs/production/CI_AND_VALIDATION_PIPELINE.md), [o tracker](docs/production/implementation-tracker.md) e [a continuidade](docs/production/CONTINUITY.md).
