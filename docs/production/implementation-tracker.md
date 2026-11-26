@@ -42,7 +42,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-015 | Save/load, versão e recuperação | Não iniciado | Sem implementação do jogo |
 | SYS-016 | Inventário, moedas, melhorias e skins | Não iniciado | Sem implementação do jogo |
 | SYS-017 | Menus, HUD, pausa e configurações | Em andamento | Menu inicial e HUD de sandbox com pausa/resultado existem; controles touch e safe area parcial. Configurações completas e fluxos finais ausentes. Headless apenas; sem validação visual/Android |
-| SYS-018 | Cutscenes, legendas e replay/pulo | Não iniciado | Sem implementação do jogo |
+| SYS-018 | Cutscenes, legendas e replay/pulo | Em andamento | Storyboard funcional de quatro páginas e avanço/pulo para tutorial; tutorial jogável guiado por robô mensageiro (texto instrucional provisório). Sem animação final, áudio ou replay persistente |
 | SYS-019 | Áudio, música, buses e opções | Não iniciado | Sem implementação do jogo |
 | SYS-020 | Loading, transições e gestão de memória | Em andamento | `SceneFlow` usa carregamento threaded, bloqueia transições concorrentes e sinaliza sucesso/falha; testado headless. Gestão abrangente de memória/preload ainda não implementada |
 | SYS-021 | Pipeline de assets e proveniência | Não iniciado | Pipeline do jogo a estabelecer |
@@ -56,7 +56,7 @@ A matriz define a estrutura planejada: seis fases por mundo; fases 1–5 de prog
 
 | ID | Mundo | Função planejada | Status inicial | Evidência |
 |---|---|---|---|---|
-| W1-L1 | Cybercore | Entrada e exploração | Não iniciado | Sem cena |
+| W1-L1 | Cybercore | Entrada e exploração | Em andamento | Blockout jogável com BOLT, HUD/touch, checkpoint local, respawn e objetivo de trecho. Sem inimigos, combate, arte/áudio finais, save ou validação Android |
 | W1-L2 | Cybercore | Progressão | Não iniciado | Sem cena |
 | W1-L3 | Cybercore | Progressão | Não iniciado | Sem cena |
 | W1-L4 | Cybercore | Combinação de mecânicas | Não iniciado | Sem cena |
@@ -118,3 +118,12 @@ Só muda para **Validado** quando inicia e termina corretamente; não possui sof
 ## 5. Nota de reconciliação de escopo — auditoria 2026-11-26
 
 A auditoria estática da main confirmou que o código atual e os registros SYS-005/SYS-006 incluem Dash. A PR #1, ainda aberta e não integrada, contém uma diretiva que exclui Dash; o `MASTER_DIRECTIVE.md` da main ainda usa linguagem condicional sobre dash. Até a revisão/reconciliação da PR #1 e confirmação da fonte canônica, não ampliar nem remover essa mecânica silenciosamente. Estado e evidências completas: [auditoria de polimento](repository-polish-audit-2026-11-26.md).
+
+
+## Entrada da campanha — branch `feat/campaign-opening-tutorial`
+
+- Menu principal → storyboard funcional de abertura → tutorial guiado por robô mensageiro provisório → blockout W1-L1 Cybercore.
+- A abertura usa fatos do canon aprovado, mas ainda não é cinemática final animada.
+- Tutorial introduz movimento, salto e Dash com o player/HUD/touch existentes. Textos instrucionais são provisórios e não definem a personalidade do mensageiro.
+- W1-L1 permanece Em andamento; inimigos, combate, assets/áudio finais, save/load e QA Android continuam pendentes.
+- Teste estrutural novo: `tests/unit/test_campaign_entry.gd`; CI pendente.
