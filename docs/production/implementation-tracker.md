@@ -311,7 +311,7 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - **Estado:** em desenvolvimento.
 
 
-| SYS-026 | Plataformas unidirecionais | Em andamento | `OneWayPlatform` estende `PlatformBlock`, configura `one_way_collision=true`, direção `Vector2.DOWN` e margin configurável; testes headless de passagem ascendente e aterrissagem adicionados, aguardando CI |
+| SYS-026 | Plataformas unidirecionais | Integrado (componente) | PR #46 integrada em `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`; Godot CI pré-merge 87 testes/548 verificações/0 falhas, Docs e Android Debug Export SUCCESS. Pós-merge CI não confirmado; sem integração em fase/playtest Android |
 
 
 ## SYS-025 — resultado da plataforma móvel (2026-11-26)
@@ -329,4 +329,4 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Implementação: `OneWayPlatform` reutiliza `PlatformBlock` e configura o sentido de colisão no `CollisionShape2D`; não altera o controller do player.
 - Testes: passagem de baixo para cima e aterrissagem de cima para baixo.
 - Plano: `docs/production/plans/2026-11-26-one-way-platform.md`.
-- **Estado:** aguardando Godot/Docs CI; sem integração em fase.
+- **Estado:** PR #46 integrada por squash em `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`. Godot CI pré-merge `45887805114`: 87 testes/548 verificações/0 falhas; Docs `45887805097` SUCCESS; Android Debug Export `45887805269` SUCCESS. Workflow runs pós-merge consultados sem execuções. Sem integração em fase, playtest visual ou Android físico.
