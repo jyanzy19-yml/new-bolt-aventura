@@ -348,3 +348,7 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - O SaveSystem atual escreve `.tmp`, mas `load_payload()` tenta somente principal e backup; o SaveStore legado tenta principal/tmp/backup e valida o tmp antes de promover.
 - O SaveSystem atual rejeita formato futuro na leitura, porém `save_payload()` não aborta quando o principal/backup é `unsupported_format_version`; o caminho de rotação pode substituir o arquivo futuro. A cobertura atual testa rejeição na leitura, não a tentativa subsequente de gravação.
 - **PROPOSTA:** abrir tarefa/PR própria com testes de crash points e mutação. Não copiar o sistema duplicado nem alterar save nesta missão.
+
+
+
+- Repetição da prova por mutação em run `45909945401`: SUCCESS; callback antigo detectado, callback ObjectID restaurado e suíte final 103/672/0.
