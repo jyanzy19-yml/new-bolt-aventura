@@ -342,3 +342,12 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - **Estado:** Implementado na branch; **não validado**. Godot local não executado nesta sessão; aguardar checks da PR.
 - **Critério de validação:** teste threaded passa 30 ciclos para cada uma das três cenas; mutação com referência direta antiga deve falhar especificamente na carga do menu; 20/20 boots com exit code 0 e sem erros não permitidos.
 - **Não alterado:** schema/persistência de save, progressão, Dash, Input Map, controles touch/multitouch e física.
+
+
+### SYS-003 — atualização diagnóstica após Godot CI #167
+
+- Suite: **93 testes / 1.307 verificações / 0 falhas**. Integração SceneFlow: 722 verificações no laço de 30 ciclos por cada cena (menu, W1-L1, W1-L2).
+- Boot smoke: falhou no primeiro processo com o erro original em main_menu.tscn:12.
+- A mutação anterior do autoload foi falsa positiva por casar um WARNING contendo o nome do menu. Descartada como evidência.
+- Implementado na branch um atraso de um frame antes da primeira transição de Boot e uma matriz de mutações em processo frio para separar a hipótese de autoload da hipótese de ordem de inicialização.
+- **Estado:** em investigação / validação pendente; nenhum boot 20/20 registrado.
