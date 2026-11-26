@@ -397,3 +397,14 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - CI pós-merge main: Godot `45855795164` SUCCESS (54 testes / 304 verificações / 0 falhas); Docs `45855795173` SUCCESS.
 - W1-L1 agora tem cobertura de integração para a cadeia real de disparo no inimigo, checkpoint/queda/respawn, coletável/recuperação, saída, derrota e contrato de retry.
 - Nenhum APK, instalação, emulador, Android físico, FPS, memória ou latência foi testado. W1-L1 permanece Em andamento; ainda falta conteúdo final, persistência de campanha e playtest/QA Android.
+
+
+## Sessão ChatGPT — fundação SaveSystem — 2026-11-26
+
+- Base main: `7af315f258a1360d84906ef72f98eae39611b623` (PR #27 integrada; rastreabilidade atualizada após PR #26).
+- Branch: `feat/versioned-save-storage-foundation`.
+- Implementação em andamento: autoload `SaveSystem`, armazenamento `user://bolt_save.json`, envelope JSON v1, checksum SHA-256, validação estrita de payload, temporário/backup e recuperação de backup.
+- API é de baixo nível e não define o payload da campanha. Nenhum checkpoint ou progresso W1-L1 foi conectado; evitar alegar persistência de gameplay.
+- Testes: round-trip, overwrite, delete, fallback de backup, formato futuro e rejeição de Node no payload. CI ainda pendente.
+- Não executado: Android físico, exportação APK, instalação, emulador, interrupção forçada do processo, benchmark de I/O ou teste de armazenamento em OEM.
+- Próxima ação: validar GDScript/import e suíte; corrigir causa-raiz; abrir PR; integrar apenas com Godot/Docs CI verdes; depois definir/integrar o primeiro payload de campanha por IDs estáveis.
