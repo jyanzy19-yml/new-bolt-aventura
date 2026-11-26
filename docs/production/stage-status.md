@@ -538,7 +538,7 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 
 - Godot Validation run 45907658225: SUCCESS.
 - Suíte: **93 testes / 1.307 verificações / 0 falhas**.
-- SceneFlow repetido: **722 verificações** em 30 ciclos para cada uma das três cenas (menu, W1-L1, W1-L2).
+- SceneFlow repetido: **722 verificações** em 30 ciclos para cada uma das quatro cenas (menu, abertura, W1-L1, W1-L2).
 - Cold boot verbose: exit 0.
 - Boot smoke: **20/20 processos independentes** passaram.
 - Mutação removendo o prewarm do script do menu reproduziu o Parse Error original; o passo de mutação passou.
@@ -559,7 +559,7 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 
 - Head testado: `893553584408ed6e1c8fd3f51b372a18f772862b`; PR #58 permanece OPEN, sem merge.
 - Godot Validation run `45908170078`: SUCCESS; **93 testes / 1.307 verificações / 0 falhas**.
-- Teste threaded: 30 ciclos por cena (menu, W1-L1, W1-L2), 90 transições e 722 verificações.
+- Teste threaded: 30 ciclos por cena (menu, W1-L1, W1-L2), 120 transições e 962 verificações.
 - Diagnóstico cold boot verbose: exit 0.
 - Boot smoke: **20/20 processos independentes** passaram.
 - Mutation: remover o prewarm reproduziu o erro original de carregamento de `main_menu.tscn`.
