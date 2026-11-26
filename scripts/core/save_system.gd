@@ -136,7 +136,13 @@ func _decode_file(path: String) -> Dictionary:
 		return {"ok": false, "error": "invalid_json"}
 	var envelope: Dictionary = parsed
 	var version: Variant = envelope.get("format_version", null)
-	if typeof(version) != TYPE_INT or version != FORMAT_VERSION:
+	var version_is_valid: bool = false
+	if typeof(version) == TYPE_INT:
+		version_is_valid = version == FORMAT_VERSION
+	elif typeof(version) == TYPE_FLOAT:
+		var numeric_version: float = float(version)
+		version_is_valid = is_finite(numeric_version) and numeric_version == float(FORMAT_VERSION)
+	if not version_is_valid:
 		return {"ok": false, "error": "unsupported_format_version"}
 	var payload_json: String = str(envelope.get("payload_json", ""))
 	if payload_json.is_empty():
