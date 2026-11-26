@@ -40,6 +40,7 @@ func test_main_scene_exists_and_autoloads() -> bool:
 	check(ResourceLoader.exists(main_scene, "PackedScene"), "cena principal existe: %s" % main_scene)
 	check(ProjectSettings.has_setting("autoload/SceneFlow"), "autoload SceneFlow registrado")
 	check(ProjectSettings.has_setting("autoload/SaveSystem"), "autoload SaveSystem registrado")
+	check(ProjectSettings.has_setting("autoload/CampaignProgress"), "autoload CampaignProgress registrado")
 	return true
 
 
