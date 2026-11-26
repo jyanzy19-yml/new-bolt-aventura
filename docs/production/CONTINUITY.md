@@ -5,12 +5,12 @@
 
 ## Snapshot vigente — revisão de 2026-11-26
 
-- **HEAD atual da main:** `7afb58b190047157f35c5a0e971d0acee87dd999`; snapshot final após PR #7. Docs CI #145 SUCCESS.
+- **Última verificação completa da main:** HEAD `caedfee2f790cc78222b281a5b602110d7229043` após merge da PR #9; Docs CI run `45817363134` SUCCESS. Confirmar o SHA real da main antes de iniciar, pois novos merges alteram o HEAD.
 - **PR #7 integrada:** merge `b8def7a22feee9573c8e4c46c99ed89cb92967c`; Docs CI #144 (PR) e #145 (push após merge) SUCCESS. A PR partiu do HEAD `75159132a7dc2503df68d8ca1abe57fc7e88019c`.
 - O projeto Godot executável existe na raiz: Godot **4.7.2**, `project.godot`, cenas, scripts GDScript, recursos e testes. Continuar a base existente; não recriar o projeto.
 - Etapa 0: **ACCEPTED**. Etapa 1: **HANDOFF_READY**. PRs #2–#7: **MERGED**.
 - Próximo turno de gameplay: **Claude Code — Etapa 2**, somente depois da integração desta rodada e confirmação do HEAD atual pelo usuário/Claude.
-- **PR #1:** OPEN, `mergeable_state=dirty`; 17 commits exclusivos, 137 commits atrás da main atual (`7afb58b`), 17 arquivos alterados. Contém documentos de raiz e uma diretiva em 12 partes/índice; não contém implementação de gameplay. Preservada sem merge/fechamento.
+- **PR #1:** OPEN, `mergeable_state=dirty`; 17 commits exclusivos e 17 arquivos alterados; o compare de 2026-11-26 após PR #9 indicava 138 commits atrás. A contagem muda com cada merge; consultar o compare atual antes de qualquer rebase. Contém documentos de raiz e uma diretiva em 12 partes/índice; não contém implementação de gameplay. Preservada sem merge/fechamento.
 - **Dash:** código e testes atuais incluem Dash; a diretiva da PR #1 exclui. Decisão canônica não resolvida. Não adicionar, remover ou retunar a mecânica sem decisão explícita.
 - **Branch protection:** GitHub confirmou `protected=false` para `main`. A integração não oferece operação administrativa para ativar proteção/ruleset; o proprietário deve configurar manualmente. Como os workflows usam filtros por caminhos, não tornar checks condicionais obrigatórios sem um check agregador que sempre execute.
 - **Validação máxima comprovada:** L2 (Godot headless/CI). Docs CI #143 SUCCESS no HEAD anterior à rodada. Não há APK exportado/instalado, editor gráfico, emulador, toque físico, safe area em aparelho, FPS ou memória medidos.
