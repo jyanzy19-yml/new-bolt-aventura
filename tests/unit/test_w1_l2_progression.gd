@@ -58,9 +58,11 @@ func test_w1_l2_registers_progress_checkpoint_and_completion() -> bool:
 	var checkpoint: BoltCheckpoint = level.get_node("Checkpoint") as BoltCheckpoint
 	var goal: Area2D = level.get_node("Goal") as Area2D
 	var hud: Hud = level.get_node("Hud") as Hud
+	var end_floor: PlatformBlock = level.get_node("Geometry/EndFloor") as PlatformBlock
 	check(player != null and gate != null and checkpoint != null and goal != null and hud != null, "W1-L2 instancia os sistemas essenciais")
 	check_eq(CampaignProgress.load_state().get("current_level_id"), "W1-L2", "entrada registra W1-L2 como destino de retomada")
 	check(gate.is_active(), "campo energético está ativo na entrada")
+	check(checkpoint.global_position.x >= end_floor.global_position.x and checkpoint.global_position.x <= end_floor.global_position.x + end_floor.size.x, "checkpoint fica sobre o piso final seguro")
 	player.global_position = checkpoint.global_position
 	player.velocity = Vector2.ZERO
 	for _tick in range(3):
