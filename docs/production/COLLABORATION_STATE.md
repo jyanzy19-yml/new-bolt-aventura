@@ -2,7 +2,7 @@
 
 ## Snapshot operacional vigente — 2026-11-26
 
-- **Main HEAD:** `68b677aa7860894928a690861ef63b300f8175fb` (PR #42 integrada; Godot `45883759266`, Docs `45883759252` e Android export `45883759260` SUCCESS na PR).
+- **Main HEAD:** `22923228d2a58c0ee6d75b581d5a16aa70e1a7ef` (PR #43 integrada; Godot `45884348999`, Docs `45884348954` e Android export `45884348969` SUCCESS na PR).
 - **Última entrega de conteúdo:** PR #34, W1-L2 em blockout e progressão W1-L1→W1-L2.
 - **Última regressão integrada:** PR #39, limpeza do ActionBuffer em pausa/suspensão/perda de foco, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.
 - **Última infraestrutura integrada:** PR #38, pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.
