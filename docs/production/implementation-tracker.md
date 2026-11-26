@@ -429,3 +429,11 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Docs Validation #396 / run `45909374561`: SUCCESS.
 - Android Debug Export #103 / run `45909374622`: SUCCESS; APK debug exportado, verificado e enviado como artifact.
 - Android físico/emulador não testado; não declarar FPS, RAM, touch ou estabilidade térmica validados.
+
+
+
+### SYS-003 — atualização do head atual PR #58
+
+- Head `63a28d9`; Godot Validation `45909667893`: 93 testes / 1.787 verificações / 0 falhas.
+- SceneFlow: 150 transições em cinco cenas / 1.202 verificações; cold boot 20/20; mutação sem prewarm reproduz Parse Error original.
+- Android Debug Export `45909667948`: SUCCESS; export CI comprovado, sem execução em aparelho.
