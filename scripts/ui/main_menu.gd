@@ -26,6 +26,16 @@ func _ready() -> void:
 	_play.grab_focus()
 
 
+## Resolve autoloads at runtime. A scene script can be compiled by ResourceLoader's
+## threaded loader before the autoload's global identifier table is available.
+func _campaign_progress() -> Node:
+	return get_node_or_null("/root/CampaignProgress")
+
+
+func _save_system() -> Node:
+	return get_node_or_null("/root/SaveSystem")
+
+
 func _resolve_level_path(level_id: String) -> String:
 	var path: String = str(LEVEL_PATHS.get(level_id, ""))
 	if path.is_empty() or not ResourceLoader.exists(path, "PackedScene"):
@@ -34,9 +44,16 @@ func _resolve_level_path(level_id: String) -> String:
 
 
 func _refresh_continue_state() -> void:
-	var state: Dictionary = CampaignProgress.load_state()
+	var progress: Node = _campaign_progress()
+	if progress == null:
+		_continue.disabled = true
+		_progress_status.text = "Progresso indisponível · Você ainda pode iniciar uma nova jornada."
+		return
+
+	var state_value: Variant = progress.call("load_state")
+	var state: Dictionary = state_value if typeof(state_value) == TYPE_DICTIONARY else {}
 	var current_level_id: String = str(state.get("current_level_id", ""))
-	var load_error: String = CampaignProgress.last_error
+	var load_error: String = str(progress.get("last_error"))
 	var resume_path: String = _resolve_level_path(current_level_id)
 	var can_continue: bool = load_error.is_empty() and not resume_path.is_empty()
 	_continue.disabled = not can_continue
@@ -47,27 +64,33 @@ func _refresh_continue_state() -> void:
 		_progress_status.text = "Nenhuma campanha salva."
 	elif resume_path.is_empty():
 		_progress_status.text = "O progresso salvo aponta para uma fase ainda indisponível."
-	elif SaveSystem.last_error == "recovered_backup":
+	elif _save_system() != null and str(_save_system().get("last_error")) == "recovered_backup":
 		_progress_status.text = "Progresso recuperado do backup · %s disponível." % str(LEVEL_LABELS.get(current_level_id, current_level_id))
-	elif CampaignProgress.is_level_completed(current_level_id):
+	elif bool(progress.call("is_level_completed", current_level_id)):
 		_progress_status.text = "Trecho concluído · %s disponível para revisitar." % str(LEVEL_LABELS.get(current_level_id, current_level_id))
 	else:
 		_progress_status.text = "Progresso disponível · %s." % str(LEVEL_LABELS.get(current_level_id, current_level_id))
 
 
 func _resolve_continue_path() -> String:
-	var state: Dictionary = CampaignProgress.load_state()
-	if not CampaignProgress.last_error.is_empty():
+	var progress: Node = _campaign_progress()
+	if progress == null:
 		return ""
+	var state_value: Variant = progress.call("load_state")
+	if not str(progress.get("last_error")).is_empty():
+		return ""
+	var state: Dictionary = state_value if typeof(state_value) == TYPE_DICTIONARY else {}
 	return _resolve_level_path(str(state.get("current_level_id", "")))
 
 
 func _on_new_game_pressed() -> void:
 	_play.disabled = true
 	_continue.disabled = true
-	if not CampaignProgress.start_new_campaign():
+	var progress: Node = _campaign_progress()
+	if progress == null or not bool(progress.call("start_new_campaign")):
 		# Save ilegível não deve ser apagado implicitamente; a sessão ainda pode começar.
-		push_warning("MainMenu: nova jornada iniciada sem redefinir o save (%s)." % CampaignProgress.last_error)
+		var reason: String = "autoload CampaignProgress ausente" if progress == null else str(progress.get("last_error"))
+		push_warning("MainMenu: nova jornada iniciada sem redefinir o save (%s)." % reason)
 		_progress_status.text = "Save indisponível · esta sessão pode não ser persistida."
 	_transition_to(OPENING_PATH)
 
@@ -86,7 +109,7 @@ func _transition_to(path: String) -> void:
 		push_error("MainMenu: autoload SceneFlow ausente.")
 		_restore_menu()
 		return
-	if not flow.change_scene(path):
+	if not bool(flow.call("change_scene", path)):
 		_restore_menu()
 
 
