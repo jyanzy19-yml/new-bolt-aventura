@@ -47,7 +47,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-020 | Loading, transições e gestão de memória | Em andamento | PR #41 integrou `LoadingOverlay`; PR #42 pausa SceneTree, oculta touch e retoma após sucesso; PR #43 cobre restauração do pause state em falha. PR #43 CI: 78 testes/484 verificações/0 falhas, export Android SUCCESS. Cancelamento, preload e gestão de memória pendentes |
 | SYS-021 | Pipeline de assets e proveniência | Não iniciado | Pipeline do jogo a estabelecer |
 | SYS-022 | Testes automatizados e regressão | Em andamento | Workflow Godot 4.7.2 executa import + `tests/test_runner.gd`; PR #44 Godot CI: 81 testes/508 verificações/0 falhas; Docs e Android export SUCCESS. Headless não equivale a QA visual ou Android físico |
-| SYS-023 | Exportação, instalação e QA Android | Em andamento | PR #44 exportou artifact `bolt-aventura-android-debug-5cfbc040d6b748092c5d2a5524f06bdb5272340e`, assinatura v2/v3 válida, SHA-256 `638f414f3851e44499a8c8b27ac4cba304eebba71e70ad316123c95dfa5a3ed3`. Package ID provisório; instalação, inicialização, touch, safe area e QA físico ainda não executados |
+| SYS-023 | Exportação, instalação e QA Android | Em andamento | PR #45 pós-merge main exportou artifact `bolt-aventura-android-debug-b24c8624a8ed64816d0131070f440a47f525ba47`, assinatura v2/v3 válida, SHA-256 `3b3be5c8df067c000216bbc3e5ad39b357f0ea70ad3d3a5bc12625724873ffd1`. Package ID provisório; instalação, inicialização, touch, safe area e QA físico ainda não executados |
 | SYS-024 | Créditos, encerramento e release candidate | Não iniciado | Sem campanha implementada |
 
 ## 4. Rastreador das 42 fases
@@ -300,7 +300,7 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - **Estado:** aguardando CI. Headless valida propriedades, não o enquadramento visual ou o comportamento em hardware.
 
 
-| SYS-025 | Plataformas móveis e transporte de personagem | Em andamento | Componente `AnimatableBody2D` em implementação com movimento ping-pong sincronizado à física; teste de deslocamento, espera de endpoint e transporte de `CharacterBody2D` pendentes. Não integrado em fase ainda |
+| SYS-025 | Plataformas móveis e transporte de personagem | Implementado (componente) | PR #45 integrou `MovingPlatform` (`AnimatableBody2D`, sync_to_physics, ping-pong, espera em endpoints). Godot CI: 85 testes/533 verificações/0 falhas, incluindo transporte real do BOLT. Sem integração em fase; playtest Android pendente |
 
 ## SYS-025 — plataforma móvel reutilizável (2026-11-26)
 
@@ -309,3 +309,15 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Abordagem: `AnimatableBody2D` com `sync_to_physics`, movimento ping-pong determinístico e transporte nativo de CharacterBody2D.
 - Não adicionar ao W1-L1/W1-L2 até validar comportamento e obter decisão de level design para fase apropriada.
 - **Estado:** em desenvolvimento.
+
+
+| SYS-026 | Plataformas unidirecionais | Em andamento | Componente `OneWayPlatform` em implementação baseado em `PlatformBlock`/`CollisionShape2D.one_way_collision`; testes de passagem de baixo para cima e aterrissagem de cima para baixo pendentes |
+
+
+## SYS-025 — resultado da plataforma móvel (2026-11-26)
+
+- PR #45 integrada por squash em `b24c8624a8ed64816d0131070f440a47f525ba47`.
+- Godot CI pré-merge `45886680875` e pós-merge `45886997248`: 85 testes/533 verificações/0 falhas.
+- Docs CI pós-merge `45886997138` SUCCESS.
+- Android Debug Export pós-merge `45886997220` SUCCESS; artifact e hash registrados em `CI_AND_VALIDATION_PIPELINE.md`.
+- Transporte do BOLT por AnimatableBody2D confirmado headless. Não integrado em fase; dimensões/percurso continuam provisórios.
