@@ -18,7 +18,7 @@ extends Node
 ## Janela padrão (s de tempo de jogo). PROVISÓRIO — valor de trabalho, a ser medido em aparelho.
 const DEFAULT_WINDOW: float = 0.12
 
-@export var tracked_actions: Array[StringName] = [Actions.JUMP, Actions.DASH]
+@export var tracked_actions: Array[StringName] = [Actions.JUMP, Actions.DASH, Actions.ATTACK]
 
 ## ação -> índice do tick de física em que foi pressionada
 var _pressed_at_tick: Dictionary = {}
