@@ -15,6 +15,7 @@ const MAIN_MENU_PATH: String = "res://scenes/ui/main_menu.tscn"
 @onready var _progress_notification_timer: Timer = %ProgressNotificationTimer
 
 var _restart_path: String = ""
+var _result_next_path: String = ""
 
 
 func _ready() -> void:
@@ -72,8 +73,10 @@ func _on_progress_notification_timeout() -> void:
 	_progress_notification.visible = false
 
 
-func show_result(title: String) -> void:
+func show_result(title: String, next_path: String = "") -> void:
 	_result_title.text = title
+	_result_next_path = next_path
+	_again_button.text = "PRÓXIMA FASE" if not _result_next_path.is_empty() else "JOGAR DE NOVO"
 	_result_overlay.visible = true
 	_pause_overlay.visible = false
 	_touch.release_all()
@@ -98,8 +101,9 @@ func _go_to_menu() -> void:
 
 
 func _restart() -> void:
-	if _restart_path != "":
-		_leave_to(_restart_path)
+	var destination: String = _result_next_path if not _result_next_path.is_empty() else _restart_path
+	if destination != "":
+		_leave_to(destination)
 
 
 func _leave_to(path: String) -> void:
