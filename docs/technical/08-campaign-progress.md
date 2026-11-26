@@ -9,7 +9,7 @@ CampaignProgress é o dono do schema de progresso de campanha. SaveSystem contin
 O payload raiz de SaveSystem contém a chave campaign_progress:
 
 - campaign_id: main
-- schema_version: 1, inteiro JSON exato; floats e strings não são convertidos para v1
+- schema_version: 1, número finito exatamente integral (TYPE_INT ou TYPE_FLOAT com valor inteiro); strings e floats fracionários são rejeitados
 - current_level_id: string; vazio no estado padrão de campanha nova e W1-L1/W1-L2 após entrada/progressão
 - active_checkpoint_id: string estável ou vazia
 - completed_level_ids: array de strings sem duplicatas
@@ -27,7 +27,7 @@ A estrutura base está em ADR-0004; a extensão W1-L1→W1-L2 está registrada e
 
 ## Falhas e validação
 
-- Schema desconhecido, schema_version não inteiro, campanha divergente ou payload inválido falham de forma fechada; não converter strings/floats nem sobrescrever automaticamente estado incompatível.
+- Schema desconhecido, schema_version textual/fracionário, campanha divergente ou payload inválido falham de forma fechada; não converter strings/floats nem sobrescrever automaticamente estado incompatível.
 - Falha de gravação gera warning e não impede o jogador de continuar.
 - Testes headless usam caminho user:// isolado, não o slot de produção.
 - A suíte valida round-trip e reentrada de cena; não valida encerramento forçado, filesystem OEM, permissões ou Android físico.
