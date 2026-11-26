@@ -4,7 +4,7 @@
 
 ## Estado vigente — revisão de 2026-11-26
 
-**HEAD de integração da correção documental:** `b8def7a22feee9573c8e4c46c99ed89cb92967c` (PR #7 MERGED; Docs CI #144 e #145 SUCCESS). A PR #7 partiu do HEAD `75159132a7dc2503df68d8ca1abe57fc7e88019c`.
+**HEAD atual da main:** `7afb58b190047157f35c5a0e971d0acee87dd999` (snapshot final após PR #7; Docs CI #145 SUCCESS). A PR #7 foi integrada por squash em `b8def7a22feee9573c8e4c46c99ed89cb92967c`, partindo do HEAD `75159132a7dc2503df68d8ca1abe57fc7e88019c`.
 
 - **Etapa 0 — Claude Code: ACCEPTED.** Fundação Godot 4.7.2 e protótipo técnico provisório aceitos; hardening integrado pela PR #3.
 - **Etapa 1 — ChatGPT: HANDOFF_READY.** Correção de reatribuição de ponteiro em `TouchControls`, regressão e execução da suíte no CI; entrega original `f3ab682`.
@@ -12,9 +12,9 @@
 - **Próximo turno de gameplay: Etapa 2 — Claude Code**, após integração desta rodada de correções documentais/governança. O usuário inicia Claude manualmente; não iniciar trabalho concorrente.
 - **Projeto executável:** Godot 4.7.2, GDScript, Android em paisagem. A base contém boot/menu, SceneFlow, player, touch/multitouch, HUD, sandbox e testes; não é a campanha completa.
 - **Validação máxima comprovada:** L2 (Godot headless/CI). Não há comprovação de APK exportado/instalado, teste visual, touch físico, safe area real ou desempenho em Android.
-- **PR #1:** continua OPEN e não mergeável (`mergeable_state=dirty`), com 17 commits exclusivos e 135 commits de atraso em relação à main verificada. Modifica 17 arquivos: quatro documentos de raiz e a diretiva dividida em 12 partes/índice. Não contém implementação de gameplay. Não mesclar automaticamente.
+- **PR #1:** continua OPEN e não mergeável (`mergeable_state=dirty`), com 17 commits exclusivos e 137 commits de atraso em relação à main atual (`7afb58b`). Modifica 17 arquivos: quatro documentos de raiz e a diretiva dividida em 12 partes/índice. Não contém implementação de gameplay. Não mesclar automaticamente.
 - **Dash:** código, Input Map, controles e testes atuais incluem a mecânica; PR #1 a exclui. A decisão canônica permanece pendente. Preservar a implementação existente sem ampliar, remover ou retunar até decisão explícita.
-- **Governança da main:** a leitura do endpoint de proteção retornou 403 para a integração; o estado atual da proteção não pôde ser confirmado nesta rodada. Auditoria anterior havia reportado ausência de proteção. É necessária verificação/configuração administrativa pelo proprietário.
+- **Governança da main:** o endpoint de branches confirmou `protected=false` para `main`. A integração não disponibiliza operação administrativa para habilitar proteção/ruleset; o proprietário deve configurar as regras manualmente. Não presumir checks obrigatórios antes de resolver os filtros por caminhos dos workflows.
 - **Escritor desta rodada:** ChatGPT, restrito a documentação, governança e auditoria. Nenhuma alteração de gameplay está autorizada nesta rodada. Claude deve aguardar a conclusão/integração e o handoff atualizado.
 
 ## Estado por etapa

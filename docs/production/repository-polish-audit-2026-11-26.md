@@ -151,3 +151,14 @@ O código atual contém Dash (Actions.DASH, estado DASHING, touch e testes), enq
 - A PR #1 também acrescenta detalhes de lore/encerramento, sequência de produção, requisitos de inimigos, skins/armas e vertical slice Cybercore. Esses detalhes exigem comparação com as bíblias/ADRs atuais antes de serem promovidos a canon; não foram incorporados automaticamente.
 - O README da PR #1 declara que a diretiva foi fornecida pelo usuário em 2026-11-25 e a apresenta como autoridade mais recente. O GitHub confirma a existência do texto e do PR, mas não comprova por si só a proveniência dessa decisão no diálogo do usuário. Por isso, a exclusão de Dash continua aguardando confirmação explícita do usuário, apesar da alegação documental.
 - PR #1 permanece OPEN, sem rebase/merge/fechamento. Nenhum código ou mecânica foi alterado.
+
+
+### 7.6 Snapshot pós-PR #7 — verificação final
+
+- **HEAD atual consultado:** `7afb58b190047157f35c5a0e971d0acee87dd999`. A PR #7 foi integrada por squash em `b8def7a22feee9573c8e4c46c99ed89cb92967c`; Docs CI #145 passou no HEAD atual.
+- **PR #1 contra a main atual:** OPEN, `mergeable_state=dirty`, 17 commits exclusivos e 137 commits atrás; 17 arquivos exclusivamente documentais. Quatro documentos raiz já foram corrigidos pela PR #7; a diretiva em 12 partes continua não integrada. Nenhum código de gameplay está no diff.
+- **Dash:** PR #1 exclui Dash, enquanto o código/Input Map/controles/testes atuais o implementam. Não existe decisão canônica confirmada no repositório. Preservar a implementação sem ampliar/remover/retunar; solicitar confirmação do usuário antes de promover a exclusão da PR #1.
+- **Branch protection:** `GET /branches/main` retornou `protected=false`. A integração GitHub disponível não expõe operação administrativa para ativar branch protection/rulesets; o proprietário deve configurar. Os workflows têm filtros por caminhos, então checks específicos podem ser omitidos em PRs fora desses caminhos; configurar um check agregador sempre executado antes de torná-los obrigatórios.
+- **Godot CI:** última execução de engine consultada, run `45809258952`, no commit `4ecaff1d67049155d95bcbb5fc9d1c98187d3767`, SUCCESS. Log confirma Godot 4.7.2, import/parse headless e **42 testes, 171 verificações, 0 falhas**. O erro `SceneFlow: cena inexistente` aparece como cenário negativo esperado no teste `test_missing_scene_is_rejected_without_side_effects`; o teste passou. O código não mudou após esse commit nas integrações documentais #5–#7.
+- **Docs CI:** run `45816337658` no HEAD `7afb58b`, SUCCESS; job `Validate project documentation` concluído.
+- **Validação não executada:** editor gráfico, exportação APK, instalação, emulador, dispositivo físico, toque real, barras/safe area em hardware, FPS/RAM/temperatura.
