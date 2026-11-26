@@ -10,7 +10,9 @@
 - **Etapas operacionais:** Etapas 01–04 CONCLUÍDAS (auditoria, planejamento, arquitetura e infraestrutura); Etapa 05 EM DESENVOLVIMENTO (recursos e carregamento); etapas 06–26 conforme `stage-status.md`. Gate 0 estático concluído; Gate 1 continua em andamento.
 - **CI pós-merge PR #46:** Godot `45888110305`, Docs `45888110285`, Android Export `45888110166`: SUCCESS; 87 testes/548 verificações/0 falhas.
 - **CI pós-merge PR #47:** Godot `45894802128`, Docs `45894802067`, Android Export `45894802116`: SUCCESS; 88 testes/553 verificações/0 falhas. APK 28.461.057 bytes, SHA-256 `c3ca03958eecf120f1a9f5f1e4fae3851fb7560bca303c8eb5a930f987b58123`, assinatura v2/v3 válida; package ID continua placeholder `com.example.boltaventura`.
-- **CI pós-merge PR #48:** Docs `45895074739` SUCCESS.\n- **CI pós-merge PR #54:** Godot `45897906267`, Docs `45897906375`, Android `45897906328`: SUCCESS; 90 testes/558 verificações/0 falhas; APK SHA-256 `12b73f0df5f71bd922f412face81b7585b3da38b705f0751c1b4d0ea79d4218a`.\n- **PR #55:** Godot `45898404709`, Docs `45898404725`, Android `45898404735`: SUCCESS; 92 testes/577 verificações/0 falhas; APK SHA-256 `6f094b6ee26f7eee7c70ae88c0c1a291b696bf0e19ad460e63e5f57de2f3cf00`. Pós-merge main ainda em validação.
+- **CI pós-merge PR #48:** Docs `45895074739` SUCCESS.
+- **CI pós-merge PR #54:** Godot `45897906267`, Docs `45897906375`, Android `45897906328`: SUCCESS; 90 testes/558 verificações/0 falhas; APK SHA-256 `12b73f0df5f71bd922f412face81b7585b3da38b705f0751c1b4d0ea79d4218a`.
+- **PR #55:** Godot `45898404709`, Docs `45898404725`, Android `45898404735`: SUCCESS; 92 testes/577 verificações/0 falhas; APK SHA-256 `6f094b6ee26f7eee7c70ae88c0c1a291b696bf0e19ad460e63e5f57de2f3cf00`. Pós-merge main ainda em validação.
 - **PR #1:** continua OPEN, antiga e divergente; não mesclar/rebasear automaticamente. Revisar o diff inteiro e reconciliar documentos raiz antes de qualquer decisão.
 - **Dash:** decisão canônica aprovada e vigente; deve permanecer conforme `docs/production/ADR-001-DASH.md`.
 - **Limites:** W1-L1/W1-L2 continuam blockouts. APK debug exportado, mas não instalado em aparelho. Toque físico, safe area, barras, lifecycle, profiling e performance Android permanecem pendentes.
@@ -647,4 +649,11 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Testes adicionados para configuração da shape, passagem ascendente e aterrissagem descendente.
 - Plano: `docs/production/plans/2026-11-26-one-way-platform.md`.
 - **Estado:** aguardando CI. Não integrada em fase.
-\n\n## Sessão ChatGPT — integração da PR #46 — 2026-11-26\n\n- PR #46 `feat: add reusable one-way platform` integrada por squash; merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.\n- Implementação: `scripts/world/one_way_platform.gd`, `scenes/world/one_way_platform.tscn`; teste `tests/unit/test_one_way_platform.gd`; contrato atualizado em `docs/technical/05-system-contracts.md`.\n- Godot CI pré-merge `45887805114`: SUCCESS — 87 testes/548 verificações/0 falhas. Docs CI `45887805097`: SUCCESS. Android Debug Export `45887805269`: SUCCESS; artifact e hash registrados em `stage-status.md`.\n- Não houve integração em fase; margin 2 px e dimensões são provisórias. Sem playtest visual ou Android físico. Pós-merge CI da main não confirmado no momento do registro.\n
+
+
+## Sessão ChatGPT — integração da PR #46 — 2026-11-26
+
+- PR #46 `feat: add reusable one-way platform` integrada por squash; merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.
+- Implementação: `scripts/world/one_way_platform.gd`, `scenes/world/one_way_platform.tscn`; teste `tests/unit/test_one_way_platform.gd`; contrato atualizado em `docs/technical/05-system-contracts.md`.
+- Godot CI pré-merge `45887805114`: SUCCESS — 87 testes/548 verificações/0 falhas. Docs CI `45887805097`: SUCCESS. Android Debug Export `45887805269`: SUCCESS; artifact e hash registrados em `stage-status.md`.
+- Não houve integração em fase; margin 2 px e dimensões são provisórias. Sem playtest visual ou Android físico. Pós-merge CI da main não confirmado no momento do registro.
