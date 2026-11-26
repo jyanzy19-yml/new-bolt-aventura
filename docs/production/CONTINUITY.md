@@ -12,7 +12,7 @@
 - **CI pós-merge PR #47:** Godot `45894802128`, Docs `45894802067`, Android Export `45894802116`: SUCCESS; 88 testes/553 verificações/0 falhas. APK 28.461.057 bytes, SHA-256 `c3ca03958eecf120f1a9f5f1e4fae3851fb7560bca303c8eb5a930f987b58123`, assinatura v2/v3 válida; package ID continua placeholder `com.example.boltaventura`.
 - **CI pós-merge PR #48:** Docs `45895074739` SUCCESS.
 - **CI pós-merge PR #54:** Godot `45897906267`, Docs `45897906375`, Android `45897906328`: SUCCESS; 90 testes/558 verificações/0 falhas; APK SHA-256 `12b73f0df5f71bd922f412face81b7585b3da38b705f0751c1b4d0ea79d4218a`.
-- **PR #55:** Godot `45898404709`, Docs `45898404725`, Android `45898404735`: SUCCESS; 92 testes/577 verificações/0 falhas; APK SHA-256 `6f094b6ee26f7eee7c70ae88c0c1a291b696bf0e19ad460e63e5f57de2f3cf00`. Pós-merge main ainda em validação.
+- **PR #55 pré-merge:** Godot `45898404709`, Docs `45898404725`, Android `45898404735`: SUCCESS; 92 testes/577 verificações/0 falhas.\n- **PR #55 pós-merge main:** Godot `45898659671`, Docs `45898659678`, Android `45898659639`: SUCCESS; 92 testes/577 verificações/0 falhas; APK 28.461.057 bytes, SHA-256 `55df5301e5cfec8cbfd533065d8dad00e8cca46f2307d0e02fa178bb30031a43`, assinatura v2/v3 válida.
 - **PR #1:** continua OPEN, antiga e divergente; não mesclar/rebasear automaticamente. Revisar o diff inteiro e reconciliar documentos raiz antes de qualquer decisão.
 - **Dash:** decisão canônica aprovada e vigente; deve permanecer conforme `docs/production/ADR-001-DASH.md`.
 - **Limites:** W1-L1/W1-L2 continuam blockouts. APK debug exportado, mas não instalado em aparelho. Toque físico, safe area, barras, lifecycle, profiling e performance Android permanecem pendentes.
