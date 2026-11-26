@@ -9,12 +9,13 @@ const MOVE_TARGET_X: float = 300.0
 enum Step { INTRO, MOVE, JUMP, DASH, COMPLETE }
 
 @onready var _player: BoltPlayer = %Bolt
+@onready var _spawn: Marker2D = $SpawnPoint
 @onready var _hud: Hud = %Hud
 @onready var _speech: Label = %SpeechLabel
 @onready var _start_button: Button = %StartButton
 
 var _step: Step = Step.INTRO
-var _spawn_position: Vector2 = Vector2(96.0, -24.0)
+var _spawn_position: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
@@ -24,6 +25,7 @@ func _ready() -> void:
 	camera.limit_right = CAMERA_LIMITS.end.x
 	camera.limit_bottom = CAMERA_LIMITS.end.y
 	_hud.bind_player(_player)
+	_spawn_position = _spawn.global_position
 	_player.set_physics_process(false)
 	%KillZone.body_entered.connect(_on_kill_zone_body_entered)
 	_hud.set_restart_path("res://scenes/tutorial/tutorial.tscn")
