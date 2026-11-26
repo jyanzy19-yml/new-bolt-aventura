@@ -1,7 +1,7 @@
 ## Snapshot vigente — 2026-11-26
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
-- **Main HEAD:** `b24c8624a8ed64816d0131070f440a47f525ba47`. **Última entrega de conteúdo:** PR #34. **Última regressão integrada:** PR #43, restauração do pause state após falha. **Última mudança de loading/input:** PR #42, bloqueio integral durante transições. **Última reconciliação documental:** PR #40. **Última infraestrutura integrada:** PR #38. **Último sistema de plataforma:** PR #45, MovingPlatform.
+- **Main HEAD após PR #46:** `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`. **Última entrega de conteúdo:** PR #34. **Última regressão integrada:** PR #43, restauração do pause state após falha. **Última mudança de loading/input:** PR #42, bloqueio integral durante transições. **Última reconciliação documental:** PR #40. **Última infraestrutura integrada:** PR #38. **Último sistema de plataforma:** PR #46, OneWayPlatform; PR #45 adicionou MovingPlatform.
 - **PR #33:** MERGED. Expansão de documentação e correção do coletável; CI Godot 66 testes/404 verificações/0 falhas e Docs SUCCESS.
 - **PR #34:** MERGED. Adiciona W1-L2 em blockout, `TimedEnergyGate`, checkpoint e progressão persistente W1-L1→W1-L2.
 - **PR #35:** MERGED. Regressão de contato físico real do campo energético. **PR #36:** feedback de checkpoint W1-L2. **PR #37:** teste físico isolado do coletável e filtro CI para erro de mutação física bloqueada. **PR #38:** pipeline Android debug. **PR #39:** limpeza do ActionBuffer no ciclo de vida.
@@ -10,10 +10,10 @@
 - **PR #35:** Godot CI pré/pós-merge SUCCESS — 69 testes/439 verificações/0 falhas (`45873118202`, `45873234656`).
 - **Escritor ativo:** ChatGPT, seguindo a diretriz vigente do usuário. Não iniciar trabalho concorrente de Claude.
 - **Dash:** decisão canônica aprovada; deve permanecer no jogo conforme `docs/production/ADR-001-DASH.md`. Referências documentais antigas que ainda dizem “pendente” estão sendo reconciliadas nesta unidade.
-- **Branch atual:** `feat/one-way-platform`; componente reutilizável de plataforma unidirecional.
+- **PR #46:** MERGED por squash em `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`; OneWayPlatform integrada à main.
 - **Unidade integrada:** `TimedEnergyGate`, cena/script `cybercore_w1_l2`, botão PRÓXIMA FASE na conclusão W1-L1, destino salvo W1-L2, retomada de W1-L1/W1-L2 e regressões.
 - **Limites:** W1-L2 é blockout/protótipo de mecânica, não conteúdo final; ciclo, dano e percurso precisam de playtest. APK debug exportado em CI, mas não instalado; Android físico, touch físico e profiling continuam pendentes.
-- **Próximo passo:** validar o componente OneWayPlatform; MovingPlatform já está integrado, sem inserção em fase até aprovação de level design.
+- **Próximo passo:** selecionar a próxima unidade a partir dos sistemas ainda incompletos no tracker e das dependências da vertical slice; OneWayPlatform e MovingPlatform permanecem componentes reutilizáveis, sem inserção em fase até aprovação de level design.
 
 ---
 
@@ -646,3 +646,4 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Testes adicionados para configuração da shape, passagem ascendente e aterrissagem descendente.
 - Plano: `docs/production/plans/2026-11-26-one-way-platform.md`.
 - **Estado:** aguardando CI. Não integrada em fase.
+\n\n## Sessão ChatGPT — integração da PR #46 — 2026-11-26\n\n- PR #46 `feat: add reusable one-way platform` integrada por squash; merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.\n- Implementação: `scripts/world/one_way_platform.gd`, `scenes/world/one_way_platform.tscn`; teste `tests/unit/test_one_way_platform.gd`; contrato atualizado em `docs/technical/05-system-contracts.md`.\n- Godot CI pré-merge `45887805114`: SUCCESS — 87 testes/548 verificações/0 falhas. Docs CI `45887805097`: SUCCESS. Android Debug Export `45887805269`: SUCCESS; artifact e hash registrados em `stage-status.md`.\n- Não houve integração em fase; margin 2 px e dimensões são provisórias. Sem playtest visual ou Android físico. Pós-merge CI da main não confirmado no momento do registro.\n
