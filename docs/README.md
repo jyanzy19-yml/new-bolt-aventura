@@ -57,6 +57,7 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - [Roadmap e gates](production/roadmap.md)
 - [Protocolo de qualidade](production/quality-control-protocol.md)
 - [Checklist de execução e aceite da Etapa 0](production/ETAPA_0_CLAUDE_CHECKLIST.md)
+- [Revisão de fundação da Etapa 0 — hardening](production/stage-0-hardening-audit.md)
 - [Auditoria de pré-produção](production/PREPRODUCTION_AUDIT.md)
 - [Protocolo de desenvolvimento alternado Claude Code ↔ ChatGPT](production/COLLABORATIVE_DEVELOPMENT_PROTOCOL.md) — Claude Etapa 0, ChatGPT Etapa 1, Claude Etapa 2, ChatGPT Etapa 3 e assim sucessivamente.
 - [Estado canônico da colaboração](production/COLLABORATION_STATE.md) — etapa atual, responsável, commit-base e próximo turno.
