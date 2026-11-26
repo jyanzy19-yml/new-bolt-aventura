@@ -150,6 +150,20 @@ func test_pause_releases_everything_and_hides_controls() -> bool:
 	return true
 
 
+func test_application_pause_releases_touch_pointers_and_actions() -> bool:
+	await _setup()
+	_touch(0, _center(Actions.JUMP), true)
+	check(Input.is_action_pressed(Actions.JUMP), "jump está pressionado antes da suspensão")
+	check(not _controls._pointer_button.is_empty(), "ponteiro está associado antes da suspensão")
+	_controls.notification(Node.NOTIFICATION_APPLICATION_PAUSED)
+	check(not Input.is_action_pressed(Actions.JUMP), "suspensão libera a ação touch")
+	check(_controls._pointer_button.is_empty(), "suspensão limpa o mapa de ponteiros")
+	check(_controls._action_pointers.is_empty(), "suspensão limpa os holders das ações")
+	check(not _controls.get_button(Actions.JUMP).visual_pressed, "suspensão remove o estado visual pressionado")
+	await _teardown()
+	return true
+
+
 func test_transition_started_releases_and_hides_touch_controls() -> bool:
 	await _setup()
 	_touch(0, _center(Actions.JUMP), true)
