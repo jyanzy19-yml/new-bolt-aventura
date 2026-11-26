@@ -68,7 +68,7 @@ unique_name_in_owner = true
 
 [node name="Checkpoint" parent="." instance=ExtResource("5_checkpoint")]
 unique_name_in_owner = true
-position = Vector2(960, -32)
+position = Vector2(980, -32)
 checkpoint_id = &"cybercore_w1_l1_checkpoint"
 
 [node name="KillZone" type="Area2D" parent="."]
