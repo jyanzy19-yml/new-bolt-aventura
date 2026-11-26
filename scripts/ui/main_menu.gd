@@ -2,7 +2,7 @@ extends Control
 ## Menu principal. Só expõe o que funciona: entrar na sandbox de movimento (desenvolvimento).
 ## Continuar, configurações, seleção de mundo etc. aparecerão quando existirem de verdade.
 
-const SANDBOX_PATH: String = "res://scenes/levels/sandbox/movement_sandbox.tscn"
+const OPENING_PATH: String = "res://scenes/campaign/opening_cinematic.tscn"
 
 @onready var _version: Label = %VersionLabel
 @onready var _play: Button = %PlayButton
@@ -24,5 +24,5 @@ func _on_play_pressed() -> void:
 		push_error("MainMenu: autoload SceneFlow ausente.")
 		return
 	_play.disabled = true  # evita segundo toque durante o carregamento
-	if not flow.change_scene(SANDBOX_PATH):
+	if not flow.change_scene(OPENING_PATH):
 		_play.disabled = false
