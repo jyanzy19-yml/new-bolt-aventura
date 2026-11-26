@@ -129,13 +129,20 @@ Essas contagens descrevem a árvore versionada na branch principal no momento da
 8. **SYS-026 atualizado:** OneWayPlatform foi integrada na PR #46. Evidência disponível: Godot CI pré-merge 87 testes/548 verificações/0 falhas, Docs SUCCESS e Android Debug Export SUCCESS. A consulta de workflow runs do merge commit retornou zero execuções; não declarar pós-merge CI.
 9. **SYS-025:** MovingPlatform permanece componente reutilizável integrado, com transporte de BOLT coberto por CI pós-merge PR #45; não foi inserido em fase.
 
-### Cobertura ainda incompleta da Etapa 01
+### Fechamento da Etapa 01 — auditoria estática
 
-A árvore inteira foi inventariada e as fontes mestras/ADRs/PRs foram revisadas, mas esta rodada não inspecionou individualmente todos os 56 scripts e 19 arquivos de cena nem todos os recursos binários/importados. Portanto, **Etapa 01 permanece EM ANÁLISE**. Não declarar auditoria integral concluída até fechar o inventário por subsistema, revisar todas as cenas e conexões de sinais, verificar referências quebradas e reconciliar o resultado com a matriz QA.
+A inspeção manual foi concluída para as 19 cenas Godot, os 30 scripts de runtime, o único recurso `.tres`, o ícone placeholder, `project.godot`, `export_presets.cfg`, as fontes mestras, ADRs, workflows e estado Git/PRs. A CI da PR #47 compilou os scripts e carregou/instanciou as cenas; a suíte passou com 88 testes/553 verificações/0 falhas. **Etapa 01: CONCLUÍDA — auditoria estática.**
 
-### Próxima sequência obrigatória
+Limites físicos Android permanecem no Gate 1/5: instalação, cold start, toque real, barras/safe area, interrupções, FPS e memória. Esses limites não invalidam a auditoria estática e não foram apresentados como testes executados.
 
-1. Completar inspeção de cenas e scripts restantes por subsistema, sem alterações de gameplay não relacionadas.
-2. Revisar referências `res://`, sinais/conexões, autoloads, colisões e camadas em todas as cenas.
-3. Consolidar matriz de rastreabilidade das 26 etapas (requisito → fonte canônica → sistema/arquivo → teste → critério de aceite).
-4. Só então fechar Etapa 01 e Etapa 02 com evidências; depois selecionar a próxima unidade técnica.
+### Achado adicional AUD-006 — estado inicial do campo energético
+
+- **Severidade:** S2 funcional, isolado em configuração não padrão.
+- **Causa:** `_active` começava em `false`; `_set_active(false)` retornava antes de aplicar `monitoring=false` e cor inativa quando `initial_active=false`.
+- **Correção:** PR #47 adicionou estado explícito de inicialização, preservando o update deferred de `monitoring`.
+- **Regressão:** teste de contato físico confirma `initial_active=false`, estado visual inativo, `monitoring=false` e ausência de dano durante a janela inicial.
+- **Validação pré-merge:** Godot `45894563021` SUCCESS — 88 testes/553 verificações/0 falhas; Docs `45894562989` SUCCESS; Android Debug Export `45894563000` SUCCESS. APK 28.461.057 bytes, SHA-256 `4f5ab64b2c51aaa2c69656854d10e056b4a4881b2f00b1bfb56279bbe5bf0884`, assinatura v2/v3 válida. Merge `2636226c4027625649e66c51ff64d7e2e56168a6`. Não houve workflow pós-merge associado ao merge commit.
+
+### Próxima etapa
+
+Consolidar a matriz de rastreabilidade das 26 etapas (requisito → fonte canônica → sistema/arquivo → teste → critério de aceite) e reconciliar a Etapa 02. A auditoria estática já foi encerrada; não repetir inventário nem recriar o projeto.
