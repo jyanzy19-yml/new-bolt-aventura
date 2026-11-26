@@ -118,3 +118,45 @@ func test_missing_save_is_a_clean_empty_state() -> bool:
 	check_eq(system.get("last_error"), "", "ausência de save não é erro de corrupção")
 	_cleanup()
 	return true
+
+
+func test_format_version_rejects_fractional_and_textual_values() -> bool:
+	var system: Node = _system()
+	check(system != null, "autoload SaveSystem presente")
+	if system == null:
+		return true
+	system.call("delete_save")
+	var payload_json: String = JSON.stringify({"settings": {"music": 0.5}})
+	var checksum: String = str(system.call("_checksum", payload_json))
+	var envelope: Dictionary = {
+		"format_version": 1.5,
+		"payload_json": payload_json,
+		"checksum": checksum,
+	}
+	var file: FileAccess = FileAccess.open(TEST_SAVE_PATH, FileAccess.WRITE)
+	check(file != null, "cria envelope com versão fracionária")
+	if file != null:
+		file.store_string(JSON.stringify(envelope))
+		file.close()
+	check_eq(system.call("load_payload"), {}, "versão fracionária é rejeitada")
+	check_eq(system.get("last_error"), "unsupported_format_version", "versão fracionária informa incompatibilidade")
+
+	envelope["format_version"] = "1"
+	file = FileAccess.open(TEST_SAVE_PATH, FileAccess.WRITE)
+	check(file != null, "cria envelope com versão textual")
+	if file != null:
+		file.store_string(JSON.stringify(envelope))
+		file.close()
+	check_eq(system.call("load_payload"), {}, "versão textual não é convertida para inteiro")
+	check_eq(system.get("last_error"), "unsupported_format_version", "versão textual informa incompatibilidade")
+
+	envelope["format_version"] = 1.0
+	file = FileAccess.open(TEST_SAVE_PATH, FileAccess.WRITE)
+	check(file != null, "cria envelope com número integral em representação float")
+	if file != null:
+		file.store_string(JSON.stringify(envelope))
+		file.close()
+	check_eq(system.call("load_payload"), {"settings": {"music": 0.5}}, "aceita número float exatamente integral")
+	check_eq(system.get("last_error"), "", "representação numérica integral não gera erro")
+	_cleanup()
+	return true

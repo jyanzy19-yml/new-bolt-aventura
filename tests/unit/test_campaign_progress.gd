@@ -137,3 +137,32 @@ func test_new_campaign_does_not_overwrite_unreadable_save() -> bool:
 	check(FileAccess.file_exists(TEST_SAVE_PATH), "arquivo corrompido é preservado para diagnóstico/recuperação")
 	_cleanup()
 	return true
+
+
+func test_progress_schema_rejects_fractional_and_textual_values() -> bool:
+	var progress: Node = _prepare()
+	var raw_state: Dictionary = {
+		"campaign_id": "main",
+		"schema_version": 1.5,
+		"current_level_id": "W1-L1",
+		"active_checkpoint_id": "",
+		"completed_level_ids": [],
+	}
+	check(SaveSystem.save_payload({"campaign_progress": raw_state}), "grava fixture com schema fracionário")
+	var state: Dictionary = progress.call("load_state")
+	check_eq(state.get("current_level_id"), "", "schema fracionário não é interpretado como v1")
+	check_eq(progress.get("last_error"), "unsupported_progress_schema", "schema fracionário informa incompatibilidade")
+
+	raw_state["schema_version"] = "1"
+	check(SaveSystem.save_payload({"campaign_progress": raw_state}), "grava fixture com schema textual")
+	state = progress.call("load_state")
+	check_eq(state.get("current_level_id"), "", "schema textual não é convertido para inteiro")
+	check_eq(progress.get("last_error"), "unsupported_progress_schema", "schema textual informa incompatibilidade")
+
+	raw_state["schema_version"] = 1.0
+	check(SaveSystem.save_payload({"campaign_progress": raw_state}), "grava fixture com schema numericamente integral")
+	state = progress.call("load_state")
+	check_eq(state.get("current_level_id"), "W1-L1", "aceita número float exatamente integral")
+	check_eq(progress.get("last_error"), "", "representação numérica integral não gera erro")
+	_cleanup()
+	return true

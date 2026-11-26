@@ -26,7 +26,14 @@ func load_state() -> Dictionary:
 	if str(raw_state.get("campaign_id", "")) != CAMPAIGN_ID:
 		last_error = "campaign_id_mismatch"
 		return _default_state()
-	if int(raw_state.get("schema_version", 0)) != PROGRESS_SCHEMA_VERSION:
+	var schema_version: Variant = raw_state.get("schema_version", null)
+	var schema_is_valid: bool = false
+	if typeof(schema_version) == TYPE_INT:
+		schema_is_valid = schema_version == PROGRESS_SCHEMA_VERSION
+	elif typeof(schema_version) == TYPE_FLOAT:
+		var numeric_schema: float = float(schema_version)
+		schema_is_valid = is_finite(numeric_schema) and numeric_schema == float(PROGRESS_SCHEMA_VERSION)
+	if not schema_is_valid:
 		last_error = "unsupported_progress_schema"
 		return _default_state()
 
