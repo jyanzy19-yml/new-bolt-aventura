@@ -43,6 +43,8 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	var start_button: Button = tutorial_instance.get_node("TutorialUI/Panel/Column/StartButton") as Button
 	check(player != null and not player.is_physics_processing(), "BOLT aguarda início explícito do tutorial")
 	check(tutorial_instance.get_node_or_null("Messenger") is Node2D, "tutorial contém robô mensageiro provisório")
+	var attack_button: TouchButton = tutorial_instance.get_node("Hud/Safe/Layout/TouchControls/Attack") as TouchButton
+	check(attack_button != null and attack_button.action == Actions.ATTACK, "HUD touch expõe o botão TIRO")
 	check(speech.text.contains("ROBÔ MENSAGEIRO"), "mensageiro orienta por balão de fala")
 	tutorial_instance.call("_on_start_or_continue")
 	check(player.is_physics_processing(), "BOLT é liberado ao iniciar o tutorial")
