@@ -1,7 +1,7 @@
 ## Snapshot vigente — 2026-11-26
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
-- **Main HEAD:** `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`. **Última entrega de conteúdo:** PR #34. **Última regressão integrada:** PR #39, limpeza do ActionBuffer, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`. **Última infraestrutura integrada:** PR #38, pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.
+- **Main HEAD:** `85412c3bdd5c6eefd27f25bf2a56af4b38fcdfed`. **Última entrega de conteúdo:** PR #34. **Última regressão integrada:** PR #39, limpeza do ActionBuffer. **Última reconciliação documental:** PR #40, merge `85412c3bdd5c6eefd27f25bf2a56af4b38fcdfed`. **Última infraestrutura integrada:** PR #38, pipeline Android debug.
 - **PR #33:** MERGED. Expansão de documentação e correção do coletável; CI Godot 66 testes/404 verificações/0 falhas e Docs SUCCESS.
 - **PR #34:** MERGED. Adiciona W1-L2 em blockout, `TimedEnergyGate`, checkpoint e progressão persistente W1-L1→W1-L2.
 - **PR #35:** MERGED. Regressão de contato físico real do campo energético. **PR #36:** feedback de checkpoint W1-L2. **PR #37:** teste físico isolado do coletável e filtro CI para erro de mutação física bloqueada. **PR #38:** pipeline Android debug. **PR #39:** limpeza do ActionBuffer no ciclo de vida.
@@ -10,10 +10,10 @@
 - **PR #35:** Godot CI pré/pós-merge SUCCESS — 69 testes/439 verificações/0 falhas (`45873118202`, `45873234656`).
 - **Escritor ativo:** ChatGPT, seguindo a diretriz vigente do usuário. Não iniciar trabalho concorrente de Claude.
 - **Dash:** decisão canônica aprovada; deve permanecer no jogo conforme `docs/production/ADR-001-DASH.md`. Referências documentais antigas que ainda dizem “pendente” estão sendo reconciliadas nesta unidade.
-- **Branch atual:** `docs/reconcile-canonical-decisions-2026-11-26`; tarefa documental, sem alterações de gameplay.
+- **Branch atual:** `feat/scene-loading-overlay`; overlay persistente de carregamento em transições.
 - **Unidade integrada:** `TimedEnergyGate`, cena/script `cybercore_w1_l2`, botão PRÓXIMA FASE na conclusão W1-L1, destino salvo W1-L2, retomada de W1-L1/W1-L2 e regressões.
 - **Limites:** W1-L2 é blockout/protótipo de mecânica, não conteúdo final; ciclo, dano e percurso precisam de playtest. APK debug exportado em CI, mas não instalado; Android físico, touch físico e profiling continuam pendentes.
-- **Próximo passo:** reconciliar as referências antigas de Dash e alternância de agentes com ADR-001 e a decisão atual de ChatGPT como único escritor; depois continuar sistemas de gameplay e preparar validação física Android quando houver dispositivo disponível.
+- **Próximo passo:** validar e integrar o overlay de carregamento; depois continuar a auditoria da Etapa 01/02 e a vertical slice.
 
 ---
 
@@ -561,3 +561,17 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Branch atual: `docs/reconcile-canonical-decisions-2026-11-26`.
 - Auditoria documental encontrou conflito resolvido no canon mas não nos documentos: MASTER_DIRECTIVE e diretiva integral ainda classificavam Dash como pendente, apesar do ADR-001; AGENTS/CLAUDE ainda descreviam alternância obrigatória apesar da decisão de ChatGPT como único escritor.
 - Esta unidade atualiza apenas documentação e governança; não altera gameplay.
+
+
+---
+
+## Sessão ChatGPT — overlay persistente de carregamento — 2026-11-26
+
+- **Main base:** `85412c3bdd5c6eefd27f25bf2a56af4b38fcdfed` (PR #40 integrada).
+- **Branch:** `feat/scene-loading-overlay`.
+- **Achado:** `SceneFlow` já carregava cenas em thread, mas não havia overlay persistente conectado aos sinais de transição; Boot só tinha um rótulo local.
+- **Implementação:** autoload `LoadingOverlay` com cena `scenes/ui/loading_overlay.tscn`; progresso percentual somente quando o ResourceLoader fornece valor real; overlay ocultado em sucesso/falha; input bloqueado durante a transição.
+- **Resiliência:** `SceneFlow` agora processa durante pausa da árvore.
+- **Testes:** autoload, estado inicial, progresso real, sucesso/falha e processamento durante pausa.
+- **Plano:** `docs/production/plans/2026-11-26-scene-loading-overlay.md`.
+- **Limites:** sem espera artificial mínima, sem cancelamento explícito ou preload avançado; CI ainda pendente nesta branch; validação visual/Android físico não executada.

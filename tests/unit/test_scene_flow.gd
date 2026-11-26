@@ -9,6 +9,15 @@ func _flow() -> Node:
 	return tree.root.get_node_or_null("SceneFlow")
 
 
+func test_scene_flow_processes_while_tree_is_paused() -> bool:
+	var flow: Node = _flow()
+	check(flow != null, "autoload SceneFlow presente")
+	if flow == null:
+		return true
+	check_eq(flow.process_mode, Node.PROCESS_MODE_ALWAYS, "SceneFlow continua processando durante pausa")
+	return true
+
+
 func test_missing_scene_is_rejected_without_side_effects() -> bool:
 	var flow: Node = _flow()
 	check(flow != null, "autoload SceneFlow presente")

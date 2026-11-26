@@ -23,3 +23,12 @@ Cada asset deve ter ID, caminho, tipo, mundo/sistema, licença/proveniência, re
 
 ## 6. Critérios de validação
 Medir tempo de entrada, pico de memória, frame time após transição e primeira exibição de efeitos. Repetir em build Android e aparelho-alvo. Confirmar que o gameplay permanece responsivo após carregamento.
+
+
+## 7. Implementação atual — Godot 4.7.2
+
+- `SceneFlow` faz `ResourceLoader.load_threaded_request()`, publica progresso disponível e impede transições concorrentes.
+- O autoload `LoadingOverlay` acompanha `transition_started`, `transition_finished` e `transition_failed`; permanece acima das cenas e bloqueia interação durante o carregamento.
+- A porcentagem só aparece quando o `ResourceLoader` fornece progresso real. Sem esse dado, a interface mostra apenas estado de carregamento, sem estimativa inventada.
+- O overlay não força duração mínima. Se o recurso carregar rápido, a transição termina rápido; se houver trabalho real, a interface permanece visível até sucesso/falha.
+- **Pendências:** cancelamento explícito, política de preload, descarregamento seletivo e medições de tempo/memória/frame time em Android físico.

@@ -2,7 +2,7 @@
 
 ## Snapshot operacional vigente — 2026-11-26
 
-- **Main HEAD:** `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.
+- **Main HEAD:** `85412c3bdd5c6eefd27f25bf2a56af4b38fcdfed` (PR #40 integrada; Docs CI pós-merge `45882348474` SUCCESS).
 - **Última entrega de conteúdo:** PR #34, W1-L2 em blockout e progressão W1-L1→W1-L2.
 - **Última regressão integrada:** PR #39, limpeza do ActionBuffer em pausa/suspensão/perda de foco, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.
 - **Última infraestrutura integrada:** PR #38, pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.
@@ -13,7 +13,7 @@
 - **APK debug:** artifact `bolt-aventura-android-debug-7415dfb988faf2dd63f9ff289106e7f7205dcdd1`, package ID placeholder `com.example.boltaventura`, SHA-256 `db03a42b909781a1f5e7c94d025615e1aa5f397c8ebd306ba30cddf84eca14b0`. Exportado/assinado, não instalado nem testado em aparelho.
 - **PR #1:** permanece separada e não deve ser integrada/rebaseada automaticamente.
 - **Dash:** decisão aprovada e vigente: deve permanecer; ver `docs/production/ADR-001-DASH.md`.
-- **Próxima unidade:** reconciliação documental das decisões de Dash e da autoridade de escritor, sem alterações de gameplay.
+- **Próxima unidade:** overlay persistente de carregamento em `feat/scene-loading-overlay`, com progresso real e sem espera artificial.
 
 
 **Fonte única para o próximo turno.** Antes de editar, confirme este arquivo contra o HEAD, commits, branches e PRs reais do GitHub.

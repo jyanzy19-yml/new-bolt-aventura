@@ -41,10 +41,10 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-014 | Checkpoints, respawn e progressão | Em andamento | `CampaignProgress` persiste entrada/checkpoint/conclusão; W1-L1 avança o destino salvo para W1-L2; W1-L2 possui checkpoint próprio e blockout integrado pela PR #34; Godot CI pré/pós-merge passou; sandbox permanece ambiente de desenvolvimento |
 | SYS-015 | Save/load, versão e recuperação | Em andamento | `SaveSystem` JSON v1 + `CampaignProgress` v1; reset seletivo, retomada W1-L1/W1-L2, backup/corrupção/schema cobertos. PR #31 CI pós-merge: 66 testes/404 verificações. Encerramento forçado e QA Android pendentes |
 | SYS-016 | Inventário, moedas, melhorias e skins | Não iniciado | Sem implementação do jogo |
-| SYS-017 | Menus, HUD, pausa e configurações | Em andamento | Nova Jornada/Continuar; retomada mapeia W1-L1 e W1-L2; HUD de resultado oferece PRÓXIMA FASE quando existe destino configurado. Configurações completas e validação visual/Android ausentes |
+| SYS-017 | Menus, HUD, pausa e configurações | Em andamento | Nova Jornada/Continuar; retomada mapeia W1-L1 e W1-L2; HUD de resultado oferece PRÓXIMA FASE; overlay de carregamento persistente básico adicionado em branch. Configurações completas e validação visual/Android ausentes |
 | SYS-018 | Cutscenes, legendas e replay/pulo | Em andamento | Nova Jornada segue abertura/tutorial; Continuar retoma W1-L1 ou W1-L2 conforme o progresso persistido. PR #34 integrada; storyboard/tutorial provisórios, animação final, áudio e replay persistente pendentes |
 | SYS-019 | Áudio, música, buses e opções | Não iniciado | Sem implementação do jogo |
-| SYS-020 | Loading, transições e gestão de memória | Em andamento | `SceneFlow` usa carregamento threaded, bloqueia transições concorrentes e sinaliza sucesso/falha; testado headless. Gestão abrangente de memória/preload ainda não implementada |
+| SYS-020 | Loading, transições e gestão de memória | Em andamento | `SceneFlow` usa carregamento threaded, bloqueia transições concorrentes e sinaliza sucesso/falha; novo autoload `LoadingOverlay` exibe estado e progresso real sem espera artificial; regressões de sucesso/falha/progresso adicionadas. Cancelamento, preload e gestão abrangente de memória ainda pendentes; CI da branch em validação |
 | SYS-021 | Pipeline de assets e proveniência | Não iniciado | Pipeline do jogo a estabelecer |
 | SYS-022 | Testes automatizados e regressão | Em andamento | Workflow Godot 4.7.2 executa import + `tests/test_runner.gd`; PRs #34/#35: 69 testes, 439 verificações, 0 falhas em Godot CI pré/pós-merge; PR #35 valida contato físico real da `Area2D`; Docs CI SUCCESS. Headless não equivale a QA visual ou Android físico |
 | SYS-023 | Exportação, instalação e QA Android | Em andamento | PR #38 integrou pipeline Godot 4.7.2. PR #39 repetiu export com artifact `bolt-aventura-android-debug-7415dfb988faf2dd63f9ff289106e7f7205dcdd1`, assinatura v2/v3 e SHA-256 `db03a42b909781a1f5e7c94d025615e1aa5f397c8ebd306ba30cddf84eca14b0`. Package ID provisório; instalação, inicialização, touch, safe area e QA físico ainda não executados |
@@ -268,3 +268,14 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - Docs CI `45881320133`: SUCCESS.
 - Android Debug Export `45881252046`: SUCCESS; artifact, assinatura, package ID e SHA-256 documentados em `CI_AND_VALIDATION_PIPELINE.md`.
 - A lógica foi testada por notificações simuladas/headless; teste real de background/foreground e multitouch continua pendente em Android físico.
+
+
+## SYS-020 — overlay persistente de carregamento (2026-11-26)
+
+- Base: main após PR #40, commit `85412c3bdd5c6eefd27f25bf2a56af4b38fcdfed`.
+- `SceneFlow` já fazia carregamento threaded; não existia UI persistente conectada aos sinais de transição.
+- Branch `feat/scene-loading-overlay`: autoload `LoadingOverlay` e cena `scenes/ui/loading_overlay.tscn`; mostra texto sem porcentagem quando o engine não reporta progresso e barra somente quando há valor real.
+- O overlay é ocultado em sucesso e falha. `SceneFlow` usa `PROCESS_MODE_ALWAYS` para concluir transições mesmo com a árvore pausada.
+- Testes adicionados: autoload no project config, estado inicial, progresso real, conclusão, falha e processamento durante pausa.
+- Plano: `docs/production/plans/2026-11-26-scene-loading-overlay.md`.
+- **Estado:** aguardando CI; não há validação visual ou Android físico.

@@ -41,6 +41,7 @@ func test_main_scene_exists_and_autoloads() -> bool:
 	check(ProjectSettings.has_setting("autoload/SceneFlow"), "autoload SceneFlow registrado")
 	check(ProjectSettings.has_setting("autoload/SaveSystem"), "autoload SaveSystem registrado")
 	check(ProjectSettings.has_setting("autoload/CampaignProgress"), "autoload CampaignProgress registrado")
+	check(ProjectSettings.has_setting("autoload/LoadingOverlay"), "autoload LoadingOverlay registrado")
 	return true
 
 
