@@ -706,3 +706,15 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Nova implementação candidata: Boot carrega main_menu.gd sincronamente na thread principal antes de SceneFlow iniciar o carregamento threaded da PackedScene. É um prewarm de um recurso de script pequeno, não um carregamento síncrono da cena inteira.
 - A CI agora roda 20 boots da implementação corrigida antes das mutações e depois compara: (A) sem prewarm; (B) autoloads diretos com prewarm; (C) combinação original sem prewarm e com autoloads diretos. A combinação C precisa reproduzir o erro; o smoke fixo precisa passar 20/20.
 - Ainda não declarar causa raiz ou correção até os resultados desta nova matriz.
+
+
+### Causa raiz do Defeito 1 — evidência de mutação #183
+
+- Godot Validation run 45907472309: **93 testes / 1.307 verificações / 0 falhas**; cold boot diagnostic exit 0; **20/20 boots** passaram.
+- A matriz de mutação isolou o fator:
+  - Remover o prewarm síncrono de main_menu.gd e deixar a PackedScene ser a primeira a carregar o script pelo caminho threaded reproduziu Parse Error em main_menu.tscn:12.
+  - Restaurar as referências diretas a CampaignProgress/SaveSystem, mantendo o prewarm, não reproduziu.
+  - A combinação original também reproduziu.
+- **Conclusão técnica:** em cold boot Godot 4.7.2, a primeira compilação/carga de main_menu.gd não deve ocorrer dentro do carregamento threaded da PackedScene. O Boot deve carregar o Script na thread principal antes de chamar SceneFlow.change_scene. As referências diretas a autoload não são a causa independente.
+- Revertidos os helpers runtime-only no menu, W1-L1/W1-L2 e HUD para preservar o código original, pois não eram necessários para a correção demonstrada.
+- O workflow agora valida a versão mínima: prewarm fixo → 20 boots; mutação removendo prewarm → erro original. **Aguardar novo CI após estas reversões para fechar a validação final.**
