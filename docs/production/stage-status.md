@@ -201,3 +201,5 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Geometria mantida após confirmar que `PlatformBlock` usa origem no canto superior esquerdo e que a saída já está dentro do piso final. Nenhuma alteração geométrica especulativa.
 - Branch: `feat/w1-l1-progression-feedback`. Validação CI desta branch pendente.
 - Limites: protótipo visual e valores continuam provisórios; sem playtest humano, APK, instalação, emulador, aparelho Android ou métricas de performance.
+
+- Segurança de respawn: checkpoint reposicionado em x=980 para manter folga além do alcance horizontal máximo do inimigo; teste calcula a distância mínima com base nas formas de colisão reais. CI do SHA final ainda pendente.
