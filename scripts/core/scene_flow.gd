@@ -60,7 +60,7 @@ func change_scene(path: String) -> bool:
 
 func _notification(what: int) -> void:
 	# Perda de foco/suspensão do app: nenhum comando pode permanecer pressionado ao voltar.
-	if what == NOTIFICATION_APPLICATION_FOCUS_OUT or what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+	if what == NOTIFICATION_APPLICATION_PAUSED \\\n\tor what == NOTIFICATION_APPLICATION_FOCUS_OUT \\\n\tor what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
 		Actions.release_all_game_actions()
 
 
