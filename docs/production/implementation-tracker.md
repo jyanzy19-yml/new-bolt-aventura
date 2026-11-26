@@ -156,4 +156,5 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - Inimigo-base em `scenes/campaign/cybercore_w1_l1.tscn`: posição alinhada ao piso intermediário e patrulha limitada à plataforma.
 - Área `Goal`: altura corrigida para cruzar a área de colisão do jogador sobre o piso final.
 - `tests/unit/test_campaign_entry.gd`: cobertura de posição do inimigo/objetivo e fluxo checkpoint → dano → queda/respawn.
-- Status W1-L1 permanece **Em andamento**. O teste headless via CI ainda precisa passar; não houve playtest humano nem validação Android.
+- A primeira execução Godot CI (`45851338093`) encontrou uma asserção excessivamente rígida: o inimigo já havia avançado no primeiro tick. Corrigida para verificar o intervalo de patrulha; nova CI pendente.
+- Status W1-L1 permanece **Em andamento**. Não houve playtest humano nem validação Android.
