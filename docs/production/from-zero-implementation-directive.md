@@ -49,7 +49,7 @@ A campanha deve preservar a premissa e os elementos de canon definidos nas bíbl
 
 Implementar e integrar, conforme especificações aprovadas:
 - personagem BOLT, controle, animação e estados;
-- movimento horizontal, aceleração/desaceleração, salto e recursos All Jump aprovados, colisões, aterrissagem, dano e recuperação; Dash é uma implementação existente cujo escopo de produto está pendente de reconciliação; não adicionar/remover/retunar sem decisão canônica;
+- movimento horizontal, aceleração/desaceleração, salto e recursos All Jump aprovados, colisões, aterrissagem, dano e recuperação; Dash é mecânica aprovada e deve permanecer conforme `docs/production/ADR-001-DASH.md`; preservar a implementação e não remover/retunar sem tarefa específica;
 - combate, armas e habilidades aprovadas;
 - inimigos com IA/estados, dano, telegraphs, contra-jogo e variações reais;
 - chefes com arenas, fases, transições e recompensa;

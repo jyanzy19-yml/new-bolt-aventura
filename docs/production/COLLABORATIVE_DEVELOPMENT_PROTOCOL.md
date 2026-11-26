@@ -5,6 +5,8 @@
 **Plataforma/engine:** Android, Godot 4.x e GDScript, conforme as fontes aprovadas  
 **Autoridade:** subordinado a `MASTER_DIRECTIVE.md`, canon, ADRs e gates aprovados.
 
+> **Estado de ativação — 2026-11-26:** este protocolo é histórico/condicional e só deve ser aplicado quando o usuário reativar explicitamente a colaboração alternada. A decisão operacional vigente é ChatGPT como único escritor ativo; Claude permanece inativo para escrita concorrente. Antes de qualquer handoff, consultar `COLLABORATION_STATE.md`. Este protocolo não se sobrepõe à atribuição atual de escritor nem ao plano operacional de 26 etapas.
+
 ## 1. Objetivo e regra central
 
 O jogo será desenvolvido em etapas alternadas. Claude Code e ChatGPT serão, ambos, responsáveis por implementar partes reais do projeto — não apenas um implementador e um revisor.

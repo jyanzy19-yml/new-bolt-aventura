@@ -1,17 +1,19 @@
 ## Snapshot vigente — 2026-11-26
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
-- **Último merge de conteúdo de gameplay:** PR #34, commit `c10ca6944bf0047abe694b7c429270a256cfff96`. **Última regressão integrada:** PR #37, commit `39b6db8298542c5057c06f509b20d250a888e289`. **Última infraestrutura integrada:** PR #38, commit `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.
+- **Main HEAD:** `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`. **Última entrega de conteúdo:** PR #34. **Última regressão integrada:** PR #39, limpeza do ActionBuffer, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`. **Última infraestrutura integrada:** PR #38, pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.
 - **PR #33:** MERGED. Expansão de documentação e correção do coletável; CI Godot 66 testes/404 verificações/0 falhas e Docs SUCCESS.
 - **PR #34:** MERGED. Adiciona W1-L2 em blockout, `TimedEnergyGate`, checkpoint e progressão persistente W1-L1→W1-L2.
-- **PR #35:** MERGED. Regressão de contato físico real do campo energético. **PR #36:** feedback de checkpoint W1-L2. **PR #37:** teste físico isolado do coletável e filtro CI para erro de mutação física bloqueada.
+- **PR #35:** MERGED. Regressão de contato físico real do campo energético. **PR #36:** feedback de checkpoint W1-L2. **PR #37:** teste físico isolado do coletável e filtro CI para erro de mutação física bloqueada. **PR #38:** pipeline Android debug. **PR #39:** limpeza do ActionBuffer no ciclo de vida.
 - **CI pré-merge PR #34:** Godot 4.7.2, 69 testes/439 verificações/0 falhas (`45872508689`); Docs SUCCESS (`45872508675`).
 - **CI pós-merge PR #34:** Godot SUCCESS — 69 testes/439 verificações/0 falhas (`45872656738`); Docs SUCCESS (`45872656798`). Docs CI da sincronização seguinte SUCCESS (`45872828901`).
 - **PR #35:** Godot CI pré/pós-merge SUCCESS — 69 testes/439 verificações/0 falhas (`45873118202`, `45873234656`).
 - **Escritor ativo:** ChatGPT, seguindo a diretriz vigente do usuário. Não iniciar trabalho concorrente de Claude.
+- **Dash:** decisão canônica aprovada; deve permanecer no jogo conforme `docs/production/ADR-001-DASH.md`. Referências documentais antigas que ainda dizem “pendente” estão sendo reconciliadas nesta unidade.
+- **Branch atual:** `docs/reconcile-canonical-decisions-2026-11-26`; tarefa documental, sem alterações de gameplay.
 - **Unidade integrada:** `TimedEnergyGate`, cena/script `cybercore_w1_l2`, botão PRÓXIMA FASE na conclusão W1-L1, destino salvo W1-L2, retomada de W1-L1/W1-L2 e regressões.
 - **Limites:** W1-L2 é blockout/protótipo de mecânica, não conteúdo final; ciclo, dano e percurso precisam de playtest. APK debug exportado em CI, mas não instalado; Android físico, touch físico e profiling continuam pendentes.
-- **Próximo passo:** manter a vertical slice e corrigir o ciclo de vida do ActionBuffer; depois seguir para teste de instalação e fluxo Android físico quando houver dispositivo disponível.
+- **Próximo passo:** reconciliar as referências antigas de Dash e alternância de agentes com ADR-001 e a decisão atual de ChatGPT como único escritor; depois continuar sistemas de gameplay e preparar validação física Android quando houver dispositivo disponível.
 
 ---
 
@@ -544,3 +546,18 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Plano: `docs/production/plans/2026-11-26-action-buffer-lifecycle-clear.md`.
 - **Estado:** implementação escrita; CI ainda não confirmado. Sem validação Android física.
 - **Próximo passo:** abrir PR, aguardar Godot/Docs CI, revisar logs e corrigir falhas antes de integrar. Depois seguir para instalação e testes de ciclo de vida em aparelho.
+
+
+---
+
+## Sessão ChatGPT — PR #39 integrada e reconciliação documental — 2026-11-26
+
+- Main HEAD: `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.
+- PR #39 integrada por squash; Godot Validation `45881320136` SUCCESS — 72 testes/451 verificações/0 falhas; Docs Validation `45881320133` SUCCESS; Android Debug Export `45881252046` SUCCESS.
+- PR #39 corrige edges pendentes do `ActionBuffer` em notificações de pausa/suspensão/perda de foco; não altera física ou tuning.
+- Artifact de export: `bolt-aventura-android-debug-7415dfb988faf2dd63f9ff289106e7f7205dcdd1`, 28.194.534 bytes; package ID provisório `com.example.boltaventura`; SHA-256 `db03a42b909781a1f5e7c94d025615e1aa5f397c8ebd306ba30cddf84eca14b0`.
+- **CI pós-merge main:** Godot `45881703643`, Docs `45881703650`, Android export `45881703604`: SUCCESS; 72 testes/451 verificações/0 falhas. Artifact main `bolt-aventura-android-debug-50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`, APK 28.447.553 bytes, SHA-256 `edb88f43f407241e5716d6b7d327272c22e40f1025a00637d7393573e320c6d7`.
+- Instalação e validação física Android continuam pendentes.
+- Branch atual: `docs/reconcile-canonical-decisions-2026-11-26`.
+- Auditoria documental encontrou conflito resolvido no canon mas não nos documentos: MASTER_DIRECTIVE e diretiva integral ainda classificavam Dash como pendente, apesar do ADR-001; AGENTS/CLAUDE ainda descreviam alternância obrigatória apesar da decisão de ChatGPT como único escritor.
+- Esta unidade atualiza apenas documentação e governança; não altera gameplay.
