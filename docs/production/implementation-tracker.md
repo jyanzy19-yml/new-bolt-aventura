@@ -339,3 +339,12 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Regressão reforçada: 24 efeitos simultâneos, teardown do nível antes do timeout e verificação de retorno ao baseline.
 - Evidência: Godot run `45909521308` = 103 testes/672 verificações/0 falhas; mutation run `45909521305` = SUCCESS, callback antigo reproduz erro e falha no teste-alvo; implementação corrigida restaurada e suíte passa.
 - PR #57 permanece aberta, não integrada. Draw calls de software GL não confirmados independentemente; sem teste Android físico.
+
+
+
+## Risco técnico proposto — hardening de SaveSystem (não implementado)
+
+- Comparação read-only com `stage2/checkpoints-and-save` identificou duas ideias a avaliar em escopo próprio: validação/recovery do `.tmp` e recusa de sobrescrita de formato futuro.
+- O SaveSystem atual escreve `.tmp`, mas `load_payload()` tenta somente principal e backup; o SaveStore legado tenta principal/tmp/backup e valida o tmp antes de promover.
+- O SaveSystem atual rejeita formato futuro na leitura, porém `save_payload()` não aborta quando o principal/backup é `unsupported_format_version`; o caminho de rotação pode substituir o arquivo futuro. A cobertura atual testa rejeição na leitura, não a tentativa subsequente de gravação.
+- **PROPOSTA:** abrir tarefa/PR própria com testes de crash points e mutação. Não copiar o sistema duplicado nem alterar save nesta missão.
