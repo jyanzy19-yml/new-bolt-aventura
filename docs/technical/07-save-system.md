@@ -21,7 +21,7 @@
 
 ## Propriedade e integração
 
-O sistema recebe um Dictionary já preparado pelo produtor de estado. Não mantém referências a Nodes nem conhece player, HUD, fase ou inventário. CampaignProgress define os campos/IDs estáveis e integra checkpoints e progressão em W1-L1/W1-L2 (ADR-0004 e ADR-0006). SaveSystem permanece agnóstico a esses campos.
+O sistema recebe um Dictionary já preparado pelo produtor de estado. Não mantém referências a Nodes nem conhece player, HUD, fase ou inventário. CampaignProgress define os campos/IDs estáveis e integra checkpoints e progressão em W1-L1/W1-L2 (ADR-0004 e ADR-0006). Ele trata `recovered_backup`, `recovered_temp` e `recovered_temp_unpromoted:*` como estados de recuperação do armazenamento, sem confundi-los com erro de schema/domínio. SaveSystem permanece agnóstico aos campos da campanha.
 
 ## Limites conhecidos
 
