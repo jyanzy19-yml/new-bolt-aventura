@@ -48,8 +48,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cp scripts/vfx/burst.gd burst-fixed.gd
-          trap 'cp burst-fixed.gd scripts/vfx/burst.gd' EXIT
+          cp scripts/vfx/burst.gd burst-fixed.txt
+          trap 'cp burst-fixed.txt scripts/vfx/burst.gd' EXIT
           python3 - <<'PY'
           from pathlib import Path
           path = Path("scripts/vfx/burst.gd")
@@ -77,8 +77,8 @@ jobs:
           "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd > burst-mutation-tests.log 2>&1
           mutation_status=$?
           set -e
-          cp burst-fixed.gd scripts/vfx/burst.gd
-          rm -f burst-fixed.gd
+          cp burst-fixed.txt scripts/vfx/burst.gd
+          rm -f burst-fixed.txt
           trap - EXIT
           cat burst-mutation-tests.log
           if [[ $mutation_status -eq 0 ]]; then
