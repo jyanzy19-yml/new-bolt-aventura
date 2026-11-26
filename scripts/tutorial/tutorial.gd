@@ -98,7 +98,7 @@ func _render_step() -> void:
 			_start_button.visible = false
 		Step.ATTACK:
 			_combat.set_enabled(true)
-			_speech.text = "ROBÔ MENSAGEIRO\\nAponte para o alvo e use TIRO."
+			_speech.text = "ROBÔ MENSAGEIRO\nAponte para o alvo e use TIRO."
 			_start_button.visible = false
 		Step.COMPLETE:
 			_speech.text = "ROBÔ MENSAGEIRO\nControles básicos verificados. Cybercore aguarda."
