@@ -5,6 +5,7 @@ on:
     paths:
       - 'scripts/vfx/burst.gd'
       - 'tests/unit/test_cybercore_polish.gd'
+      - 'tests/mutation/**'
       - '.github/workflows/burst-cleanup-mutation.yml'
   pull_request:
     paths:
