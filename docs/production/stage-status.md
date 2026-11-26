@@ -1,8 +1,8 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` — base `8c502efaee16a47a31303c77d0efbbd4c847a5e8`.  
-**Branch de trabalho atual:** `feat/checkpoint-respawn-system` — implementação em revisão, CI pendente.  
+**Branch de integração:** `main` — HEAD `09317a2c1b7c1113e7ff2f142a82b495998f7578` (PR #13 integrada).  
+**Última entrega:** checkpoint reutilizável e respawn local da sandbox; implementação integrada, sem persistência entre sessões.  
 **Responsável atual:** ChatGPT, por decisão explícita do usuário; Claude não está no fluxo ativo.  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
 
@@ -21,7 +21,7 @@
 | Sandbox | Implementado | Cenário de desenvolvimento; **não é fase da campanha** |
 | Campanha | Não iniciada | Nenhuma das 42 fases está implementada |
 | Combate/inimigos/chefes | Não iniciado | Nenhum sistema de combate ou inimigo integrado |
-| Checkpoint/save | Em andamento | Checkpoint local na sandbox com ativação única e respawn no ponto ativado; estado não persiste entre sessões. SaveSystem/campanha ainda não implementados |
+| Checkpoint/save | Em andamento | PR #13 integrada: `BoltCheckpoint` com ativação única e respawn no último ponto ativo da sandbox. Estado em memória; SaveSystem/campanha ainda não implementados |
 | Assets finais/áudio | Não identificados como integrados | Placeholders de apresentação permanecem |
 
 ## Validação observada
@@ -39,10 +39,10 @@
 |---|---|---|---|
 | 0 | Claude Code | ACCEPTED | Fundação + protótipo provisório; hardening complementar PR #3 integrado |
 | 1 | ChatGPT | HANDOFF_READY | Correção de reatribuição de ponteiro, regressão e CI executando suíte |
-| 2 | ChatGPT | IN_PROGRESS | Checkpoint reutilizável e respawn local da sandbox; PR/CI pendentes |
+| 2 | ChatGPT | IN_PROGRESS | PR #13 integrada (`09317a2`); Godot CI #50 e Docs CI #167 SUCCESS; próxima unidade da vertical slice ainda em execução |
 | 3 | ChatGPT | Aguardando | Próxima unidade após validação da Etapa 2 |
 
-Um único escritor por vez. O usuário aciona manualmente o próximo agente.
+Um único escritor por vez. Por decisão do usuário, ChatGPT conduz sozinho as próximas etapas; Claude permanece inativo no fluxo de escrita.
 
 ## Pull requests
 
@@ -65,7 +65,7 @@ Um único escritor por vez. O usuário aciona manualmente o próximo agente.
 
 ## Próximo gate executável
 
-ChatGPT assume a Etapa 2 por decisão explícita do usuário. A implementação atual está na branch `feat/checkpoint-respawn-system`, baseada no HEAD `8c502efaee16a47a31303c77d0efbbd4c847a5e8`. A primeira unidade é o checkpoint/respawn local da sandbox, sem tratar a sandbox como fase da campanha. Não tratar a sandbox como fase da campanha nem canonizar parâmetros provisórios. Exportação e Android físico permanecem gates de validação pendentes.
+ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de checkpoint/respawn local da sandbox foi integrada pela PR #13 (`09317a2c1b7c1113e7ff2f142a82b495998f7578`). A próxima unidade será selecionada a partir dos sistemas centrais ainda ausentes, sem tratar a sandbox como fase da campanha. Não tratar a sandbox como fase da campanha nem canonizar parâmetros provisórios. Exportação e Android físico permanecem gates de validação pendentes.
 
 ## Referências
 
@@ -111,3 +111,11 @@ ChatGPT assume a Etapa 2 por decisão explícita do usuário. A implementação 
 - Etapa 2 em andamento na branch `feat/checkpoint-respawn-system`, baseada em `8c502efaee16a47a31303c77d0efbbd4c847a5e8`.
 - Primeira unidade: checkpoint reutilizável e respawn local na sandbox. Não representa checkpoint de campanha nem persistência entre sessões.
 - Godot CI #47 (run `45841375185`) passou no HEAD `4f89fa73f16cc28ed6e400fbcb26d81046d4864e`: importação Godot 4.7.2 e suíte headless com 43 testes, 179 verificações, 0 falhas. Docs CI #164 (`45841375193`) também passou. APK e Android físico continuam não executados. Nenhuma exportação APK ou validação em Android físico foi realizada.
+
+
+## Pós-merge PR #13 — 2026-11-26
+
+- PR #13 integrada por squash em `09317a2c1b7c1113e7ff2f142a82b495998f7578`.
+- Godot CI #50 (`45841890027`) SUCCESS no merge: Godot 4.7.2, importação headless e suíte com 43 testes / 179 verificações / 0 falhas.
+- Docs CI #167 (`45841889890`) SUCCESS no merge.
+- Nenhuma exportação APK, instalação, emulador ou validação em Android físico foi realizada.
