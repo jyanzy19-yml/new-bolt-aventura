@@ -1,10 +1,6 @@
 class_name Hud
 extends CanvasLayer
-## HUD de gameplay: controles touch, pausa e tela de resultado.
-##
-## O HUD OBSERVA o estado do jogador por sinais (docs/technical/05-system-contracts.md §3); não
-## é fonte de verdade de nada. Continua processando durante a pausa (PROCESS_MODE_ALWAYS) para
-## que os botões de pausa/resultado funcionem.
+## HUD de gameplay: vida, controles touch, pausa e tela de resultado.
 
 const MAIN_MENU_PATH: String = "res://scenes/ui/main_menu.tscn"
 
@@ -14,6 +10,7 @@ const MAIN_MENU_PATH: String = "res://scenes/ui/main_menu.tscn"
 @onready var _resume_button: Button = %ResumeButton
 @onready var _result_title: Label = %ResultTitle
 @onready var _again_button: Button = %AgainButton
+@onready var _health_label: Label = %HealthLabel
 
 var _restart_path: String = ""
 
@@ -29,13 +26,15 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
-	# Sair da cena nunca pode deixar o jogo pausado nem comandos pressionados.
 	get_tree().paused = false
 
 
 func bind_player(player: BoltPlayer) -> void:
 	player.dash_cooldown_changed.connect(_on_dash_cooldown_changed)
+	player.health_changed.connect(_on_player_health_changed)
+	var health: BoltHealth = player.get_node("%Health") as BoltHealth
 	_on_dash_cooldown_changed(1.0)
+	_on_player_health_changed(health.current_health, health.max_health)
 
 
 func set_restart_path(path: String) -> void:
@@ -75,6 +74,10 @@ func _on_dash_cooldown_changed(ratio: float) -> void:
 		dash_button.availability = ratio
 
 
+func _on_player_health_changed(current: int, maximum: int) -> void:
+	_health_label.text = "VIDA  %d / %d" % [current, maximum]
+
+
 func _go_to_menu() -> void:
 	_leave_to(MAIN_MENU_PATH)
 
@@ -87,7 +90,6 @@ func _restart() -> void:
 func _leave_to(path: String) -> void:
 	get_tree().paused = false
 	Actions.release_all_game_actions()
-	# Resolvido em runtime (mesmo motivo de MainMenu: compilação em thread de carregamento).
 	var flow: Node = get_node_or_null("/root/SceneFlow")
 	if flow == null:
 		push_error("Hud: autoload SceneFlow ausente.")
