@@ -6,7 +6,7 @@
 - ChatGPT é o único escritor ativo conforme a decisão vigente do usuário; Claude permanece inativo para escrita concorrente.
 - Etapa de produção atual: continuação do Gate 1/vertical slice e expansão incremental da campanha.
 - PR #34 integrada: W1-L1 encaminha para W1-L2; save e menu Continuar reconhecem ambas as fases existentes; W1-L2 possui blockout, campo energético cíclico, checkpoint e saída.
-- CI pré e pós-merge da PR #34: Godot 4.7.2, 69 testes/439 verificações/0 falhas; Docs CI pré/pós-merge SUCCESS. A sincronização documental posterior também passou no Docs CI.
+- CI pré e pós-merge das PRs #34/#35: Godot 4.7.2, 69 testes/439 verificações/0 falhas; Docs CI pré/pós-merge SUCCESS. PR #35 cobre contato físico real da `Area2D`.
 - A PR #1 permanece separada e não deve ser mesclada automaticamente. Android físico não validado.
 
 
