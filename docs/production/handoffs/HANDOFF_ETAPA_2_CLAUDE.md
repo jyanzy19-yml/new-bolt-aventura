@@ -5,7 +5,7 @@
 **Etapa:** 2 — continuação do Gate 1 / vertical slice  
 **Repositório:** `jyanzy19-yml/new-bolt-aventura`  
 **Branch de integração:** `main`  
-**HEAD atual verificado para este handoff:** `7afb58b190047157f35c5a0e971d0acee87dd999` (main após PR #7; confirmar novamente imediatamente antes de iniciar).  
+**Último HEAD verificado para este handoff:** `caedfee2f790cc78222b281a5b602110d7229043` (após PR #9; confirmar o HEAD real da main imediatamente antes de iniciar).  
 **Estado:** handoff integrado na PR #4; Claude pode iniciar após o usuário ativar a sessão e confirmar o HEAD atual.
 
 ## 1. O que já está integrado
@@ -54,7 +54,7 @@ Validação máxima comprovada: L2 (Godot headless/CI). Não há APK exportado, 
 - Tuning de movimento, layout touch, viewport 960×540 e renderer GL Compatibility continuam provisórios.
 - Package ID `com.example.boltaventura` é placeholder; não inventar identificador definitivo.
 - Não declarar exportação, instalação ou validação Android sem evidência.
-- PR #1 permanece OPEN, `mergeable_state=dirty`, 17 commits exclusivos e 137 commits atrás da main verificada (`7afb58b`); altera 17 arquivos documentais e não contém código de gameplay. Não mesclar automaticamente. Revisar cada um dos quatro documentos raiz e a diretiva em 12 partes; recuperar somente conteúdo compatível com as fontes aprovadas.
+- PR #1 permanece OPEN, `mergeable_state=dirty`, 17 commits exclusivos; o compare após PR #9 indicava 138 commits atrás, número volátil que deve ser consultado novamente antes de qualquer rebase.; altera 17 arquivos documentais e não contém código de gameplay. Não mesclar automaticamente. Revisar cada um dos quatro documentos raiz e a diretiva em 12 partes; recuperar somente conteúdo compatível com as fontes aprovadas.
 - Dash existe no Input Map, em `BoltPlayer`, controles e testes; a diretiva proposta na PR #1 o exclui. A fonte canônica ainda não foi resolvida. Não adicionar, remover ou retunar até decisão explícita do usuário.
 - Um único escritor ativo. O usuário inicia Claude manualmente; não há transferência automática de sessão.
 

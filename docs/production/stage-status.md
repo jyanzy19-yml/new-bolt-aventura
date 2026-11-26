@@ -1,7 +1,7 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` (HEAD atual verificado: `7afb58b190047157f35c5a0e971d0acee87dd999`)  
+**Branch de integração:** `main` (último HEAD verificado antes desta sincronização: `caedfee2f790cc78222b281a5b602110d7229043`; confirmar novamente ao iniciar)  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
 
 ## Estado executável observado
@@ -55,7 +55,7 @@ Um único escritor por vez. O usuário aciona manualmente o próximo agente.
 ## Auditoria de polimento e reconciliação documental
 
 - Auditoria abrangente anterior: [repository-polish-audit-2026-11-26.md](repository-polish-audit-2026-11-26.md), integrada pela PR #5.
-- Revisão atual confirmou PR #1 OPEN, `mergeable_state=dirty`, 17 commits exclusivos e 137 commits atrás da main atual (`7afb58b`); 17 arquivos modificados, todos documentais. Não contém gameplay. Não mesclar automaticamente.
+- Revisão atual confirmou PR #1 OPEN, `mergeable_state=dirty`, 17 commits exclusivos; a comparação de 2026-11-26 após PR #9 indicava 138 commits de atraso. Consultar o compare atual antes de rebasear.; 17 arquivos modificados, todos documentais. Não contém gameplay. Não mesclar automaticamente.
 - Documentos raiz foram identificados como obsoletos quanto à existência do projeto Godot. Esta rodada atualiza o mandato para continuar a base existente, sem recriá-la.
 - Conflito de escopo do Dash permanece pendente; preservar implementação atual sem ampliar/remover/retunar.
 - GitHub confirmou `protected=false` para `main`. A integração não tem operação administrativa para ativar proteção/ruleset; o proprietário precisa configurar manualmente. Verificar também os filtros por caminhos antes de exigir checks específicos.

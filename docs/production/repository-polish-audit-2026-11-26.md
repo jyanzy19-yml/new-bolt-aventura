@@ -162,3 +162,15 @@ O código atual contém Dash (Actions.DASH, estado DASHING, touch e testes), enq
 - **Godot CI:** última execução de engine consultada, run `45809258952`, no commit `4ecaff1d67049155d95bcbb5fc9d1c98187d3767`, SUCCESS. Log confirma Godot 4.7.2, import/parse headless e **42 testes, 171 verificações, 0 falhas**. O erro `SceneFlow: cena inexistente` aparece como cenário negativo esperado no teste `test_missing_scene_is_rejected_without_side_effects`; o teste passou. O código não mudou após esse commit nas integrações documentais #5–#7.
 - **Docs CI:** run `45816337658` no HEAD `7afb58b`, SUCCESS; job `Validate project documentation` concluído.
 - **Validação não executada:** editor gráfico, exportação APK, instalação, emulador, dispositivo físico, toque real, barras/safe area em hardware, FPS/RAM/temperatura.
+
+
+### 7.7 Estado após PR #9 — fechamento da auditoria
+
+- **PR #9:** MERGED por squash em `caedfee2f790cc78222b281a5b602110d7229043`. Atualizou cinco documentos de produção, sincronizando a divergência da PR #1, o estado de proteção e as evidências CI. Docs CI run `45817363134` no commit de merge: SUCCESS; check `Validate project documentation` passou.
+- **PR #1:** permanece OPEN, não rebaseada, não fechada e não mesclada. Compare realizado após PR #9: 17 commits exclusivos da PR e 138 commits atrás da main, com 17 arquivos exclusivamente documentais. Esse número é uma fotografia temporal; consultar o compare atual antes de qualquer reconciliação.
+- **PR #1 — decisão de conteúdo:** os quatro documentos raiz foram substituídos/corrigidos pela PR #7; a diretiva em 12 partes ainda não está integrada. Ela contém requisitos potencialmente úteis, mas também declara ausência do projeto Godot (agora falso) e exclui explicitamente Dash. O restante de suas propostas de lore, skins, inimigos, armas, mundo inicial e sequência de produção deve ser comparado às bíblias/ADRs antes de qualquer promoção a canon.
+- **Dash:** manter implementação atual intacta até decisão explícita do usuário. Não mesclar a PR #1 nem aplicar sua exclusão de Dash sem essa decisão.
+- **Main:** `protected=false`; nenhuma ferramenta administrativa de escrita de proteção/ruleset está disponível nesta integração. Ação administrativa permanece com o proprietário.
+- **Godot CI:** run `45809258952`, commit `4ecaff1d67049155d95bcbb5fc9d1c98187d3767`, SUCCESS; Godot 4.7.2, import/parse headless, 42 testes, 171 verificações, zero falhas. Nenhuma alteração de gameplay ocorreu nas PRs #5–#9.
+- **Docs CI:** run `45817363134`, commit `caedfee2f790cc78222b281a5b602110d7229043`, SUCCESS.
+- **Limite de validação:** não houve execução no editor gráfico, exportação/instalação APK, emulador ou Android físico; toque real, safe area, FPS, RAM e temperatura seguem sem evidência de dispositivo.
