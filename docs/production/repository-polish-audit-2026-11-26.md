@@ -219,3 +219,12 @@ Arquivos relidos: `project.godot`, `.gitignore`, `export_presets.cfg`, `TouchCon
 ### 8.6 Resultado e limites desta rodada
 
 As correções documentais confirmadas foram implementadas em branch separada. Nenhum arquivo de gameplay, cena, física, input map, Dash, configuração de exportação ou secret foi modificado. A validação final depende dos checks disparados pela PR desta branch. Claude Etapa 2 deve aguardar a integração/fechamento desta rodada.
+
+
+### 8.7 Decisão explícita do usuário — Dash permanece (2026-11-26)
+
+- **Decisão:** o usuário confirmou explicitamente que Dash deve permanecer no BOLT · AVENTURA.
+- **Registro canônico:** `docs/production/ADR-001-DASH.md`.
+- A implementação existente (Input Map, `Actions.DASH`, estado `DASHING`, controles touch e testes) deve ser preservada. A diretiva ainda não integrada da PR #1 que exclui Dash está superada neste ponto e não pode ser usada para remover a mecânica.
+- Esta decisão não autoriza retuning, redesign, expansão ou alteração de física/controles; essas mudanças continuam exigindo escopo próprio e testes.
+- Nenhum código de gameplay foi alterado para registrar esta decisão.
