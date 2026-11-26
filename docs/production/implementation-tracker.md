@@ -228,3 +228,13 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - O caminho normal agora também deve informar `CHECKPOINT ATIVADO`; regressão verifica visibilidade e texto no HUD.
 - **Estado:** implementado na branch, aguardando Godot CI e Docs CI. Não classificar como validado nem integrado até os checks e o merge serem confirmados.
 - A correção não altera a persistência nem o comportamento do checkpoint.
+
+
+## SYS-022 — regressão de contato físico do coletável (2026-11-26)
+
+- Base: main após PR #36, commit `afea046b6a481d48299641c9d8e529f6288d5256`.
+- Achado: o teste anterior de `BoltHealthPickup` invocava `_on_body_entered` diretamente; não exercitava a colisão real entre o player e a `Area2D`.
+- Branch `test/health-pickup-physical-contact`: acrescentado teste de sobreposição física, cura, emissão única de `collected` e consumo do coletável.
+- O workflow Godot passa a procurar também o erro de mutação de estado físico bloqueada durante sinais/flush de queries.
+- **Estado:** implementação e documentação na branch; Godot CI e Docs CI da PR ainda pendentes. Não marcar como validado antes dos checks.
+- Não altera cura, valores de gameplay, colisões, persistência ou canon.
