@@ -169,3 +169,11 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - Status W1-L1 continua **Em andamento**; ainda faltam playtest humano, arte/áudio finais, save/load de campanha e QA Android.
 
 - Checkpoint da W1-L1 agora em x=980; teste verifica folga entre o ponto de respawn e a área de contato do inimigo usando dimensões das CollisionShape2D.
+
+
+## W1-L1 — integração do primeiro disparo no encontro real (branch `test/w1-l1-live-combat-encounter`)
+
+- Novo teste em `tests/unit/test_campaign_entry.gd`: posiciona BOLT no piso do encontro, envia o evento lógico ATTACK pelo `Input.parse_input_event`, deixa o `ActionBuffer` e `BoltCombat` processarem o disparo e aguarda o sinal `CybercorePatrolEnemy.hit_received`.
+- Verifica que o projétil real da Pistola Crono reduz a vida do inimigo real instanciado em W1-L1.
+- Não altera dano, cadência, velocidade, tuning, IA ou comportamento de combate; apenas eleva a cobertura de integração do contrato já implementado.
+- CI desta branch pendente. W1-L1 permanece **Em andamento** até critérios de fase, playtest e QA Android serem atendidos.
