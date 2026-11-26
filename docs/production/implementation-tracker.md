@@ -184,3 +184,12 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - Novo teste `test_campaign_defeat_exposes_retry_for_w1_l1`: aplica dano letal ao player real da cena, verifica overlay/título de derrota, conexão do botão `JOGAR DE NOVO` e destino de reinício para a própria W1-L1.
 - Não altera política de vidas, checkpoint, respawn, dano, invulnerabilidade ou fluxo de cena; valida o contrato já implementado.
 - CI Godot 4.7.2 e Docs desta branch pendentes.
+
+
+## Pós-merge PR #26 — derrota e retry W1-L1
+
+- Main HEAD: `3428851c774f989d3522da1ed0430e9d39f7a680`.
+- `test_campaign_defeat_exposes_retry_for_w1_l1`: dano letal no player da cena, overlay/título de derrota, conexão do botão `JOGAR DE NOVO` e destino de reinício W1-L1.
+- Godot CI pré-merge `45855625278` SUCCESS: 54 testes, 304 verificações, 0 falhas. Docs CI pré-merge `45855625442` SUCCESS.
+- CI pós-merge main Godot `45855795164` SUCCESS: 54 testes, 304 verificações, 0 falhas; Docs `45855795173` SUCCESS.
+- W1-L1 segue **Em andamento**; critérios pendentes incluem persistência de campanha/save-load, conteúdo final, playtest e QA Android.

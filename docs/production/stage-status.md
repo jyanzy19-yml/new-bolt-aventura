@@ -1,8 +1,8 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` — HEAD `92b35d52723f5fa1b05a8e53921a2d8605c6f1cf` (PR #25 integrada).  
-**Última entrega integrada:** feedback de progressão, checkpoint seguro e teste de disparo real da Pistola Crono no inimigo de W1-L1 (PRs #24 e #25).  
+**Branch de integração:** `main` — HEAD `3428851c774f989d3522da1ed0430e9d39f7a680` (PR #26 integrada).  
+**Última entrega integrada:** feedback de progressão, checkpoint seguro, combate real e validação do fluxo de derrota/retry de W1-L1 (PRs #24–#26).  
 **CI da PR #21:** Godot run #45849915250 SUCCESS em Godot 4.7.2; 53 testes, 276 verificações, 0 falhas. CI pós-merge da PR #21 deve ser consultado separadamente.  
 **Responsável atual:** ChatGPT, por decisão explícita do usuário; Claude não está no fluxo ativo.  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
@@ -224,3 +224,14 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - CI pós-merge main: Godot run `45855371627` / `45855463491` e Docs run `45855371706` / `45855463599`; consultar os resultados finais antes de declarar a main pós-merge validada.
 - Próximo incremento: cobrir derrota e ligação do botão de reinício da W1-L1; branch `test/w1-l1-defeat-retry-flow`.
 - W1-L1 continua **Em andamento**; sem playtest humano, APK, instalação, emulador, aparelho Android ou medições de performance.
+
+
+## Pós-merge PR #26 — derrota e retry W1-L1 — 2026-11-26
+
+- PR #26 integrada por squash em `3428851c774f989d3522da1ed0430e9d39f7a680`.
+- Godot CI pré-merge run `45855625278` SUCCESS — Godot 4.7.2, import/parse headless aprovado, **54 testes, 304 verificações, 0 falhas**.
+- Docs CI pré-merge run `45855625442` SUCCESS.
+- CI pós-merge main: Godot run `45855795164` SUCCESS — 54 testes, 304 verificações, 0 falhas; Docs run `45855795173` SUCCESS.
+- Teste novo aplica dano letal em BOLT na W1-L1 e verifica overlay/título de derrota, conexão do botão `JOGAR DE NOVO` e destino de retry para a própria W1-L1.
+- Nenhuma regra de vida, checkpoint, respawn, dano, invulnerabilidade ou SceneFlow foi alterada.
+- W1-L1 permanece **Em andamento**: blockout/arte e áudio finais, save/load de campanha, playtest humano e QA Android ainda não concluídos.
