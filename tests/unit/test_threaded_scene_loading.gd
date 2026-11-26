@@ -49,7 +49,7 @@ func _transition_via_scene_flow(path: String, repetition: int) -> void:
 	await tree.process_frame
 
 
-func test_scene_flow_repeatedly_loads_menu_and_both_campaign_levels() -> bool:
+func test_scene_flow_repeatedly_loads_all_campaign_entry_scenes() -> bool:
 	var save_system: Node = tree.root.get_node_or_null("SaveSystem")
 	check(save_system != null, "autoload SaveSystem disponível no runner")
 	if save_system != null:
