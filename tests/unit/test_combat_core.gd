@@ -16,11 +16,11 @@ func test_health_component_clamps_damage_and_emits_depleted_once() -> bool:
 	tree.root.add_child(health)
 	await tree.process_frame
 	check_eq(health.get("current_health"), 3, "vida inicial corresponde ao máximo")
-	check(health.call("apply_damage", 2), "dano positivo aplicado")
+	check(bool(health.call("apply_damage", 2)), "dano positivo aplicado")
 	check_eq(health.get("current_health"), 1, "vida reduzida corretamente")
-	check(health.call("apply_damage", 9), "dano excedente aplicado")
+	check(bool(health.call("apply_damage", 9)), "dano excedente aplicado")
 	check_eq(health.get("current_health"), 0, "vida limitada a zero")
-	check(not health.call("apply_damage", 1), "alvo derrotado não recebe dano adicional")
+	check(not bool(health.call("apply_damage", 1)), "alvo derrotado não recebe dano adicional")
 	health.queue_free()
 	await tree.process_frame
 	return true
@@ -48,7 +48,7 @@ func test_chrono_projectile_defeats_training_target() -> bool:
 		if defeated[0]:
 			break
 	check(defeated[0], "projétil atinge e derrota alvo de treinamento")
-	check(not is_instance_valid(target), "alvo é removido após vida chegar a zero")
+	check(target.is_queued_for_deletion(), "alvo é marcado para remoção após vida chegar a zero")
 	root.queue_free()
 	await tree.process_frame
 	return true
