@@ -1,4 +1,4 @@
-# BOLT · AVENTURA — Diretiva de implementação integral do zero
+# BOLT · AVENTURA — Diretiva de implementação integral e continuidade
 
 **Tipo:** mandato de produção e execução  
 **Projeto:** BOLT · AVENTURA  
@@ -9,9 +9,9 @@
 
 ## 1. Mandato inequívoco
 
-Este trabalho tem como resultado esperado **um jogo completo, funcional, jogável e exportável para Android, criado do zero**. Não se limite a auditar, documentar, planejar, criar pastas vazias, produzir protótipos descartáveis ou recomendar que outra pessoa implemente.
+O resultado de longo prazo continua sendo **um jogo completo, funcional, jogável e exportável para Android**, cobrindo o escopo aprovado de sete mundos e 42 fases. A fundação Godot já existe e está integrada à `main`; esta diretiva agora orienta sua evolução incremental até o produto completo. Não se limite a auditar, documentar, planejar ou recomendar implementação, mas também não recrie nem apague a base existente.
 
-O repositório contém especificações, bíblias, decisões, skills e instruções. Isso não significa que exista um projeto Godot executável. Na ausência de `project.godot`, crie o projeto. Crie também todas as cenas, scripts GDScript, Resources, dados, interfaces, recursos visuais/sonoros, testes, configurações e arquivos de exportação necessários, respeitando licenças e proveniência.
+O repositório contém documentação, decisões, skills e instruções **e um projeto Godot executável**: `project.godot`, cenas, scripts GDScript, recursos, configuração Android e testes. Antes de qualquer alteração, inspecione o estado real e reutilize os sistemas já presentes. Só crie arquivos novos quando forem necessários e não existirem equivalentes.
 
 **A documentação é a especificação; os arquivos Godot são a implementação; os testes e evidências são a validação.** Nunca confunda essas três coisas.
 
@@ -49,7 +49,7 @@ A campanha deve preservar a premissa e os elementos de canon definidos nas bíbl
 
 Implementar e integrar, conforme especificações aprovadas:
 - personagem BOLT, controle, animação e estados;
-- movimento horizontal, aceleração/desaceleração, salto e recursos All Jump aprovados, dash, colisões, aterrissagem, dano e recuperação;
+- movimento horizontal, aceleração/desaceleração, salto e recursos All Jump aprovados, colisões, aterrissagem, dano e recuperação; Dash é uma implementação existente cujo escopo de produto está pendente de reconciliação; não adicionar/remover/retunar sem decisão canônica;
 - combate, armas e habilidades aprovadas;
 - inimigos com IA/estados, dano, telegraphs, contra-jogo e variações reais;
 - chefes com arenas, fases, transições e recompensa;
@@ -64,12 +64,12 @@ Não criar sistemas apenas como botões decorativos ou telas sem comportamento. 
 
 ## 4. Produção do zero: sequência executável
 
-### Fase A — descoberta e fundação
-- Inspecionar branch, arquivos, histórico e decisões; confirmar ausência/presença de projeto Godot.
-- Selecionar uma versão estável Godot 4.x compatível com Android, registrar versão exata, renderer, export templates e justificativa.
-- Criar `project.godot`, configuração de projeto, orientação paisagem, resolução/base viewport, stretch, input map, renderer e estrutura de pastas.
-- Definir arquitetura mínima sustentável, cenas, autoloads estritamente necessários, contratos e convenções.
-- Criar projeto que abre sem erros e uma cena inicial funcional.
+### Fase A — descoberta e consolidação da fundação existente
+- Inspecionar branch, HEAD, arquivos, histórico, decisões e estado real do projeto Godot.
+- Confirmar Godot 4.7.2 em `.godot-version` e `project.godot`; verificar renderer, orientação paisagem, viewport, Input Map, export preset e estrutura atual.
+- Não recriar `project.godot`, cenas, autoloads, scripts ou testes que já existam. Corrigir apenas defeitos confirmados e lacunas necessárias à próxima unidade.
+- Mapear arquitetura, cenas, autoloads, contratos e dependências existentes antes de qualquer reorganização.
+- Garantir que a base atual importe/parseie sem erros e que a cena inicial funcione conforme os testes disponíveis.
 
 ### Fase B — vertical slice real
 Construir uma fatia jogável representativa: inicialização → menu → tutorial/entrada → fase → movimento e combate → inimigo → checkpoint → transição/loading → resultado → save/load. Incluir controles touch e HUD reais. Exportar e instalar build de teste Android quando o ambiente permitir. Medir e registrar limitações.
@@ -141,12 +141,12 @@ A conclusão exige jogo completo e conectável, 42 fases concluíveis, narrativa
 
 ## 9. Primeira instrução ao iniciar Claude Code
 
-Comece verificando o estado real do repositório e lendo toda a documentação obrigatória. Depois:
-1. produza uma auditoria curta com evidências;
-2. identifique e corrija inconsistências documentais sem alterar canon aprovado;
-3. escolha e registre a versão Godot 4.x compatível;
-4. crie imediatamente o projeto executável e implemente a fundação;
-5. avance pelo roadmap até a campanha completa, sem encerrar após planejamento;
-6. atualize status, matrizes, decisões e relatórios à medida que o trabalho for realizado.
+Comece verificando o estado real do repositório e lendo a documentação obrigatória. Depois:
+1. confirme o HEAD e audite a fundação Godot existente;
+2. corrija inconsistências documentais e técnicas comprovadas sem alterar canon aprovado;
+3. confirme Godot 4.7.2, configuração Android/paisagem e contratos existentes;
+4. escolha a próxima unidade funcional mínima do roadmap e implemente-a sobre a base atual;
+5. avance pelos gates até a campanha completa, sem recriar o projeto nem encerrar após planejamento;
+6. atualize status, matrizes, decisões e relatórios com evidências reais.
 
 **Não responda apenas com um plano. Execute a implementação no repositório.** Se uma tarefa exceder o limite de uma sessão, deixe o projeto em estado consistente, atualize o registro de continuidade com o próximo passo concreto e retome do ponto real, sem declarar concluído o que falta.
