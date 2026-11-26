@@ -4,7 +4,7 @@
 
 ## Estado vigente — revisão de 2026-11-26
 
-**Último merge confirmado na main:** PR #16 integrada por squash em `2b81211e56677a7f4ee1da97e6d1c4d604e87d77`. Confirmar novamente o SHA antes de cada novo turno.
+**Último merge confirmado na main:** PR #17 integrada por squash em `33fe452d0a6aad2fc87ea19da789dfde9999c93a`. Confirmar novamente o SHA antes de cada novo turno.
 
 - **Etapa 0 — Claude Code: ACCEPTED.** Fundação Godot 4.7.2 e protótipo técnico provisório aceitos; hardening integrado pela PR #3.
 - **Etapa 1 — ChatGPT: HANDOFF_READY.** Correção de reatribuição de ponteiro em `TouchControls`, regressão e execução da suíte no CI; entrega original `f3ab682`.
@@ -115,7 +115,7 @@ O usuário autorizou ChatGPT a assumir sozinho todas as etapas de desenvolviment
 ## Sessão atual — combate básico
 
 - Base: `main` após PR #16, commit `2b81211e56677a7f4ee1da97e6d1c4d604e87d77`.
-- Branch: `feat/chrono-pistol-combat-core`.
+- Branch integrada: `feat/chrono-pistol-combat-core` → PR #17 → `main` em `33fe452d0a6aad2fc87ea19da789dfde9999c93a`.
 - Entrega em desenvolvimento: `BoltHealth`, `BoltCombat`, `ChronoProjectile`, alvo estático de treinamento, botão touch TIRO e lição de ataque no tutorial.
 - Limite de escopo: alvo não é inimigo de campanha; parâmetros da Pistola Crono são provisórios; outras armas, seleção, IA e dano ao jogador não implementados.
-- ChatGPT permanece único escritor; CI/revisão pendentes.
+- ChatGPT permanece único escritor; Godot CI #61 e Docs CI #182 passaram. CI pós-merge #62/#183 em execução.
