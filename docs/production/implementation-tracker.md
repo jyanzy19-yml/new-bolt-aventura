@@ -366,3 +366,15 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Mutation A (remover prewarm) reproduziu o erro; mutation B (restaurar identificadores diretos dos autoloads mantendo prewarm) não reproduziu. Isso isola a compilação/carga do script no caminho threaded como causa; não os identificadores autoload em si.
 - Foram revertidas mudanças desnecessárias em main_menu.gd, W1-L1, W1-L2 e HUD. Correção mínima atual: prewarm do script no Boot antes de SceneFlow.change_scene.
 - Revalidar a versão final após a reversão e o workflow de mutação simplificado.
+
+
+### SYS-003 — resultado de validação
+
+- **Status:** corrigido e validado em CI headless.
+- Godot Validation #190: 93 testes / 1.307 verificações / 0 falhas.
+- Regressão SceneFlow: 722 verificações em 90 transições.
+- Boot: diagnóstico verbose exit 0 e 20/20 processos independentes.
+- Mutation: remover o prewarm de main_menu.gd reproduz o erro em main_menu.tscn:12.
+- Causa: primeiro carregamento do script GDScript dentro da dependência threaded da PackedScene falha no cold boot Godot 4.7.2; carregar o Script na thread principal antes da transição evita o erro.
+- PR #58 aberta, sem merge.
+- Android físico e export APK não validados.
