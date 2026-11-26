@@ -1,11 +1,11 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Main HEAD:** `88b753f3b28d6591642a044b76d2d1ec21ad0d73`.  
+**Main HEAD:** `b24c8624a8ed64816d0131070f440a47f525ba47`.  
 **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente.  
 **Última regressão de gameplay integrada:** PR #39 — limpeza do ActionBuffer no ciclo de vida Android, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.  
 **Última entrega de infraestrutura integrada:** PR #38 — pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.  
-**Branch de trabalho:** `feat/moving-platform-system` — componente reutilizável de plataforma móvel.  
+**Branch de trabalho:** `feat/one-way-platform` — componente reutilizável de plataforma unidirecional.  
 **Responsável atual:** ChatGPT, único escritor ativo conforme decisão vigente do usuário.  
 **Estado do Gate 1:** EM ANDAMENTO — W1-L1/W1-L2 seguem blockouts; APK debug exportado em CI, instalação e validação Android física pendentes.
 
@@ -15,6 +15,7 @@
 **PR #43 CI:** Godot `45884348999` SUCCESS (78 testes/484 verificações/0 falhas), Docs `45884348954` SUCCESS, Android Export `45884348969` SUCCESS; artifact `bolt-aventura-android-debug-b6bf765bccdb80c2de0512655208060ab2fc1480`, SHA-256 `3dc8eba90dc3f914b1db725f50fbdc38bee9a16dee2c38d95b05f476a41cb212`.
 **PR #43 pós-merge main:** Godot `45884671403`, Docs `45884671584`, Android Export `45884671259`: SUCCESS; artifact `bolt-aventura-android-debug-22923228d2a58c0ee6d75b581d5a16aa70e1a7ef`, APK 28.456.143 bytes, SHA-256 `3fc5ea209e88a69b3b33a7de9360dbc42d38dae9a2734eb38e103ab7f2478661`.
 **PR #44 pós-merge main:** Godot `45885612259`, Docs `45885612332`, Android Export `45885612341`: SUCCESS; 81 testes/508 verificações/0 falhas; artifact `bolt-aventura-android-debug-88b753f3b28d6591642a044b76d2d1ec21ad0d73`, APK 28.456.143 bytes, SHA-256 `de37ec1b4330f1845eb434f079be92a3c83d661cbfc1aecfd431a9fe75a3fe2d`.
+**PR #45 pós-merge main:** Godot `45886997248`, Docs `45886997138`, Android Export `45886997220`: SUCCESS; 85 testes/533 verificações/0 falhas; artifact `bolt-aventura-android-debug-b24c8624a8ed64816d0131070f440a47f525ba47`, APK 28.460.646 bytes, SHA-256 `3b3be5c8df067c000216bbc3e5ad39b357f0ea70ad3d3a5bc12625724873ffd1`.
 **CI pós-merge main:** Godot `45881703643`, Docs `45881703650` e Android Export `45881703604`: SUCCESS. A execução da main repetiu 72 testes/451 verificações/0 falhas e gerou artifact `bolt-aventura-android-debug-50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`; SHA-256 do APK `edb88f43f407241e5716d6b7d327272c22e40f1025a00637d7393573e320c6d7`.
 
 ## Estado executável observado
@@ -68,6 +69,7 @@ Um único escritor por vez. Por decisão do usuário, ChatGPT conduz sozinho as 
 - [PR #42](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/42): MERGED — pausa da SceneTree e bloqueio integral de input durante loading; Godot 77 testes/479 verificações/0 falhas, Docs e Android export SUCCESS.
 - [PR #43](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/43): MERGED — teste de restauração do pause state após falha; Godot 78 testes/484 verificações/0 falhas, Docs e export Android SUCCESS.
 - [PR #44](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/44): MERGED — contratos de câmera e limites por fase; Godot 81 testes/508 verificações/0 falhas, Docs e Android export SUCCESS.
+- [PR #45](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/45): MERGED — MovingPlatform reutilizável (AnimatableBody2D); Godot 85 testes/533 verificações/0 falhas, Docs e Android export SUCCESS.
 - [PR #34](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/34): MERGED — W1-L2 Rede Interrompida, campo energético cíclico e progressão W1-L1→W1-L2; Godot CI pré-merge 69 testes/439 verificações/0 falhas; Docs CI SUCCESS.
 - [PR #33](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/33): MERGED — expansão da diretriz de produção e correção do coletável de vida.
 
@@ -344,7 +346,7 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 | 16 | Arquitetura de mundos e fases | EM DESENVOLVIMENTO | Atlas de 42 fases e fluxo de campanha; gerenciamento global de conteúdo ainda parcial |
 | 17 | Construção dos mundos | EM DESENVOLVIMENTO | Cybercore em blockout; mundos 2–7 sem ambientes executáveis |
 | 18 | Construção das fases | EM DESENVOLVIMENTO | W1-L1 e W1-L2 em blockout; demais fases sem cenas |
-| 19 | Obstáculos e exploração | EM DESENVOLVIMENTO | Checkpoint, coletável e campo energético existentes; componente de plataforma móvel reutilizável em implementação; segredos/rotas opcionais pendentes |
+| 19 | Obstáculos e exploração | EM DESENVOLVIMENTO | Checkpoint, coletável e campo energético; MovingPlatform (AnimatableBody2D) integrado e validado; OneWayPlatform em implementação; segredos/rotas opcionais pendentes |
 | 20 | Narrativa e progressão | EM DESENVOLVIMENTO | Premissa/canon, abertura, tutorial e progressão W1-L1→W1-L2 parciais; campanha narrativa incompleta |
 | 21 | Interface e UX | EM DESENVOLVIMENTO | Menu, HUD, pausa, controles touch e overlay de carregamento básico; lock de input durante transição em validação; configurações, polimento visual e validação Android pendentes |
 | 22 | Arte e efeitos visuais | EM DESENVOLVIMENTO | Placeholders geométricos e feedback básico; arte final e pipeline de assets pendentes |
@@ -447,3 +449,11 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Motivação: gameplay systems documenta plataformas móveis; o W1-L3 proposto no blueprint prevê esse obstáculo, mas a implementação ainda não existe.
 - Diretriz: componente `AnimatableBody2D` sincronizado com física, movimento ping-pong determinístico e sem aplicar velocidade do player duas vezes.
 - Estado: em desenvolvimento; não será inserido em fase até validar transporte/colisão em testes.
+
+
+### Unidade atual — plataforma unidirecional
+
+- Branch: `feat/one-way-platform`, base main `b24c8624a8ed64816d0131070f440a47f525ba47`.
+- Motivação: o contrato de gameplay prevê plataformas unidirecionais; o sistema ainda não existia.
+- Diretriz: StaticBody2D com CollisionShape2D.one_way_collision e direção local DOWN; permitir subir através da plataforma e aterrissar por cima.
+- Estado: em desenvolvimento; não integrar em fase até validar testes de passagem e aterrissagem.
