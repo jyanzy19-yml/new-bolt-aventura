@@ -33,6 +33,23 @@ offset_bottom = 64.0
 theme_override_font_sizes/font_size = 26
 text = "VIDA  3 / 3"
 
+[node name="ProgressNotification" type="Label" parent="Safe/Layout"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -240.0
+offset_top = 84.0
+offset_right = 240.0
+offset_bottom = 128.0
+theme_override_colors/font_color = Color(0.45, 1, 0.82, 1)
+theme_override_colors/font_outline_color = Color(0.02, 0.06, 0.1, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 26
+text = "CHECKPOINT ATIVADO"
+horizontal_alignment = 1
+
 [node name="TouchControls" type="Control" parent="Safe/Layout"]
 unique_name_in_owner = true
 layout_mode = 1
@@ -225,6 +242,11 @@ custom_minimum_size = Vector2(340, 72)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "JOGAR DE NOVO"
+
+[node name="ProgressNotificationTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 1.8
+one_shot = true
 
 [node name="ResultMenuButton" type="Button" parent="ResultOverlay/Center/Column"]
 unique_name_in_owner = true
