@@ -102,6 +102,21 @@ func test_burst_spawns_one_shot_particles_and_releases_them() -> bool:
 	return true
 
 
+func test_burst_releases_counter_when_parent_is_freed_before_timeout() -> bool:
+	var host: Node2D = Node2D.new()
+	tree.root.add_child(host)
+	var baseline: int = Burst.active_count()
+	var particles: CPUParticles2D = Burst.spawn(host, Vector2.ZERO, Color.WHITE, 4, 50.0, 0.1)
+	check(particles != null, "burst criado antes de destruir o pai")
+	check_eq(Burst.active_count(), baseline + 1, "contador incrementado")
+	host.queue_free()
+	await tree.process_frame
+	check(not is_instance_valid(particles), "partícula removida junto com o pai")
+	await tree.create_timer(0.6).timeout
+	check_eq(Burst.active_count(), baseline, "callback do timer libera contador mesmo após destruição do pai")
+	return true
+
+
 func test_burst_count_is_capped() -> bool:
 	var host: Node2D = Node2D.new()
 	tree.root.add_child(host)
