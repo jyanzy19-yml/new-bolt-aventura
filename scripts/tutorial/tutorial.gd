@@ -12,9 +12,9 @@ enum Step { INTRO, MOVE, JUMP, DASH, COMPLETE }
 @onready var _hud: Hud = %Hud
 @onready var _speech: Label = %SpeechLabel
 @onready var _start_button: Button = %StartButton
-@onready var _messenger: Node2D = %Messenger
 
 var _step: Step = Step.INTRO
+var _spawn_position: Vector2 = Vector2(96.0, -24.0)
 
 
 func _ready() -> void:
@@ -24,6 +24,8 @@ func _ready() -> void:
 	camera.limit_right = CAMERA_LIMITS.end.x
 	camera.limit_bottom = CAMERA_LIMITS.end.y
 	_hud.bind_player(_player)
+	_player.set_physics_process(false)
+	%KillZone.body_entered.connect(_on_kill_zone_body_entered)
 	_hud.set_restart_path("res://scenes/tutorial/tutorial.tscn")
 	_player.state_changed.connect(_on_player_state_changed)
 	_start_button.pressed.connect(_on_start_or_continue)
@@ -35,7 +37,12 @@ func _process(_delta: float) -> void:
 		_set_step(Step.JUMP)
 
 
-func _on_player_state_changed(new_state: BoltPlayer.State) -> void:
+func _on_kill_zone_body_entered(body: Node2D) -> void:
+	if body == _player:
+		_player.respawn(_spawn_position)
+
+
+func _on_player_state_changed(new_state: int) -> void:
 	if _step == Step.JUMP and new_state == BoltPlayer.State.RISING:
 		_set_step(Step.DASH)
 	elif _step == Step.DASH and new_state == BoltPlayer.State.DASHING:
@@ -45,6 +52,7 @@ func _on_player_state_changed(new_state: BoltPlayer.State) -> void:
 func _on_start_or_continue() -> void:
 	if _step == Step.INTRO:
 		_start_button.visible = false
+		_player.set_physics_process(true)
 		_set_step(Step.MOVE)
 	elif _step == Step.COMPLETE:
 		_start_button.disabled = true
