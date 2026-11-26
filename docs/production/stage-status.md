@@ -1,10 +1,11 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Main HEAD:** `b24c8624a8ed64816d0131070f440a47f525ba47`.  
+**Main HEAD após PR #46:** `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.  
 **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente.  
 **Última regressão de gameplay integrada:** PR #39 — limpeza do ActionBuffer no ciclo de vida Android, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.  
 **Última entrega de infraestrutura integrada:** PR #38 — pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.  
+**Último componente de plataforma integrado:** PR #46 — `OneWayPlatform`, merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.  
 **Branch de trabalho:** `feat/one-way-platform` — componente de plataforma unidirecional e testes de passagem/aterrissagem.  
 **Responsável atual:** ChatGPT, único escritor ativo conforme decisão vigente do usuário.  
 **Estado do Gate 1:** EM ANDAMENTO — W1-L1/W1-L2 seguem blockouts; APK debug exportado em CI, instalação e validação Android física pendentes.
@@ -15,7 +16,8 @@
 **PR #43 CI:** Godot `45884348999` SUCCESS (78 testes/484 verificações/0 falhas), Docs `45884348954` SUCCESS, Android Export `45884348969` SUCCESS; artifact `bolt-aventura-android-debug-b6bf765bccdb80c2de0512655208060ab2fc1480`, SHA-256 `3dc8eba90dc3f914b1db725f50fbdc38bee9a16dee2c38d95b05f476a41cb212`.
 **PR #43 pós-merge main:** Godot `45884671403`, Docs `45884671584`, Android Export `45884671259`: SUCCESS; artifact `bolt-aventura-android-debug-22923228d2a58c0ee6d75b581d5a16aa70e1a7ef`, APK 28.456.143 bytes, SHA-256 `3fc5ea209e88a69b3b33a7de9360dbc42d38dae9a2734eb38e103ab7f2478661`.
 **PR #44 pós-merge main:** Godot `45885612259`, Docs `45885612332`, Android Export `45885612341`: SUCCESS; 81 testes/508 verificações/0 falhas; artifact `bolt-aventura-android-debug-88b753f3b28d6591642a044b76d2d1ec21ad0d73`, APK 28.456.143 bytes, SHA-256 `de37ec1b4330f1845eb434f079be92a3c83d661cbfc1aecfd431a9fe75a3fe2d`.
-**PR #45 pós-merge main:** Godot `45886997248`, Docs `45886997138`, Android Export `45886997220`: SUCCESS; 85 testes/533 verificações/0 falhas; artifact `bolt-aventura-android-debug-b24c8624a8ed64816d0131070f440a47f525ba47`, APK 28.460.646 bytes, SHA-256 `3b3be5c8df067c000216bbc3e5ad39b357f0ea70ad3d3a5bc12625724873ffd1`.
+**PR #45 pós-merge main:** Godot `45886997248`, Docs `45886997138`, Android Export `45886997220`: SUCCESS; 85 testes/533 verificações/0 falhas; artifact `bolt-aventura-android-debug-b24c8624a8ed64816d0131070f440a47f525ba47`, APK 28.460.646 bytes, SHA-256 `3b3be5c8df067c000216bbc3e5ad39b357f0ea70ad3d3a5bc12625724873ffd1`.  
+**PR #46 pré-merge:** Godot Validation `45887805114` SUCCESS — 87 testes/548 verificações/0 falhas; Docs Validation `45887805097` SUCCESS; Android Debug Export `45887805269` SUCCESS. Artifact `bolt-aventura-android-debug-f20ba8c94a4e1c205edba95fc12c3b3a2beac1cd`, 28.461.057 bytes; package ID provisório `com.example.boltaventura`; assinatura v2/v3 válida; SHA-256 `8211b6c46b17861f9859c62beed1f524a35f9d571838171034cb59cb8f02eb58`. Pós-merge CI da main ainda não confirmado.
 **CI pós-merge main:** Godot `45881703643`, Docs `45881703650` e Android Export `45881703604`: SUCCESS. A execução da main repetiu 72 testes/451 verificações/0 falhas e gerou artifact `bolt-aventura-android-debug-50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`; SHA-256 do APK `edb88f43f407241e5716d6b7d327272c22e40f1025a00637d7393573e320c6d7`.
 
 ## Estado executável observado
@@ -69,7 +71,7 @@ Um único escritor por vez. Por decisão do usuário, ChatGPT conduz sozinho as 
 - [PR #42](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/42): MERGED — pausa da SceneTree e bloqueio integral de input durante loading; Godot 77 testes/479 verificações/0 falhas, Docs e Android export SUCCESS.
 - [PR #43](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/43): MERGED — teste de restauração do pause state após falha; Godot 78 testes/484 verificações/0 falhas, Docs e export Android SUCCESS.
 - [PR #44](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/44): MERGED — contratos de câmera e limites por fase; Godot 81 testes/508 verificações/0 falhas, Docs e Android export SUCCESS.
-- [PR #45](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/45): MERGED — MovingPlatform reutilizável (AnimatableBody2D); Godot 85 testes/533 verificações/0 falhas, Docs e Android export SUCCESS.
+- [PR #45](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/45): MERGED — MovingPlatform reutilizável (AnimatableBody2D); Godot 85 testes/533 verificações/0 falhas, Docs e Android export SUCCESS.\n- [PR #46](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/46): MERGED — OneWayPlatform com colisão unidirecional nativa; pré-merge Godot 87 testes/548 verificações/0 falhas, Docs e Android export SUCCESS; sem integração em fase.
 - [PR #34](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/34): MERGED — W1-L2 Rede Interrompida, campo energético cíclico e progressão W1-L1→W1-L2; Godot CI pré-merge 69 testes/439 verificações/0 falhas; Docs CI SUCCESS.
 - [PR #33](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/33): MERGED — expansão da diretriz de produção e correção do coletável de vida.
 
@@ -466,3 +468,4 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Testes: propriedades da shape, aterrissagem por cima e passagem ascendente por baixo.
 - Plano: [one-way-platform](plans/2026-11-26-one-way-platform.md).
 - **Estado:** implementação escrita; aguardando CI.
+\n\n## Sessão ChatGPT — OneWayPlatform integrada — 2026-11-26\n\n- PR #46 integrada por squash em `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.\n- `OneWayPlatform` estende `PlatformBlock`, usa `CollisionShape2D.one_way_collision=true` e direção `Vector2.DOWN`; margem default de 2 px permanece provisória.\n- Testes headless cobrem configuração da shape, passagem ascendente e aterrissagem descendente: Godot 4.7.2, 87 testes/548 verificações/0 falhas; Docs CI e Android Debug Export SUCCESS antes do merge.\n- APK pré-merge: 28.461.057 bytes, assinatura v2/v3 válida, package ID placeholder `com.example.boltaventura`, SHA-256 `8211b6c46b17861f9859c62beed1f524a35f9d571838171034cb59cb8f02eb58`.\n- Não integrada em W1-L1/W1-L2; nenhuma alteração no controller, física-base, Dash ou plataforma sólida.\n- CI pós-merge main, playtest visual, instalação e validação Android física ainda não confirmados.\n
