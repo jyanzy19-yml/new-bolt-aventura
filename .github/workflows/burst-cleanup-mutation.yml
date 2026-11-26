@@ -88,6 +88,10 @@ jobs:
             echo "::error::Mutation failed for an unrelated reason; expected cleanup marker was not observed."
             exit 1
           fi
+          if ! grep -F "Error calling from signal 'timeout' to callable: 'GDScript::_release'" burst-mutation-tests.log; then
+            echo "::error::Old callback mutation did not reproduce the observed Godot runtime error."
+            exit 1
+          fi
           "$GODOT_BIN" --headless --editor --path . --import --quit
           "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd
           echo "Mutation verified: old callback fails the isolated parent-destruction cleanup runner."
