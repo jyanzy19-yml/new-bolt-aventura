@@ -10,6 +10,22 @@ func _prepare() -> Node:
 	return CampaignProgress
 
 
+func _write_envelope(path: String, payload: Dictionary) -> bool:
+	var payload_json: String = str(SaveSystem.call("_canonical_json", payload))
+	var envelope: Dictionary = {
+		"format_version": 1,
+		"payload_json": payload_json,
+		"checksum": str(SaveSystem.call("_checksum", payload_json)),
+	}
+	var file: FileAccess = FileAccess.open(path, FileAccess.WRITE)
+	if file == null:
+		return false
+	file.store_string(JSON.stringify(envelope))
+	file.flush()
+	var write_error: Error = file.get_error()
+	file.close()
+	return write_error == OK
+
 func _cleanup() -> void:
 	SaveSystem.delete_save()
 	SaveSystem.storage_path_override = ""
@@ -164,5 +180,46 @@ func test_progress_schema_rejects_fractional_and_textual_values() -> bool:
 	state = progress.call("load_state")
 	check_eq(state.get("current_level_id"), "W1-L1", "aceita número float exatamente integral")
 	check_eq(progress.get("last_error"), "", "representação numérica integral não gera erro")
+	_cleanup()
+	return true
+
+
+func test_campaign_progress_accepts_recovered_temp_payload() -> bool:
+	var progress: Node = _prepare()
+	var older_payload: Dictionary = {
+		"campaign_progress": {
+			"campaign_id": "main",
+			"schema_version": 1,
+			"current_level_id": "W1-L1",
+			"active_checkpoint_id": "cp_old",
+			"completed_level_ids": [],
+		},
+	}
+	var recovered_payload: Dictionary = {
+		"campaign_progress": {
+			"campaign_id": "main",
+			"schema_version": 1,
+			"current_level_id": "W1-L2",
+			"active_checkpoint_id": "cp_recovered",
+			"completed_level_ids": ["W1-L1"],
+		},
+	}
+	check(SaveSystem.save_payload(older_payload), "grava progresso anterior para backup")
+	check(SaveSystem.save_payload({"campaign_progress": {
+		"campaign_id": "main",
+		"schema_version": 1,
+		"current_level_id": "W1-L1",
+		"active_checkpoint_id": "cp_intermediate",
+		"completed_level_ids": [],
+	}}), "rotaciona o progresso anterior para backup")
+	check(DirAccess.remove_absolute(ProjectSettings.globalize_path(TEST_SAVE_PATH)) == OK, "simula principal ausente após interrupção")
+	check(_write_envelope(TEST_SAVE_PATH + ".tmp", recovered_payload), "prepara envelope de campanha completo no temporário")
+	var state: Dictionary = progress.call("load_state")
+	check_eq(state.get("current_level_id"), "W1-L2", "CampaignProgress aceita payload recuperado do temporário")
+	check_eq(state.get("active_checkpoint_id"), "cp_recovered", "checkpoint recuperado permanece disponível")
+	check_eq(progress.get("last_error"), "", "recuperação válida não é tratada como erro de domínio")
+	check_eq(SaveSystem.get("last_error"), "recovered_temp", "SaveSystem registra a origem da recuperação")
+	check(progress.call("save_checkpoint", "W1-L2", "cp_after_recovery"), "campanha continua gravável após recuperação do temporário")
+	check_eq(progress.call("get_checkpoint_id", "W1-L2"), "cp_after_recovery", "novo checkpoint é persistido após recuperação")
 	_cleanup()
 	return true
