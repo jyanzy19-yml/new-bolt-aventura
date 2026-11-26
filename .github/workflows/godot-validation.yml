@@ -93,10 +93,13 @@ jobs:
 
           run_checked godot-tests "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd
 
-          # Mutation check: restore the pre-fix direct autoload reference in the menu.
-          # The threaded-scene regression must reject this old implementation.
+          # Cold-process mutation matrix. The test runner above has already loaded scenes;
+          # only a fresh project boot can prove the original startup failure is detected.
           cp scripts/ui/main_menu.gd main-menu-fixed.gd
-          trap 'cp main-menu-fixed.gd scripts/ui/main_menu.gd' EXIT
+          cp scripts/core/boot.gd boot-fixed.gd
+          trap 'cp main-menu-fixed.gd scripts/ui/main_menu.gd; cp boot-fixed.gd scripts/core/boot.gd' EXIT
+
+          # Mutation A: restore the original direct autoload identifiers, keeping the boot barrier.
           python3 - <<'PY'
           from pathlib import Path
           path = Path("scripts/ui/main_menu.gd")
@@ -107,34 +110,72 @@ jobs:
           }
           for old, new in mutations.items():
               if old not in source:
-                  raise SystemExit(f"Mutation target not found: {old}")
+                  raise SystemExit(f"Menu mutation target missing: {old}")
               source = source.replace(old, new, 1)
           path.write_text(source)
           PY
           set +e
-          "$GODOT_BIN" --headless --editor --path . --import --quit > mutation-import.log 2>&1
-          import_status=$?
-          "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd > mutation-tests.log 2>&1
-          mutation_status=$?
+          "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300 > mutation-menu-delayed.log 2>&1
+          menu_mutation_status=$?
           set -e
+          if grep -qE 'Parse Error: Failed.*main_menu.tscn|Failed loading resource: res://scenes/ui/main_menu.tscn' mutation-menu-delayed.log; then
+            echo "Direct-autoload mutation reproduced the cold menu failure (status $menu_mutation_status)."
+          else
+            echo "Direct-autoload mutation alone did not reproduce with the first-frame barrier."
+          fi
+
+          # Restore the menu; Mutation B removes only the first-frame barrier from Boot.
           cp main-menu-fixed.gd scripts/ui/main_menu.gd
-          rm -f main-menu-fixed.gd
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("scripts/core/boot.gd")
+          source = path.read_text()
+          barrier = '\\tawait get_tree().process_frame\\n\\tif not is_inside_tree():\\n\\t\\treturn\\n'
+          if barrier not in source:
+              raise SystemExit("Boot first-frame barrier mutation target missing.")
+          path.write_text(source.replace(barrier, "", 1))
+          PY
+          set +e
+          "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300 > mutation-boot-immediate.log 2>&1
+          boot_mutation_status=$?
+          set -e
+          if grep -qE 'Parse Error: Failed.*main_menu.tscn|Failed loading resource: res://scenes/ui/main_menu.tscn' mutation-boot-immediate.log; then
+            echo "Same-frame boot mutation reproduced the cold menu failure (status $boot_mutation_status)."
+          else
+            echo "Same-frame boot mutation alone did not reproduce."
+          fi
+
+          # Combined original behavior must reproduce the reported defect.
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("scripts/ui/main_menu.gd")
+          source = path.read_text()
+          source = source.replace('return get_node_or_null("/root/CampaignProgress")', 'return CampaignProgress', 1)
+          source = source.replace('return get_node_or_null("/root/SaveSystem")', 'return SaveSystem', 1)
+          path.write_text(source)
+          PY
+          set +e
+          "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300 > mutation-original-combined.log 2>&1
+          combined_mutation_status=$?
+          set -e
+          if ! grep -qE 'Parse Error: Failed.*main_menu.tscn|Failed loading resource: res://scenes/ui/main_menu.tscn' mutation-original-combined.log; then
+            echo "::error::Combined pre-fix implementation did not reproduce the reported main-menu failure."
+            cat mutation-menu-delayed.log mutation-boot-immediate.log mutation-original-combined.log
+            exit 1
+          fi
+          echo "Original combined implementation reproduced the main-menu failure (status $combined_mutation_status)."
+
+          cp main-menu-fixed.gd scripts/ui/main_menu.gd
+          cp boot-fixed.gd scripts/core/boot.gd
+          rm -f main-menu-fixed.gd boot-fixed.gd
           trap - EXIT
-          cat mutation-import.log mutation-tests.log
-          if [[ $import_status -eq 0 && $mutation_status -eq 0 ]] && ! grep -nE 'main_menu.tscn|Parse Error:|SCRIPT ERROR:' mutation-import.log mutation-tests.log; then
-            echo "::error::Threaded autoload regression survived the old-code mutation."
-            exit 1
-          fi
-          if ! grep -nE 'main_menu.tscn|Parse Error:|SCRIPT ERROR:' mutation-import.log mutation-tests.log; then
-            echo "::error::Mutation failed for an unrelated reason; no evidence that the regression detected the old menu code."
-            exit 1
-          fi
           "$GODOT_BIN" --headless --editor --path . --import --quit > godot-restore-import.log 2>&1
           if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' godot-restore-import.log | grep -vE 'audio_driver_alsa|ERR_CANT_OPEN.*audio'; then
             echo "::error::Restored source did not import cleanly after mutation verification."
             exit 1
           fi
-          echo "Mutation check passed: the pre-fix direct-autoload menu implementation was detected."
+          echo "Mutation matrix passed: the original combined implementation was detected."
+
 
           echo "Running 20 real project boots (300 frames each, fixed 60 FPS)."
           for run in $(seq 1 20); do
