@@ -378,3 +378,6 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Causa: primeiro carregamento do script GDScript dentro da dependência threaded da PackedScene falha no cold boot Godot 4.7.2; carregar o Script na thread principal antes da transição evita o erro.
 - PR #58 aberta, sem merge.
 - Android físico e export APK não validados.
+
+
+- **Android export CI:** run 45907688455 SUCCESS; APK debug exportado, verificado e enviado como artefato. Não equivale a teste em aparelho físico.
