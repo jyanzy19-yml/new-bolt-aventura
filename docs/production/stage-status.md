@@ -2,7 +2,7 @@
 
 **Atualização:** 2026-11-26  
 **Branch de integração:** `main` — base `d6301e887c6c3a54ab532fcc2f75cb983c3e9840`.  
-**Branch de trabalho:** `feat/campaign-opening-tutorial` — abertura, tutorial e blockout W1-L1 em implementação; PR/CI pendentes.  
+**Branch de trabalho:** `feat/campaign-opening-tutorial` — abertura, tutorial e blockout W1-L1 em implementação; PR #15 em revisão; Godot CI #54 SUCCESS (44 testes, 205 verificações, 0 falhas) e Docs CI #173 SUCCESS.  
 **Última entrega integrada:** checkpoint reutilizável e respawn local da sandbox (PR #13).  
 **Responsável atual:** ChatGPT, por decisão explícita do usuário; Claude não está no fluxo ativo.  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
@@ -126,4 +126,4 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 
 - Menu principal → storyboard de abertura → tutorial jogável com robô mensageiro → blockout W1-L1 Cybercore.
 - W1-L1 é blockout de gameplay em desenvolvimento, não fase concluída. Inimigos, combate, narrativa ambiental, assets finais, áudio, save/load e QA continuam pendentes.
-- Branch `feat/campaign-opening-tutorial`, base `d6301e887c6c3a54ab532fcc2f75cb983c3e9840`; CI pendente.
+- Branch `feat/campaign-opening-tutorial`, base `d6301e887c6c3a54ab532fcc2f75cb983c3e9840`; Godot CI #54 e Docs CI #173 SUCCESS.
