@@ -69,4 +69,5 @@ Separar canon consolidado, expansão autoral proposta, requisito, decisão técn
 - `docs/game-design/04-gameplay-systems.md`: sistemas de gameplay.
 - `docs/game-design/EXPANDED-NARRATIVE-DOSSIER.md`: aprofundamento narrativo proposto.
 - `docs/game-design/EXPANDED-GAMEPLAY-SYSTEMS.md`: especificação expandida de sistemas.
+- `docs/game-design/EXPANDED-42-LEVEL-CAMPAIGN-BLUEPRINT.md`: proposta de macrodesign das 42 fases, com percurso, mecânica, narrativa, opcionais e gates de cada fase.
 - `docs/production/stage-status.md` e `CONTINUITY.md`: estado executável e continuidade.
