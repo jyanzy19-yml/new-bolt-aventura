@@ -556,6 +556,7 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - PR #39 integrada por squash; Godot Validation `45881320136` SUCCESS — 72 testes/451 verificações/0 falhas; Docs Validation `45881320133` SUCCESS; Android Debug Export `45881252046` SUCCESS.
 - PR #39 corrige edges pendentes do `ActionBuffer` em notificações de pausa/suspensão/perda de foco; não altera física ou tuning.
 - Artifact de export: `bolt-aventura-android-debug-7415dfb988faf2dd63f9ff289106e7f7205dcdd1`, 28.194.534 bytes; package ID provisório `com.example.boltaventura`; SHA-256 `db03a42b909781a1f5e7c94d025615e1aa5f397c8ebd306ba30cddf84eca14b0`.
+- **CI pós-merge main:** Godot `45881703643`, Docs `45881703650`, Android export `45881703604`: SUCCESS; 72 testes/451 verificações/0 falhas. Artifact main `bolt-aventura-android-debug-50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`, APK 28.447.553 bytes, SHA-256 `edb88f43f407241e5716d6b7d327272c22e40f1025a00637d7393573e320c6d7`.
 - Instalação e validação física Android continuam pendentes.
 - Branch atual: `docs/reconcile-canonical-decisions-2026-11-26`.
 - Auditoria documental encontrou conflito resolvido no canon mas não nos documentos: MASTER_DIRECTIVE e diretiva integral ainda classificavam Dash como pendente, apesar do ADR-001; AGENTS/CLAUDE ainda descreviam alternância obrigatória apesar da decisão de ChatGPT como único escritor.
