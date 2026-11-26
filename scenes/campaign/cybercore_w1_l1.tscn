@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/campaign/cybercore_w1_l1.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://scenes/world/platform_block.tscn" id="2_block"]
+[ext_resource type="PackedScene" path="res://scenes/player/bolt.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
+[ext_resource type="PackedScene" path="res://scenes/levels/checkpoint.tscn" id="5_checkpoint"]
+
+[sub_resource type="RectangleShape2D" id="KillShape"]
+size = Vector2(2800, 180)
+
+[sub_resource type="RectangleShape2D" id="GoalShape"]
+size = Vector2(72, 128)
+
+[node name="CybercoreW1L1" type="Node2D"]
+script = ExtResource("1_level")
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="StartFloor" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(-32, 0)
+size = Vector2(640, 128)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="RaisedPlatformA" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(420, -64)
+size = Vector2(180, 32)
+fill_color = Color(0.08, 0.11, 0.19, 1)
+
+[node name="MidFloor" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(760, 0)
+size = Vector2(600, 128)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="RaisedPlatformB" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(1120, -96)
+size = Vector2(180, 32)
+fill_color = Color(0.08, 0.11, 0.19, 1)
+
+[node name="EndFloor" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(1500, 0)
+size = Vector2(600, 128)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(96, -24)
+
+[node name="Bolt" parent="." instance=ExtResource("3_player")]
+unique_name_in_owner = true
+position = Vector2(96, -24)
+
+[node name="Hud" parent="." instance=ExtResource("4_hud")]
+unique_name_in_owner = true
+
+[node name="Checkpoint" parent="." instance=ExtResource("5_checkpoint")]
+unique_name_in_owner = true
+position = Vector2(920, -32)
+checkpoint_id = &"cybercore_w1_l1_checkpoint"
+
+[node name="KillZone" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1030, 650)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+shape = SubResource("KillShape")
+
+[node name="Goal" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1960, -64)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal"]
+shape = SubResource("GoalShape")
+
+[node name="GateVisual" type="Polygon2D" parent="Goal"]
+color = Color(0.1, 0.9, 1, 0.6)
+polygon = PackedVector2Array(-32, -64, 32, -64, 32, 64, -32, 64)
+
+[node name="LevelNote" type="Label" parent="."]
+position = Vector2(24, -168)
+theme_override_font_sizes/font_size = 16
+text = "W1-L1 · CYBERCORE — BLOCKOUT / CONTEÚDO PROVISÓRIO"
