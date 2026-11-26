@@ -500,3 +500,11 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Evidência final: Godot Validation run `45909521308` SUCCESS — 103 testes / 672 verificações / 0 falhas; Mutation run `45909521305` SUCCESS — callback antigo reproduziu erro de conversão e fez a regressão de teardown falhar; callback corrigido restaurado e suíte passou novamente.
 - Android Debug Export run `45909521316` SUCCESS; exportação CI comprovada, sem validação de runtime em aparelho físico.
 - Draw calls 25/23 não reproduzidos independentemente; medições de software GL em PC não representam hardware Android.
+
+
+
+### Auditoria da branch legada de save — somente proposta — 2026-11-26
+
+- `stage2/checkpoints-and-save` continua remota e não integrada. Não apagar sem autorização explícita.
+- Comparação de arquitetura confirmou duplicação: `ProgressState/GameState`, `SaveData`, `SaveStore`, `LevelSession/Checkpoint` competem com `SaveSystem`, `CampaignProgress` e `BoltCheckpoint` de main.
+- PROPOSTA (fora do escopo desta PR): avaliar hardening isolado do SaveSystem para recuperar `.tmp` validado após interrupção e bloquear qualquer escrita quando envelope principal/backup indicar formato futuro. Nenhuma alteração de save foi feita.
