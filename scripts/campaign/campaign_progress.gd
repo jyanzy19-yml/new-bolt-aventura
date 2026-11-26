@@ -26,7 +26,8 @@ func load_state() -> Dictionary:
 	if str(raw_state.get("campaign_id", "")) != CAMPAIGN_ID:
 		last_error = "campaign_id_mismatch"
 		return _default_state()
-	if int(raw_state.get("schema_version", 0)) != PROGRESS_SCHEMA_VERSION:
+	var schema_version: Variant = raw_state.get("schema_version", null)
+	if typeof(schema_version) != TYPE_INT or schema_version != PROGRESS_SCHEMA_VERSION:
 		last_error = "unsupported_progress_schema"
 		return _default_state()
 
