@@ -2,6 +2,7 @@ extends Node2D
 ## W1-L1 — Cybercore. Blockout de campanha com inimigo-base provisório.
 
 const LEVEL_PATH: String = "res://scenes/campaign/cybercore_w1_l1.tscn"
+const LEVEL_ID: String = "W1-L1"
 const CAMERA_LIMITS: Rect2i = Rect2i(0, -360, 2200, 620)
 
 @onready var _player: BoltPlayer = %Bolt
@@ -30,6 +31,10 @@ func _ready() -> void:
 	_health_pickup.collected.connect(_on_health_pickup_collected)
 	_goal.body_entered.connect(_on_goal_body_entered)
 	_respawn_position = _spawn.global_position
+	var saved_checkpoint_id: String = CampaignProgress.get_checkpoint_id(LEVEL_ID)
+	if saved_checkpoint_id == String(_checkpoint.checkpoint_id):
+		_checkpoint.restore_activation()
+		_respawn_position = _checkpoint.get_respawn_position()
 	_player.respawn(_respawn_position)
 
 
@@ -39,6 +44,8 @@ func _on_player_defeated() -> void:
 
 func _on_checkpoint_activated(_checkpoint_id: StringName, respawn_position: Vector2) -> void:
 	_respawn_position = respawn_position
+	if not CampaignProgress.save_checkpoint(LEVEL_ID, String(_checkpoint.checkpoint_id)):
+		push_warning("W1-L1: não foi possível persistir checkpoint (%s)." % CampaignProgress.last_error)
 	_hud.show_progress_notification("CHECKPOINT ATIVADO")
 
 
@@ -54,4 +61,6 @@ func _on_kill_zone_body_entered(body: Node2D) -> void:
 func _on_goal_body_entered(body: Node2D) -> void:
 	if body == _player and not _section_finished:
 		_section_finished = true
+		if not CampaignProgress.mark_level_completed(LEVEL_ID):
+			push_warning("W1-L1: não foi possível persistir a conclusão (%s)." % CampaignProgress.last_error)
 		_hud.show_result("Cybercore — trecho inicial concluído")
