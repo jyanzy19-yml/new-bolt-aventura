@@ -82,7 +82,7 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	var hud: Hud = cybercore_instance.get_node("Hud") as Hud
 	var health: BoltHealth = level_player.get_node("%Health") as BoltHealth
 	var end_floor: PlatformBlock = cybercore_instance.get_node("Geometry/EndFloor") as PlatformBlock
-	check(enemy.global_position.y, -19.0, "inimigo começa apoiado no piso intermediário")
+	check_eq(enemy.global_position.y, -19.0, "inimigo começa apoiado no piso intermediário")
 	check(enemy.global_position.x >= 800.0 and enemy.global_position.x <= 900.0, "inimigo patrulha dentro dos limites seguros do piso")
 	check_eq(enemy.patrol_distance, 50.0, "patrulha fica limitada ao trecho seguro da plataforma")
 	check(goal.global_position.x >= end_floor.global_position.x and goal.global_position.x <= end_floor.global_position.x + end_floor.size.x, "objetivo está contido no piso final")
