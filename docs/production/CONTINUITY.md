@@ -665,3 +665,23 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - **Dash/Input/touch/save/progressão:** preservados por escopo; sem alteração deliberada desses contratos.
 - **Android:** sem APK, emulador, aparelho físico, FPS, memória ou térmica nesta unidade.
 - **Próxima ação:** abrir PR independente, aguardar Godot Validation, examinar logs (inclusive mutation-import/mutation-tests e boot-01…boot-20), corrigir erros observados e só então registrar resultados reais. Não integrar automaticamente.
+
+
+---
+
+## Revisões paralelas da mesma sessão — 2026-11-26
+
+### PR #57 — Cybercore W1 polish
+
+- Revisão independente registrada como COMMENT (review ID `6081188962`); PR #57 continua OPEN e não integrada.
+- GitHub Actions no head da PR: Godot Validation run `45904728896` SUCCESS; Docs Validation `45904728890` SUCCESS; Android Debug Export `45904728900` SUCCESS.
+- Leitura estática do diff não identificou defeito bloqueador. O código usa ArrayMesh/um draw_mesh por camada e limita Burst a 24 instâncias simultâneas.
+- Draw calls 21→25 / 19→23 **não confirmados independentemente**; medições llvmpipe/PC não demonstram desempenho Helio G99. Sem Android físico/FPS/memória/térmica.
+- Arte, câmera e VFX continuam provisórios até playtest visual e validação no hardware-alvo.
+
+### Branch obsoleta `stage2/checkpoints-and-save`
+
+- Comparação GitHub: branch contém 1 commit exclusivo e está 75 commits atrás de main; não integrar.
+- Implementa `SaveData`, `SaveStore`, `ProgressState` (`GameState`) e `LevelSession`, duplicando os domínios atuais `SaveSystem`, `CampaignProgress` e `BoltCheckpoint`.
+- Não foi alterada nem apagada; exclusão permanece dependente de autorização explícita.
+- **PROPOSTA técnica, sem implementação:** avaliar recuperação de `.tmp` íntegro após interrupção e bloqueio explícito de escrita quando o arquivo principal/backup contém versão futura. Main já possui temporário, backup, checksum SHA-256 e recuperação de backup; a proposta deve ser tratada como hardening incremental do serviço existente, não como adoção de SaveStore/GameState.
