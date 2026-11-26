@@ -144,20 +144,24 @@ func save_payload(payload: Dictionary) -> bool:
 func load_payload() -> Dictionary:
 	last_error = ""
 	var primary: Dictionary = _decode_file(_primary_path())
+	var temporary: Dictionary = _decode_file(_temp_path())
+	var backup: Dictionary = _decode_file(_backup_path())
+
+	# Não escolher uma cópia aparentemente antiga quando qualquer slot contém
+	# envelope de versão não suportada. Sem metadados de geração confiáveis,
+	# não é possível provar que a cópia atual é mais recente.
+	for candidate: Dictionary in [primary, temporary, backup]:
+		if str(candidate.get("error", "")) == "unsupported_format_version":
+			last_error = "unsupported_format_version"
+			return {}
+
 	if bool(primary.get("ok", false)):
 		return primary["payload"] as Dictionary
-	if str(primary.get("error", "")) == "unsupported_format_version":
-		last_error = "unsupported_format_version"
-		return {}
 
 	# Um .tmp íntegro representa uma gravação que terminou de ser escrita,
 	# mas pode não ter sido promovida antes de uma interrupção do processo.
 	# Ele é mais recente que o backup e só é considerado quando o principal
-	# não é válido. Uma versão futura no temporário também bloqueia downgrade.
-	var temporary: Dictionary = _decode_file(_temp_path())
-	if str(temporary.get("error", "")) == "unsupported_format_version":
-		last_error = "unsupported_format_version"
-		return {}
+	# não é válido.
 	if bool(temporary.get("ok", false)):
 		var primary_cleanup_error: Error = _remove_if_exists(_primary_path())
 		if primary_cleanup_error != OK:
@@ -173,21 +177,15 @@ func load_payload() -> Dictionary:
 		last_error = "recovered_temp"
 		return temporary["payload"] as Dictionary
 
-	var backup: Dictionary = _decode_file(_backup_path())
 	if bool(backup.get("ok", false)):
 		last_error = "recovered_backup"
 		return backup["payload"] as Dictionary
-	if str(backup.get("error", "")) == "unsupported_format_version":
-		last_error = "unsupported_format_version"
-		return {}
 
-	if (
-		str(primary.get("error", "")) == "missing"
-		and str(temporary.get("error", "")) == "missing"
-		and str(backup.get("error", "")) == "missing"
-	):
-		return {}
-	last_error = str(primary.get("error", temporary.get("error", backup.get("error", "load_failed"))))
+	for candidate: Dictionary in [primary, temporary, backup]:
+		var candidate_error: String = str(candidate.get("error", ""))
+		if not candidate_error.is_empty() and candidate_error != "missing":
+			last_error = candidate_error
+			return {}
 	return {}
 
 
