@@ -130,7 +130,9 @@ jobs:
           from pathlib import Path
           path = Path("scripts/core/boot.gd")
           source = path.read_text()
-          barrier = '\\tawait get_tree().process_frame\\n\\tif not is_inside_tree():\\n\\t\\treturn\\n'
+          tab = chr(9)
+          nl = chr(10)
+          barrier = tab + 'await get_tree().process_frame' + nl + tab + 'if not is_inside_tree():' + nl + tab + tab + 'return' + nl
           if barrier not in source:
               raise SystemExit("Boot first-frame barrier mutation target missing.")
           path.write_text(source.replace(barrier, "", 1))
