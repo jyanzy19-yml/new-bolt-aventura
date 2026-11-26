@@ -97,6 +97,7 @@ size_flags_horizontal = 4
 text = "COMEÇAR"
 
 [node name="KillZone" type="Area2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(700, 600)
 collision_layer = 0
 collision_mask = 2
