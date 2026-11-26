@@ -1,8 +1,8 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` — HEAD `7af315f258a1360d84906ef72f98eae39611b623` (PR #27 integrada).  
-**Última entrega integrada:** cobertura de progressão, combate, derrota/retry W1-L1 e rastreabilidade (PRs #24–#27); fundação de SaveSystem em desenvolvimento.  
+**Branch de integração:** `main` — HEAD `e09ee388aa511d78f2b36c4ee6be9617d0c27655` (PR #28 integrada).  
+**Última entrega integrada:** cobertura de progressão, combate, derrota/retry W1-L1, SaveSystem versionado e rastreabilidade (PRs #24–#28); integração do progresso persistente em desenvolvimento.  
 **CI da PR #21:** Godot run #45849915250 SUCCESS em Godot 4.7.2; 53 testes, 276 verificações, 0 falhas. CI pós-merge da PR #21 deve ser consultado separadamente.  
 **Responsável atual:** ChatGPT, por decisão explícita do usuário; Claude não está no fluxo ativo.  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
@@ -22,7 +22,7 @@
 | Sandbox | Implementado | Cenário de desenvolvimento; **não é fase da campanha** |
 | Campanha | Em andamento | Abertura/tutorial jogável; W1-L1 Cybercore tem blockout, inimigo-base provisório, Pistola Crono, dano ao jogador e coletável de cura. Conteúdo e apresentação finais pendentes; nenhuma fase validada |
 | Combate/inimigos/chefes | Em andamento | Pistola Crono, inimigo-base de patrulha provisório, vida/dano, invulnerabilidade, feedback visual de impacto e coletável de cura. Sem chefes, IA avançada ou arsenal completo |
-| Checkpoint/save | Em andamento | `BoltCheckpoint` continua local à sessão. `SaveSystem` agora existe como armazenamento JSON versionado de baixo nível na branch em revisão; ainda não foi ligado ao estado de campanha/checkpoint |
+| Checkpoint/save | Em andamento | `SaveSystem` versionado integrado (PR #28). `CampaignProgress` em desenvolvimento conecta IDs de checkpoint/conclusão W1-L1; CI pendente. Persistência em Android físico ainda não testada |
 | Assets finais/áudio | Não identificados como integrados | Placeholders de apresentação permanecem |
 
 ## Validação observada
@@ -244,3 +244,13 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Dados de domínio continuam pertencendo aos produtores; nenhum estado de checkpoint/campanha foi conectado ainda. `SYS-014` e W1-L1 permanecem Em andamento.
 - Testes headless cobrem round-trip, sobrescrita, delete, recuperação do backup, versão futura incompatível e rejeição de referências a Nodes. CI desta branch pendente.
 - Sem teste de interrupção real, Android físico, APK, emulador, desempenho ou armazenamento OEM.
+
+
+## Integração CampaignProgress — W1-L1 (branch `feat/w1-l1-persistent-checkpoint-progress`)
+
+- Define schema de domínio `campaign_progress` v1 sob o payload genérico de SaveSystem, preservando campos de outros domínios.
+- IDs técnicos: campanha `main`, nível `W1-L1`, checkpoint `cybercore_w1_l1_checkpoint`.
+- Ativação do checkpoint grava current_level_id + active_checkpoint_id; reentrada restaura o indicador e ponto de respawn sem reemitir o sinal.
+- Objetivo marca W1-L1 em completed_level_ids e limpa o checkpoint ativo; não transiciona para W1-L2 inexistente.
+- ADR-0004 registra a decisão técnica. Testes cobrem schema, preservação de payload, reentrada de cena e conclusão. CI desta branch pendente.
+- Limite: sem validação de encerramento forçado, APK, emulador, Android físico, filesystem OEM ou performance de I/O.
