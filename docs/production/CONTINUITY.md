@@ -201,3 +201,19 @@ Ao retomar, consultar o HEAD real; este snapshot descreve a base auditada e não
 - **Bugs abertos:** nenhum conhecido reproduzível; riscos em handoff (feel e toque real não avaliados).
 - **Bloqueios:** export Android (sem SDK/templates); decisões do usuário (package ID, resolução, renderer, ABIs, "All Jump").
 - **Próxima ação executável:** Etapa 1 (ChatGPT) — inspecionar HEAD, rodar `--import` e a suíte, auditar o conflito de escopo e escolher a próxima unidade do roadmap.
+
+
+## 13. Sessão Etapa 1 — ChatGPT — 2026-11-26
+
+- **Commit-base:** `ab72c584522db49ad7b31c80717fd2d6ab7ab73e` (HEAD de `main) confirmado antes de editar; nenhum commit posterior encontrado.
+- **Commit de implementação:** `f3ab6829228c077b1a3c14eb65385a8a99c34608` (precedido por `4700d39` e `317f4ef`). Atualizações documentais de handoff/status foram gravadas depois; consultar o HEAD atual para o hash mais recente.
+- **Gate/unidade:** Gate 1 em andamento; integridade de input multitouch e execução automática da suíte headless.
+- **Revisão Etapa 0:** commits `7057532`, `c32a99d`, `ab72c58` e handoff inspecionados. Conflito de escopo aceito explicitamente: movimento/touch/HUD/sandbox ficam como base provisória solicitada; sandbox não é fase de campanha.
+- **Achado:** S3 em `TouchControls._bind`: o mesmo índice de ponteiro podia ser reassociado sem liberar o botão anterior, deixando ação lógica presa. Corrigido com unbind defensivo; teste sintético de regressão adicionado.
+- **CI:** Godot Run #31 SUCCESS (`f3ab682`): Godot 4.7.2 headless, import e `tests/test_runner.gd` exit 0. 42 métodos de teste identificados em 9 arquivos. Docs Run #119 SUCCESS. Nível L2.
+- **Ambiente local:** Godot não instalado; execução local NÃO EXECUTADA. Editor gráfico, APK, Android físico, toque real, barras, FPS e memória NÃO EXECUTADOS.
+- **Mutação:** não executada nesta sessão para a nova regressão; não declarar cobertura por mutação adicional.
+- **Arquivos de implementação:** `scripts/input/touch_controls.gd`, `tests/unit/test_touch_controls.gd`, `.github/workflows/godot-validation.yml`.
+- **Documentação:** tracker, stage-status, COLLABORATION_STATE, este arquivo e `handoffs/HANDOFF_ETAPA_1.md`.
+- **Decisões/ADRs:** nenhuma alterada. Valores de movimento, layout touch e “All Jump” continuam provisórios.
+- **Próxima ação:** Claude Code assume Etapa 2, revisa HEAD/handoff e continua Gate 1 conforme roadmap; não tratar a sandbox como fase final.
