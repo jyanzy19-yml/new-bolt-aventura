@@ -24,7 +24,7 @@ func test_player_camera_uses_builtin_smoothing_and_drag_margins() -> bool:
 		check_near(camera.drag_top_margin, 0.2, 0.001, "margem superior")
 		check_near(camera.drag_bottom_margin, 0.25, 0.001, "margem inferior")
 		check(camera.limit_smoothed, "limites suavizados")
-		check_eq(camera.process_callback, Camera2D.CAMERA2D_PROCESS_IDLE, "camera atualiza após o movimento de física")
+		check_eq(camera.process_callback, Camera2D.CAMERA2D_PROCESS_PHYSICS, "camera atualiza após o movimento de física")
 	player.free()
 	return true
 
