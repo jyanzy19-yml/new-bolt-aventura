@@ -26,7 +26,6 @@ func test_save_payload_round_trips_overwrites_and_deletes() -> bool:
 	check(system.call("save_payload", first_payload), "grava payload JSON versionado")
 	check(system.call("has_save"), "slot fica disponível após gravação")
 	var first_loaded: Dictionary = system.call("load_payload")
-	print("SaveSystem load diagnostic: error=%s raw=%s" % [system.get("last_error"), FileAccess.get_file_as_string(TEST_SAVE_PATH)])
 	check_eq(first_loaded, first_payload, "payload é recuperado sem alteração")
 
 	var second_payload: Dictionary = {"level_id": "W1-L2", "completed": ["tutorial", "W1-L1"]}
