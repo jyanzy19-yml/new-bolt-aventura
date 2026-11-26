@@ -756,7 +756,7 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - **Branch:** `fix/threaded-boot-smoke-2026-11-26`; head `893553584408ed6e1c8fd3f51b372a18f772862b`; PR #58 OPEN, sem merge.
 - **Runtime:** `scripts/core/boot.gd` pre-carrega `main_menu.gd` na thread principal; menu e scripts de W1/HUD não foram alterados.
 - **Godot Validation run 45908170078:** SUCCESS — 93 testes, 1.307 verificações, 0 falhas.
-- **SceneFlow:** 30 ciclos para cada uma de quatro cenas (menu, abertura, W1-L1, W1-L2), 120 transições e 962 verificações.
+- **SceneFlow:** 30 ciclos para cada uma de cinco cenas (menu, abertura, tutorial, W1-L1, W1-L2), 150 transições e 1.202 verificações.
 - **Boot:** diagnóstico verbose exit 0; 20/20 processos independentes passaram.
 - **Mutation:** remover o prewarm reproduziu o Parse Error original em `main_menu.tscn:12`.
 - **Docs Validation 45908170019:** SUCCESS.
