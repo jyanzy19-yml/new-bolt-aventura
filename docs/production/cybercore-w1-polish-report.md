@@ -36,3 +36,14 @@ Escopo: somente apresentação e feedback. Mecânicas, tuning, Dash, controles t
 ## Defeito pré-existente encontrado (NÃO corrigido aqui — fora do escopo permitido)
 
 `main` (sem esta PR) falha **5/5** no smoke de boot (`--fixed-fps 60 --quit-after 300`) com `Parse Error: res://scenes/ui/main_menu.tscn:12`. Causa provável (mesmo mecanismo já diagnosticado na Etapa 0): `scripts/ui/main_menu.gd` usa os autoloads `CampaignProgress`/`SaveSystem` por identificador direto num script compilado durante o carregamento em thread. Correção sugerida, em PR própria: resolver via `get_node_or_null("/root/CampaignProgress")` em tempo de execução (e testar o boot em laço). Toca inicialização/progressão, que a missão proibia alterar.
+
+
+## Revisão independente e correção S2 — 2026-11-26
+
+- **Evidência:** Godot Validation run `45904728896` (head original `d51bcb4`) terminou SUCCESS e registrou `102 testes / 644 verificações / 0 falhas`, mas o log também contém múltiplos `ERROR: Error calling from signal 'timeout' to callable: 'GDScript::_release': Cannot convert argument 1 from Object to Object.` Portanto, o resultado verde anterior não significava ausência de erro de runtime.
+- **Causa técnica:** `Burst.spawn()` vinculava uma referência `CPUParticles2D` tipada ao callback de `SceneTreeTimer`. Quando a cena/pai era destruído antes do timeout, o objeto podia já estar inválido quando o timer tentava invocar o método; a conversão do argumento falhava e `_active` não era decrementado.
+- **Correção na branch da PR:** o callback agora recebe o `instance_id` (int), decrementa o contador independentemente da vida do Node e só chama `queue_free()` se `instance_from_id()` ainda resolver uma `CPUParticles2D` válida.
+- **Regressão adicionada:** `test_burst_releases_counter_when_parent_is_freed_before_timeout` destrói o pai antes do timeout e exige que o contador retorne ao baseline. O teste drena efeitos anteriores para evitar dependência de ordem.
+- **Mutação:** workflow independente `.github/workflows/burst-cleanup-mutation.yml` restaura temporariamente o callback antigo, exige que a asserção específica falhe e depois restaura o código corrigido e roda novamente a suíte.
+- **Estado desta correção:** commits separados na branch `feat/cybercore-w1-blockout`: correção `dba47d9`, regressão/isolation `e50230b` e `7e41df9`, workflow de mutação `436927d`. A validação destes commits ainda depende dos novos checks; não declarar o S2 fechado antes dos logs.
+- **Impacto de escopo:** apenas ciclo de vida do VFX Burst e cobertura de teste; nenhuma mudança de gameplay, dano, Dash, input, save ou progressão.
