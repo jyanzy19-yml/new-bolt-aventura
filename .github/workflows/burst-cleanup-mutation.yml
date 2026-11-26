@@ -85,7 +85,7 @@ jobs:
             echo "::error::Burst cleanup regression survived the old-code mutation."
             exit 1
           fi
-          if ! grep -F "FAIL test_cybercore_polish.gd::test_burst_releases_counter_when_parent_is_freed_before_timeout" burst-mutation-tests.log; then
+          if ! grep -F "FAIL res://tests/unit/test_cybercore_polish.gd::test_burst_releases_counter_when_parent_is_freed_before_timeout" burst-mutation-tests.log; then
             echo "::error::The targeted W1-L1 teardown regression did not fail under the old callback."
             exit 1
           fi
