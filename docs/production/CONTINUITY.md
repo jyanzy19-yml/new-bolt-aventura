@@ -648,3 +648,17 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Plano: `docs/production/plans/2026-11-26-one-way-platform.md`.
 - **Estado:** aguardando CI. Não integrada em fase.
 \n\n## Sessão ChatGPT — integração da PR #46 — 2026-11-26\n\n- PR #46 `feat: add reusable one-way platform` integrada por squash; merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.\n- Implementação: `scripts/world/one_way_platform.gd`, `scenes/world/one_way_platform.tscn`; teste `tests/unit/test_one_way_platform.gd`; contrato atualizado em `docs/technical/05-system-contracts.md`.\n- Godot CI pré-merge `45887805114`: SUCCESS — 87 testes/548 verificações/0 falhas. Docs CI `45887805097`: SUCCESS. Android Debug Export `45887805269`: SUCCESS; artifact e hash registrados em `stage-status.md`.\n- Não houve integração em fase; margin 2 px e dimensões são provisórias. Sem playtest visual ou Android físico. Pós-merge CI da main não confirmado no momento do registro.\n
+
+---
+
+## Sessão ChatGPT — recuperação de temporário e proteção de versão futura do SaveSystem — 2026-11-26
+
+- Main confirmada no início: `54fd48e5f49fba877740265aafa0d8f649c2b1e9`.
+- Branch: `fix/save-system-temp-recovery-2026-11-26`.
+- Arquivos funcionais alterados: `scripts/core/save_system.gd`, `tests/unit/test_save_system.gd`.
+- `load_payload()` tenta recuperar `.tmp` completo, com checksum/payload válidos, quando o principal está ausente ou inválido; promove o temporário ao principal. A precedência permanece principal válido → `.tmp` válido → backup válido.
+- Um principal/temporário com versão não suportada bloqueia fallback para evitar downgrade silencioso. `save_payload()` verifica os três slots e bloqueia escrita/rotação quando qualquer um contém versão não suportada, preservando os bytes existentes.
+- `has_save()` reconhece `.tmp` pendente. Schema v1, API pública e domínio CampaignProgress não foram alterados.
+- Testes adicionados para recuperação do temporário mais novo que backup e proteção de principal, backup e temporário futuros.
+- **Estado no checkpoint:** commits da implementação e testes presentes na branch; workflows ainda não executados/confirmados. Próximo passo: revisar o diff integral, abrir PR independente, aguardar Godot/Docs/Android CI e corrigir qualquer falha antes de atualizar status para validado.
+- Limites: nenhum teste local Godot, encerramento forçado real, Android físico, APK desta branch, profiling ou acesso ao save real do usuário foi realizado.
