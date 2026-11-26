@@ -104,4 +104,5 @@ Atualize este índice quando documentos forem adicionados ou movidos. Use links 
 
 - [Relatório de validação estrutural](production/validation-report.md)
 - [Auditoria de integridade do repositório — 2026-11-26](production/repository-audit-2026-11-26.md)
+- [Matriz de rastreabilidade das 26 etapas](production/26-stage-traceability-matrix.md) — fontes canônicas, sistemas, evidências e critérios de aceite por etapa.
 - [Checklist de release Android](production/android-release-checklist.md)
