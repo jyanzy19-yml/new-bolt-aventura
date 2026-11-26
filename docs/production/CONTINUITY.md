@@ -636,3 +636,13 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - APK main: artifact `bolt-aventura-android-debug-b24c8624a8ed64816d0131070f440a47f525ba47`, 28.460.646 bytes, package ID provisório `com.example.boltaventura`, SHA-256 `3b3be5c8df067c000216bbc3e5ad39b357f0ea70ad3d3a5bc12625724873ffd1`.
 - MovingPlatform está integrado como componente reutilizável, sem uso em fase da campanha.
 - Nova unidade `feat/one-way-platform`: implementar plataforma que permite passagem de baixo para cima e colisão ao aterrissar por cima, conforme Godot 4.7.
+
+
+## Sessão ChatGPT — plataforma unidirecional — 2026-11-26
+
+- Main base: `b24c8624a8ed64816d0131070f440a47f525ba47` (PR #45 integrada).
+- Unidade atual: `feat/one-way-platform`.
+- `OneWayPlatform` estende `PlatformBlock`; direção de bloqueio `Vector2.DOWN` permite atravessar por baixo e aterrissar por cima.
+- Testes adicionados para configuração da shape, passagem ascendente e aterrissagem descendente.
+- Plano: `docs/production/plans/2026-11-26-one-way-platform.md`.
+- **Estado:** aguardando CI. Não integrada em fase.
