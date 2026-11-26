@@ -3,12 +3,24 @@ extends BoltTest
 
 const TEST_SAVE_PATH: String = "user://bolt_save_test.json"
 
+var _previous_storage_path_override: String = ""
+
 
 func _system() -> Node:
 	var system: Node = tree.root.get_node_or_null("SaveSystem")
 	if system != null:
+		_previous_storage_path_override = str(system.get("storage_path_override"))
 		system.set("storage_path_override", TEST_SAVE_PATH)
 	return system
+
+
+func _cleanup() -> void:
+	var system: Node = tree.root.get_node_or_null("SaveSystem")
+	if system == null:
+		return
+	if str(system.get("storage_path_override")) == TEST_SAVE_PATH:
+		system.call("delete_save")
+		system.set("storage_path_override", _previous_storage_path_override)
 
 
 func test_save_payload_round_trips_overwrites_and_deletes() -> bool:
@@ -39,6 +51,7 @@ func test_save_payload_round_trips_overwrites_and_deletes() -> bool:
 	check(system.call("delete_save"), "delete_save remove os arquivos do slot de teste")
 	check(not system.call("has_save"), "slot deixa de existir após remoção")
 	check_eq(system.call("load_payload"), {}, "save ausente retorna payload vazio")
+	_cleanup()
 	return true
 
 
@@ -64,6 +77,7 @@ func test_corrupt_primary_recovers_valid_backup() -> bool:
 	check_eq(system.call("load_payload"), payload, "recupera o payload válido do backup")
 	check_eq(system.get("last_error"), "recovered_backup", "registra que houve recuperação do backup")
 	check(system.call("delete_save"), "remove arquivos temporários após o teste")
+	_cleanup()
 	return true
 
 
@@ -90,6 +104,7 @@ func test_future_format_is_rejected_and_non_json_values_are_blocked() -> bool:
 	check_eq(system.get("last_error"), "payload_not_json_compatible", "expõe payload não serializável")
 	runtime_node.free()
 	check(system.call("delete_save"), "limpa fixture de versão futura")
+	_cleanup()
 	return true
 
 
@@ -101,4 +116,5 @@ func test_missing_save_is_a_clean_empty_state() -> bool:
 	system.call("delete_save")
 	check_eq(system.call("load_payload"), {}, "slot inexistente é um estado vazio")
 	check_eq(system.get("last_error"), "", "ausência de save não é erro de corrupção")
+	_cleanup()
 	return true

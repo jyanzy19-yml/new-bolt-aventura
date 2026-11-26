@@ -46,6 +46,7 @@ func _run_all() -> void:
 			test.tree = self
 			_tests += 1
 			var finished: Variant = await test.call(method_name)
+			_cleanup_test_storage_override()
 			_checks += test.checks
 			_failed_checks += test.failures.size()
 			if finished != true:
@@ -55,3 +56,17 @@ func _run_all() -> void:
 				push_error("FAIL %s::%s — %s" % [path, method_name, failure])
 			if finished == true and test.failures.is_empty():
 				print("ok   %s::%s (%d verificações)" % [path.get_file(), method_name, test.checks])
+
+
+
+## Each unit test runs in the same SceneTree/autoload scope. Remove only a non-empty
+## test override so a failed test cannot leak a temporary path into the next test.
+func _cleanup_test_storage_override() -> void:
+	var save_system: Node = root.get_node_or_null("SaveSystem")
+	if save_system == null:
+		return
+	var override_path: String = str(save_system.get("storage_path_override"))
+	if override_path.is_empty():
+		return
+	save_system.call("delete_save")
+	save_system.set("storage_path_override", "")
