@@ -47,3 +47,13 @@ Escopo: somente apresentação e feedback. Mecânicas, tuning, Dash, controles t
 - **Mutação:** workflow independente `.github/workflows/burst-cleanup-mutation.yml` restaura temporariamente o callback antigo, exige que a asserção específica falhe e depois restaura o código corrigido e roda novamente a suíte.
 - **Estado desta correção:** commits separados na branch `feat/cybercore-w1-blockout`: correção `dba47d9`, regressão/isolation `e50230b` e `7e41df9`, workflow de mutação `436927d`. A validação destes commits ainda depende dos novos checks; não declarar o S2 fechado antes dos logs.
 - **Impacto de escopo:** apenas ciclo de vida do VFX Burst e cobertura de teste; nenhuma mudança de gameplay, dano, Dash, input, save ou progressão.
+
+
+### Atualização de validação da correção S2 — 2026-11-26
+
+- Godot Validation run `45908112064`: SUCCESS, **103 testes / 671 verificações / 0 falhas**.
+- O log da suíte corrigida não contém o erro `Error calling from signal 'timeout' to callable: 'GDScript::_release'`.
+- A regressão unitária agora estressa 24 bursts simultâneos, destrói o nó-pai antes dos timeouts e exige retorno do contador ao baseline; passou no run acima.
+- A primeira execução do workflow de mutação falhou na preparação da mutação (alvo textual não encontrado), não por falha do código fixo. O runner foi alterado para reproduzir 24 efeitos no teardown de W1-L1; o mutador agora substitui a função pelo marcador de assinatura, sem depender de whitespace.
+- **Mutation verification ainda pendente** após essa última alteração. Não declarar S2 totalmente fechado até confirmar que a implementação antiga reproduz o erro e que a implementação corrigida passa.
+- Commit mais recente do workflow de mutação: `3d533bd`; runner de stress e teste unitário de 24 efeitos estão na branch da PR.
