@@ -98,4 +98,5 @@ Atualize este índice quando documentos forem adicionados ou movidos. Use links 
 ## Referências complementares
 
 - [Relatório de validação estrutural](production/validation-report.md)
+- [Auditoria de integridade do repositório — 2026-11-26](production/repository-audit-2026-11-26.md)
 - [Checklist de release Android](production/android-release-checklist.md)
