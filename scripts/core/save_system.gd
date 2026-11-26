@@ -143,7 +143,9 @@ func _decode_file(path: String) -> Dictionary:
 		return {"ok": false, "error": "invalid_payload"}
 	var payload_json: String = _canonical_json(payload)
 	var expected_checksum: String = str(envelope.get("checksum", ""))
-	if expected_checksum.is_empty() or _checksum(payload_json) != expected_checksum:
+	var actual_checksum: String = _checksum(payload_json)
+	print("SaveSystem checksum diagnostic: expected=%s actual=%s canonical=%s" % [expected_checksum, actual_checksum, payload_json])
+	if expected_checksum.is_empty() or actual_checksum != expected_checksum:
 		return {"ok": false, "error": "checksum_mismatch"}
 	return {"ok": true, "payload": payload, "error": ""}
 
