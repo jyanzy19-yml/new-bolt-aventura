@@ -1,8 +1,8 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` — HEAD `532320ec9c5b3507d880717e4437603a984b7808` (PR #24 integrada).  
-**Última entrega integrada:** feedback de progressão, checkpoint seguro e testes dos gatilhos W1-L1 (PR #24).  
+**Branch de integração:** `main` — HEAD `92b35d52723f5fa1b05a8e53921a2d8605c6f1cf` (PR #25 integrada).  
+**Última entrega integrada:** feedback de progressão, checkpoint seguro e teste de disparo real da Pistola Crono no inimigo de W1-L1 (PRs #24 e #25).  
 **CI da PR #21:** Godot run #45849915250 SUCCESS em Godot 4.7.2; 53 testes, 276 verificações, 0 falhas. CI pós-merge da PR #21 deve ser consultado separadamente.  
 **Responsável atual:** ChatGPT, por decisão explícita do usuário; Claude não está no fluxo ativo.  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
@@ -214,3 +214,13 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Checkpoint em x=980; teste calcula folga em relação ao limite da patrulha e às dimensões das formas de colisão do player/inimigo.
 - W1-L1 permanece **Em andamento**. Próximo incremento: comprovar no teste de integração que o input ATTACK e a Pistola Crono atingem o inimigo real instanciado na fase.
 - Sem playtest humano, export APK, instalação, emulador, aparelho Android ou medições de performance.
+
+
+## Pós-merge PR #25 — combate real de W1-L1 — 2026-11-26
+
+- PR #25 integrada por squash em `92b35d52723f5fa1b05a8e53921a2d8605c6f1cf`.
+- Godot CI pré-merge run `45855173247` SUCCESS — Godot 4.7.2, **53 testes, 298 verificações, 0 falhas**; Docs CI `45855173229` SUCCESS.
+- Teste de integração agora percorre ATTACK → ActionBuffer → BoltCombat → ChronoProjectile → CybercorePatrolEnemy e verifica `hit_received`/redução da vida do inimigo real da fase.
+- CI pós-merge main: Godot run `45855371627` / `45855463491` e Docs run `45855371706` / `45855463599`; consultar os resultados finais antes de declarar a main pós-merge validada.
+- Próximo incremento: cobrir derrota e ligação do botão de reinício da W1-L1; branch `test/w1-l1-defeat-retry-flow`.
+- W1-L1 continua **Em andamento**; sem playtest humano, APK, instalação, emulador, aparelho Android ou medições de performance.
