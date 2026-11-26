@@ -67,7 +67,15 @@ Um único escritor por vez. Por decisão do usuário, ChatGPT conduz sozinho as 
 - [PR #42](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/42): MERGED — pausa da SceneTree e bloqueio integral de input durante loading; Godot 77 testes/479 verificações/0 falhas, Docs e Android export SUCCESS.
 - [PR #43](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/43): MERGED — teste de restauração do pause state após falha; Godot 78 testes/484 verificações/0 falhas, Docs e export Android SUCCESS.
 - [PR #44](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/44): MERGED — contratos de câmera e limites por fase; Godot 81 testes/508 verificações/0 falhas, Docs e Android export SUCCESS.
-- [PR #45](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/45): MERGED — MovingPlatform reutilizável (AnimatableBody2D); Godot 85 testes/533 verificações/0 falhas, Docs e Android export SUCCESS.\n- [PR #46](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/46): MERGED — OneWayPlatform com colisão unidirecional nativa; pré-merge Godot 87 testes/548 verificações/0 falhas, Docs e Android export SUCCESS; sem integração em fase.\n- [PR #47](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/47): MERGED — corrige `initial_active=false` no TimedEnergyGate e adiciona regressão física; Godot pré/pós-merge 88 testes/553 verificações/0 falhas, Docs e Android export SUCCESS.\n- [PR #48](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/48): MERGED — matriz de rastreabilidade das 26 etapas; Docs CI pré-merge `45895024931` e pós-merge `45895074739` SUCCESS; alteração documental.\n- [PR #49](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/49): MERGED — reconcilia snapshots de continuidade/colaboração, tracker, prioridade da diretriz mestra e referências canônicas; Docs CI pré-merge `45895420328` e pós-merge `45895460895` SUCCESS.\n- [PR #50](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/50): MERGED — GAP-001…GAP-022, owners, dependências, P0 acceptance, ADR-0006 e reconciliação técnica; Docs CI `45896247264` SUCCESS no HEAD final da PR.\n- **Revisão documental adicional em main:** commit `13dc16625019f9f5c1351daee6ec63406eed4b59`, Docs CI `45896357977` SUCCESS; classificação explícita dos 22 GAPs.\n- [PR #51](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/51): MERGED — encerra Etapa 02 e adiciona mapa da arquitetura atual; Docs CI pré-merge `45896594068` e pós-merge `45896636445` SUCCESS.\n- [PR #52](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/52): MERGED — registra acoplamento Player/Combat e sincroniza status; Docs CI pré-merge `45896823250` e pós-merge `45896905043` SUCCESS.
+- [PR #45](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/45): MERGED — MovingPlatform reutilizável (AnimatableBody2D); Godot 85 testes/533 verificações/0 falhas, Docs e Android export SUCCESS.
+- [PR #46](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/46): MERGED — OneWayPlatform com colisão unidirecional nativa; pré-merge Godot 87 testes/548 verificações/0 falhas, Docs e Android export SUCCESS; sem integração em fase.
+- [PR #47](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/47): MERGED — corrige `initial_active=false` no TimedEnergyGate e adiciona regressão física; Godot pré/pós-merge 88 testes/553 verificações/0 falhas, Docs e Android export SUCCESS.
+- [PR #48](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/48): MERGED — matriz de rastreabilidade das 26 etapas; Docs CI pré-merge `45895024931` e pós-merge `45895074739` SUCCESS; alteração documental.
+- [PR #49](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/49): MERGED — reconcilia snapshots de continuidade/colaboração, tracker, prioridade da diretriz mestra e referências canônicas; Docs CI pré-merge `45895420328` e pós-merge `45895460895` SUCCESS.
+- [PR #50](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/50): MERGED — GAP-001…GAP-022, owners, dependências, P0 acceptance, ADR-0006 e reconciliação técnica; Docs CI `45896247264` SUCCESS no HEAD final da PR.
+- **Revisão documental adicional em main:** commit `13dc16625019f9f5c1351daee6ec63406eed4b59`, Docs CI `45896357977` SUCCESS; classificação explícita dos 22 GAPs.
+- [PR #51](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/51): MERGED — encerra Etapa 02 e adiciona mapa da arquitetura atual; Docs CI pré-merge `45896594068` e pós-merge `45896636445` SUCCESS.
+- [PR #52](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/52): MERGED — registra acoplamento Player/Combat e sincroniza status; Docs CI pré-merge `45896823250` e pós-merge `45896905043` SUCCESS.
 - [PR #34](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/34): MERGED — W1-L2 Rede Interrompida, campo energético cíclico e progressão W1-L1→W1-L2; Godot CI pré-merge 69 testes/439 verificações/0 falhas; Docs CI SUCCESS.
 - [PR #33](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/33): MERGED — expansão da diretriz de produção e correção do coletável de vida.
 
@@ -466,7 +474,17 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Testes: propriedades da shape, aterrissagem por cima e passagem ascendente por baixo.
 - Plano: [one-way-platform](plans/2026-11-26-one-way-platform.md).
 - **Estado:** implementação escrita; aguardando CI.
-\n\n## Sessão ChatGPT — OneWayPlatform integrada — 2026-11-26\n\n- PR #46 integrada por squash em `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.\n- `OneWayPlatform` estende `PlatformBlock`, usa `CollisionShape2D.one_way_collision=true` e direção `Vector2.DOWN`; margem default de 2 px permanece provisória.\n- Testes headless cobrem configuração da shape, passagem ascendente e aterrissagem descendente: Godot 4.7.2, 87 testes/548 verificações/0 falhas; Docs CI e Android Debug Export SUCCESS antes do merge.\n- APK pré-merge: 28.461.057 bytes, assinatura v2/v3 válida, package ID placeholder `com.example.boltaventura`, SHA-256 `8211b6c46b17861f9859c62beed1f524a35f9d571838171034cb59cb8f02eb58`.\n- Não integrada em W1-L1/W1-L2; nenhuma alteração no controller, física-base, Dash ou plataforma sólida.\n- CI pós-merge main, playtest visual, instalação e validação Android física ainda não confirmados.\n
+
+
+## Sessão ChatGPT — OneWayPlatform integrada — 2026-11-26
+
+- PR #46 integrada por squash em `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.
+- `OneWayPlatform` estende `PlatformBlock`, usa `CollisionShape2D.one_way_collision=true` e direção `Vector2.DOWN`; margem default de 2 px permanece provisória.
+- Testes headless cobrem configuração da shape, passagem ascendente e aterrissagem descendente: Godot 4.7.2, 87 testes/548 verificações/0 falhas; Docs CI e Android Debug Export SUCCESS antes do merge.
+- APK pré-merge: 28.461.057 bytes, assinatura v2/v3 válida, package ID placeholder `com.example.boltaventura`, SHA-256 `8211b6c46b17861f9859c62beed1f524a35f9d571838171034cb59cb8f02eb58`.
+- Não integrada em W1-L1/W1-L2; nenhuma alteração no controller, física-base, Dash ou plataforma sólida.
+- CI pós-merge main, playtest visual, instalação e validação Android física ainda não confirmados.
+
 
 ## Atualização de continuidade — 2026-11-26 (ChatGPT)
 
@@ -484,4 +502,54 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Etapa 01 permanece EM ANÁLISE: nem todos os 56 scripts e 19 cenas foram inspecionados individualmente; não declarar auditoria integral concluída.
 - Etapa 02 permanece EM ANÁLISE: falta matriz de rastreabilidade requisito → sistema → arquivo → teste → critério de aceite para as 26 etapas.
 - `com.example.boltaventura` permanece package ID placeholder. APK de CI é artefato debug; instalação, cold start, barras/safe area, toque físico e performance em aparelho não foram executados.
-\n\n### Fechamento da Etapa 01 — auditoria estática — 2026-11-26\n\n- Revisão manual concluída das 19 cenas Godot, 30 scripts de runtime, `bolt_tuning_provisional.tres`, `project.godot`, `export_presets.cfg`, ícone placeholder, documentação mestra, ADRs, workflows, PRs e branches.\n- Inventário: 288 arquivos versionados, 56 GDScript no total (runtime, testes e fixtures de skills), 19 cenas, 20 arquivos de testes unitários, 39 skills e 11 agentes.\n- Evidência automatizada adicional na PR #47: Godot 4.7.2, 88 testes/553 verificações/0 falhas; Docs SUCCESS; Android Debug Export SUCCESS; 53 scripts compilados e 39 verificações de carregamento/instanciação de cenas no runner.\n- Achado AUD-006: `TimedEnergyGate` ignorava `initial_active=false`; corrigido pela PR #47 com teste que verifica estado lógico, `monitoring`, visual e ausência de dano inicial.\n- Limites registrados: APK debug não foi instalado em aparelho; toque físico, safe area, barras, FPS, memória e lifecycle Android continuam pendentes nos Gates 1/5.\n- **Estado:** Etapa 01 concluída como auditoria estática do repositório; limitações de hardware e QA não são tratadas como defeitos confirmados nem como motivo para manter a auditoria aberta.\n\n\n### Pós-merge PR #48 — matriz das 26 etapas\n\n- Merge commit: `e2e4f68b5b21c584c33eba739845adc3c685965e`.\n- Docs CI pós-merge push `45895074739`: SUCCESS.\n- A matriz foi integrada e indexada em `docs/README.md`. Etapa 02 permanece em desenvolvimento até revisão requisito-a-requisito, classificação das lacunas de canon e registro de conflitos/decisões.\n\n\n### Etapa 02 — registro de lacunas\n\n- O registro `requirements-gap-register.md` foi criado na branch `docs/requirements-gap-register` com 22 lacunas priorizadas e 8 decisões já fechadas.\n- GAP-021 mantém como pendência de reconciliação os comandos históricos do protótipo HTML (Blast, Voar e seleção de armas 1–3); não reintroduzir nem descartar sem comparar fontes.\n- A Etapa 02 permanece EM DESENVOLVIMENTO até classificar e atribuir owners às lacunas materiais e reconciliar todos os requisitos P0 do Gate 1.\n\n\n### Encerramento da Etapa 02 e início da Etapa 03\n\n- Etapa 02 CONCLUÍDA: 22 lacunas classificadas; oito decisões fechadas; owners e dependências; critérios verificáveis para GAP-001…GAP-004; 11 conflitos documentais registrados e corrigidos/emendados.\n- Etapa 03 EM DESENVOLVIMENTO: mapa atual de arquitetura criado na branch `docs/current-architecture-map`; não foi proposta migração de pastas nem reescrita de sistemas.\n- Gate 0 (auditoria/alinhamento) estático concluído; Gate 1 (vertical slice Android) permanece em andamento e depende de validação física.\n\n\n### Etapa 03 — mapa arquitetural integrado\n\n- PR #51 integrou `technical/09-current-architecture-map.md`, com quatro autoloads, fluxo de boot, ownership de dados, player/combat, cenas de campanha, plataformas e lacunas.\n- O mapa identifica acoplamento de tipo entre BoltPlayer e BoltCombat; não foi feita refatoração sem necessidade comprovada.\n- Etapa 03 permanece EM DESENVOLVIMENTO até revisar o grafo completo de dependências, sinais, lifecycle e outros possíveis ciclos.\n\n\n### Encerramento da Etapa 03 e início da Etapa 04\n\n- Etapa 03 CONCLUÍDA como baseline arquitetural estático; autoloads e fluxos mapeados; exceção BoltPlayer↔BoltCombat documentada e não refatorada sem necessidade.\n- Etapa 04 EM DESENVOLVIMENTO: auditar Boot, SceneFlow, SaveSystem, CampaignProgress e LoadingOverlay, cobrindo erros, transições, save/backup, progressão, pause/lifecycle e falhas.\n\n\n### Integrações recentes — PR #54 e PR #55\n\n- [PR #54](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/54): isolamento de fixtures do SaveSystem no runner; CI pós-merge main SUCCESS, 90 testes/558 verificações/0 falhas; APK SHA-256 `12b73f0df5f71bd922f412face81b7585b3da38b705f0751c1b4d0ea79d4218a`.\n- [PR #55](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/55): versões do envelope/progresso aceitam apenas números finitos exatamente integrais; floats fracionários e strings são rejeitados. PR CI: 92 testes/577 verificações/0 falhas; Docs SUCCESS; Android export SUCCESS. CI pós-merge da main em validação.\n- **Próxima unidade:** Etapa 05 — revisar carregamento threaded, cancelamento/timeout, lifecycle e orçamento de memória; não inventar percentuais de loading nem declarar preload abrangente.\n
+
+
+### Fechamento da Etapa 01 — auditoria estática — 2026-11-26
+
+- Revisão manual concluída das 19 cenas Godot, 30 scripts de runtime, `bolt_tuning_provisional.tres`, `project.godot`, `export_presets.cfg`, ícone placeholder, documentação mestra, ADRs, workflows, PRs e branches.
+- Inventário: 288 arquivos versionados, 56 GDScript no total (runtime, testes e fixtures de skills), 19 cenas, 20 arquivos de testes unitários, 39 skills e 11 agentes.
+- Evidência automatizada adicional na PR #47: Godot 4.7.2, 88 testes/553 verificações/0 falhas; Docs SUCCESS; Android Debug Export SUCCESS; 53 scripts compilados e 39 verificações de carregamento/instanciação de cenas no runner.
+- Achado AUD-006: `TimedEnergyGate` ignorava `initial_active=false`; corrigido pela PR #47 com teste que verifica estado lógico, `monitoring`, visual e ausência de dano inicial.
+- Limites registrados: APK debug não foi instalado em aparelho; toque físico, safe area, barras, FPS, memória e lifecycle Android continuam pendentes nos Gates 1/5.
+- **Estado:** Etapa 01 concluída como auditoria estática do repositório; limitações de hardware e QA não são tratadas como defeitos confirmados nem como motivo para manter a auditoria aberta.
+
+
+### Pós-merge PR #48 — matriz das 26 etapas
+
+- Merge commit: `e2e4f68b5b21c584c33eba739845adc3c685965e`.
+- Docs CI pós-merge push `45895074739`: SUCCESS.
+- A matriz foi integrada e indexada em `docs/README.md`. Etapa 02 permanece em desenvolvimento até revisão requisito-a-requisito, classificação das lacunas de canon e registro de conflitos/decisões.
+
+
+### Etapa 02 — registro de lacunas
+
+- O registro `requirements-gap-register.md` foi criado na branch `docs/requirements-gap-register` com 22 lacunas priorizadas e 8 decisões já fechadas.
+- GAP-021 mantém como pendência de reconciliação os comandos históricos do protótipo HTML (Blast, Voar e seleção de armas 1–3); não reintroduzir nem descartar sem comparar fontes.
+- A Etapa 02 permanece EM DESENVOLVIMENTO até classificar e atribuir owners às lacunas materiais e reconciliar todos os requisitos P0 do Gate 1.
+
+
+### Encerramento da Etapa 02 e início da Etapa 03
+
+- Etapa 02 CONCLUÍDA: 22 lacunas classificadas; oito decisões fechadas; owners e dependências; critérios verificáveis para GAP-001…GAP-004; 11 conflitos documentais registrados e corrigidos/emendados.
+- Etapa 03 EM DESENVOLVIMENTO: mapa atual de arquitetura criado na branch `docs/current-architecture-map`; não foi proposta migração de pastas nem reescrita de sistemas.
+- Gate 0 (auditoria/alinhamento) estático concluído; Gate 1 (vertical slice Android) permanece em andamento e depende de validação física.
+
+
+### Etapa 03 — mapa arquitetural integrado
+
+- PR #51 integrou `technical/09-current-architecture-map.md`, com quatro autoloads, fluxo de boot, ownership de dados, player/combat, cenas de campanha, plataformas e lacunas.
+- O mapa identifica acoplamento de tipo entre BoltPlayer e BoltCombat; não foi feita refatoração sem necessidade comprovada.
+- Etapa 03 permanece EM DESENVOLVIMENTO até revisar o grafo completo de dependências, sinais, lifecycle e outros possíveis ciclos.
+
+
+### Encerramento da Etapa 03 e início da Etapa 04
+
+- Etapa 03 CONCLUÍDA como baseline arquitetural estático; autoloads e fluxos mapeados; exceção BoltPlayer↔BoltCombat documentada e não refatorada sem necessidade.
+- Etapa 04 EM DESENVOLVIMENTO: auditar Boot, SceneFlow, SaveSystem, CampaignProgress e LoadingOverlay, cobrindo erros, transições, save/backup, progressão, pause/lifecycle e falhas.
+
+
+### Integrações recentes — PR #54 e PR #55
+
+- [PR #54](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/54): isolamento de fixtures do SaveSystem no runner; CI pós-merge main SUCCESS, 90 testes/558 verificações/0 falhas; APK SHA-256 `12b73f0df5f71bd922f412face81b7585b3da38b705f0751c1b4d0ea79d4218a`.
+- [PR #55](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/55): versões do envelope/progresso aceitam apenas números finitos exatamente integrais; floats fracionários e strings são rejeitados. PR CI: 92 testes/577 verificações/0 falhas; Docs SUCCESS; Android export SUCCESS. CI pós-merge da main em validação.
+- **Próxima unidade:** Etapa 05 — revisar carregamento threaded, cancelamento/timeout, lifecycle e orçamento de memória; não inventar percentuais de loading nem declarar preload abrangente.
