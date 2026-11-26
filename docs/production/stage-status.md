@@ -555,14 +555,13 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Isso comprova exportação CI, não instalação, execução ou desempenho em aparelho físico.
 
 
-### Revalidação no head atual da PR #58 — Godot Validation #199
+### Revalidação final da PR #58 — head `97f0eeed54f722e3d83701928ab5a61dd55d3731`
 
-- Head testado: `893553584408ed6e1c8fd3f51b372a18f772862b`; PR #58 permanece OPEN, sem merge.
-- Godot Validation run `45908170078`: SUCCESS; **93 testes / 1.307 verificações / 0 falhas**.
-- Teste threaded: 30 ciclos por cena (menu, abertura, tutorial, W1-L1, W1-L2), 150 transições e 1.202 verificações.
-- Diagnóstico cold boot verbose: exit 0.
-- Boot smoke: **20/20 processos independentes** passaram.
-- Mutation: remover o prewarm reproduziu o erro original de carregamento de `main_menu.tscn`.
-- Docs Validation run `45908170019`: SUCCESS.
-- Android Debug Export run `45908170050`: SUCCESS; APK debug exportado, verificado e publicado como artifact CI.
-- Limite: nenhuma instalação/execução em aparelho físico ou emulador; não comprova FPS, RAM, touch, térmica ou compatibilidade em hardware.
+- PR #58 permanece OPEN, mergeable e sem integração.
+- Godot Validation run `45909374538` (#215): SUCCESS — **93 testes / 1.787 verificações / 0 falhas**.
+- SceneFlow: 30 ciclos em cinco cenas (menu, abertura narrativa, tutorial, W1-L1, W1-L2), **150 transições / 1.202 verificações**.
+- Cold boot verbose: exit 0; smoke: **20/20 processos independentes** passaram.
+- Mutação removendo o prewarm reproduziu o Parse Error original em `main_menu.tscn:12`.
+- Docs Validation run `45909374561` (#396): SUCCESS.
+- Android Debug Export run `45909374622` (#103): SUCCESS; APK debug exportado, verificado e enviado como artifact CI.
+- Limite: exportação CI não comprova instalação, execução, FPS, RAM, touch físico, safe areas ou comportamento térmico em aparelho Android.
