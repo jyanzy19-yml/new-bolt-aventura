@@ -39,7 +39,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-012 | NPCs, interação, diálogo e flags | Não iniciado | Sem implementação do jogo |
 | SYS-013 | Objetivos, colecionáveis e fragmentos | Não iniciado | Sem implementação do jogo |
 | SYS-014 | Checkpoints, respawn e progressão | Em andamento | `CampaignProgress` persiste entrada/checkpoint/conclusão; W1-L1 avança o destino salvo para W1-L2; W1-L2 possui checkpoint próprio e blockout integrado pela PR #34; Godot CI pré/pós-merge passou; sandbox permanece ambiente de desenvolvimento |
-| SYS-015 | Save/load, versão e recuperação | Em andamento | `SaveSystem` JSON v1 + `CampaignProgress` v1; reset seletivo, retomada W1-L1, backup/corrupção/schema cobertos. PR #31 CI pós-merge: 66 testes/404 verificações. Encerramento forçado e QA Android pendentes |
+| SYS-015 | Save/load, versão e recuperação | Em andamento | `SaveSystem` JSON v1 + `CampaignProgress` v1; reset seletivo, retomada W1-L1/W1-L2, backup/corrupção/schema cobertos. PR #31 CI pós-merge: 66 testes/404 verificações. Encerramento forçado e QA Android pendentes |
 | SYS-016 | Inventário, moedas, melhorias e skins | Não iniciado | Sem implementação do jogo |
 | SYS-017 | Menus, HUD, pausa e configurações | Em andamento | Nova Jornada/Continuar; retomada mapeia W1-L1 e W1-L2; HUD de resultado oferece PRÓXIMA FASE quando existe destino configurado. Configurações completas e validação visual/Android ausentes |
 | SYS-018 | Cutscenes, legendas e replay/pulo | Em andamento | Nova Jornada segue abertura/tutorial; Continuar retoma W1-L1 ou W1-L2 conforme o progresso persistido. PR #34 integrada; storyboard/tutorial provisórios, animação final, áudio e replay persistente pendentes |
