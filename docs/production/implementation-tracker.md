@@ -236,7 +236,7 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - Achado: o teste anterior de `BoltHealthPickup` invocava `_on_body_entered` diretamente; não exercitava a colisão real entre o player e a `Area2D`.
 - Branch `test/health-pickup-physical-contact`: acrescentado teste de sobreposição física, cura, emissão única de `collected` e consumo do coletável.
 - O workflow Godot passa a procurar também o erro de mutação de estado físico bloqueada durante sinais/flush de queries.
-- **Estado:** implementação e documentação na branch; Godot CI e Docs CI da PR ainda pendentes. Não marcar como validado antes dos checks.
+- **Estado:** PR #37 integrada em `39b6db8298542c5057c06f509b20d250a888e289`; Godot e Docs CI pré/pós-merge SUCCESS. A cobertura física isolada complementa o teste de integração já existente em `test_campaign_entry.gd`.
 - Não altera cura, valores de gameplay, colisões, persistência ou canon.
 
 
@@ -246,7 +246,7 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - Preset existente: `Android (debug/teste)`, arm64-v8a, landscape e modo imersivo; package ID `com.example.boltaventura` permanece placeholder.
 - Branch `ci/android-debug-export`: workflow baixa Godot e templates pareados, instala JDK 17/Android SDK, gera chave de debug efêmera, roda importação/testes, exporta APK, verifica assinatura/package ID/hash e publica artifact temporário.
 - Nenhuma chave de release, segredo, package ID definitivo ou permissão nova foi introduzida.
-- **Estado:** pipeline escrita; aguardando execução CI e artifact. Não classificar como exportação validada antes de confirmar o run e o arquivo.
+- **Estado:** PR #38 integrada em `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`; export Android debug SUCCESS no run `45879045098`, assinatura v2/v3 verificada e artifact publicado. Instalação e validação Android física pendentes.
 - Mesmo após export, instalação, cold start, touch, safe area, lifecycle e performance Android físico permanecem pendentes.
 
 
@@ -254,10 +254,10 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 
 - Base: main após PR #38, commit `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.
 - Achado: a liberação de ações físicas em perda de foco não garantia, por si só, a remoção dos edges ainda armazenados no `ActionBuffer`.
-- Branch `fix/action-buffer-lifecycle-clear-v2`: limpeza em notificações de pausa, suspensão e perda de foco; testes de regressão para JUMP e DASH pendentes.
+- PR #39 integrada por squash em `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`: limpeza em notificações de pausa, suspensão e perda de foco; regressões de JUMP e DASH passaram.
 - A janela de buffer, a física, os valores de movimento e o Dash não foram alterados.
 - Plano: `docs/production/plans/2026-11-26-action-buffer-lifecycle-clear.md`.
-- **Estado:** implementação escrita; aguardando CI. Notificações simuladas em headless não substituem teste de background/foreground em Android físico.
+- **Estado:** integrada e validada em CI headless — 72 testes/451 verificações/0 falhas. Notificações simuladas em headless não substituem teste de background/foreground em Android físico.
 
 
 ## Pós-merge PR #39 — ActionBuffer lifecycle
