@@ -26,8 +26,7 @@ func _ready() -> void:
 	_play.grab_focus()
 
 
-## Resolve autoloads at runtime. A scene script can be compiled by ResourceLoader's
-## threaded loader before the autoload's global identifier table is available.
+## Resolve autoloads at runtime rather than binding the scene script to global singleton identifiers.
 func _campaign_progress() -> Node:
 	return get_node_or_null("/root/CampaignProgress")
 
