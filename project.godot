@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 SceneFlow="*res://scripts/core/scene_flow.gd"
+SaveSystem="*res://scripts/core/save_system.gd"
 
 [display]
 

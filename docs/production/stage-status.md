@@ -1,8 +1,8 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` — HEAD `3428851c774f989d3522da1ed0430e9d39f7a680` (PR #26 integrada).  
-**Última entrega integrada:** feedback de progressão, checkpoint seguro, combate real e validação do fluxo de derrota/retry de W1-L1 (PRs #24–#26).  
+**Branch de integração:** `main` — HEAD `7af315f258a1360d84906ef72f98eae39611b623` (PR #27 integrada).  
+**Última entrega integrada:** cobertura de progressão, combate, derrota/retry W1-L1 e rastreabilidade (PRs #24–#27); fundação de SaveSystem em desenvolvimento.  
 **CI da PR #21:** Godot run #45849915250 SUCCESS em Godot 4.7.2; 53 testes, 276 verificações, 0 falhas. CI pós-merge da PR #21 deve ser consultado separadamente.  
 **Responsável atual:** ChatGPT, por decisão explícita do usuário; Claude não está no fluxo ativo.  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
@@ -22,7 +22,7 @@
 | Sandbox | Implementado | Cenário de desenvolvimento; **não é fase da campanha** |
 | Campanha | Em andamento | Abertura/tutorial jogável; W1-L1 Cybercore tem blockout, inimigo-base provisório, Pistola Crono, dano ao jogador e coletável de cura. Conteúdo e apresentação finais pendentes; nenhuma fase validada |
 | Combate/inimigos/chefes | Em andamento | Pistola Crono, inimigo-base de patrulha provisório, vida/dano, invulnerabilidade, feedback visual de impacto e coletável de cura. Sem chefes, IA avançada ou arsenal completo |
-| Checkpoint/save | Em andamento | PR #13 integrada: `BoltCheckpoint` com ativação única e respawn no último ponto ativo da sandbox. Estado em memória; SaveSystem/campanha ainda não implementados |
+| Checkpoint/save | Em andamento | `BoltCheckpoint` continua local à sessão. `SaveSystem` agora existe como armazenamento JSON versionado de baixo nível na branch em revisão; ainda não foi ligado ao estado de campanha/checkpoint |
 | Assets finais/áudio | Não identificados como integrados | Placeholders de apresentação permanecem |
 
 ## Validação observada
@@ -235,3 +235,12 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Teste novo aplica dano letal em BOLT na W1-L1 e verifica overlay/título de derrota, conexão do botão `JOGAR DE NOVO` e destino de retry para a própria W1-L1.
 - Nenhuma regra de vida, checkpoint, respawn, dano, invulnerabilidade ou SceneFlow foi alterada.
 - W1-L1 permanece **Em andamento**: blockout/arte e áudio finais, save/load de campanha, playtest humano e QA Android ainda não concluídos.
+
+
+## SYS-015 — fundação de armazenamento versionado (branch `feat/versioned-save-storage-foundation`)
+
+- Novo autoload `SaveSystem` com API `save_payload`, `load_payload`, `has_save` e `delete_save`.
+- Envelope JSON versão 1, checksum SHA-256, validação de tipos serializáveis, arquivo temporário, backup e recuperação quando o arquivo principal está ausente/inválido.
+- Dados de domínio continuam pertencendo aos produtores; nenhum estado de checkpoint/campanha foi conectado ainda. `SYS-014` e W1-L1 permanecem Em andamento.
+- Testes headless cobrem round-trip, sobrescrita, delete, recuperação do backup, versão futura incompatível e rejeição de referências a Nodes. CI desta branch pendente.
+- Sem teste de interrupção real, Android físico, APK, emulador, desempenho ou armazenamento OEM.
