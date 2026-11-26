@@ -160,3 +160,24 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	tree.paused = false
 	cybercore_instance.free()
 	return true
+
+
+func test_campaign_defeat_exposes_retry_for_w1_l1() -> bool:
+	var cybercore: PackedScene = load(CYBERCORE_W1_L1_PATH) as PackedScene
+	check(cybercore != null, "W1-L1 carrega para validar derrota e reinício")
+	if cybercore == null:
+		return true
+	var level: Node = cybercore.instantiate()
+	tree.root.add_child(level)
+	await tree.physics_frame
+	var player: BoltPlayer = level.get_node("Bolt") as BoltPlayer
+	var hud: Hud = level.get_node("Hud") as Hud
+	check(player.take_damage(3, 1.0), "dano letal encerra a vida de BOLT")
+	check(hud.get_node("%ResultOverlay").visible, "derrota abre o overlay de resultado")
+	check_eq(hud.get_node("%ResultTitle").text, "BOLT foi derrotado", "resultado identifica a derrota")
+	var again_button: Button = hud.get_node("%AgainButton") as Button
+	check(again_button.pressed.is_connected(Callable(hud, "_restart")), "JOGAR DE NOVO está conectado ao fluxo de reinício")
+	check_eq(hud.get("_restart_path"), CYBERCORE_W1_L1_PATH, "reinício aponta para a W1-L1 atual")
+	tree.paused = false
+	level.free()
+	return true
