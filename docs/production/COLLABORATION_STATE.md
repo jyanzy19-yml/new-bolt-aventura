@@ -4,6 +4,8 @@
 
 ## Estado vigente — 2026-11-26
 
+**HEAD da main confirmado:** `9d5381047817ac9fc949583f6645d24eadd88e8c`.
+
 - **Etapa 0 — Claude Code: ACCEPTED.** Fundação Godot 4.7.2 e protótipo técnico provisório aceitos após auditoria. Hardening complementar integrado pela PR #3.
 - **Etapa 1 — ChatGPT: HANDOFF_READY.** Correção de reatribuição de ponteiro em `TouchControls`, regressão e execução da suíte no CI. Handoff: [HANDOFF_ETAPA_1.md](handoffs/HANDOFF_ETAPA_1.md).
 - **PR #2 — qualidade e especialistas: MERGED.** Merge `6f8bae62018fc2c7efce8fa454c16681599dcbe6`; adiciona skills, agentes consultivos e validações.
