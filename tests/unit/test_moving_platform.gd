@@ -11,16 +11,16 @@ func _step_physics(frames: int) -> void:
 		await tree.physics_frame
 
 
-func _new_platform() -> Node:
+func _new_platform() -> MovingPlatform:
 	var packed: PackedScene = load(PLATFORM_SCENE) as PackedScene
 	check(packed != null, "cena MovingPlatform carrega")
 	if packed == null:
 		return null
-	return packed.instantiate()
+	return packed.instantiate() as MovingPlatform
 
 
 func test_platform_uses_animatable_body_and_world_collision() -> bool:
-	var platform: Node = _new_platform()
+	var platform: MovingPlatform = _new_platform()
 	if platform == null:
 		return true
 	tree.root.add_child(platform)
