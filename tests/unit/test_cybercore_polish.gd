@@ -105,21 +105,38 @@ func test_burst_spawns_one_shot_particles_and_releases_them() -> bool:
 
 
 func test_burst_releases_counter_when_parent_is_freed_before_timeout() -> bool:
-	# Drena bursts dos testes anteriores para isolar o delta deste caso.
+	# Reproduz o ownership real: BoltFeedback cria Burst como filho do nível.
 	await tree.create_timer(1.0).timeout
-	var host: Node2D = Node2D.new()
-	tree.root.add_child(host)
-	var baseline: int = Burst.active_count()
-	for index in range(24):
-		var particles: CPUParticles2D = Burst.spawn(
-			host, Vector2(float(index) * 8.0, 0.0), Color.WHITE, 4, 50.0, 0.1
-		)
-		check(particles != null, "burst %d criado antes de destruir o pai" % index)
-	check_eq(Burst.active_count(), baseline + 24, "contador registra os 24 efeitos ativos")
-	host.queue_free()
+	var save_system: Node = tree.root.get_node_or_null("SaveSystem")
+	check(save_system != null, "autoload SaveSystem disponível")
+	if save_system != null:
+		save_system.set("storage_path_override", "user://burst_teardown_regression.json")
+		save_system.call("delete_save")
+
+	var level: Node = (load(LEVELS[0]) as PackedScene).instantiate()
+	tree.root.add_child(level)
 	await tree.process_frame
+	var player: BoltPlayer = level.get_node("Bolt") as BoltPlayer
+	var feedback: BoltFeedback = player.get_node("Feedback") as BoltFeedback
+	var baseline: int = Burst.active_count()
+
+	# Uma partícula é disparada pelo mesmo callback usado no pulo real.
+	feedback.call("_on_state_changed", BoltPlayer.State.RISING)
+	check_eq(Burst.active_count(), baseline + 1, "BoltFeedback cria o Burst de pulo no nível")
+	# Completa o teto para estressar vários timeouts durante a destruição da fase.
+	for index in range(23):
+		var particles: CPUParticles2D = Burst.spawn(
+			level, Vector2(float(index) * 8.0, 0.0), Color.WHITE, 4, 50.0, 0.1
+		)
+		check(particles != null, "burst adicional %d criado" % index)
+	check_eq(Burst.active_count(), baseline + 24, "24 efeitos ativos antes do teardown")
+
+	level.free()
 	await tree.create_timer(0.8).timeout
-	check_eq(Burst.active_count(), baseline, "callbacks liberam todos os efeitos após destruição do pai")
+	check_eq(Burst.active_count(), baseline, "callbacks liberam todos os efeitos após destruir o nível")
+	if save_system != null:
+		save_system.call("delete_save")
+		save_system.set("storage_path_override", "")
 	return true
 
 func test_burst_count_is_capped() -> bool:
