@@ -138,7 +138,7 @@ Os commits seguintes desta auditoria alteram apenas documentação e QA. Antes d
 - HEAD consultado antes do início: `ab72c584522db49ad7b31c80717fd2d6ab7ab73e`; não havia commits posteriores ao handoff de Claude.
 - Etapa 0: **ACCEPTED**. O escopo antecipado de movimento, touch, HUD e sandbox foi aceito como implementação provisória solicitada pelo usuário; a sandbox não é fase da campanha. Não houve canonização dos valores de `BoltTuning`, layout touch ou interpretação de “All Jump”.
 - Etapa 1: **HANDOFF_READY**. Corrigida a reatribuição do mesmo índice de ponteiro em `TouchControls`; teste de regressão adicionado; workflow Godot agora executa a suíte headless após import.
-- Godot CI Run #31: SUCCESS no commit `f3ab682`; import + runner headless exit 0. Docs CI Run #119: SUCCESS no mesmo commit. Validação L2; sem teste de editor, Android, APK, toque físico, FPS ou memória.
+- Godot CI Run #36: SUCCESS no commit `624edce`; import + runner headless exit 0. Docs CI Run #124: SUCCESS no mesmo commit. Validação L2; sem teste de editor, Android, APK, toque físico, FPS ou memória.
 - Achado S3 corrigido: reatribuição inesperada de índice podia deixar ação anterior presa. Nenhum S0–S2 confirmado na revisão estática dos sistemas da Etapa 0.
 - PR #1 permanece aberta/divergente e intocada.
 - Próximo escritor: Claude Code, Etapa 2, após acionamento manual do usuário.
