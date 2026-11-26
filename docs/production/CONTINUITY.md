@@ -408,3 +408,14 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Testes: round-trip, overwrite, delete, fallback de backup, formato futuro e rejeição de Node no payload. CI ainda pendente.
 - Não executado: Android físico, exportação APK, instalação, emulador, interrupção forçada do processo, benchmark de I/O ou teste de armazenamento em OEM.
 - Próxima ação: validar GDScript/import e suíte; corrigir causa-raiz; abrir PR; integrar apenas com Godot/Docs CI verdes; depois definir/integrar o primeiro payload de campanha por IDs estáveis.
+
+
+## Sessão ChatGPT — CampaignProgress e checkpoint persistente W1-L1 — 2026-11-26
+
+- Base main confirmada: `e09ee388aa511d78f2b36c4ee6be9617d0c27655` (PR #28 integrada; Godot pós-merge #45858347751 SUCCESS, 58 testes/335 verificações/0 falhas; Docs #45858347565 SUCCESS).
+- Branch: `feat/w1-l1-persistent-checkpoint-progress`.
+- Adiciona autoload `CampaignProgress` sobre `SaveSystem`, schema de domínio v1, IDs estáveis de campanha/nível/checkpoint, persistência de checkpoint e conclusão W1-L1.
+- `BoltCheckpoint.restore_activation()` restaura apresentação/estado sem reemitir o evento; reentrada da W1-L1 posiciona BOLT no ponto salvo.
+- O objetivo marca W1-L1 como concluída e limpa checkpoint ativo; não tenta carregar W1-L2, que não existe.
+- ADR-0004 registra a decisão técnica. Testes isolam os arquivos user:// para não tocar no slot real.
+- CI da branch ainda pendente. Não executado: APK, instalação, emulador, Android físico, encerramento forçado, filesystem OEM, FPS, memória ou latência.
