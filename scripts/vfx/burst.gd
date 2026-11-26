@@ -48,11 +48,14 @@ static func spawn(parent: Node, position: Vector2, color: Color, amount: int = 8
 	particles.global_position = position
 	particles.emitting = true
 	_active += 1
-	parent.get_tree().create_timer(lifetime + 0.25).timeout.connect(_release.bind(particles))
+	parent.get_tree().create_timer(lifetime + 0.25).timeout.connect(_release.bind(particles.get_instance_id()))
 	return particles
 
 
-static func _release(particles: CPUParticles2D) -> void:
+## Recebe ObjectID, não a referência do Node: o pai pode ser destruído antes do timer.
+## Assim o callback continua tipável e sempre libera o contador, mesmo se a partícula já sumiu.
+static func _release(particles_instance_id: int) -> void:
 	_active = maxi(0, _active - 1)
-	if is_instance_valid(particles):
-		particles.queue_free()
+	var particle_object: Object = instance_from_id(particles_instance_id)
+	if particle_object is CPUParticles2D:
+		(particle_object as CPUParticles2D).queue_free()
