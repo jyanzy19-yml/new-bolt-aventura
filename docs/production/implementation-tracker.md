@@ -420,12 +420,12 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - **Android export CI:** run 45907688455 SUCCESS; APK debug exportado, verificado e enviado como artefato. Não equivale a teste em aparelho físico.
 
 
-### SYS-003 — revalidação no head atual da PR #58
+### SYS-003 — revalidação final da PR #58
 
-- Head: `893553584408ed6e1c8fd3f51b372a18f772862b`; PR #58 aberta, sem merge.
-- Godot Validation #199 / run `45908170078`: 93 testes / 1.307 verificações / 0 falhas.
-- SceneFlow: 90 transições (30 ciclos para menu, W1-L1 e W1-L2), 722 verificações.
-- Cold boot: diagnóstico verbose exit 0; smoke 20/20.
-- Mutação removendo o prewarm reproduz o Parse Error original.
-- Docs Validation `45908170019` SUCCESS; Android Debug Export `45908170050` SUCCESS.
-- APK debug exportado em CI; Android físico não testado.
+- Head `97f0eeed54f722e3d83701928ab5a61dd55d3731`; PR #58 OPEN, sem merge.
+- Godot Validation #215 / run `45909374538`: **93 testes / 1.787 verificações / 0 falhas**.
+- SceneFlow: 30 ciclos para menu, abertura, tutorial, W1-L1 e W1-L2; **150 transições / 1.202 verificações**.
+- Cold boot verbose exit 0; smoke 20/20; mutação sem prewarm reproduz o erro de parse original.
+- Docs Validation #396 / run `45909374561`: SUCCESS.
+- Android Debug Export #103 / run `45909374622`: SUCCESS; APK debug exportado, verificado e enviado como artifact.
+- Android físico/emulador não testado; não declarar FPS, RAM, touch ou estabilidade térmica validados.
