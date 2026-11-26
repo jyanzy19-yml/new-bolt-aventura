@@ -29,12 +29,12 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-002 | Configuração Android, paisagem e renderer | Implementado | Orientação 4 (sensor landscape), viewport 960×540 (provisório), GL Compatibility (provisório), preset Android com `screen/immersive_mode=true` (ADR-0003), sem segredos; verificado por `tests/unit/test_project_config.gd`. **Export Android NÃO executado** (sem SDK/templates); nenhum APK; nada validado em aparelho |
 | SYS-003 | Arquitetura, cenas e recursos compartilhados | Em andamento | Existem: boot, menu, autoload `SceneFlow` (thread, `use_accumulated_input=false`), `Actions`, `SafeAreaMargin`, `BoltTuning` (Resource), `PlatformBlock`, HUD. Testado só em headless. Faltam inimigos, mundos, save, áudio e demais contratos |
 | SYS-004 | Input abstrato e multitouch | Em andamento | `TouchControls`/`TouchButton` rastreiam ponteiros independentes; botão TIRO adicionado ao HUD e `ActionBuffer` agora rastreia ATTACK. Regressão para toque curto de ataque adicionada; toque físico NÃO EXECUTADO |
-| SYS-005 | BOLT: controller, estados e animação | Em andamento | `BoltPlayer` (GROUNDED/RISING/FALLING/DASHING) + placeholders. ~11 testes headless. Sem animação final, dano, wall slide/jump. Valores provisórios; não validado em aparelho |
+| SYS-005 | BOLT: controller, estados e animação | Em andamento | `BoltPlayer` (GROUNDED/RISING/FALLING/DASHING), vida/dano, knockback, invulnerabilidade e API de cura. Dash preservado. Placeholders e valores provisórios; sem validação física Android |
 | SYS-006 | Movimento, salto, All Jump e dash | Em andamento | Corrida, pulo variável, pulo duplo, coyote, buffer, dash aéreo único (`BoltTuning` provisório). Bot headless completa a sandbox. **Feel não avaliado por humano**; semântica de "All Jump" não confirmada em fonte aprovada — não canonizada |
 | SYS-007 | Câmera e limites de fase | Em andamento | `Camera2D` com suavização, drag margins e limites definidos pela sandbox. Não avaliado visualmente/em aparelho |
-| SYS-008 | Combate, dano e armas | Em andamento | `BoltHealth`, `ChronoProjectile` e `BoltCombat` implementam vida/dano e o disparo básico provisório da Pistola Crono; botão TIRO no HUD touch; alvo estático de treinamento usado no tutorial. Tríplice Prisma, Laser Nexo, dano ao jogador, inimigos com IA e balanceamento final ainda não implementados |
+| SYS-008 | Combate, dano e armas | Em andamento | `BoltHealth`, `BoltCombat`, `ChronoProjectile`, `BoltHealthPickup` e `CybercorePatrolEnemy`: Pistola Crono, dano/vida do jogador, invulnerabilidade, knockback, cura limitada, coletável de recuperação e flash de impacto. Tríplice Prisma, Laser Nexo, chefes e balanceamento final pendentes. PR #21: 53 testes, 276 verificações, 0 falhas em Godot 4.7.2 |
 | SYS-009 | Habilidades e cooldowns | Não iniciado | Sem implementação do jogo |
-| SYS-010 | IA e arquétipos de inimigos | Não iniciado | Sem implementação do jogo |
+| SYS-010 | IA e arquétipos de inimigos | Em andamento | `CybercorePatrolEnemy` é um inimigo-base provisório de patrulha e contato em W1-L1. Ainda não é arquétipo canônico; IA avançada, variedade e tuning final pendentes |
 | SYS-011 | Chefes e arenas | Não iniciado | Sem implementação do jogo |
 | SYS-012 | NPCs, interação, diálogo e flags | Não iniciado | Sem implementação do jogo |
 | SYS-013 | Objetivos, colecionáveis e fragmentos | Não iniciado | Sem implementação do jogo |
@@ -46,7 +46,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-019 | Áudio, música, buses e opções | Não iniciado | Sem implementação do jogo |
 | SYS-020 | Loading, transições e gestão de memória | Em andamento | `SceneFlow` usa carregamento threaded, bloqueia transições concorrentes e sinaliza sucesso/falha; testado headless. Gestão abrangente de memória/preload ainda não implementada |
 | SYS-021 | Pipeline de assets e proveniência | Não iniciado | Pipeline do jogo a estabelecer |
-| SYS-022 | Testes automatizados e regressão | Em andamento | 42 métodos de teste em `tests/unit/`; workflow Godot agora executa import + `tests/test_runner.gd` no Godot 4.7.2. Run #31 SUCCESS (L2). Mutação da nova regressão NÃO EXECUTADA nesta sessão |
+| SYS-022 | Testes automatizados e regressão | Em andamento | Workflow Godot 4.7.2 executa import + `tests/test_runner.gd`. PR #21: 53 testes, 276 verificações, 0 falhas (run `45849915250`). Cobertura ainda não equivale a QA visual ou Android físico |
 | SYS-023 | Exportação, instalação e QA Android | Não iniciado | Sem APK/build verificada |
 | SYS-024 | Créditos, encerramento e release candidate | Não iniciado | Sem campanha implementada |
 
@@ -56,7 +56,7 @@ A matriz define a estrutura planejada: seis fases por mundo; fases 1–5 de prog
 
 | ID | Mundo | Função planejada | Status inicial | Evidência |
 |---|---|---|---|---|
-| W1-L1 | Cybercore | Entrada e exploração | Em andamento | Blockout jogável com BOLT, HUD/touch, checkpoint local, respawn e objetivo de trecho. Sem inimigos, combate, arte/áudio finais, save ou validação Android |
+| W1-L1 | Cybercore | Entrada e exploração | Em andamento | Blockout com BOLT, HUD/touch, checkpoint, inimigo-base provisório, Pistola Crono, dano/vida, coletável de cura e objetivo de trecho. Arte/áudio finais, save e validação Android pendentes |
 | W1-L2 | Cybercore | Progressão | Não iniciado | Sem cena |
 | W1-L3 | Cybercore | Progressão | Não iniciado | Sem cena |
 | W1-L4 | Cybercore | Combinação de mecânicas | Não iniciado | Sem cena |
@@ -138,3 +138,14 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - Tutorial agora ensina mover → saltar → Dash → acertar o alvo com TIRO antes de liberar Cybercore.
 - Cadência, velocidade, dano e alcance são parâmetros de protótipo; não representam balanceamento aprovado. Tríplice Prisma, Laser Nexo, seleção de armas, IA inimiga e dano/vida de BOLT permanecem pendentes.
 - Testes novos: `test_combat_core.gd`, regressão de buffer ATTACK e extensão de `test_campaign_entry.gd`; PR #17 integrada em `33fe452`; Godot CI #61 e Docs CI #182 SUCCESS (47 testes, 231 verificações, 0 falhas). CI pós-merge #62/#183 em execução.
+
+
+## Pós-merge PR #21 — recuperação e feedback (2026-11-26)
+
+- Main HEAD: `b2e66d9638d367cce29b266d75f230cb16ed1763`.
+- `BoltHealth.restore(amount)` limita a cura à vida máxima e não restaura uma vida já esgotada.
+- `BoltPlayer.heal(amount)` bloqueia cura para jogador derrotado ou sem necessidade de cura.
+- `BoltHealthPickup` é consumido apenas após recuperação válida; colocado em W1-L1 como protótipo de gameplay.
+- `CybercorePatrolEnemy` emite feedback visual temporário ao receber dano e restaura a cor-base no tick fixo.
+- Godot CI run `45849915250` SUCCESS: Godot 4.7.2, 53 testes, 276 verificações, 0 falhas. Uma execução anterior falhou e foi corrigida antes do merge.
+- Sem exportação APK, instalação, emulador, aparelho físico ou medições de desempenho.
