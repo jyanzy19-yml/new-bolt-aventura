@@ -1,3 +1,13 @@
+## Estado atual — PR #17 integrada — 2026-11-26
+
+- **Main HEAD:** `33fe452d0a6aad2fc87ea19da789dfde9999c93a`.
+- **PR #17:** integrada por squash; adiciona vida/dano reutilizável, Pistola Crono básica, projétil, alvo estático de treino, botão touch TIRO e lição de ataque no tutorial.
+- **Validação da PR:** Godot CI #61 (`45846655204`) SUCCESS — Godot 4.7.2, 47 testes / 231 verificações / 0 falhas. Docs CI #182 (`45846655293`) SUCCESS.
+- **Limites:** parâmetros da Pistola Crono são provisórios; alvo é apenas de treino, não inimigo da campanha. Outras armas, seleção, IA inimiga, dano ao jogador e chefes não implementados. APK e Android físico não testados.
+- **Próximo foco:** inimigo-base com comportamento simples e contrato de dano, depois integração gradual ao blockout W1-L1; manter valores provisórios e testes headless.
+
+---
+
 ## Estado atual — combate básico em desenvolvimento
 
 - **Main base:** `2b81211e56677a7f4ee1da97e6d1c4d604e87d77` (PR #16 integrada).

@@ -135,3 +135,13 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Pistola Crono é a primeira arma conectada ao input lógico e ao botão touch TIRO. Valores permanecem provisórios.
 - Alvo de treinamento estático valida vida/dano e o tutorial; não deve ser contabilizado como inimigo/arquétipo da campanha.
 - Tríplice Prisma, Laser Nexo, seleção de armas, IA inimiga, dano ao jogador e validação física Android continuam pendentes.
+
+
+## Pós-merge PR #17 — combate básico
+
+- PR #17 integrada por squash em `33fe452d0a6aad2fc87ea19da789dfde9999c93a`.
+- Godot CI #61 (`45846655204`) SUCCESS: Godot 4.7.2, 47 testes, 231 verificações, 0 falhas.
+- Docs CI #182 (`45846655293`) SUCCESS.
+- O primeiro loop de ataque está disponível no tutorial; o alvo é estático e exclusivo de treino, não um inimigo de campanha.
+- Valores da Pistola Crono são provisórios. Tríplice Prisma, Laser Nexo, seleção de armas, IA inimiga, dano ao jogador e chefes permanecem pendentes.
+- APK, emulador e Android físico ainda não testados.
