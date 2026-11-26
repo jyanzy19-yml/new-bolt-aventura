@@ -5,11 +5,11 @@
 
 ## Snapshot vigente — 2026-11-26
 
-- **HEAD confirmado da main:** `9d5381047817ac9fc949583f6645d24eadd88e8c` (merge da PR #4).
+- **HEAD confirmado da main:** `f5fbff8de138bfec395f45a7fef1ad57c45aa37c` (merge da PR #5).
 - O projeto Godot executável existe na raiz: Godot **4.7.2**, `project.godot`, cenas, scripts e testes. Não recriar o projeto nem duplicar sistemas existentes.
-- Etapa 0: **ACCEPTED**. Etapa 1: **HANDOFF_READY**. PRs #2, #3 e #4: **MERGED**.
+- Etapa 0: **ACCEPTED**. Etapa 1: **HANDOFF_READY**. PRs #2, #3, #4 e #5: **MERGED**.
 - Próximo turno: **Claude Code — Etapa 2**, iniciado manualmente pelo usuário. Handoff: `handoffs/HANDOFF_ETAPA_2_CLAUDE.md`.
-- Auditoria de polimento atual: [repository-polish-audit-2026-11-26.md](repository-polish-audit-2026-11-26.md), branch `chore/repository-polish-audit` / PR pendente.
+- Auditoria de polimento integrada: [repository-polish-audit-2026-11-26.md](repository-polish-audit-2026-11-26.md), PR #5; Docs CI #140 SUCCESS.
 - PR #1 continua aberta, baseada em commit antigo e reportada pelo GitHub como não mergeável. Não mesclar sem rebase/reconciliação.
 - **Conflito de escopo pendente:** código/tracker incluem Dash; diretiva proposta na PR #1 o exclui. Não remover nem ampliar essa mecânica silenciosamente.
 - Validação máxima comprovada: **L2** (Godot headless/CI). Godot CI #45 passou na PR #3; Docs CI #135 passou na PR #4. Não há APK, instalação ou validação física/visual/performance Android comprovada.
