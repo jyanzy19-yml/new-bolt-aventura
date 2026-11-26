@@ -1,7 +1,7 @@
 ## Snapshot vigente — 2026-11-26
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
-- **Main HEAD:** `68b677aa7860894928a690861ef63b300f8175fb`. **Última entrega de conteúdo:** PR #34. **Última regressão integrada:** PR #42, bloqueio de input durante loading. **Última reconciliação documental:** PR #40. **Última infraestrutura integrada:** PR #38. **Último sistema de loading:** PR #41, overlay persistente.
+- **Main HEAD:** `22923228d2a58c0ee6d75b581d5a16aa70e1a7ef`. **Última entrega de conteúdo:** PR #34. **Última regressão integrada:** PR #43, restauração do pause state após falha. **Última mudança de loading/input:** PR #42, bloqueio integral durante transições. **Última reconciliação documental:** PR #40. **Última infraestrutura integrada:** PR #38. **Último sistema de loading:** PR #41.
 - **PR #33:** MERGED. Expansão de documentação e correção do coletável; CI Godot 66 testes/404 verificações/0 falhas e Docs SUCCESS.
 - **PR #34:** MERGED. Adiciona W1-L2 em blockout, `TimedEnergyGate`, checkpoint e progressão persistente W1-L1→W1-L2.
 - **PR #35:** MERGED. Regressão de contato físico real do campo energético. **PR #36:** feedback de checkpoint W1-L2. **PR #37:** teste físico isolado do coletável e filtro CI para erro de mutação física bloqueada. **PR #38:** pipeline Android debug. **PR #39:** limpeza do ActionBuffer no ciclo de vida.
@@ -10,10 +10,10 @@
 - **PR #35:** Godot CI pré/pós-merge SUCCESS — 69 testes/439 verificações/0 falhas (`45873118202`, `45873234656`).
 - **Escritor ativo:** ChatGPT, seguindo a diretriz vigente do usuário. Não iniciar trabalho concorrente de Claude.
 - **Dash:** decisão canônica aprovada; deve permanecer no jogo conforme `docs/production/ADR-001-DASH.md`. Referências documentais antigas que ainda dizem “pendente” estão sendo reconciliadas nesta unidade.
-- **Branch atual:** `test/scene-flow-failure-pause-restoration`; cobertura do retorno ao pause state anterior quando o carregamento falha.
+- **Branch atual:** `test/camera-contracts`; contratos headless da Camera2D e limites por fase.
 - **Unidade integrada:** `TimedEnergyGate`, cena/script `cybercore_w1_l2`, botão PRÓXIMA FASE na conclusão W1-L1, destino salvo W1-L2, retomada de W1-L1/W1-L2 e regressões.
 - **Limites:** W1-L2 é blockout/protótipo de mecânica, não conteúdo final; ciclo, dano e percurso precisam de playtest. APK debug exportado em CI, mas não instalado; Android físico, touch físico e profiling continuam pendentes.
-- **Próximo passo:** validar a regressão de restauração em falha; depois avançar para câmera e construção da próxima parte da vertical slice.
+- **Próximo passo:** validar os contratos da câmera; depois avançar para construção de fases e melhoria visual, preservando o blockout como estado atual.
 
 ---
 
@@ -600,3 +600,17 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Achado: a restauração do pause state em sucesso estava coberta; o ramo de falha ainda não tinha teste direto.
 - Branch `test/scene-flow-failure-pause-restoration`: regressões para origem pausada e despausada.
 - **Estado:** teste escrito; aguardando CI.
+
+
+---
+
+## Sessão ChatGPT — contratos da câmera 2D — 2026-11-26
+
+- Main base: `22923228d2a58c0ee6d75b581d5a16aa70e1a7ef` (PR #43 integrada).
+- PR #43: Godot `45884348999` SUCCESS — 78 testes/484 verificações/0 falhas; Docs `45884348954` SUCCESS; Android Export `45884348969` SUCCESS.
+- PR #43 artifact: `bolt-aventura-android-debug-b6bf765bccdb80c2de0512655208060ab2fc1480`, APK 28.456.143 bytes, SHA-256 `3dc8eba90dc3f914b1db725f50fbdc38bee9a16dee2c38d95b05f476a41cb212`.
+- PR #43 pós-merge main: Godot `45884671403`, Docs `45884671584`, Android export `45884671259` SUCCESS; artifact main `bolt-aventura-android-debug-22923228d2a58c0ee6d75b581d5a16aa70e1a7ef`, APK 28.456.143 bytes, SHA-256 `3fc5ea209e88a69b3b33a7de9360dbc42d38dae9a2734eb38e103ab7f2478661`.
+- Achado: Camera2D já usa rig nativo com smoothing/drag e limites W1-L1/W1-L2; faltavam testes dedicados.
+- Branch `test/camera-contracts`: extrai `configure_camera()` nos scripts de fase e testa smoothing, margins, callback físico e limites por fase.
+- Plano: `docs/production/plans/2026-11-26-camera-contracts.md`.
+- **Estado:** aguardando CI; inspeção visual e Android físico pendentes.
