@@ -1,20 +1,20 @@
 ## Snapshot vigente — 2026-11-26
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
-- **Main HEAD após PR #52:** `6f8e9b8fbaaab9c44247050e5f86e4442bd2622f`; PR #51/#52 integraram e revisaram o mapa arquitetural atual.
+- **Main HEAD após PR #55:** `d91af104ab5bf2112b4586431fc10bc44889d94e`; PR #54/#55 endureceram o harness e a validação do SaveSystem/CampaignProgress.
 - **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético e progressão W1-L1→W1-L2.
 - **Última correção de gameplay:** PR #47 — estado inicial `initial_active=false` do `TimedEnergyGate`, merge `2636226c4027625649e66c51ff64d7e2e56168a6`.
 - **Último componente de plataforma:** PR #46 — `OneWayPlatform`, merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`; PR #45 adicionou `MovingPlatform`.
-- **Última unidade documental:** PR #52 — acoplamento Player/Combat documentado e snapshots sincronizados; Docs CI pré/pós-merge SUCCESS. Etapas 01–03 concluídas.
+- **Última unidade técnica:** PR #55 — versões de envelope/schema sem coerção; 92 testes/577 verificações/0 falhas, Docs e Android Export SUCCESS pré-merge. Etapas 01–04 concluídas.
 - **Escritor ativo:** ChatGPT como único escritor, por decisão explícita do usuário; Claude permanece inativo para escrita concorrente.
-- **Etapas operacionais:** Etapas 01–03 CONCLUÍDAS (auditoria, planejamento e baseline arquitetural); Etapa 04 EM DESENVOLVIMENTO (hardening dos sistemas centrais); etapas 05–26 conforme `stage-status.md`. Gate 0 estático concluído; Gate 1 continua em andamento.
+- **Etapas operacionais:** Etapas 01–04 CONCLUÍDAS (auditoria, planejamento, arquitetura e infraestrutura); Etapa 05 EM DESENVOLVIMENTO (recursos e carregamento); etapas 06–26 conforme `stage-status.md`. Gate 0 estático concluído; Gate 1 continua em andamento.
 - **CI pós-merge PR #46:** Godot `45888110305`, Docs `45888110285`, Android Export `45888110166`: SUCCESS; 87 testes/548 verificações/0 falhas.
 - **CI pós-merge PR #47:** Godot `45894802128`, Docs `45894802067`, Android Export `45894802116`: SUCCESS; 88 testes/553 verificações/0 falhas. APK 28.461.057 bytes, SHA-256 `c3ca03958eecf120f1a9f5f1e4fae3851fb7560bca303c8eb5a930f987b58123`, assinatura v2/v3 válida; package ID continua placeholder `com.example.boltaventura`.
-- **CI pós-merge PR #48:** Docs `45895074739` SUCCESS.
+- **CI pós-merge PR #48:** Docs `45895074739` SUCCESS.\n- **CI pós-merge PR #54:** Godot `45897906267`, Docs `45897906375`, Android `45897906328`: SUCCESS; 90 testes/558 verificações/0 falhas; APK SHA-256 `12b73f0df5f71bd922f412face81b7585b3da38b705f0751c1b4d0ea79d4218a`.\n- **PR #55:** Godot `45898404709`, Docs `45898404725`, Android `45898404735`: SUCCESS; 92 testes/577 verificações/0 falhas; APK SHA-256 `6f094b6ee26f7eee7c70ae88c0c1a291b696bf0e19ad460e63e5f57de2f3cf00`. Pós-merge main ainda em validação.
 - **PR #1:** continua OPEN, antiga e divergente; não mesclar/rebasear automaticamente. Revisar o diff inteiro e reconciliar documentos raiz antes de qualquer decisão.
 - **Dash:** decisão canônica aprovada e vigente; deve permanecer conforme `docs/production/ADR-001-DASH.md`.
 - **Limites:** W1-L1/W1-L2 continuam blockouts. APK debug exportado, mas não instalado em aparelho. Toque físico, safe area, barras, lifecycle, profiling e performance Android permanecem pendentes.
-- **Próximo passo:** auditar edge cases de Boot/SceneFlow/SaveSystem/CampaignProgress/LoadingOverlay na Etapa 04, corrigir defeitos confirmados e ampliar regressões sem alterar o schema/canon.
+- **Próximo passo:** Etapa 05 — auditar carregamento threaded, LoadingOverlay, cancelamento/timeout, lifecycle e picos de memória; em seguida avançar a vertical slice sem ampliar o escopo de forma prematura.
 
 ---
 
