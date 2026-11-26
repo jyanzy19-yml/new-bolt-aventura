@@ -336,7 +336,7 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 
 - Branch: `fix/save-system-temp-recovery-2026-11-26`, base `54fd48e5f49fba877740265aafa0d8f649c2b1e9`.
 - `load_payload()` passa a tentar `.tmp` completo após principal ausente/inválido e antes do backup; promove o temporário validado ao principal.
-- `save_payload()` verifica principal, temporário e backup antes de qualquer limpeza/rotação e recusa escrita se encontrar versão não suportada. `load_payload()` também evita downgrade silencioso quando principal ou temporário é de versão não suportada.
+- `save_payload()` verifica principal, temporário e backup antes de qualquer limpeza/rotação e recusa escrita se encontrar versão não suportada. `load_payload()` também evita downgrade silencioso quando qualquer slot (principal, temporário ou backup) é de versão não suportada.
 - `CampaignProgress` aceita os estados de recuperação do armazenamento (`recovered_temp`, `recovered_temp_unpromoted:*`) sem tratar erro de schema como recuperação válida.
 - Testes novos cobrem temporário interrompido, preservação dos três slots de formato futuro e continuidade do checkpoint de campanha após recuperação.
 - **Estado:** implementação em branch; CI pendente. Não altera schema v1, API pública, CampaignProgress, IDs de fase/checkpoint ou payload de domínio.
