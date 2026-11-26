@@ -60,6 +60,8 @@ func take_damage(amount: int, knockback_direction: float = 0.0) -> bool:
 		return false
 	if not _health.apply_damage(amount):
 		return false
+	if _is_defeated:
+		return true
 	_invulnerability_left = damage_invulnerability
 	var direction: float = signf(knockback_direction)
 	if is_zero_approx(direction):
