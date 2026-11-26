@@ -149,5 +149,14 @@ func test_format_version_requires_exact_integer_type() -> bool:
 		file.close()
 	check_eq(system.call("load_payload"), {}, "versão textual não é convertida para inteiro")
 	check_eq(system.get("last_error"), "unsupported_format_version", "versão textual informa incompatibilidade")
+
+	envelope["format_version"] = 1.0
+	file = FileAccess.open(TEST_SAVE_PATH, FileAccess.WRITE)
+	check(file != null, "cria envelope com número integral em representação float")
+	if file != null:
+		file.store_string(JSON.stringify(envelope))
+		file.close()
+	check_eq(system.call("load_payload"), {"settings": {"music": 0.5}}, "aceita número float exatamente integral")
+	check_eq(system.get("last_error"), "", "representação numérica integral não gera erro")
 	_cleanup()
 	return true
