@@ -83,6 +83,8 @@ func test_both_w1_levels_use_the_backdrop() -> bool:
 
 
 func test_burst_spawns_one_shot_particles_and_releases_them() -> bool:
+	# Efeitos de testes anteriores podem expirar durante a espera deste teste.
+	await tree.create_timer(1.0).timeout
 	var host: Node2D = Node2D.new()
 	tree.root.add_child(host)
 	var before: int = Burst.active_count()
