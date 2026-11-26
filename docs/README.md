@@ -42,6 +42,10 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 
 ## Engenharia
 
+- [ADR-0005 — fluxo Nova Jornada/Continuar](decisions/ADR-0005-main-menu-campaign-entry.md)
+- [Plano — fluxo Nova Jornada/Continuar](production/plans/2026-11-26-main-menu-new-game-continue.md)
+- [Handoff — fluxo Nova Jornada/Continuar](production/handoffs/HANDOFF_MAIN_MENU_CONTINUE.md)
+
 - [Princípios de arquitetura Godot](technical/00-architecture-principles.md)
 - [Especificação Android e desempenho](technical/01-android-performance.md)
 - [Input touch, tela e áreas seguras](technical/02-touch-and-display.md)

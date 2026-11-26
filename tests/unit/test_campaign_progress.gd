@@ -66,5 +66,59 @@ func test_unknown_progress_schema_fails_closed() -> bool:
 	check_eq(state.get("current_level_id"), "", "unknown schema is not interpreted as current state")
 	check_eq(progress.get("last_error"), "unsupported_progress_schema", "reports incompatible progress schema")
 	check(not progress.call("save_checkpoint", "W1-L1", "cp_2"), "does not overwrite an unsupported schema silently")
+	check(progress.call("start_new_campaign"), "explicit Nova Jornada replaces an incompatible campaign schema")
+	state = progress.call("load_state")
+	check_eq(state.get("current_level_id"), "", "incompatible campaign progress is reset to a clean state")
+	check_eq(progress.get("last_error"), "", "new campaign can continue after explicit reset")
+	_cleanup()
+	return true
+
+
+func test_new_campaign_resets_campaign_only_and_preserves_other_domains() -> bool:
+	var progress: Node = _prepare()
+	check(SaveSystem.save_payload({
+		"settings": {"music": 0.25, "sfx": 0.5},
+		"campaign_progress": {
+			"campaign_id": "main",
+			"schema_version": 1,
+			"current_level_id": "W1-L1",
+			"active_checkpoint_id": "cybercore_w1_l1_checkpoint",
+			"completed_level_ids": ["W1-L1"],
+		},
+	}), "semeia save com progresso e configurações")
+	check(progress.call("start_new_campaign"), "Nova Jornada redefine o domínio da campanha")
+	var state: Dictionary = progress.call("load_state")
+	check_eq(state.get("current_level_id"), "", "nova campanha começa sem fase atual")
+	check_eq(state.get("active_checkpoint_id"), "", "nova campanha começa sem checkpoint")
+	check_eq(state.get("completed_level_ids"), [], "nova campanha limpa fases concluídas")
+	var payload: Dictionary = SaveSystem.load_payload()
+	check_eq(payload.get("settings"), {"music": 0.25, "sfx": 0.5}, "configurações de outros domínios são preservadas")
+	_cleanup()
+	return true
+
+
+func test_begin_level_records_resume_point_and_preserves_same_level_checkpoint() -> bool:
+	var progress: Node = _prepare()
+	check(progress.call("begin_level", "W1-L1"), "entrada na fase registra o ponto de retomada")
+	var state: Dictionary = progress.call("load_state")
+	check_eq(state.get("current_level_id"), "W1-L1", "fase atual fica persistida desde a entrada")
+	check_eq(state.get("active_checkpoint_id"), "", "entrada inicial não inventa checkpoint")
+	check(progress.call("save_checkpoint", "W1-L1", "cybercore_w1_l1_checkpoint"), "checkpoint existente pode ser gravado")
+	check(progress.call("begin_level", "W1-L1"), "reentrada na mesma fase é idempotente")
+	check_eq(progress.call("get_checkpoint_id", "W1-L1"), "cybercore_w1_l1_checkpoint", "reentrada não apaga checkpoint ativo")
+	_cleanup()
+	return true
+
+
+func test_new_campaign_does_not_overwrite_unreadable_save() -> bool:
+	var progress: Node = _prepare()
+	var corrupt_file: FileAccess = FileAccess.open(TEST_SAVE_PATH, FileAccess.WRITE)
+	check(corrupt_file != null, "abre arquivo temporário para fixture corrompida")
+	if corrupt_file != null:
+		corrupt_file.store_string("{invalid-json")
+		corrupt_file.close()
+	check(not progress.call("start_new_campaign"), "não sobrescreve envelope ilegível sem recuperação")
+	check_eq(progress.get("last_error"), "invalid_json", "expõe a causa da falha de persistência")
+	check(FileAccess.file_exists(TEST_SAVE_PATH), "arquivo corrompido é preservado para diagnóstico/recuperação")
 	_cleanup()
 	return true

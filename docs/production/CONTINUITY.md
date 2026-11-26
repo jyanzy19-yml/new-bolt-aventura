@@ -428,3 +428,20 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - W1-L1 persiste o checkpoint quando ativado, restaura estado visual/respawn na reentrada e registra a conclusão da fase no schema CampaignProgress v1.
 - CI pós-merge main Godot `45859653809` e Docs `45859653966` ainda aguardando confirmação final.
 - Persistência ainda não validada em Android físico ou após encerramento forçado. Sandbox e demais fases não integradas.
+
+
+## Sessão ChatGPT — fluxo Nova Jornada / Continuar — 2026-11-26
+
+- **Base main confirmada:** `52f75f437c37cbc018ef8d4611f49fb462bae74c`.
+- **Branch:** `feat/main-menu-new-game-continue`.
+- **Escopo:** fluxo explícito de Nova Jornada e Continuar integrado ao `CampaignProgress`; o projeto continua em Godot 4.7.2 e Android empacotado em paisagem.
+- **Auditoria:** o menu anterior só iniciava abertura/tutorial; W1-L1 só registrava progresso em checkpoint/conclusão, não na entrada inicial.
+- **Decisão:** Nova Jornada reseta apenas `campaign_progress` e inicia abertura/tutorial; Continuar só aceita o ID W1-L1 quando a cena está presente e abre W1-L1 diretamente. Não criar destino W1-L2.
+- **Persistência:** W1-L1 registra `current_level_id` na entrada. Reentrada na mesma fase não limpa checkpoint.
+- **Falha de save:** ausência de save é estado limpo; schema de campanha incompatível pode ser substituído apenas pela ação explícita Nova Jornada; envelope ilegível não é apagado automaticamente e não impede iniciar a sessão, embora a persistência possa ficar indisponível.
+- **Arquivos de implementação:** `scripts/campaign/campaign_progress.gd`, `scripts/ui/main_menu.gd`, `scenes/ui/main_menu.tscn`, `scripts/campaign/cybercore_w1_l1.gd`.
+- **Testes adicionados:** `tests/unit/test_campaign_progress.gd` e `tests/unit/test_campaign_entry.gd`; aguardando CI Godot/Docs.
+- **Validação local:** não executada; sem runtime Godot local disponível nesta sessão. Não alegar teste headless até o workflow concluir.
+- **Não executado:** editor gráfico, exportação APK, instalação, emulador, Android físico, teste de encerramento forçado, FPS, memória e I/O.
+- **PR:** ainda não aberta neste snapshot. Não integrar sem revisão do diff e ambos os workflows verdes.
+- **Próxima ação:** revisar o diff completo, corrigir falhas do CI, abrir PR, verificar checks pré-merge, integrar e verificar CI pós-merge.
