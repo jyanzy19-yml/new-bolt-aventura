@@ -1,7 +1,7 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Main HEAD após PR #52:** `6f8e9b8fbaaab9c44247050e5f86e4442bd2622f`.  
+**Main HEAD verificado nesta atualização:** `54fd48e5f49fba877740265aafa0d8f649c2b1e9`.  
 **Matriz operacional:** `docs/production/26-stage-traceability-matrix.md`, integrada pela PR #48. Registro de lacunas GAP-001…GAP-022 em elaboração na branch `docs/requirements-gap-register`; Etapa 02 continua em revisão requisito-a-requisito.  
 **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente.  
 **Última regressão de gameplay integrada:** PR #39 — limpeza do ActionBuffer no ciclo de vida Android, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.  
@@ -534,7 +534,7 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 
 ### Fechamento técnico do Defeito 1 — Godot Validation #190
 
-<badge>Validado em CI headless</badge>
+**Validação:** CI headless aprovada.
 
 - Godot Validation run 45907658225: SUCCESS.
 - Suíte: **93 testes / 1.307 verificações / 0 falhas**.
@@ -553,3 +553,16 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - O run #190 tinha o job Android Debug Export cancelado por concorrência de execução.
 - No head atual da PR #58, o run 45907688455 terminou SUCCESS: exportação Android debug, verificação do APK e upload do artefato concluídos.
 - Isso comprova exportação CI, não instalação, execução ou desempenho em aparelho físico.
+
+
+### Revalidação no head atual da PR #58 — Godot Validation #199
+
+- Head testado: `893553584408ed6e1c8fd3f51b372a18f772862b`; PR #58 permanece OPEN, sem merge.
+- Godot Validation run `45908170078`: SUCCESS; **93 testes / 1.307 verificações / 0 falhas**.
+- Teste threaded: 30 ciclos por cena (menu, W1-L1, W1-L2), 90 transições e 722 verificações.
+- Diagnóstico cold boot verbose: exit 0.
+- Boot smoke: **20/20 processos independentes** passaram.
+- Mutation: remover o prewarm reproduziu o erro original de carregamento de `main_menu.tscn`.
+- Docs Validation run `45908170019`: SUCCESS.
+- Android Debug Export run `45908170050`: SUCCESS; APK debug exportado, verificado e publicado como artifact CI.
+- Limite: nenhuma instalação/execução em aparelho físico ou emulador; não comprova FPS, RAM, touch, térmica ou compatibilidade em hardware.
