@@ -5,7 +5,7 @@
 **Etapa:** 2 — continuação do Gate 1 / vertical slice  
 **Repositório:** `jyanzy19-yml/new-bolt-aventura`  
 **Branch de integração:** `main`  
-**Commit-base confirmado:** `f5fbff8de138bfec395f45a7fef1ad57c45aa37c` (HEAD da main após PR #5).  
+**HEAD de referência verificado antes da correção documental:** `75159132a7dc2503df68d8ca1abe57fc7e88019c` (main após PR #6; confirmar HEAD real antes de iniciar).  
 **Estado:** handoff integrado na PR #4; Claude pode iniciar após o usuário ativar a sessão e confirmar o HEAD atual.
 
 ## 1. O que já está integrado
@@ -48,13 +48,13 @@ Validação máxima comprovada: L2 (Godot headless/CI). Não há APK exportado, 
 ## 5. Restrições e decisões ainda abertas
 
 - Android empacotado é o único alvo; orientação paisagem.
-- Priorizar controles touch, incluindo salto/dash e multitouch, para aparelhos de aproximadamente 4 GB RAM e Helio G99 ou inferiores.
+- Priorizar controles touch, incluindo salto e multitouch, para aparelhos de aproximadamente 4 GB RAM e Helio G99 ou inferiores. Dash permanece implementado/provisório, mas seu escopo está em conflito documental; não alterar até decisão canônica.
 - Sandbox é ambiente de desenvolvimento, não fase da campanha.
 - Tuning de movimento, layout touch, viewport 960×540 e renderer GL Compatibility continuam provisórios.
 - Package ID `com.example.boltaventura` é placeholder; não inventar identificador definitivo.
 - Não declarar exportação, instalação ou validação Android sem evidência.
-- PR #1 permanece aberta, baseada em commit anterior e reportada como não mergeável pelo GitHub. Não mesclar automaticamente; revisar/rebasear e reconciliar seus documentos raiz antes.
-- Existe conflito documental sobre a mecânica Dash: código/tracker atuais a incluem, enquanto a diretiva proposta na PR #1 a exclui. Não remover nem ampliar a mecânica sem resolver a fonte canônica.
+- PR #1 permanece OPEN, `mergeable_state=dirty`, 17 commits exclusivos e 135 commits atrás da main verificada; altera 17 arquivos documentais e não contém código de gameplay. Não mesclar automaticamente. Revisar cada um dos quatro documentos raiz e a diretiva em 12 partes; recuperar somente conteúdo compatível com as fontes aprovadas.
+- Dash existe no Input Map, em `BoltPlayer`, controles e testes; a diretiva proposta na PR #1 o exclui. A fonte canônica ainda não foi resolvida. Não adicionar, remover ou retunar até decisão explícita do usuário.
 - Um único escritor ativo. O usuário inicia Claude manualmente; não há transferência automática de sessão.
 
 ## 6. Próximo responsável e critério de transferência

@@ -2,21 +2,20 @@
 
 **Fonte única para o próximo turno.** Antes de editar, confirme este arquivo contra o HEAD, commits, branches e PRs reais do GitHub.
 
-## Estado vigente — 2026-11-26
+## Estado vigente — revisão de 2026-11-26
 
-**HEAD da main confirmado:** `f5fbff8de138bfec395f45a7fef1ad57c45aa37c` (merge da PR #5).
+**HEAD da main verificado antes desta rodada:** `75159132a7dc2503df68d8ca1abe57fc7e88019c` (PR #6 integrada; Docs CI #143 SUCCESS). A branch de correção documental atual parte exatamente desse commit.
 
-- **Etapa 0 — Claude Code: ACCEPTED.** Fundação Godot 4.7.2 e protótipo técnico provisório aceitos após auditoria. Hardening complementar integrado pela PR #3.
-- **Etapa 1 — ChatGPT: HANDOFF_READY.** Correção de reatribuição de ponteiro em `TouchControls`, regressão e execução da suíte no CI. Handoff: [HANDOFF_ETAPA_1.md](handoffs/HANDOFF_ETAPA_1.md).
-- **PR #2 — qualidade e especialistas: MERGED.** Merge `6f8bae62018fc2c7efce8fa454c16681599dcbe6`; adiciona skills, agentes consultivos e validações.
-- **PR #3 — hardening da Etapa 0: MERGED.** Merge `4ecaff1d67049155d95bcbb5fc9d1c98187d3767`; runner não aceita suíte vazia, Safe Area responde ao ciclo de vida e registros de aceite/continuidade foram corrigidos. Auditoria: [stage-0-hardening-audit.md](stage-0-hardening-audit.md).
-- **PR #4 — handoff e sincronização documental: MERGED.** Merge `9d5381047817ac9fc949583f6645d24eadd88e8c`; registra a transferência para Claude Etapa 2.
-- **PR #5 — auditoria e polimento do repositório: MERGED.** Merge `f5fbff8de138bfec395f45a7fef1ad57c45aa37c`; Docs CI #140 SUCCESS. Relatório: [repository-polish-audit-2026-11-26.md](repository-polish-audit-2026-11-26.md).
-- **Próximo turno: Etapa 2 — Claude Code.** Aguardando o usuário iniciar Claude manualmente. Este handoff é o ponto de partida: [HANDOFF_ETAPA_2_CLAUDE.md](handoffs/HANDOFF_ETAPA_2_CLAUDE.md).
-- **Branch oficial:** `main`. Um único escritor ativo. Implementações substanciais em branch/PR; só passar o turno após integração e handoff.
-- **Projeto:** Godot 4.7.2, GDScript, Android em paisagem.
-- **Validação máxima comprovada:** L2 (importação/testes headless via GitHub Actions). Não há comprovação de exportação APK, instalação, teste visual, toque físico, safe area real ou performance Android.
-- **PR #1:** permanece separada; não mesclar nem fechar automaticamente.
+- **Etapa 0 — Claude Code: ACCEPTED.** Fundação Godot 4.7.2 e protótipo técnico provisório aceitos; hardening integrado pela PR #3.
+- **Etapa 1 — ChatGPT: HANDOFF_READY.** Correção de reatribuição de ponteiro em `TouchControls`, regressão e execução da suíte no CI; entrega original `f3ab682`.
+- **PRs #2–#6: MERGED.** Incluem tooling de qualidade, hardening, handoff da Etapa 2, auditoria de polimento e sincronização final.
+- **Próximo turno de gameplay: Etapa 2 — Claude Code**, após integração desta rodada de correções documentais/governança. O usuário inicia Claude manualmente; não iniciar trabalho concorrente.
+- **Projeto executável:** Godot 4.7.2, GDScript, Android em paisagem. A base contém boot/menu, SceneFlow, player, touch/multitouch, HUD, sandbox e testes; não é a campanha completa.
+- **Validação máxima comprovada:** L2 (Godot headless/CI). Não há comprovação de APK exportado/instalado, teste visual, touch físico, safe area real ou desempenho em Android.
+- **PR #1:** continua OPEN e não mergeável (`mergeable_state=dirty`), com 17 commits exclusivos e 135 commits de atraso em relação à main verificada. Modifica 17 arquivos: quatro documentos de raiz e a diretiva dividida em 12 partes/índice. Não contém implementação de gameplay. Não mesclar automaticamente.
+- **Dash:** código, Input Map, controles e testes atuais incluem a mecânica; PR #1 a exclui. A decisão canônica permanece pendente. Preservar a implementação existente sem ampliar, remover ou retunar até decisão explícita.
+- **Governança da main:** a leitura do endpoint de proteção retornou 403 para a integração; o estado atual da proteção não pôde ser confirmado nesta rodada. Auditoria anterior havia reportado ausência de proteção. É necessária verificação/configuração administrativa pelo proprietário.
+- **Escritor desta rodada:** ChatGPT, restrito a documentação, governança e auditoria. Nenhuma alteração de gameplay está autorizada nesta rodada. Claude deve aguardar a conclusão/integração e o handoff atualizado.
 
 ## Estado por etapa
 

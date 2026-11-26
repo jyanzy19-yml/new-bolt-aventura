@@ -112,3 +112,32 @@ A fundação não é apenas documental, mas o jogo completo ainda não existe: a
 - Dispositivo físico, toque, safe area, FPS, memória e temperatura: NÃO EXECUTADO.
 
 **Conclusão:** a base técnica e os controles de qualidade estão presentes e coerentes em boa parte. O maior risco atual não é uma falha de gameplay confirmada, mas a divergência entre documentos de autoridade e a realidade integrada, especialmente a PR #1 e a regra de Dash. A próxima implementação deve continuar da main existente, sem reiniciar o projeto, enquanto esses conflitos são tratados explicitamente.
+
+
+## 7. Revalidação complementar — 2026-11-26 (após PR #6)
+
+**HEAD consultado:** 75159132a7dc2503df68d8ca1abe57fc7e88019c. O repositório permanece privado e a branch padrão é main. A execução mais recente observada antes desta rodada foi Docs CI #143 (SUCCESS) nesse HEAD. A consulta de workflows mostrou 189 execuções no total.
+
+### 7.1 PR #1 — comparação atual
+
+- Estado: OPEN; mergeable=false; mergeable_state=dirty.
+- Base: db88a1608f9a6361c942df2e119000fc5c2ab0e7; head: e6785d588838ae3671aab84da4718066101d495a.
+- Comparação com a main verificada: 17 commits exclusivos da PR, 135 commits de atraso; 17 arquivos modificados.
+- Conteúdo: quatro documentos raiz (README.md, CLAUDE.md, AGENTS.md, docs/README.md) e 13 arquivos da diretiva dividida em 12 partes/índice. Nenhum arquivo de gameplay/cena/script foi alterado.
+- A PR foi preservada sem rebase, fechamento ou merge. As alterações de documentos raiz não devem substituir a versão atual sem reconciliação. O conteúdo da diretiva permanece material candidato a revisão, não fonte canônica automaticamente aprovada.
+
+### 7.2 Estado executável e revisão estática focalizada
+
+A árvore Git confirma project.godot, .godot-version, cenas, scripts, recursos e testes. Foram relidos TouchControls, TouchButton, SafeAreaMargin, SceneFlow, BoltPlayer, ActionBuffer, o runner, testes de touch/safe area, project.godot, .gitignore, preset Android e os dois workflows. Nenhum novo defeito S0–S2 foi confirmado por esta inspeção estática focalizada. Isso não substitui execução local/editor ou testes físicos Android.
+
+### 7.3 Segurança, CI e governança
+
+- .gitignore exclui caches Godot, builds, APK/AAB, arquivos de assinatura e segredos comuns.
+- export_presets.cfg contém preset Android de debug/teste, ABI arm64-v8a e package ID placeholder com.example.boltaventura; não contém caminho de APK ou credenciais de assinatura. O package ID não foi alterado.
+- Godot CI executa importação headless e runner, e o runner falha com zero testes/checks. Docs CI valida metadados e links locais.
+- A API de proteção da branch retornou HTTP 403 para a integração; não foi possível confirmar nem alterar a proteção de main nesta rodada. A auditoria anterior reportou protected=false; o proprietário deve verificar/configurar isso na interface administrativa do GitHub.
+- Não foi executado Godot local, editor gráfico, exportação APK, instalação, emulador, aparelho físico, toque, medição de FPS/memória/temperatura.
+
+### 7.4 Decisões mantidas em aberto
+
+O código atual contém Dash (Actions.DASH, estado DASHING, touch e testes), enquanto a PR #1 o exclui. A divergência não foi resolvida por fonte canônica confirmada. Nenhuma mecânica foi alterada; não adicionar, remover ou retunar Dash sem decisão explícita do usuário.

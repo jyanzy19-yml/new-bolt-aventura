@@ -1,7 +1,7 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` (base verificada para handoff: `f5fbff8de138bfec395f45a7fef1ad57c45aa37c`)  
+**Branch de integração:** `main` (HEAD verificado antes da rodada documental: `75159132a7dc2503df68d8ca1abe57fc7e88019c`; consultar o HEAD após a integração desta correção)  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
 
 ## Estado executável observado
@@ -51,10 +51,13 @@ Um único escritor por vez. O usuário aciona manualmente o próximo agente.
 - [PR #3](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/3): MERGED — hardening da fundação e governança.
 - [PR #1](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/1): permanece separada e divergente; não mesclar, fechar ou modificar automaticamente.
 
-## Auditoria de polimento
+## Auditoria de polimento e reconciliação documental
 
-- Auditoria abrangente concluída e integrada pela PR #5; [repository-polish-audit-2026-11-26.md](repository-polish-audit-2026-11-26.md).
-- Foram identificadas divergências entre documentos raiz e o projeto Godot existente, além de conflito de escopo sobre Dash na PR #1 não integrada. Não alterar mecânica até reconciliação.
+- Auditoria abrangente anterior: [repository-polish-audit-2026-11-26.md](repository-polish-audit-2026-11-26.md), integrada pela PR #5.
+- Revisão atual confirmou PR #1 OPEN, `mergeable_state=dirty`, 17 commits exclusivos e 135 commits atrás da main consultada; 17 arquivos modificados, todos documentais. Não contém gameplay. Não mesclar automaticamente.
+- Documentos raiz foram identificados como obsoletos quanto à existência do projeto Godot. Esta rodada atualiza o mandato para continuar a base existente, sem recriá-la.
+- Conflito de escopo do Dash permanece pendente; preservar implementação atual sem ampliar/remover/retunar.
+- Leitura da proteção da branch retornou 403 para a integração; estado atual não confirmado. A auditoria anterior reportou main sem proteção e a configuração requer ação administrativa.
 
 ## Próximo gate executável
 
