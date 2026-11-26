@@ -31,6 +31,8 @@ func _ready() -> void:
 	_health_pickup.collected.connect(_on_health_pickup_collected)
 	_goal.body_entered.connect(_on_goal_body_entered)
 	_respawn_position = _spawn.global_position
+	if not CampaignProgress.begin_level(LEVEL_ID):
+		push_warning("W1-L1: não foi possível registrar a entrada na fase (%s)." % CampaignProgress.last_error)
 	var saved_checkpoint_id: String = CampaignProgress.get_checkpoint_id(LEVEL_ID)
 	if not CampaignProgress.last_error.is_empty():
 		push_warning("W1-L1: progresso persistente indisponível (%s)." % CampaignProgress.last_error)

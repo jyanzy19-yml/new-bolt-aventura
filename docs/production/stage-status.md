@@ -1,8 +1,9 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` — HEAD `44d9e0fcda68200579506b909c8920d4692cdc84` (PR #29 integrada).  
-**Última entrega integrada:** cobertura de progressão, combate, derrota/retry, SaveSystem versionado e checkpoint/conclusão persistentes em W1-L1 (PRs #24–#29).  
+**Branch de integração:** `main` — HEAD `52f75f437c37cbc018ef8d4611f49fb462bae74c` (base desta etapa).  
+**Branch de trabalho:** `feat/main-menu-new-game-continue` — fluxo Nova Jornada/Continuar em implementação; PR e CI ainda pendentes.  
+**Última entrega integrada:** SaveSystem versionado e CampaignProgress com checkpoint/conclusão persistentes em W1-L1 (PRs #28–#30).  
 **CI da PR #21:** Godot run #45849915250 SUCCESS em Godot 4.7.2; 53 testes, 276 verificações, 0 falhas. CI pós-merge da PR #21 deve ser consultado separadamente.  
 **Responsável atual:** ChatGPT, por decisão explícita do usuário; Claude não está no fluxo ativo.  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
@@ -13,7 +14,7 @@
 |---|---|---|
 | Projeto Godot | Implementado | `project.godot`, Godot 4.7.2 fixado em `.godot-version` |
 | Android/paisagem | Configurado | Preset Android, orientação sensor landscape e política imersiva ADR-0003; exportação não executada |
-| Inicialização/menu | Implementado parcialmente | Boot e menu de identidade; menu não é fluxo de campanha completo |
+| Inicialização/menu | Em andamento | Boot e menu com Nova Jornada/Continuar em implementação; Continuar limitado à W1-L1 existente; CI desta etapa pendente |
 | SceneFlow/loading | Implementado parcialmente | Carregamento threaded, bloqueio de transições concorrentes e sinais; headless |
 | Player/movimento | Implementado parcialmente | Corrida, salto variável, pulo duplo provisório, coyote, buffer e dash; parâmetros provisórios |
 | Touch/multitouch | Implementado parcialmente | Controles por ponteiro, liberação de ações e regressão de reatribuição de índice; eventos sintéticos |
@@ -22,7 +23,7 @@
 | Sandbox | Implementado | Cenário de desenvolvimento; **não é fase da campanha** |
 | Campanha | Em andamento | Abertura/tutorial jogável; W1-L1 Cybercore tem blockout, inimigo-base provisório, Pistola Crono, dano ao jogador e coletável de cura. Conteúdo e apresentação finais pendentes; nenhuma fase validada |
 | Combate/inimigos/chefes | Em andamento | Pistola Crono, inimigo-base de patrulha provisório, vida/dano, invulnerabilidade, feedback visual de impacto e coletável de cura. Sem chefes, IA avançada ou arsenal completo |
-| Checkpoint/save | Em andamento | `SaveSystem` versionado integrado (PR #28). `CampaignProgress` em desenvolvimento conecta IDs de checkpoint/conclusão W1-L1; CI pendente. Persistência em Android físico ainda não testada |
+| Checkpoint/save | Em andamento | `SaveSystem` versionado + `CampaignProgress` com checkpoint/conclusão W1-L1 integrados (PRs #28–#30); esta etapa acrescenta registro de entrada e reset explícito da campanha. Persistência em Android físico ainda não testada |
 | Assets finais/áudio | Não identificados como integrados | Placeholders de apresentação permanecem |
 
 ## Validação observada
@@ -264,3 +265,14 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - W1-L1 grava checkpoint na ativação física, restaura o indicador e posição de BOLT na reentrada e marca conclusão ao alcançar a saída.
 - CI pós-merge main: Godot run `45859653809` e Docs run `45859653966`; consultar os resultados finais antes de fechar o registro pós-merge.
 - Limites: sandbox e outras fases não usam CampaignProgress; sem teste de encerramento forçado, Android físico, APK, emulador, filesystem OEM ou benchmark de I/O.
+
+
+## Fluxo Nova Jornada / Continuar — branch `feat/main-menu-new-game-continue`
+
+- Base confirmada: `52f75f437c37cbc018ef8d4611f49fb462bae74c`.
+- Menu passa a oferecer Nova Jornada e Continuar. Continuar só fica disponível quando o save aponta para W1-L1 e a cena existe; o destino é a própria fase, sem repetir abertura/tutorial.
+- Nova Jornada redefine apenas o domínio `campaign_progress`, preservando outros domínios quando o envelope é legível; depois inicia abertura e tutorial.
+- Ao entrar em W1-L1, a fase atual é persistida. Reentrada na mesma fase preserva o checkpoint ativo.
+- Save ausente/incompatível/corrompido não bloqueia Nova Jornada. Um envelope ilegível não é apagado automaticamente; a sessão pode prosseguir sem persistência.
+- Testes adicionados para reset, preservação de configurações, retomada direta, fase ainda indisponível, entrada na fase e arquivo corrompido.
+- Estado desta branch: implementação submetida à validação CI; não declarar aprovada até os workflows concluírem.

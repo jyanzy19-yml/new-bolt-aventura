@@ -76,6 +76,7 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	check(cybercore_instance.get_node_or_null("HealthPickup") is BoltHealthPickup, "W1-L1 contém recuperação")
 	check(cybercore_instance.get_node_or_null("Goal") is Area2D, "W1-L1 contém objetivo de trecho")
 	check(cybercore_instance.get_node_or_null("Hud") is Hud, "W1-L1 mantém HUD e controles touch")
+	check_eq(CampaignProgress.load_state().get("current_level_id"), "W1-L1", "entrada na W1-L1 registra o ponto de retomada")
 	var level_player: BoltPlayer = cybercore_instance.get_node("Bolt") as BoltPlayer
 	var checkpoint: BoltCheckpoint = cybercore_instance.get_node("Checkpoint") as BoltCheckpoint
 	var pickup: BoltHealthPickup = cybercore_instance.get_node("HealthPickup") as BoltHealthPickup
@@ -225,6 +226,59 @@ func test_campaign_defeat_exposes_retry_for_w1_l1() -> bool:
 	check_eq(hud.get("_restart_path"), CYBERCORE_W1_L1_PATH, "reinício aponta para a W1-L1 atual")
 	tree.paused = false
 	level.free()
+	SaveSystem.delete_save()
+	SaveSystem.storage_path_override = ""
+	return true
+
+
+func test_main_menu_gates_continue_and_keeps_new_game_available_on_bad_save() -> bool:
+	const TEST_SAVE_PATH: String = "user://bolt_main_menu_flow_test.json"
+	SaveSystem.storage_path_override = TEST_SAVE_PATH
+	SaveSystem.delete_save()
+	var menu_scene: PackedScene = load("res://scenes/ui/main_menu.tscn") as PackedScene
+	check(menu_scene != null, "menu principal carrega")
+	if menu_scene == null:
+		SaveSystem.storage_path_override = ""
+		return true
+
+	var menu: Node = menu_scene.instantiate()
+	tree.root.add_child(menu)
+	await tree.process_frame
+	var new_game: Button = menu.get_node("Center/Column/PlayButton") as Button
+	var continue_button: Button = menu.get_node("Center/Column/ContinueButton") as Button
+	var status: Label = menu.get_node("Center/Column/ProgressStatusLabel") as Label
+	check(new_game != null and not new_game.disabled, "Nova Jornada permanece disponível sem save")
+	check(continue_button != null and continue_button.disabled, "Continuar fica indisponível sem progresso")
+	check(continue_button.pressed.is_connected(Callable(menu, "_on_continue_pressed")), "Continuar está ligado ao callback de retomada")
+	check_eq(menu.call("_resolve_continue_path"), "", "sem progresso não há destino de retomada")
+
+	check(CampaignProgress.begin_level("W1-L1"), "fixture registra uma fase implementada")
+	menu.call("_refresh_continue_state")
+	check(not continue_button.disabled, "Continuar é habilitado para W1-L1 existente")
+	check_eq(menu.call("_resolve_continue_path"), "res://scenes/campaign/cybercore_w1_l1.tscn", "retomada aponta diretamente para W1-L1, sem repetir abertura/tutorial")
+
+	check(CampaignProgress.begin_level("W1-L2"), "fixture representa um ID de fase ainda não disponível")
+	menu.call("_refresh_continue_state")
+	check(continue_button.disabled, "fase sem cena não habilita Continuar")
+	check(status.text.contains("indisponível"), "menu explica que a fase salva ainda não está disponível")
+	menu.free()
+
+	SaveSystem.delete_save()
+	var corrupt_file: FileAccess = FileAccess.open(TEST_SAVE_PATH, FileAccess.WRITE)
+	check(corrupt_file != null, "cria fixture de save corrompido")
+	if corrupt_file != null:
+		corrupt_file.store_string("{invalid-json")
+		corrupt_file.close()
+	var corrupt_menu: Node = menu_scene.instantiate()
+	tree.root.add_child(corrupt_menu)
+	await tree.process_frame
+	var corrupt_new_game: Button = corrupt_menu.get_node("Center/Column/PlayButton") as Button
+	var corrupt_continue: Button = corrupt_menu.get_node("Center/Column/ContinueButton") as Button
+	var corrupt_status: Label = corrupt_menu.get_node("Center/Column/ProgressStatusLabel") as Label
+	check(not corrupt_new_game.disabled, "save corrompido não bloqueia Nova Jornada")
+	check(corrupt_continue.disabled, "save corrompido não oferece retomada inválida")
+	check(corrupt_status.text.contains("SAVE INDISPONÍVEL"), "menu informa indisponibilidade do save")
+	corrupt_menu.free()
 	SaveSystem.delete_save()
 	SaveSystem.storage_path_override = ""
 	return true

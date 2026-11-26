@@ -91,6 +91,40 @@ func is_level_completed(level_id: String) -> bool:
 	return typeof(completed) == TYPE_ARRAY and completed.has(level_id)
 
 
+## New-game and resume entry points
+
+func start_new_campaign() -> bool:
+	# Reset only the campaign domain. Other valid save domains (settings, etc.) survive.
+	# An unreadable envelope is never deleted implicitly; the caller may still start a
+	# session, but persistence remains unavailable until the save can be recovered.
+	last_error = ""
+	var payload: Dictionary = SaveSystem.load_payload()
+	if not SaveSystem.last_error.is_empty() and SaveSystem.last_error != "recovered_backup":
+		last_error = SaveSystem.last_error
+		return false
+	payload[PAYLOAD_KEY] = _default_state()
+	if not SaveSystem.save_payload(payload):
+		last_error = SaveSystem.last_error
+		return false
+	last_error = ""
+	return true
+
+
+func begin_level(level_id: String) -> bool:
+	if level_id.is_empty():
+		last_error = "empty_level_id"
+		return false
+	var state: Dictionary = load_state()
+	if not last_error.is_empty():
+		return false
+	# Re-entering the same level must not erase its active checkpoint.
+	if str(state.get("current_level_id", "")) == level_id:
+		return true
+	state["current_level_id"] = level_id
+	state["active_checkpoint_id"] = ""
+	return _persist_state(state)
+
+
 func _persist_state(state: Dictionary) -> bool:
 	var payload: Dictionary = SaveSystem.load_payload()
 	if not SaveSystem.last_error.is_empty() and SaveSystem.last_error != "recovered_backup":
