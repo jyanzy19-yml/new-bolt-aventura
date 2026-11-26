@@ -156,3 +156,40 @@ func test_enemy_hit_feedback_flashes_and_returns_to_base_color() -> bool:
 	root.queue_free()
 	await tree.process_frame
 	return true
+
+
+
+func test_health_pickup_collects_through_physical_area_contact() -> bool:
+	var player_scene: PackedScene = load(PLAYER_SCENE) as PackedScene
+	var pickup_scene: PackedScene = load("res://scenes/combat/bolt_health_pickup.tscn") as PackedScene
+	check(player_scene != null and pickup_scene != null, "cenas de BOLT e coletável carregam para contato físico")
+	if player_scene == null or pickup_scene == null:
+		return true
+	var root: Node2D = Node2D.new()
+	tree.root.add_child(root)
+	var player: BoltPlayer = player_scene.instantiate() as BoltPlayer
+	var pickup: BoltHealthPickup = pickup_scene.instantiate() as BoltHealthPickup
+	player.damage_invulnerability = 0.0
+	var collected_amounts: Array[int] = []
+	pickup.collected.connect(func(amount: int) -> void:
+		collected_amounts.append(amount)
+	)
+	root.add_child(player)
+	root.add_child(pickup)
+	await tree.process_frame
+	var health: BoltHealth = player.get_node("%Health") as BoltHealth
+	check(player.take_damage(1, 0.0), "BOLT recebe dano antes do contato físico")
+	player.velocity = Vector2.ZERO
+	pickup.global_position = player.global_position
+	for _tick in 5:
+		await tree.physics_frame
+		if not collected_amounts.is_empty():
+			break
+	check_eq(health.current_health, 3, "contato físico real restaura a vida de BOLT")
+	check_eq(collected_amounts.size(), 1, "contato físico emite collected exatamente uma vez")
+	if not collected_amounts.is_empty():
+		check_eq(collected_amounts[0], 1, "sinal de coleta informa a quantidade restaurada")
+	check(not is_instance_valid(pickup) or pickup.is_queued_for_deletion(), "coletável é consumido após a coleta física")
+	root.queue_free()
+	await tree.process_frame
+	return true
