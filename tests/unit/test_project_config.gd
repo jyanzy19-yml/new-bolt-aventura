@@ -39,6 +39,7 @@ func test_main_scene_exists_and_autoloads() -> bool:
 	var main_scene: String = ProjectSettings.get_setting("application/run/main_scene")
 	check(ResourceLoader.exists(main_scene, "PackedScene"), "cena principal existe: %s" % main_scene)
 	check(ProjectSettings.has_setting("autoload/SceneFlow"), "autoload SceneFlow registrado")
+	check(ProjectSettings.has_setting("autoload/SaveSystem"), "autoload SaveSystem registrado")
 	return true
 
 
