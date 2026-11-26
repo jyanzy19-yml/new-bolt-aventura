@@ -93,6 +93,24 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	check(goal.global_position.x >= end_floor.global_position.x and goal.global_position.x <= end_floor.global_position.x + end_floor.size.x, "objetivo está contido no piso final")
 	check(level_player.global_position.distance_to(Vector2(96.0, -24.0)) < 2.0, "BOLT inicia no ponto de entrada da fase")
 
+	# Valida o primeiro encontro com a Pistola Crono usando o ActionBuffer e o projétil reais.
+	var enemy_health: BoltHealth = enemy.get_node("%Health") as BoltHealth
+	var enemy_hit: Array[bool] = [false]
+	enemy.hit_received.connect(func(_remaining_health: int) -> void:
+		enemy_hit[0] = true
+	)
+	level_player.global_position = Vector2(800.0, -24.0)
+	level_player.velocity = Vector2.ZERO
+	level_player.facing = 1
+	_send_action(Actions.ATTACK, true)
+	_send_action(Actions.ATTACK, false)
+	for _tick in range(12):
+		await tree.physics_frame
+		if enemy_hit[0]:
+			break
+	check(enemy_hit[0], "Pistola Crono atinge o inimigo real da W1-L1")
+	check_eq(enemy_health.current_health, 2, "projétil da campanha reduz a vida do inimigo em um ponto")
+
 	# Percorre os gatilhos físicos reais em vez de chamar os handlers diretamente.
 	var checkpoint_activated: Array[bool] = [false]
 	checkpoint.activated.connect(func(_id: StringName, _position: Vector2) -> void:
