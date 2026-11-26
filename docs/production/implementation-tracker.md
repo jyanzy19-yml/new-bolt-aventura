@@ -358,3 +358,11 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - O atraso de um frame foi testado e não resolveu o erro de parse; removido.
 - Candidata atual: precompilar/carregar main_menu.gd sincronamente na thread principal antes de SceneFlow solicitar main_menu.tscn de forma threaded.
 - A CI compara mutações separadas de prewarm/autoload e a combinação original. Causa raiz não confirmada até resultados reais.
+
+
+### SYS-003 — causa raiz isolada por mutação
+
+- Godot Validation #183: 93/1.307/0 e boot smoke 20/20 passaram com o prewarm de main_menu.gd na thread principal.
+- Mutation A (remover prewarm) reproduziu o erro; mutation B (restaurar identificadores diretos dos autoloads mantendo prewarm) não reproduziu. Isso isola a compilação/carga do script no caminho threaded como causa; não os identificadores autoload em si.
+- Foram revertidas mudanças desnecessárias em main_menu.gd, W1-L1, W1-L2 e HUD. Correção mínima atual: prewarm do script no Boot antes de SceneFlow.change_scene.
+- Revalidar a versão final após a reversão e o workflow de mutação simplificado.
