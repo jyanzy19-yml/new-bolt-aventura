@@ -28,7 +28,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-001 | Projeto Godot e versão fixada | Implementado | `project.godot`, `.godot-version` = 4.7.2. Evidência L2: `--headless --import` sem erros; `tests/test_runner.gd` 0 falhas (Godot 4.7.2 headless, Linux). Não validado em editor gráfico nem Android. Ver [06-godot-project-foundation.md](../technical/06-godot-project-foundation.md) |
 | SYS-002 | Configuração Android, paisagem e renderer | Implementado | Orientação 4 (sensor landscape), viewport 960×540 (provisório), GL Compatibility (provisório), preset Android com `screen/immersive_mode=true` (ADR-0003), sem segredos; verificado por `tests/unit/test_project_config.gd`. **Export Android NÃO executado** (sem SDK/templates); nenhum APK; nada validado em aparelho |
 | SYS-003 | Arquitetura, cenas e recursos compartilhados | Em andamento | Boot, menu, `SceneFlow`, `SaveSystem`, `CampaignProgress`, `Actions`, `SafeAreaMargin`, `BoltTuning`, `PlatformBlock` e HUD. Menu/retomada reconhece W1-L1 e W1-L2 na main após PR #34; demais contratos pendentes |
-| SYS-004 | Input abstrato e multitouch | Em andamento | `TouchControls`/`TouchButton` rastreiam ponteiros independentes; botão TIRO adicionado ao HUD e `ActionBuffer` agora rastreia ATTACK. Regressão para toque curto de ataque adicionada; toque físico NÃO EXECUTADO |
+| SYS-004 | Input abstrato e multitouch | Em andamento | `TouchControls`/`TouchButton` rastreiam ponteiros independentes; `ActionBuffer` rastreia JUMP/DASH/ATTACK e a branch `fix/action-buffer-lifecycle-clear-v2` adiciona limpeza de edges em pausa/suspensão/perda de foco com regressões. CI desta branch pendente; toque físico NÃO EXECUTADO |
 | SYS-005 | BOLT: controller, estados e animação | Em andamento | `BoltPlayer` (GROUNDED/RISING/FALLING/DASHING), vida/dano, knockback, invulnerabilidade e API de cura. Dash preservado. Placeholders e valores provisórios; sem validação física Android |
 | SYS-006 | Movimento, salto, All Jump e dash | Em andamento | Corrida, pulo variável, pulo duplo, coyote, buffer, dash aéreo único (`BoltTuning` provisório). Bot headless completa a sandbox. **Feel não avaliado por humano**; semântica de "All Jump" não confirmada em fonte aprovada — não canonizada |
 | SYS-007 | Câmera e limites de fase | Em andamento | `Camera2D` com suavização, drag margins e limites definidos pela sandbox. Não avaliado visualmente/em aparelho |
@@ -47,7 +47,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-020 | Loading, transições e gestão de memória | Em andamento | `SceneFlow` usa carregamento threaded, bloqueia transições concorrentes e sinaliza sucesso/falha; testado headless. Gestão abrangente de memória/preload ainda não implementada |
 | SYS-021 | Pipeline de assets e proveniência | Não iniciado | Pipeline do jogo a estabelecer |
 | SYS-022 | Testes automatizados e regressão | Em andamento | Workflow Godot 4.7.2 executa import + `tests/test_runner.gd`; PRs #34/#35: 69 testes, 439 verificações, 0 falhas em Godot CI pré/pós-merge; PR #35 valida contato físico real da `Area2D`; Docs CI SUCCESS. Headless não equivale a QA visual ou Android físico |
-| SYS-023 | Exportação, instalação e QA Android | Não iniciado | Sem APK/build verificada |
+| SYS-023 | Exportação, instalação e QA Android | Em andamento | PR #38 integrada: pipeline Godot 4.7.2 exportou APK debug, verificou assinatura v2/v3, package ID provisório e SHA-256; artifact `bolt-aventura-android-debug-5be706c042fceaa66dadf2509ffafd0833ad3617`. Instalação, inicialização, touch, safe area e QA físico ainda não executados |
 | SYS-024 | Créditos, encerramento e release candidate | Não iniciado | Sem campanha implementada |
 
 ## 4. Rastreador das 42 fases
@@ -248,3 +248,13 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - Nenhuma chave de release, segredo, package ID definitivo ou permissão nova foi introduzida.
 - **Estado:** pipeline escrita; aguardando execução CI e artifact. Não classificar como exportação validada antes de confirmar o run e o arquivo.
 - Mesmo após export, instalação, cold start, touch, safe area, lifecycle e performance Android físico permanecem pendentes.
+
+
+## SYS-004 — limpeza do ActionBuffer no ciclo de vida Android (2026-11-26)
+
+- Base: main após PR #38, commit `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.
+- Achado: a liberação de ações físicas em perda de foco não garantia, por si só, a remoção dos edges ainda armazenados no `ActionBuffer`.
+- Branch `fix/action-buffer-lifecycle-clear-v2`: limpeza em notificações de pausa, suspensão e perda de foco; testes de regressão para JUMP e DASH pendentes.
+- A janela de buffer, a física, os valores de movimento e o Dash não foram alterados.
+- Plano: `docs/production/plans/2026-11-26-action-buffer-lifecycle-clear.md`.
+- **Estado:** implementação escrita; aguardando CI. Notificações simuladas em headless não substituem teste de background/foreground em Android físico.
