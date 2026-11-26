@@ -57,9 +57,9 @@
 | Verificação | Comando / procedimento | Ambiente | Resultado | Evidência |
 |---|---|---|---|---|
 | Revisão estática | Inspeção dos commits, diffs e fontes atuais | GitHub, branch main | Concluída; achado S3 identificado e corrigido | Commits acima |
-| Godot import/headless | `godot --headless --editor --path . --import --quit` | GitHub Actions, Ubuntu, Godot 4.7.2 | SUCCESS | [Godot Run #31](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45801225080) |
+| Godot import/headless | `godot --headless --editor --path . --import --quit` | GitHub Actions, Ubuntu, Godot 4.7.2 | SUCCESS | [Godot Run #36](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45801754847) |
 | Testes automatizados | `godot --headless --path . --script res://tests/test_runner.gd` | Mesmo job, Godot 4.7.2 | Exit 0. 42 métodos `test_*` em 9 arquivos; runner não reportou falha | [Godot Run #31](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45801225080) |
-| CI documental | Workflow `docs-validation.yml` | GitHub Actions | SUCCESS no commit de implementação | [Docs Run #119](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45801225270) |
+| CI documental | Workflow `docs-validation.yml` | GitHub Actions | SUCCESS no commit de implementação | [Docs Run #124](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45801754909) |
 | Editor / emulador | Abrir e observar projeto no editor/emulador | — | **NÃO EXECUTADO**; este ambiente não disponibilizou Godot/editor/emulador | — |
 | Android físico | Instalar e testar toque/imersão | — | **NÃO EXECUTADO**; nenhum aparelho Android foi usado | — |
 | Performance / memória | Medir frame time e memória | — | **NÃO EXECUTADO**; sem build/aparelho e sem perfilamento | — |
