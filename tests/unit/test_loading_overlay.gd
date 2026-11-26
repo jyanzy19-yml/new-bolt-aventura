@@ -31,6 +31,17 @@ func test_overlay_shows_without_fake_progress_and_hides_on_finish() -> bool:
 	return true
 
 
+func test_overlay_captures_input_and_processes_while_paused() -> bool:
+	var overlay: Node = _overlay()
+	check(overlay != null, "autoload LoadingOverlay presente")
+	if overlay == null:
+		return true
+	var panel: Control = overlay.get_node("%Overlay") as Control
+	check_eq(panel.mouse_filter, Control.MOUSE_FILTER_STOP, "overlay captura input GUI durante transição")
+	check_eq(overlay.process_mode, Node.PROCESS_MODE_ALWAYS, "overlay processa durante pausa")
+	return true
+
+
 func test_overlay_hides_when_transition_fails() -> bool:
 	var overlay: Node = _overlay()
 	if overlay == null:
