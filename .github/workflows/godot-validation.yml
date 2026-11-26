@@ -108,12 +108,9 @@ jobs:
           done
           echo "Boot smoke passed: 20/20 process launches."
 
-          # Cold-process mutation matrix. The boot smoke above runs before any mutation.
-          cp scripts/ui/main_menu.gd main-menu-fixed.gd
+          # Mutation: remove the only proven fix while retaining the original menu script.
           cp scripts/core/boot.gd boot-fixed.gd
-          trap 'cp main-menu-fixed.gd scripts/ui/main_menu.gd; cp boot-fixed.gd scripts/core/boot.gd' EXIT
-
-          # Mutation A: remove only the synchronous script prewarm.
+          trap 'cp boot-fixed.gd scripts/core/boot.gd' EXIT
           python3 - <<'PY'
           from pathlib import Path
           path = Path("scripts/core/boot.gd")
@@ -130,91 +127,29 @@ jobs:
               + tab + tab + 'return' + nl
           )
           if block not in source:
-              raise SystemExit("Menu script prewarm mutation target missing.")
+              raise SystemExit("Main-thread menu script prewarm mutation target missing.")
           path.write_text(source.replace(block, "", 1))
           PY
           set +e
           "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300 > mutation-no-prewarm.log 2>&1
-          no_prewarm_status=$?
+          mutation_status=$?
           set -e
-          if grep -qE 'Parse Error: Failed.*main_menu.tscn|Failed loading resource: res://scenes/ui/main_menu.tscn' mutation-no-prewarm.log; then
-            echo "Removing main-thread script prewarm reproduced the menu failure (status $no_prewarm_status)."
-          else
-            echo "Removing main-thread script prewarm alone did not reproduce."
-          fi
-
-          # Restore Boot; Mutation B restores direct autoload identifiers in the menu.
-          cp boot-fixed.gd scripts/core/boot.gd
-          python3 - <<'PY'
-          from pathlib import Path
-          path = Path("scripts/ui/main_menu.gd")
-          source = path.read_text()
-          mutations = {
-              'return get_node_or_null("/root/CampaignProgress")': 'return CampaignProgress',
-              'return get_node_or_null("/root/SaveSystem")': 'return SaveSystem',
-          }
-          for old, new in mutations.items():
-              if old not in source:
-                  raise SystemExit(f"Menu mutation target missing: {old}")
-              source = source.replace(old, new, 1)
-          path.write_text(source)
-          PY
-          set +e
-          "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300 > mutation-direct-autoload.log 2>&1
-          direct_autoload_status=$?
-          set -e
-          if grep -qE 'Parse Error: Failed.*main_menu.tscn|Failed loading resource: res://scenes/ui/main_menu.tscn' mutation-direct-autoload.log; then
-            echo "Direct-autoload mutation reproduced the menu failure (status $direct_autoload_status)."
-          else
-            echo "Direct-autoload mutation alone did not reproduce with main-thread script prewarm."
-          fi
-
-          # Combined original behavior must reproduce the reported defect.
-          python3 - <<'PY'
-          from pathlib import Path
-          path = Path("scripts/core/boot.gd")
-          source = path.read_text()
-          tab = chr(9)
-          nl = chr(10)
-          block = (
-              tab + '# Compila/carrega o script leve do menu na thread principal antes do PackedScene' + nl
-              + tab + '# ser solicitado por SceneFlow via ResourceLoader threaded.' + nl
-              + tab + '_main_menu_script = load(MAIN_MENU_SCRIPT_PATH) as Script' + nl
-              + tab + 'if _main_menu_script == null:' + nl
-              + tab + tab + 'push_error("Boot: falha ao carregar o script do menu.")' + nl
-              + tab + tab + '_status.text = "Falha ao preparar o menu principal."' + nl
-              + tab + tab + 'return' + nl
-          )
-          if block not in source:
-              raise SystemExit("Combined mutation could not remove script prewarm.")
-          path.write_text(source.replace(block, "", 1))
-          menu_path = Path("scripts/ui/main_menu.gd")
-          menu = menu_path.read_text()
-          menu = menu.replace('return get_node_or_null("/root/CampaignProgress")', 'return CampaignProgress', 1)
-          menu = menu.replace('return get_node_or_null("/root/SaveSystem")', 'return SaveSystem', 1)
-          menu_path.write_text(menu)
-          PY
-          set +e
-          "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300 > mutation-original-combined.log 2>&1
-          combined_mutation_status=$?
-          set -e
-          if ! grep -qE 'Parse Error: Failed.*main_menu.tscn|Failed loading resource: res://scenes/ui/main_menu.tscn' mutation-original-combined.log; then
-            echo "::error::Combined pre-fix implementation did not reproduce the reported main-menu failure."
-            cat mutation-no-prewarm.log mutation-direct-autoload.log mutation-original-combined.log
+          if ! grep -qE 'Parse Error: Failed.*main_menu.tscn|Failed loading resource: res://scenes/ui/main_menu.tscn' mutation-no-prewarm.log; then
+            echo "::error::Removing the main-thread script prewarm did not reproduce the original menu failure."
+            cat mutation-no-prewarm.log
             exit 1
           fi
-          echo "Original combined implementation reproduced the main-menu failure (status $combined_mutation_status)."
+          echo "Mutation verified: removing main-thread script prewarm reproduces the original menu failure (process exit $mutation_status; engine error is the assertion)."
 
-          cp main-menu-fixed.gd scripts/ui/main_menu.gd
           cp boot-fixed.gd scripts/core/boot.gd
-          rm -f main-menu-fixed.gd boot-fixed.gd
+          rm -f boot-fixed.gd
           trap - EXIT
           "$GODOT_BIN" --headless --editor --path . --import --quit > godot-restore-import.log 2>&1
           if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' godot-restore-import.log | grep -vE 'audio_driver_alsa|ERR_CANT_OPEN.*audio'; then
             echo "::error::Restored source did not import cleanly after mutation verification."
             exit 1
           fi
-          echo "Mutation matrix passed: the original combined implementation was detected."
+
 
 
 
