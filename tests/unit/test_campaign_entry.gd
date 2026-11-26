@@ -4,6 +4,7 @@ extends BoltTest
 const OPENING_PATH: String = "res://scenes/campaign/opening_cinematic.tscn"
 const TUTORIAL_PATH: String = "res://scenes/tutorial/tutorial.tscn"
 const CYBERCORE_W1_L1_PATH: String = "res://scenes/campaign/cybercore_w1_l1.tscn"
+const CYBERCORE_W1_L2_PATH: String = "res://scenes/campaign/cybercore_w1_l2.tscn"
 
 
 func _send_action(action: StringName, pressed: bool) -> void:
@@ -18,10 +19,12 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	var opening: PackedScene = load(OPENING_PATH) as PackedScene
 	var tutorial: PackedScene = load(TUTORIAL_PATH) as PackedScene
 	var cybercore: PackedScene = load(CYBERCORE_W1_L1_PATH) as PackedScene
+	var cybercore_l2: PackedScene = load(CYBERCORE_W1_L2_PATH) as PackedScene
 	check(opening != null, "cena da abertura carrega")
 	check(tutorial != null, "cena do tutorial carrega")
 	check(cybercore != null, "cena W1-L1 de Cybercore carrega")
-	if opening == null or tutorial == null or cybercore == null:
+	check(cybercore_l2 != null, "cena W1-L2 Rede Interrompida carrega")
+	if opening == null or tutorial == null or cybercore == null or cybercore_l2 == null:
 		return true
 
 	var opening_instance: Node = opening.instantiate()
@@ -162,6 +165,8 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	check(hud.get_node("%ResultOverlay").visible, "alcançar fisicamente a saída conclui o trecho")
 	check_eq(hud.get_node("%ResultTitle").text, "Cybercore — trecho inicial concluído", "tela de resultado identifica a conclusão")
 	check(CampaignProgress.is_level_completed("W1-L1"), "conclusão da W1-L1 é persistida")
+	check_eq(CampaignProgress.load_state().get("current_level_id"), "W1-L2", "conclusão da W1-L1 avança o destino de retomada para W1-L2")
+	check_eq(hud.get_node("%AgainButton").text, "PRÓXIMA FASE", "resultado oferece entrada direta na próxima fase")
 	check_eq(CampaignProgress.get_checkpoint_id("W1-L1"), "", "checkpoint ativo é limpo após conclusão")
 	tree.paused = false
 	cybercore_instance.free()
@@ -257,10 +262,11 @@ func test_main_menu_gates_continue_and_keeps_new_game_available_on_bad_save() ->
 	check(not continue_button.disabled, "Continuar é habilitado para W1-L1 existente")
 	check_eq(menu.call("_resolve_continue_path"), "res://scenes/campaign/cybercore_w1_l1.tscn", "retomada aponta diretamente para W1-L1, sem repetir abertura/tutorial")
 
-	check(CampaignProgress.begin_level("W1-L2"), "fixture representa um ID de fase ainda não disponível")
+	check(CampaignProgress.begin_level("W1-L2"), "fixture registra W1-L2 como fase atual")
 	menu.call("_refresh_continue_state")
-	check(continue_button.disabled, "fase sem cena não habilita Continuar")
-	check(status.text.contains("indisponível"), "menu explica que a fase salva ainda não está disponível")
+	check(not continue_button.disabled, "Continuar é habilitado para W1-L2 implementada")
+	check_eq(menu.call("_resolve_continue_path"), CYBERCORE_W1_L2_PATH, "retomada aponta diretamente para W1-L2")
+	check(status.text.contains("Rede Interrompida"), "menu identifica a fase atual pelo nome")
 	menu.free()
 
 	SaveSystem.delete_save()
