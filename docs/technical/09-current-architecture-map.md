@@ -119,8 +119,9 @@ W1-L1 e W1-L2 possuem scripts de composição de nível próprios. Eles conectam
 5. LoadingOverlay observa SceneFlow; não inicia transições próprias nem decide destinos.
 6. SceneFlow impede transições concorrentes e coordena pause/input lock. HUD libera a pausa antes de solicitar uma saída iniciada pelo jogador; SceneFlow restaura estado em falha.
 7. TouchControls e ActionBuffer limpam ações/pointers em pausa, cancelamento, perda de foco, ocultação e transição.
-8. MovingPlatform e OneWayPlatform não devem ser adicionadas a uma fase sem decisão de level design e playtest.
-9. Parâmetros de BoltTuning, projétil, dimensões, margens de colisão e tempos de gate permanecem provisórios até validação de gameplay.
+8. Existe uma dependência de tipo bidirecional localizada: BoltPlayer mantém referência tipada a BoltCombat como componente filho, enquanto BoltCombat mantém referência tipada/cast do parent para BoltPlayer. É composição funcional atual, não prova de ciclo de runtime; registrar como acoplamento para revisão, sem refatorar até haver necessidade de reutilização/testabilidade que justifique mudança.
+9. MovingPlatform e OneWayPlatform não devem ser adicionadas a uma fase sem decisão de level design e playtest.
+10. Parâmetros de BoltTuning, projétil, dimensões, margens de colisão e tempos de gate permanecem provisórios até validação de gameplay.
 
 ## 6. Lacunas arquiteturais confirmadas
 
@@ -133,7 +134,7 @@ W1-L1 e W1-L2 possuem scripts de composição de nível próprios. Eles conectam
 | Enemy AI | Patrulha simples provisória | Percepção, estados, navegação, telegraphs e limites |
 | Asset catalog | Parcial; placeholders | IDs, proveniência/licença, import settings, budgets e estado |
 | Save migration | Schema v1 sem migração futura | Migrações explícitas e regressões quando novos campos forem aprovados |
-| Android lifecycle | CI exporta APK debug | Teste físico de foco, background, encerramento, retomada e persistência |
+| Android lifecycle | CI exporta APK debug | Teste físico de foco, background, encerramento, retomada e persistência |\n| Acoplamento Player/Combat | BoltPlayer referencia BoltCombat e BoltCombat referencia BoltPlayer | Manter enquanto composição é local; reavaliar antes de extrair/reutilizar Combat ou adicionar múltiplos owners |
 | Safe area / touch físico | Testes sintéticos | Validação em aparelhos identificados, barras/gestos e recortes |
 
 ## 7. Evidência e limites
