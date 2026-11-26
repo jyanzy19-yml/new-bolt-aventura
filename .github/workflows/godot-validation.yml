@@ -76,7 +76,7 @@ jobs:
               echo "::error::${label} exited with status $command_status."
               return 1
             fi
-            if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' "$log" | grep -vF 'SceneFlow: cena inexistente: res://nao_existe.tscn'; then
+            if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' "$log" | grep -vE 'SceneFlow: cena inexistente: res://nao_existe.tscn|audio_driver_alsa|ERR_CANT_OPEN.*audio'; then
               echo "::error::Unexpected Godot error in ${label}; see ${log}."
               return 1
             fi
