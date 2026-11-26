@@ -33,7 +33,7 @@ permissions:
 jobs:
   godot:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -42,8 +42,8 @@ jobs:
         run: |
           set -euo pipefail
           if [[ ! -f project.godot ]]; then
-            echo "::notice::NOT APPLICABLE — project.godot is absent; no engine test was performed."
-            exit 0
+            echo "::error::project.godot is absent; Godot validation cannot be skipped."
+            exit 1
           fi
           if [[ ! -f .godot-version ]]; then
             echo "::error::project.godot exists but .godot-version is missing."
@@ -63,12 +63,94 @@ jobs:
           chmod +x "$GODOT_BIN"
           ACTUAL_VERSION="$("$GODOT_BIN" --headless --version)"
           [[ "$ACTUAL_VERSION" == "$GODOT_VERSION".* ]]
+
+          run_checked() {
+            local label="$1"
+            shift
+            local log="${label}.log"
+            set +e
+            "$@" 2>&1 | tee "$log"
+            local command_status=${PIPESTATUS[0]}
+            set -e
+            if [[ $command_status -ne 0 ]]; then
+              echo "::error::${label} exited with status $command_status."
+              return 1
+            fi
+            # Expected diagnostics only: test_scene_flow.gd deliberately exercises one missing
+            # scene and two _fail() paths; headless runners may also lack ALSA audio hardware.
+            # Any other SCRIPT ERROR, Parse Error or ERROR fails CI.
+            if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' "$log" | grep -vE "SceneFlow: cena inexistente: res://nao_existe.tscn|SceneFlow: transição para 'res://test_failure_from_unpaused_state.tscn' falhou \\(test_failure\\)|SceneFlow: transição para 'res://test_failure_from_paused_state.tscn' falhou \\(test_failure\\)|audio_driver_alsa|ERR_CANT_OPEN.*audio"; then
+              echo "::error::Unexpected Godot error in ${label}; see ${log}."
+              return 1
+            fi
+          }
+
           "$GODOT_BIN" --headless --editor --path . --import --quit 2>&1 | tee godot-import.log
-          echo "Headless import/parse passed for Godot $GODOT_VERSION."
-          "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd 2>&1 | tee godot-tests.log
-          if grep -nE "SCRIPT ERROR:|Parse Error:|^ERROR:.*(Function blocked during in/out signal|flushing queries)" godot-import.log godot-tests.log; then
-            echo "::error::Godot reported a script or parse error; refusing a green validation."
+          if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' godot-import.log | grep -vE 'audio_driver_alsa|ERR_CANT_OPEN.*audio'; then
+            echo "::error::Unexpected import/parse error."
             exit 1
           fi
-          echo "Headless project test suite passed."
+
+          run_checked godot-tests "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd
+
+          # Capture verbose diagnostics from one fresh boot before mutation or repeated runs.
+          set +e
+          "$GODOT_BIN" --headless --path . --verbose --fixed-fps 60 --quit-after 300 > boot-diagnostic.log 2>&1
+          diagnostic_status=$?
+          set -e
+          echo "Verbose cold-boot diagnostic exit: $diagnostic_status"
+          grep -nEi 'main_menu|SCRIPT ERROR|Parse Error|ERROR:|failed|failed loading|loading resource' boot-diagnostic.log | tail -120 || true
+
+          echo "Running 20 real project boots (300 frames each, fixed 60 FPS)."
+          for run in $(seq 1 20); do
+            echo "Boot smoke ${run}/20"
+            run_checked "boot-${run}" "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300
+          done
+          echo "Boot smoke passed: 20/20 process launches."
+
+          # Mutation: remove the only proven fix while retaining the original menu script.
+          cp scripts/core/boot.gd boot-fixed.gd
+          trap 'cp boot-fixed.gd scripts/core/boot.gd' EXIT
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("scripts/core/boot.gd")
+          source = path.read_text()
+          tab = chr(9)
+          nl = chr(10)
+          block = (
+              tab + '# Compila/carrega o script leve do menu na thread principal antes do PackedScene' + nl
+              + tab + '# ser solicitado por SceneFlow via ResourceLoader threaded.' + nl
+              + tab + '_main_menu_script = load(MAIN_MENU_SCRIPT_PATH) as Script' + nl
+              + tab + 'if _main_menu_script == null:' + nl
+              + tab + tab + 'push_error("Boot: falha ao carregar o script do menu.")' + nl
+              + tab + tab + '_status.text = "Falha ao preparar o menu principal."' + nl
+              + tab + tab + 'return' + nl
+          )
+          if block not in source:
+              raise SystemExit("Main-thread menu script prewarm mutation target missing.")
+          path.write_text(source.replace(block, "", 1))
+          PY
+          set +e
+          "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300 > mutation-no-prewarm.log 2>&1
+          mutation_status=$?
+          set -e
+          if ! grep -qE 'Parse Error: Failed.*main_menu.tscn|Failed loading resource: res://scenes/ui/main_menu.tscn' mutation-no-prewarm.log; then
+            echo "::error::Removing the main-thread script prewarm did not reproduce the original menu failure."
+            cat mutation-no-prewarm.log
+            exit 1
+          fi
+          echo "Mutation verified: removing main-thread script prewarm reproduces the original menu failure (process exit $mutation_status; engine error is the assertion)."
+
+          cp boot-fixed.gd scripts/core/boot.gd
+          rm -f boot-fixed.gd
+          trap - EXIT
+          "$GODOT_BIN" --headless --editor --path . --import --quit > godot-restore-import.log 2>&1
+          if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' godot-restore-import.log | grep -vE 'audio_driver_alsa|ERR_CANT_OPEN.*audio'; then
+            echo "::error::Restored source did not import cleanly after mutation verification."
+            exit 1
+          fi
+
+
+
+
           echo "This does not prove Android export, rendering, touch hardware or physical-device performance."

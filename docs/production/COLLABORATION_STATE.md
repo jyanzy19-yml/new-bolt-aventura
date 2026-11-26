@@ -2,7 +2,7 @@
 
 ## Snapshot operacional vigente — 2026-11-26
 
-- **Main HEAD:** `6f8e9b8fbaaab9c44247050e5f86e4442bd2622f` (PR #52 integrada; mapa arquitetural revisado e sincronizado).
+- **Main HEAD:** `54fd48e5f49fba877740265aafa0d8f649c2b1e9` (PR #52 integrada; mapa arquitetural revisado e sincronizado).
 - **Última correção de gameplay:** PR #47, `TimedEnergyGate.initial_active=false`; CI pós-merge Godot 88 testes/553 verificações/0 falhas, Docs SUCCESS e Android Debug Export SUCCESS.
 - **Último componente de plataforma:** PR #46, `OneWayPlatform`; CI pós-merge Godot 87 testes/548 verificações/0 falhas, Docs e Android Export SUCCESS.
 - **Última entrega de conteúdo:** PR #34, W1-L2 em blockout e progressão W1-L1→W1-L2.
@@ -16,6 +16,19 @@
 
 
 **Fonte única para o próximo turno.** Antes de editar, confirme este arquivo contra o HEAD, commits, branches e PRs reais do GitHub.
+
+## Atualização operacional — auditoria de boot e Cybercore (2026-11-26)
+
+- **Main HEAD verificado:** `54fd48e5f49fba877740265aafa0d8f649c2b1e9` (inclui o dossiê mestre `BOLT_MASTER_CONTEXT.md`).
+- **Escritor ativo:** ChatGPT, único escritor; Claude inativo.
+- **PR #58:** `fix/threaded-boot-smoke-2026-11-26`, aberta e não integrada; correção do cold boot e smoke CI.
+- **PR #57:** `feat/cybercore-w1-blockout`, aberta e não integrada; polimento W1-L1/W1-L2, revisão independente e hardening do Burst em andamento.
+- **PR #1:** permanece aberta/divergente; não editar, rebasear ou integrar automaticamente.
+- **Branch `stage2/checkpoints-and-save`:** preservada; não integrar nem apagar sem autorização explícita.
+- **Evidência atual da PR #58:** head `97f0eeed54f722e3d83701928ab5a61dd55d3731`; Godot Validation #215 (93 testes/1.787 verificações/0 falhas; 150 transições SceneFlow e 20/20 boots; mutação do prewarm reproduz o erro), Docs #396 SUCCESS e Android Debug Export #103 SUCCESS com APK verificado/uploaded. Sem teste Android físico.
+- **Próxima ação:** concluir a mutação direcionada do Burst na PR #57; revisar novamente os checks após o novo teste de teardown real W1-L1.
+
+---
 
 ## Histórico — revisão anterior à sequência PR #38/#39
 

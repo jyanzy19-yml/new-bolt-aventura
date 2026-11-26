@@ -1,7 +1,7 @@
 ## Snapshot vigente — 2026-11-26
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
-- **Main HEAD após PR #52:** `6f8e9b8fbaaab9c44247050e5f86e4442bd2622f`; PR #51/#52 integraram e revisaram o mapa arquitetural atual.
+- **Main HEAD verificada nesta atualização:** `54fd48e5f49fba877740265aafa0d8f649c2b1e9`; PR #51/#52 integraram e revisaram o mapa arquitetural atual.
 - **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético e progressão W1-L1→W1-L2.
 - **Última correção de gameplay:** PR #47 — estado inicial `initial_active=false` do `TimedEnergyGate`, merge `2636226c4027625649e66c51ff64d7e2e56168a6`.
 - **Último componente de plataforma:** PR #46 — `OneWayPlatform`, merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`; PR #45 adicionou `MovingPlatform`.
@@ -647,4 +647,130 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Testes adicionados para configuração da shape, passagem ascendente e aterrissagem descendente.
 - Plano: `docs/production/plans/2026-11-26-one-way-platform.md`.
 - **Estado:** aguardando CI. Não integrada em fase.
-\n\n## Sessão ChatGPT — integração da PR #46 — 2026-11-26\n\n- PR #46 `feat: add reusable one-way platform` integrada por squash; merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.\n- Implementação: `scripts/world/one_way_platform.gd`, `scenes/world/one_way_platform.tscn`; teste `tests/unit/test_one_way_platform.gd`; contrato atualizado em `docs/technical/05-system-contracts.md`.\n- Godot CI pré-merge `45887805114`: SUCCESS — 87 testes/548 verificações/0 falhas. Docs CI `45887805097`: SUCCESS. Android Debug Export `45887805269`: SUCCESS; artifact e hash registrados em `stage-status.md`.\n- Não houve integração em fase; margin 2 px e dimensões são provisórias. Sem playtest visual ou Android físico. Pós-merge CI da main não confirmado no momento do registro.\n
+
+
+## Sessão ChatGPT — integração da PR #46 — 2026-11-26
+
+- PR #46 `feat: add reusable one-way platform` integrada por squash; merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.
+- Implementação: `scripts/world/one_way_platform.gd`, `scenes/world/one_way_platform.tscn`; teste `tests/unit/test_one_way_platform.gd`; contrato atualizado em `docs/technical/05-system-contracts.md`.
+- Godot CI pré-merge `45887805114`: SUCCESS — 87 testes/548 verificações/0 falhas. Docs CI `45887805097`: SUCCESS. Android Debug Export `45887805269`: SUCCESS; artifact e hash registrados em `stage-status.md`.
+- Não houve integração em fase; margin 2 px e dimensões são provisórias. Sem playtest visual ou Android físico. Pós-merge CI da main não confirmado no momento do registro.
+
+
+---
+
+## Sessão ChatGPT — correção de boot threaded (2026-11-26)
+
+- **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
+- **Base main confirmada:** `54fd48e5f49fba877740265aafa0d8f649c2b1e9`.
+- **Branch:** `fix/threaded-boot-smoke-2026-11-26`.
+- **PR #57:** OPEN, não integrada e preservada. Esta unidade não altera sua branch nem seu diff.
+- **Escopo implementado na branch:** referências a autoloads de menu/fases/HUD resolvidas por caminho runtime; teste de carga threaded repetida (30 ciclos × menu/W1-L1/W1-L2); workflow com importação, suíte, mutação da referência antiga do menu e 20 inicializações reais de 300 frames.
+- **Arquivos de runtime/teste/CI:** `scripts/ui/main_menu.gd`, `scripts/campaign/cybercore_w1_l1.gd`, `scripts/campaign/cybercore_w1_l2.gd`, `scripts/ui/hud.gd`, `tests/unit/test_threaded_scene_loading.gd`, `.github/workflows/godot-validation.yml`.
+- **Validação local:** NÃO EXECUTADA. Não há binário Godot local; tentativa de clone Git falhou por DNS indisponível. Nenhum resultado local deve ser inferido.
+- **Causa raiz:** ainda não declarada como comprovada até os logs do teste threaded e da etapa de mutação. A referência direta a autoload é a hipótese que o teste tenta reproduzir.
+- **Boot em laço:** NÃO EXECUTADO nesta sessão; o CI foi configurado para 20 execuções independentes e deve fornecer a evidência.
+- **Dash/Input/touch/save/progressão:** preservados por escopo; sem alteração deliberada desses contratos.
+- **Android:** sem APK, emulador, aparelho físico, FPS, memória ou térmica nesta unidade.
+- **Próxima ação:** abrir PR independente, aguardar Godot Validation, examinar logs (inclusive mutation-import/mutation-tests e boot-01…boot-20), corrigir erros observados e só então registrar resultados reais. Não integrar automaticamente.
+
+
+---
+
+## Revisões paralelas da mesma sessão — 2026-11-26
+
+### PR #57 — Cybercore W1 polish
+
+- Revisão independente registrada como COMMENT (review ID `6081188962`); PR #57 continua OPEN e não integrada.
+- GitHub Actions no head da PR: Godot Validation run `45904728896` SUCCESS; Docs Validation `45904728890` SUCCESS; Android Debug Export `45904728900` SUCCESS.
+- Leitura estática do diff não identificou defeito bloqueador. O código usa ArrayMesh/um draw_mesh por camada e limita Burst a 24 instâncias simultâneas.
+- Draw calls 21→25 / 19→23 **não confirmados independentemente**; medições llvmpipe/PC não demonstram desempenho Helio G99. Sem Android físico/FPS/memória/térmica.
+- Arte, câmera e VFX continuam provisórios até playtest visual e validação no hardware-alvo.
+
+### Branch obsoleta `stage2/checkpoints-and-save`
+
+- Comparação GitHub: branch contém 1 commit exclusivo e está 75 commits atrás de main; não integrar.
+- Implementa `SaveData`, `SaveStore`, `ProgressState` (`GameState`) e `LevelSession`, duplicando os domínios atuais `SaveSystem`, `CampaignProgress` e `BoltCheckpoint`.
+- Não foi alterada nem apagada; exclusão permanece dependente de autorização explícita.
+- **PROPOSTA técnica, sem implementação:** avaliar recuperação de `.tmp` íntegro após interrupção e bloqueio explícito de escrita quando o arquivo principal/backup contém versão futura. Main já possui temporário, backup, checksum SHA-256 e recuperação de backup; a proposta deve ser tratada como hardening incremental do serviço existente, não como adoção de SaveStore/GameState.
+
+
+### Diagnóstico atualizado do Defeito 1 — após CI #167
+
+- Godot Validation run 45906475220 (commit de workflow 6df8989) terminou FAILURE no boot-1/20.
+- Evidência real da suíte: 93 testes / 1.307 verificações / 0 falhas; test_threaded_scene_loading.gd passou 722 verificações, mas não era cold-start confiável porque outros testes anteriores já carregavam cenas e aqueciam o cache.
+- Boot frio falhou com:
+  - ERROR: Parse Error: Failed. [Resource file res://scenes/ui/main_menu.tscn:12]
+  - ERROR: Failed loading resource: res://scenes/ui/main_menu.tscn.
+- A mutação de autoload anterior não foi prova: o grep aceitava WARNING: SceneFlow: transição ignorada ... main_menu.tscn. Não declarar causa raiz a partir dela.
+- Alteração de diagnóstico: scripts/core/boot.gd aguarda um process_frame antes de iniciar a primeira carga threaded. A ideia é testar se o request no mesmo ciclo de _ready() é a condição de corrida.
+- Workflow de CI atualizado com três cenários cold-process: (A) menu com identificadores diretos e barreira mantida; (B) boot sem barreira e menu runtime; (C) combinação pré-correção. O cenário combinado precisa reproduzir especificamente o erro de parse; a implementação corrigida deve passar 20 boots independentes.
+- **Não validado ainda:** causa raiz, eficácia da barreira, mutation matrix, 20 boots e Android físico. Aguardando nova execução do workflow.
+
+
+### Hipótese de diagnóstico revisada — prewarm de script
+
+- Godot Validation #180 confirmou que a barreira de um frame em Boot não corrigiu o erro; essa alteração foi removida.
+- Nova implementação candidata: Boot carrega main_menu.gd sincronamente na thread principal antes de SceneFlow iniciar o carregamento threaded da PackedScene. É um prewarm de um recurso de script pequeno, não um carregamento síncrono da cena inteira.
+- A CI agora roda 20 boots da implementação corrigida antes das mutações e depois compara: (A) sem prewarm; (B) autoloads diretos com prewarm; (C) combinação original sem prewarm e com autoloads diretos. A combinação C precisa reproduzir o erro; o smoke fixo precisa passar 20/20.
+- Ainda não declarar causa raiz ou correção até os resultados desta nova matriz.
+
+
+### Causa raiz do Defeito 1 — evidência de mutação #183
+
+- Godot Validation run 45907472309: **93 testes / 1.307 verificações / 0 falhas**; cold boot diagnostic exit 0; **20/20 boots** passaram.
+- A matriz de mutação isolou o fator:
+  - Remover o prewarm síncrono de main_menu.gd e deixar a PackedScene ser a primeira a carregar o script pelo caminho threaded reproduziu Parse Error em main_menu.tscn:12.
+  - Restaurar as referências diretas a CampaignProgress/SaveSystem, mantendo o prewarm, não reproduziu.
+  - A combinação original também reproduziu.
+- **Conclusão técnica:** em cold boot Godot 4.7.2, a primeira compilação/carga de main_menu.gd não deve ocorrer dentro do carregamento threaded da PackedScene. O Boot deve carregar o Script na thread principal antes de chamar SceneFlow.change_scene. As referências diretas a autoload não são a causa independente.
+- Revertidos os helpers runtime-only no menu, W1-L1/W1-L2 e HUD para preservar o código original, pois não eram necessários para a correção demonstrada.
+- O workflow agora valida a versão mínima: prewarm fixo → 20 boots; mutação removendo prewarm → erro original. **Aguardar novo CI após estas reversões para fechar a validação final.**
+
+
+### Fechamento do Defeito 1 — evidência final
+
+- **Godot Validation run:** 45907658225 — SUCCESS.
+- **Suíte:** 93 testes, 1.307 verificações, 0 falhas.
+- **Teste de transições:** 722 verificações em 30 ciclos para cada cena (menu, W1-L1, W1-L2).
+- **Cold boot:** diagnóstico verbose exit 0; 20/20 processos independentes passaram.
+- **Mutation:** retirar o prewarm de main_menu.gd reproduz o Parse Error original em main_menu.tscn:12. A verificação de mutação passou.
+- **Causa raiz confirmada:** o script GDScript do menu falha quando sua primeira compilação ocorre como dependência da PackedScene carregada em thread no cold boot Godot 4.7.2. Boot carrega o Script na thread principal antes da solicitação threaded da cena.
+- Mutação adicional: referências diretas CampaignProgress/SaveSystem com prewarm não reproduziram o erro; os helpers exploratórios foram revertidos.
+- **PR #58:** OPEN, mergeable, não integrada. Não houve merge automático.
+- **Limitações:** Android Debug Export foi cancelado neste run; não há APK, emulador ou dispositivo físico testado. Não afirmar FPS, RAM, touch, térmica ou desempenho Android.
+
+
+### Atualização final do Android Debug Export — PR #58
+
+- No head atual da PR #58, Android Debug Export run 45907688455 terminou SUCCESS: Godot exportou o APK debug, verificou o arquivo/proveniência e fez upload do artefato.
+- O cancelamento mencionado anteriormente referia-se somente ao run #190, substituído pela execução bem-sucedida #191.
+- Nenhum aparelho físico ou emulador foi usado; não afirmar validação Android em runtime, FPS, memória, touch ou térmica.
+
+
+---
+
+## Sessão ChatGPT — revalidação final do cold boot / PR #58
+
+- **Main HEAD base:** `54fd48e5f49fba877740265aafa0d8f649c2b1e9`.
+- **Branch:** `fix/threaded-boot-smoke-2026-11-26`; head `97f0eeed54f722e3d83701928ab5a61dd55d3731`; PR #58 OPEN, sem merge.
+- **Runtime:** `scripts/core/boot.gd` pre-carrega `main_menu.gd` na thread principal. Menu, W1-L1, W1-L2, abertura e HUD permanecem com seus scripts originais.
+- **Godot Validation #215 / run 45909374538:** SUCCESS — 93 testes, 1.787 verificações, 0 falhas.
+- **SceneFlow:** 30 ciclos para cada uma de cinco cenas (menu, abertura narrativa, tutorial, W1-L1, W1-L2), 150 transições e 1.202 verificações.
+- **Boot:** diagnóstico verbose exit 0; 20/20 processos independentes passaram.
+- **Mutation:** remover o prewarm reproduziu o Parse Error original em `main_menu.tscn:12`.
+- **Docs Validation #396 / run 45909374561:** SUCCESS.
+- **Android Debug Export #103 / run 45909374622:** SUCCESS; APK debug exportado, verificado e enviado como artifact CI.
+- **Limitações:** nenhum aparelho físico/emulador; FPS, memória, touch físico, safe areas, lifecycle real e comportamento térmico não validados.
+- **Próxima ação:** fechar a mutação do Burst na PR #57; manter ambas as PRs abertas até revisão final. Não fazer merge automático.
+
+
+
+### Atualização final — PR #58 head `63a28d9` — 2026-11-26
+
+- Godot Validation run `45909667893`: SUCCESS — 93 testes / 1.787 verificações / 0 falhas.
+- SceneFlow: 30 ciclos em cinco cenas (menu, abertura, tutorial, W1-L1, W1-L2), 150 transições / 1.202 verificações.
+- Cold boot verbose exit 0; smoke 20/20; mutação removendo prewarm reproduz Parse Error original.
+- Docs Validation `45909667933`: SUCCESS.
+- Android Debug Export `45909667948`: SUCCESS; APK debug exportado, verificado e enviado como artefato CI.
+- PR #58 continua aberta, sem merge. Nenhum dispositivo físico/emulador foi testado.

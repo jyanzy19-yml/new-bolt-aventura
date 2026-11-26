@@ -1,7 +1,9 @@
 # BOLT · AVENTURA — Rastreador de implementação
 
 **Objetivo:** impedir que sistemas ou fases sejam declarados concluídos apenas por terem arquivos ou cenas criados.  
-**Atualização:** em toda entrega substancial e mudança de gate.\n\n**Snapshot 2026-11-26:** main após PR #52 (`6f8e9b8fbaaab9c44247050e5f86e4442bd2622f`); PR #47 pós-merge Godot 88 testes/553 verificações/0 falhas, Docs e Android Export SUCCESS. APK debug exportado, não instalado em aparelho. Etapas 01–03 concluídas; Etapa 04 em desenvolvimento.  
+**Atualização:** em toda entrega substancial e mudança de gate.
+
+**Snapshot 2026-11-26:** main verificada nesta atualização (`54fd48e5f49fba877740265aafa0d8f649c2b1e9`); PR #47 pós-merge Godot 88 testes/553 verificações/0 falhas, Docs e Android Export SUCCESS. APK debug exportado, não instalado em aparelho. Etapas 01–03 concluídas; Etapa 04 em desenvolvimento.  
 **Regra:** estado precisa refletir evidência no branch atual.
 
 ## 1. Vocabulário de status
@@ -330,4 +332,108 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Testes: passagem de baixo para cima e aterrissagem de cima para baixo.
 - Plano: `docs/production/plans/2026-11-26-one-way-platform.md`.
 - **Estado:** PR #46 integrada por squash em `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`. Godot CI pré-merge `45887805114`: 87 testes/548 verificações/0 falhas; Docs `45887805097` SUCCESS; Android Debug Export `45887805269` SUCCESS. Workflow runs pós-merge consultados sem execuções. Sem integração em fase, playtest visual ou Android físico.
-\n\n## Snapshot pós-PR #47/#48 — 2026-11-26\n\n- PR #47 corrigiu a inicialização de `TimedEnergyGate` quando `initial_active=false`; Godot pós-merge 88 testes/553 verificações/0 falhas, Docs e Android export SUCCESS.\n- PR #48 integrou a matriz operacional das 26 etapas; Docs CI pós-merge `45895074739` SUCCESS.\n- `SYS-025` e `SYS-026` continuam componentes reutilizáveis implementados, ainda sem inserção em fase aprovada.\n- `SYS-023` permanece Em andamento: exportação debug automatizada comprovada, mas package ID é placeholder e não há instalação/QA em aparelho.\n\n\n## Snapshot documental após PR #49 — 2026-11-26\n\n- Main HEAD `d03cd744b2354bd9711894eab431dbc6912ca9d3`; PR #49 reconciliou snapshots, prioridade técnica e referências canônicas.\n- A matriz de 26 etapas foi integrada pela PR #48. O registro GAP-001…GAP-022 está em elaboração na branch `docs/requirements-gap-register`.\n- Etapa 01: auditoria estática concluída. Etapa 02: em desenvolvimento; revisão de requisitos, decisões/owners e critérios P0 do Gate 1 pendentes.\n\n\n## Atualização de planejamento — Etapas 01–03\n\n- Etapa 01 concluída como auditoria estática, conforme `repository-audit-2026-11-26.md`.\n- Etapa 02 concluída: matriz de 26 etapas, 22 GAPs classificados, 11 conflitos documentais reconciliados, owners/dependências e critérios P0 registrados.\n- Etapa 03 em desenvolvimento: mapa de arquitetura atual em `technical/09-current-architecture-map.md`; ainda falta revisar grafo de dependências, sinais e lifecycle em profundidade.\n\n\n## Atualização arquitetural — PR #51\n\n- Mapa de runtime integrado em `technical/09-current-architecture-map.md`; documenta autoloads, ownership, fluxo de boot, player/combat, campanha, plataformas e lacunas.\n- Acoplamento de tipo BoltPlayer↔BoltCombat identificado; mantido por enquanto como composição local, sem refatoração estética.\n- Etapa 03 segue em desenvolvimento até concluir revisão do grafo, sinais e lifecycle.\n\n\n## Atualização — Etapa 03 concluída / Etapa 04 iniciada\n\n- Etapa 03: mapa arquitetural estático integrado; quatro autoloads e fluxos documentados; nenhum ciclo entre serviços/autoloads; acoplamento de tipo local BoltPlayer↔BoltCombat registrado como exceção consciente.\n- Etapa 04: próxima auditoria técnica de Boot, SceneFlow, SaveSystem, CampaignProgress e LoadingOverlay, incluindo erros, concorrência, pause/lifecycle, backup e progressão.\n
+
+
+## Snapshot pós-PR #47/#48 — 2026-11-26
+
+- PR #47 corrigiu a inicialização de `TimedEnergyGate` quando `initial_active=false`; Godot pós-merge 88 testes/553 verificações/0 falhas, Docs e Android export SUCCESS.
+- PR #48 integrou a matriz operacional das 26 etapas; Docs CI pós-merge `45895074739` SUCCESS.
+- `SYS-025` e `SYS-026` continuam componentes reutilizáveis implementados, ainda sem inserção em fase aprovada.
+- `SYS-023` permanece Em andamento: exportação debug automatizada comprovada, mas package ID é placeholder e não há instalação/QA em aparelho.
+
+
+## Snapshot documental após PR #49 — 2026-11-26
+
+- Main HEAD `d03cd744b2354bd9711894eab431dbc6912ca9d3`; PR #49 reconciliou snapshots, prioridade técnica e referências canônicas.
+- A matriz de 26 etapas foi integrada pela PR #48. O registro GAP-001…GAP-022 está em elaboração na branch `docs/requirements-gap-register`.
+- Etapa 01: auditoria estática concluída. Etapa 02: em desenvolvimento; revisão de requisitos, decisões/owners e critérios P0 do Gate 1 pendentes.
+
+
+## Atualização de planejamento — Etapas 01–03
+
+- Etapa 01 concluída como auditoria estática, conforme `repository-audit-2026-11-26.md`.
+- Etapa 02 concluída: matriz de 26 etapas, 22 GAPs classificados, 11 conflitos documentais reconciliados, owners/dependências e critérios P0 registrados.
+- Etapa 03 em desenvolvimento: mapa de arquitetura atual em `technical/09-current-architecture-map.md`; ainda falta revisar grafo de dependências, sinais e lifecycle em profundidade.
+
+
+## Atualização arquitetural — PR #51
+
+- Mapa de runtime integrado em `technical/09-current-architecture-map.md`; documenta autoloads, ownership, fluxo de boot, player/combat, campanha, plataformas e lacunas.
+- Acoplamento de tipo BoltPlayer↔BoltCombat identificado; mantido por enquanto como composição local, sem refatoração estética.
+- Etapa 03 segue em desenvolvimento até concluir revisão do grafo, sinais e lifecycle.
+
+
+## Atualização — Etapa 03 concluída / Etapa 04 iniciada
+
+- Etapa 03: mapa arquitetural estático integrado; quatro autoloads e fluxos documentados; nenhum ciclo entre serviços/autoloads; acoplamento de tipo local BoltPlayer↔BoltCombat registrado como exceção consciente.
+- Etapa 04: próxima auditoria técnica de Boot, SceneFlow, SaveSystem, CampaignProgress e LoadingOverlay, incluindo erros, concorrência, pause/lifecycle, backup e progressão.
+
+
+---
+
+## SYS-003 / SYS-020 — regressão de boot em carregamento threaded (branch própria)
+
+- **Defeito reportado:** menu principal falha no smoke de boot com erro de parse ao carregar `main_menu.tscn`; classificação S0 enquanto reproduzido.
+- **Hipótese sob teste:** referências diretas a autoloads em scripts compilados pelo carregador threaded. A causa raiz ainda não está confirmada sem logs da execução da regressão e do teste por mutação.
+- **Implementação na branch `fix/threaded-boot-smoke-2026-11-26`:** resolução runtime de CampaignProgress/SaveSystem em `main_menu.gd`, CampaignProgress em W1-L1/W1-L2 e SceneFlow no HUD; teste de carga threaded repetida; CI com import, suíte, mutação e 20 boots.
+- **Estado:** Implementado na branch; **não validado**. Godot local não executado nesta sessão; aguardar checks da PR.
+- **Critério de validação:** teste threaded passa 30 ciclos para cada uma das três cenas; mutação com referência direta antiga deve falhar especificamente na carga do menu; 20/20 boots com exit code 0 e sem erros não permitidos.
+- **Não alterado:** schema/persistência de save, progressão, Dash, Input Map, controles touch/multitouch e física.
+
+
+### SYS-003 — atualização diagnóstica após Godot CI #167
+
+- Suite: **93 testes / 1.307 verificações / 0 falhas**. Integração SceneFlow: 722 verificações no laço de 30 ciclos por cada cena (menu, W1-L1, W1-L2).
+- Boot smoke: falhou no primeiro processo com o erro original em main_menu.tscn:12.
+- A mutação anterior do autoload foi falsa positiva por casar um WARNING contendo o nome do menu. Descartada como evidência.
+- Implementado na branch um atraso de um frame antes da primeira transição de Boot e uma matriz de mutações em processo frio para separar a hipótese de autoload da hipótese de ordem de inicialização.
+- **Estado:** em investigação / validação pendente; nenhum boot 20/20 registrado.
+
+
+### SYS-003 — hipótese revisada
+
+- O atraso de um frame foi testado e não resolveu o erro de parse; removido.
+- Candidata atual: precompilar/carregar main_menu.gd sincronamente na thread principal antes de SceneFlow solicitar main_menu.tscn de forma threaded.
+- A CI compara mutações separadas de prewarm/autoload e a combinação original. Causa raiz não confirmada até resultados reais.
+
+
+### SYS-003 — causa raiz isolada por mutação
+
+- Godot Validation #183: 93/1.307/0 e boot smoke 20/20 passaram com o prewarm de main_menu.gd na thread principal.
+- Mutation A (remover prewarm) reproduziu o erro; mutation B (restaurar identificadores diretos dos autoloads mantendo prewarm) não reproduziu. Isso isola a compilação/carga do script no caminho threaded como causa; não os identificadores autoload em si.
+- Foram revertidas mudanças desnecessárias em main_menu.gd, W1-L1, W1-L2 e HUD. Correção mínima atual: prewarm do script no Boot antes de SceneFlow.change_scene.
+- Revalidar a versão final após a reversão e o workflow de mutação simplificado.
+
+
+### SYS-003 — resultado de validação
+
+- **Status:** corrigido e validado em CI headless.
+- Godot Validation #190: 93 testes / 1.307 verificações / 0 falhas.
+- Regressão SceneFlow: 722 verificações em 90 transições.
+- Boot: diagnóstico verbose exit 0 e 20/20 processos independentes.
+- Mutation: remover o prewarm de main_menu.gd reproduz o erro em main_menu.tscn:12.
+- Causa: primeiro carregamento do script GDScript dentro da dependência threaded da PackedScene falha no cold boot Godot 4.7.2; carregar o Script na thread principal antes da transição evita o erro.
+- PR #58 aberta, sem merge.
+- Android físico não validado; APK debug exportado/verificado via CI no run 45908170050 (não equivale a teste em aparelho).
+
+
+- **Android export CI:** run 45907688455 SUCCESS; APK debug exportado, verificado e enviado como artefato. Não equivale a teste em aparelho físico.
+
+
+### SYS-003 — revalidação final da PR #58
+
+- Head `97f0eeed54f722e3d83701928ab5a61dd55d3731`; PR #58 OPEN, sem merge.
+- Godot Validation #215 / run `45909374538`: **93 testes / 1.787 verificações / 0 falhas**.
+- SceneFlow: 30 ciclos para menu, abertura, tutorial, W1-L1 e W1-L2; **150 transições / 1.202 verificações**.
+- Cold boot verbose exit 0; smoke 20/20; mutação sem prewarm reproduz o erro de parse original.
+- Docs Validation #396 / run `45909374561`: SUCCESS.
+- Android Debug Export #103 / run `45909374622`: SUCCESS; APK debug exportado, verificado e enviado como artifact.
+- Android físico/emulador não testado; não declarar FPS, RAM, touch ou estabilidade térmica validados.
+
+
+
+### SYS-003 — atualização do head atual PR #58
+
+- Head `63a28d9`; Godot Validation `45909667893`: 93 testes / 1.787 verificações / 0 falhas.
+- SceneFlow: 150 transições em cinco cenas / 1.202 verificações; cold boot 20/20; mutação sem prewarm reproduz Parse Error original.
+- Android Debug Export `45909667948`: SUCCESS; export CI comprovado, sem execução em aparelho.
