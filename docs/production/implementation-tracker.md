@@ -31,7 +31,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-004 | Input abstrato e multitouch | Em andamento | `TouchControls`/`TouchButton` rastreiam ponteiros independentes; `ActionBuffer` limpa edges em pausa/suspensão/perda de foco. PR #39 e PR #42 integradas; branch `test/scene-flow-failure-pause-restoration` acrescenta regressão de restauração de pause state após falha. Teste físico pendente |
 | SYS-005 | BOLT: controller, estados e animação | Em andamento | `BoltPlayer` (GROUNDED/RISING/FALLING/DASHING), vida/dano, knockback, invulnerabilidade e API de cura. Dash preservado. Placeholders e valores provisórios; sem validação física Android |
 | SYS-006 | Movimento, salto, All Jump e dash | Em andamento | Corrida, pulo variável, pulo duplo, coyote, buffer, dash aéreo único (`BoltTuning` provisório). Bot headless completa a sandbox. **Feel não avaliado por humano**; semântica de "All Jump" não confirmada em fonte aprovada — não canonizada |
-| SYS-007 | Câmera e limites de fase | Em andamento | `Camera2D` com suavização, drag margins e limites definidos pela sandbox. Não avaliado visualmente/em aparelho |
+| SYS-007 | Câmera e limites de fase | Em andamento | `Camera2D` nativa com suavização, drag margins, callback físico e limites definidos em W1-L1/W1-L2. Branch `test/camera-contracts` extrai `configure_camera()` e adiciona regressões de rig/limites; CI pendente. Enquadramento, bordas e feel não avaliados visualmente/em aparelho |
 | SYS-008 | Combate, dano e armas | Em andamento | `BoltHealth`, `BoltCombat`, `ChronoProjectile`, `BoltHealthPickup` e `CybercorePatrolEnemy`: Pistola Crono, dano/vida do jogador, invulnerabilidade, knockback, cura limitada, coletável de recuperação e flash de impacto. Tríplice Prisma, Laser Nexo, chefes e balanceamento final pendentes. PR #21: 53 testes, 276 verificações, 0 falhas em Godot 4.7.2 |
 | SYS-009 | Habilidades e cooldowns | Não iniciado | Sem implementação do jogo |
 | SYS-010 | IA e arquétipos de inimigos | Em andamento | `CybercorePatrolEnemy` é um inimigo-base provisório de patrulha e contato em W1-L1. Ainda não é arquétipo canônico; IA avançada, variedade e tuning final pendentes |
@@ -289,3 +289,12 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - Regressões: pausa/retomada da SceneTree na troca real; touch liberado/oculto e restaurado quando a transição falha.
 - Plano: `docs/production/plans/2026-11-26-scene-flow-input-lock.md`.
 - **Estado:** aguardando CI; teste Android físico pendente.
+
+
+## SYS-007 — contratos da câmera 2D (2026-11-26)
+
+- Base: main após PR #43, commit `22923228d2a58c0ee6d75b581d5a16aa70e1a7ef`.
+- Implementação existente: Camera2D nativa, smoothing speed 10, drag margins horizontal/vertical, `limit_smoothed` e callback físico; W1-L1 bounds `(0,-360)-(2200,260)`, W1-L2 `(0,-360)-(1900,260)`.
+- Branch `test/camera-contracts`: extração da aplicação de limites para `configure_camera()` e testes de propriedades do rig e limites por fase.
+- Plano: `docs/production/plans/2026-11-26-camera-contracts.md`.
+- **Estado:** aguardando CI. Headless valida propriedades, não o enquadramento visual ou o comportamento em hardware.
