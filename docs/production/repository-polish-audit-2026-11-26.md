@@ -99,6 +99,9 @@ A fundação não é apenas documental, mas o jogo completo ainda não existe: a
 
 ## 6. Estado de validação desta auditoria
 
+- **Integração:** PR #5 MERGED em `f5fbff8de138bfec395f45a7fef1ad57c45aa37c`.
+- **Docs CI #140:** SUCCESS no HEAD final da PR #5; job de validação documental concluído sem falhas.
+
 - ****Docs CI #137:** SUCCESS na PR #5; job `Validate project documentation`, incluindo `Validate Claude metadata and local links`, concluído sem falhas.
 
 - Inspeção GitHub da árvore recursiva, branches, PRs e arquivos: concluída.
