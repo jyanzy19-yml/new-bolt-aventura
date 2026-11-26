@@ -14,6 +14,11 @@ func _ready() -> void:
 		_status.text = "Erro de configuração: Input Map incompleto."
 		return
 	SceneFlow.transition_failed.connect(_on_transition_failed, CONNECT_ONE_SHOT)
+	# Não iniciar o primeiro carregamento threaded dentro do mesmo ciclo de _ready
+	# da cena principal. A barreira de um frame permite concluir a inicialização da árvore.
+	await get_tree().process_frame
+	if not is_inside_tree():
+		return
 	SceneFlow.change_scene(MAIN_MENU_PATH)
 
 
