@@ -28,11 +28,11 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-001 | Projeto Godot e versão fixada | Implementado | `project.godot`, `.godot-version` = 4.7.2. Evidência L2: `--headless --import` sem erros; `tests/test_runner.gd` 0 falhas (Godot 4.7.2 headless, Linux). Não validado em editor gráfico nem Android. Ver [06-godot-project-foundation.md](../technical/06-godot-project-foundation.md) |
 | SYS-002 | Configuração Android, paisagem e renderer | Implementado | Orientação 4 (sensor landscape), viewport 960×540 (provisório), GL Compatibility (provisório), preset Android com `screen/immersive_mode=true` (ADR-0003), sem segredos; verificado por `tests/unit/test_project_config.gd`. **Export Android NÃO executado** (sem SDK/templates); nenhum APK; nada validado em aparelho |
 | SYS-003 | Arquitetura, cenas e recursos compartilhados | Em andamento | Existem: boot, menu, autoload `SceneFlow` (thread, `use_accumulated_input=false`), `Actions`, `SafeAreaMargin`, `BoltTuning` (Resource), `PlatformBlock`, HUD. Testado só em headless. Faltam inimigos, mundos, save, áudio e demais contratos |
-| SYS-004 | Input abstrato e multitouch | Em andamento | `TouchControls`/`TouchButton` rastreiam ponteiros independentes; reatribuição defensiva do mesmo índice agora libera a ação anterior. Regressão `test_reused_pointer_id_releases_previous_action`; suíte de 42 testes executada no CI Godot 4.7.2 (L2). `ActionBuffer` usa ticks de física. **Layout/tamanhos provisórios; toque físico NÃO EXECUTADO** |
+| SYS-004 | Input abstrato e multitouch | Em andamento | `TouchControls`/`TouchButton` rastreiam ponteiros independentes; botão TIRO adicionado ao HUD e `ActionBuffer` agora rastreia ATTACK. Regressão para toque curto de ataque adicionada; toque físico NÃO EXECUTADO |
 | SYS-005 | BOLT: controller, estados e animação | Em andamento | `BoltPlayer` (GROUNDED/RISING/FALLING/DASHING) + placeholders. ~11 testes headless. Sem animação final, dano, wall slide/jump. Valores provisórios; não validado em aparelho |
 | SYS-006 | Movimento, salto, All Jump e dash | Em andamento | Corrida, pulo variável, pulo duplo, coyote, buffer, dash aéreo único (`BoltTuning` provisório). Bot headless completa a sandbox. **Feel não avaliado por humano**; semântica de "All Jump" não confirmada em fonte aprovada — não canonizada |
 | SYS-007 | Câmera e limites de fase | Em andamento | `Camera2D` com suavização, drag margins e limites definidos pela sandbox. Não avaliado visualmente/em aparelho |
-| SYS-008 | Combate, dano e armas | Não iniciado | Sem implementação do jogo |
+| SYS-008 | Combate, dano e armas | Em andamento | `BoltHealth`, `ChronoProjectile` e `BoltCombat` implementam vida/dano e o disparo básico provisório da Pistola Crono; botão TIRO no HUD touch; alvo estático de treinamento usado no tutorial. Tríplice Prisma, Laser Nexo, dano ao jogador, inimigos com IA e balanceamento final ainda não implementados |
 | SYS-009 | Habilidades e cooldowns | Não iniciado | Sem implementação do jogo |
 | SYS-010 | IA e arquétipos de inimigos | Não iniciado | Sem implementação do jogo |
 | SYS-011 | Chefes e arenas | Não iniciado | Sem implementação do jogo |
@@ -42,7 +42,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-015 | Save/load, versão e recuperação | Não iniciado | Sem implementação do jogo |
 | SYS-016 | Inventário, moedas, melhorias e skins | Não iniciado | Sem implementação do jogo |
 | SYS-017 | Menus, HUD, pausa e configurações | Em andamento | Menu inicial e HUD de sandbox com pausa/resultado existem; controles touch e safe area parcial. Configurações completas e fluxos finais ausentes. Headless apenas; sem validação visual/Android |
-| SYS-018 | Cutscenes, legendas e replay/pulo | Em andamento | Storyboard funcional de quatro páginas e avanço/pulo para tutorial; tutorial jogável guiado por robô mensageiro (texto instrucional provisório). Sem animação final, áudio ou replay persistente |
+| SYS-018 | Cutscenes, legendas e replay/pulo | Em andamento | Storyboard funcional de quatro páginas e avanço/pulo para tutorial; tutorial jogável guiado por robô mensageiro (texto instrucional provisório), incluindo ataque básico da Pistola Crono contra alvo de treinamento. Seleção de armas, animação final, áudio e replay persistente pendentes |
 | SYS-019 | Áudio, música, buses e opções | Não iniciado | Sem implementação do jogo |
 | SYS-020 | Loading, transições e gestão de memória | Em andamento | `SceneFlow` usa carregamento threaded, bloqueia transições concorrentes e sinaliza sucesso/falha; testado headless. Gestão abrangente de memória/preload ainda não implementada |
 | SYS-021 | Pipeline de assets e proveniência | Não iniciado | Pipeline do jogo a estabelecer |
@@ -127,3 +127,14 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - Tutorial introduz movimento, salto e Dash com o player/HUD/touch existentes. Textos instrucionais são provisórios e não definem a personalidade do mensageiro.
 - W1-L1 permanece Em andamento; inimigos, combate, assets/áudio finais, save/load e QA Android continuam pendentes.
 - Teste de runtime novo: `tests/unit/test_campaign_entry.gd`; verifica storyboard, progressão de etapas do tutorial e contratos de W1-L1; PR #15 integrada em `783c1d2`; Godot CI #56 e Docs CI #175 SUCCESS (44 testes, 205 verificações, 0 falhas). CI pós-merge #57/#176 em execução.
+
+
+## Combate básico — branch `feat/chrono-pistol-combat-core`
+
+- `BoltHealth`: vida reutilizável com redução limitada a zero e sinal de esgotamento.
+- `BoltCombat`: consome ATTACK pelo `ActionBuffer` e instancia `ChronoProjectile` da Pistola Crono.
+- Botão touch TIRO adicionado ao HUD; ação ATTACK passa a ser bufferizada como salto/dash.
+- `BoltTrainingTarget` é alvo estático de treino, não um arquétipo de inimigo da campanha.
+- Tutorial agora ensina mover → saltar → Dash → acertar o alvo com TIRO antes de liberar Cybercore.
+- Cadência, velocidade, dano e alcance são parâmetros de protótipo; não representam balanceamento aprovado. Tríplice Prisma, Laser Nexo, seleção de armas, IA inimiga e dano/vida de BOLT permanecem pendentes.
+- Testes novos: `test_combat_core.gd`, regressão de buffer ATTACK e extensão de `test_campaign_entry.gd`; CI pendente.
