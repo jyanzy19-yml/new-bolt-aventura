@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate BOLT's project guidance, Claude Code metadata and local Markdown links."""
+"""Validate BOLT project guidance, Claude Code metadata and local Markdown links."""
 from __future__ import annotations
 
 import re
@@ -34,12 +34,16 @@ def frontmatter(path: Path) -> tuple[dict[str, str], str]:
     return fields, content
 
 
-def check_claude_files(folder: str, required: tuple[str, ...]) -> int:
+def claude_files(folder: str) -> list[Path]:
     base = ROOT / folder
     if not base.exists():
         WARNINGS.append(f"{folder}: directory not present")
-        return 0
-    files = sorted(base.rglob("SKILL.md")) if folder.endswith("/skills") else sorted(base.rglob("*.md"))
+        return []
+    return sorted(base.rglob("SKILL.md")) if folder.endswith("/skills") else sorted(base.rglob("*.md"))
+
+
+def check_claude_files(folder: str, required: tuple[str, ...]) -> int:
+    files = claude_files(folder)
     for path in files:
         fields, _ = frontmatter(path)
         for key in required:
@@ -50,12 +54,57 @@ def check_claude_files(folder: str, required: tuple[str, ...]) -> int:
     return len(files)
 
 
+def check_unique_metadata(folder: str, key: str) -> int:
+    seen: dict[str, Path] = {}
+    checked = 0
+    for path in claude_files(folder):
+        fields, _ = frontmatter(path)
+        value = fields.get(key, "")
+        if not value:
+            continue
+        checked += 1
+        if value in seen:
+            ERRORS.append(
+                f"{path.relative_to(ROOT)}: duplicate {key} '{value}' "
+                f"(also in {seen[value].relative_to(ROOT)})"
+            )
+        else:
+            seen[value] = path
+        if folder.endswith("/agents"):
+            tools_value = fields.get("tools", "")
+            allowed = {"Read", "Grep", "Glob"}
+            declared = {item.strip() for item in tools_value.split(",") if item.strip()}
+            if not declared or not declared.issubset(allowed):
+                ERRORS.append(
+                    f"{path.relative_to(ROOT)}: advisory agent must remain read-only; "
+                    f"allowed tools are Read, Grep, Glob (found '{tools_value}')"
+                )
+    return checked
+
+
+def check_required_files() -> None:
+    required = (
+        ".claude/skills/router/SKILL.md",
+        ".claude/skills/bolt-godot-debugging/SKILL.md",
+        ".claude/skills/bolt-regression-engineering/SKILL.md",
+        ".claude/skills/bolt-android-release-readiness/SKILL.md",
+        ".claude/agents/godot-integration-reviewer.md",
+        ".claude/agents/android-release-auditor.md",
+        ".claude/agents/persistence-integrity-auditor.md",
+        "docs/production/COLLABORATION_STATE.md",
+        "docs/production/AGENT_ACCESS_SETUP.md",
+        "docs/production/HANDOFF_TEMPLATE.md",
+    )
+    for relative in required:
+        if not (ROOT / relative).is_file():
+            ERRORS.append(f"Required project file is missing: {relative}")
+
+
 def check_markdown_links() -> int:
     candidates = [ROOT / "README.md", ROOT / "CLAUDE.md", ROOT / "AGENTS.md", ROOT / "MASTER_DIRECTIVE.md"]
-    for folder in ("docs",):
-        base = ROOT / folder
-        if base.exists():
-            candidates.extend(base.rglob("*.md"))
+    base = ROOT / "docs"
+    if base.exists():
+        candidates.extend(base.rglob("*.md"))
     checked = 0
     pattern = re.compile(r"(?<!!)\[[^\]]*\]\(([^)]+)\)")
     for source in sorted(set(candidates)):
@@ -67,8 +116,7 @@ def check_markdown_links() -> int:
             parsed = urlsplit(target)
             if parsed.scheme or target.startswith("//") or not parsed.path:
                 continue
-            local = unquote(parsed.path)
-            resolved = (source.parent / local).resolve()
+            resolved = (source.parent / unquote(parsed.path)).resolve()
             try:
                 resolved.relative_to(ROOT.resolve())
             except ValueError:
@@ -85,29 +133,28 @@ def main() -> int:
     agents = check_claude_files(".claude/agents", ("name", "description"))
     commands = check_claude_files(".claude/commands", ("description",))
     links = check_markdown_links()
+    unique_skills = check_unique_metadata(".claude/skills", "name")
+    unique_agents = check_unique_metadata(".claude/agents", "name")
 
-    if skills < 35:
-        ERRORS.append(f"Expected at least 35 skills in the current baseline; found {skills}")
-    if agents < 8:
-        ERRORS.append(f"Expected at least 8 specialist agents in the current baseline; found {agents}")
+    if skills < 39:
+        ERRORS.append(f"Expected at least 39 skills in the current baseline; found {skills}")
+    if agents < 11:
+        ERRORS.append(f"Expected at least 11 specialist agents in the current baseline; found {agents}")
     if commands < 6:
         ERRORS.append(f"Expected at least 6 BOLT workflow commands; found {commands}")
 
-    required_collaboration_docs = (
-        "docs/production/COLLABORATION_STATE.md",
-        "docs/production/AGENT_ACCESS_SETUP.md",
-        "docs/production/HANDOFF_TEMPLATE.md",
-    )
-    for relative in required_collaboration_docs:
-        if not (ROOT / relative).is_file():
-            ERRORS.append(f"Required collaboration document is missing: {relative}")
+    check_required_files()
 
     docs_index = read(ROOT / "docs/README.md")
     if r"## Skills e agentes\n" in docs_index:
         ERRORS.append("docs/README.md: literal escaped newline found in Skills section")
 
     print("BOLT documentation validation")
-    print(f"Skills: {skills} | Agents: {agents} | Commands: {commands} | Local Markdown links: {links}")
+    print(
+        f"Skills: {skills} ({unique_skills} unique) | "
+        f"Agents: {agents} ({unique_agents} unique, read-only) | "
+        f"Commands: {commands} | Local Markdown links: {links}"
+    )
     for warning in WARNINGS:
         print(f"WARNING: {warning}")
     for error in ERRORS:
