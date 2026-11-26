@@ -37,8 +37,8 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 ## Skills e agentes
 
 - [Catálogo de skills](skills-catalog.md) — conjunto selecionado, regras de carregamento e proveniência.
-- Skills Claude Code: .claude/skills/; carregar apenas as necessárias.
-- Agentes consultivos: .claude/agents/.
+- **39 skills Claude Code:** `.claude/skills/`; carregar apenas as necessárias. Inclui diagnóstico Godot, engenharia de regressão e prontidão de release Android.
+- **11 agentes consultivos read-only:** `.claude/agents/`; incluem revisão de integração Godot, release Android e integridade de persistência.
 
 ## Engenharia
 
