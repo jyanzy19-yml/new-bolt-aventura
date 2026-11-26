@@ -44,3 +44,4 @@ O menu anterior oferecia apenas Nova Jornada e sempre encaminhava o jogador à a
 - Godot CI pré-merge `45862187355` e pós-merge `45862459941`: SUCCESS, Godot 4.7.2, 66 testes, 404 verificações, 0 falhas em ambos.
 - Docs CI pré-merge `45862187418` e pós-merge `45862459947`: SUCCESS.
 - Limites não cobertos: validação visual, Android físico, encerramento forçado e performance.
+\n\n## Emenda de escopo — PR #34 / ADR-0006\n\nEste ADR foi escrito antes da criação de W1-L2. A PR #34 integrou a segunda fase de Cybercore e estendeu o mapa de retomada: Continuar aceita W1-L1 e W1-L2 quando o ID salvo corresponde a uma cena existente. A conclusão de W1-L1 define W1-L2 como destino persistido e a ação PRÓXIMA FASE efetua a transição. A conclusão de W1-L2 mantém W1-L2 como destino revisável; W1-L3 não é inferida. Ver [ADR-0006](ADR-0006-campaign-progress-w1-l2.md).\n
