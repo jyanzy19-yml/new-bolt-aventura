@@ -33,4 +33,6 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("apply_damage"):
 		body.call("apply_damage", damage)
+	Burst.spawn(get_parent(), global_position, Color(0.4, 0.95, 1.0, 1.0), 6, 110.0, 0.2,
+			Vector2(-float(_direction), 0.0), 150.0, 6.0, 0.0)
 	queue_free()

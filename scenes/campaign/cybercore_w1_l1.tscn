@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/campaign/cybercore_w1_l1.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/world/platform_block.tscn" id="2_block"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/cybercore_patrol_enemy.tscn" id="6_enemy"]
 [ext_resource type="PackedScene" path="res://scenes/combat/bolt_health_pickup.tscn" id="7_pickup"]
 
+[ext_resource type="PackedScene" path="res://scenes/world/cybercore_backdrop.tscn" id="99_backdrop"]
+
 [sub_resource type="RectangleShape2D" id="KillShape"]
 size = Vector2(2800, 180)
 
@@ -16,6 +18,8 @@ size = Vector2(72, 128)
 
 [node name="CybercoreW1L1" type="Node2D"]
 script = ExtResource("1_level")
+
+[node name="Backdrop" parent="." instance=ExtResource("99_backdrop")]
 
 [node name="Geometry" type="Node2D" parent="."]
 

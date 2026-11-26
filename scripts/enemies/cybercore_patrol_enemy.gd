@@ -34,6 +34,7 @@ func apply_damage(amount: int) -> void:
 		return
 	_hit_flash_left = hit_flash_duration
 	_visual.color = Color(1.0, 0.92, 0.48, 1.0)
+	Burst.spawn(get_parent(), global_position, Color(1.0, 0.92, 0.48, 1.0), 7, 140.0, 0.28, Vector2.UP, 200.0, 6.0, 160.0)
 	hit_received.emit(_health.current_health)
 
 
@@ -64,5 +65,6 @@ func _on_depleted() -> void:
 	if not _active:
 		return
 	_active = false
+	Burst.spawn(get_parent(), global_position, Color(1.0, 0.45, 0.25, 1.0), 20, 240.0, 0.55, Vector2.UP, 320.0, 9.0, 220.0)
 	defeated.emit()
 	queue_free()

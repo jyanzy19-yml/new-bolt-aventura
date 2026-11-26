@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/campaign/cybercore_w1_l2.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/world/platform_block.tscn" id="2_block"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
 [ext_resource type="PackedScene" path="res://scenes/levels/checkpoint.tscn" id="5_checkpoint"]
 [ext_resource type="PackedScene" path="res://scenes/levels/timed_energy_gate.tscn" id="6_gate"]
+
+[ext_resource type="PackedScene" path="res://scenes/world/cybercore_backdrop.tscn" id="99_backdrop"]
 
 [sub_resource type="RectangleShape2D" id="KillShape"]
 size = Vector2(2600, 180)
@@ -15,6 +17,8 @@ size = Vector2(72, 128)
 
 [node name="CybercoreW1L2" type="Node2D"]
 script = ExtResource("1_level")
+
+[node name="Backdrop" parent="." instance=ExtResource("99_backdrop")]
 
 [node name="Geometry" type="Node2D" parent="."]
 
