@@ -609,6 +609,7 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Main base: `22923228d2a58c0ee6d75b581d5a16aa70e1a7ef` (PR #43 integrada).
 - PR #43: Godot `45884348999` SUCCESS — 78 testes/484 verificações/0 falhas; Docs `45884348954` SUCCESS; Android Export `45884348969` SUCCESS.
 - PR #43 artifact: `bolt-aventura-android-debug-b6bf765bccdb80c2de0512655208060ab2fc1480`, APK 28.456.143 bytes, SHA-256 `3dc8eba90dc3f914b1db725f50fbdc38bee9a16dee2c38d95b05f476a41cb212`.
+- PR #43 pós-merge main: Godot `45884671403`, Docs `45884671584`, Android export `45884671259` SUCCESS; artifact main `bolt-aventura-android-debug-22923228d2a58c0ee6d75b581d5a16aa70e1a7ef`, APK 28.456.143 bytes, SHA-256 `3fc5ea209e88a69b3b33a7de9360dbc42d38dae9a2734eb38e103ab7f2478661`.
 - Achado: Camera2D já usa rig nativo com smoothing/drag e limites W1-L1/W1-L2; faltavam testes dedicados.
 - Branch `test/camera-contracts`: extrai `configure_camera()` nos scripts de fase e testa smoothing, margins, callback físico e limites por fase.
 - Plano: `docs/production/plans/2026-11-26-camera-contracts.md`.
