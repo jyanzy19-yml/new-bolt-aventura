@@ -27,7 +27,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 |---|---|---|---|
 | SYS-001 | Projeto Godot e versão fixada | Implementado | `project.godot`, `.godot-version` = 4.7.2. Evidência L2: `--headless --import` sem erros; `tests/test_runner.gd` 0 falhas (Godot 4.7.2 headless, Linux). Não validado em editor gráfico nem Android. Ver [06-godot-project-foundation.md](../technical/06-godot-project-foundation.md) |
 | SYS-002 | Configuração Android, paisagem e renderer | Implementado | Orientação 4 (sensor landscape), viewport 960×540 (provisório), GL Compatibility (provisório), preset Android com `screen/immersive_mode=true` (ADR-0003), sem segredos; verificado por `tests/unit/test_project_config.gd`. **Export Android NÃO executado** (sem SDK/templates); nenhum APK; nada validado em aparelho |
-| SYS-003 | Arquitetura, cenas e recursos compartilhados | Em andamento | Existem: boot, menu, autoload `SceneFlow` (thread, `use_accumulated_input=false`), `Actions`, `SafeAreaMargin`, `BoltTuning` (Resource), `PlatformBlock`, HUD. Testado só em headless. Faltam inimigos, mundos, save, áudio e demais contratos |
+| SYS-003 | Arquitetura, cenas e recursos compartilhados | Em andamento | Existem: boot, menu, autoload `SceneFlow`, `SaveSystem` (armazenamento versionado de baixo nível, em revisão), `Actions`, `SafeAreaMargin`, `BoltTuning`, `PlatformBlock` e HUD. Save ainda não está conectado ao domínio da campanha; demais contratos pendentes |
 | SYS-004 | Input abstrato e multitouch | Em andamento | `TouchControls`/`TouchButton` rastreiam ponteiros independentes; botão TIRO adicionado ao HUD e `ActionBuffer` agora rastreia ATTACK. Regressão para toque curto de ataque adicionada; toque físico NÃO EXECUTADO |
 | SYS-005 | BOLT: controller, estados e animação | Em andamento | `BoltPlayer` (GROUNDED/RISING/FALLING/DASHING), vida/dano, knockback, invulnerabilidade e API de cura. Dash preservado. Placeholders e valores provisórios; sem validação física Android |
 | SYS-006 | Movimento, salto, All Jump e dash | Em andamento | Corrida, pulo variável, pulo duplo, coyote, buffer, dash aéreo único (`BoltTuning` provisório). Bot headless completa a sandbox. **Feel não avaliado por humano**; semântica de "All Jump" não confirmada em fonte aprovada — não canonizada |
@@ -39,14 +39,14 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-012 | NPCs, interação, diálogo e flags | Não iniciado | Sem implementação do jogo |
 | SYS-013 | Objetivos, colecionáveis e fragmentos | Não iniciado | Sem implementação do jogo |
 | SYS-014 | Checkpoints, respawn e progressão | Em andamento | `BoltCheckpoint` (`scenes/levels/checkpoint.tscn`, `scripts/levels/bolt_checkpoint.gd`) ativa uma vez e atualiza o respawn da sandbox; teste `test_checkpoint_updates_respawn_target_once` adicionado. Estado apenas em memória durante a sessão; SaveSystem/persistência e fases da campanha ainda não implementados. Godot CI #50 SUCCESS no merge `09317a2c1b7c1113e7ff2f142a82b495998f7578`: 43 testes, 179 verificações, 0 falhas |
-| SYS-015 | Save/load, versão e recuperação | Não iniciado | Sem implementação do jogo |
+| SYS-015 | Save/load, versão e recuperação | Em andamento | `scripts/core/save_system.gd` + autoload `SaveSystem`: envelope JSON v1, SHA-256, validação de payload, escrita temporária/backup/recuperação. Testes `tests/unit/test_save_system.gd` em CI. Ainda sem modelo de dados da campanha, migrações ou integração com checkpoint/progressão |
 | SYS-016 | Inventário, moedas, melhorias e skins | Não iniciado | Sem implementação do jogo |
 | SYS-017 | Menus, HUD, pausa e configurações | Em andamento | Menu inicial e HUD de sandbox com pausa/resultado existem; controles touch e safe area parcial. Configurações completas e fluxos finais ausentes. Headless apenas; sem validação visual/Android |
 | SYS-018 | Cutscenes, legendas e replay/pulo | Em andamento | Storyboard funcional de quatro páginas e avanço/pulo para tutorial; tutorial jogável guiado por robô mensageiro (texto instrucional provisório), incluindo ataque básico da Pistola Crono contra alvo de treinamento. Seleção de armas, animação final, áudio e replay persistente pendentes |
 | SYS-019 | Áudio, música, buses e opções | Não iniciado | Sem implementação do jogo |
 | SYS-020 | Loading, transições e gestão de memória | Em andamento | `SceneFlow` usa carregamento threaded, bloqueia transições concorrentes e sinaliza sucesso/falha; testado headless. Gestão abrangente de memória/preload ainda não implementada |
 | SYS-021 | Pipeline de assets e proveniência | Não iniciado | Pipeline do jogo a estabelecer |
-| SYS-022 | Testes automatizados e regressão | Em andamento | Workflow Godot 4.7.2 executa import + `tests/test_runner.gd`. PR #21: 53 testes, 276 verificações, 0 falhas (run `45849915250`). Cobertura ainda não equivale a QA visual ou Android físico |
+| SYS-022 | Testes automatizados e regressão | Em andamento | Workflow Godot 4.7.2 executa import + `tests/test_runner.gd`; main PR #26: 54 testes, 304 verificações, 0 falhas. Nova cobertura do SaveSystem em branch; CI pendente. Headless não equivale a QA visual ou Android físico |
 | SYS-023 | Exportação, instalação e QA Android | Não iniciado | Sem APK/build verificada |
 | SYS-024 | Créditos, encerramento e release candidate | Não iniciado | Sem campanha implementada |
 
@@ -56,7 +56,7 @@ A matriz define a estrutura planejada: seis fases por mundo; fases 1–5 de prog
 
 | ID | Mundo | Função planejada | Status inicial | Evidência |
 |---|---|---|---|---|
-| W1-L1 | Cybercore | Entrada e exploração | Em andamento | Blockout com BOLT, HUD/touch, checkpoint, inimigo-base provisório, Pistola Crono, dano/vida, coletável de cura e objetivo de trecho. Arte/áudio finais, save e validação Android pendentes |
+| W1-L1 | Cybercore | Entrada e exploração | Em andamento | Blockout com BOLT, HUD/touch, checkpoint local, inimigo-base provisório, Pistola Crono, dano/vida, coletável de cura e objetivo de trecho. SaveSystem de baixo nível em desenvolvimento, ainda não integrado ao checkpoint/campanha; arte/áudio finais e validação Android pendentes |
 | W1-L2 | Cybercore | Progressão | Não iniciado | Sem cena |
 | W1-L3 | Cybercore | Progressão | Não iniciado | Sem cena |
 | W1-L4 | Cybercore | Combinação de mecânicas | Não iniciado | Sem cena |
@@ -193,3 +193,12 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - Godot CI pré-merge `45855625278` SUCCESS: 54 testes, 304 verificações, 0 falhas. Docs CI pré-merge `45855625442` SUCCESS.
 - CI pós-merge main Godot `45855795164` SUCCESS: 54 testes, 304 verificações, 0 falhas; Docs `45855795173` SUCCESS.
 - W1-L1 segue **Em andamento**; critérios pendentes incluem persistência de campanha/save-load, conteúdo final, playtest e QA Android.
+
+
+## SYS-015 — armazenamento versionado (branch `feat/versioned-save-storage-foundation`)
+
+- `scripts/core/save_system.gd`, autoload `SaveSystem`; arquivo principal `user://bolt_save.json`, temporário e backup.
+- Envelope `format_version=1`, `payload` Dictionary JSON-safe e checksum SHA-256. Tipos runtime (Node/Resource) e chaves que não sejam String são rejeitados.
+- Escrita com temporário e backup; leitura tenta backup após principal ausente/inválido. Versão desconhecida falha fechada. API síncrona deve ser chamada em marcos discretos, nunca por frame.
+- `tests/unit/test_save_system.gd`: round-trip/sobrescrita/delete, backup recovery, versão futura e payload não serializável; CI pendente.
+- Não há modelo de dados de campanha, migração de versão, autosave ou integração com `BoltCheckpoint`. `SYS-014` e W1-L1 permanecem Em andamento.
