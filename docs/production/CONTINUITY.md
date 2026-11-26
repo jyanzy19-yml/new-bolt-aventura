@@ -1,7 +1,7 @@
 ## Snapshot vigente — 2026-11-26
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
-- **Main HEAD:** `66b3c0e060762ebe1f3c4b6af84c84a79f0cd781`. **Última entrega de conteúdo:** PR #34. **Última regressão integrada:** PR #39, limpeza do ActionBuffer. **Última reconciliação documental:** PR #40. **Última infraestrutura integrada:** PR #38. **Último sistema de loading:** PR #41, overlay persistente.
+- **Main HEAD:** `68b677aa7860894928a690861ef63b300f8175fb`. **Última entrega de conteúdo:** PR #34. **Última regressão integrada:** PR #42, bloqueio de input durante loading. **Última reconciliação documental:** PR #40. **Última infraestrutura integrada:** PR #38. **Último sistema de loading:** PR #41, overlay persistente.
 - **PR #33:** MERGED. Expansão de documentação e correção do coletável; CI Godot 66 testes/404 verificações/0 falhas e Docs SUCCESS.
 - **PR #34:** MERGED. Adiciona W1-L2 em blockout, `TimedEnergyGate`, checkpoint e progressão persistente W1-L1→W1-L2.
 - **PR #35:** MERGED. Regressão de contato físico real do campo energético. **PR #36:** feedback de checkpoint W1-L2. **PR #37:** teste físico isolado do coletável e filtro CI para erro de mutação física bloqueada. **PR #38:** pipeline Android debug. **PR #39:** limpeza do ActionBuffer no ciclo de vida.
@@ -10,10 +10,10 @@
 - **PR #35:** Godot CI pré/pós-merge SUCCESS — 69 testes/439 verificações/0 falhas (`45873118202`, `45873234656`).
 - **Escritor ativo:** ChatGPT, seguindo a diretriz vigente do usuário. Não iniciar trabalho concorrente de Claude.
 - **Dash:** decisão canônica aprovada; deve permanecer no jogo conforme `docs/production/ADR-001-DASH.md`. Referências documentais antigas que ainda dizem “pendente” estão sendo reconciliadas nesta unidade.
-- **Branch atual:** `fix/scene-flow-input-lock`; pausa da simulação e bloqueio de input em transições.
+- **Branch atual:** `test/scene-flow-failure-pause-restoration`; cobertura do retorno ao pause state anterior quando o carregamento falha.
 - **Unidade integrada:** `TimedEnergyGate`, cena/script `cybercore_w1_l2`, botão PRÓXIMA FASE na conclusão W1-L1, destino salvo W1-L2, retomada de W1-L1/W1-L2 e regressões.
 - **Limites:** W1-L2 é blockout/protótipo de mecânica, não conteúdo final; ciclo, dano e percurso precisam de playtest. APK debug exportado em CI, mas não instalado; Android físico, touch físico e profiling continuam pendentes.
-- **Próximo passo:** validar e integrar o bloqueio integral de input; depois retomar a auditoria da Etapa 01/02 e a vertical slice.
+- **Próximo passo:** validar a regressão de restauração em falha; depois avançar para câmera e construção da próxima parte da vertical slice.
 
 ---
 
@@ -588,3 +588,15 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Branch `fix/scene-flow-input-lock`: pausa SceneTree, mantém SceneFlow/LoadingOverlay processando, oculta controles touch, ignora pausa no HUD durante transição, retoma após sucesso e restaura estado de pausa em falha.
 - Plano: `docs/production/plans/2026-11-26-scene-flow-input-lock.md`.
 - **Estado:** implementação escrita; aguardando Godot/Docs CI. Sem teste físico Android.
+
+
+---
+
+## Sessão ChatGPT — regressão de restauração após falha de transição — 2026-11-26
+
+- Main base: `68b677aa7860894928a690861ef63b300f8175fb` (PR #42 integrada).
+- PR #42: Godot `45883759266` SUCCESS — 77 testes/479 verificações/0 falhas; Docs `45883759252` SUCCESS; Android Debug Export `45883759260` SUCCESS.
+- APK da PR #42: artifact `bolt-aventura-android-debug-b5f277107f2c590ef5401cd24c0d15e7f0a6468b`, SHA-256 `976b83d44abb50a7c545e8943b3f5b89ebfbb98ef364eb3a3da9224f0fb79f2c`.
+- Achado: a restauração do pause state em sucesso estava coberta; o ramo de falha ainda não tinha teste direto.
+- Branch `test/scene-flow-failure-pause-restoration`: regressões para origem pausada e despausada.
+- **Estado:** teste escrito; aguardando CI.
