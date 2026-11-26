@@ -87,7 +87,8 @@ func is_level_completed(level_id: String) -> bool:
 	if level_id.is_empty():
 		return false
 	var state: Dictionary = load_state()
-	return (state.get("completed_level_ids", []) as Array).has(level_id)
+	var completed: Variant = state.get("completed_level_ids", [])
+	return typeof(completed) == TYPE_ARRAY and completed.has(level_id)
 
 
 func _persist_state(state: Dictionary) -> bool:
