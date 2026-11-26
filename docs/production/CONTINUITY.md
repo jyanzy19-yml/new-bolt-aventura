@@ -698,3 +698,11 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Alteração de diagnóstico: scripts/core/boot.gd aguarda um process_frame antes de iniciar a primeira carga threaded. A ideia é testar se o request no mesmo ciclo de _ready() é a condição de corrida.
 - Workflow de CI atualizado com três cenários cold-process: (A) menu com identificadores diretos e barreira mantida; (B) boot sem barreira e menu runtime; (C) combinação pré-correção. O cenário combinado precisa reproduzir especificamente o erro de parse; a implementação corrigida deve passar 20 boots independentes.
 - **Não validado ainda:** causa raiz, eficácia da barreira, mutation matrix, 20 boots e Android físico. Aguardando nova execução do workflow.
+
+
+### Hipótese de diagnóstico revisada — prewarm de script
+
+- Godot Validation #180 confirmou que a barreira de um frame em Boot não corrigiu o erro; essa alteração foi removida.
+- Nova implementação candidata: Boot carrega main_menu.gd sincronamente na thread principal antes de SceneFlow iniciar o carregamento threaded da PackedScene. É um prewarm de um recurso de script pequeno, não um carregamento síncrono da cena inteira.
+- A CI agora roda 20 boots da implementação corrigida antes das mutações e depois compara: (A) sem prewarm; (B) autoloads diretos com prewarm; (C) combinação original sem prewarm e com autoloads diretos. A combinação C precisa reproduzir o erro; o smoke fixo precisa passar 20/20.
+- Ainda não declarar causa raiz ou correção até os resultados desta nova matriz.
