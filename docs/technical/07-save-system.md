@@ -16,7 +16,7 @@
 - Ausência de arquivo retorna Dictionary vazio sem erro.
 - Versão desconhecida, format_version fracionário/textual, JSON inválido, payload inválido ou checksum divergente falham de forma fechada e deixam a causa em `last_error`.
 - Escrita: arquivo temporário, preservação do anterior como backup, promoção do novo arquivo e restauração do backup se a promoção falhar. Antes de qualquer rotação/limpeza, a escrita inspeciona principal, temporário e backup; se algum envelope declarar versão não suportada, a operação falha sem modificar esses arquivos.
-- Leitura prioriza principal válido; se o principal estiver ausente/inválido, tenta um temporário completo e o promove ao principal (`last_error = "recovered_temp"`), depois tenta o backup (`last_error = "recovered_backup"`). Um principal ou temporário com versão não suportada bloqueia fallback para cópias mais antigas, evitando downgrade silencioso.
+- Leitura prioriza principal válido; se o principal estiver ausente/inválido, tenta um temporário completo e o promove ao principal (`last_error = "recovered_temp"`), depois tenta o backup (`last_error = "recovered_backup"`). Um envelope de qualquer slot (principal, temporário ou backup) com versão não suportada bloqueia a seleção de uma cópia, evitando downgrade silencioso.
 - A API é síncrona e deve ser chamada apenas em marcos discretos (checkpoint, conclusão ou opções), nunca no caminho por frame.
 
 ## Propriedade e integração
