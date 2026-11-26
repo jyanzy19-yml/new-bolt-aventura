@@ -70,3 +70,9 @@ Escopo: somente apresentação e feedback. Mecânicas, tuning, Dash, controles t
 - **Achados residuais de severidade baixa:** direção de arte e parâmetros de efeitos continuam explicitamente provisórios; os arquivos `.uid` gerados aumentam o ruído do diff, mas não constituem defeito funcional. Não há áudio nem alterações de level design, conforme limitações declaradas.
 - **Canon/escopo:** nenhuma alteração de canon, mecânica, Dash, Input Map, touch/multitouch, dano, save, boot ou progressão.
 - **Status:** S2 FECHADO por evidência de teste e mutação nesta branch. PR #57 permanece aberta e não integrada.
+
+
+
+### Repetição final da mutação S2 — atualização
+
+- Mutation workflow run `45909945401`: SUCCESS após as atualizações de documentação. A implementação fixa passou a suíte; a mutação do callback antigo reproduziu o erro e fez o teste específico de teardown falhar; o código fixo foi restaurado e a suíte voltou a passar com **103 testes / 672 verificações / 0 falhas**.
