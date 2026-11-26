@@ -18,10 +18,6 @@ var _restart_path: String = ""
 var _result_next_path: String = ""
 
 
-func _scene_flow() -> Node:
-	return get_node_or_null("/root/SceneFlow")
-
-
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_pause_overlay.visible = false
@@ -31,18 +27,13 @@ func _ready() -> void:
 	%ResultMenuButton.pressed.connect(_go_to_menu)
 	_again_button.pressed.connect(_restart)
 	_progress_notification_timer.timeout.connect(_on_progress_notification_timeout)
-	var flow: Node = _scene_flow()
-	if flow != null:
-		flow.connect("transition_started", Callable(self, "_on_scene_transition_started"))
-		flow.connect("transition_failed", Callable(self, "_on_scene_transition_failed"))
-	else:
-		push_warning("Hud: autoload SceneFlow ausente; transições não serão observadas.")
+	SceneFlow.transition_started.connect(_on_scene_transition_started)
+	SceneFlow.transition_failed.connect(_on_scene_transition_failed)
 
 
 func _exit_tree() -> void:
 	# SceneFlow owns pause restoration while a transition is active.
-	var flow: Node = _scene_flow()
-	if flow != null and not bool(flow.call("is_transitioning")):
+	if not SceneFlow.is_transitioning():
 		get_tree().paused = false
 
 
@@ -59,8 +50,7 @@ func set_restart_path(path: String) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	var flow: Node = _scene_flow()
-	if flow != null and bool(flow.call("is_transitioning")):
+	if SceneFlow.is_transitioning():
 		return
 	if event.is_action_pressed(Actions.PAUSE, false) and not _result_overlay.visible:
 		set_paused(not get_tree().paused)
@@ -139,4 +129,4 @@ func _leave_to(path: String) -> void:
 	if flow == null:
 		push_error("Hud: autoload SceneFlow ausente.")
 		return
-	flow.call("change_scene", path)
+	flow.change_scene(path)
