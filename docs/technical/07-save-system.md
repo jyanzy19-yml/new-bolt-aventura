@@ -9,7 +9,7 @@
 - Autoload: `SaveSystem`.
 - API: `save_payload(Dictionary) -> bool`, `load_payload() -> Dictionary`, `has_save() -> bool`, `delete_save() -> bool`.
 - Arquivo principal: `user://bolt_save.json`.
-- Envelope: `format_version`, `payload`, `checksum`.
+- Envelope: `format_version`, `payload_json` (string JSON canônico), `checksum`.
 - Versão atual do envelope: 1.
 - Checksum SHA-256 sobre a representação JSON do payload.
 - Tipos permitidos: null, bool, int, float finito, String, Array e Dictionary com chaves String. Nodes, Resources, referências de runtime e tipos não JSON são rejeitados.
