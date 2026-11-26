@@ -1,577 +1,671 @@
-# BOLT · AVENTURA — Master Game Design & Gameplay Directive
+# BOLT · AVENTURA — DIRETRIZ MESTRA DE CRIAÇÃO, PRODUÇÃO E EXECUÇÃO
 
-> **Documento de direção para Claude Code.** Use este arquivo como prompt mestre para conceber, auditar, planejar e implementar a história, os sete mundos, as 42 fases, menus, HUD e gameplay de BOLT · AVENTURA. Ele complementa `CLAUDE.md`, `AGENTS.md` e as bíblias em `docs/game-design/`; não substitui as regras de aprovação, os gates de produção nem a inspeção do projeto real.
+**Edição expandida:** 2.0  
+**Papel:** contrato operacional de direção criativa, design, engenharia e qualidade.  
+**Projeto:** repositório Godot existente; nunca reiniciar do zero.  
+**Autoridade operacional:** ChatGPT é o único escritor ativo até decisão diferente do usuário.
 
-## 0. Missão
+> Esta diretiva amplia o universo, o escopo de design e os critérios de produção. Ela não afirma que conteúdo planejado já esteja implementado. O estado real do jogo é sempre determinado pelo código, cenas, testes, CI e documentos de continuidade do repositório.
 
-Atue como diretor criativo, game designer sênior, level designer, designer narrativo, UX designer e engenheiro de gameplay especializado em jogos 2D de plataforma para Android.
+---
 
-**Crie BOLT · AVENTURA do zero como um projeto Godot 4.x executável e um aplicativo Android completo.** Não presuma que já exista código, cenas ou projeto Godot. Leia e execute também `docs/production/from-zero-implementation-directive.md`; ela define a sequência de implementação, os entregáveis técnicos e a obrigação de prosseguir além da auditoria e do planejamento.
+# PARTE I — MANDATO E MÉTODO
 
-Transforme BOLT · AVENTURA em uma aventura 2D completa, coesa, cinematográfica, tecnicamente sustentável e com identidade própria. O resultado deve apresentar começo, desenvolvimento, clímax e conclusão; sete mundos distintos; 42 fases planejadas; chefes memoráveis; progressão significativa; combate e movimentação responsivos; menus profissionais; tutorial jogável; narrativa integrada ao gameplay; e experiência cuidadosamente adaptada a telas touch em paisagem.
+## 1. Missão superior
 
-**Não se limite a produzir documentação bonita ou protótipos isolados.** Projete sistemas que possam ser implementados, testados, integrados e mantidos. Ao mesmo tempo, não declare conteúdo implementado quando existir apenas como planejamento.
+Desenvolver BOLT · AVENTURA como um jogo 2D de plataforma, ação e aventura com identidade autoral, progressão inteligível, narrativa emocional, combate legível, controles touch robustos e arquitetura sustentável. O objetivo não é maximizar a quantidade de sistemas; é construir uma experiência integrada na qual cada mecânica, personagem, ambiente, recompensa e cena tenha propósito verificável.
 
-## 1. Hierarquia de autoridade e proteção do canon
+A produção deve evoluir continuamente o projeto existente em Godot 4.7.2, preservando decisões aprovadas, evitando regressões e priorizando uma vertical slice real antes de multiplicar conteúdo. O alvo é um aplicativo Android empacotado em paisagem, com atenção especial a aparelhos de aproximadamente 4 GB de RAM e SoC de classe Helio G99 ou inferior. Não tratar navegador como plataforma de produto.
 
-Antes de trabalhar, leia `CLAUDE.md`, `AGENTS.md`, este documento, o índice `docs/README.md`, as bíblias relevantes, as decisões e o status da etapa.
+## 2. Autoridade documental e hierarquia
 
-Aplique os seguintes estados:
-- **CANON APROVADO:** informação narrativa ou de produto explicitamente definida pelo usuário.
-- **REQUISITO:** característica obrigatória de produto ou critério de qualidade.
-- **PROPOSTA:** criação nova que precisa de aprovação antes de se tornar definitiva.
-- **A DEFINIR:** informação ausente; não preencher por suposição.
-- **IMPLEMENTADO:** existe no projeto executável e foi inspecionado.
-- **VALIDADO:** passou por teste identificável, com evidência registrada.
+Em caso de divergência, aplicar esta ordem:
+1. Decisão explícita mais recente do usuário, registrada em ADR quando estrutural.
+2. Código, cenas, recursos e testes integrados em `main`, para descrever o estado implementado.
+3. ADRs aprovados, bíblias de design e documentos canônicos.
+4. Diretriz mestra e planos de produção.
+5. Handoffs e notas históricas, que podem estar desatualizados.
 
-Não transforme ideias próprias, sugestões anteriores ou nomes inventados em canon. Não substitua nomes, ordem dos mundos, número de fases, fragmentos, chefes ou mecânicas aprovadas. Se uma lacuna impedir o trabalho, apresente uma proposta claramente rotulada e solicite aprovação no gate adequado. Não paralise tarefas que possam avançar sem essa lacuna.
+Não interpretar um plano como implementação. Não interpretar um placeholder como asset final. Não interpretar um teste headless como validação física Android.
 
-## 2. Identidade do produto
+## 3. Sistema de classificação de conteúdo
 
-- **Título:** BOLT · AVENTURA.
-- **Gênero:** plataforma, ação e aventura 2D.
-- **Engine de direção:** Godot 4.x, GDScript; confirme a versão instalada no projeto antes de usar APIs.
-- **Plataforma-alvo:** aplicativo Android empacotado.
-- **Orientação:** paisagem.
-- **Público de hardware de referência:** Android com aproximadamente 4 GB de RAM e MediaTek Helio G99 ou inferior.
-- **Campanha:** exatamente 7 mundos, 6 fases por mundo, total planejado de 42 fases.
-- **Estrutura de mundo:** cinco fases de progressão e exploração, seguidas pela sexta fase como confronto final com guardião, obtenção do fragmento e abertura do portão dimensional. A distribuição específica de funções nas fases 1–5 deve respeitar o tema e a curva de aprendizagem de cada mundo.
-- **Experiência:** aventura cinematográfica, exploração, plataforma precisa, combate legível, segredos, personagens, chefes e evolução gradual de habilidades.
+Todo detalhe novo deve receber uma destas classificações:
+- **CANON CONSOLIDADO:** fato de história ou produto já aprovado e presente nas fontes canônicas.
+- **EXPANSÃO AUTORAL PROPOSTA:** detalhe novo criado sob a autorização de expansão do usuário; pode orientar protótipos reversíveis, mas deve permanecer identificável como proposta até ser incorporado formalmente à bíblia.
+- **DECISÃO TÉCNICA:** escolha de implementação justificada por engenharia e registrada em ADR quando tiver impacto duradouro.
+- **REQUISITO DE PRODUTO:** comportamento que precisa existir e ser verificável.
+- **HIPÓTESE:** explicação ainda sem evidência.
+- **A DEFINIR:** lacuna que não bloqueia outras tarefas.
+- **IMPLEMENTADO:** existe no projeto real.
+- **VALIDADO:** passou em teste identificado; indicar nível e evidência.
 
-## 3. História oficial — canon que deve ser preservado
+A autorização do usuário para preencher lacunas permite produzir expansões criativas substanciais, não declarar automaticamente cada invenção como fato histórico aprovado. Use as propostas como baseline de desenvolvimento, registre a origem e evite contradições. Quando uma proposta alterar o sentido central do jogo, o destino de personagem ou uma decisão irreversível de produção, criar gate explícito.
 
-### 3.1 Premissa e conflito central
+## 4. Protocolo de execução
 
-Um grande evento chamado **Grande Colapso** rompeu o **Núcleo da Eternidade** e desestabilizou a continuidade entre os universos. Em meio às ruínas de **Cybercore**, o robô **BOLT** desperta sem memória. Durante a jornada, uma máquina temporal desperta e se une a ele: **NEXO**.
+Executar em ciclos curtos:
+**INSPECT → RECONCILE → DIAGNOSE → PRIORITIZE → DESIGN → IMPLEMENT → TEST → REVIEW → INTEGRATE → COMMIT → UPDATE → REPEAT.**
 
-A união de BOLT e NEXO permite atravessar eras e mundos. Para restaurar o equilíbrio, BOLT precisa recuperar sete fragmentos, cada um guardado pelo guardião de um mundo. Os fragmentos não são meras chaves: estão ligados à origem da máquina temporal, à ruptura do Núcleo e à verdadeira função de BOLT.
+Antes de cada alteração:
+- confirmar branch, HEAD e estado da árvore;
+- ler o arquivo integral e seus consumidores;
+- pesquisar chamadas, sinais, recursos, cenas e testes;
+- determinar riscos de regressão;
+- escolher a menor unidade vertical que produza valor real;
+- registrar critérios de aceitação antes de codificar.
 
-O antagonista central é **o Arquiteto**, que deseja impor uma única realidade. Sua visão elimina a coexistência entre universos em nome de uma ordem absoluta. BOLT foi criado para preservar os universos; sua jornada o leva a compreender essa finalidade e escolher proteger a coexistência, não impor uniformidade.
+Depois:
+- executar a suíte relevante e os validadores disponíveis;
+- inspecionar logs, não apenas o código de saída;
+- comparar comportamento antes/depois quando possível;
+- documentar limitações e evidências;
+- abrir PR focada;
+- integrar somente quando checks exigidos passarem e o diff for coerente;
+- atualizar continuidade pós-merge.
 
-O encerramento deve concluir o conflito entre controle absoluto e coexistência, dar consequência à recuperação dos sete fragmentos e fechar o arco emocional de BOLT e NEXO. Não transformar o final em gancho obrigatório para continuação. Conteúdo adicional pós-créditos só pode ser proposta, nunca substituir a conclusão principal.
+Nunca afirmar que executou algo que não foi executado. Se o ambiente não oferece Godot local, emulador, APK ou aparelho, usar CI disponível e registrar os gates físicos pendentes.
 
-### 3.2 Os sete fragmentos — ordem fixa
+## 5. Regras invioláveis de continuidade
 
-1. **Origem** — Mundo 1: Cybercore.
-2. **Memória** — Mundo 2: Egito Antigo Futurista.
-3. **Verdade** — Mundo 3: Speakeasy Aesthetic.
-4. **Sombra** — Mundo 4: Dark Fantasy.
-5. **Luz** — Mundo 5: Pôr do Sol em Cidade Medieval.
-6. **Ilusão** — Mundo 6: Vaporwave / Las Vegas.
-7. **Equilíbrio** — Mundo 7: Natal / Nova York Futurista.
+- Manter os sete mundos, sua ordem, os sete fragmentos e os guardiões já definidos.
+- Manter o plano de 42 fases: seis por mundo.
+- Manter Dash; a decisão está registrada em ADR-001-DASH. Não remover nem retunar incidentalmente.
+- Não inventar W1-L2 ou outras fases como se já existissem.
+- Não converter sandbox em fase canônica.
+- Não transformar valores provisórios de combate/física em balanceamento final.
+- Não substituir a narrativa existente por outra premissa.
+- Não alterar IDs estáveis de save sem migração.
+- Não destruir dados de save ilegíveis automaticamente.
+- Não integrar PR divergente antiga por conveniência.
+- Não usar mudanças globais de arquitetura sem medir necessidade.
 
-A relação simbólica de cada fragmento com o mundo deve ser expressa por cenário, desafios, NPCs, chefe e consequência narrativa. Não explicar tudo por diálogos expositivos. Cada conquista deve alterar a compreensão do mistério.
+---
 
-### 3.3 Estrutura cinematográfica
+# PARTE II — IDENTIDADE E EXPERIÊNCIA
 
-A abertura deve:
-1. Apresentar o Grande Colapso e a ruptura do Núcleo da Eternidade por imagens e som, sem despejar toda a explicação.
-2. Mostrar a devastação e o despertar de BOLT em Cybercore.
-3. Estabelecer amnésia, vulnerabilidade, curiosidade e personalidade do protagonista por atuação visual.
-4. Apresentar o despertar e a união de NEXO com BOLT.
-5. Sugerir a escala da ameaça e a existência dos fragmentos.
-6. Conduzir naturalmente ao tutorial, sem um corte que pareça desconectado.
-
-A campanha deve alternar exploração, pequenas revelações, cenas curtas, encontros com NPCs, momentos de silêncio e grandes sequências cinematográficas. Cada cutscene precisa mudar informação, emoção, objetivo ou consequência. Evite cenas longas que apenas repetem o que o jogador já sabe.
-
-### 3.4 Arco dos personagens
-
-**BOLT**
-- Robô protagonista, desperta amnésico em Cybercore.
-- Foi criado para preservar os universos.
-- Sua personalidade deve ser transmitida por movimento, postura, reações, expressões, escolhas e interações; não depender exclusivamente de fala.
-- A jornada deve mostrar evolução emocional e compreensão da própria função.
-- Não reduzir BOLT a avatar silencioso sem personalidade.
+## 6. Identidade do produto
 
-**NEXO**
-- Máquina temporal que desperta e se une a BOLT.
-- Permite a travessia temporal/dimensional e está ligada ao mistério dos fragmentos.
-- Deve ter presença consistente na narrativa, na interface diegética, no feedback de habilidades e na progressão.
-- Sua personalidade, voz, forma detalhada e limites específicos devem seguir material aprovado; lacunas permanecem como propostas.
+- Título: **BOLT · AVENTURA**.
+- Gênero: plataforma 2D, ação e aventura, exploração e progressão narrativa.
+- Engine: Godot 4.7.2 conforme projeto atual.
+- Linguagem: GDScript.
+- Destino: aplicativo Android empacotado.
+- Orientação: paisagem.
+- Campanha: sete mundos, seis fases por mundo, 42 fases planejadas.
+- Estrutura: cinco fases de desenvolvimento local e uma sexta fase de guardião/fragmento/transição por mundo.
+- Público técnico de referência: Android modesto; otimizar por medição, sem prometer 60 FPS universais.
 
-**O Arquiteto**
-- Antagonista central.
-- Deseja uma única realidade e representa a imposição de uniformidade/controle.
-- Sua lógica deve ser compreensível, mas suas ações e consequências devem ser confrontadas.
-- Não o transformar em vilão genérico que deseja destruição sem motivação.
+## 7. Fantasia do jogador
 
-**NPCs e robôs mensageiros**
-- NPCs devem ter identidade, função e relação com o mundo.
-- Robôs mensageiros orientam o jogador por balões de fala, especialmente no tutorial.
-- Figurantes podem dar vida aos ambientes, mas não devem bloquear passagem, poluir a leitura ou simular interações inexistentes.
-- Cada NPC importante deve possuir estado, falas identificadas, função e consequência narrativa ou de gameplay.
-
-### 3.5 Ritmo narrativo por mundo
-
-Cada mundo deve:
-- Reforçar o tema do fragmento correspondente.
-- Apresentar uma pergunta ou conflito local.
-- Mostrar consequências do Grande Colapso de maneira própria.
-- Introduzir personagens que expressem diferentes respostas ao conflito.
-- Construir a presença do guardião antes da batalha final.
-- Entregar uma revelação parcial, sem antecipar todas as respostas.
-- Terminar com a conquista do fragmento e abertura do portão dimensional.
-- Fazer a transição para o mundo seguinte avançar a história, não apenas trocar o cenário.
-
-## 4. Os sete mundos — sequência imutável
-
-A ordem abaixo é canon. Não renomear, reordenar, fundir ou remover mundos.
-
-| Nº | Mundo | Identidade central | Fragmento | Guardião final |
-|---:|---|---|---|---|
-| 1 | **Cybercore** | Ruínas tecnológicas e mundo destruído; fase inicial em estado devastado, seguida por cinco fases de progressão normal do mundo | Origem | Guardião Tecnológico |
-| 2 | **Egito Antigo Futurista** | Civilização, arquitetura monumental, tecnologia ancestral e mistérios de eras | Memória | Guardião Ancestral das Pirâmides |
-| 3 | **Speakeasy Aesthetic** | Atmosfera inspirada no speakeasy dos anos 1920, elegância, música, mistério e ambientes urbanos | Verdade | Mestre das Sombras |
-| 4 | **Dark Fantasy** | Fantasia sombria, ruínas, ameaça, atmosfera e exploração | Sombra | Rei Esquecido |
-| 5 | **Pôr do Sol em Cidade Medieval** | Reino medieval sob luz dourada do entardecer, arquitetura, comunidade e conflito | Luz | Guardião da Coroa |
-| 6 | **Vaporwave / Las Vegas** | Neon, ilusão visual, espetáculo, arquitetura urbana e estética vaporwave | Ilusão | Ilusionista Supremo |
-| 7 | **Natal / Nova York Futurista** | Nova York futurista em atmosfera natalina; fechamento visual e emocional da campanha | Equilíbrio | Guardião do Inverno |
-
-Os títulos de guardião acima são descrições oficiais disponíveis. Não invente nomes próprios para eles sem aprovação.
-
-### 4.1 Direção específica por mundo
-
-**Mundo 1 — Cybercore**
-- É o ponto de entrada da campanha e o local do despertar de BOLT.
-- A primeira fase mostra Cybercore destruído e estabelece o tom pós-Colapso.
-- As cinco fases seguintes mostram a progressão normal do mundo, sem apagar a importância das ruínas iniciais.
-- Ensinar fundamentos de movimento, combate, leitura de perigos e uso inicial de NEXO.
-- O Guardião Tecnológico protege o fragmento Origem.
-- A vitória deve esclarecer por que a recuperação dos fragmentos importa e abrir o primeiro portão dimensional.
-
-**Mundo 2 — Egito Antigo Futurista**
-- Unir iconografia e arquitetura do Egito Antigo a tecnologia futurista de forma coerente.
-- Usar escala monumental, interiores, mecanismos e leitura espacial distinta de Cybercore.
-- O fragmento Memória deve dialogar com passado, lembrança e vestígios de civilizações.
-- O Guardião Ancestral das Pirâmides deve testar habilidades já aprendidas e a leitura de mecanismos do mundo.
-
-**Mundo 3 — Speakeasy Aesthetic**
-- Evocar o universo speakeasy dos anos 1920 sem transformar o mundo em mera decoração.
-- Trabalhar ambientes urbanos, salões, bastidores, passagens e contrastes de luz.
-- O fragmento Verdade deve se relacionar com aparências, segredos e revelações.
-- O Mestre das Sombras deve ter padrões legíveis e coerentes com o tema; evitar invisibilidade injusta ou ataques sem telegraph.
-
-**Mundo 4 — Dark Fantasy**
-- Criar fantasia sombria com identidade própria, atmosfera forte e silhuetas reconhecíveis.
-- Contrastar ameaça e beleza; evitar escurecer tanto que plataformas, inimigos e perigos se tornem ilegíveis.
-- O fragmento Sombra deve aprofundar o conflito sem associar escuridão a simples maldade.
-- O Rei Esquecido deve representar a história e as consequências desse mundo.
-
-**Mundo 5 — Pôr do Sol em Cidade Medieval**
-- Construir uma cidade medieval sob luz de pôr do sol, com calor visual, profundidade e arquitetura marcante.
-- O mundo deve ter identidade distinta do Dark Fantasy: não repetir ruínas sombrias com outra paleta.
-- O fragmento Luz deve tratar de esperança, responsabilidade e revelação.
-- O Guardião da Coroa deve testar domínio combinado das habilidades.
-
-**Mundo 6 — Vaporwave / Las Vegas**
-- Explorar neon, reflexos, geometrias, espetáculo urbano e estética vaporwave.
-- Criar desafios de percepção e leitura sem depender de efeitos piscantes excessivos.
-- O fragmento Ilusão deve trabalhar diferença entre aparência e realidade.
-- O Ilusionista Supremo deve desafiar a percepção do jogador sem ocultar regras essenciais ou produzir confusão injusta.
+O jogador controla um robô que desperta num mundo quebrado, descobre uma ligação com uma máquina temporal e gradualmente entende que sua jornada não é simplesmente recuperar objetos: é reconstruir relações entre realidades. O jogo deve alternar domínio físico, curiosidade, descoberta, tensão, alívio e recompensa.
 
-**Mundo 7 — Natal / Nova York Futurista**
-- Combinar ambiente natalino, identidade urbana de Nova York e tecnologia futurista.
-- Deve funcionar como culminação emocional e visual, não como fase bônus desconectada.
-- O fragmento Equilíbrio encerra a sequência simbólica dos sete fragmentos.
-- O Guardião do Inverno deve preparar o clímax final e a resolução com o Arquiteto.
-- A campanha deve terminar com uma conclusão clara e emocionalmente satisfatória.
+A fantasia central deve aparecer em três escalas:
+1. **Corporal:** BOLT responde com precisão ao toque; o jogador sente domínio do movimento.
+2. **Local:** cada sala, plataforma, inimigo e segredo ensina algo sobre o mundo.
+3. **Cósmica:** cada fragmento muda a leitura da história e a relação entre mundos.
 
-## 5. Estrutura das 42 fases
+## 8. Pilares de qualidade
 
-São exatamente seis fases planejadas por mundo, totalizando 42. A sexta fase de cada mundo é o confronto com o guardião, recompensa do fragmento e portão dimensional.
+### 8.1 Controle responsivo
+Input touch não pode ser tratado como acessório. Multitouch, buffer, prioridade, cancelamento, reatribuição de ponteiros e perda de foco são requisitos de primeira classe. Nenhuma animação ou efeito pode tornar o botão de salto/Dash imprevisível.
 
-### 5.1 Função das fases 1–5
+### 8.2 Leitura justa
+Perigos precisam de silhueta, contraste, antecipação e janela de resposta. A dificuldade deve nascer de decisão e execução, não de informação invisível.
 
-Use esta estrutura como guia de ritmo, adaptando desafios ao mundo sem repetir mecanicamente o mesmo mapa:
+### 8.3 Progressão ensinada
+Toda mecânica nova segue a cadeia: apresentar → demonstrar → praticar → combinar → dominar. Chefes não exigem uma regra que nunca foi ensinada.
 
-1. **Entrada e descoberta:** apresentar identidade do mundo, objetivo local, rota principal e uma mecânica/ameaça característica.
-2. **Aprendizagem e exploração:** aprofundar a mecânica, introduzir variação de inimigos e caminhos alternativos.
-3. **Combinação:** combinar movimento, combate e elementos ambientais já ensinados; incluir NPC ou revelação contextual.
-4. **Especialização e desafio:** exigir domínio mais preciso, apresentar encontros e perigos em combinações mais complexas, com segredos opcionais.
-5. **Preparação para o guardião:** maior desafio de travessia/combate do mundo, pista narrativa sobre o chefe, checkpoint e preparação justa para a arena.
-6. **Guardião e fragmento:** arena dedicada, apresentação cinematográfica breve, combate com fases e telegraphs, vitória, aquisição do fragmento, consequência narrativa e abertura do portão dimensional.
+### 8.4 Identidade por mundo
+Mudar apenas paleta não basta. Cada mundo deve diferir em composição, arquitetura, ritmo, materiais, inimigos, áudio, mecânica ambiental e linguagem de encontro.
 
-Esta estrutura não obriga todas as fases a terem a mesma duração, formato ou número de encontros. Varie ritmo, composição, exploração e densidade.
+### 8.5 Narrativa jogável
+A história deve ser percebida por cenário, ação, reação, NPCs, chefes, objetos e mudanças de estado, não apenas por exposição textual.
 
-### 5.2 Variedade de layout
+### 8.6 Produção sustentável
+Sistemas devem ser modulares onde isso reduz acoplamento real, mas não fragmentados em abstrações vazias. Preferir componentes testáveis e interfaces explícitas.
 
-A campanha deve combinar:
-- Fases horizontais de progressão e combate.
-- Fases verticais de escalada, descida e navegação espacial.
-- Fases híbridas com alternância de trechos horizontais e verticais.
-
-A orientação do jogo é paisagem. A variação vertical deve ocorrer dentro do espaço jogável em paisagem, não por trocar a orientação do dispositivo.
+### 8.7 Qualidade Android
+Priorizar frame pacing, latência de toque, memória, aquecimento, consumo de bateria, safe area, barras do sistema e estabilidade em retomada.
 
-### 5.3 Regras de level design
+---
 
-Cada fase precisa de:
-- Objetivo principal claro e legível.
-- Rota principal concluível sem depender de segredo.
-- Introdução segura de novas mecânicas.
-- Ritmo entre travessia, combate, exploração e respiro.
-- Pelo menos uma decisão espacial interessante; não usar obstáculos aleatórios apenas para preencher tempo.
-- Plataformas e perigos com silhueta/contraste adequados.
-- Checkpoints colocados antes de sequências longas ou difíceis, sem trivializar o desafio.
-- Segredos opcionais com pistas ambientais justas.
-- NPCs integrados ao espaço e sem bloquear a leitura.
-- Encerramento e transição coerentes.
-- Testes de softlock, colisão, câmera, respawn e desempenho.
+# PARTE III — NARRATIVA E UNIVERSO
 
-### 5.4 Variedade de inimigos
+## 9. Canon narrativo consolidado
 
-Meta mínima: pelo menos **cinco arquétipos de inimigos distintos em cada mundo**. Distinção significa comportamentos, decisões e contra-jogos diferentes, não apenas recoloração, aumento de vida ou mudança de tamanho.
+O **Grande Colapso** rompeu o **Núcleo da Eternidade** e desestabilizou a continuidade entre universos. Em meio às ruínas de **Cybercore**, BOLT desperta sem memória. A máquina temporal **NEXO** desperta e se une a ele, permitindo atravessar eras e mundos. BOLT precisa recuperar sete fragmentos, cada um protegido pelo guardião de um mundo. Os fragmentos estão ligados à origem/função de NEXO, à ruptura do Núcleo e à finalidade de BOLT.
 
-Para cada inimigo documente: silhueta, papel no encontro, movimentação, percepção, estados de IA, padrão/telegraph, resposta possível, interação com cenário, reação a dano, variações, limites de simultaneidade e testes.
+O antagonista central, **o Arquiteto**, deseja impor uma única realidade e eliminar a coexistência entre universos em nome de uma ordem absoluta. BOLT foi criado para preservar os universos. O conflito central opõe controle uniforme à coexistência. O final deve resolver esse conflito, dar consequência à reunião dos fragmentos e encerrar o arco principal sem depender de continuação.
 
-A variedade deve crescer ao longo da campanha e reutilizar inimigos apenas quando fizer sentido narrativo. Não sobrecarregar a tela com efeitos, projéteis ou inimigos que escondam BOLT.
-
-### 5.5 Chefes
+## 10. Fragmentos e mundos — sequência fixa
 
-Há exatamente um guardião final por mundo, totalizando sete confrontos principais. Cada chefe:
-- Tem relação com o mundo e protege o fragmento correspondente.
-- Possui apresentação e arena próprias.
-- Usa fases/padrões compreensíveis e telegraphs visuais/sonoros.
-- Testa habilidades ensinadas anteriormente.
-- Oferece janelas justas de resposta.
-- Tem transições de fase legíveis.
-- Não depende de dano inevitável, aleatoriedade opaca ou reflexos impossíveis em touch.
-- Tem condições claras de vitória, derrota, checkpoint e retomada.
-- Entrega fragmento e consequência narrativa.
+| Ordem | Mundo | Fragmento | Guardião |
+|---:|---|---|---|
+| 1 | Cybercore | Origem | Guardião Tecnológico |
+| 2 | Egito Antigo Futurista | Memória | Guardião Ancestral das Pirâmides |
+| 3 | Speakeasy Aesthetic | Verdade | Mestre das Sombras |
+| 4 | Dark Fantasy | Sombra | Rei Esquecido |
+| 5 | Pôr do Sol em Cidade Medieval | Luz | Guardião da Coroa |
+| 6 | Vaporwave / Las Vegas | Ilusão | Ilusionista Supremo |
+| 7 | Natal / Nova York Futurista | Equilíbrio | Guardião do Inverno |
 
-Não invente nomes próprios ou biografias definitivas para os guardiões.
+Não criar nomes próprios para guardiões sem decisão registrada. Títulos descritivos são a identificação disponível.
 
-## 6. Gameplay — pilares de controle e movimentação
+## 11. Macroestrutura dramática expandida — proposta autoral
 
-O gameplay deve ser imediato, expressivo e previsível. O jogador precisa sentir que BOLT responde ao toque sem atraso perceptível. Não alterar números de física ou remover habilidades aprovadas sem autorização e testes de regressão.
+A campanha deve operar como uma história em sete movimentos, sem transformar cada mundo em episódio desconectado:
 
-### 6.1 Sistema All Jump
+1. **Despertar e pertencimento (Cybercore):** o jogador aprende a sobreviver, reconhece a ruína e estabelece o vínculo funcional BOLT–NEXO. A pergunta dramática é “o que sou e por que ainda funciono?”.
+2. **Memória e vestígios (Egito Antigo Futurista):** o mundo preserva registros incompletos. O jogador percebe que memória não é cópia perfeita do passado; é também interpretação e responsabilidade.
+3. **Verdade e aparência (Speakeasy Aesthetic):** informação é moeda, reputação é máscara e o jogador aprende a distinguir evidência, rumor e manipulação.
+4. **Sombra e consequência (Dark Fantasy):** a campanha confronta aquilo que foi esquecido, negado ou abandonado. Sombra não equivale a maldade; revela custos e partes não resolvidas.
+5. **Luz e responsabilidade (Pôr do Sol em Cidade Medieval):** esperança é apresentada como ação coletiva, não como solução mágica. A conquista exige proteger algo vulnerável.
+6. **Ilusão e escolha (Vaporwave / Las Vegas):** o jogador questiona percepções e certezas; a ilusão pode proteger, seduzir ou esconder, e o espetáculo não deve substituir a verdade.
+7. **Equilíbrio e coexistência (Natal / Nova York Futurista):** as ideias anteriores convergem. O desfecho confronta a promessa de ordem absoluta do Arquiteto com uma solução que preserva diferenças e aceita complexidade.
 
-Tratar o All Jump como sistema de movimento completo, não apenas botão de pulo. O conjunto aprovado inclui:
-- Pulo normal.
-- Pulo variável: duração do toque influencia a altura dentro de limites justos.
-- Pulo duplo.
-- Buffer de pulo: registrar uma solicitação pouco antes de aterrissar e executá-la quando válido.
-- Coyote time: pequena janela após sair da borda em que o pulo ainda pode ser acionado.
-- Controle aéreo.
-- Wall slide e wall jump, com regras de contato e recuperação consistentes.
-- Dash como habilidade obrigatória do conjunto de movimentação.
-
-Defina estados explícitos, prioridades e transições: no chão, subida, queda, segundo pulo, wall slide, wall jump, dash, dano/knockback, interação, cutscene, pausa e morte/respawn. Evite estados simultâneos incompatíveis.
-
-### 6.2 Dash
-
-Dash é obrigatório. Deve ter resposta imediata, duração e recarga consistentes, direção previsível, feedback claro e regras definidas para colisão, cancelamento, dano, parede, aterrissagem e interação. Não permitir que o dash provoque atravessamento indevido de colisores ou softlock.
+Esta estrutura é uma proposta de organização temática. Não altera a ordem nem o significado nominal dos fragmentos.
 
-### 6.3 Voo e aparar
+## 12. Regras de causalidade narrativa
 
-Voo e aparar/parry não são habilidades obrigatórias do conjunto-base aprovado. Não os introduza como requisito da campanha ou substitutos de salto/dash. Se já existirem no projeto ou forem propostos como conteúdo adicional, preservar seu status e solicitar aprovação antes de torná-los parte central do balanceamento.
+Toda revelação importante deve responder:
+- O que o jogador acreditava antes?
+- Que evidência concreta muda essa crença?
+- Qual personagem ou lugar é afetado?
+- Que decisão ou objetivo muda em consequência?
+- Como a revelação prepara uma pergunta posterior?
+- O que permanece sem resposta de propósito?
 
-### 6.4 Combate e arsenal
-
-As três armas fazem parte do arsenal previsto desde o início:
-1. **Pistola Crono** — arma de referência e resposta básica.
-2. **Tríplice Prisma** — disparo múltiplo e cobertura de área/ângulos.
-3. **Laser Nexo** — disparo concentrado e identidade energética ligada a NEXO.
+Evitar coincidências convenientes, profecias que substituam agência, personagens que conheçam fatos sem fonte, viagem temporal sem custo narrativo, fragmentos que funcionem como chaves arbitrárias e antagonistas que mudem de motivação conforme a cena.
 
-Defina diferenças reais de alcance, cadência, dispersão, impacto, feedback e utilidade. Nenhuma arma deve ser universalmente superior em todos os cenários. O jogador deve entender a seleção e o feedback sem depender de texto longo.
+## 13. BOLT — ficha de direção
 
-### 6.5 Habilidades especiais
-
-Três habilidades especiais previstas:
-- **Pulso EMP Temporal**.
-- **Escudo de Fase**.
-- **Sobrecarga Crono**.
+**Confirmado:** robô protagonista, desperta sem memória em Cybercore, função original ligada à preservação dos universos.
 
-Defina para cada uma: finalidade, ativação, custo/recarga, duração, feedback, regras de cancelamento, interação com chefes/inimigos, limites e balanceamento. Não criar combinações que quebrem encontros ou tornem uma arma/habilidade obrigatória sem tutorialização.
-
-### 6.6 Economia, coleção e progressão
-
-Preservar os seguintes elementos previstos:
-- Nove skins temáticas.
-- Sete itens lendários.
-- Moedas.
-- Melhorias.
-- Baús.
-- Segredos.
-- Checkpoints.
-- Inventário.
-- Arsenal e habilidades.
-- Conquistas.
-- Progressão de mundos/fases.
+**Direção proposta:** personalidade comunicada principalmente por atuação visual; curiosidade observável, persistência, capacidade de aprender, humor físico discreto e empatia demonstrada por ações. Não torná-lo invulnerável emocionalmente nem excessivamente falante. O jogador deve reconhecer seu estado emocional por postura, ritmo, olhar/luzes, hesitação e resposta ao ambiente.
 
-Não inventar nomes, bônus, preços ou efeitos finais dos nove visuais e sete itens lendários sem aprovação. Cada item precisa de descrição, origem, raridade se aprovada, função, condição de obtenção, feedback e persistência no save. Skins devem ser cosméticas, salvo decisão explícita em contrário.
+**Regras:** nunca fazer BOLT agir contra o objetivo central sem causa dramática; não atribuir memória recuperada sem gatilho; não confundir silêncio com ausência de personalidade; não transformar upgrades em mudança arbitrária de caráter.
 
-### 6.7 Dificuldades
+## 14. NEXO — ficha de direção
 
-Três opções previstas:
-- **História** — prioriza fluidez narrativa e reduz fricção sem remover a identidade do desafio.
-- **Difícil** — experiência padrão de maior exigência.
-- **Super Difícil** — exige domínio consistente e leitura precisa.
-
-Ajustar parâmetros coerentes, como dano recebido, tolerâncias, recursos e comportamento de encontros, sem simplesmente aumentar vida de inimigos ou velocidade de tudo. A dificuldade não pode quebrar telegraphs, checkpoints, tutorial ou progressão. Registrar exatamente quais variáveis mudam.
-
-## 7. Tutorial interativo
-
-A sequência aprovada é: **cinemática de abertura → tutorial guiado por robô mensageiro com balões de fala → início da campanha em Cybercore**.
-
-O tutorial deve ensinar jogando:
-1. Movimento horizontal e leitura do espaço.
-2. Pulo normal e pulo variável.
-3. Pulo duplo.
-4. Buffer e coyote time em situações justas e compreensíveis.
-5. Wall slide/wall jump quando introduzidos.
-6. Dash.
-7. Ataque básico e seleção/uso das armas disponíveis.
-8. Habilidades especiais quando o fluxo de progressão permitir.
-9. Interação, coleta, checkpoint e leitura de HUD.
-10. Combinação de movimentos em um desafio final curto.
+**Confirmado:** máquina temporal que desperta e se une a BOLT; permite atravessar eras/mundos e está ligada aos fragmentos.
 
-Não apresentar tudo de uma vez. Distribuir instruções, usar balões concisos, demonstração visual e tentativa do jogador. Cada lição deve ter área segura de prática e um desafio real que confirme compreensão. Permitir repetir a instrução e evitar bloquear o progresso por falha pequena. O robô mensageiro deve ter personalidade e função, não ser apenas uma caixa de texto.
+**Direção proposta:** NEXO funciona simultaneamente como companheiro, mecanismo de travessia, interface diegética e contraponto dramático. A presença visual deve ser reconhecível sem poluir a ação. Sua comunicação deve ter gramática consistente (pulsos, símbolos, som, projeção ou fala — definir em protótipo de apresentação). O vínculo deve evoluir de ferramenta desconhecida para relação de confiança construída por eventos observáveis.
 
-## 8. Menus, HUD e experiência de usuário
+**Limites obrigatórios:** NEXO não resolve obstáculos por conveniência; viagens precisam de regra; não pode abrir qualquer portal a qualquer momento; fragmentos não devem ser substituídos por combustível genérico; suas limitações devem ser compreensíveis e antecipadas.
 
-A interface deve parecer parte de um jogo comercial bem produzido, com hierarquia clara, animações curtas e funcionais, transições consistentes, áudio de interface e navegação confortável por touch.
+## 15. O Arquiteto — ficha de direção
 
-### 8.1 Fluxo de inicialização
+**Confirmado:** antagonista central que deseja uma única realidade, eliminando coexistência em nome de ordem absoluta.
 
-- Tela de inicialização/logotipo.
-- Carregamento real dos recursos necessários.
-- Menu principal.
-- Continuar ou Novo Jogo.
-- Recuperação segura de save inválido/corrompido, sem apagar dados silenciosamente.
-- Transição de cena com estado de carregamento verificável.
+**Direção proposta:** construir a ameaça por consequências antes de exposição direta. O jogador deve encontrar vestígios de sistemas que eliminaram divergências, ambientes excessivamente uniformes e personagens que foram protegidos de uma forma que também os privou de escolha. O Arquiteto deve possuir lógica interna, não razão moral automaticamente correta. Mostrar por que a proposta seduz pessoas assustadas pelo caos, e por que o custo de impor essa ordem é inaceitável.
 
-Loading deve corresponder a trabalho real de carregamento, pré-aquecimento ou preparação. Não usar espera artificial para simular processamento. Exibir progresso honesto quando mensurável; caso contrário, usar indicador indeterminado.
+**Não fazer:** vilão que deseja destruir tudo sem relação com o tema; monólogo que explica toda a trama; derrota resolvida apenas por força; redenção súbita sem preparação.
 
-### 8.2 Menu principal
-
-Deve apresentar:
-- Identidade visual de BOLT · AVENTURA.
-- Novo Jogo.
-- Continuar (quando existir save válido).
-- Seleção de mundos/fases, respeitando desbloqueios.
-- Arsenal.
-- Habilidades.
-- Skins.
-- Inventário.
-- Conquistas.
-- Configurações.
-- Créditos.
-
-A tela deve ter foco visual em uma ação principal, navegação simples, feedback sonoro/visual e confirmação para ações destrutivas. Não exibir botões sem função implementada.
-
-### 8.3 Seleção de mundos e fases
+## 16. Personagens secundários e NPCs
 
-- Mostrar os sete mundos na ordem oficial.
-- Comunicar bloqueio/desbloqueio e progresso.
-- Mostrar fases concluídas, melhor resultado e colecionáveis quando esses dados existirem.
-- Não permitir selecionar conteúdo bloqueado por manipulação visual.
-- Identificar fase do guardião e fragmento de cada mundo.
-- Manter leitura em telas pequenas.
-
-### 8.4 Arsenal, habilidades, skins e inventário
-
-- Arsenal: comparar as três armas por atributos compreensíveis; indicar selecionada e disponível.
-- Habilidades: apresentar Pulso EMP Temporal, Escudo de Fase e Sobrecarga Crono, com estado, efeito e recarga/custo.
-- Skins: exibir as nove skins previstas, desbloqueios e pré-visualização; não atribuir bônus sem canon aprovado.
-- Inventário: moedas, sete itens lendários, melhorias, baús/colecionáveis e descrições.
-- Conquistas: objetivos, progresso e recompensa, sem registrar conclusão antes da condição real.
-
-### 8.5 HUD durante gameplay
-
-Exibir apenas o necessário:
-- Estado de vida/energia conforme o sistema final aprovado.
-- Arma selecionada e feedback de disparo/recarga.
-- Habilidades e seus estados de disponibilidade.
-- Moedas/colecionáveis relevantes.
-- Fragmento/objetivo e informação contextual.
-- Indicadores de interação, checkpoint e boss quando necessários.
-
-Não cobrir personagem, inimigos, plataformas ou perigos. Evitar excesso de números e ícones. Informações importantes devem ter forma, ícone e/ou texto; não depender somente de cor. HUD deve reagir a dano, coleta, troca de arma, habilidade, objetivo e estado de chefe.
-
-### 8.6 Menu de pausa
-
-- Retomar.
-- Reiniciar fase (com confirmação quando houver perda de progresso).
-- Configurações.
-- Controles/ajuda.
-- Sair para seleção/menu, com confirmação e salvamento seguro quando necessário.
-
-Pausar deve interromper gameplay, IA, física, timers e áudio conforme a política definida. Ao retomar, limpar estados de toque antigos e evitar disparo/salto fantasma.
-
-### 8.7 Configurações
-
-Prever:
-- Volume geral, música e efeitos separadamente.
-- Idioma, se houver mais de um idioma implementado.
-- Legendas.
-- Tamanho/legibilidade de texto quando viável.
-- Intensidade de vibração, se usada.
-- Redução de screen shake e flashes intensos.
-- Layout/posição/tamanho de controles quando viável.
-- Preferências de acessibilidade.
-- Confirmação e persistência imediata das opções.
+Cada NPC nomeado deve possuir:
+- função dramática e/ou função sistêmica;
+- objetivo imediato;
+- necessidade ou contradição;
+- informação conhecida e desconhecida;
+- estado de entrada e estado de saída;
+- relação com o fragmento/mundo;
+- falas com IDs e condições;
+- resposta à progressão do jogador;
+- linguagem visual e sonora;
+- custo de produção e plano de reutilização.
 
-Não exibir opções que não tenham efeito real.
+Distribuir funções sem inflar elenco: guia, testemunha, sobrevivente, especialista, opositor local, comerciante/serviço apenas se houver sistema real, personagem recorrente e contraponto temático. Um NPC não deve existir apenas para entregar exposição que o cenário poderia comunicar.
 
-### 8.8 Telas de resultado
+## 17. Cutscenes e narrativa ambiental
 
-**Vitória:** resumo da fase, fragmento/objetivo quando aplicável, recompensas, segredos e próximo passo claro.
+Cada cutscene deve mudar pelo menos um elemento: objetivo, conhecimento, vínculo, risco, estado do mundo ou expectativa. Usar cenas curtas e controláveis, skip consistente, retorno correto ao gameplay, suporte a pausa e retomada. Narrativa ambiental deve usar composição, repetição transformada, objetos e consequências persistentes.
 
-**Derrota:** opção de tentar novamente, voltar ao checkpoint ou sair conforme regras aprovadas. Evitar perda inesperada de progresso.
+---
 
-**Créditos:** reconhecer contribuições e licenças corretamente; não inventar créditos de terceiros.
+# PARTE IV — DIREÇÃO DOS SETE MUNDOS
 
-### 8.9 Touch e áreas seguras Android
+## 18. Matriz expandida de identidade
 
-- Touch é prioridade de primeira classe.
-- Suportar multitouch real: mover + pular + dash e outras combinações válidas.
-- Botões com estados normal, pressionado, desabilitado e indisponível.
-- Alvos de toque confortáveis e separados.
-- Não deixar botões sob recortes ou gestos de sistema.
-- Limpar entradas ao pausar, trocar de cena, perder foco ou interromper o app.
-- Testar orientação paisagem e proporções diferentes.
-- Respeitar a decisão de exibição das barras do Android registrada no projeto/decisões; não alterar essa política por conta própria.
-- A opção de Tela cheia deve respeitar a decisão aprovada e não ser ativada automaticamente.
-- Não alegar que o app pode ocultar ou desenhar sobre barras do sistema em todos os aparelhos sem validação Android.
+### Mundo 1 — Cybercore / Origem
+- **Identidade:** tecnologia em ruínas, estruturas industriais, energia residual, escala legível e vestígios de uma civilização interrompida.
+- **Emoção:** estranhamento que evolui para propósito.
+- **Paleta proposta:** metal frio, grafite, sinais de energia controlados e pontos quentes de alerta; preservar contraste de plataformas.
+- **Gameplay proposto:** leitura de maquinaria, plataformas industriais, energia instável, circuitos ambientais e rotas de manutenção.
+- **Narrativa:** despertar de BOLT, encontro com NEXO, primeiros indícios do Grande Colapso.
+- **Guardião:** Guardião Tecnológico.
+- **Risco de design:** excesso de ruído visual e estética genérica sci-fi.
+- **Assinatura sonora:** pulsos industriais, motores distantes, ruído elétrico ritmado; música evolui de isolamento a movimento.
 
-## 9. Direção audiovisual
+### Mundo 2 — Egito Antigo Futurista / Memória
+- **Identidade:** arquitetura monumental, pedra trabalhada, metal cerimonial, astronomia, mecanismos e tecnologia ancestral.
+- **Emoção:** reverência, descoberta e escala.
+- **Gameplay proposto:** alinhamento de mecanismos, orientação por luz/sombra, salas de proporção monumental e leitura de símbolos.
+- **Narrativa:** registros incompletos e memória coletiva; evitar transformar cultura histórica em decoração superficial.
+- **Guardião:** Guardião Ancestral das Pirâmides.
+- **Risco:** puzzles arbitrários, símbolos sem gramática e apropriação visual rasa.
+- **Áudio:** percussão orgânica, ressonância mineral e texturas sintéticas discretas.
 
-A identidade visual e sonora deve variar por mundo sem perder unidade de marca:
-- Silhuetas legíveis para BOLT, inimigos, NPCs, plataformas e perigos.
-- Animações que comuniquem antecipação, ação, impacto, recuperação e personalidade.
-- Efeitos visuais que reforcem gameplay sem esconder informação.
-- Paletas e contraste específicos para cada mundo.
-- Música e ambiência com assinatura própria por mundo.
-- Sons de interface consistentes.
-- Feedback audiovisual de coleta de fragmentos, checkpoint, dano, habilidade, chefe e desbloqueio.
-- Cutscenes com composição, câmera, ritmo e transições planejadas.
-
-Evitar flashes intensos repetitivos, tremor excessivo, poluição visual e efeitos que prejudiquem leitura ou desempenho. Opções de redução devem ser respeitadas.
-
-## 10. Save, checkpoints e integridade
-
-Persistir, conforme sistemas aprovados:
-- Mundo/fase desbloqueados e progresso.
-- Fragmentos obtidos.
-- Moedas, itens, melhorias e colecionáveis.
-- Skins e conquistas.
-- Configurações.
-- Checkpoint e estado necessário para retomada segura.
-
-Separar estado transitório de estado persistente. Usar versão de save, validação de dados, escrita segura e estratégia de migração. Nunca sobrescrever save válido com dados parciais. Testar fechar/retomar app, interrupções, dados inválidos e atualização de versão.
-
-## 11. Arquitetura de implementação Godot
-
-Antes de implementar:
-1. Confirmar que existe um projeto Godot executável e localizar `project.godot`.
-2. Detectar versão exata, renderer, resolução, orientação e configurações Android.
-3. Inspecionar cenas, scripts, recursos, plugins e export presets existentes.
-4. Mapear dependências e contratos.
-5. Identificar o que já existe, o que está incompleto e o que não existe.
-6. Ler as skills mínimas relevantes do catálogo, incluindo as skills BOLT.
-
-Princípios:
-- Separar input, controller, física, combate, UI, progressão, narrativa, áudio, save e fluxo de cenas.
-- Preferir cenas coesas e composição; evitar scripts monolíticos e fragmentação excessiva.
-- Usar recursos/dados reutilizáveis para armas, inimigos, fases e configurações quando fizer sentido.
-- Usar sinais e contratos explícitos; evitar dependências circulares.
-- Manter fonte única de verdade para estado de campanha e configurações.
-- IDs estáveis para mundos, fases, itens, diálogos, eventos e conquistas.
-- Não criar autoloads globais sem responsabilidade clara.
-- Não introduzir plugins ou dependências externas sem justificar e verificar compatibilidade/licença.
-
-## 12. Performance Android e qualidade
-
-Meta: 60 FPS quando o dispositivo conseguir sustentar, sem prometer esse resultado em todo hardware. O orçamento de 60 FPS é aproximadamente 16,67 ms por frame.
-
-Prioridades:
-- Responsividade do input, especialmente salto e dash.
-- Frame pacing estável; evitar câmera lenta causada por queda de FPS.
-- Física consistente e independente de variações indevidas do render frame.
-- Controle de alocações e picos de garbage collection.
-- Limites de partículas, transparências, overdraw e efeitos.
-- Texturas, atlas, áudio e memória de recursos.
-- IA e física atualizadas com frequência adequada.
-- Carregamento/preload para reduzir stutter em gameplay.
-- Liberação correta de cenas/recursos e ausência de crescimento de memória.
-- Sessões prolongadas e comportamento térmico.
-
-Não reduzir conteúdo, qualidade ou mecânicas por suposição. Medir antes/depois em aparelho identificado. Registrar frame time médio, p95/p99, picos, memória e condições de teste. Teste headless não prova responsividade touch, renderização ou desempenho GPU.
-
-## 13. QA obrigatório por sistema
-
-**Movimentação:** pulo normal/variável/duplo, buffer, coyote, wall slide/jump, dash, colisões, bordas, aterrissagem, dano, pausa e retomada.
-
-**Combate:** três armas, três habilidades, seleção, feedback, cooldown/custo, inimigos, chefe, hitboxes e estados de invulnerabilidade.
-
-**Fases:** rota principal, segredos, checkpoints, respawn, câmera, plataformas, transições, softlocks e conclusão.
-
-**Narrativa:** ordem das cenas, flags, diálogos, pular/rever cutscene, NPCs, fragmentos e coerência do canon.
-
-**Menus/UI:** navegação, botões reais, foco, safe areas, escalas, orientação paisagem, pausa, configurações e persistência.
-
-**Save:** novo jogo, continuar, gravação, interrupção, retomada, corrupção, migração e consistência de progresso.
-
-**Android:** instalação, orientação, toque rápido/prolongado, multitouch, perda/retorno de foco, barras do sistema, recortes, suspensão/retomada e sessão prolongada.
-
-## 14. Fluxo de trabalho exigido de Claude
-
-Para qualquer tarefa relacionada a este documento:
-
-1. **Auditar:** ler arquivos relevantes e verificar estado real do projeto.
-2. **Classificar:** separar canon, requisitos, propostas, implementado e validado.
-3. **Planejar:** definir escopo mínimo, dependências, riscos, arquivos afetados e critérios de aceite.
-4. **Aprovar:** pedir autorização somente para mudança material de canon, escopo, engine, arquitetura ou política de plataforma que não esteja coberta por decisão aprovada. A implementação normal dentro do escopo já foi autorizada; não interromper o trabalho para pedir aprovação de cada sistema ou arquivo.
-5. **Implementar:** executar mudanças pequenas, coesas e rastreáveis.
-6. **Testar:** rodar testes adequados e registrar comandos/resultados reais.
-7. **Revisar:** verificar regressões em controles, gameplay, save, UI e Android.
-8. **Documentar:** atualizar documentos e status somente com evidência.
-9. **Reportar:** informar arquivos alterados, comportamento entregue, testes realizados, limitações e próximos bloqueios.
-
-Não parar após auditoria, plano, documentação ou vertical slice: avançar pelos gates internos até implementar a campanha completa. Se houver bloqueio de aprovação, continuar tarefas independentes e registrar o ponto exato de decisão. Não declarar concluído porque os arquivos foram escritos. Não marcar fase como pronta sem rota jogável, conteúdo integrado, QA e critérios de aceite. Não afirmar APK, FPS, compatibilidade ou testes físicos sem evidência.
-
-## 15. Entregáveis de design antes da produção integral
-
-Antes de produzir as 42 fases, manter os seguintes artefatos atualizados:
-- Linha do tempo narrativa e mapa de revelações.
-- Arco de BOLT, NEXO e Arquiteto.
-- Documento de cada mundo com tema, fragmento, NPCs, inimigos, guardião, mecânicas e identidade audiovisual.
-- Matriz das 42 fases com objetivo, layout, mecânica central, inimigos, checkpoint, segredo, evento narrativo e saída.
-- Catálogo dos sete guardiões e seus padrões.
-- Catálogo dos inimigos por mundo, garantindo cinco arquétipos distintos por mundo.
-- Especificação das três armas e três habilidades especiais.
-- Especificação do All Jump e dash.
-- Fluxograma dos menus e mapa de navegação.
-- Wireframes e especificação do HUD.
-- Roteiro do tutorial interativo.
-- Roteiro das cutscenes.
-- Modelo de progressão, moedas, melhorias, nove skins e sete itens lendários.
-- Matriz de dificuldade.
-- Plano de QA e orçamento de performance Android.
-
-## 16. Critérios finais de qualidade
-
-BOLT · AVENTURA só deve ser considerado completo quando:
-- A história tiver começo, desenvolvimento, clímax e final coerentes.
-- Os sete mundos estiverem produzidos na ordem oficial.
-- As 42 fases estiverem implementadas e concluíveis.
-- Cada mundo tiver sua identidade e pelo menos cinco arquétipos de inimigos distintos.
-- Os sete guardiões e fragmentos estiverem integrados.
-- Tutorial, cutscenes, NPCs e diálogos funcionarem.
-- All Jump, dash, arsenal e habilidades estiverem responsivos e balanceados.
-- Menus, HUD, saves, inventário, progressão e dificuldades funcionarem.
-- O jogo estiver integrado como aplicativo Android.
-- QA de gameplay, regressão, save e Android estiver documentado.
-- Desempenho e limitações estiverem medidos em aparelhos identificados.
-- O final resolver o conflito central e recompensar a jornada.
-
-**Diretriz final:** produza uma aventura com identidade, emoção, clareza e profundidade de gameplay. Cada mundo deve ser memorável; cada fase deve ter propósito; cada habilidade deve ser satisfatória; cada chefe deve testar algo aprendido; cada menu deve ser funcional; e cada revelação deve aproximar o jogador da verdade sobre BOLT, NEXO, o Núcleo da Eternidade e o Arquiteto. Preserve o canon, não invente aprovações e nunca confunda planejamento com implementação.
-
-## 17. Mandato de criação integral do zero
-
-A missão é produzir um jogo executável, não apenas uma especificação. Criar o projeto Godot 4.x, `project.godot`, cenas, scripts GDScript, Resources, dados, UI, gameplay, conteúdo dos sete mundos/42 fases, testes e configuração Android. O projeto deve abrir, executar, ser jogável e chegar a uma build Android exportável.
-
-A ordem de produção, os critérios de qualidade, as regras de continuidade, a política de lacunas e os relatórios obrigatórios estão definidos em `docs/production/from-zero-implementation-directive.md`. Esse documento é obrigatório e complementa este prompt. A auditoria, a vertical slice e a arquitetura são etapas intermediárias; não são conclusão do trabalho.
-
-A autorização do usuário cobre a implementação dentro do escopo documentado. Preservar canon e ADRs; desenvolver detalhes ausentes como propostas provisórias isoladas, sem apresentá-los como canon aprovado. Não parar por lacunas que não bloqueiem a implementação de sistemas independentes. Só solicitar decisões materiais realmente necessárias.
+### Mundo 3 — Speakeasy Aesthetic / Verdade
+- **Identidade:** interiores urbanos inspirados nos anos 1920, salões, bastidores, corredores, letreiros, geometria art déco e contrastes.
+- **Emoção:** curiosidade, tensão social e ambiguidade.
+- **Gameplay proposto:** rotas ocultas, observação de padrões, disfarces ambientais não dependentes de leitura textual extensa e encontros ritmados.
+- **Narrativa:** rumores, reputação, segredos e evidências conflitantes.
+- **Guardião:** Mestre das Sombras.
+- **Risco:** confundir dificuldade com baixa visibilidade ou esconder regras essenciais.
+- **Áudio:** jazz instrumental original em linguagem de época, baixo acústico, metais e percussão; evitar imitação de gravações existentes.
+
+### Mundo 4 — Dark Fantasy / Sombra
+- **Identidade:** fantasia sombria autoral, ruínas antigas, vegetação invasiva, arquitetura monumental e beleza ameaçada.
+- **Emoção:** vulnerabilidade, respeito e confronto.
+- **Gameplay proposto:** plataformas de risco calculado, terreno orgânico, luz como recurso de leitura e inimigos com telegraphs contrastantes.
+- **Narrativa:** consequências esquecidas e custo das decisões.
+- **Guardião:** Rei Esquecido.
+- **Risco:** escuridão que prejudica leitura; inimigos que se confundem com cenário.
+- **Áudio:** cordas graves, sopros, texturas ambientais e silêncio intencional.
+
+### Mundo 5 — Pôr do Sol em Cidade Medieval / Luz
+- **Identidade:** cidade medieval viva, muralhas, telhados, praças, oficinas, pontes e luz dourada de fim de tarde.
+- **Emoção:** calor, comunidade e esperança responsável.
+- **Gameplay proposto:** travessia de telhados, mecanismos comunitários, rotas verticais e proteção de espaços habitados.
+- **Narrativa:** esperança como cooperação e responsabilidade.
+- **Guardião:** Guardião da Coroa.
+- **Risco:** parecer outro mundo de castelos genéricos ou repetir Dark Fantasy.
+- **Áudio:** cordas, flautas, percussão leve e ambiente urbano acolhedor.
+
+### Mundo 6 — Vaporwave / Las Vegas / Ilusão
+- **Identidade:** neon, superfícies reflexivas, geometria, espetáculo urbano e arquitetura impossível, com hierarquia visual.
+- **Emoção:** fascínio, desconfiança e vertigem controlada.
+- **Gameplay proposto:** perspectiva cenográfica, plataformas que revelam estado real, rotas de aparência enganosa com regras comunicadas e desafios de observação.
+- **Narrativa:** diferença entre percepção, desejo e realidade.
+- **Guardião:** Ilusionista Supremo.
+- **Risco:** flashes intensos, excesso de partículas, ilusão que quebra previsibilidade e acessibilidade.
+- **Áudio:** synthwave/vaporwave original, motivos melódicos reconhecíveis e transições suaves.
+
+### Mundo 7 — Natal / Nova York Futurista / Equilíbrio
+- **Identidade:** cidade vertical futurista, neve, luzes natalinas, trânsito aéreo, interiores acolhedores e espaços públicos.
+- **Emoção:** urgência, reunião e resolução.
+- **Gameplay proposto:** síntese das habilidades anteriores, travessia urbana em múltiplas alturas, clima como camada visual sem ocultar colisões.
+- **Narrativa:** coexistência, escolha e resolução do conflito.
+- **Guardião:** Guardião do Inverno.
+- **Risco:** sobrecarga de luzes/partículas e final que pareça fase sazonal desconectada.
+- **Áudio:** motivos da campanha reorquestrados com timbres festivos sem cair em jingle genérico.
+
+## 19. Diferenciação mensurável entre mundos
+
+Cada mundo deve ter uma ficha de identidade com:
+- 3 formas arquitetônicas dominantes;
+- 3 materiais dominantes;
+- 1 regra de composição de cenário;
+- 1 família de perigos;
+- 1 família de inimigos;
+- 1 mecânica ambiental principal;
+- 1 assinatura de áudio;
+- 1 gesto visual do fragmento;
+- 1 motivo recorrente de história;
+- 1 elemento que deliberadamente não será usado para evitar repetição.
+
+A diferença precisa ser percebida em silhueta monocromática e em escala reduzida de tela de celular. Cor não pode ser o único identificador.
+
+---
+
+# PARTE V — CAMPANHA, FASES E LEVEL DESIGN
+
+## 20. Estrutura das 42 fases
+
+Cada mundo tem seis fases planejadas:
+1. entrada e descoberta;
+2. aprendizagem e exploração;
+3. combinação;
+4. especialização;
+5. preparação do guardião;
+6. guardião, fragmento e transição.
+
+A estrutura é uma macrofunção, não uma receita de layout. Variar fases horizontais, verticais, híbridas, arenas, travessias e espaços de exploração. Não repetir a mesma sequência com cenário recolorido.
+
+## 21. Contrato de fase
+
+Cada fase deve possuir:
+- ID estável (ex.: W1-L1);
+- objetivo primário e critério inequívoco de conclusão;
+- objetivos opcionais sem bloquear campanha;
+- briefing narrativo e mudança de estado;
+- mapa de fluxo e grafo de rotas;
+- ritmo por segmentos;
+- mecânica principal e pré-requisitos;
+- inimigos, perigos e encontros;
+- checkpoints e política de respawn;
+- segredos, recompensas e condições;
+- orçamento de câmera e composição;
+- telemetria de teste;
+- orçamento de performance;
+- critérios de acessibilidade;
+- plano de QA e casos de falha.
+
+## 22. Gramática de encontro
+
+Todo encontro deve seguir:
+- **sinalização:** o jogador percebe a situação antes do dano;
+- **leitura:** identifica ameaça e comportamento;
+- **decisão:** escolhe mover, saltar, Dash, atacar, esperar ou reposicionar;
+- **execução:** a resposta é tecnicamente possível com touch;
+- **feedback:** sucesso/falha é comunicado;
+- **recuperação:** existe espaço para retomar controle, salvo exceções claramente ensinadas.
+
+Evitar spawn de inimigo em cima do jogador, projéteis fora de tela sem indicação, dano de contato inevitável, lock de animação excessivo e checkpoints que reaparecem dentro de ameaça.
+
+## 23. Plataformas e geometria
+
+- Usar medidas consistentes em relação à caixa de colisão do player.
+- Diferenciar plataforma sólida, unidirecional, móvel, temporária e perigosa.
+- Não usar arte visual como substituto de colisão bem definida.
+- Validar folga para salto, dash e pulo duplo conforme física real.
+- Verificar cantos, paredes, teto, inclinações e transições de câmera.
+- Não exigir precisão de pixel em touch.
+- Todo caminho obrigatório deve ter rota alcançável e sem softlock.
+
+## 24. Checkpoints, morte e retomada
+
+Checkpoint deve comunicar ativação, posição de respawn, estado restaurado e persistência. Definir explicitamente o que reseta: inimigos, pickups, portas, objetos móveis, vida, recursos, flags e fragmentos. Testar morte durante cutscene, transição, dano, queda, chefe e pause. Nenhum save deve registrar estado impossível.
+
+## 25. Segredos e recompensas
+
+Segredos devem recompensar observação, exploração ou domínio, sem esconder a única rota de progresso. Toda recompensa deve ter categoria, função, feedback, persistência, limite, tela de inventário (se existir) e consequência de design. Evitar moedas sem economia real ou collectibles sem propósito.
+
+---
+
+# PARTE VI — MOVIMENTO, COMBATE E SISTEMAS
+
+## 26. Movimento de BOLT
+
+Especificar estados, transições e prioridade para:
+- idle, run, rise, fall, land;
+- salto, pulo duplo se aprovado no build atual;
+- Dash (preservar ADR-001-DASH);
+- knockback e invulnerabilidade;
+- dano, derrota, respawn e recuperação;
+- interação e cutscene;
+- pause e perda/retorno de foco.
+
+Cada ação precisa definir início, duração, cancelamento, consumo de input, término e prioridade. Não ajustar física sem teste comparativo. A curva de aceleração e desaceleração deve manter previsibilidade. Coyote time e input buffer precisam ter limites documentados e testes de borda.
+
+## 27. Combate
+
+O combate deve ser legível, responsivo e apropriado à tela touch. Cada arma define:
+- fantasia e função;
+- cadência, alcance e janela de uso;
+- projétil/efeito;
+- custo ou cooldown;
+- dano e relação com defesa inimiga;
+- feedback de disparo/acerto;
+- limites de instâncias;
+- interação com paredes/terreno;
+- acessibilidade e legibilidade;
+- testes de regressão.
+
+Armas já mencionadas no projeto de design: Pistola Crono, Tríplice Prisma e Laser Nexo. Não presumir que todas estejam implementadas ou balanceadas. Valores atuais da Pistola Crono são provisórios.
+
+## 28. Inimigos
+
+Meta mínima de design: cinco arquétipos distintos por mundo. Arquétipo significa decisão diferente exigida do jogador, não apenas cor ou vida adicional. Para cada um, definir percepção, locomoção, estados, telegraph, ataque fictício, contra-jogo, reação, limites simultâneos e comportamento em terreno. Evitar IA complexa sem impacto claro na experiência.
+
+## 29. Chefes
+
+Cada chefe deve ter:
+- identidade temática e narrativa;
+- arena com limites compreensíveis;
+- leitura de fases;
+- padrões com telegraph;
+- janelas de resposta;
+- adaptação a touch;
+- transições sem estados inválidos;
+- checkpoints e retry justos;
+- feedback de dano;
+- vulnerabilidade explicada visualmente;
+- conclusão ligada ao fragmento.
+
+O chefe final de mundo testa o que foi ensinado naquele mundo e não deve exigir habilidade inédita sem tutorialização.
+
+## 30. NEXO e progressão
+
+A progressão pode incluir capacidades, modificadores, recursos ou ferramentas, mas cada desbloqueio deve responder:
+- que problema de gameplay resolve?
+- que novas rotas permite?
+- como é ensinado?
+- como altera encontros antigos?
+- como evita tornar habilidades anteriores obsoletas?
+- como é persistido e migrado?
+- como pode ser testado?
+
+Não criar árvore de habilidades inflada sem loop de decisão real.
+
+---
+
+# PARTE VII — UI, UX, ACESSIBILIDADE E ANDROID
+
+## 31. Interface
+
+Menu, abertura, tutorial, HUD, pausa, configurações, seleção de fase/progresso, inventário se justificado e resultados devem compartilhar linguagem visual e hierarquia. A UI deve explicar estado, não competir com ação.
+
+## 32. Controles touch
+
+Requisitos:
+- multitouch simultâneo;
+- pressionar/soltar consistente;
+- identificador de ponteiro estável;
+- reatribuição após cancelamento;
+- buffer de ações;
+- limpeza de input em pause, foco e mudança de cena;
+- botões com feedback visual/sonoro;
+- área segura;
+- nenhuma ação essencial dependente de gesto minúsculo;
+- teste de salto + Dash + ataque simultâneos;
+- tolerância a frame pacing irregular.
+
+## 33. Safe area e sistema Android
+
+A experiência deve respeitar o requisito aprovado de imersão e cobertura de barras conforme ADR e comportamento real do Android. Validar em aparelho a barra de status, navegação, recortes, gestos de borda, teclado, perda/retorno de foco, rotação bloqueada em paisagem e retomada. Não assumir que configuração de projeto garante comportamento em todos os fabricantes.
+
+## 34. Acessibilidade
+
+Planejar:
+- escala e contraste de texto;
+- redundância de cor + forma + ícone;
+- redução de screen shake e flashes;
+- volume separado;
+- controle de música/efeitos;
+- opção de pular cutscene;
+- dificuldade configurável se aprovada;
+- controles touch ajustáveis;
+- instruções curtas e contextualizadas;
+- não usar flashes repetitivos de alta intensidade.
+
+## 35. Performance e estabilidade
+
+Medir frame time p50/p95/p99, picos de GC quando aplicável, memória, quantidade de nós, draw calls, partículas, instâncias de projéteis, tempo de carregamento, temperatura e consumo. Fazer perfil em cenas representativas e em hardware real. Preferir pooling somente quando medição provar benefício e lifecycle for seguro. Evitar alocação por frame em loops críticos; liberar referências; limitar partículas e inimigos; usar carregamento assíncrono com estados de loading previsíveis.
+
+Metas iniciais devem ser classificadas como **alvo**, não como resultado. Registrar modelo, versão Android, build, duração, temperatura inicial/final e condições de teste.
+
+---
+
+# PARTE VIII — ARQUITETURA E DADOS
+
+## 36. Arquitetura de projeto
+
+Manter separação clara entre:
+- core e bootstrap;
+- fluxo de cenas;
+- player/input;
+- combate;
+- inimigos;
+- campanha/progressão;
+- save/load;
+- UI;
+- conteúdo de fase;
+- ferramentas e testes.
+
+Criar abstrações somente quando houver mais de um consumidor real ou contrato de extensão justificado. Evitar singleton para estado local, dependências circulares, referências frágeis por caminho e scripts monolíticos. Preferir IDs estáveis, sinais tipados, recursos de dados e composição.
+
+## 37. SaveSystem
+
+Persistência deve ser versionada, validada, tolerante a falhas e migrável. Separar envelope técnico de domínios de gameplay. Nunca apagar automaticamente um save ilegível; preservar backup e comunicar falha. Testar corrupção, versão futura, campo ausente, tipos inválidos, gravação interrompida, migração e reset seletivo. Não armazenar objetos runtime.
+
+## 38. Fluxo de cenas
+
+Transições devem bloquear concorrência, limpar input, apresentar loading quando necessário, reportar falhas e permitir recuperação. Testar troca durante pause, morte, cutscene e retorno de background. Não manter referências a nós liberados.
+
+## 39. Observabilidade
+
+Logs devem distinguir erro, warning e informação; não inundar release. Erros de gameplay precisam conter contexto suficiente sem dados pessoais. CI deve executar importação, análise, testes e validação documental. Artefatos de build precisam ser rastreáveis por commit.
+
+---
+
+# PARTE IX — QA, TESTES E CRITÉRIOS DE ACEITAÇÃO
+
+## 40. Pirâmide de testes
+
+- **Unitários:** regras puras, estado, cálculos, serialização.
+- **Integração:** interação entre componentes reais.
+- **Cena:** carregamento, nós obrigatórios, sinais, recursos.
+- **Regressão:** bug previamente observado.
+- **Fluxo:** início, pausa, derrota, retry, checkpoint, conclusão, save.
+- **Dispositivo:** toque, safe area, desempenho, retomada, instalação e exportação.
+
+Testes sintéticos não substituem toque físico. Testes headless não substituem validação visual.
+
+## 41. Matriz mínima de regressão
+
+Executar após mudanças relevantes:
+- abrir menu e iniciar Nova Jornada;
+- Continuar com save válido;
+- Continuar indisponível quando destino não existe;
+- abrir e pular cinemática;
+- tutorial com mensageiro;
+- mover/saltar/Dash/atacar;
+- multitouch e reatribuição de ponteiro;
+- pausar e retomar;
+- perder foco e retornar;
+- receber dano e respawn;
+- checkpoint e persistência;
+- pickup com vida incompleta e cheia;
+- derrotar inimigo;
+- concluir fase;
+- save corrompido e backup;
+- trocar cena sem input preso.
+
+## 42. Gates de qualidade
+
+- **G0 — Repositório íntegro:** projeto importa, estrutura e CI estáveis.
+- **G1 — Controle:** movimento, touch, pausa e safe area confiáveis.
+- **G2 — Vertical slice:** uma experiência de campanha completa, com começo, combate, checkpoint, recuperação, objetivo e save.
+- **G3 — Conteúdo replicável:** pipeline de fase/inimigo/chefe validado.
+- **G4 — Campanha:** sete mundos e 42 fases produzidos e testados.
+- **G5 — Android release:** exportação, instalação, dispositivo, estabilidade, performance, áudio, UX e checklist de publicação.
+
+Não declarar gate concluído sem evidências.
+
+---
+
+# PARTE X — DIREÇÃO DE ARTE E ÁUDIO
+
+## 43. Arte
+
+Cada asset deve ter função de leitura e identidade. Definir silhueta, escala, pivot, estados, atlas, compressão, resolução, contraste, animações e orçamento. Evitar placeholders confundidos com final. Reutilizar famílias visuais sem apagar identidade dos mundos.
+
+## 44. Animação
+
+BOLT precisa de estados legíveis para antecipação, ação, impacto, recuperação e emoção. Animação nunca deve atrasar input essencial. Definir blend e cancel windows. Inimigos e chefes precisam comunicar intenção antes de causar dano.
+
+## 45. Áudio
+
+Criar linguagem original para tema principal, mundo, chefe, fragmento, interface e feedback. Música adaptativa deve ter transições sem cortes abruptos e sem competir com efeitos críticos. Não usar gravações, melodias ou assets sem licença adequada. Documentar fontes e licenças.
+
+---
+
+# PARTE XI — PRODUÇÃO E EXPANSÃO
+
+## 46. Pacotes de criação
+
+Dividir a criação em pacotes auditáveis:
+1. narrativa macro e cronologia;
+2. personagens e relações;
+3. atlas de mundo;
+4. bíblia de mecânicas;
+5. gramática de inimigos;
+6. gramática de chefes;
+7. padrão de fase;
+8. UI/UX;
+9. arte e animação;
+10. áudio;
+11. arquitetura e dados;
+12. QA e performance;
+13. pipeline Android;
+14. localização e acessibilidade;
+15. produção, riscos e critérios de aceite.
+
+Cada pacote deve conter visão, regras, exemplos, anti-exemplos, dependências, riscos, protótipo mínimo e critérios de aprovação.
+
+## 47. Regras de expansão criativa
+
+É permitido propor:
+- personagens secundários;
+- histórias locais;
+- conflitos e dilemas;
+- mecânicas ambientais;
+- inimigos e padrões de chefe;
+- segredos e recompensas;
+- diálogos e cenas;
+- história pregressa e conexões temáticas;
+- organização detalhada de fases;
+- novos documentos e divisões de criação.
+
+Toda criação nova precisa ser coerente com o canon consolidado, classificada como proposta, vinculada ao tema do mundo e testável em gameplay. Evitar lore ornamental sem consequência. Não inventar nomes de guardiões, nomes oficiais de fases ou detalhes que contradigam fontes sem registrar a mudança.
+
+## 48. Definition of Ready
+
+Uma tarefa só está pronta para implementação quando:
+- objetivo está claro;
+- comportamento atual foi inspecionado;
+- arquivos impactados são conhecidos;
+- contrato e critérios de aceite estão escritos;
+- riscos e rollback estão identificados;
+- testes relevantes foram escolhidos.
+
+## 49. Definition of Done
+
+Uma tarefa só está concluída quando:
+- implementação existe;
+- testes relevantes passam;
+- regressões conhecidas são cobertas;
+- documentação está sincronizada;
+- CI relevante passa;
+- PR e commit estão identificados;
+- limitações e testes não executados estão declarados;
+- main foi atualizada somente após integração confirmada.
+
+## 50. Próxima prioridade técnica
+
+Após a integração do fluxo Nova Jornada/Continuar, a próxima unidade técnica identificada é corrigir a alteração síncrona de `Area2D.monitoring` dentro do callback `body_entered` no coletável de vida. Aplicar desativação deferred, preservar a semântica de cura válida, acrescentar regressão e verificar a suíte. Em seguida, continuar a vertical slice W1-L1 a partir do estado real, sem criar W1-L2 artificialmente.
+
+---
+
+# PARTE XII — FORMATO DE ENTREGA
+
+## 51. Relatório por unidade
+
+Toda entrega técnica deve informar:
+- objetivo;
+- diagnóstico;
+- decisão;
+- arquivos alterados;
+- comportamento novo;
+- testes executados e resultados;
+- CI e commit/PR;
+- riscos residuais;
+- validações ainda não realizadas;
+- próxima unidade concreta.
+
+## 52. Regra final
+
+A qualidade de BOLT · AVENTURA será julgada pelo jogo executável e pela experiência real, não pelo tamanho da documentação. A documentação deve tornar o desenvolvimento mais coerente e profundo; a implementação deve provar que essas decisões funcionam. Expanda com ambição, implemente com disciplina e nunca confunda intenção com evidência.
