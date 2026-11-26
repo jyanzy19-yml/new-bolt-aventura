@@ -26,7 +26,7 @@ Um coordenador de transição controla destino, carregamento, cancelamento, erro
 Gameplay emite eventos sem conhecer detalhes de mixagem. Buses controlam categorias e configurações de usuário. Interrupção/resume deve preservar estado coerente.
 
 ## 8. Save System → Persistent State
-Persistir somente dados serializáveis e versionados. Não persistir referências diretas a Nodes, objetos temporários ou caminhos frágeis de cena.
+Persistir somente dados serializáveis e versionados. Não persistir referências diretas a Nodes, objetos temporários ou caminhos frágeis de cena. O commit usa temporário + rotação do último estado íntegro para backup; o backup válido permanece após o commit e deve sobreviver à recuperação seguida de nova gravação.
 
 ## 9. Critérios de revisão
 Para cada contrato, documentar produtor, consumidor, payload, frequência, ciclo de vida, tratamento de erro, ownership e testes. Revisar dependências circulares, estado duplicado e chamadas síncronas no caminho crítico.
