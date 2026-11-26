@@ -229,6 +229,21 @@ func test_complete_temp_is_recovered_before_older_backup() -> bool:
 	check(FileAccess.file_exists(TEST_SAVE_PATH), "promove temporário recuperado ao arquivo principal")
 	check(not FileAccess.file_exists(TEST_SAVE_PATH + ".tmp"), "remove temporário após promoção bem-sucedida")
 	check_eq(system.call("load_payload"), recovered, "segunda leitura usa o principal recuperado")
+
+	# Uma nova gravação não pode apagar um temporário completo ainda pendente.
+	var pending_payload: Dictionary = {"level_id": "W1-L4", "revision": 4}
+	var replacement_payload: Dictionary = {"level_id": "W1-L5", "revision": 5}
+	check(DirAccess.remove_absolute(ProjectSettings.globalize_path(TEST_SAVE_PATH)) == OK, "simula principal ausente antes de nova gravação")
+	check(_write_envelope(TEST_SAVE_PATH + ".tmp", pending_payload), "prepara commit pendente anterior")
+	check(system.call("save_payload", replacement_payload), "nova gravação consolida o temporário anterior antes de substituir")
+	check_eq(system.call("load_payload"), replacement_payload, "nova gravação torna-se o principal")
+	var corrupt_after_write: FileAccess = FileAccess.open(TEST_SAVE_PATH, FileAccess.WRITE)
+	check(corrupt_after_write != null, "corrompe principal para verificar backup da gravação pendente")
+	if corrupt_after_write != null:
+		corrupt_after_write.store_string("{corrupt-after-pending-write")
+		corrupt_after_write.close()
+	check_eq(system.call("load_payload"), pending_payload, "backup preserva o temporário que existia antes da nova gravação")
+	check_eq(system.get("last_error"), "recovered_backup", "identifica recuperação do estado pendente preservado")
 	_cleanup()
 	return true
 
