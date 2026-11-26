@@ -38,7 +38,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-011 | Chefes e arenas | Não iniciado | Sem implementação do jogo |
 | SYS-012 | NPCs, interação, diálogo e flags | Não iniciado | Sem implementação do jogo |
 | SYS-013 | Objetivos, colecionáveis e fragmentos | Não iniciado | Sem implementação do jogo |
-| SYS-014 | Checkpoints, respawn e progressão | Não iniciado | Sem implementação do jogo |
+| SYS-014 | Checkpoints, respawn e progressão | Em andamento | `BoltCheckpoint` (`scenes/levels/checkpoint.tscn`, `scripts/levels/bolt_checkpoint.gd`) ativa uma vez e atualiza o respawn da sandbox; teste `test_checkpoint_updates_respawn_target_once` adicionado. Estado apenas em memória durante a sessão; SaveSystem/persistência e fases da campanha ainda não implementados. CI pendente nesta branch |
 | SYS-015 | Save/load, versão e recuperação | Não iniciado | Sem implementação do jogo |
 | SYS-016 | Inventário, moedas, melhorias e skins | Não iniciado | Sem implementação do jogo |
 | SYS-017 | Menus, HUD, pausa e configurações | Em andamento | Menu inicial e HUD de sandbox com pausa/resultado existem; controles touch e safe area parcial. Configurações completas e fluxos finais ausentes. Headless apenas; sem validação visual/Android |

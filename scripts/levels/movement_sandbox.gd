@@ -13,10 +13,12 @@ const CAMERA_LIMITS: Rect2i = Rect2i(0, -432, 2560, 700)
 @onready var _player: BoltPlayer = %Bolt
 @onready var _spawn: Marker2D = %SpawnPoint
 @onready var _kill_zone: Area2D = %KillZone
+@onready var _checkpoint: BoltCheckpoint = %Checkpoint
 @onready var _goal: Area2D = %Goal
 @onready var _hud: Hud = %Hud
 
 var _completed: bool = false
+var _respawn_position: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
@@ -28,14 +30,20 @@ func _ready() -> void:
 	_hud.bind_player(_player)
 	_hud.set_restart_path(LEVEL_PATH)
 	_kill_zone.body_entered.connect(_on_kill_zone_body_entered)
+	_checkpoint.activated.connect(_on_checkpoint_activated)
 	_goal.body_entered.connect(_on_goal_body_entered)
-	_player.respawn(_spawn.global_position)
+	_respawn_position = _spawn.global_position
+	_player.respawn(_respawn_position)
+
+
+func _on_checkpoint_activated(_checkpoint_id: StringName, respawn_position: Vector2) -> void:
+	# O ponto ativo é estado da sessão da sandbox; persistência entre execuções virá com SaveSystem.
+	_respawn_position = respawn_position
 
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
 	if body == _player:
-		# "Checkpoint" provisório: o único ponto de retorno é o início da sandbox.
-		_player.respawn(_spawn.global_position)
+		_player.respawn(_respawn_position)
 
 
 func _on_goal_body_entered(body: Node2D) -> void:
