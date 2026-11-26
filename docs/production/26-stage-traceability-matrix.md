@@ -94,5 +94,5 @@ A numeração operacional organiza o trabalho, mas não obriga serialização ab
 - **Etapa 03:** concluída como baseline arquitetural estático pela PR #51/#52; quatro autoloads, fluxos e ownership mapeados; nenhum ciclo de autoload/serviço identificado; acoplamento local BoltPlayer↔BoltCombat documentado como exceção consciente.
 - **Etapa 04:** concluída como infraestrutura headless/CI; PR #54/#55 cobrem isolamento de fixtures e validação estrita de versões.
 - **Etapa 05:** em desenvolvimento — SceneFlow/LoadingOverlay, cancelamento/timeout, interrupções, preload e budgets de memória.
-- **Etapas 05–26:** status conforme `stage-status.md`; linhas não significam que o conteúdo final já existe.
+- **Etapas 06–26:** status conforme `stage-status.md`; linhas não significam que o conteúdo final já existe.
 - **Limites conhecidos:** package ID `com.example.boltaventura` é placeholder; instalação Android, toque físico, barras/safe area, profiling e sessão prolongada não foram executados.
