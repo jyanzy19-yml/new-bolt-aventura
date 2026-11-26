@@ -508,3 +508,7 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - `stage2/checkpoints-and-save` continua remota e não integrada. Não apagar sem autorização explícita.
 - Comparação de arquitetura confirmou duplicação: `ProgressState/GameState`, `SaveData`, `SaveStore`, `LevelSession/Checkpoint` competem com `SaveSystem`, `CampaignProgress` e `BoltCheckpoint` de main.
 - PROPOSTA (fora do escopo desta PR): avaliar hardening isolado do SaveSystem para recuperar `.tmp` validado após interrupção e bloquear qualquer escrita quando envelope principal/backup indicar formato futuro. Nenhuma alteração de save foi feita.
+
+
+
+- Repetição da validação S2 em mutation run `45909945401`: SUCCESS; 103 testes / 672 verificações / 0 falhas após restauração do callback ObjectID.
