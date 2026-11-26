@@ -1,7 +1,7 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` (HEAD confirmado em 2026-11-26: `1e5294cf112c014c21e43c51b4c8e797beceb9b6`; confirmar novamente ao iniciar)  
+**Branch de integração:** `main` (PR #11 integrada por squash em `6f97ffc97219bb541e9f36a1c140331c2c621403`; HEAD deve ser confirmado novamente ao iniciar)  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
 
 ## Estado executável observado
@@ -50,6 +50,7 @@ Um único escritor por vez. O usuário aciona manualmente o próximo agente.
 
 - [PR #2](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/2): MERGED — melhorias de qualidade e especialistas.
 - [PR #3](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/3): MERGED — hardening da fundação e governança.
+- [PR #11](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/11): MERGED — auditoria documental, ADR-001-DASH e sincronização do handoff (squash `6f97ffc`; Docs CI #160 SUCCESS no HEAD da PR).
 - [PR #1](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/1): permanece separada e divergente; não mesclar, fechar ou modificar automaticamente.
 
 ## Auditoria de polimento e reconciliação documental
@@ -95,8 +96,8 @@ Claude Code assume a Etapa 2 após o usuário iniciar sua sessão. Ponto de part
 - Preservar código, Input Map, controles touch e testes existentes. Alterações de física, cooldown, velocidade, duração, controles ou balanceamento exigem tarefa própria.
 - Esta atualização é documental; não altera gameplay.
 
-## Estado desta auditoria — PR #11
+## Estado desta auditoria — PR #11 integrada
 
-- PR #11 permanece aberta e mergeable, sem merge automático.
-- Docs CI run #157 (ID `45822873097`) SUCCESS no HEAD `bfec6e20e767477302801d46a50a637cfd4f30ad`; job `Validate project documentation` concluiu todas as etapas. As correções posteriores de consistência em continuidade, handoff e relatório precisam de nova execução CI.
-- Godot CI não foi acionado porque os arquivos alterados são documentais. Não houve execução local de Godot, exportação APK ou teste Android físico.
+- PR #11 foi integrada por squash em `6f97ffc97219bb541e9f36a1c140331c2c621403`.
+- Docs CI run #160 (ID `45825228812`) SUCCESS no HEAD `7412e49b27bf135fcaa566bcfce458d19de39cec`; job `Validate project documentation` e todas as etapas concluídos.
+- A sincronização pós-merge está sendo registrada nesta PR documental separada. Godot CI não foi acionado por não haver alterações de gameplay. APK, emulador e Android físico continuam não executados.

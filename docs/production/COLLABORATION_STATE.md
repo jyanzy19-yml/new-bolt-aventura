@@ -4,18 +4,18 @@
 
 ## Estado vigente — revisão de 2026-11-26
 
-**Última verificação completa da main:** HEAD `1e5294cf112c014c21e43c51b4c8e797beceb9b6` após PR #10; confirmar novamente o SHA antes de cada novo turno.
+**Último merge confirmado na main:** PR #11 integrada por squash no commit `6f97ffc97219bb541e9f36a1c140331c2c621403` em 2026-11-26; confirmar novamente o SHA antes de cada novo turno.
 
 - **Etapa 0 — Claude Code: ACCEPTED.** Fundação Godot 4.7.2 e protótipo técnico provisório aceitos; hardening integrado pela PR #3.
 - **Etapa 1 — ChatGPT: HANDOFF_READY.** Correção de reatribuição de ponteiro em `TouchControls`, regressão e execução da suíte no CI; entrega original `f3ab682`.
-- **PRs #2–#10: MERGED.** PR #7 reconciliou documentos raiz; PRs #8–#10 sincronizaram auditoria e continuidade. PR #10 foi integrada em `1e5294c`. Nenhum código de gameplay foi alterado nessas PRs documentais.
-- **Escritor ativo:** ChatGPT, exclusivamente nesta branch de auditoria/correção. Claude Code deve aguardar a conclusão da PR e o handoff atualizado. Depois da integração e aceite, Claude assume a Etapa 2; o usuário inicia a sessão manualmente.
+- **PRs #2–#11: MERGED.** PR #7 reconciliou documentos raiz; PRs #8–#10 sincronizaram auditoria e continuidade; PR #11 concluiu a auditoria documental e registrou o ADR-001. PR #11 foi integrada por squash em `6f97ffc`. Nenhum código de gameplay foi alterado nessas PRs documentais.
+- **Escritor ativo:** ChatGPT, exclusivamente nesta PR curta de sincronização pós-PR #11. Após a integração e confirmação deste handoff, Claude Code assume a Etapa 2; o usuário inicia a sessão manualmente.
 - **Projeto executável:** Godot 4.7.2, GDScript, Android em paisagem. A base contém boot/menu, SceneFlow, player, touch/multitouch, HUD, sandbox e testes; não é a campanha completa.
 - **Validação máxima comprovada:** L2 (Godot headless/CI). Não há comprovação de APK exportado/instalado, teste visual, touch físico, safe area real ou desempenho em Android.
 - **PR #1:** continua OPEN e não mergeável (`mergeable_state=dirty`), com 17 commits exclusivos; a comparação atual de 2026-11-26 após PR #10 indica 139 commits de atraso. A contagem é volátil: consultar o compare atual antes de rebasear. Modifica 17 arquivos: quatro documentos de raiz e a diretiva dividida em 12 partes/índice. Não contém implementação de gameplay. Não mesclar automaticamente.
 - **Dash:** decisão explícita do usuário em 2026-11-26: DEVE PERMANECER no jogo. Preservar implementação, Input Map, controles e testes. A exclusão na diretiva não integrada da PR #1 está superada; ver `ADR-001-DASH.md`. Não retunar ou redesenhar sem escopo próprio.
 - **Governança da main:** o endpoint de branches confirmou `protected=false` para `main`. A integração não disponibiliza operação administrativa para habilitar proteção/ruleset; o proprietário deve configurar as regras manualmente. Não presumir checks obrigatórios antes de resolver os filtros por caminhos dos workflows.
-- **Escritor desta rodada:** ChatGPT, restrito a documentação, governança e auditoria. Nenhuma alteração de gameplay está autorizada nesta rodada. Claude deve aguardar a conclusão/integração e o handoff atualizado.
+- **Escritor desta rodada:** ChatGPT, restrito à sincronização documental pós-PR #11. Nenhuma alteração de gameplay foi feita. Claude deve iniciar a Etapa 2 após esta PR curta ser integrada e confirmar o HEAD.
 
 ## Estado por etapa
 
@@ -70,6 +70,12 @@ Não avançar etapa só porque uma sessão terminou. Não marcar ACCEPTED por au
 - [Estado de produção](stage-status.md)
 - [Rastreador](implementation-tracker.md)
 - [Continuidade](CONTINUITY.md)
+
+## Atualização pós-PR #11 — 2026-11-26
+
+- PR #11 foi integrada por squash; merge commit `6f97ffc97219bb541e9f36a1c140331c2c621403`.
+- Docs CI run #160 (ID `45825228812`) SUCCESS no HEAD da PR #11 `7412e49b27bf135fcaa566bcfce458d19de39cec`; job `Validate project documentation` e todas as etapas concluídos.
+- Esta PR curta atualiza os ponteiros de HEAD, o estado da colaboração e o handoff para remover a espera pela PR #11. Claude assume a Etapa 2 após a integração desta sincronização.
 
 ## Histórico resumido
 

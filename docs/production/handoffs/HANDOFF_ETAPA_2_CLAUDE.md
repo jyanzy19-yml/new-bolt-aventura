@@ -5,8 +5,8 @@
 **Etapa:** 2 — continuação do Gate 1 / vertical slice  
 **Repositório:** `jyanzy19-yml/new-bolt-aventura`  
 **Branch de integração:** `main`  
-**Último HEAD verificado para este handoff:** `1e5294cf112c014c21e43c51b4c8e797beceb9b6` (após PR #10; confirmar o HEAD real da main imediatamente antes de iniciar).
-**Estado:** handoff-base integrado historicamente na PR #4; início da Etapa 2 aguarda a conclusão e integração da auditoria corretiva atual, seguida de nova confirmação do HEAD pelo Claude.
+**Último merge confirmado:** PR #11 integrada por squash no commit `6f97ffc97219bb541e9f36a1c140331c2c621403`; Claude deve confirmar o HEAD real da `main` imediatamente antes de iniciar.
+**Estado:** handoff-base integrado historicamente na PR #4; auditoria corretiva PR #11 integrada. A Etapa 2 fica liberada após a integração desta sincronização pós-merge e confirmação do HEAD pelo Claude.
 
 ## 1. O que já está integrado
 
@@ -17,7 +17,7 @@
 - PR #4 — MERGED: handoff Etapa 2 e sincronização documental. Merge `9d5381047817ac9fc949583f6645d24eadd88e8c`.
 - PR #5 — MERGED: auditoria integral e polimento da continuidade; Docs CI #140 SUCCESS. Relatório: [repository-polish-audit-2026-11-26.md](../repository-polish-audit-2026-11-26.md).
 - PR #7 — MERGED: reconciliação da documentação raiz com o projeto Godot existente; merge `b8def7a`.
-- PR #8–#10 — MERGED: auditoria, sincronização de continuidade e atualização do handoff. Último merge observado: PR #10, commit `1e5294c`. Alterações documentais, sem gameplay.
+- PR #8–#10 — MERGED: auditoria, sincronização de continuidade e atualização do handoff. PR #11 — MERGED: auditoria corretiva, ADR-001-DASH e continuidade. Merge squash `6f97ffc97219bb541e9f36a1c140331c2c621403`. Alterações documentais, sem gameplay.
 
 ## 2. Hardening recente da Etapa 0
 
@@ -38,7 +38,7 @@ Validação máxima comprovada: L2 (Godot headless/CI). Não há APK exportado, 
 
 ## 4. Ponto exato para Claude começar
 
-1. Confirmar que está em `main` no commit-base acima (ou em descendente dele), sem alterações locais não registradas; verificar PRs e branch atual.
+1. Confirmar que está em `main` no HEAD atual (descendente do merge PR #11 `6f97ffc97219bb541e9f36a1c140331c2c621403`), sem alterações locais não registradas; verificar PRs e branch atual.
 2. Ler `MASTER_DIRECTIVE.md`, `CLAUDE.md`, `AGENTS.md`, `docs/production/COLLABORATION_STATE.md`, `docs/production/COLLABORATIVE_DEVELOPMENT_PROTOCOL.md` e `docs/production/CONTINUITY.md`.
 3. Ler `docs/production/handoffs/HANDOFF_ETAPA_1.md`, este handoff, `docs/production/stage-status.md`, `implementation-tracker.md`, `roadmap.md`, `quality-control-protocol.md` e `definition-of-done.md`.
 4. Ler a diretiva from-zero e as especificações/ADRs relevantes para a primeira unidade do Gate 1. Carregar `.claude/skills/router/SKILL.md` e somente as skills necessárias.
@@ -69,8 +69,8 @@ Claude Code é o próximo escritor, Etapa 2. ChatGPT não deve iniciar implement
 ## 7. Estado após PR #10 e auditoria ChatGPT — 2026-11-26
 
 - HEAD de entrada desta auditoria: `1e5294cf112c014c21e43c51b4c8e797beceb9b6`.
-- PR #10 está integrada. PR #1 continua OPEN, sem alterações; compare atual: 17 commits exclusivos e 139 commits atrás.
-- ChatGPT mantém a autoria exclusiva da branch/PR de auditoria. Claude não deve iniciar Etapa 2 enquanto esta alteração estiver em revisão/integração.
-- Após merge e atualização do estado colaborativo, Claude Code será o próximo escritor da Etapa 2.
+- PR #10 e PR #11 estão integradas. PR #11 merge squash `6f97ffc97219bb541e9f36a1c140331c2c621403`. PR #1 continua OPEN e não mergeável; compare confirmado após PR #10: 17 commits exclusivos e 139 commits atrás (revalidar antes de qualquer ação).
+- A auditoria documental do ChatGPT foi integrada pela PR #11. Esta PR curta sincroniza os ponteiros pós-merge; Claude inicia a Etapa 2 após sua integração.
+- Após a integração desta sincronização e confirmação do HEAD, Claude Code será o próximo escritor da Etapa 2.
 - Dash deve permanecer por decisão explícita do usuário, registrada em `../ADR-001-DASH.md`; a exclusão na PR #1 está superada. Preservar implementação e não retunar sem escopo próprio.
 - Não há nova evidência de exportação APK, emulador, dispositivo físico, toque, safe area ou performance Android.
