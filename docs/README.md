@@ -63,7 +63,7 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - [Checklist de execução e aceite da Etapa 0](production/ETAPA_0_CLAUDE_CHECKLIST.md)
 - [Revisão de fundação da Etapa 0 — hardening](production/stage-0-hardening-audit.md)
 - [Auditoria de pré-produção](production/PREPRODUCTION_AUDIT.md)
-- [Protocolo de desenvolvimento alternado Claude Code ↔ ChatGPT](production/COLLABORATIVE_DEVELOPMENT_PROTOCOL.md) — Claude Etapa 0, ChatGPT Etapa 1, Claude Etapa 2, ChatGPT Etapa 3 e assim sucessivamente.
+- [Protocolo histórico/condicional de colaboração Claude Code ↔ ChatGPT](production/COLLABORATIVE_DEVELOPMENT_PROTOCOL.md) — só aplicar quando o usuário reativar explicitamente a alternância; o escritor vigente consta em `COLLABORATION_STATE.md` (atualmente ChatGPT).
 - [Estado canônico da colaboração](production/COLLABORATION_STATE.md) — etapa atual, responsável, commit-base e próximo turno.
 - [Configuração de acesso dos agentes](production/AGENT_ACCESS_SETUP.md) — diferença entre contexto de leitura e acesso real de escrita/commit.
 - [Template obrigatório de handoff](production/HANDOFF_TEMPLATE.md) — transferência verificável entre os agentes.
