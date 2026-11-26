@@ -1,6 +1,6 @@
 # Contratos entre sistemas — BOLT · AVENTURA
 
-Este documento registra contratos conceituais. Os nomes finais de classes, sinais e Resources devem seguir o projeto Godot real depois da auditoria.
+Este documento combina contratos conceituais e contratos já ancorados no projeto Godot 4.7.2. Os nomes de classes, sinais, Resources e autoloads integrados devem corresponder ao código; os contratos ainda sem consumidor executável permanecem requisitos de design, não implementação presumida.
 
 ## 1. Input → Player Controller
 Input publica ações lógicas e estados/edges de pressionar e soltar. O controller decide o que é permitido no estado atual. UI não deve alterar velocidade ou física diretamente.
@@ -20,7 +20,7 @@ Diálogos e cutscenes atualizam flags por IDs definidos e validados. Pular uma c
 ## 6. Scene Flow → Loading
 Um coordenador de transição controla destino, carregamento, cancelamento, erro, bloqueio de input e liberação de recursos. Impedir duas transições incompatíveis simultâneas.
 
-**Implementação atual:** `SceneFlow` controla carregamento threaded, falha e concorrência; `LoadingOverlay` apresenta estado/progresso real. A unidade de input lock pausa a SceneTree, oculta controles touch e retoma após `scene_changed`, restaurando a pausa anterior em falha. Cancelamento e política abrangente de liberação de recursos permanecem pendentes.
+**Implementação atual:** `SceneFlow` controla carregamento threaded, falha e concorrência; `LoadingOverlay` apresenta estado/progresso real. A PR #42 integrou o input lock: pausa a SceneTree, oculta controles touch e retoma após `scene_changed`, restaurando a pausa anterior em falha. Cancelamento e política abrangente de liberação de recursos permanecem pendentes.
 
 ## 7. Audio Events → Audio Buses
 Gameplay emite eventos sem conhecer detalhes de mixagem. Buses controlam categorias e configurações de usuário. Interrupção/resume deve preservar estado coerente.
