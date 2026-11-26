@@ -1,65 +1,79 @@
 # Handoff — Etapa 0 (Claude Code → ChatGPT)
 
-## Identificação
+## Identificação e estado final
 
-- **Etapa concluída:** 0 — fundação Godot + base de movimento/touch/HUD/sandbox (ver "Conflito de escopo").
-- **Responsável:** Claude Code. **Próxima etapa / responsável:** 1 — ChatGPT.
-- **Repositório / branch:** jyanzy19-yml/new-bolt-aventura, `main`.
-- **Commit-base:** `16d42de2f2b5b3a52411f7d13db6d37b3a38b9d3`.
-- **Commits de entrega:** `7057532` (fundação) + `c32a99d` (gameplay-base, testes e documentação).
-- **PR #1:** não tocada, não mesclada (divergente).
-- **Estado:** HANDOFF_READY (não significa slice, APK ou campanha prontos).
+- **Responsável:** Claude Code.
+- **Etapa:** 0 — fundação Godot e protótipo técnico inicial.
+- **Repositório/branch de integração:** `jyanzy19-yml/new-bolt-aventura`, `main`.
+- **Commit-base registrado:** `16d42de2f2b5b3a52411f7d13db6d37b3a38b9d3`.
+- **Commits principais de entrega:** `7057532` (fundação), `c32a99d` (base provisória de gameplay/testes/docs), `ab72c58` (ajustes posteriores).
+- **Estado:** **ACCEPTED** pelo responsável da Etapa 1. O aceite não significa vertical slice, APK, campanha ou validação física concluídos.
 
-## Conflito de escopo (decisão a confirmar)
+## Exceção de escopo — resolvida
 
-`ETAPA_0_CLAUDE_CHECKLIST.md` §5 proíbe antecipar gameplay; a ordem de execução do usuário pediu explicitamente personagem, movimento, câmera, touch, HUD e primeiro nível funcional. Segui a ordem do usuário e rebaixei o status: SYS-004/005/006/007 = **Em andamento (provisório)**. A sandbox é cenário de desenvolvimento, **não** fase da campanha. ChatGPT: aceite ou reverta explicitamente.
+O §5 do checklist original restringia a Etapa 0 à fundação e proibia antecipar gameplay. Durante a execução, o usuário solicitou explicitamente uma base com personagem, movimento, câmera, touch, HUD e um primeiro cenário funcional. Claude implementou parte desse escopo adicional como protótipo provisório.
 
-## Implementado (headless apenas)
+**Decisão de aceite:** a Etapa 1 inspecionou a entrega e aceitou a ampliação como exceção específica solicitada pelo usuário. Portanto, a antiga pendência “ChatGPT: aceite ou reverta explicitamente” está resolvida. Isso não altera a regra de que a sandbox é cenário de desenvolvimento, não fase da campanha, e não canoniza parâmetros, layout touch ou interpretação de “All Jump”.
 
-Projeto Godot 4.7.2 (`.godot-version`), `project.godot` (paisagem, 960×540 provisório, GL Compatibility provisório, física 60 Hz, camadas, Input Map), `export_presets.cfg` (imersivo conforme ADR-0003, sem segredos, package ID placeholder), boot + menu + `SceneFlow` (threaded), `SafeAreaMargin`, `TouchControls`/`TouchButton` (multitouch por dedo), `ActionBuffer` (ticks de física), `BoltPlayer` + `BoltTuning` (corrida, pulo variável, pulo duplo, coyote, buffer, dash), câmera, `PlatformBlock`, sandbox de movimento, HUD (touch, pausa, resultado), suíte de testes headless.
+## Implementado na Etapa 0
 
-## Não implementado
+- Projeto Godot 4.7.2, GDScript, configuração Android/paisagem e renderer GL Compatibility provisório.
+- `project.godot`, Input Map, boot, menu e autoload `SceneFlow`.
+- `SafeAreaMargin`, `TouchControls`, `TouchButton`, `ActionBuffer`.
+- `BoltPlayer`, `BoltTuning` provisório, câmera e geometria de plataforma.
+- Sandbox de movimento e HUD de desenvolvimento.
+- Testes headless iniciais.
 
-Animação final, assets, áudio, combate/dano/inimigos, wall slide/jump, save, qualquer fase W#-L#, export Android/APK, CI Godot validado no GitHub (apenas local).
+## Não implementado na Etapa 0
 
-## Propostas provisórias (não canonizadas)
+Campanha/fases W#-L#, combate, armas funcionais, inimigos, chefes, NPCs, checkpoints persistentes, save/load, áudio final, animação final, assets finais, APK exportado/instalado e QA físico Android.
 
-Todos os valores de `BoltTuning`; janelas de buffer/coyote; layout dos botões touch; geometria da sandbox; regra "pulo ignorado durante o dash"; "All Jump" interpretado como pulo duplo (**sem fonte aprovada confirmada**).
+## Valores e decisões que continuam provisórios
 
-## Validação
+- Todos os valores de `BoltTuning`, janelas de buffer/coyote e layout/tamanho dos botões touch.
+- Geometria e percurso da sandbox.
+- Regra de pulo durante dash.
+- Interpretação de “All Jump” como pulo duplo, sem confirmação de fonte canônica.
+- Viewport 960×540, renderer final e ABI além de arm64-v8a.
+- Package ID atual é placeholder `com.example.boltaventura`; precisa ser definido antes de distribuição.
 
-| Verificação | Comando | Ambiente | Resultado |
-|---|---|---|---|
-| Import | `godot --headless --path . --import` | Godot 4.7.2 Linux | sem erros |
-| Testes | `godot --headless --path . --script res://tests/test_runner.gd` | idem | 41 testes, 167 verificações, 0 falhas (exit 0) |
-| Mutação | 5 alterações deliberadas no código | idem | todas detectadas; arquivos restaurados |
-| Boot | `--fixed-fps 60 --quit-after 300` ×20 | idem | 0/20 com erro |
-| Playthrough | bot com entrada sintética | idem | completa a sandbox, 0 quedas |
-| Editor gráfico / renderização | — | — | **NÃO EXECUTADO** |
-| Toque físico / Android / barras | — | — | **NÃO EXECUTADO** (sem aparelho) |
-| Export APK | `--export-debug` | — | **BLOQUEADO** (sem SDK/templates) |
-| FPS / memória | — | — | **NÃO EXECUTADO** |
+## Validação original da Etapa 0
 
-**Nível máximo: L2 (headless).**
+| Verificação | Resultado declarado no handoff original | Limite |
+|---|---|---|
+| Import/headless | Godot 4.7.2, sem erros | Não comprova renderização |
+| Runner inicial | 41 testes, 167 verificações, 0 falhas | Estado do runner naquele commit |
+| Testes de mutação | 5 alterações deliberadas detectadas | Evidência do ambiente de desenvolvimento |
+| Boot repetido | 20 execuções, 0 erros observados | Não comprova Android |
+| Sandbox com bot | Percurso sintético concluído | Não comprova sensação de controle |
+| Editor gráfico/renderização | NÃO EXECUTADO | — |
+| Toque físico, barras, FPS e memória | NÃO EXECUTADO | — |
+| Exportação APK | BLOQUEADA por SDK/templates ausentes no ambiente | Nenhum APK foi produzido |
 
-## Bugs/riscos
+**Nível máximo original: L2 (headless).**
 
-- Sensação de controle nunca avaliada por humano; tuning pode estar ruim.
-- Toque real, multitouch físico e imersivo do Android não verificados.
-- O erro intermitente de parse de autoload em carga em thread foi mitigado (resolução por `/root/SceneFlow`); evitar referenciar autoloads por identificador em scripts de cena carregados em thread.
-- Bot só prova transponibilidade, não qualidade do percurso.
+## Validação posterior pela Etapa 1
 
-## Decisões pendentes do usuário
+A Etapa 1 corrigiu um defeito de reatribuição do mesmo índice de ponteiro em `TouchControls`, adicionou teste de regressão e atualizou o CI para executar a suíte. No Godot CI Run #36, commit `624edce`, a importação e a suíte passaram: **42 testes, 171 verificações, 0 falhas**. Docs CI Run #124 também passou. Essa validação posterior não deve ser atribuída retroativamente à execução original da Etapa 0.
 
-Package ID; resolução-base; renderer final; ABIs; semântica canônica de "All Jump"; se a antecipação de gameplay da Etapa 0 é aceita.
+## Achados e riscos conhecidos
 
-## Próxima ação concreta (Etapa 1, ChatGPT)
+- Defeito S3 de reatribuição de índice de ponteiro foi corrigido na Etapa 1 e coberto por regressão.
+- Coordenadas touch, safe areas, orientação/reversão, barras Android, retomada após interrupções e desempenho ainda exigem dispositivo real.
+- O ajuste `Input.use_accumulated_input = false` não possui medição de latência/custo em aparelho.
+- Tuning e layout continuam provisórios; sensação de controle não foi avaliada por teste humano documentado.
+- O bot da sandbox prova apenas que o percurso sintético é transponível.
 
-1. Inspecionar o HEAD e rodar import + suíte (critério: exit 0, 41 testes).
-2. Auditar este handoff e o conflito de escopo.
-3. Escolher a próxima unidade do roadmap (ex.: validação em aparelho do toque/imersivo se o usuário tiver aparelho; ou primeiro inimigo/combate conforme docs aprovados). Não canonizar os valores provisórios.
+## Decisões pendentes do produto
 
-## Declaração
+1. Package ID definitivo.
+2. Resolução-base/escala final de pixel art.
+3. Renderer final após medição em hardware.
+4. ABI(s) necessárias além de arm64-v8a.
+5. Semântica canônica de “All Jump” conforme as fontes aprovadas.
 
-- [x] Nenhum teste declarado sem execução real.
-- [x] Commit `c32a99d` enviado a `origin/main` (push confirmado).
+A decisão sobre aceitar a ampliação de escopo da Etapa 0 **não está mais pendente**.
+
+## Próximo turno
+
+A Etapa 1 foi entregue. O próximo responsável é Claude Code — Etapa 2. Deve auditar o HEAD atual e o handoff da Etapa 1, preservar correções existentes e continuar o Gate 1/vertical slice conforme o roadmap. Não declarar Android validado até haver evidência física.
