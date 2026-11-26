@@ -177,3 +177,10 @@ A auditoria estática da main confirmou que o código atual e os registros SYS-0
 - Verifica que o projétil real da Pistola Crono reduz a vida do inimigo real instanciado em W1-L1.
 - Não altera dano, cadência, velocidade, tuning, IA ou comportamento de combate; apenas eleva a cobertura de integração do contrato já implementado.
 - CI desta branch pendente. W1-L1 permanece **Em andamento** até critérios de fase, playtest e QA Android serem atendidos.
+
+
+## W1-L1 — derrota e retry (branch `test/w1-l1-defeat-retry-flow`)
+
+- Novo teste `test_campaign_defeat_exposes_retry_for_w1_l1`: aplica dano letal ao player real da cena, verifica overlay/título de derrota, conexão do botão `JOGAR DE NOVO` e destino de reinício para a própria W1-L1.
+- Não altera política de vidas, checkpoint, respawn, dano, invulnerabilidade ou fluxo de cena; valida o contrato já implementado.
+- CI Godot 4.7.2 e Docs desta branch pendentes.
