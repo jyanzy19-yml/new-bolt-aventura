@@ -1,12 +1,13 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Main HEAD:** `09afde26cc2bdb1126202dbfd413fa317f2a3e9d` — PR #33 integrada.  
-**Branch de trabalho:** `feat/w1-l2-energy-network-progression` — continuação da campanha W1-L1 → W1-L2; CI da branch ainda pendente nesta fotografia.  
-**Última entrega integrada:** expansão da diretriz de produção e correção do coletável de vida (PR #33).  
-**CI da PR #33:** Godot run `45866746478` SUCCESS — 66 testes, 404 verificações, 0 falhas; Docs run `45866747521` SUCCESS.  
+**Main HEAD:** `c10ca6944bf0047abe694b7c429270a256cfff96` — PR #34 integrada após PR #33.  
+**Branch de trabalho:** nenhuma pendente; a unidade W1-L1 → W1-L2 foi integrada à `main`.  
+**Última entrega integrada:** W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente da campanha (PR #34).  
+**CI pré-merge PR #34:** Godot run `45872508689` SUCCESS — Godot 4.7.2, 69 testes, 439 verificações, 0 falhas; Docs run `45872508675` SUCCESS.  
+**CI pós-merge:** Docs run `45872656798` SUCCESS; Godot run `45872656738` em andamento nesta fotografia.  
 **Responsável atual:** ChatGPT, como único escritor ativo conforme a diretriz vigente do usuário.  
-**Estado do Gate 1:** EM ANDAMENTO — W1-L1 segue em blockout; W1-L2 foi iniciada como blockout com campo energético cíclico; nenhuma validação Android física foi executada.
+**Estado do Gate 1:** EM ANDAMENTO — W1-L1 e W1-L2 permanecem blockouts; nenhuma validação Android física foi executada.
 
 ## Estado executável observado
 
@@ -14,7 +15,7 @@
 |---|---|---|
 | Projeto Godot | Implementado | `project.godot`, Godot 4.7.2 fixado em `.godot-version` |
 | Android/paisagem | Configurado | Preset Android, orientação sensor landscape e política imersiva ADR-0003; exportação não executada |
-| Inicialização/menu | Implementado parcialmente | Boot e menu com Nova Jornada/Continuar; retomada mapeia W1-L1 e W1-L2 quando a cena existe. A validação da nova rota aguarda CI desta branch; validação visual/Android pendente |
+| Inicialização/menu | Implementado parcialmente | Boot e menu com Nova Jornada/Continuar; retomada mapeia W1-L1 e W1-L2 quando a cena existe. CI pré-merge da PR #34 passou; validação visual/Android pendente |
 | SceneFlow/loading | Implementado parcialmente | Carregamento threaded, bloqueio de transições concorrentes e sinais; headless |
 | Player/movimento | Implementado parcialmente | Corrida, salto variável, pulo duplo provisório, coyote, buffer e dash; parâmetros provisórios |
 | Touch/multitouch | Implementado parcialmente | Controles por ponteiro, liberação de ações e regressão de reatribuição de índice; eventos sintéticos |
@@ -41,12 +42,15 @@
 |---|---|---|---|
 | 0 | Claude Code | ACCEPTED | Fundação + protótipo provisório; hardening complementar PR #3 integrado |
 | 1 | ChatGPT | HANDOFF_READY | Correção de reatribuição de ponteiro, regressão e CI executando suíte |
-| 2 | ChatGPT | IN_PROGRESS | PRs #13–#33 integradas; unidade atual na branch `feat/w1-l2-energy-network-progression`: transição W1-L1→W1-L2, retomada e blockout W1-L2; CI pendente |
+| 2 | ChatGPT | IN_PROGRESS | PR #34 integrada (`c10ca69`); W1-L1→W1-L2, retomada e blockout W1-L2. PR CI: 69 testes/439 verificações/0 falhas; Godot CI pós-merge pendente |
 | 3 | ChatGPT | Aguardando | Próxima unidade após validação da Etapa 2 |
 
 Um único escritor por vez. Por decisão do usuário, ChatGPT conduz sozinho as próximas etapas; Claude permanece inativo no fluxo de escrita.
 
 ## Pull requests
+
+- [PR #34](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/34): MERGED — W1-L2 Rede Interrompida, campo energético cíclico e progressão W1-L1→W1-L2; Godot CI pré-merge 69 testes/439 verificações/0 falhas; Docs CI SUCCESS.
+- [PR #33](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/33): MERGED — expansão da diretriz de produção e correção do coletável de vida.
 
 - [PR #4](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/4): MERGED — handoff Etapa 2 e sincronização documental.
 - [PR #5](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/5): MERGED — auditoria integral e polimento da continuidade (Docs CI #140 SUCCESS).
