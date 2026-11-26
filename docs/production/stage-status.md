@@ -1,8 +1,9 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` — HEAD `09317a2c1b7c1113e7ff2f142a82b495998f7578` (PR #13 integrada).  
-**Última entrega:** checkpoint reutilizável e respawn local da sandbox; implementação integrada, sem persistência entre sessões.  
+**Branch de integração:** `main` — base `d6301e887c6c3a54ab532fcc2f75cb983c3e9840`.  
+**Branch de trabalho:** `feat/campaign-opening-tutorial` — abertura, tutorial e blockout W1-L1 em implementação; PR/CI pendentes.  
+**Última entrega integrada:** checkpoint reutilizável e respawn local da sandbox (PR #13).  
 **Responsável atual:** ChatGPT, por decisão explícita do usuário; Claude não está no fluxo ativo.  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
 
@@ -19,7 +20,7 @@
 | Safe Area | Implementado parcialmente | Recalcula em resize/viewport e eventos de retomada/foco; comportamento real ainda não validado em Android |
 | HUD | Implementado parcialmente | HUD de sandbox, pausa e resultado; layout provisório |
 | Sandbox | Implementado | Cenário de desenvolvimento; **não é fase da campanha** |
-| Campanha | Não iniciada | Nenhuma das 42 fases está implementada |
+| Campanha | Em andamento | Sequência de abertura/tutorial jogável; W1-L1 Cybercore possui blockout inicial, ainda sem inimigos/combate e conteúdo final. Nenhuma fase validada |
 | Combate/inimigos/chefes | Não iniciado | Nenhum sistema de combate ou inimigo integrado |
 | Checkpoint/save | Em andamento | PR #13 integrada: `BoltCheckpoint` com ativação única e respawn no último ponto ativo da sandbox. Estado em memória; SaveSystem/campanha ainda não implementados |
 | Assets finais/áudio | Não identificados como integrados | Placeholders de apresentação permanecem |
@@ -119,3 +120,10 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Godot CI #50 (`45841890027`) SUCCESS no merge: Godot 4.7.2, importação headless e suíte com 43 testes / 179 verificações / 0 falhas.
 - Docs CI #167 (`45841889890`) SUCCESS no merge.
 - Nenhuma exportação APK, instalação, emulador ou validação em Android físico foi realizada.
+
+
+## Próxima entrega — entrada da campanha
+
+- Menu principal → storyboard de abertura → tutorial jogável com robô mensageiro → blockout W1-L1 Cybercore.
+- W1-L1 é blockout de gameplay em desenvolvimento, não fase concluída. Inimigos, combate, narrativa ambiental, assets finais, áudio, save/load e QA continuam pendentes.
+- Branch `feat/campaign-opening-tutorial`, base `d6301e887c6c3a54ab532fcc2f75cb983c3e9840`; CI pendente.
