@@ -1,9 +1,9 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Branch de integração:** `main` — HEAD `96bf49a659fecc3ca280ceb140613add808dcdda` (PR #19 integrada).  
-**Última entrega integrada:** inimigo-base provisório de Cybercore, dano/vida do jogador, invulnerabilidade, respawn e HUD de vida (PR #19).  
-**CI da PR #19:** Godot #45848858668 e Docs #45848858475 SUCCESS; 50 testes, 252 verificações, 0 falhas. CI pós-merge #45849033538/#45849033502 em execução no momento deste registro.  
+**Branch de integração:** `main` — HEAD `b2e66d9638d367cce29b266d75f230cb16ed1763` (PR #21 integrada).  
+**Última entrega integrada:** inimigo-base provisório, dano/vida do jogador, invulnerabilidade, respawn, HUD, coletável de cura e feedback visual de impacto (PR #19 e #21).  
+**CI da PR #21:** Godot run #45849915250 SUCCESS em Godot 4.7.2; 53 testes, 276 verificações, 0 falhas. CI pós-merge da PR #21 deve ser consultado separadamente.  
 **Responsável atual:** ChatGPT, por decisão explícita do usuário; Claude não está no fluxo ativo.  
 **Estado do Gate 1:** EM ANDAMENTO — a base jogável e o input existem, mas a vertical slice Android ainda não está completa.
 
@@ -20,8 +20,8 @@
 | Safe Area | Implementado parcialmente | Recalcula em resize/viewport e eventos de retomada/foco; comportamento real ainda não validado em Android |
 | HUD | Implementado parcialmente | HUD de sandbox, pausa e resultado; layout provisório |
 | Sandbox | Implementado | Cenário de desenvolvimento; **não é fase da campanha** |
-| Campanha | Em andamento | Sequência de abertura/tutorial jogável; W1-L1 Cybercore possui blockout inicial, ainda sem inimigos/combate e conteúdo final. Nenhuma fase validada |
-| Combate/inimigos/chefes | Em andamento | Pistola Crono básica, componente de vida/dano e alvo estático de treinamento integrados ao tutorial. Ainda sem inimigos com IA, dano ao jogador, chefes ou arsenal completo |
+| Campanha | Em andamento | Abertura/tutorial jogável; W1-L1 Cybercore tem blockout, inimigo-base provisório, Pistola Crono, dano ao jogador e coletável de cura. Conteúdo e apresentação finais pendentes; nenhuma fase validada |
+| Combate/inimigos/chefes | Em andamento | Pistola Crono, inimigo-base de patrulha provisório, vida/dano, invulnerabilidade, feedback visual de impacto e coletável de cura. Sem chefes, IA avançada ou arsenal completo |
 | Checkpoint/save | Em andamento | PR #13 integrada: `BoltCheckpoint` com ativação única e respawn no último ponto ativo da sandbox. Estado em memória; SaveSystem/campanha ainda não implementados |
 | Assets finais/áudio | Não identificados como integrados | Placeholders de apresentação permanecem |
 
@@ -169,3 +169,15 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Dash, ActionBuffer, controles touch e Pistola Crono preservados. Inimigo e parâmetros continuam protótipos, não canon.
 - Handoff: [HANDOFF_ENEMY_COMBAT.md](handoffs/HANDOFF_ENEMY_COMBAT.md).
 - APK/exportação, instalação, emulador, aparelho Android, FPS e memória: NÃO EXECUTADOS.
+
+
+## Pós-merge PR #21 — recuperação e feedback de combate (2026-11-26)
+
+- PR #21 integrada por squash em `b2e66d9638d367cce29b266d75f230cb16ed1763`.
+- Godot Validation PR #21: run `45849915250` SUCCESS, Godot 4.7.2, import/parse headless aprovado, **53 testes, 276 verificações, 0 falhas**.
+- Entrega: `BoltHealth.restore(amount)` com limite de vida máxima; `BoltPlayer.heal(amount)`; coletável `BoltHealthPickup` que só é consumido quando a cura funciona; flash de impacto temporário no inimigo; coletável posicionado no blockout W1-L1.
+- Primeiro CI da PR #21 falhou por referência visual não marcada como única e regressões de contato; correção aplicada e segunda execução passou. Não ocultar o primeiro resultado: a revisão foi corrigida antes do merge.
+- O coletável e seus parâmetros são protótipos, não sistema final de inventário/recompensas. Feedback usa placeholder geométrico.
+- Dash, ActionBuffer, controles touch, Pistola Crono, invulnerabilidade e fluxo de derrota preservados.
+- APK/exportação, instalação, emulador, aparelho Android, FPS e memória: NÃO EXECUTADOS.
+- Handoff: [HANDOFF_HEALTH_PICKUP_FEEDBACK.md](handoffs/HANDOFF_HEALTH_PICKUP_FEEDBACK.md).
