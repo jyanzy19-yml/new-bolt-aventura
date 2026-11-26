@@ -72,10 +72,9 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	check(cybercore_instance.get_node_or_null("Bolt") is BoltPlayer, "W1-L1 instancia BOLT")
 	check(cybercore_instance.get_node_or_null("Checkpoint") is BoltCheckpoint, "W1-L1 contém checkpoint")
 	check(cybercore_instance.get_node_or_null("Goal") is Area2D, "W1-L1 contém objetivo de trecho")
-		check(cybercore_instance.get_node_or_null("Hud") is Hud, "W1-L1 mantém HUD e controles touch")
+	check(cybercore_instance.get_node_or_null("Hud") is Hud, "W1-L1 mantém HUD e controles touch")
 	var level_player: BoltPlayer = cybercore_instance.get_node("Bolt") as BoltPlayer
 	var checkpoint: BoltCheckpoint = cybercore_instance.get_node("Checkpoint") as BoltCheckpoint
-	var kill_zone: Area2D = cybercore_instance.get_node("KillZone") as Area2D
 	var enemy: CybercorePatrolEnemy = cybercore_instance.get_node("PatrolEnemy") as CybercorePatrolEnemy
 	var goal: Area2D = cybercore_instance.get_node("Goal") as Area2D
 	check_eq(enemy.global_position, Vector2(850.0, -19.0), "inimigo começa apoiado no piso intermediário")
@@ -83,7 +82,7 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	check_eq(goal.global_position, Vector2(1960.0, -32.0), "área de conclusão alcança a altura do jogador sobre o piso")
 	checkpoint.activate()
 	check(level_player.take_damage(1, 1.0), "BOLT pode receber dano antes do respawn no checkpoint")
-	kill_zone.call("_on_body_entered", level_player)
+	cybercore_instance.call("_on_kill_zone_body_entered", level_player)
 	var health: BoltHealth = level_player.get_node("%Health") as BoltHealth
 	check_eq(level_player.global_position, checkpoint.get_respawn_position(), "queda retorna ao checkpoint ativado")
 	check_eq(health.current_health, health.max_health, "respawn da fase restaura a vida conforme o comportamento atual")
