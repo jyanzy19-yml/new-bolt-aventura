@@ -1,8 +1,9 @@
-# BOLT · AVENTURA — Ecossistema de desenvolvimento
+# BOLT · AVENTURA — Projeto de jogo e ecossistema de desenvolvimento
 
-Framework de produção para apoiar o desenvolvimento de BOLT · AVENTURA com Claude Code.
+Projeto 2D de plataforma, ação e aventura para Android, desenvolvido em Godot 4.7.2/GDScript e acompanhado por documentação de produção, testes e ferramentas de qualidade.
 
 ## Conteúdo do repositório
+- **Projeto executável existente:** `project.godot`, cenas em `scenes/`, scripts GDScript em `scripts/`, recursos em `resources/` e testes em `tests/`. A base atual é uma fundação/protótipo técnico; não representa a campanha completa.
 - **39 skills:** 26 skills selecionadas da coleção comunitária de game development, 1 skill BOLT de estrutura Godot adaptada com referência comunitária e 12 skills originais específicas do BOLT.
 - **11 agentes consultivos read-only:** arquitetura, gameplay, narrativa, level design, Android/performance, QA, UI/UX direção de arte/áudio, integração Godot, release Android e integridade de persistência.
 - **6 comandos de fluxo de trabalho:** auditoria, planejamento, QA, revisão Android, continuidade e prontidão de release.
@@ -45,9 +46,9 @@ O alvo técnico inclui aparelhos Android com aproximadamente 4 GB de RAM e Media
 
 ## Mandato de implementação
 
-A missão não é apenas manter documentação: é criar o jogo completo do zero em Godot 4.x para Android. A especificação operacional obrigatória está em [docs/production/from-zero-implementation-directive.md](docs/production/from-zero-implementation-directive.md), vinculada também a `MASTER_DIRECTIVE.md` e `CLAUDE.md`. Auditoria, planejamento e vertical slice são etapas internas; não são entregáveis finais. O estado atual continua sendo documental até que os arquivos executáveis Godot sejam efetivamente criados e testados.
+A missão de longo prazo é entregar o jogo completo em Godot para Android. **A fundação executável já existe** e deve ser continuada incrementalmente; não recrie `project.godot`, cenas ou sistemas existentes. A [diretiva de implementação integral](docs/production/from-zero-implementation-directive.md) orienta a evolução da base atual até a campanha completa. Auditoria, planejamento e vertical slice são gates de qualidade, não entregáveis finais.
 
 ## Origem e licença
 As 26 skills comunitárias foram selecionadas da coleção [gamedev-skills/awesome-gamedev-agent-skills](https://github.com/gamedev-skills/awesome-gamedev-agent-skills), distribuída sob Apache License 2.0. LICENSE e NOTICE originais foram preservados. A skill `godot-project-structure` é uma adaptação original orientada ao BOLT, inspirada na abordagem Function First de [grndctrl/godot-skills](https://github.com/grndctrl/godot-skills); não copia o texto nem os scripts da origem. As nove skills `bolt-*` são instruções originais específicas do projeto.
 
-Este repositório é um ecossistema de documentação e instruções para agentes. **Não é, por si só, a implementação executável do jogo.** A presença de skills, agentes e documentos não significa que o projeto Godot, os sete mundos ou um APK já estejam implementados.
+Este repositório reúne **o projeto Godot executável em estágio inicial** e o ecossistema de documentação/instruções para agentes. A presença do projeto não significa que os sete mundos, as 42 fases ou um APK estejam concluídos. Consulte `docs/production/stage-status.md` para distinguir implementação parcial, testes automatizados e validação Android real.
