@@ -24,6 +24,16 @@ const DEFAULT_WINDOW: float = 0.12
 var _pressed_at_tick: Dictionary = {}
 
 
+func _notification(what: int) -> void:
+	# Um toque curto pode continuar pendente mesmo depois que o SO suspende o app.
+	# Limpar na perda de foco/pausa evita consumir um comando antigo ao retornar.
+	if what == NOTIFICATION_APPLICATION_PAUSED \
+	or what == NOTIFICATION_APPLICATION_FOCUS_OUT \
+	or what == NOTIFICATION_WM_WINDOW_FOCUS_OUT \
+	or what == NOTIFICATION_PAUSED:
+		clear()
+
+
 func _input(event: InputEvent) -> void:
 	for action: StringName in tracked_actions:
 		if event.is_action_pressed(action, false):
