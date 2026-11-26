@@ -228,3 +228,26 @@ Ao retomar, consultar o HEAD real; este snapshot descreve a base auditada e não
 - **Documentação:** tracker, stage-status, COLLABORATION_STATE, este arquivo e `handoffs/HANDOFF_ETAPA_1.md`.
 - **Decisões/ADRs:** nenhuma alterada. Valores de movimento, layout touch e “All Jump” continuam provisórios.
 - **Próxima ação:** Claude Code assume Etapa 2, revisa HEAD/handoff e continua Gate 1 conforme roadmap; não tratar a sandbox como fase final.
+
+
+
+## 14. Handoff autoritativo para Etapa 2 — 2026-11-26
+
+Esta seção substitui snapshots anteriores para a próxima retomada. O histórico anterior foi preservado como registro histórico.
+
+- **Branch de integração:** `main`.
+- **HEAD-base confirmado:** `4ecaff1d67049155d95bcbb5fc9d1c98187d3767` (merge da PR #3).
+- **PR #2:** MERGED, commit `6f8bae62018fc2c7efce8fa454c16681599dcbe6`.
+- **PR #3:** MERGED, commit `4ecaff1d67049155d95bcbb5fc9d1c98187d3767`.
+- **Godot CI #45:** SUCCESS no commit da PR #3; importação condicional/análise de scripts concluídas.
+- **Docs CI #133:** SUCCESS no commit da PR #3.
+- **Etapa 0:** ACCEPTED. Hardening complementar adicionou falha do runner para suíte/checks vazios e recálculo de Safe Area no ciclo de vida; detalhes em `stage-0-hardening-audit.md`.
+- **Etapa 1:** HANDOFF_READY. Correção multitouch, teste de regressão e CI executando a suíte; handoff em `handoffs/HANDOFF_ETAPA_1.md`.
+- **Próximo responsável:** Claude Code — Etapa 2, aguardando o usuário iniciar manualmente. Handoff de entrada: `handoffs/HANDOFF_ETAPA_2_CLAUDE.md`.
+- **Gate:** Gate 1 / vertical slice ainda EM ANDAMENTO. Próxima unidade deve ser escolhida após auditoria do HEAD e das especificações; não reiniciar nem duplicar sistemas já implementados.
+- **Validação máxima:** L2. A suíte 42 testes/171 verificações/0 falhas pertence à execução anterior Godot CI #36; não atribuir esses números à Run #45 sem evidência específica.
+- **Não executado:** APK/exportação, instalação, editor gráfico, emulador, Android físico, toque real, safe area em aparelho, FPS e memória.
+- **PR #1:** permanece aberta/separada; não mesclar automaticamente.
+- **Protocolo:** um único escritor; Claude trabalha em branch/PR e ChatGPT só assume após revisar, integrar e aceitar o handoff. O usuário inicia cada sessão manualmente.
+
+**Próxima ação exata:** Claude deve confirmar que está em `main` no HEAD indicado ou descendente, ler as diretivas e handoffs, auditar o projeto real e então implementar a próxima unidade funcional do Gate 1, com testes e atualização dos registros.
