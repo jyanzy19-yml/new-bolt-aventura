@@ -103,6 +103,8 @@ func test_burst_spawns_one_shot_particles_and_releases_them() -> bool:
 
 
 func test_burst_releases_counter_when_parent_is_freed_before_timeout() -> bool:
+	# Drena bursts dos testes anteriores para isolar o delta deste caso.
+	await tree.create_timer(1.0).timeout
 	var host: Node2D = Node2D.new()
 	tree.root.add_child(host)
 	var baseline: int = Burst.active_count()
