@@ -1,26 +1,20 @@
 # Estado de produção — BOLT · AVENTURA
 
 **Atualização:** 2026-11-26  
-**Main HEAD após PR #52:** `6f8e9b8fbaaab9c44247050e5f86e4442bd2622f`.  
-**Matriz operacional:** `docs/production/26-stage-traceability-matrix.md`, integrada pela PR #48. Registro de lacunas GAP-001…GAP-022 em elaboração na branch `docs/requirements-gap-register`; Etapa 02 continua em revisão requisito-a-requisito.  
+**Main HEAD após PR #55:** d91af104ab5bf2112b4586431fc10bc44889d94e.  
+**Matriz operacional:** docs/production/26-stage-traceability-matrix.md; registro GAP-001…GAP-022 e DOC-001…DOC-011 integrado.  
+**Etapas:** 01–04 CONCLUÍDAS; Etapa 05 EM DESENVOLVIMENTO; demais conforme matriz de 26 etapas.  
+**Gate 0:** auditoria, requisitos e arquitetura estática concluídos. **Gate 1:** EM ANDAMENTO — W1-L1/W1-L2 seguem blockouts; APK debug exportado em CI, instalação e validação Android física pendentes.  
+**Escritor ativo:** ChatGPT, único escritor, conforme decisão vigente do usuário.  
 **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente.  
-**Última regressão de gameplay integrada:** PR #39 — limpeza do ActionBuffer no ciclo de vida Android, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.  
-**Última entrega de infraestrutura integrada:** PR #38 — pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.  
-**Último componente de plataforma integrado:** PR #46 — `OneWayPlatform`, merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.  
-**Última correção de gameplay integrada:** PR #47 — estado inicial do `TimedEnergyGate`, merge `2636226c4027625649e66c51ff64d7e2e56168a6`.  
-**Branch de trabalho:** `main`; PR #47 integrada. Próxima branch deve ser criada somente para a unidade aprovada seguinte.  
-**Responsável atual:** ChatGPT, único escritor ativo conforme decisão vigente do usuário.  
-**Estado do Gate 1:** EM ANDAMENTO — W1-L1/W1-L2 seguem blockouts; APK debug exportado em CI, instalação e validação Android física pendentes.
+**Última correção de gameplay:** PR #47 — estado inicial de TimedEnergyGate, merge 2636226c4027625649e66c51ff64d7e2e56168a6.  
+**Última entrega de infraestrutura/testes:** PR #55 — validação estrita de versões do SaveSystem/CampaignProgress; 92 testes/577 verificações/0 falhas; export Android debug SUCCESS pré-merge.  
+**Android debug PR #55:** 28.461.057 bytes; SHA-256 6f094b6ee26f7eee7c70ae88c0c1a291b696bf0e19ad460e63e5f57de2f3cf00; assinatura v2/v3 válida; package ID placeholder com.example.boltaventura. Não instalado em aparelho.  
+**CI pós-merge PR #54:** Godot 45897906267, Docs 45897906375 e Android Export 45897906328 SUCCESS; 90 testes/558 verificações/0 falhas; APK 28.461.057 bytes, SHA-256 12b73f0df5f71bd922f412face81b7585b3da38b705f0751c1b4d0ea79d4218a.  
+**CI pós-merge PR #55:** Docs 45898659678 SUCCESS; Godot 45898659671 e Android Export 45898659639 ainda em execução no momento deste snapshot.  
+**PR #1:** permanece OPEN, antiga e divergente; não mesclar/rebasear automaticamente.  
+**Limites físicos:** APKs debug exportados, mas não instalados; toque físico, safe area real, barras, lifecycle, profiling, temperatura e performance Android ainda não comprovados.
 
-**CI da PR #39:** Godot Validation `45881320136` SUCCESS — Godot 4.7.2, 72 testes, 451 verificações, 0 falhas; Docs Validation `45881320133` SUCCESS; Android Debug Export `45881252046` SUCCESS.  
-**Artifact PR #39:** `bolt-aventura-android-debug-7415dfb988faf2dd63f9ff289106e7f7205dcdd1`, 28.194.534 bytes; package ID provisório `com.example.boltaventura`; assinatura v2/v3 verificada; SHA-256 `db03a42b909781a1f5e7c94d025615e1aa5f397c8ebd306ba30cddf84eca14b0`.
-**PR #40:** reconciliação de Dash e autoridade do escritor integrada em `85412c3bdd5c6eefd27f25bf2a56af4b38fcdfed`; Docs CI PR `45882294553` e pós-merge main `45882348474`: SUCCESS.
-**PR #43 CI:** Godot `45884348999` SUCCESS (78 testes/484 verificações/0 falhas), Docs `45884348954` SUCCESS, Android Export `45884348969` SUCCESS; artifact `bolt-aventura-android-debug-b6bf765bccdb80c2de0512655208060ab2fc1480`, SHA-256 `3dc8eba90dc3f914b1db725f50fbdc38bee9a16dee2c38d95b05f476a41cb212`.
-**PR #43 pós-merge main:** Godot `45884671403`, Docs `45884671584`, Android Export `45884671259`: SUCCESS; artifact `bolt-aventura-android-debug-22923228d2a58c0ee6d75b581d5a16aa70e1a7ef`, APK 28.456.143 bytes, SHA-256 `3fc5ea209e88a69b3b33a7de9360dbc42d38dae9a2734eb38e103ab7f2478661`.
-**PR #44 pós-merge main:** Godot `45885612259`, Docs `45885612332`, Android Export `45885612341`: SUCCESS; 81 testes/508 verificações/0 falhas; artifact `bolt-aventura-android-debug-88b753f3b28d6591642a044b76d2d1ec21ad0d73`, APK 28.456.143 bytes, SHA-256 `de37ec1b4330f1845eb434f079be92a3c83d661cbfc1aecfd431a9fe75a3fe2d`.
-**PR #45 pós-merge main:** Godot `45886997248`, Docs `45886997138`, Android Export `45886997220`: SUCCESS; 85 testes/533 verificações/0 falhas; artifact `bolt-aventura-android-debug-b24c8624a8ed64816d0131070f440a47f525ba47`, APK 28.460.646 bytes, SHA-256 `3b3be5c8df067c000216bbc3e5ad39b357f0ea70ad3d3a5bc12625724873ffd1`.  
-**PR #46 pré-merge:** Godot Validation `45887805114` SUCCESS — 87 testes/548 verificações/0 falhas; Docs Validation `45887805097` SUCCESS; Android Debug Export `45887805269` SUCCESS. Artifact `bolt-aventura-android-debug-f20ba8c94a4e1c205edba95fc12c3b3a2beac1cd`, 28.461.057 bytes; package ID provisório `com.example.boltaventura`; assinatura v2/v3 válida; SHA-256 `8211b6c46b17861f9859c62beed1f524a35f9d571838171034cb59cb8f02eb58`. **Pós-merge:** consulta de workflow runs para `8ecfe0aa11eb911745bbe5e8e1b2211c03010702` retornou zero execuções; portanto não há evidência de CI pós-merge neste momento.
-**CI pós-merge main:** Godot `45881703643`, Docs `45881703650` e Android Export `45881703604`: SUCCESS. A execução da main repetiu 72 testes/451 verificações/0 falhas e gerou artifact `bolt-aventura-android-debug-50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`; SHA-256 do APK `edb88f43f407241e5716d6b7d327272c22e40f1025a00637d7393573e320c6d7`.
 
 ## Estado executável observado
 
