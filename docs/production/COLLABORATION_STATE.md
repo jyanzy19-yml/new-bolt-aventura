@@ -6,7 +6,7 @@
 - ChatGPT é o único escritor ativo conforme a decisão vigente do usuário; Claude permanece inativo para escrita concorrente.
 - Etapa de produção atual: continuação do Gate 1/vertical slice e expansão incremental da campanha.
 - PR #34 integrada: W1-L1 encaminha para W1-L2; save e menu Continuar reconhecem ambas as fases existentes; W1-L2 possui blockout, campo energético cíclico, checkpoint e saída.
-- CI pré-merge da PR #34: Godot 4.7.2, 69 testes/439 verificações/0 falhas; Docs SUCCESS. Docs pós-merge SUCCESS; Godot pós-merge em andamento nesta fotografia.
+- CI pré e pós-merge da PR #34: Godot 4.7.2, 69 testes/439 verificações/0 falhas; Docs CI pré/pós-merge SUCCESS. A sincronização documental posterior também passou no Docs CI.
 - A PR #1 permanece separada e não deve ser mesclada automaticamente. Android físico não validado.
 
 
@@ -33,7 +33,7 @@
 |---|---|---|---|---|
 | 0 | Claude Code | ACCEPTED | Fundação e protótipo provisório; hardening PR #3 integrado | ChatGPT |
 | 1 | ChatGPT | HANDOFF_READY | `f3ab682`: correção multitouch, regressão e CI | Claude Code |
-| 2 | ChatGPT | IN_PROGRESS | PR #34 integrada (`c10ca69`); rota W1-L1→W1-L2, retomada e blockout W1-L2. CI pré-merge 69 testes/439 verificações/0 falhas; Godot CI pós-merge pendente | ChatGPT |
+| 2 | ChatGPT | IN_PROGRESS | PR #34 integrada (`c10ca69`); rota W1-L1→W1-L2, retomada e blockout W1-L2. CI Godot pré/pós-merge 69 testes/439 verificações/0 falhas; Docs CI SUCCESS | ChatGPT |
 | 3 | ChatGPT | Aguardando | Próxima unidade após revisão/validação da Etapa 2 | ChatGPT |
 
 ## Protocolo de início de turno
