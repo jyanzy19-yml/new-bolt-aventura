@@ -753,13 +753,13 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 ## Sessão ChatGPT — revalidação final do cold boot / PR #58
 
 - **Main HEAD base:** `54fd48e5f49fba877740265aafa0d8f649c2b1e9`.
-- **Branch:** `fix/threaded-boot-smoke-2026-11-26`; head `893553584408ed6e1c8fd3f51b372a18f772862b`; PR #58 OPEN, sem merge.
-- **Runtime:** `scripts/core/boot.gd` pre-carrega `main_menu.gd` na thread principal; menu e scripts de W1/HUD não foram alterados.
-- **Godot Validation run 45908170078:** SUCCESS — 93 testes, 1.307 verificações, 0 falhas.
-- **SceneFlow:** 30 ciclos para cada uma de cinco cenas (menu, abertura, tutorial, W1-L1, W1-L2), 150 transições e 1.202 verificações.
+- **Branch:** `fix/threaded-boot-smoke-2026-11-26`; head `97f0eeed54f722e3d83701928ab5a61dd55d3731`; PR #58 OPEN, sem merge.
+- **Runtime:** `scripts/core/boot.gd` pre-carrega `main_menu.gd` na thread principal. Menu, W1-L1, W1-L2, abertura e HUD permanecem com seus scripts originais.
+- **Godot Validation #215 / run 45909374538:** SUCCESS — 93 testes, 1.787 verificações, 0 falhas.
+- **SceneFlow:** 30 ciclos para cada uma de cinco cenas (menu, abertura narrativa, tutorial, W1-L1, W1-L2), 150 transições e 1.202 verificações.
 - **Boot:** diagnóstico verbose exit 0; 20/20 processos independentes passaram.
 - **Mutation:** remover o prewarm reproduziu o Parse Error original em `main_menu.tscn:12`.
-- **Docs Validation 45908170019:** SUCCESS.
-- **Android Debug Export 45908170050:** SUCCESS; APK debug exportado, verificado e publicado como artifact CI.
-- **Limitações:** sem aparelho físico/emulador; não foram validados FPS, memória, touch físico, safe areas, ciclo de vida real ou comportamento térmico.
-- **Próxima ação:** terminar e validar a mutação do Burst no head atual da PR #57; manter ambas as PRs abertas até revisão independente. Não fazer merge automático.
+- **Docs Validation #396 / run 45909374561:** SUCCESS.
+- **Android Debug Export #103 / run 45909374622:** SUCCESS; APK debug exportado, verificado e enviado como artifact CI.
+- **Limitações:** nenhum aparelho físico/emulador; FPS, memória, touch físico, safe areas, lifecycle real e comportamento térmico não validados.
+- **Próxima ação:** fechar a mutação do Burst na PR #57; manter ambas as PRs abertas até revisão final. Não fazer merge automático.
