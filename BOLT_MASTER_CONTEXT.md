@@ -957,3 +957,328 @@ PR #1 foi registrada como antiga, divergente e separada; não integrar ou rebase
 
 ---
 
+# 15. MODELO DE PRODUÇÃO: 26 ETAPAS, 24 SISTEMAS E 42 FASES
+
+O projeto utiliza um plano operacional de 26 etapas e uma matriz de rastreabilidade. O tracker acompanha 24 sistemas globais e as 42 fases planejadas. A sequência operacional deve ser consultada em `docs/production/stage-status.md` e `docs/production/26-stage-traceability-matrix.md`.
+
+Snapshot de continuidade consultado em 26/11/2026:
+- Etapas 01–03: concluídas.
+- Etapa 04: em desenvolvimento, hardening dos sistemas centrais.
+- Gate 0 estático: concluído.
+- Gate 1: em andamento.
+- W1-L1 e W1-L2: blockouts.
+- APK debug: exportado por CI.
+- Instalação e validação Android física: pendentes.
+- Responsável de escrita ativo registrado: ChatGPT como único escritor.
+- Claude permanece inativo para escrita concorrente, conforme o estado canônico de colaboração consultado.
+
+A matriz de 26 etapas é instrumento de organização e rastreabilidade, não autorização para ignorar gates. O prompt/diretiva mestre no repositório continua sendo a fonte normativa do que deve ser implementado.
+
+## 15.1. Regras de avanço
+
+- não encerrar trabalho substancial após auditoria ou planejamento;
+- implementar unidades funcionais aprovadas;
+- não declarar etapa concluída sem critérios e evidências;
+- manter tracker e continuidade sincronizados;
+- preservar canon e ADRs;
+- continuar trabalho independente e seguro quando houver bloqueio localizado;
+- pedir decisão apenas para mudanças materiais não cobertas por decisões aprovadas, credenciais que só o usuário pode fornecer ou riscos irreversíveis;
+- deixar próximo passo concreto no handoff.
+
+## 15.2. Vertical slice
+
+A vertical slice deve validar um fluxo representativo de ponta a ponta:
+inicialização → menu → abertura/tutorial → fase → movimento/combate → inimigo → checkpoint → loading/transição → resultado → save/load.
+
+A vertical slice é um gate de qualidade e integração, não o produto final. Não repetir indefinidamente o protótipo sem avançar para a campanha.
+
+---
+
+# 16. SKILLS, AGENTES E COMANDOS DO REPOSITÓRIO
+
+O repositório contém um ecossistema de instruções e ferramentas para apoiar a produção. O README registra 39 skills, incluindo 26 selecionadas de uma coleção comunitária, uma adaptação de estrutura Godot e skills originais BOLT. Também registra 11 agentes consultivos read-only e seis comandos de workflow.
+
+As skills devem ser carregadas seletivamente conforme a tarefa. Não carregar a coleção inteira sem necessidade.
+
+Exemplos de domínios cobertos:
+- arquitetura de jogo;
+- gameplay;
+- narrativa;
+- level design;
+- Android/performance;
+- QA;
+- UI/UX;
+- arte e áudio;
+- integração Godot;
+- release Android;
+- persistência;
+- touch;
+- boss encounters;
+- cinemáticas;
+- pipeline de conteúdo;
+- debugging;
+- regressão;
+- continuidade de mundos.
+
+Comandos documentados incluem:
+- `/bolt-audit`;
+- `/bolt-plan`;
+- `/bolt-qa`;
+- `/bolt-android-review`;
+- `/bolt-continue`;
+- `/bolt-release-check`.
+
+Comandos e agentes são auxiliares. Não substituem execução, testes, evidências ou aprovação do usuário.
+
+---
+
+# 17. ESTADO DO PROJETO NA CONSOLIDAÇÃO
+
+## 17.1. Estado geral
+
+O projeto não é apenas documentação: existe uma fundação Godot executável com cenas, scripts, recursos, testes e configuração Android. Entretanto, essa fundação não representa a campanha completa.
+
+O estado consultado aponta um protótipo técnico e blockouts iniciais, com sistemas centrais em hardening e expansão progressiva.
+
+## 17.2. Estado por área
+
+| Área | Estado conhecido | Limite importante |
+|---|---|---|
+| Projeto Godot | Implementado | Confirmar importação e versão no ambiente atual |
+| Boot/menu | Parcialmente implementado | Validação visual/Android física pendente |
+| SceneFlow | Implementado parcialmente | Cobrir edge cases e validação de runtime |
+| LoadingOverlay | Implementado parcialmente | Validar transições em dispositivo |
+| Player/movimento | Implementado parcialmente | Tuning provisório e validação física pendente |
+| Dash | Aprovado e presente | Preservar implementação e comportamento |
+| Touch/multitouch | Parcialmente implementado | Teste real em Android pendente |
+| Safe area | Parcialmente implementada | Validar recortes e barras em aparelho |
+| HUD | Parcial/provisório | Acabamento e validação de layout pendentes |
+| Sandbox | Implementado | Ferramenta de desenvolvimento, não fase de campanha |
+| Abertura/tutorial | Fluxo funcional inicial | Não equivale a cinematics/arte finais |
+| W1-L1 | Blockout | Conteúdo, arte, áudio, playtest e QA final pendentes |
+| W1-L2 | Blockout | Conteúdo, arte, áudio, playtest e QA final pendentes |
+| Combate | Base inicial | Arsenal, IA e balanceamento incompletos |
+| Inimigos | Base provisória | Arquétipos e IA de campanha incompletos |
+| Chefes | Não implementados no escopo completo observado | Necessários para campanha |
+| SaveSystem | v1 implementado parcialmente | Migrações e validação física pendentes |
+| CampaignProgress | v1 parcial | Integração de todos os níveis/domínios pendente |
+| Checkpoints | Integração inicial | Validar persistência/cold start em Android |
+| Assets finais | Não identificados como integrados de forma completa | Placeholders permanecem |
+| Áudio final | Não identificado como integrado | Produção e mixagem pendentes |
+| Android debug APK | Exportado por CI em registros | Não confundir exportação com instalação |
+| Android físico | Pendente | Touch, lifecycle, safe area, desempenho e playtest |
+| Campanha 7 mundos/42 fases | Planejada | Não implementada integralmente |
+
+## 17.3. Snapshot de colaboração
+
+O arquivo `docs/production/COLLABORATION_STATE.md` consultado registra ChatGPT como único escritor ativo e Claude inativo para escrita concorrente. Esse estado deve ser confirmado no repositório antes de iniciar qualquer fluxo de colaboração entre agentes.
+
+O protocolo de colaboração histórico pode continuar documentado, mas não sobrepõe o escritor ativo atual.
+
+## 17.4. Próxima unidade registrada
+
+O snapshot de continuidade consultado indica como próxima unidade a auditoria de:
+- Boot;
+- SceneFlow;
+- SaveSystem;
+- CampaignProgress;
+- LoadingOverlay.
+
+A tarefa consiste em encontrar edge cases confirmados, corrigir defeitos reais e adicionar regressões, sem alterar schema/canon desnecessariamente. Antes de executar, confirmar se essa unidade ainda é a próxima no HEAD atual.
+
+---
+
+# 18. PROCEDIMENTO OBRIGATÓRIO PARA QUALQUER AGENTE QUE RETOMAR O PROJETO
+
+Antes de editar:
+
+1. Confirmar acesso real ao repositório.
+2. Confirmar nome completo do repositório e branch.
+3. Obter HEAD atual, árvore e estado de PRs relevantes.
+4. Ler `MASTER_DIRECTIVE.md`.
+5. Ler `CLAUDE.md` e `AGENTS.md`.
+6. Ler `docs/README.md`.
+7. Ler `docs/production/stage-status.md`.
+8. Ler `docs/production/COLLABORATION_STATE.md`.
+9. Ler `docs/production/CONTINUITY.md`.
+10. Ler `docs/production/implementation-tracker.md`.
+11. Ler ADRs pertinentes.
+12. Ler a especificação de design/técnica da tarefa.
+13. Inspecionar cenas, scripts e testes reais relacionados.
+14. Confirmar a versão Godot no projeto.
+15. Identificar estado implementado, provisório, pendente e validado.
+16. Formular uma unidade de mudança pequena e verificável.
+17. Implementar sem refatorações não relacionadas.
+18. Rodar testes apropriados.
+19. Revisar diff e impactos.
+20. Atualizar documentação, tracker e continuidade.
+
+Nunca iniciar uma implementação baseada apenas neste dossiê ou em uma conversa antiga quando o estado do repositório puder ser consultado.
+
+## 18.1. Relatório obrigatório ao final de tarefa substancial
+
+- objetivo;
+- branch e commit-base;
+- arquivos alterados;
+- sistemas afetados;
+- canon/ADR afetados ou declaração de que nenhum foi alterado;
+- implementação realizada;
+- testes executados;
+- resultados exatos;
+- testes não executados e motivo;
+- validação Android realizada ou não;
+- riscos e limitações;
+- status do gate;
+- próximo passo concreto.
+
+---
+
+# 19. REGRAS DE NÃO REGRESSÃO E PROTEÇÃO DO PRODUTO
+
+1. Não recriar `project.godot` ou a fundação existente.
+2. Não migrar de engine por iniciativa própria.
+3. Não converter o projeto para web como plataforma-alvo.
+4. Não remover Dash.
+5. Não alterar física, controles ou tuning sem escopo.
+6. Não quebrar multitouch.
+7. Não comprometer salto ou Dash durante stutter.
+8. Não modificar modo imersivo, barras do sistema ou safe areas sem consultar ADRs.
+9. Não alterar schema de save sem plano de compatibilidade/migração.
+10. Não criar IDs instáveis para conteúdo persistente.
+11. Não usar espera artificial como substituto de loading real.
+12. Não declarar blockout como fase final.
+13. Não declarar sandbox como fase da campanha.
+14. Não declarar alvo de treino como inimigo completo.
+15. Não declarar APK exportado como instalado.
+16. Não declarar CI headless como validação Android física.
+17. Não declarar placeholder como arte final.
+18. Não inventar canon narrativo.
+19. Não transformar proposta em aprovação.
+20. Não executar operações destrutivas ou force push.
+21. Não expor, alterar ou buscar credenciais sem necessidade e autorização.
+22. Não marcar etapa, sistema ou fase como concluída sem evidência.
+23. Não duplicar documentação quando já existir fonte especializada.
+24. Não permitir escrita concorrente por agentes sem reativação explícita do fluxo.
+
+---
+
+# 20. GLOSSÁRIO TÉCNICO E DE PRODUÇÃO
+
+- **ADR:** Architecture Decision Record; registro de decisão arquitetural.
+- **APK:** pacote instalável Android.
+- **Blockout:** versão preliminar da fase para validar geometria, fluxo e mecânicas.
+- **CampaignProgress:** domínio de estado persistente da campanha.
+- **Cold start:** inicialização do aplicativo a partir de estado encerrado.
+- **Coyote time:** janela de tolerância após sair de uma plataforma em que o salto ainda é permitido.
+- **Dash:** deslocamento rápido aprovado como mecânica de gameplay.
+- **Definition of Done:** critérios verificáveis para considerar uma unidade concluída.
+- **Frame time:** tempo de processamento de um frame; métrica mais informativa que FPS isolado para stutter.
+- **Gate:** marco de validação que precisa ser satisfeito antes de avançar.
+- **Godot headless:** execução/testes sem interface gráfica.
+- **HUD:** interface sobreposta ao gameplay.
+- **Input buffer:** armazenamento temporário de comandos para preservar intenção do jogador.
+- **Lifecycle:** estados de foco, pausa, suspensão e retomada do aplicativo.
+- **Multitouch:** registro simultâneo de múltiplos contatos.
+- **p95/p99:** percentis de distribuição de frame time ou latência.
+- **Safe area:** região da tela livre de recortes e áreas reservadas pelo sistema.
+- **SceneFlow:** serviço de transição/carregamento entre cenas.
+- **SaveSystem:** infraestrutura de serialização e armazenamento.
+- **Softlock:** estado em que o jogo continua executando, mas o progresso fica impossível.
+- **Telemetry:** medição estruturada de comportamento/desempenho, quando adotada.
+- **Vertical slice:** fatia pequena, porém representativa, do produto integrada de ponta a ponta.
+
+---
+
+# 21. ÍNDICE DE DOCUMENTOS QUE DEVEM SER CONSULTADOS
+
+## Diretrizes
+- `MASTER_DIRECTIVE.md`
+- `CLAUDE.md`
+- `AGENTS.md`
+- `docs/README.md`
+- `docs/production/from-zero-implementation-directive.md`
+
+## Game design
+- `docs/game-design/00-game-overview.md`
+- `docs/game-design/01-narrative-bible.md`
+- `docs/game-design/02-world-bible.md`
+- `docs/game-design/03-character-bible.md`
+- `docs/game-design/04-gameplay-systems.md`
+- `docs/game-design/05-level-design-standard.md`
+- `docs/game-design/06-ui-ux.md`
+- `docs/game-design/07-art-audio-direction.md`
+- `docs/game-design/EXPANDED-42-LEVEL-CAMPAIGN-BLUEPRINT.md`
+- `docs/game-design/EXPANDED-GAMEPLAY-SYSTEMS.md`
+- `docs/game-design/EXPANDED-NARRATIVE-DOSSIER.md`
+
+## Técnica
+- `docs/technical/00-architecture-principles.md`
+- `docs/technical/01-android-performance.md`
+- `docs/technical/02-touch-and-display.md`
+- `docs/technical/03-loading-and-assets.md`
+- `docs/technical/04-android-build-checklist.md`
+- `docs/technical/05-system-contracts.md`
+- `docs/technical/06-godot-project-foundation.md`
+- `docs/technical/07-save-system.md`
+- `docs/technical/08-campaign-progress.md`
+- `docs/technical/09-current-architecture-map.md`
+
+## Produção e continuidade
+- `docs/production/stage-status.md`
+- `docs/production/COLLABORATION_STATE.md`
+- `docs/production/CONTINUITY.md`
+- `docs/production/implementation-tracker.md`
+- `docs/production/26-stage-traceability-matrix.md`
+- `docs/production/requirements-gap-register.md`
+- `docs/production/CI_AND_VALIDATION_PIPELINE.md`
+- `docs/production/quality-control-protocol.md`
+- `docs/production/definition-of-done.md`
+- `docs/production/ADR-001-DASH.md`
+
+## QA
+- `docs/qa/test-matrix.md`
+- templates de plano, decisão, handoff e relatórios em `docs/templates/`
+
+---
+
+# 22. DECLARAÇÃO FINAL DE CONTEXTO
+
+BOLT · AVENTURA deve ser desenvolvido como um produto de jogo 2D profissional, com engenharia de gameplay, arquitetura modular sustentável, direção de arte consistente, narrativa rastreável, level design autoral e validação Android real.
+
+O projeto já possui uma fundação Godot executável e um ecossistema documental amplo. A prioridade não é recomeçar, trocar de tecnologia ou produzir documentação redundante. A prioridade é continuar a implementação real, fechar contratos entre sistemas, fortalecer a confiabilidade, validar a experiência mobile e expandir progressivamente a campanha.
+
+O agente deve agir com rigor de engenharia:
+- inspecionar antes de modificar;
+- compreender ownership e dependências;
+- respeitar canon e decisões;
+- implementar incrementalmente;
+- testar regressões;
+- medir antes de otimizar;
+- distinguir evidência de expectativa;
+- manter rastreabilidade;
+- preservar continuidade;
+- nunca declarar conclusão sem critérios.
+
+**Objetivo permanente:** transformar a fundação atual em BOLT · AVENTURA completo, coeso, responsivo, visualmente consistente, tecnicamente robusto e pronto para distribuição Android.
+
+---
+
+# APÊNDICE A — METADADOS DA CONSULTA DE REPOSITÓRIO
+
+Esta consolidação foi preparada a partir da árvore e de arquivos do repositório consultados em 26/11/2026.
+
+- Repositório: `jyanzy19-yml/new-bolt-aventura`
+- Branch consultada: `main`
+- Árvore Git retornada: `fc4839e4a36b914514d8a6c8ca86fd29b6e47807`
+- Linguagem primária reportada pelo GitHub: GDScript
+- Visibilidade observada: pública
+- Tamanho reportado pelo GitHub na consulta: 1105 KB (valor sujeito a mudança)
+- Quantidade de entradas na árvore recursiva consultada: 411
+- A árvore é mutável; não usar o SHA da árvore como substituto do commit HEAD.
+- O snapshot de continuidade presente nos documentos consultados indicava `main` HEAD `6f8e9b8fbaaab9c44247050e5f86e4442bd2622f` após PR #52. Como os dados podem mudar entre consultas, confirmar commit atual antes de qualquer implementação.
+
+Este apêndice registra procedência e limitações da consolidação. Ele não afirma que todos os 411 arquivos foram integralmente auditados nesta operação. Os documentos especializados e o código executável continuam sendo as fontes completas.
+
+# APÊNDICE B — PROMPT OPERACIONAL CURTO PARA USO DESTE DOSSIÊ
+
+Ao receber este documento, trate-o como contexto consolidado de BOLT · AVENTURA. Não comece a programar apenas com base nele. Primeiro confirme o estado atual do repositório GitHub, branch, HEAD, documentação de autoridade, ADRs, tracker e continuidade. Depois leia as fontes especializadas relacionadas à tarefa e inspecione os arquivos reais. Preserve a fundação Godot 4.7.2, Android landscape, Dash aprovado, touch/multitouch, safe areas, persistência e decisões narrativas. Diferencie canon, requisito, proposta, provisório, implementado e validado. Faça mudanças pequenas e integradas, execute testes pertinentes, não invente evidências e atualize a continuidade. A missão é avançar a implementação real até a campanha completa de sete mundos e 42 fases, sem recriar o projeto ou encerrar o trabalho apenas em planejamento.
