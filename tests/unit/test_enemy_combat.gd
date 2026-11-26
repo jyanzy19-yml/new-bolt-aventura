@@ -87,3 +87,72 @@ func test_chrono_projectile_can_defeat_patrol_enemy() -> bool:
 	root.queue_free()
 	await tree.process_frame
 	return true
+
+
+func test_health_restore_is_capped_and_cannot_revive_depleted_health() -> bool:
+	var health: BoltHealth = BoltHealth.new()
+	health.max_health = 3
+	tree.root.add_child(health)
+	await tree.process_frame
+	check_eq(health.current_health, 3, "componente inicia com vida máxima")
+	check(health.apply_damage(2), "componente aceita dano")
+	check(health.restore(1), "componente restaura vida")
+	check_eq(health.current_health, 2, "restauração soma a quantidade solicitada")
+	check(health.restore(10), "restauração excedente é aceita")
+	check_eq(health.current_health, 3, "restauração não ultrapassa vida máxima")
+	check(not health.restore(1), "restaurar vida cheia não altera o estado")
+	check(health.apply_damage(3), "dano pode esgotar a vida")
+	check_eq(health.current_health, 0, "vida chega a zero")
+	check(not health.restore(2), "cura não revive componente esgotado")
+	health.queue_free()
+	await tree.process_frame
+	return true
+
+
+func test_health_pickup_only_collects_when_player_needs_health() -> bool:
+	var player_scene: PackedScene = load(PLAYER_SCENE) as PackedScene
+	var pickup_scene: PackedScene = load("res://scenes/combat/bolt_health_pickup.tscn") as PackedScene
+	check(player_scene != null and pickup_scene != null, "cenas de BOLT e coletável de vida carregam")
+	if player_scene == null or pickup_scene == null:
+		return true
+	var root: Node2D = Node2D.new()
+	tree.root.add_child(root)
+	var player: BoltPlayer = player_scene.instantiate() as BoltPlayer
+	var pickup: BoltHealthPickup = pickup_scene.instantiate() as BoltHealthPickup
+	root.add_child(player)
+	root.add_child(pickup)
+	await tree.process_frame
+	var health: BoltHealth = player.get_node("%Health") as BoltHealth
+	check(not player.heal(1), "BOLT não aceita cura quando está com vida cheia")
+	check(not pickup.is_queued_for_deletion(), "coletável permanece disponível com vida cheia")
+	check(player.take_damage(1, 0.0), "BOLT recebe dano antes da coleta")
+	check_eq(health.current_health, 2, "dano reduz vida para permitir recuperação")
+	pickup.call("_on_body_entered", player)
+	check_eq(health.current_health, 3, "coletável restaura um ponto de vida")
+	check(pickup.is_queued_for_deletion(), "coletável é consumido após cura válida")
+	root.queue_free()
+	await tree.process_frame
+	return true
+
+
+func test_enemy_hit_feedback_flashes_and_returns_to_base_color() -> bool:
+	var enemy_scene: PackedScene = load(ENEMY_SCENE) as PackedScene
+	check(enemy_scene != null, "cena do inimigo carrega para teste de feedback")
+	if enemy_scene == null:
+		return true
+	var root: Node2D = Node2D.new()
+	tree.root.add_child(root)
+	var enemy: CybercorePatrolEnemy = enemy_scene.instantiate() as CybercorePatrolEnemy
+	root.add_child(enemy)
+	await tree.process_frame
+	var visual: Polygon2D = enemy.get_node("%Visual") as Polygon2D
+	var original_color: Color = visual.color
+	enemy.apply_damage(1)
+	check(visual.color != original_color, "inimigo muda de cor ao receber dano")
+	check_eq((enemy.get_node("%Health") as BoltHealth).current_health, 2, "feedback acompanha redução real de vida")
+	for _tick in 12:
+		await tree.physics_frame
+	check_eq(visual.color, original_color, "cor original retorna após o flash")
+	root.queue_free()
+	await tree.process_frame
+	return true

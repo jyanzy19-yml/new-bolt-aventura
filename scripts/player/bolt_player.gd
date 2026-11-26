@@ -55,6 +55,12 @@ func get_camera() -> Camera2D:
 	return _camera
 
 
+func heal(amount: int) -> bool:
+	if _is_defeated or amount <= 0:
+		return false
+	return _health.restore(amount)
+
+
 func take_damage(amount: int, knockback_direction: float = 0.0) -> bool:
 	if amount <= 0 or _is_defeated or _invulnerability_left > 0.0:
 		return false

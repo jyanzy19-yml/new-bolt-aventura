@@ -25,6 +25,17 @@ func apply_damage(amount: int) -> bool:
 	return true
 
 
+func restore(amount: int) -> bool:
+	if amount <= 0 or current_health <= 0 or current_health >= maxi(1, max_health):
+		return false
+	var previous_health: int = current_health
+	current_health = mini(maxi(1, max_health), current_health + amount)
+	if current_health == previous_health:
+		return false
+	health_changed.emit(current_health, maxi(1, max_health))
+	return true
+
+
 func restore_full() -> void:
 	current_health = maxi(1, max_health)
 	health_changed.emit(current_health, current_health)
