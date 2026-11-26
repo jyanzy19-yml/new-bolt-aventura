@@ -5,6 +5,7 @@ extends BoltTest
 const SCENES: Array[String] = [
 	"res://scenes/ui/main_menu.tscn",
 	"res://scenes/campaign/opening_cinematic.tscn",
+	"res://scenes/tutorial/tutorial.tscn",
 	"res://scenes/campaign/cybercore_w1_l1.tscn",
 	"res://scenes/campaign/cybercore_w1_l2.tscn",
 ]
