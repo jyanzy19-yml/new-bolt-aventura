@@ -317,3 +317,323 @@ Os parâmetros atuais devem ser consultados nos scripts e recursos reais. Não a
 ## 4.3. Dash — decisão aprovada
 
 Dash é uma mecânica aprovada e deve permanecer no jogo. A decisão está registrada em `docs/production/ADR-001-DASH.md`.
+Regras:
+- não remover Dash;
+- não substituir sua implementação por uma versão genérica;
+- preservar Input Map, controles e testes existentes;
+- não retunar duração, velocidade, cooldown, alcance ou comportamento sem tarefa específica;
+- qualquer alteração deve ser isolada, justificada e coberta por regressões;
+- garantir que o controle touch continue confiável.
+
+## 4.4. Combate
+
+O estado de implementação documentado inclui uma base inicial de combate:
+- componente reutilizável de vida/dano (`BoltHealth`);
+- controlador de combate (`BoltCombat`);
+- projétil `ChronoProjectile`;
+- alvo de treinamento (`BoltTrainingTarget`);
+- Pistola Crono básica;
+- botão touch de tiro;
+- lição de ataque no tutorial.
+
+Parâmetros de cadência, dano, velocidade e alcance foram descritos como provisórios. O alvo estático é um alvo de treino, não um inimigo completo da campanha.
+
+O escopo maior inclui armas, seleção, inimigos, IA, dano ao jogador, feedback, chefes e progressão de arsenal, conforme as bíblias. O documento de gameplay deve ser consultado antes de definir comportamento final.
+
+## 4.5. Inimigos e IA
+
+O inimigo-base de patrulha Cybercore é provisório. Não confundir a existência de um script/cena com um ecossistema de IA completo.
+
+A arquitetura de IA deve permitir:
+- estados explícitos;
+- percepção e detecção;
+- navegação/steering quando aplicável;
+- telegraphs;
+- ataque e recuperação;
+- dano e morte;
+- reação a colisões;
+- variação de arquétipos;
+- integração com level design;
+- testes de transições e edge cases.
+
+As skills de `game-ai`, `enemy-ai` e documentos relacionados podem servir de referência técnica, mas os contratos do projeto e a compatibilidade Godot devem ser respeitados.
+
+## 4.6. Feedback e game feel
+
+O projeto precisa de feedback audiovisual coerente para:
+- salto e aterrissagem;
+- Dash;
+- disparo;
+- acerto;
+- dano recebido;
+- invulnerabilidade;
+- coleta;
+- checkpoint;
+- interação;
+- objetivo concluído;
+- derrota/vitória;
+- transição de fase.
+
+Feedback não deve comprometer legibilidade, performance ou acessibilidade. Efeitos devem ter limites de emissão, duração e custo.
+
+---
+
+# 5. ANDROID, TOUCH, DISPLAY E UX
+
+## 5.1. Android como plataforma de produto
+
+Toda decisão de UX, arquitetura, performance, input e release deve considerar o aplicativo Android empacotado. Não desenvolver a experiência principal para navegador.
+
+## 5.2. Orientação e apresentação
+
+A orientação do jogo é paisagem. A política de barras do sistema, modo imersivo, fullscreen e safe areas está registrada em ADRs e documentos técnicos. Não alterar a política de status bar/navigation bar por preferência estética ou suposição.
+
+A implementação deve respeitar recortes, áreas seguras e regiões de gestos. A área útil de gameplay deve ser calculada de forma consistente com a configuração real do dispositivo.
+
+## 5.3. Touch e multitouch
+
+Touch é sistema central, não acessório. A arquitetura deve considerar:
+- identificadores de ponteiros;
+- press/release;
+- multitouch simultâneo;
+- cancelamento de toque;
+- reatribuição de índices;
+- perda de foco;
+- pausa e suspensão;
+- retomada;
+- troca de cena;
+- limpeza de ações pendentes;
+- prevenção de input preso ou fantasma.
+
+Ações essenciais, especialmente movimento, salto e Dash, não podem perder eventos durante pequenos engasgos. O buffer de ações deve ser determinístico e coberto por testes.
+
+O projeto possui `ActionBuffer`, `Actions`, `TouchButton` e `TouchControls`. O ciclo de vida Android recebeu correção para limpar edges pendentes em pausa, suspensão e perda de foco, integrada pela PR #39 segundo os registros consultados.
+
+Testes sintéticos/headless são necessários, mas não substituem validação em aparelho físico.
+
+## 5.4. HUD e UI
+
+A UI deve ser desenhada para telas mobile em paisagem, com:
+- alvos de toque dimensionados;
+- hierarquia visual clara;
+- leitura em diferentes densidades;
+- safe area;
+- estados de foco/pressionado/desabilitado;
+- prevenção de sobreposição;
+- feedback de ação;
+- consistência entre telas;
+- navegação funcional.
+
+O HUD atual é parcial e contém controles e informações provisórias. Menus e telas precisam de comportamento real, não apenas aparência.
+
+## 5.5. Lifecycle Android
+
+O jogo deve sobreviver corretamente a:
+- perda de foco;
+- alternância de aplicativo;
+- bloqueio/desbloqueio de tela;
+- pausa;
+- suspensão;
+- retomada;
+- interrupções do sistema;
+- mudança de orientação quando aplicável;
+- encerramento inesperado.
+
+A validação headless pode simular notificações, mas não comprova o comportamento integral do sistema operacional em dispositivo real.
+
+---
+
+# 6. ARQUITETURA TÉCNICA E ORGANIZAÇÃO DO PROJETO
+
+## 6.1. Stack
+
+- Godot 4.7.2.
+- GDScript.
+- Cenas `.tscn`.
+- Scripts `.gd`.
+- Resources `.tres`.
+- Configuração principal `project.godot`.
+- Android export preset.
+- Testes GDScript/headless e workflows GitHub Actions.
+- Documentação Markdown.
+- Skills e agentes auxiliares em `.claude/`.
+
+## 6.2. Princípios arquiteturais
+
+- coesão alta e acoplamento controlado;
+- composição em vez de hierarquias excessivamente profundas;
+- cenas com responsabilidade definida;
+- scripts com ownership explícito;
+- dados de conteúdo separados da lógica quando isso facilitar manutenção;
+- Resources para parâmetros/configurações reutilizáveis;
+- sinais com contratos claros;
+- IDs estáveis para conteúdo e progresso;
+- persistência separada do estado transitório;
+- dependências dirigidas e sem ciclos;
+- autoloads restritos a serviços realmente globais;
+- testes próximos dos contratos críticos;
+- evitar monólitos e abstrações prematuras.
+
+## 6.3. Mapa estrutural observado
+
+A árvore observada no repositório inclui, entre outros, os seguintes elementos:
+
+```text
+.
+├── .claude/
+│   ├── agents/
+│   ├── commands/
+│   └── skills/
+├── .github/
+│   ├── workflows/
+│   ├── ISSUE_TEMPLATE/
+│   └── PULL_REQUEST_TEMPLATE.md
+├── docs/
+│   ├── decisions/
+│   ├── game-design/
+│   ├── production/
+│   ├── prompts/
+│   ├── qa/
+│   ├── skills/
+│   ├── technical/
+│   └── templates/
+├── resources/
+│   └── player/
+├── scenes/
+│   ├── boot/
+│   ├── campaign/
+│   ├── combat/
+│   ├── enemies/
+│   ├── levels/
+│   ├── player/
+│   ├── tutorial/
+│   ├── ui/
+│   └── world/
+├── scripts/
+│   ├── campaign/
+│   ├── combat/
+│   ├── core/
+│   ├── enemies/
+│   ├── input/
+│   ├── levels/
+│   ├── player/
+│   ├── tutorial/
+│   ├── ui/
+│   └── world/
+├── tests/
+│   ├── unit/
+│   └── ...
+├── project.godot
+├── .godot-version
+├── MASTER_DIRECTIVE.md
+├── CLAUDE.md
+└── AGENTS.md
+```
+
+Esta árvore é um mapa resumido, não uma listagem exaustiva de todos os 411 caminhos retornados pela árvore consultada. Sempre inspecionar a árvore atual antes de mover ou criar arquivos.
+
+## 6.4. Cenas e scripts identificados
+
+### Boot e fluxo central
+- `scenes/boot/boot.tscn`
+- `scripts/core/boot.gd`
+- `scripts/core/scene_flow.gd`
+
+### Campanha
+- `scenes/campaign/cybercore_w1_l1.tscn`
+- `scenes/campaign/cybercore_w1_l2.tscn`
+- `scenes/campaign/opening_cinematic.tscn`
+- `scripts/campaign/campaign_progress.gd`
+- `scripts/campaign/cybercore_w1_l1.gd`
+- `scripts/campaign/cybercore_w1_l2.gd`
+- `scripts/campaign/opening_cinematic.gd`
+
+### Player
+- `scenes/player/bolt.tscn`
+- `scripts/player/bolt_player.gd`
+- `scripts/player/bolt_tuning.gd`
+- `resources/player/bolt_tuning_provisional.tres`
+
+### Input
+- `scripts/input/action_buffer.gd`
+- `scripts/input/actions.gd`
+- `scripts/input/touch_button.gd`
+- `scripts/input/touch_controls.gd`
+
+### Combate
+- `scenes/combat/bolt_health_pickup.tscn`
+- `scenes/combat/chrono_projectile.tscn`
+- `scenes/combat/training_target.tscn`
+- `scripts/combat/bolt_combat.gd`
+- `scripts/combat/bolt_health.gd`
+- `scripts/combat/bolt_health_pickup.gd`
+- `scripts/combat/chrono_projectile.gd`
+- `scripts/combat/training_target.gd`
+
+### Inimigos
+- `scenes/enemies/cybercore_patrol_enemy.tscn`
+- `scripts/enemies/cybercore_patrol_enemy.gd`
+
+### Levels e mundo
+- `scenes/levels/checkpoint.tscn`
+- `scenes/levels/timed_energy_gate.tscn`
+- `scenes/levels/sandbox/movement_sandbox.tscn`
+- `scenes/world/moving_platform.tscn`
+- `scenes/world/one_way_platform.tscn`
+- `scenes/world/platform_block.tscn`
+- scripts correspondentes em `scripts/levels/` e `scripts/world/`
+
+### Tutorial e UI
+- `scenes/tutorial/tutorial.tscn`
+- `scripts/tutorial/tutorial.gd`
+- `scenes/ui/hud.tscn`
+- `scenes/ui/loading_overlay.tscn`
+- `scenes/ui/main_menu.tscn`
+- `scripts/ui/hud.gd`
+- `scripts/ui/loading_overlay.gd`
+- `scripts/ui/main_menu.gd`
+- `scripts/ui/safe_area_margin.gd`
+
+### Core e persistência
+- `scripts/core/save_system.gd`
+- `scripts/core/scene_flow.gd`
+- `scripts/campaign/campaign_progress.gd`
+
+A listagem é indicativa e deve ser confrontada com a árvore e o conteúdo atual.
+
+## 6.5. Contratos e ownership
+
+O mapa arquitetural atual e os contratos entre sistemas estão documentados em `docs/technical/05-system-contracts.md` e `docs/technical/09-current-architecture-map.md`.
+
+A integração Player/Combat foi objeto de revisão documental nas PRs #51/#52 segundo os snapshots de continuidade. O agente deve consultar os arquivos atualizados antes de alterar sinais, ownership de dano, entrada ou dependências.
+
+Evitar:
+- jogador conhecendo detalhes internos de UI;
+- HUD controlando lógica de combate;
+- sistemas de campanha manipulando diretamente detalhes internos de física;
+- persistência executando por frame;
+- dependências circulares entre autoloads;
+- scripts de fase acumulando lógica global;
+- IDs derivados de nomes de apresentação;
+- estado persistente armazenado em nós de cena sem serialização definida.
+
+---
+
+# 7. INPUT BUFFER, MOVIMENTO E CONTRATOS DE CONTROLE
+
+O input deve ser tratado como fluxo de eventos e não apenas como consulta de estado instantâneo. Em dispositivos touch, a perda de um release ou a reatribuição incorreta de ponteiros pode causar ações presas, ausência de salto ou disparos indevidos.
+
+O `ActionBuffer` mantém edges de ações para que comandos essenciais possam ser consumidos pelo gameplay dentro de janelas controladas. A janela de buffer e os valores de física não devem ser alterados incidentalmente em correções de lifecycle.
+
+A PR #39, integrada segundo o registro consultado, limpou edges pendentes em notificações de pausa, suspensão e perda de foco. A cobertura documentada atingiu 72 testes, 451 verificações e zero falhas na execução CI indicada no snapshot histórico. Isso não comprova testes de lifecycle em aparelho físico.
+
+Requisitos de regressão:
+- pressionar e soltar;
+- toque simultâneo em movimento e salto;
+- salto + Dash;
+- reatribuição de ponteiro;
+- cancelamento de toque;
+- pausa durante ação;
+- perda de foco;
+- suspensão e retomada;
+- troca de cena;
