@@ -126,8 +126,13 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	check_eq(hud.get_node("%ProgressNotification").text, "RECUPERAÇÃO +1", "HUD comunica a recuperação")
 
 	# A área de objetivo encerra a sequência apenas quando BOLT alcança a saída.
-	goal.body_entered.emit(level_player)
-	check(hud.get_node("%ResultOverlay").visible, "sinal body_entered do objetivo conclui o trecho")
+	level_player.global_position = goal.global_position
+	level_player.velocity = Vector2.ZERO
+	for _tick in range(3):
+		await tree.physics_frame
+		if hud.get_node("%ResultOverlay").visible:
+			break
+	check(hud.get_node("%ResultOverlay").visible, "alcançar fisicamente a saída conclui o trecho")
 	check_eq(hud.get_node("%ResultTitle").text, "Cybercore — trecho inicial concluído", "tela de resultado identifica a conclusão")
 	tree.paused = false
 	cybercore_instance.free()
