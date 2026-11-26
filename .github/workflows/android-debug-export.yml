@@ -56,7 +56,9 @@ jobs:
         run: |
           set -euo pipefail
           : "${ANDROID_HOME:?Android SDK path was not configured}"
+          set +o pipefail
           yes | sdkmanager --licenses >/dev/null
+          set -o pipefail
           sdkmanager --install \
             "platform-tools" \
             "platforms;android-35" \
@@ -127,7 +129,7 @@ jobs:
           set -euo pipefail
           mkdir -p "$HOME/.android"
           keytool -genkeypair -noprompt \
-            -keystore "$HOME/.android/bolt-debug.keystore" \
+            -keystore "$RUNNER_TEMP/bolt-debug.keystore" \
             -storepass android \
             -alias androiddebugkey \
             -keypass android \
@@ -140,7 +142,7 @@ jobs:
         shell: bash
         env:
           GODOT_BIN: ${{ steps.godot.outputs.godot_bin }}
-          GODOT_ANDROID_KEYSTORE_DEBUG_PATH: ${{ runner.temp }}/../.android/bolt-debug.keystore
+          GODOT_ANDROID_KEYSTORE_DEBUG_PATH: ${{ runner.temp }}/bolt-debug.keystore
           GODOT_ANDROID_KEYSTORE_DEBUG_USER: androiddebugkey
           GODOT_ANDROID_KEYSTORE_DEBUG_PASSWORD: android
         run: |
