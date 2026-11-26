@@ -5,14 +5,17 @@
 
 ## Snapshot vigente — 2026-11-26
 
-- O projeto Godot executável existe na `main`; versão fixada: **4.7.2** (`.godot-version`). Não reutilizar snapshots antigos que afirmam ausência de `project.godot`.
-- Etapa 0: **ACCEPTED**. Etapa 1: **HANDOFF_READY** após correção de reatribuição de ponteiro e ampliação da CI para executar testes headless.
-- Validação comprovada: Godot 4.7.2 headless/import + runner de testes, e Docs CI, até nível **L2**. Nenhuma exportação APK, instalação, validação física, visual ou de desempenho Android foi comprovada.
-- Próximo turno atribuído: **Claude Code — Etapa 2**, acionado manualmente pelo usuário. Um único escritor por vez; ChatGPT não deve competir com Claude na implementação de gameplay.
-- Inventário atual registrado em `stage-status.md` e `COLLABORATION_STATE.md`; snapshots mais antigos abaixo são históricos e não descrevem o estado atual.
-- PR #1 continua aberta/divergente e não deve ser mesclada automaticamente.
+- **HEAD confirmado da main:** `9d5381047817ac9fc949583f6645d24eadd88e8c` (merge da PR #4).
+- O projeto Godot executável existe na raiz: Godot **4.7.2**, `project.godot`, cenas, scripts e testes. Não recriar o projeto nem duplicar sistemas existentes.
+- Etapa 0: **ACCEPTED**. Etapa 1: **HANDOFF_READY**. PRs #2, #3 e #4: **MERGED**.
+- Próximo turno: **Claude Code — Etapa 2**, iniciado manualmente pelo usuário. Handoff: `handoffs/HANDOFF_ETAPA_2_CLAUDE.md`.
+- Auditoria de polimento atual: [repository-polish-audit-2026-11-26.md](repository-polish-audit-2026-11-26.md), branch `chore/repository-polish-audit` / PR pendente.
+- PR #1 continua aberta, baseada em commit antigo e reportada pelo GitHub como não mergeável. Não mesclar sem rebase/reconciliação.
+- **Conflito de escopo pendente:** código/tracker incluem Dash; diretiva proposta na PR #1 o exclui. Não remover nem ampliar essa mecânica silenciosamente.
+- Validação máxima comprovada: **L2** (Godot headless/CI). Godot CI #45 passou na PR #3; Docs CI #135 passou na PR #4. Não há APK, instalação ou validação física/visual/performance Android comprovada.
+- Um único escritor por vez. Claude deve confirmar HEAD e ler a auditoria antes de implementar; ChatGPT não deve iniciar gameplay concorrente.
 
-Antes de continuar, verificar branch/HEAD, PRs e mudanças mais recentes. Se o repositório divergir deste snapshot, atualizar este bloco com evidências atuais antes de implementar.
+Antes de continuar, verificar branch/HEAD, PRs e mudanças mais recentes. O estado do repositório prevalece sobre handoffs antigos.
 
 ## 1. Protocolo de retomada
 
@@ -251,3 +254,11 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - **Protocolo:** um único escritor; Claude trabalha em branch/PR e ChatGPT só assume após revisar, integrar e aceitar o handoff. O usuário inicia cada sessão manualmente.
 
 **Próxima ação exata:** Claude deve confirmar que está em `main` no HEAD indicado ou descendente, ler as diretivas e handoffs, auditar o projeto real e então implementar a próxima unidade funcional do Gate 1, com testes e atualização dos registros.
+
+## 15. Auditoria de polimento — 2026-11-26
+
+- Main auditada em `9d5381047817ac9fc949583f6645d24eadd88e8c`; inventário de 328 entradas, 39 skills, 11 agentes, 6 comandos, 9 arquivos de teste unitário e 30 arquivos Godot executáveis.
+- Auditoria estática documentada em `repository-polish-audit-2026-11-26.md` na branch `chore/repository-polish-audit`.
+- Achados prioritários: documentos raiz descrevem incorretamente a existência do projeto; PR #1 está aberta/não mergeável e precisa de rebase/reconciliação; conflito de escopo sobre Dash; main sem proteção de branch confirmada.
+- Nenhum código de gameplay foi alterado nesta auditoria. Não foram executados Godot local, APK, emulador ou Android físico.
+- Próxima ação de Claude: conferir a main atual, ler a auditoria, continuar o projeto existente sem recriá-lo e evitar alterações de Dash até reconciliação da fonte canônica.
