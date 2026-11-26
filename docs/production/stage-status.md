@@ -5,7 +5,7 @@
 **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente.  
 **Última regressão de gameplay integrada:** PR #39 — limpeza do ActionBuffer no ciclo de vida Android, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.  
 **Última entrega de infraestrutura integrada:** PR #38 — pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.  
-**Branch de trabalho:** `feat/one-way-platform` — componente reutilizável de plataforma unidirecional.  
+**Branch de trabalho:** `feat/one-way-platform` — componente de plataforma unidirecional e testes de passagem/aterrissagem.  
 **Responsável atual:** ChatGPT, único escritor ativo conforme decisão vigente do usuário.  
 **Estado do Gate 1:** EM ANDAMENTO — W1-L1/W1-L2 seguem blockouts; APK debug exportado em CI, instalação e validação Android física pendentes.
 
@@ -457,3 +457,12 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Motivação: o contrato de gameplay prevê plataformas unidirecionais; o sistema ainda não existia.
 - Diretriz: StaticBody2D com CollisionShape2D.one_way_collision e direção local DOWN; permitir subir através da plataforma e aterrissar por cima.
 - Estado: em desenvolvimento; não integrar em fase até validar testes de passagem e aterrissagem.
+
+
+### Unidade atual — OneWayPlatform
+
+- Branch `feat/one-way-platform`, base `b24c8624a8ed64816d0131070f440a47f525ba47`.
+- `OneWayPlatform` estende `PlatformBlock`, usa `one_way_collision=true` e direção bloqueada `Vector2.DOWN`.
+- Testes: propriedades da shape, aterrissagem por cima e passagem ascendente por baixo.
+- Plano: [one-way-platform](plans/2026-11-26-one-way-platform.md).
+- **Estado:** implementação escrita; aguardando CI.
