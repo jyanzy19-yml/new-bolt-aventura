@@ -56,7 +56,9 @@ O teste existente `test_w1_l2_progression.gd` foi atualizado para exigir o próx
 
 - Godot 4.7.2: importação, parsing e suíte headless passam.
 - Documentation Validation: SUCCESS.
-- Android Debug Export: SUCCESS, assinatura v2/v3 e artifact rastreável.
+- Android Debug Export: SUCCESS (`46074498597`), assinatura v2/v3 e artifact rastreável (`15234138213`; ZIP SHA-256 `2cc8bd5b166c89ec574534996f083be630d5bff82283fa07ac68e08c8d1dd9c8`).
+- Godot Validation `46074498555`: SUCCESS; Documentation Validation `46074498631`: SUCCESS.
+- Suíte headless no job Android: **129 testes / 2.135 verificações / 0 falhas**.
 - W1-L2 conclui e aponta para W1-L3; menu retoma W1-L3.
 - Checkpoint W1-L3 persiste e restaura após reentrada.
 - Nenhum teste afirma que W1-L3 é fase final ou que W1-L4 existe.
