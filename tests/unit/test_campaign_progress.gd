@@ -155,6 +155,25 @@ func test_new_campaign_does_not_overwrite_unreadable_save() -> bool:
 	return true
 
 
+func test_duplicate_completed_level_ids_are_rejected() -> bool:
+	var progress: Node = _prepare()
+	var raw_state: Dictionary = {
+		"campaign_id": "main",
+		"schema_version": 1,
+		"current_level_id": "W1-L2",
+		"active_checkpoint_id": "",
+		"completed_level_ids": ["W1-L1", "W1-L1"],
+	}
+	check(SaveSystem.save_payload({"campaign_progress": raw_state}), "grava fixture com IDs de fase concluída duplicados")
+	var state: Dictionary = progress.call("load_state")
+	check_eq(state.get("current_level_id"), "", "estado com IDs concluídos duplicados falha fechado")
+	check_eq(progress.get("last_error"), "duplicate_completed_level_id", "duplicidade recebe erro de domínio específico")
+	check(not progress.call("mark_level_completed", "W1-L2"), "não grava por cima de um estado de progresso inválido")
+	check_eq(progress.get("last_error"), "duplicate_completed_level_id", "falha de escrita preserva o diagnóstico de duplicidade")
+	_cleanup()
+	return true
+
+
 func test_progress_schema_rejects_fractional_and_textual_values() -> bool:
 	var progress: Node = _prepare()
 	var raw_state: Dictionary = {
