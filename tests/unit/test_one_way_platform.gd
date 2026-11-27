@@ -11,6 +11,14 @@ func _step_physics(frames: int) -> void:
 		await tree.physics_frame
 
 
+func _send_action(action: StringName, pressed: bool) -> void:
+	var event: InputEventAction = InputEventAction.new()
+	event.action = action
+	event.pressed = pressed
+	event.strength = 1.0 if pressed else 0.0
+	Input.parse_input_event(event)
+
+
 func test_one_way_platform_configures_upward_pass_through() -> bool:
 	var packed: PackedScene = load(PLATFORM_SCENE) as PackedScene
 	check(packed != null, "cena OneWayPlatform carrega")
@@ -23,7 +31,7 @@ func test_one_way_platform_configures_upward_pass_through() -> bool:
 	tree.root.add_child(platform)
 	await tree.process_frame
 
-	var shape: CollisionShape2D = platform.get_node("CollisionShape2D") as CollisionShape2D
+	var shape: CollisionShape2D = platform.get_child(0) as CollisionShape2D
 	check(shape != null, "shape de colisão presente")
 	if shape != null:
 		var rectangle: RectangleShape2D = shape.shape as RectangleShape2D
@@ -70,12 +78,12 @@ func test_character_jumps_through_from_below_and_lands_from_above() -> bool:
 	await _step_physics(20)
 	check(player.is_on_floor(), "BOLT inicia apoiado no piso sólido inferior")
 
-	Input.action_press(Actions.JUMP)
+	_send_action(Actions.JUMP, true)
 	var apex_y: float = player.global_position.y
 	for _tick in 30:
 		await tree.physics_frame
 		apex_y = minf(apex_y, player.global_position.y)
-	Input.action_release(Actions.JUMP)
+	_send_action(Actions.JUMP, false)
 	check(apex_y < 95.0, "BOLT atravessa a plataforma ao subir (ápice y=%.2f)" % apex_y)
 
 	await _step_physics(90)
