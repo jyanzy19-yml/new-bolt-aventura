@@ -134,3 +134,97 @@ func test_w1_l2_registers_progress_checkpoint_and_completion() -> bool:
 	SaveSystem.delete_save()
 	SaveSystem.storage_path_override = ""
 	return true
+
+
+func test_w1_l2_checkpoint_restores_after_scene_reentry() -> bool:
+	SaveSystem.storage_path_override = TEST_SAVE_PATH
+	SaveSystem.delete_save()
+	var packed: PackedScene = load(LEVEL_SCENE) as PackedScene
+	check(packed != null, "cena W1-L2 carrega para regressão de retomada do checkpoint")
+	if packed == null:
+		SaveSystem.storage_path_override = ""
+		return true
+
+	var first_level: Node = packed.instantiate()
+	tree.root.add_child(first_level)
+	var first_player: BoltPlayer = first_level.get_node("Bolt") as BoltPlayer
+	var first_checkpoint: BoltCheckpoint = first_level.get_node("Checkpoint") as BoltCheckpoint
+	check(first_player != null and first_checkpoint != null, "primeira instância contém BOLT e checkpoint")
+	if first_player == null or first_checkpoint == null:
+		first_level.free()
+		SaveSystem.delete_save()
+		SaveSystem.storage_path_override = ""
+		return true
+
+	var expected_respawn: Vector2 = first_checkpoint.get_respawn_position()
+	first_player.global_position = first_checkpoint.global_position
+	first_player.velocity = Vector2.ZERO
+	for _tick in 3:
+		await tree.physics_frame
+	check(first_checkpoint.is_activated(), "contato ativa o checkpoint na primeira entrada")
+	check_eq(CampaignProgress.get_checkpoint_id("W1-L2"), "cybercore_w1_l2_checkpoint", "ID do checkpoint fica persistido antes da reentrada")
+
+	first_level.free()
+	await tree.process_frame
+
+	var resumed_level: Node = packed.instantiate()
+	tree.root.add_child(resumed_level)
+	var resumed_player: BoltPlayer = resumed_level.get_node("Bolt") as BoltPlayer
+	var resumed_checkpoint: BoltCheckpoint = resumed_level.get_node("Checkpoint") as BoltCheckpoint
+	check(resumed_checkpoint.is_activated(), "reentrada restaura estado ativo do checkpoint")
+	check(resumed_checkpoint.get_node("%Indicator").color.is_equal_approx(Color(0.35, 1.0, 0.68, 1.0)), "reentrada restaura o indicador visual")
+	check_near(resumed_player.global_position.x, expected_respawn.x, 0.01, "BOLT retoma na coordenada X do checkpoint salvo")
+	check_near(resumed_player.global_position.y, expected_respawn.y, 0.01, "BOLT retoma na coordenada Y do checkpoint salvo")
+	check_eq(CampaignProgress.get_checkpoint_id("W1-L2"), "cybercore_w1_l2_checkpoint", "reentrada mantém o ID persistente sem duplicar a ativação")
+
+	resumed_level.free()
+	SaveSystem.delete_save()
+	SaveSystem.storage_path_override = ""
+	await tree.process_frame
+	return true
+
+
+func test_w1_l2_checkpoint_remains_usable_when_persistence_fails() -> bool:
+	SaveSystem.storage_path_override = TEST_SAVE_PATH
+	SaveSystem.delete_save()
+	var corrupt_file: FileAccess = FileAccess.open(TEST_SAVE_PATH, FileAccess.WRITE)
+	check(corrupt_file != null, "cria fixture de save corrompido para testar fallback local")
+	if corrupt_file == null:
+		SaveSystem.storage_path_override = ""
+		return true
+	corrupt_file.store_string("{invalid-json")
+	corrupt_file.close()
+
+	var packed: PackedScene = load(LEVEL_SCENE) as PackedScene
+	check(packed != null, "cena W1-L2 carrega com armazenamento indisponível")
+	if packed == null:
+		SaveSystem.delete_save()
+		SaveSystem.storage_path_override = ""
+		return true
+
+	var level: Node = packed.instantiate()
+	tree.root.add_child(level)
+	await tree.physics_frame
+	var player: BoltPlayer = level.get_node("Bolt") as BoltPlayer
+	var checkpoint: BoltCheckpoint = level.get_node("Checkpoint") as BoltCheckpoint
+	var expected_respawn: Vector2 = checkpoint.get_respawn_position()
+
+	player.global_position = checkpoint.global_position
+	player.velocity = Vector2.ZERO
+	for _tick in 3:
+		await tree.physics_frame
+	check(checkpoint.is_activated(), "checkpoint ativa localmente mesmo quando a gravação falha")
+	check(not CampaignProgress.last_error.is_empty(), "falha de persistência permanece diagnosticável")
+
+	# A posição local de retorno deve funcionar durante a sessão mesmo sem save válido.
+	player.global_position = Vector2(950.0, 650.0)
+	player.velocity = Vector2.ZERO
+	for _tick in 3:
+		await tree.physics_frame
+	check(player.global_position.distance_to(expected_respawn) < 2.0, "queda retorna ao checkpoint local apesar da falha de persistência")
+
+	level.free()
+	SaveSystem.delete_save()
+	SaveSystem.storage_path_override = ""
+	await tree.process_frame
+	return true
