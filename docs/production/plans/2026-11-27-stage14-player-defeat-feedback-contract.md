@@ -46,3 +46,14 @@ Cenário coberto:
 ## Limitações
 
 O teste headless não comprova renderização visual em aparelho, latência de touchscreen, acessibilidade do botão de reinício em hardware, frame pacing, FPS, memória ou estabilidade térmica Android.
+
+
+## Evidência CI — HEAD de implementação
+
+- HEAD de implementação validado: `d666d52f5f19bc62672eddbf7dd41592142b3ad4`.
+- Godot Validation run `46042358492`: SUCCESS — **109 testes / 1.959 verificações / 0 falhas**, 20/20 cold boots; mutation check do prewarm aprovado.
+- Documentation Validation run `46042358553`: SUCCESS.
+- Android Debug Export run `46042358532`: SUCCESS — suíte headless **109 testes / 1.959 verificações / 0 falhas**.
+- APK debug: 28.469.428 bytes; package ID placeholder `com.example.boltaventura`; SHA-256 `c54c573be6b5c4029c22a7476f8756b4ddf52428b91242a9cee93bea7f69e276`; assinatura v2/v3 verificada; artifact ID `15220227823`; digest ZIP SHA-256 `a1029d859cd2e8c30161ba6e007899b3f866f2d5f3f74ef8b5c187b353ca1fe7`.
+- A remoção da instalação redundante de `cmdline-tools;latest` corrigiu o pré-requisito de exportação Android enquanto a correção correspondente da PR #93 ainda não está em `main`.
+- Esta evidência pertence ao HEAD de implementação acima. Os commits posteriores nesta branch são apenas atualização de documentação; a validação documental do HEAD mais recente deve ser confirmada separadamente.
