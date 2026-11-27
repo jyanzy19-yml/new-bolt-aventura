@@ -53,7 +53,7 @@ A proposta de direção visual global está registrada na PR #87 e ainda aguarda
 
 ### 3.2 Etapa 06 — pipeline técnico
 
-O guia ART-BOLT-002 foi criado na PR #88. A PR permanece aberta e a validação automatizada não foi confirmada no momento desta revisão. O brief segue os contratos documentados, mas os valores técnicos dependentes do style guide continuam TBD até o aceite da Etapa 06 e a aprovação visual da Etapa 05.
+O guia ART-BOLT-002 foi criado na PR #88. A PR permanece aberta e sua validação documental automatizada foi concluída com sucesso (Docs Validation run `46016532136`). O guia está validado no escopo documental, embora ainda não integrado à `main`. Os valores técnicos dependentes da direção visual continuam TBD até a aprovação da Etapa 05.
 
 ### 3.3 Regra de não bloqueio
 
