@@ -1,16 +1,17 @@
 # Estado de produção — BOLT · AVENTURA
 
-**Atualização:** 2026-11-26  
-**Main HEAD após PR #52:** `6f8e9b8fbaaab9c44247050e5f86e4442bd2622f`.  
+**Atualização:** 2026-11-27  
+**Main HEAD confirmado:** `54fd48e5f49fba877740265aafa0d8f649c2b1e9`; PRs #57–#61 continuam abertas e não integradas.  
 **Matriz operacional:** `docs/production/26-stage-traceability-matrix.md`, integrada pela PR #48. Registro de lacunas GAP-001…GAP-022 em elaboração na branch `docs/requirements-gap-register`; Etapa 02 continua em revisão requisito-a-requisito.  
 **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente.  
 **Última regressão de gameplay integrada:** PR #39 — limpeza do ActionBuffer no ciclo de vida Android, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.  
 **Última entrega de infraestrutura integrada:** PR #38 — pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.  
 **Último componente de plataforma integrado:** PR #46 — `OneWayPlatform`, merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.  
 **Última correção de gameplay integrada:** PR #47 — estado inicial do `TimedEnergyGate`, merge `2636226c4027625649e66c51ff64d7e2e56168a6`.  
-**Branch de trabalho:** `main`; PR #47 integrada. Próxima branch deve ser criada somente para a unidade aprovada seguinte.  
+**Branch de integração:** `main` em `54fd48e5f49fba877740265aafa0d8f649c2b1e9`. PRs de trabalho #57–#61 permanecem isoladas; não integrar automaticamente.  
 **Responsável atual:** ChatGPT, único escritor ativo conforme decisão vigente do usuário.  
-**Estado do Gate 1:** EM ANDAMENTO — W1-L1/W1-L2 seguem blockouts; APK debug exportado em CI, instalação e validação Android física pendentes.
+**Estado do Gate 1:** EM ANDAMENTO — W1-L1/W1-L2 seguem blockouts; APK debug exportado em CI, instalação e validação Android física pendentes.  
+**Etapa 04:** hardening de SaveSystem e lifecycle Android em PRs #59/#60; regressão de cold-start Boot em PR #61. Auditoria estática de Boot/SceneFlow/LoadingOverlay não encontrou defeito de execução confirmado nesta rodada.
 
 **CI da PR #39:** Godot Validation `45881320136` SUCCESS — Godot 4.7.2, 72 testes, 451 verificações, 0 falhas; Docs Validation `45881320133` SUCCESS; Android Debug Export `45881252046` SUCCESS.  
 **Artifact PR #39:** `bolt-aventura-android-debug-7415dfb988faf2dd63f9ff289106e7f7205dcdd1`, 28.194.534 bytes; package ID provisório `com.example.boltaventura`; assinatura v2/v3 verificada; SHA-256 `db03a42b909781a1f5e7c94d025615e1aa5f397c8ebd306ba30cddf84eca14b0`.
