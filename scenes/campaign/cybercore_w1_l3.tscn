@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://scripts/campaign/cybercore_w1_l3.gd" id="1_level"]
 [ext_resource type="PackedScene" path="res://scenes/world/platform_block.tscn" id="2_block"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" path="res://scenes/levels/checkpoint.tscn" id="5_checkpoint"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/cybercore_patrol_enemy.tscn" id="6_enemy"]
 [ext_resource type="PackedScene" path="res://scenes/world/moving_platform.tscn" id="7_moving_platform"]
+[ext_resource type="PackedScene" path="res://scenes/world/conveyor_belt.tscn" id="8_conveyor"]
+[ext_resource type="PackedScene" path="res://scenes/levels/industrial_press.tscn" id="9_press"]
 
 [sub_resource type="RectangleShape2D" id="KillShape"]
 size = Vector2(3000, 180)
@@ -56,6 +58,20 @@ travel_offset = Vector2(160, 0)
 travel_duration = 3.0
 endpoint_pause = 0.45
 
+[node name="ConveyorBeltA" parent="Geometry" instance=ExtResource("8_conveyor")]
+position = Vector2(840, -4)
+size = Vector2(220, 32)
+surface_speed = 110.0
+fill_color = Color(0.055, 0.12, 0.2, 1)
+top_color = Color(0.2, 0.95, 1, 1)
+
+[node name="ConveyorBeltB" parent="Geometry" instance=ExtResource("8_conveyor")]
+position = Vector2(1680, -4)
+size = Vector2(220, 32)
+surface_speed = -95.0
+fill_color = Color(0.055, 0.12, 0.2, 1)
+top_color = Color(0.2, 0.95, 1, 1)
+
 [node name="SpawnPoint" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(96, -24)
@@ -75,6 +91,18 @@ patrol_distance = 70.0
 [node name="Hud" parent="." instance=ExtResource("4_hud")]
 unique_name_in_owner = true
 
+[node name="IndustrialPressA" parent="." instance=ExtResource("9_press")]
+position = Vector2(1160, 0)
+warning_duration = 1.1
+active_duration = 0.32
+recovery_duration = 1.25
+
+[node name="IndustrialPressB" parent="." instance=ExtResource("9_press")]
+position = Vector2(1980, 0)
+warning_duration = 0.9
+active_duration = 0.3
+recovery_duration = 1.35
+
 [node name="Checkpoint" parent="." instance=ExtResource("5_checkpoint")]
 unique_name_in_owner = true
 position = Vector2(1650, -32)
@@ -88,6 +116,11 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
 shape = SubResource("KillShape")
+
+[node name="ControlTowerNote" type="Label" parent="."]
+position = Vector2(1980, -168)
+theme_override_font_sizes/font_size = 16
+text = "TORRE DE CONTROLE · DESATIVAR A LINHA DE MONTAGEM"
 
 [node name="Goal" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -105,4 +138,4 @@ polygon = PackedVector2Array(-32, -64, 32, -64, 32, 64, -32, 64)
 [node name="LevelNote" type="Label" parent="."]
 position = Vector2(24, -168)
 theme_override_font_sizes/font_size = 16
-text = "W1-L3 · SETOR DE MONTAGEM — BLOCKOUT PROVISÓRIO"
+text = "W1-L3 · FÁBRICA DE ECOS — BLOCKOUT PROVISÓRIO"
