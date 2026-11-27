@@ -51,7 +51,9 @@ func _ready() -> void:
 
 
 ## Contrato de alvo da Pistola Crono. Pode ser chamado mais de uma vez por golpe: o controlador deduplica.
-func apply_damage(_amount: int) -> void:
+func apply_damage(amount: int) -> void:
+	if amount <= 0:
+		return
 	struck.emit(relay_id)
 
 
