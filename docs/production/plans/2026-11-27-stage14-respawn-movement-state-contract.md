@@ -17,6 +17,7 @@ Cenários:
 1. Interromper um Dash terrestre em andamento, zerar deslocamento residual e permitir novo Dash imediatamente após o respawn.
 2. Restaurar a disponibilidade de Dash aéreo quando o respawn posiciona BOLT no ar, sem depender de um pouso intermediário.
 3. Restaurar o orçamento de salto aéreo após respawn em posição aérea.
+4. Descartar toques curtos de salto e Dash ainda pendentes no ActionBuffer quando o respawn acontece, impedindo que comandos da vida anterior sejam executados na nova tentativa.
 
 Os testes usam a cena real do jogador, o `ActionBuffer`, o `InputMap` e ticks reais de física do runner headless. Não alteram diretamente velocidades internas ou campos privados para simular os resultados.
 
