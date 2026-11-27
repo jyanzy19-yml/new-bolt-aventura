@@ -133,3 +133,8 @@ func test_world_and_phase_screens_build_their_cards_at_runtime() -> bool:
 	phase_screen.queue_free()
 	await tree.process_frame
 	return true
+
+func test_xvfb_capture_harness_script_compiles() -> bool:
+	var capture_script: GDScript = load("res://tests/capture_campaign_selection.gd") as GDScript
+	check(capture_script != null, "harness de captura Xvfb compila")
+	return true
