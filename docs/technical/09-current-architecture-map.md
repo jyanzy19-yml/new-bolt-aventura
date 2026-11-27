@@ -7,14 +7,14 @@
 
 ## 1. Composição da aplicação
 
-O projeto usa quatro autoloads declarados em project.godot:
+O projeto usa cinco autoloads declarados em project.godot:
 
 | Autoload | Implementação | Ownership |
 |---|---|---|
 | SceneFlow | scripts/core/scene_flow.gd | Coordena transições, carregamento threaded, exclusão mútua, sinais de sucesso/falha e bloqueio/limpeza de input |
 | SaveSystem | scripts/core/save_system.gd | Envelope JSON versionado, checksum, arquivo temporário, backup e recuperação |
 | CampaignProgress | scripts/campaign/campaign_progress.gd | Schema de domínio da campanha, IDs estáveis, checkpoint, fase atual e conclusão; delega I/O ao SaveSystem |
-| LoadingOverlay | scenes/ui/loading_overlay.tscn | Apresentação global de loading; observa sinais do SceneFlow e não é dono do estado da transição |
+| LoadingOverlay | scenes/ui/loading_overlay.tscn | Apresentação global de loading; observa sinais do SceneFlow e não é dono do estado da transição |\n| PerformanceProbe | scripts/core/performance_probe.gd | Instrumentação de frame time e monitores de runtime; ativa apenas em builds debug e não participa do gameplay |
 
 ### Fluxo de boot e navegação
 
@@ -68,7 +68,7 @@ flowchart LR
 | Fase atual, checkpoint ativo e fases concluídas | CampaignProgress | SaveSystem, schema v1 |
 | Envelope, checksum e backup | SaveSystem | user://bolt_save.json |
 | Pausa, overlay de resultado e notificação | Hud | Estado de apresentação, não fonte de progresso |
-| Destino e estado da transição | SceneFlow | Transitório; não persistido |
+| Destino e estado da transição | SceneFlow | Transitório; não persistido |\n| Métricas de frame time e monitores de runtime | PerformanceProbe | Janela volátil de diagnóstico; não persistida e desativada em builds não-debug |
 
 **Regra de integridade:** CampaignProgress persiste IDs/valores serializáveis, nunca referências a Nodes/Resources. SaveSystem permanece agnóstico ao schema de domínio.
 
