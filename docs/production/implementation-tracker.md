@@ -2,7 +2,7 @@
 
 Plano operacional primário: [32-stage-production-plan.md](32-stage-production-plan.md).  
 Matriz de 26 etapas: registro histórico e crosswalk; preservar IDs e evidências antigas.  
-Base documental: PR #72 integrada em `d4036b942e41299bcd33f3ce19826d8558c50420`.
+Main HEAD: `d90ac2c78e96b32233f8d003ea6673a38079ecb3`; PR #72 e PR #73 integradas. Docs Validation pós-merge PR #73 `45986435957` SUCCESS.
 
 **Migração de estado:** novas Etapas 01–04 preservam o estado concluído das antigas 01–04, com limite L2. A antiga Etapa 05 (recursos/loading) migra para a nova Etapa 29 e continua EM ANDAMENTO. Novas Etapas 05–09 são trabalho artístico novo e não herdam conclusão. Nenhuma outra etapa herda status apenas por equivalência temática.
 
