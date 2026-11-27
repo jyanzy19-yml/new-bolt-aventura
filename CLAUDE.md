@@ -76,3 +76,12 @@ For every substantial implementation task, follow `docs/production/quality-contr
 Always read `docs/production/COLLABORATION_STATE.md` before considering a handoff. The current explicit user decision is **ChatGPT as the sole active writer; Claude is inactive for concurrent implementation**. Do not start a Claude implementation turn, alternate stages, or assume ownership from historical tables unless the user explicitly reactivates Claude and the collaboration state identifies Claude as the active writer.
 
 The sequential Claude ↔ ChatGPT protocol is retained as a historical/conditional workflow in `docs/production/COLLABORATIVE_DEVELOPMENT_PROTOCOL.md`. If the user reactivates it, verify actual repository access, inspect the current commit and project, audit the prior handoff, use the acceptance checklist and handoff template, preserve one writer at a time, and report only executed checks. Repository state and the current collaboration record override stale handoff instructions.
+
+
+## Approved 32-stage production plan and asset approval
+
+Use `docs/production/32-stage-production-plan.md` as the operational production sequence. The old 26-stage matrix is historical traceability only; preserve its evidence and map old Stage 05 (resource/loading work) to new Stage 29. Do not reset progress or infer completion from mapping.
+
+The user has authorized Claude to work in isolated branches/PRs on level construction, enemies/bosses, interactive elements, UI/visual content, and independent gameplay systems. Read `docs/production/COLLABORATION_STATE.md` before each unit and avoid concurrent edits to the same files.
+
+**Visual asset approval is mandatory:** ChatGPT creates the game's visual assets and presents each delivery to the user. Do not integrate, replace, or promote a final visual asset until the user explicitly approves the exact version. Claude may build scene consumers, layout, UI logic, and placeholders clearly marked as temporary, but may not bypass this approval gate. Follow `docs/production/ASSET_PIPELINE.md`.
