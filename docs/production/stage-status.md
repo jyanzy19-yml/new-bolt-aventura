@@ -3,7 +3,7 @@
 - VDIR-01 aprovado pelo usuário: **HÍBRIDO CONTROLADO**.
 - Interpretação aprovada: personagens estilizados com silhuetas fortes e detalhes legíveis; cenários 2D raster com profundidade e atmosfera; elementos de gameplay com contraste e leitura funcional; pixelização apenas pontual, sem impor grade pixelada global.
 - VDIR-02 a VDIR-08 permanecem pendentes; não inferir resolução lógica, escala, proporções, paletas, materiais, contornos, densidade ou parâmetros de animação.
-- ART-BOLT-003-C01 v0.1: concept exploratório de BOLT gerado e apresentado em 27/11/2026; estado **AWAITING_USER_APPROVAL**. Não é arte final, não está integrado ao Godot e não autoriza spritesheets, animações finais ou substituição de placeholders.
+- ART-BOLT-003-C02 v0.1: concept de BOLT aprovado explicitamente pelo usuário em 27/11/2026; referência conceitual aprovada, não é arte final, não está integrado ao Godot e não autoriza produção antecipada de spritesheets, animações finais ou substituição de placeholders.
 - PRs #87, #88 e #89 permanecem independentes, abertas e não integradas neste checkpoint. Nenhum merge foi realizado.
 
 ---
@@ -15,7 +15,7 @@
 **Plano primário:** [32-stage-production-plan.md](32-stage-production-plan.md). A matriz de 26 etapas permanece como histórico/crosswalk, não como plano operacional primário.  
 **Etapas novas 01–04:** concluídas no nível automatizado/documental L2 descrito nas evidências históricas; isso não aprova Gate 1 nem QA Android físico.  
 **Nova Etapa 29:** EM ANDAMENTO — recebe o trabalho da antiga Etapa 05 sobre recursos, carregamento, ciclo de vida e instrumentação. PR #69, #70, #71 e #72 integradas; medições físicas ainda pendentes.  
-**Etapa 05:** EM ANDAMENTO — proposta ART-BOLT-001 em PR #87; VDIR-01 APROVADO: HÍBRIDO CONTROLADO (27/11/2026); VDIR-02 a VDIR-08 permanecem pendentes. **Etapa 06:** VALIDADA (documental) — guia ART-BOLT-002 em PR #88; Docs Validation run `46016532136` SUCCESS. PR ainda aberta, sem merge. **Etapa 07:** EM ANDAMENTO — brief técnico ART-BOLT-003 criado e submetido na PR #89; concept visual ART-BOLT-003-C01 v0.1 foi gerado e apresentado para avaliação; aguarda aprovação/revisão do usuário. VDIR-01 está definido; VDIR-02 a VDIR-08 e os gates técnicos de assets permanecem pendentes.  
+**Etapa 05:** EM ANDAMENTO — proposta ART-BOLT-001 em PR #87; VDIR-01 APROVADO: HÍBRIDO CONTROLADO (27/11/2026); VDIR-02 a VDIR-08 permanecem pendentes. **Etapa 06:** VALIDADA (documental) — guia ART-BOLT-002 em PR #88; Docs Validation run `46016532136` SUCCESS. PR ainda aberta, sem merge. **Etapa 07:** EM ANDAMENTO — brief técnico ART-BOLT-003 criado e submetido na PR #89; concept ART-BOLT-003-C02 v0.1 aprovado explicitamente pelo usuário em 27/11/2026 como referência conceitual de BOLT. A produção visual definitiva permanece na Etapa 31; VDIR-02 a VDIR-08 e os gates técnicos de assets permanecem pendentes.  
 **Gate 1:** EM ANDAMENTO. W1-L1 e W1-L2 permanecem blockouts. Instalação, touch, safe areas, barras, FPS, memória, temperatura e lifecycle ainda carecem de validação Android física.  
 **PR #72:** integrada por squash antes deste plano; teste determinístico de overflow do buffer de 600 amostras. Godot Validation `45969491642` e Android Debug Export `45969491660` SUCCESS no HEAD da PR. Isso não é profiling físico.
 
