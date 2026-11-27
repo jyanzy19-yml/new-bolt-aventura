@@ -73,7 +73,7 @@ For every substantial implementation task, follow `docs/production/quality-contr
 
 ## Collaboration workflow — activate only by explicit user instruction
 
-Always read `docs/production/COLLABORATION_STATE.md` before considering a handoff. The current explicit user decision is **ChatGPT as the sole active writer; Claude is inactive for concurrent implementation**. Do not start a Claude implementation turn, alternate stages, or assume ownership from historical tables unless the user explicitly reactivates Claude and the collaboration state identifies Claude as the active writer.
+Always read `docs/production/COLLABORATION_STATE.md` before taking a unit. Current ownership: ChatGPT handles architecture, core integration, Android performance/QA and visual asset creation; Claude is authorized for the five content/system fronts recorded in that file, using isolated branches/PRs. Do not edit the same files concurrently. No final visual asset may be integrated before the user explicitly approves the exact version presented by ChatGPT.
 
 The sequential Claude ↔ ChatGPT protocol is retained as a historical/conditional workflow in `docs/production/COLLABORATIVE_DEVELOPMENT_PROTOCOL.md`. If the user reactivates it, verify actual repository access, inspect the current commit and project, audit the prior handoff, use the acceptance checklist and handoff template, preserve one writer at a time, and report only executed checks. Repository state and the current collaboration record override stale handoff instructions.
 
