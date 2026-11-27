@@ -8,7 +8,7 @@ Hardening integrado: PR #59 SaveSystem (2e1f7cd); PR #60 lifecycle Android/input
 Escritor ativo: ChatGPT como único escritor; Claude permanece inativo para escrita concorrente.
 Etapas: 01–03 concluídas; Etapa 04 em desenvolvimento; Gate 1 em andamento. W1-L1/W1-L2 permanecem blockouts.
 CI PR #63: Godot 4.7.2, 99 testes/1.873 verificações/0 falhas; 150 transições em cinco cenas; 20/20 cold boots headless; mutation test de remoção do prewarm passou. Android Debug Export SUCCESS; artefato publicado, assinatura v2/v3 verificada.
-CI pós-merge main: Docs 45918395500 SUCCESS; Godot 45918395535 e Android 45918395499 em execução no snapshot.
+CI pós-merge main: Docs 45918395500 SUCCESS; Godot 45918395535 SUCCESS; Android 45918395499 SUCCESS.
 PRs abertas: #57 polimento visual; #58 branch antiga de cold boot; #61 teste Boot/Input Map antigo; #62 unidade consolidada anterior. Não mesclar #58/#61/#62: conteúdo sobreposto/obsoleto em relação à #63. #57 requer revisão independente.
 Limites: APK debug não foi instalado. Touch físico, safe area/barras, lifecycle OEM, FPS, memória e térmica permanecem sem validação em dispositivo.
 Próxima unidade: concluir auditoria de CampaignProgress e LoadingOverlay e conferir contratos de recuperação SaveSystem→CampaignProgress sem alterar schema v1 ou canon.
