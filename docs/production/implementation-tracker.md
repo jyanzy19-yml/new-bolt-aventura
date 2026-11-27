@@ -392,3 +392,13 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Exige exatamente `RISING → FALLING → GROUNDED`, sem duplicação; runtime, física e assets não foram alterados.
 - CI no commit `0019ac9b0ac1bf813c4bcc874d9017fa69bf0295`: Godot run `46027916866` SUCCESS; Docs `46027916827` SUCCESS; Android Debug Export `46027916828` SUCCESS.
 - **Estado:** regressão automatizada aprovada em CI; PR #91 aberta e não integrada. Etapa 12 continua EM ANDAMENTO, sem validação visual ou Android físico.
+
+
+## Etapa 14 — contrato integrado de derrota do jogador (27/11/2026)
+
+- PR #94 aberta: `test/stage14-player-defeat-feedback-contract-2026-11-27`; teste novo `tests/unit/test_stage14_player_defeat_feedback_contract.gd`.
+- Integração verificada em W1-L1: esgotamento de `BoltHealth` → emissão única de `BoltPlayer.defeated` → callback real do controlador de fase → `Hud.show_result`; cobre 18 verificações incluindo ActionBuffer, HUD, controles touchscreen, pausa e dano subsequente.
+- CI no HEAD `d666d52f5f19bc62672eddbf7dd41592142b3ad4`: Godot `46042358492` SUCCESS (109 testes/1.959 verificações/0 falhas; 20/20 cold boots); Docs `46042358553` SUCCESS; Android Debug Export `46042358532` SUCCESS (109/1.959/0).
+- APK debug 28.469.428 bytes; package ID placeholder; SHA-256 `c54c573be6b5c4029c22a7476f8756b4ddf52428b91242a9cee93bea7f69e276`; assinatura v2/v3; artifact `15220227823`.
+- PR #94 continua aberta/não integrada. Alterações restritas a teste, plano e correção operacional do workflow Android; nenhuma regra de runtime foi alterada. Sem instalação ou validação física.
+- Etapa 14 continua EM ANDAMENTO. Cobertura já em revisão: checkpoint/persistência (#79), eventos de vida (#82), ciclo de pickup (#85), recuperação de movimento no respawn (#93) e fluxo terminal de derrota (#94); verificar os diffs/estados de cada PR antes de qualquer integração.
