@@ -1,6 +1,6 @@
 # Snapshot operacional vigente — adoção do plano de 32 etapas (27/11/2026)
 
-**Main HEAD vigente:** `d90ac2c78e96b32233f8d003ea6673a38079ecb3` (PR #72 e PR #73 integradas por squash). Docs Validation pós-merge PR #73: run `45986435957` SUCCESS.  
+**Main HEAD no checkpoint desta atualização:** `79023eabb6b31bccc456d3a2d005731733e8444e`. PRs #93–#95 permanecem abertas e não integradas; CI SUCCESS confirmado nos respectivos HEADs registrados.  
 **PR #73:** formalizou o plano de 32 etapas e o pipeline de aprovação visual; merge commit `d90ac2c78e96b32233f8d003ea6673a38079ecb3`.
 **Plano primário:** [32-stage-production-plan.md](32-stage-production-plan.md). A matriz de 26 etapas permanece como histórico/crosswalk, não como plano operacional primário.  
 **Etapas novas 01–04:** concluídas no nível automatizado/documental L2 descrito nas evidências históricas; isso não aprova Gate 1 nem QA Android físico.  
@@ -594,3 +594,14 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - CI: Godot `46027916866` SUCCESS; Docs `46027916827` SUCCESS; Android Debug Export `46027916828` SUCCESS.
 - O workflow Android comprova exportação debug automatizada, não instalação/execução física.
 - Etapa 12 permanece EM ANDAMENTO: sincronização visual e critérios completos de animação ainda não foram validados.
+
+
+## Etapa 14 — fallback local de checkpoint W1-L1 diante de save incompatível (27/11/2026)
+
+- Unidade aberta na branch `test/stage14-w1-l1-checkpoint-save-failure-2026-11-27`; PR criada após validação do escopo.
+- Auditoria confirmou que a cobertura existente já inclui reentrada de W1-L1 com checkpoint persistido (`test_w1_l1_restores_persisted_checkpoint_on_scene_reentry`), ativação física, queda e recuperação com persistência válida. Não foi duplicado esse cenário.
+- Lacuna distinta: ausência de regressão para domínio `CampaignProgress` com schema futuro/incompatível durante a sessão.
+- Novo teste `tests/unit/test_stage14_w1_l1_checkpoint_persistence_failure_contract.gd`: semeia schema de domínio 999, ativa checkpoint e KillZone por contato físico real, exige fallback de respawn local, preservação do payload incompatível e ausência de derrota/pausa terminal.
+- Runtime, cenas, colisões, física, Dash, InputMap, schema v1, IDs persistentes, progressão, canon e assets não foram alterados.
+- Plano: `docs/production/plans/2026-11-27-stage14-w1-l1-checkpoint-persistence-failure.md`.
+- **Estado:** implementação e documentação na branch; CI pendente. Etapa 14 continua EM ANDAMENTO. Sem validação Android física.
