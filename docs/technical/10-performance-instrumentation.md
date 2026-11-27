@@ -39,7 +39,7 @@ Campos principais: `sample_count`, `frame_time_ms_avg`, `frame_time_ms_p95`, `fr
 
 1. Executar uma build debug no aparelho Android identificado.
 2. Reproduzir a mesma cena e sequência durante a janela de captura.
-3. Consultar `PerformanceProbe.get_snapshot()` pelo Remote Inspector ou por harness de diagnóstico temporário.
+3. Consultar `PerformanceProbe.get_snapshot()` por um harness/script de diagnóstico temporário; a implementação não adiciona interface de profiling ao produto.
 4. Registrar commit, build, aparelho/SoC/RAM, Android, renderer, resolução, duração e condição térmica no template `docs/qa/performance-capture-template.md`.
 5. Repetir a sequência antes/depois de qualquer otimização. Não alterar parâmetros de gameplay com base apenas em uma captura isolada.
 
