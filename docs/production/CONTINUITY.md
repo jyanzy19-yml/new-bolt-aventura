@@ -1,3 +1,17 @@
+## Continuidade vigente — Etapas 06 e 07 (27/11/2026)
+
+- Base de referência: `71463b5a1f27d7499943858ac86392a3933c58f2`.
+- PR #87 (Etapa 05) continua aberta; direção visual aguarda aprovação explícita do usuário.
+- PR #88 (Etapa 06) contém ART-BOLT-002, guia técnico de sprites/assets; revisão documental foi feita, mas CI/validação automatizada não foi confirmada. Etapa 06 marcada IMPLEMENTADA, não VALIDADA.
+- PR #88 não foi integrada. Nenhuma PR foi integrada sem autorização do usuário.
+- Etapa 07 iniciada na branch `docs/stage07-bolt-character-design-brief`.
+- ART-BOLT-003: brief técnico criado em `BOLT-CHARACTER-CONCEPT-BRIEF.md`, com fatos canônicos, lacunas, requisitos de leitura, folha de personagem, matriz de poses, aprovação e limites de integração.
+- O concept visual final não foi gerado: a Etapa 05 ainda não foi aprovada e a validação da Etapa 06 não está confirmada. Não definir proporções, paleta, resolução, estilo ou origem técnica por suposição.
+- Nenhuma cena, script, física, Dash, InputMap, multitouch, save schema, ID persistente, progressão ou canon foi alterado.
+- Próxima ação: confirmar Docs Validation da PR #88; obter decisão da direção visual da PR #87; então criar e apresentar concept visual versionado de BOLT para aprovação.
+
+---
+
 ## Continuidade vigente — adoção do plano de 32 etapas (27/11/2026)
 
 - Main HEAD: `d90ac2c78e96b32233f8d003ea6673a38079ecb3`; PR #72 e PR #73 integradas por squash.
