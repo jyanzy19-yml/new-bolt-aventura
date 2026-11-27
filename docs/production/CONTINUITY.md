@@ -6,7 +6,7 @@ Repositório: jyanzy19-yml/new-bolt-aventura.
 Main HEAD: 3e4124f561438da2dcff1458a852d47f2f4dfaea, PR #63 integrada por squash.
 Hardening integrado: PR #59 SaveSystem (2e1f7cd2709ff71cc925f26504fa54e52e4f5b95); PR #60 lifecycle Android/input (fd8aefa2a5991a67d3ce75caba57df066a5c1514); PR #63 Boot/cold-start/threaded loading (3e4124f561438da2dcff1458a852d47f2f4dfaea).
 Evidência PR #63: Godot 4.7.2 — 99 testes/1.873 verificações/0 falhas; 150 transições em cinco cenas; 20/20 cold boots headless; mutation test reproduziu o defeito quando o prewarm foi removido. Android Debug Export SUCCESS; APK debug assinado/verificado v2/v3, artefato publicado.
-CI pós-merge main: Docs 45918395500 SUCCESS; Godot 45918395535 e Android Export 45918395499 estavam em execução no momento da atualização.
+CI pós-merge main: Docs 45918395500 SUCCESS; Godot 45918395535 SUCCESS; Android Export 45918395499 SUCCESS.
 Escritor ativo: ChatGPT como único escritor; Claude permanece inativo para escrita concorrente.
 Etapas: 01–03 concluídas; Etapa 04 em desenvolvimento; Gate 0 estático concluído; Gate 1 em andamento. W1-L1/W1-L2 permanecem blockouts.
 PRs abertas: #57 (polimento visual), #58 (cold boot antigo), #61 (teste Boot/Input Map antigo), #62 (unidade consolidada anterior). #58/#61/#62 sobrepõem a correção integrada em #63 e não devem ser mescladas automaticamente; #57 requer revisão independente.
