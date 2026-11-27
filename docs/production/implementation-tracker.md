@@ -2,7 +2,7 @@
 
 - Main HEAD: `5e55fa1693d8ecf6d8a1d79bfffa1999824ad1ea`; PR #69/#70 integradas.
 - SYS-020/SceneFlow: cancelamento lógico opt-in integrado; a thread ResourceLoader não é interrompida.
-- SYS-027/PerformanceProbe: instrumentação debug-only integrada; 107 testes/1.933 verificações/0 falhas no CI da PR #70.
+- PerformanceProbe: instrumentação debug-only integrada; 107 testes/1.933 verificações/0 falhas no CI da PR #70.
 - Etapa 05: cancelamento e instrumentação implementados; política de preload/cache/liberação documentada na branch atual, aguardando revisão/CI. Baseline Android físico e medição de RSS/GPU/touch continuam pendentes.
 - Política atual não adiciona preload global nem unload forçado: dependências estão declaradas nas PackedScenes e recursos devem ser liberados por ownership/refcount.
 - Próximo passo: concluir PR de política de recursos; depois preparar procedimento de captura física e revisar necessidade real de preload/unload com evidência.
