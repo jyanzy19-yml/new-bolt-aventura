@@ -6,6 +6,8 @@ const TEST_SAVE_PATH: String = "user://bolt_w1_l5_blockout_test.json"
 
 
 func test_w1_l5_scene_composes_existing_gameplay_systems() -> bool:
+	SaveSystem.storage_path_override = TEST_SAVE_PATH
+	SaveSystem.delete_save()
 	var packed: PackedScene = load(LEVEL_SCENE) as PackedScene
 	check(packed != null, "cena W1-L5 carrega")
 	if packed == null:
@@ -30,6 +32,8 @@ func test_w1_l5_scene_composes_existing_gameplay_systems() -> bool:
 	check(checkpoint.global_position.x < gate.global_position.x, "checkpoint fica antes do desafio temporal")
 	check_eq(CampaignProgress.get_checkpoint_id("W1-L5"), "", "checkpoint não é persistido antes de ativação")
 	level.free()
+	SaveSystem.delete_save()
+	SaveSystem.storage_path_override = ""
 	await tree.process_frame
 	return true
 
@@ -57,6 +61,8 @@ func test_w1_l5_checkpoint_and_completion_persist() -> bool:
 		await tree.physics_frame
 	check(checkpoint.is_activated(), "contato físico ativa checkpoint")
 	check_eq(CampaignProgress.get_checkpoint_id("W1-L5"), "cybercore_w1_l5_checkpoint", "checkpoint W1-L5 persiste com ID próprio")
+	check(hud.get_node("%ProgressNotification").visible, "ativação do checkpoint apresenta feedback visual")
+	check_eq(hud.get_node("%ProgressNotification").text, "CHECKPOINT ATIVADO", "notificação identifica o checkpoint")
 	player.global_position = goal.global_position
 	player.velocity = Vector2.ZERO
 	for _tick in 3:
