@@ -1,6 +1,6 @@
 # Snapshot operacional vigente — adoção do plano de 32 etapas (27/11/2026)
 
-**Main HEAD vigente:** `d90ac2c78e96b32233f8d003ea6673a38079ecb3` (PR #72 e PR #73 integradas por squash). Docs Validation pós-merge PR #73: run `45986435957` SUCCESS.  
+**Main HEAD no início desta consolidação:** `79023eabb6b31bccc456d3a2d005731733e8444e`. Contratos de recuperação da Etapa 14 reunidos na branch de integração; CI combinado pendente.  
 **PR #73:** formalizou o plano de 32 etapas e o pipeline de aprovação visual; merge commit `d90ac2c78e96b32233f8d003ea6673a38079ecb3`.
 **Plano primário:** [32-stage-production-plan.md](32-stage-production-plan.md). A matriz de 26 etapas permanece como histórico/crosswalk, não como plano operacional primário.  
 **Etapas novas 01–04:** concluídas no nível automatizado/documental L2 descrito nas evidências históricas; isso não aprova Gate 1 nem QA Android físico.  
@@ -594,3 +594,17 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - CI: Godot `46027916866` SUCCESS; Docs `46027916827` SUCCESS; Android Debug Export `46027916828` SUCCESS.
 - O workflow Android comprova exportação debug automatizada, não instalação/execução física.
 - Etapa 12 permanece EM ANDAMENTO: sincronização visual e critérios completos de animação ainda não foram validados.
+
+
+## Etapa 14 — pacote integrado de contratos de respawn, checkpoint e derrota (27/11/2026)
+
+- Branch de integração: `integration/stage14-respawn-checkpoint-defeat-contracts-2026-11-27`; reúne as unidades anteriormente propostas nas PRs #93, #94, #95 e #96, ainda não integradas em `main`.
+- `tests/unit/test_player_respawn_movement_contract.gd`: quatro regressões para interrupção/retomada de Dash terrestre e aéreo, orçamento de salto aéreo e descarte de edges antigos no `ActionBuffer`.
+- `tests/unit/test_stage14_player_defeat_feedback_contract.gd`: integração de vida esgotada até o estado terminal da W1-L1, emissão única de `defeated`, HUD, controles touch, pausa e retry.
+- `tests/unit/test_stage14_w1_l1_killzone_recovery_contract.gd`: ativação física, persistência e retorno à posição do checkpoint pela KillZone, com exatamente um respawn.
+- `tests/unit/test_stage14_w1_l1_checkpoint_persistence_failure_contract.gd`: domínio de campanha incompatível (schema 999), preservação dos dados desconhecidos e fallback de checkpoint local durante a sessão.
+- A cobertura de reentrada bem-sucedida já existente em `test_w1_l1_restores_persisted_checkpoint_on_scene_reentry` foi preservada; não duplicada.
+- Quatro planos técnicos correspondentes em `docs/production/plans/2026-11-27-stage14-*.md`.
+- Ajuste único em `.github/workflows/android-debug-export.yml`: remove instalação redundante de `cmdline-tools;latest`, já preparada pelo setup do SDK.
+- Sem alteração de runtime, cenas, colisões, tuning, física, Dash, InputMap, ActionBuffer, schema v1, IDs persistentes, progressão, canon ou assets.
+- **Estado:** CI combinado pendente nesta branch. Etapa 14 permanece EM ANDAMENTO; W1-L1 continua blockout provisório e QA Android físico segue pendente.
