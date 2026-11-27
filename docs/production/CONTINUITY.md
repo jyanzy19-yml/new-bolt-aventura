@@ -748,9 +748,18 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Alteração de runtime restrita: `BoltCombat.reset_for_respawn()` zera cooldown e reabilita o componente; `BoltPlayer.respawn()` invoca esse método. Nenhum cooldown normal, dano, velocidade ou regra de cura é alterado.
 - Testes cobrem ataque imediato após respawn, descarte de ataque pendente, `restore_activation()` sem evento duplicado, reentrada W1-L2, fallback com JSON corrompido, ciclo de vida de `BoltHealth` e callback duplicado do pickup.
 - Plano: `docs/production/plans/2026-11-27-stage14-health-checkpoint-respawn-integration.md`.
-- CI combinado concluído com SUCCESS nos três workflows; integração depende apenas da revisão final.
+- CI combinado concluído com SUCCESS nos três workflows; PR #99 integrada por squash em `f3be8395352847ee0527dd9bc07ac32cc2867f05`; PRs #78, #79, #82 e #85 encerradas como supersedidas.
 - CI no HEAD de implementação `12d741c3ce1a17d00f8227ecbe9dfefc3d417e29`: Godot Validation `46047470577`, Documentation Validation `46047470585` e Android Debug Export `46047470530` — **todos SUCCESS**.
 - Godot 4.7.2: **122 testes / 2.074 verificações / 0 falhas**; 20/20 cold boots e mutation check do prewarm aprovados.
 - Android Debug Export repetiu a suíte: **122 testes / 2.074 verificações / 0 falhas**. APK **28.469.428 bytes**, package ID placeholder `com.example.boltaventura`, SHA-256 `4ec82202e1286f6e9b1379a20d3fadc648cf0eec5fd56374617e909a247e5e77`; assinatura v2/v3 verificada.
 - Artifact ID `15222278861`; ZIP SHA-256 `fbaaf44d95c55f9a7c6b6873fff5cb46a83b50b5f9a6cde32bcb9f1f72e8d31d`; [artefato Android Debug](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46047470530/artifacts/15222278861).
 - Evidência L2/CI somente; APK não foi instalado nem executado em Android físico. Touch, safe areas/barras, FPS, frame pacing, memória, temperatura e lifecycle OEM continuam pendentes.
+
+
+## Sessão ChatGPT — integração final dos contratos Stage 14 — 2026-11-27
+
+- PR #99 integrada por squash em `f3be8395352847ee0527dd9bc07ac32cc2867f05`.
+- PRs #78, #79, #82 e #85 encerradas como supersedidas; todo o runtime/teste foi preservado na integração.
+- CI do HEAD pré-merge `c554d4017b7122115d8aa7f19a958e8ebe17131a`: Godot `46047789524`, Docs `46047789662`, Android Debug Export `46047789618` — todos SUCCESS; 122 testes/2.074 verificações/0 falhas; 20/20 cold boots; mutation check aprovado.
+- APK Debug: 28.469.428 bytes; package ID provisório `com.example.boltaventura`; SHA-256 `3fcc82001ef65fc3809e514ea42e24db6935f1e2d0f9e04b5d5b6f520bc12128`; assinatura v2/v3 verificada; Artifact `15222484035`; ZIP SHA-256 `7fb7d288b160dbaf6bc18f0620d6a80c2dca83cbe53142eabd6e64c632b46bd6`.
+- QA Android físico e CI pós-merge não confirmados. Etapa 14 permanece EM ANDAMENTO.

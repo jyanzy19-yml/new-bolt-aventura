@@ -421,7 +421,7 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - W1-L1 reentrada/fallback e derrota/KillZone continuam cobertos pela PR #97 já integrada; esta unidade complementa com W1-L2 e lifecycle de componentes.
 - Plano: `docs/production/plans/2026-11-27-stage14-health-checkpoint-respawn-integration.md`.
 - Nenhum valor de tuning, Dash, InputMap, schema de save, ID persistente, progressão, canon, geometria, arte ou asset é alterado.
-- **Estado:** contratos e correção de respawn passaram em CI combinado; PR #99 pronta para integração. Etapa 14 permanece EM ANDAMENTO.
+- **Estado:** PR #99 integrada por squash em `f3be8395352847ee0527dd9bc07ac32cc2867f05`; PRs de origem #78, #79, #82 e #85 encerradas como supersedidas. Etapa 14 permanece EM ANDAMENTO.
 - CI no HEAD de implementação `12d741c3ce1a17d00f8227ecbe9dfefc3d417e29`: Godot Validation `46047470577`, Documentation Validation `46047470585` e Android Debug Export `46047470530` — **todos SUCCESS**.
 - Godot 4.7.2: **122 testes / 2.074 verificações / 0 falhas**; 20/20 cold boots e mutation check do prewarm aprovados.
 - Android Debug Export repetiu a suíte: **122 testes / 2.074 verificações / 0 falhas**. APK **28.469.428 bytes**, package ID placeholder `com.example.boltaventura`, SHA-256 `4ec82202e1286f6e9b1379a20d3fadc648cf0eec5fd56374617e909a247e5e77`; assinatura v2/v3 verificada.
