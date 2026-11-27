@@ -1,6 +1,6 @@
 ## Continuidade vigente — adoção do plano de 32 etapas (27/11/2026)
 
-- Main HEAD: `d90ac2c78e96b32233f8d003ea6673a38079ecb3`; PR #72 e PR #73 integradas por squash.
+- Main HEAD no checkpoint desta atualização: `71463b5a1f27d7499943858ac86392a3933c58f2`; PRs #72, #73 e #74 integradas por squash.
 - Docs Validation pós-merge PR #73: run `45986435957` SUCCESS.
 - PR #73 formalizou o plano de 32 etapas, migração 26→32 e aprovação visual obrigatória antes de integração.
 - Plano operacional primário: `docs/production/32-stage-production-plan.md`; matriz 26 etapas preservada como histórico/crosswalk.
