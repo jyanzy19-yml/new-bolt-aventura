@@ -196,3 +196,82 @@ func test_health_pickup_collects_through_physical_area_contact() -> bool:
 	root.queue_free()
 	await tree.process_frame
 	return true
+
+
+func _send_action(action: StringName, pressed: bool) -> void:
+	var event: InputEventAction = InputEventAction.new()
+	event.action = action
+	event.pressed = pressed
+	event.strength = 1.0 if pressed else 0.0
+	Input.parse_input_event(event)
+
+
+func _count_projectiles(root: Node) -> int:
+	var count: int = 0
+	for child: Node in root.get_children():
+		if child is ChronoProjectile and not child.is_queued_for_deletion():
+			count += 1
+	return count
+
+
+func test_respawn_resets_attack_cooldown_and_reenables_combat() -> bool:
+	var packed: PackedScene = load(PLAYER_SCENE) as PackedScene
+	check(packed != null, "cena de BOLT carrega para regressão de respawn/combate")
+	if packed == null:
+		return true
+
+	var root: Node2D = Node2D.new()
+	tree.root.add_child(root)
+	var player: BoltPlayer = packed.instantiate() as BoltPlayer
+	root.add_child(player)
+	await tree.process_frame
+
+	_send_action(Actions.ATTACK, true)
+	_send_action(Actions.ATTACK, false)
+	for _tick in 2:
+		await tree.physics_frame
+	check_eq(_count_projectiles(root), 1, "primeiro ataque cria um projétil")
+
+	check(player.take_damage(3, 1.0), "derrota desativa o combate após esgotar a vida")
+	check(not player.is_physics_processing(), "jogador derrotado interrompe a física")
+	player.respawn(Vector2(80.0, -20.0))
+	check(player.is_physics_processing(), "respawn reativa a física do jogador")
+
+	_send_action(Actions.ATTACK, true)
+	_send_action(Actions.ATTACK, false)
+	for _tick in 2:
+		await tree.physics_frame
+	check_eq(_count_projectiles(root), 2, "primeiro ataque após respawn não herda o cooldown anterior")
+
+	Actions.release_all_game_actions()
+	root.queue_free()
+	await tree.process_frame
+	return true
+
+
+func test_respawn_discards_unconsumed_action_buffer_press() -> bool:
+	var packed: PackedScene = load(PLAYER_SCENE) as PackedScene
+	check(packed != null, "cena de BOLT carrega para regressão do ActionBuffer no respawn")
+	if packed == null:
+		return true
+
+	var root: Node2D = Node2D.new()
+	tree.root.add_child(root)
+	var player: BoltPlayer = packed.instantiate() as BoltPlayer
+	root.add_child(player)
+	await tree.process_frame
+	var buffer: ActionBuffer = player.get_node("%ActionBuffer") as ActionBuffer
+	player.set_physics_process(false)
+
+	_send_action(Actions.ATTACK, true)
+	_send_action(Actions.ATTACK, false)
+	check(buffer.has_pending(Actions.ATTACK), "toque curto fica pendente antes do respawn")
+
+	player.respawn(Vector2(64.0, -24.0))
+	check(not buffer.has_pending(Actions.ATTACK), "respawn descarta o comando antigo não consumido")
+	check(player.is_physics_processing(), "respawn reativa o processamento do jogador")
+
+	Actions.release_all_game_actions()
+	root.queue_free()
+	await tree.process_frame
+	return true
