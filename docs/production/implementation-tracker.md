@@ -1,4 +1,18 @@
-## Snapshot técnico — 2026-11-27 (pós-PR #70)
+# Snapshot do plano de 32 etapas — 27/11/2026
+
+Plano operacional primário: [32-stage-production-plan.md](32-stage-production-plan.md).  
+Matriz de 26 etapas: registro histórico e crosswalk; preservar IDs e evidências antigas.  
+Base documental: PR #72 integrada em `d4036b942e41299bcd33f3ce19826d8558c50420`.
+
+**Migração de estado:** novas Etapas 01–04 preservam o estado concluído das antigas 01–04, com limite L2. A antiga Etapa 05 (recursos/loading) migra para a nova Etapa 29 e continua EM ANDAMENTO. Novas Etapas 05–09 são trabalho artístico novo e não herdam conclusão. Nenhuma outra etapa herda status apenas por equivalência temática.
+
+**Ownership:** ChatGPT — arquitetura, sistemas centrais, integração, Android/performance, QA e criação dos assets visuais sujeitos à aprovação do usuário. Claude — frentes autorizadas de fases, inimigos/chefes, interativos, UI/conteúdo visual e sistemas independentes, em branch/PR isolada; não integrar assets não aprovados.
+
+**Restrições preservadas:** Gate 1 em andamento; W1-L1/W1-L2 blockouts; validação Android física pendente; não alterar schema, IDs, Dash, física, InputMap, canon ou decisões de display por causa da migração.
+
+---
+
+## Snapshot histórico — 2026-11-27 (pré-adoção das 32 etapas)
 
 - Main HEAD: `5e55fa1693d8ecf6d8a1d79bfffa1999824ad1ea`; PR #69/#70 integradas.
 - SYS-020/SceneFlow: cancelamento lógico opt-in integrado; a thread ResourceLoader não é interrompida.
@@ -11,7 +25,7 @@
 
 # BOLT · AVENTURA — Rastreador de implementação
 
-## Snapshot vigente — 2026-11-27
+## Snapshot histórico — 2026-11-27 (plano anterior de 26 etapas)
 
 Main HEAD: `4544efc7082a17e7824ccf46c524db07486e3dc9`. PRs #59, #60, #63, #65, #66 e #67 integradas.
 PR #59: recuperação de temporário íntegro e proteção contra downgrade de formatos futuros; schema v1 preservado.

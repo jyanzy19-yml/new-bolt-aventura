@@ -1,4 +1,41 @@
-## Estado operacional de colaboração — 2026-11-27 (pós-PR #70)
+## Estado canônico de colaboração — plano de 32 etapas (27/11/2026)
+
+**Base documental:** `d4036b942e41299bcd33f3ce19826d8558c50420` (PR #72 integrada).  
+**Plano:** `docs/production/32-stage-production-plan.md`.
+
+### Responsabilidades autorizadas
+
+**ChatGPT**
+- Arquitetura, sistemas centrais, integração, desempenho Android, regressão e QA.
+- Criação dos assets visuais do jogo.
+- Apresentar cada asset ao usuário e aguardar aprovação explícita antes de integrar/substituir qualquer arte.
+
+**Claude**
+- Construção de fases.
+- Inimigos e chefes.
+- Elementos interativos.
+- Interface e conteúdo visual.
+- Sistemas independentes de gameplay.
+
+A autorização de Claude não permite contornar o processo de aprovação visual do usuário. Claude pode preparar consumidores, cenas, layout e lógica; assets finais só entram depois de aprovação da versão exata.
+
+### Coordenação obrigatória
+- Uma branch/PR por unidade de trabalho; não editar simultaneamente os mesmos arquivos.
+- Declarar escopo, arquivos, dependências e contratos afetados.
+- CI e revisão de diff antes de merge; nenhum merge presumido.
+- ChatGPT integra/revisa alterações que afetem contratos centrais.
+- Nenhuma entrega de Claude é presumida sem commit/PR observável.
+- O usuário mantém autoridade sobre canon, decisões materiais e aprovação de arte.
+
+### Estado de produção
+- Etapas 01–04 do novo plano: concluídas no nível L2 registrado.
+- Nova Etapa 29: em andamento, recebe o trabalho de recursos/loading da antiga Etapa 05.
+- Novas Etapas 05–09: não iniciadas; pipeline de arte exige aprovação antes da integração.
+- Gate 1 em andamento; W1-L1/W1-L2 são blockouts; Android físico pendente.
+
+---
+
+## Snapshot histórico de colaboração — 2026-11-27 (pré-adoção das 32 etapas)
 
 **Main HEAD:** `5e55fa1693d8ecf6d8a1d79bfffa1999824ad1ea`.
 **ChatGPT:** responsável por arquitetura, sistemas centrais, integração entre subsistemas, desempenho Android, testes de regressão e gates de qualidade.
@@ -15,7 +52,7 @@
 
 ---
 
-# Estado canônico de desenvolvimento — BOLT · AVENTURA
+# Registro histórico de colaboração e desenvolvimento — BOLT · AVENTURA
 
 ## Snapshot operacional vigente — 2026-11-27
 
