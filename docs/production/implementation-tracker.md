@@ -1,3 +1,12 @@
+## Atualização — Etapa 11 multitouch (27/11/2026)
+
+- Plano: `docs/production/plans/2026-11-27-stage11-multitouch-four-actions.md`.
+- Novo teste em `tests/unit/test_touch_controls.gd`: quatro ponteiros simultâneos para movimento, jump, Dash e attack; liberação antes do tick de física; confirmação de que jump/Dash/attack chegam ao `ActionBuffer` e são consumidos uma única vez.
+- Escopo somente de teste; runtime, InputMap, física, Dash, janela de buffer e save schema inalterados.
+- Validação L2/CI ainda pendente neste checkpoint; Android físico não testado.
+
+---
+
 # Snapshot do plano de 32 etapas — 27/11/2026
 
 Plano operacional primário: [32-stage-production-plan.md](32-stage-production-plan.md).  

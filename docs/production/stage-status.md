@@ -9,6 +9,8 @@
 **Gate 1:** EM ANDAMENTO. W1-L1 e W1-L2 permanecem blockouts. Instalação, touch, safe areas, barras, FPS, memória, temperatura e lifecycle ainda carecem de validação Android física.  
 **PR #72:** integrada por squash antes deste plano; teste determinístico de overflow do buffer de 600 amostras. Godot Validation `45969491642` e Android Debug Export `45969491660` SUCCESS no HEAD da PR. Isso não é profiling físico.
 
+**Atualização de trabalho — Etapa 11 (27/11/2026):** branch `test/stage11-touch-multiaction-buffer-2026-11-27` adiciona uma regressão integrada para quatro ponteiros simultâneos (movimento, salto, Dash e ataque) e para a chegada de toques discretos curtos ao `ActionBuffer` antes do próximo tick de física. Escopo somente de teste; CI da PR ainda pendente. Não altera runtime nem valida toque físico.
+
 ## Estado inicial das 32 etapas
 
 | Etapa | Estado no checkpoint de adoção | Fundamentação |
@@ -23,7 +25,7 @@
 | 08 | NÃO INICIADA | Spritesheets finais dependem da Etapa 07 |
 | 09 | NÃO INICIADA | Kit visual inicial de UI/HUD depende de aprovação |
 | 10 | EM ANDAMENTO | BoltPlayer e componentes existem; personagem final ainda não consolidado |
-| 11 | EM ANDAMENTO | Movimento, Dash e touch possuem base/testes; feel e Android físico pendentes |
+| 11 | EM ANDAMENTO | Base de movimento/Dash/touch existente; regressão integrada de quatro ações multitouch adicionada nesta branch, CI pendente; feel e Android físico continuam pendentes |
 | 12 | EM ANDAMENTO | Estados/feedback parciais; animações finais dependem de assets aprovados |
 | 13 | EM ANDAMENTO | Camera2D e componentes espaciais existem; validação visual/device incompleta |
 | 14 | EM ANDAMENTO | Vida, checkpoints, pickups e progressão parciais |

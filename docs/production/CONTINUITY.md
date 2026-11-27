@@ -1,3 +1,16 @@
+## Sessão de desenvolvimento — regressão multitouch Etapa 11 (27/11/2026)
+
+- Branch: `test/stage11-touch-multiaction-buffer-2026-11-27`, criada a partir de `main`.
+- Escopo: cobertura integrada de quatro ponteiros simultâneos (move_right, jump, dash, attack) e buffering de ações discretas liberadas antes do próximo tick de física.
+- Arquivo de teste alterado: `tests/unit/test_touch_controls.gd`; novo plano em `docs/production/plans/2026-11-27-stage11-multitouch-four-actions.md`.
+- Alterações somente de teste/documentação; nenhum runtime, cena de produção, InputMap, física, Dash, buffer ou save foi alterado.
+- CI ainda pendente no momento do registro; não declarar teste aprovado até observar os workflows da PR.
+- Validação física Android continua pendente; testes sintéticos headless não medem latência do digitalizador.
+- PRs existentes #78–#89 permanecem independentes e não foram integradas nem modificadas.
+- Próximo passo: revisar diff e CI; corrigir qualquer falha antes de encerrar esta unidade.
+
+---
+
 ## Continuidade vigente — adoção do plano de 32 etapas (27/11/2026)
 
 - Main HEAD: `d90ac2c78e96b32233f8d003ea6673a38079ecb3`; PR #72 e PR #73 integradas por squash.
