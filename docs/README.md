@@ -28,7 +28,7 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 ## Produção visual
 
 - [Brief técnico de concept art de BOLT — Etapa 07](production/BOLT-CHARACTER-CONCEPT-BRIEF.md)
-- [Guia técnico de produção de sprites e assets — Etapa 06](production/SPRITE-ASSET-TECHNICAL-GUIDE.md) (PR #88, aguardando validação)
+- [Guia técnico de produção de sprites e assets — Etapa 06](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/88) (PR #88; Docs Validation SUCCESS)
 
 ## Design
 
