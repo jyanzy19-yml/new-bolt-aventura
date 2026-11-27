@@ -79,7 +79,7 @@ jobs:
             # Expected diagnostics only: test_scene_flow.gd deliberately exercises one missing
             # scene and two _fail() paths; headless runners may also lack ALSA audio hardware.
             # Any other SCRIPT ERROR, Parse Error or ERROR fails CI.
-            if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' "$log" | grep -vE "SceneFlow: cena inexistente: res://nao_existe.tscn|SceneFlow: transição para 'res://test_failure_from_unpaused_state.tscn' falhou \\(test_failure\\)|SceneFlow: transição para 'res://test_failure_from_paused_state.tscn' falhou \\(test_failure\\)|audio_driver_alsa|ERR_CANT_OPEN.*audio"; then
+            if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' "$log" | grep -vE "SceneFlow: cena inexistente: res://nao_existe.tscn|SceneFlow: transição para 'res://test_failure_from_unpaused_state.tscn' falhou \\(test_failure\\)|SceneFlow: transição para 'res://test_failure_from_paused_state.tscn' falhou \\(test_failure\\)|Boot: ações ausentes no Input Map:|audio_driver_alsa|ERR_CANT_OPEN.*audio"; then
               echo "::error::Unexpected Godot error in ${label}; see ${log}."
               return 1
             fi
