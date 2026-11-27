@@ -40,3 +40,40 @@ func test_defeated_enemy_ignores_late_contact_callback() -> bool:
 	root.queue_free()
 	await tree.process_frame
 	return true
+
+
+func test_patrol_clamps_motion_to_both_horizontal_bounds() -> bool:
+	var enemy_scene: PackedScene = load(ENEMY_SCENE) as PackedScene
+	check(enemy_scene != null, "cena do inimigo carrega para teste dos limites de patrulha")
+	if enemy_scene == null:
+		return true
+
+	var root: Node2D = Node2D.new()
+	tree.root.add_child(root)
+	var enemy: CybercorePatrolEnemy = enemy_scene.instantiate() as CybercorePatrolEnemy
+	var origin: Vector2 = Vector2(240.0, 80.0)
+	enemy.global_position = origin
+	enemy.patrol_speed = 300.0
+	enemy.patrol_distance = 30.0
+	root.add_child(enemy)
+	await tree.process_frame
+
+	var minimum_x: float = enemy.global_position.x
+	var maximum_x: float = enemy.global_position.x
+	for _tick in 36:
+		await tree.physics_frame
+		minimum_x = minf(minimum_x, enemy.global_position.x)
+		maximum_x = maxf(maximum_x, enemy.global_position.x)
+
+	check(maximum_x <= origin.x + enemy.patrol_distance + 0.05,
+		"inimigo não ultrapassa o limite direito mesmo com passo de alta velocidade")
+	check(minimum_x >= origin.x - enemy.patrol_distance - 0.05,
+		"inimigo não ultrapassa o limite esquerdo mesmo com passo de alta velocidade")
+	check(maximum_x >= origin.x + enemy.patrol_distance - 1.0,
+		"patrulha alcança o limite direito declarado")
+	check(minimum_x <= origin.x - enemy.patrol_distance + 1.0,
+		"patrulha alcança o limite esquerdo declarado")
+
+	root.queue_free()
+	await tree.process_frame
+	return true
