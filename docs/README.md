@@ -4,6 +4,8 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 
 ## Ponto de entrada obrigatório
 
+- [Plano Mestre de Produção — 32 etapas](production/32-stage-production-plan.md) — plano operacional aprovado, critérios de aceite, migração rastreável da matriz histórica e pipeline de aprovação visual.
+
 - [Diretiva de implementação integral e continuidade](production/from-zero-implementation-directive.md) — mandato completo de produção aplicado à base Godot existente; não recriar o projeto.
 - [MASTER_DIRECTIVE.md](../MASTER_DIRECTIVE.md) — diretriz central para criação, produção, implementação e validação. Leia primeiro.
 - [Master Game Design & Gameplay Prompt](prompts/master-game-design-and-gameplay-prompt.md) — diretiva detalhada de design e gameplay; deve ser lida em conjunto com as bíblias e decisões.
@@ -106,7 +108,8 @@ Atualize este índice quando documentos forem adicionados ou movidos. Use links 
 
 - [Relatório de validação estrutural](production/validation-report.md)
 - [Auditoria de integridade do repositório — 2026-11-26](production/repository-audit-2026-11-26.md)
-- [Matriz de rastreabilidade das 26 etapas](production/26-stage-traceability-matrix.md) — fontes canônicas, sistemas, evidências e critérios de aceite por etapa.
+- [Plano Mestre de Produção — 32 etapas](production/32-stage-production-plan.md) — fonte operacional vigente.
+- [Matriz histórica das 26 etapas](production/26-stage-traceability-matrix.md) — preservada para rastreabilidade legada e crosswalk 26→32.
 - [Registro de lacunas e decisões — Etapa 02](production/requirements-gap-register.md) — requisitos ainda a definir, prioridades, dependências e decisões já fechadas.
 - [Mapa da arquitetura atual](technical/09-current-architecture-map.md) — autoloads, fluxo de boot, ownership de estado, contratos e lacunas arquiteturais.
 - [Checklist de release Android](production/android-release-checklist.md)
