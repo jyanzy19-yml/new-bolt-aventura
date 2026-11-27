@@ -613,3 +613,14 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Android Debug Export repetiu a suíte: **115 testes / 2.015 verificações / 0 falhas**. APK **28.469.428 bytes**, package ID placeholder `com.example.boltaventura`, SHA-256 `47141db58ac0e11247727e1c3c5822092afd3807d6b80d1e71e20b7a4de1ed98`; assinatura v2/v3 verificada.
 - Artifact ID `15222507024`; ZIP SHA-256 `eff4379737417cbda1b9e73dfb26475dc09ab3a93f029bb1391ee1ffa0e8311f`; [artefato Android Debug](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46046351864/artifacts/15222507024).
 - Evidência L2/CI somente: APK não foi instalado nem executado em Android físico; touch, safe areas/barras, FPS, frame pacing, memória, temperatura e lifecycle OEM continuam sem validação.
+
+
+## Etapa 14 — integração de saúde, checkpoints e recuperação do combate (27/11/2026)
+
+- Branch: `integration/stage14-health-checkpoint-respawn-2026-11-27`; consolida o conteúdo das PRs #78, #79, #82 e #85, todas baseadas no mesmo commit ancestral `71463b5a1f27d7499943858ac86392a3933c58f2`.
+- Runtime: `BoltCombat.reset_for_respawn()` limpa somente o cooldown transitório e `BoltPlayer.respawn()` passa a usar esse contrato explícito.
+- Regressões: reset de cooldown/ataque pendente; restauração idempotente do checkpoint; reentrada e fallback local W1-L2; eventos de `BoltHealth`; callback duplicado do `BoltHealthPickup`.
+- W1-L1 reentrada/fallback e derrota/KillZone continuam cobertos pela PR #97 já integrada; esta unidade complementa com W1-L2 e lifecycle de componentes.
+- Plano: `docs/production/plans/2026-11-27-stage14-health-checkpoint-respawn-integration.md`.
+- Nenhum valor de tuning, Dash, InputMap, schema de save, ID persistente, progressão, canon, geometria, arte ou asset é alterado.
+- **Estado:** implementação e documentação na branch; CI combinado pendente. Etapa 14 permanece EM ANDAMENTO; QA Android físico ainda não executado.
