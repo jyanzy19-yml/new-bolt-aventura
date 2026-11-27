@@ -1,4 +1,7 @@
-# Matriz de rastreabilidade — plano operacional em 26 etapas
+# Matriz histórica de rastreabilidade — plano operacional em 26 etapas
+
+> **Aviso de migração — 27/11/2026:** esta matriz é preservada como registro histórico e crosswalk. O plano operacional primário agora é [32-stage-production-plan.md](32-stage-production-plan.md). Não renumerar nem apagar IDs/evidências antigas. A antiga Etapa 05 (recursos/loading) migra para a nova Etapa 29; as novas Etapas 05–09 tratam da fundação visual e não herdam o status da etapa histórica. A tabela 26→32 e as regras de preservação estão no plano novo.
+
 
 **Data:** 2026-11-27  
 **Base funcional:** main HEAD `4544efc7082a17e7824ccf46c524db07486e3dc9` (PRs #59/#60/#63/#65/#66/#67 integradas).  
