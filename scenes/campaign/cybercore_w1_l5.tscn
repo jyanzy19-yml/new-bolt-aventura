@@ -1,0 +1,120 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/campaign/cybercore_w1_l5.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://scenes/world/platform_block.tscn" id="2_block"]
+[ext_resource type="PackedScene" path="res://scenes/player/bolt.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
+[ext_resource type="PackedScene" path="res://scenes/levels/checkpoint.tscn" id="5_checkpoint"]
+[ext_resource type="PackedScene" path="res://scenes/levels/timed_energy_gate.tscn" id="6_gate"]
+[ext_resource type="PackedScene" path="res://scenes/world/moving_platform.tscn" id="7_moving"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/cybercore_patrol_enemy.tscn" id="8_enemy"]
+
+[sub_resource type="RectangleShape2D" id="KillShape"]
+size = Vector2(2800, 180)
+
+[sub_resource type="RectangleShape2D" id="GoalShape"]
+size = Vector2(72, 128)
+
+[node name="CybercoreW1L5" type="Node2D"]
+script = ExtResource("1_level")
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="StartFloor" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(-32, 0)
+size = Vector2(520, 128)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="MidFloor" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(760, 0)
+size = Vector2(700, 128)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="EndFloor" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(1520, 0)
+size = Vector2(1000, 128)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="ObservatoryPlatform" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(1040, -176)
+size = Vector2(200, 24)
+fill_color = Color(0.08, 0.11, 0.19, 1)
+top_color = Color(0.45, 0.8, 1, 1)
+
+[node name="ObservatoryView" type="Polygon2D" parent="Geometry"]
+position = Vector2(1140, -216)
+color = Color(0.18, 0.55, 0.9, 0.18)
+polygon = PackedVector2Array(-72, -64, 72, -64, 120, 64, -120, 64)
+
+[node name="MovingPlatformA" parent="Geometry" instance=ExtResource("7_moving")]
+position = Vector2(520, -64)
+size = Vector2(180, 24)
+travel_offset = Vector2(0, -48)
+travel_duration = 2.4
+endpoint_pause = 0.45
+
+[node name="MovingPlatformB" parent="Geometry" instance=ExtResource("7_moving")]
+position = Vector2(1840, -96)
+size = Vector2(180, 24)
+travel_offset = Vector2(0, -40)
+travel_duration = 2.8
+endpoint_pause = 0.5
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(96, -24)
+
+[node name="Bolt" parent="." instance=ExtResource("3_player")]
+unique_name_in_owner = true
+position = Vector2(96, -24)
+
+[node name="PatrolEnemy" parent="." instance=ExtResource("8_enemy")]
+position = Vector2(980, -19)
+patrol_distance = 64.0
+patrol_speed = 62.0
+
+[node name="Hud" parent="." instance=ExtResource("4_hud")]
+unique_name_in_owner = true
+
+[node name="Checkpoint" parent="." instance=ExtResource("5_checkpoint")]
+unique_name_in_owner = true
+position = Vector2(1370, -32)
+checkpoint_id = &"cybercore_w1_l5_checkpoint"
+
+[node name="EnergyGate" parent="." instance=ExtResource("6_gate")]
+unique_name_in_owner = true
+position = Vector2(1740, 0)
+active_duration = 1.8
+inactive_duration = 1.2
+contact_damage = 1
+initial_active = true
+
+[node name="KillZone" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1200, 650)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+shape = SubResource("KillShape")
+
+[node name="Goal" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2350, -32)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal"]
+shape = SubResource("GoalShape")
+
+[node name="GateVisual" type="Polygon2D" parent="Goal"]
+color = Color(0.1, 0.9, 1, 0.6)
+polygon = PackedVector2Array(-32, -64, 32, -64, 32, 64, -32, 64)
+
+[node name="LevelNote" type="Label" parent="."]
+position = Vector2(24, -168)
+theme_override_font_sizes/font_size = 16
+text = "W1-L5 · PERÍMETRO DO GUARDIÃO — BLOCKOUT PROVISÓRIO"
