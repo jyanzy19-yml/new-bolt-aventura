@@ -14,7 +14,8 @@ O projeto usa cinco autoloads declarados em project.godot:
 | SceneFlow | scripts/core/scene_flow.gd | Coordena transições, carregamento threaded, exclusão mútua, sinais de sucesso/falha e bloqueio/limpeza de input |
 | SaveSystem | scripts/core/save_system.gd | Envelope JSON versionado, checksum, arquivo temporário, backup e recuperação |
 | CampaignProgress | scripts/campaign/campaign_progress.gd | Schema de domínio da campanha, IDs estáveis, checkpoint, fase atual e conclusão; delega I/O ao SaveSystem |
-| LoadingOverlay | scenes/ui/loading_overlay.tscn | Apresentação global de loading; observa sinais do SceneFlow e não é dono do estado da transição |\n| PerformanceProbe | scripts/core/performance_probe.gd | Instrumentação de frame time e monitores de runtime; ativa apenas em builds debug e não participa do gameplay |
+| LoadingOverlay | scenes/ui/loading_overlay.tscn | Apresentação global de loading; observa sinais do SceneFlow e não é dono do estado da transição |
+| PerformanceProbe | scripts/core/performance_probe.gd | Instrumentação de frame time e monitores de runtime; ativa apenas em builds debug e não participa do gameplay |
 
 ### Fluxo de boot e navegação
 
@@ -68,7 +69,8 @@ flowchart LR
 | Fase atual, checkpoint ativo e fases concluídas | CampaignProgress | SaveSystem, schema v1 |
 | Envelope, checksum e backup | SaveSystem | user://bolt_save.json |
 | Pausa, overlay de resultado e notificação | Hud | Estado de apresentação, não fonte de progresso |
-| Destino e estado da transição | SceneFlow | Transitório; não persistido |\n| Métricas de frame time e monitores de runtime | PerformanceProbe | Janela volátil de diagnóstico; não persistida e desativada em builds não-debug |
+| Destino e estado da transição | SceneFlow | Transitório; não persistido |
+| Métricas de frame time e monitores de runtime | PerformanceProbe | Janela volátil de diagnóstico; não persistida e desativada em builds não-debug |
 
 **Regra de integridade:** CampaignProgress persiste IDs/valores serializáveis, nunca referências a Nodes/Resources. SaveSystem permanece agnóstico ao schema de domínio.
 
@@ -134,7 +136,8 @@ W1-L1 e W1-L2 possuem scripts de composição de nível próprios. Eles conectam
 | Enemy AI | Patrulha simples provisória | Percepção, estados, navegação, telegraphs e limites |
 | Asset catalog | Parcial; placeholders | IDs, proveniência/licença, import settings, budgets e estado |
 | Save migration | Schema v1 sem migração futura | Migrações explícitas e regressões quando novos campos forem aprovados |
-| Android lifecycle | CI exporta APK debug | Teste físico de foco, background, encerramento, retomada e persistência |\n| Acoplamento Player/Combat | BoltPlayer referencia BoltCombat e BoltCombat referencia BoltPlayer | Manter enquanto composição é local; reavaliar antes de extrair/reutilizar Combat ou adicionar múltiplos owners |
+| Android lifecycle | CI exporta APK debug | Teste físico de foco, background, encerramento, retomada e persistência |
+| Acoplamento Player/Combat | BoltPlayer referencia BoltCombat e BoltCombat referencia BoltPlayer | Manter enquanto composição é local; reavaliar antes de extrair/reutilizar Combat ou adicionar múltiplos owners |
 | Safe area / touch físico | Testes sintéticos | Validação em aparelhos identificados, barras/gestos e recortes |
 
 ## 7. Evidência e limites
