@@ -108,7 +108,7 @@ func test_world_and_phase_screens_build_their_cards_at_runtime() -> bool:
 	var world_screen: Control = world_scene.instantiate() as Control
 	tree.root.add_child(world_screen)
 	await tree.process_frame
-	var world_grid: GridContainer = world_screen.find_child("GridContainer", true, false) as GridContainer
+	var world_grid: GridContainer = world_screen.find_child("WorldGrid", true, false) as GridContainer
 	check(world_grid != null, "grid de mundos construído em runtime")
 	if world_grid != null:
 		check_eq(world_grid.get_child_count(), 7, "sete cards de mundo")
@@ -122,7 +122,7 @@ func test_world_and_phase_screens_build_their_cards_at_runtime() -> bool:
 	var phase_screen: Control = phase_scene.instantiate() as Control
 	tree.root.add_child(phase_screen)
 	await tree.process_frame
-	var phase_grid: GridContainer = phase_screen.find_child("GridContainer", true, false) as GridContainer
+	var phase_grid: GridContainer = phase_screen.find_child("PhaseGrid", true, false) as GridContainer
 	check(phase_grid != null, "grid de fases construído em runtime")
 	if phase_grid != null:
 		check_eq(phase_grid.get_child_count(), 6, "seis cards de fase")
