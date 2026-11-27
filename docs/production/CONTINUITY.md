@@ -712,3 +712,14 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - CI no head `0019ac9b0ac1bf813c4bcc874d9017fa69bf0295`: Godot `46027916866`, Docs `46027916827` e Android Debug Export `46027916828` concluídos SUCCESS.
 - Nenhum runtime, cena, tuning, física, InputMap, Dash, arte ou save foi alterado. A exportação debug não foi instalada em aparelho.
 - PR #91 não integrada; Etapa 12 continua EM ANDAMENTO. Próxima unidade independente: contratos de configuração espacial/câmera da Etapa 13, sem sobrepor a PR #91.
+
+
+## Sessão ChatGPT — consolidação de contratos da Etapa 14 — 2026-11-27
+
+- Base `main`: `79023eabb6b31bccc456d3a2d005731733e8444e`.
+- Criada branch `integration/stage14-respawn-checkpoint-defeat-contracts-2026-11-27` para reunir as regressões anteriormente divididas nas PRs #93–#96, reduzindo divergência documental e repetição do mesmo ajuste no workflow Android.
+- Quatro contratos: recuperação de estados transitórios após respawn (4 cenários); integração da derrota ao feedback terminal W1-L1; recuperação física pela KillZone com checkpoint persistido; fallback local quando o schema de campanha não pode ser gravado.
+- A reentrada normal com checkpoint persistido já tinha cobertura em `test_campaign_entry.gd`; preservada sem duplicação.
+- Inclui quatro planos de unidade e uma única remoção da instalação redundante de `cmdline-tools;latest` no workflow Android.
+- Somente testes, planos, continuidade/tracker/status e workflow. Nenhum runtime, cena, física, input, Dash, save schema, IDs, progressão, canon, arte ou asset alterado.
+- CI combinado pendente. Não mesclar até Godot, Docs e Android Debug Export concluírem com SUCCESS.
