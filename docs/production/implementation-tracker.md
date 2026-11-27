@@ -392,3 +392,14 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Exige exatamente `RISING → FALLING → GROUNDED`, sem duplicação; runtime, física e assets não foram alterados.
 - CI no commit `0019ac9b0ac1bf813c4bcc874d9017fa69bf0295`: Godot run `46027916866` SUCCESS; Docs `46027916827` SUCCESS; Android Debug Export `46027916828` SUCCESS.
 - **Estado:** regressão automatizada aprovada em CI; PR #91 aberta e não integrada. Etapa 12 continua EM ANDAMENTO, sem validação visual ou Android físico.
+
+
+## Etapa 13 — contrato estrutural da câmera (2026-11-27)
+
+- Branch: `test/stage13-camera-configuration-contract-2026-11-27`.
+- Novo teste `tests/unit/test_camera_configuration.gd` verifica ownership/acesso público da Camera2D, habilitação, smoothing, dead zones e validade das margens.
+- Plano: `docs/production/plans/2026-11-27-stage13-camera-configuration-contract.md`.
+- Não altera cena, runtime, limites de fase ou parâmetros de câmera; não prova enquadramento visual.
+- **Estado:** aguardando CI; Etapa 13 permanece EM ANDAMENTO.
+
+- Cobertura ampliada: valida também `configure_camera()` e os limites reais declarados por W1-L1 (`0,-360,2200,620`) e W1-L2 (`0,-360,1900,620`), sem instanciar fases nem tocar no save.
