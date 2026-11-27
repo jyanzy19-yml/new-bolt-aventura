@@ -114,3 +114,32 @@ func test_respawn_restores_air_jump_budget() -> bool:
 	check(_player.velocity.y < 0.0, "orçamento de salto aéreo é restaurado no respawn")
 	await _teardown()
 	return true
+
+
+func _tap_buffered(action: StringName) -> void:
+	var down: InputEventAction = InputEventAction.new()
+	down.action = action
+	down.pressed = true
+	tree.root.push_input(down, false)
+	var up: InputEventAction = InputEventAction.new()
+	up.action = action
+	up.pressed = false
+	tree.root.push_input(up, false)
+
+
+func test_respawn_discards_pending_jump_and_dash_taps() -> bool:
+	await _setup()
+	var buffer: ActionBuffer = _player.get_node("%ActionBuffer") as ActionBuffer
+	_tap_buffered(Actions.JUMP)
+	_tap_buffered(Actions.DASH)
+	check(buffer.has_pending(Actions.JUMP), "toque curto de salto está pendente antes do respawn")
+	check(buffer.has_pending(Actions.DASH), "toque curto de dash está pendente antes do respawn")
+
+	_player.respawn(Vector2(200.0, -20.0))
+	check(not buffer.has_pending(Actions.JUMP), "respawn descarta salto antigo ainda não consumido")
+	check(not buffer.has_pending(Actions.DASH), "respawn descarta dash antigo ainda não consumido")
+	await _frames(2)
+	check_eq(_player.state, BoltPlayer.State.GROUNDED, "comandos anteriores à morte não são executados após respawn")
+	check(_player.is_on_floor(), "BOLT permanece no ponto de retorno sem salto residual")
+	await _teardown()
+	return true
