@@ -392,3 +392,12 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Exige exatamente `RISING → FALLING → GROUNDED`, sem duplicação; runtime, física e assets não foram alterados.
 - CI no commit `0019ac9b0ac1bf813c4bcc874d9017fa69bf0295`: Godot run `46027916866` SUCCESS; Docs `46027916827` SUCCESS; Android Debug Export `46027916828` SUCCESS.
 - **Estado:** regressão automatizada aprovada em CI; PR #91 aberta e não integrada. Etapa 12 continua EM ANDAMENTO, sem validação visual ou Android físico.
+
+
+## Etapa 14 — contrato de recuperação do movimento (2026-11-27)
+
+- Branch: `test/stage14-respawn-movement-state-contract-2026-11-27`; base `79023eabb6b31bccc456d3a2d005731733e8444e`.
+- Novo teste `tests/unit/test_player_respawn_movement_contract.gd`: cobre cancelamento de Dash em andamento, reset observável do cooldown, restauração do Dash aéreo e orçamento de salto aéreo no respawn.
+- Escopo não altera runtime, tuning, física, InputMap, Dash, save schema, IDs persistentes ou cenas de produção.
+- Plano: `docs/production/plans/2026-11-27-stage14-respawn-movement-state-contract.md`.
+- **Estado:** aguardando CI; não declara Etapa 14 concluída e não substitui PRs #78, #79 ou #85.
