@@ -288,10 +288,10 @@ func test_enemy_terminal_lifecycle_is_idempotent_and_ignores_late_contact() -> b
 	tree.root.add_child(root)
 	var player: BoltPlayer = player_scene.instantiate() as BoltPlayer
 	var enemy: CybercorePatrolEnemy = enemy_scene.instantiate() as CybercorePatrolEnemy
-	player.global_position = Vector2(1000.0, 0.0)
-	enemy.global_position = Vector2.ZERO
 	root.add_child(player)
 	root.add_child(enemy)
+	player.global_position = Vector2(1000.0, 0.0)
+	enemy.global_position = Vector2.ZERO
 	await tree.process_frame
 
 	var player_health: BoltHealth = player.get_node("%Health") as BoltHealth
