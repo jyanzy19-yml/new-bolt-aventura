@@ -601,6 +601,6 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Branch: `test/stage14-respawn-movement-state-contract-2026-11-27`, baseada no Main HEAD `79023eabb6b31bccc456d3a2d005731733e8444e`.
 - Plano: [stage14-respawn-movement-state-contract](plans/2026-11-27-stage14-respawn-movement-state-contract.md).
 - Teste novo: `tests/unit/test_player_respawn_movement_contract.gd`.
-- Cenários: interrupção de Dash terrestre e limpeza do cooldown; restauração do Dash aéreo após respawn em posição aérea; restauração do orçamento de salto aéreo após respawn.
+- Cenários: interrupção de Dash terrestre e limpeza do cooldown; restauração do Dash aéreo após respawn em posição aérea; restauração do orçamento de salto aéreo; descarte de toques curtos antigos de salto/Dash pendentes no ActionBuffer.
 - Testes utilizam a cena real de BOLT, InputMap/ActionBuffer e ticks físicos do runner; nenhum campo privado é alterado para forçar o resultado.
 - **Estado:** implementação documental/teste submetida à validação CI; Etapa 14 permanece EM ANDAMENTO. Nenhum teste físico Android é alegado.
