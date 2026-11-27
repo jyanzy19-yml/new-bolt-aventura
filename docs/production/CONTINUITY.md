@@ -2,7 +2,7 @@
 
 - Base de referência: `71463b5a1f27d7499943858ac86392a3933c58f2`.
 - PR #87 (Etapa 05) continua aberta; direção visual aguarda aprovação explícita do usuário.
-- PR #88 (Etapa 06) contém ART-BOLT-002, guia técnico de sprites/assets; revisão documental foi feita, mas CI/validação automatizada não foi confirmada. Etapa 06 marcada IMPLEMENTADA, não VALIDADA.
+- PR #88 (Etapa 06) contém ART-BOLT-002, guia técnico de sprites/assets; Docs Validation run `46016532136` SUCCESS. Etapa 06 VALIDADA no escopo documental. PR ainda aberta, sem merge.
 - PR #88 não foi integrada. Nenhuma PR foi integrada sem autorização do usuário.
 - Etapa 07 iniciada na branch `docs/stage07-bolt-character-design-brief`.
 - ART-BOLT-003: brief técnico criado em `BOLT-CHARACTER-CONCEPT-BRIEF.md`, com fatos canônicos, lacunas, requisitos de leitura, folha de personagem, matriz de poses, aprovação e limites de integração.
