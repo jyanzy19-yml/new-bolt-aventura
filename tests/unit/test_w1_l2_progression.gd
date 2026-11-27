@@ -128,7 +128,8 @@ func test_w1_l2_registers_progress_checkpoint_and_completion() -> bool:
 			break
 	check(hud.get_node("%ResultOverlay").visible, "saída física conclui W1-L2")
 	check(CampaignProgress.is_level_completed("W1-L2"), "conclusão de W1-L2 fica persistida")
-	check_eq(hud.get_node("%AgainButton").text, "JOGAR DE NOVO", "última fase implementada ainda oferece reinício, não destino inexistente")
+	check_eq(CampaignProgress.load_state().get("current_level_id"), "W1-L3", "conclusão encaminha o progresso para W1-L3")
+	check_eq(hud.get_node("%AgainButton").text, "PRÓXIMA FASE", "W1-L2 oferece avanço para W1-L3 disponível")
 	tree.paused = false
 	level.free()
 	SaveSystem.delete_save()
