@@ -739,3 +739,13 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - APK debug: 28.469.428 bytes, package ID placeholder `com.example.boltaventura`, SHA-256 `47141db58ac0e11247727e1c3c5822092afd3807d6b80d1e71e20b7a4de1ed98`; assinatura v2/v3 verificada. Artifact `15222507024`; ZIP SHA-256 `eff4379737417cbda1b9e73dfb26475dc09ab3a93f029bb1391ee1ffa0e8311f`.
 - Nenhuma alteração de runtime/gameplay; W1-L1 permanece blockout. Etapa 14 continua EM ANDAMENTO, aguardando QA físico Android e demais critérios.
 - CI pós-merge da main não foi confirmado por este registro; evidência citada é do HEAD validado antes do merge. APK não instalado em aparelho.
+
+
+## Sessão ChatGPT — integração de saúde/checkpoint/respawn da Etapa 14 — 2026-11-27
+
+- Branch `integration/stage14-health-checkpoint-respawn-2026-11-27`, baseada no `main` após PR #97/#98.
+- Consolida PRs #78 (reset de cooldown de combate no respawn), #79 (restauração idempotente e checkpoint W1-L2), #82 (eventos de BoltHealth) e #85 (coleta única do pickup). Todos os arquivos existentes tocados foram comparados com o ancestral comum; os cinco arquivos funcionais/testes tinham o mesmo conteúdo em main e no ancestral antes da aplicação dos diffs.
+- Alteração de runtime restrita: `BoltCombat.reset_for_respawn()` zera cooldown e reabilita o componente; `BoltPlayer.respawn()` invoca esse método. Nenhum cooldown normal, dano, velocidade ou regra de cura é alterado.
+- Testes cobrem ataque imediato após respawn, descarte de ataque pendente, `restore_activation()` sem evento duplicado, reentrada W1-L2, fallback com JSON corrompido, ciclo de vida de `BoltHealth` e callback duplicado do pickup.
+- Plano: `docs/production/plans/2026-11-27-stage14-health-checkpoint-respawn-integration.md`.
+- CI pendente; não mesclar antes de Godot, Docs e Android Debug Export concluírem com SUCCESS.
