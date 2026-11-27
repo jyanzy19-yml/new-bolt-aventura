@@ -1,3 +1,54 @@
+# Snapshot operacional vigente — adoção do plano de 32 etapas (27/11/2026)
+
+**Base da branch documental:** `d4036b942e41299bcd33f3ce19826d8558c50420` (PR #72 integrada por squash).  
+**Plano primário:** [32-stage-production-plan.md](32-stage-production-plan.md). A matriz de 26 etapas permanece como histórico/crosswalk, não como plano operacional primário.  
+**Etapas novas 01–04:** concluídas no nível automatizado/documental L2 descrito nas evidências históricas; isso não aprova Gate 1 nem QA Android físico.  
+**Nova Etapa 29:** EM ANDAMENTO — recebe o trabalho da antiga Etapa 05 sobre recursos, carregamento, ciclo de vida e instrumentação. PR #69, #70, #71 e #72 integradas; medições físicas ainda pendentes.  
+**Novas Etapas 05–09:** NÃO INICIADAS — direção de arte, guia técnico e produção visual ainda precisam ser executados. A criação visual deverá ser apresentada ao usuário e aprovada antes de integração.  
+**Gate 1:** EM ANDAMENTO. W1-L1 e W1-L2 permanecem blockouts. Instalação, touch, safe areas, barras, FPS, memória, temperatura e lifecycle ainda carecem de validação Android física.  
+**PR #72:** integrada por squash em `d4036b942e41299bcd33f3ce19826d8558c50420`; teste determinístico de overflow do buffer de 600 amostras. Godot Validation `45969491642` e Android Debug Export `45969491660` SUCCESS no HEAD da PR. Isso não é profiling físico.
+
+## Estado inicial das 32 etapas
+
+| Etapa | Estado no checkpoint de adoção | Fundamentação |
+|---:|---|---|
+| 01 | VALIDADA (L2 documental/estático) | Auditoria histórica preservada; não equivale a QA físico |
+| 02 | VALIDADA (L2 documental) | Requisitos, GAPs e conflitos documentais rastreados |
+| 03 | VALIDADA (L2 documental) | Baseline arquitetural e contratos mapeados |
+| 04 | VALIDADA (L2) | Boot, SceneFlow, SaveSystem, CampaignProgress e LoadingOverlay endurecidos |
+| 05 | NÃO INICIADA | Nova etapa de direção de arte global |
+| 06 | NÃO INICIADA | Guia técnico de assets a formalizar |
+| 07 | NÃO INICIADA | Concept final de BOLT depende de produção e aprovação |
+| 08 | NÃO INICIADA | Spritesheets finais dependem da Etapa 07 |
+| 09 | NÃO INICIADA | Kit visual inicial de UI/HUD depende de aprovação |
+| 10 | EM ANDAMENTO | BoltPlayer e componentes existem; personagem final ainda não consolidado |
+| 11 | EM ANDAMENTO | Movimento, Dash e touch possuem base/testes; feel e Android físico pendentes |
+| 12 | EM ANDAMENTO | Estados/feedback parciais; animações finais dependem de assets aprovados |
+| 13 | EM ANDAMENTO | Camera2D e componentes espaciais existem; validação visual/device incompleta |
+| 14 | EM ANDAMENTO | Vida, checkpoints, pickups e progressão parciais |
+| 15 | EM ANDAMENTO | Componentes de inimigo-base existem; arquitetura completa não fechada |
+| 16 | NÃO INICIADA | Produção visual de inimigos aguarda direção e aprovação |
+| 17 | EM ANDAMENTO | Patrulha simples provisória; IA/arquetipagem incompletas |
+| 18 | NÃO INICIADA | Dossiers/concepts dos sete chefes pendentes |
+| 19 | NÃO INICIADA | Arenas e confrontos finais não identificados |
+| 20 | EM ANDAMENTO | Blueprint de 42 fases existe; rastreabilidade/integração completa pendente |
+| 21 | NÃO INICIADA | Concepts visuais dos sete mundos pendentes |
+| 22 | NÃO INICIADA | Tilesets e kits finais não identificados; blockouts não contam como arte final |
+| 23 | EM ANDAMENTO | W1-L1/W1-L2 em blockout; demais fases não construídas |
+| 24 | EM ANDAMENTO | Componentes reutilizáveis existem; integração e exploração da campanha parciais |
+| 25 | EM ANDAMENTO | Abertura/tutorial e progressão inicial existem; arco completo pendente |
+| 26 | EM ANDAMENTO | Menu/HUD/Loading existem em estágio parcial; UX completa pendente |
+| 27 | NÃO INICIADA | Áudio final de campanha não identificado |
+| 28 | EM ANDAMENTO | Export Android CI existe; instalação, safe areas, barras e lifecycle físico pendentes |
+| 29 | EM ANDAMENTO | Antiga Etapa 05 migrada; instrumentação/política documental integradas, baseline físico pendente |
+| 30 | EM ANDAMENTO | CI/regressões existentes; QA integral 42 fases e validação física pendentes |
+| 31 | NÃO INICIADA | Polimento final depende de conteúdo e arte aprovados |
+| 32 | NÃO INICIADA | Release Candidate e auditoria final não iniciados |
+
+Os estados são um snapshot inicial, não percentuais. Atualizar somente com evidências novas. A correspondência histórica 26→32 está documentada no plano mestre.
+
+---
+
 ## Snapshot operacional vigente — 2026-11-27 (pós-PR #70)
 
 **Main HEAD:** `5e55fa1693d8ecf6d8a1d79bfffa1999824ad1ea`. PR #69 e PR #70 integradas por squash.
