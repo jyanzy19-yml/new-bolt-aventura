@@ -54,6 +54,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_contact_body_entered(body: Node2D) -> void:
+	# A defeated enemy can remain in the physics tree until queue_free is flushed.
+	# Ignore any late overlap callback after its active lifecycle has ended.
+	if not _active or not body is BoltPlayer:
+		return
 	if body is BoltPlayer:
 		var player: BoltPlayer = body as BoltPlayer
 		var knockback_direction: float = signf(player.global_position.x - global_position.x)
