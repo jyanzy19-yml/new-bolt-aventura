@@ -1,7 +1,7 @@
-## Snapshot vigente — 2026-11-26
+## Snapshot vigente — 2026-11-27
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
-- **Main HEAD após PR #52:** `6f8e9b8fbaaab9c44247050e5f86e4442bd2622f`; PR #51/#52 integraram e revisaram o mapa arquitetural atual.
+- **Main HEAD confirmado:** `54fd48e5f49fba877740265aafa0d8f649c2b1e9`. PRs #57–#61 permanecem abertas e não integradas; confirmar cada head/check no GitHub antes de qualquer integração.
 - **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético e progressão W1-L1→W1-L2.
 - **Última correção de gameplay:** PR #47 — estado inicial `initial_active=false` do `TimedEnergyGate`, merge `2636226c4027625649e66c51ff64d7e2e56168a6`.
 - **Último componente de plataforma:** PR #46 — `OneWayPlatform`, merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`; PR #45 adicionou `MovingPlatform`.
@@ -648,3 +648,17 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Plano: `docs/production/plans/2026-11-26-one-way-platform.md`.
 - **Estado:** aguardando CI. Não integrada em fase.
 \n\n## Sessão ChatGPT — integração da PR #46 — 2026-11-26\n\n- PR #46 `feat: add reusable one-way platform` integrada por squash; merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.\n- Implementação: `scripts/world/one_way_platform.gd`, `scenes/world/one_way_platform.tscn`; teste `tests/unit/test_one_way_platform.gd`; contrato atualizado em `docs/technical/05-system-contracts.md`.\n- Godot CI pré-merge `45887805114`: SUCCESS — 87 testes/548 verificações/0 falhas. Docs CI `45887805097`: SUCCESS. Android Debug Export `45887805269`: SUCCESS; artifact e hash registrados em `stage-status.md`.\n- Não houve integração em fase; margin 2 px e dimensões são provisórias. Sem playtest visual ou Android físico. Pós-merge CI da main não confirmado no momento do registro.\n
+
+---
+
+## Sessão ChatGPT — auditoria de Boot e regressão de cold-start — 2026-11-27
+
+- **Main base:** `54fd48e5f49fba877740265aafa0d8f649c2b1e9`.
+- **Branch:** `test/boot-input-map-fail-closed-2026-11-27`.
+- **PR #61:** aberta, não integrada; head `4875934435c71a3fe64f1f202f427b256cef0acc`.
+- Revisão estática de `Boot`, `SceneFlow` e `LoadingOverlay`: nenhum defeito de execução confirmado nesta rodada. O contrato de Boot já falhava de modo seguro quando uma ação obrigatória do Input Map estava ausente, mas não havia regressão de integração para esse cold-start inválido.
+- Novo teste `tests/unit/test_boot.gd::test_boot_reports_missing_required_action_without_starting_transition`: remove temporariamente Jump, instancia a cena real de Boot, verifica mensagem de erro e ausência de transição e restaura o InputMap original.
+- Godot Validation `45915349890`: SUCCESS — 93 testes/593 verificações/0 falhas. Documentation Validation `45915349860`: SUCCESS. Android Debug Export `45915349841`: SUCCESS — 93/593/0.
+- APK debug: 28.461.057 bytes; package ID provisório `com.example.boltaventura`; assinatura v2/v3 válida; SHA-256 `eea3d5b4c15d9ccf29693790fb1d69c0a732ffa0b70b9519334871df149c3ff6`; artifact `bolt-aventura-android-debug-aa2bed6693de4da2206fce06321c6d8886185417`.
+- Limites: nenhuma instalação/execução Android física, inspeção visual de cold-start, profiling ou teste OEM. Nenhuma PR integrada automaticamente.
+- **Próxima ação:** concluir a auditoria de Etapa 04 nos consumidores de progressão/save e rever a interação entre PRs #57–#61 sem misturar suas branches.

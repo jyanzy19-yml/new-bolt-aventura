@@ -1,8 +1,8 @@
 # Estado canônico de desenvolvimento — BOLT · AVENTURA
 
-## Snapshot operacional vigente — 2026-11-26
+## Snapshot operacional vigente — 2026-11-27
 
-- **Main HEAD:** `6f8e9b8fbaaab9c44247050e5f86e4442bd2622f` (PR #52 integrada; mapa arquitetural revisado e sincronizado).
+- **Main HEAD confirmado:** `54fd48e5f49fba877740265aafa0d8f649c2b1e9` (PRs #57–#61 ainda não integradas).
 - **Última correção de gameplay:** PR #47, `TimedEnergyGate.initial_active=false`; CI pós-merge Godot 88 testes/553 verificações/0 falhas, Docs SUCCESS e Android Debug Export SUCCESS.
 - **Último componente de plataforma:** PR #46, `OneWayPlatform`; CI pós-merge Godot 87 testes/548 verificações/0 falhas, Docs e Android Export SUCCESS.
 - **Última entrega de conteúdo:** PR #34, W1-L2 em blockout e progressão W1-L1→W1-L2.
@@ -12,8 +12,10 @@
 - **APK pós-merge PR #47:** artifact `bolt-aventura-android-debug-2636226c4027625649e66c51ff64d7e2e56168a6`, 28.461.057 bytes, SHA-256 `c3ca03958eecf120f1a9f5f1e4fae3851fb7560bca303c8eb5a930f987b58123`, assinatura v2/v3 válida; package ID `com.example.boltaventura` é placeholder; APK não instalado em aparelho.
 - **PR #1:** permanece separada e não deve ser integrada/rebaseada automaticamente.
 - **Dash:** decisão aprovada e vigente: deve permanecer; ver `docs/production/ADR-001-DASH.md`.
-- **Próxima unidade:** auditar Boot, SceneFlow, SaveSystem, CampaignProgress e LoadingOverlay; corrigir edge cases confirmados e adicionar regressões.
+- **Próxima unidade:** concluir auditoria de Etapa 04 nos consumidores de progressão/save e revisar as PRs abertas sem integração automática.
 
+
+- **PRs abertas:** #57 Cybercore polish; #58 threaded boot/loading; #59 SaveSystem recovery; #60 Android pause/input lifecycle; #61 Boot Input Map regression. Todas devem permanecer separadas até revisão independente e decisão de integração.
 
 **Fonte única para o próximo turno.** Antes de editar, confirme este arquivo contra o HEAD, commits, branches e PRs reais do GitHub.
 
