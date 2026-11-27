@@ -49,7 +49,7 @@ Os estados são um snapshot inicial, não percentuais. Atualizar somente com evi
 
 ---
 
-## Snapshot operacional vigente — 2026-11-27 (pós-PR #70)
+## Snapshot histórico — 2026-11-27 (pré-adoção das 32 etapas; pós-PR #70)
 
 **Main HEAD:** `5e55fa1693d8ecf6d8a1d79bfffa1999824ad1ea`. PR #69 e PR #70 integradas por squash.
 **Etapas:** 01–04 concluídas; Etapa 05 em desenvolvimento. Gate 1 permanece em andamento; W1-L1/W1-L2 seguem blockouts e QA Android físico permanece pendente.
@@ -65,7 +65,7 @@ Os estados são um snapshot inicial, não percentuais. Atualizar somente com evi
 
 # Estado de produção — BOLT · AVENTURA
 
-## Snapshot vigente — 2026-11-27
+## Snapshot histórico — 2026-11-27 (plano anterior de 26 etapas)
 
 **Main HEAD:** `4544efc7082a17e7824ccf46c524db07486e3dc9` — PRs #65, #66 e #67 integradas; PRs #59, #60 e #63 também permanecem na linha principal.
 **Etapas:** 01–04 concluídas; Etapa 05 em desenvolvimento; etapas 06–26 conforme a matriz.
