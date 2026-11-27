@@ -58,7 +58,8 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - [Contratos entre sistemas](technical/05-system-contracts.md)
 - [Fundação do projeto Godot — estado real](technical/06-godot-project-foundation.md)
 - [Pipeline de CI e validação](production/CI_AND_VALIDATION_PIPELINE.md)
-- [Pipeline de assets](production/ASSET_PIPELINE.md)
+- [Pipeline de assets e aprovação visual](production/ASSET_PIPELINE.md)
+- [Fila rastreável de assets](production/ASSET_REQUEST_QUEUE.md)
 
 ## Produção e qualidade
 
