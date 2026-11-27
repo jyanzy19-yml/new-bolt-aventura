@@ -721,4 +721,6 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Lacuna selecionada: comportamento quando `CampaignProgress` rejeita um schema de domínio futuro. O controlador W1-L1 atualiza `_respawn_position` antes de tentar persistir; a sessão deve continuar recuperável sem sobrescrever dados incompatíveis.
 - Branch `test/stage14-w1-l1-checkpoint-save-failure-2026-11-27`; teste `tests/unit/test_stage14_w1_l1_checkpoint_persistence_failure_contract.gd`; plano `docs/production/plans/2026-11-27-stage14-w1-l1-checkpoint-persistence-failure.md`.
 - Escopo somente teste/documentação; nenhum runtime, cena, física, input, Dash, schema v1, ID, progressão, canon ou asset alterado.
-- CI pendente no checkpoint de escrita. Nenhuma validação Android física foi executada.
+- CI final do HEAD `913cff01c3c273aa756d9b8b8c9137f34aa60dc5`: Godot `46045367448`, Docs `46045367446` e Android Debug Export `46045367372` — todos SUCCESS; 109 testes/1.957 verificações/0 falhas; 20/20 cold boots e mutation check aprovados.
+- APK debug: 28.469.428 bytes, package ID placeholder `com.example.boltaventura`, SHA-256 `1a4dde3754c4e0b22a599e5b1ba3ae3e9def7b9d08e78065ab9cc51e6420934c`; assinatura v2/v3 verificada. Artifact `15221204802`; ZIP SHA-256 `e18f0b95f5cbd88971a54bb7c0ff724d12d465ad5dfe63aed4124b40eda81b`.
+- CI/Headless é evidência L2. APK não foi instalado em Android físico; touch, safe areas, FPS, memória, temperatura e lifecycle OEM continuam pendentes.
