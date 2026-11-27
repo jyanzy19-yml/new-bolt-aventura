@@ -36,3 +36,35 @@ func test_checkpoint_updates_respawn_target_once() -> bool:
 	level.queue_free()
 	await tree.process_frame
 	return true
+
+
+func test_checkpoint_restore_does_not_emit_activation_again() -> bool:
+	var packed: PackedScene = load("res://scenes/levels/checkpoint.tscn") as PackedScene
+	check(packed != null, "cena de checkpoint carrega para teste de restauração")
+	if packed == null:
+		return true
+
+	var root: Node2D = Node2D.new()
+	tree.root.add_child(root)
+	var checkpoint: BoltCheckpoint = packed.instantiate() as BoltCheckpoint
+	root.add_child(checkpoint)
+	await tree.process_frame
+
+	var activations: Array[int] = [0]
+	checkpoint.activated.connect(func(_id: StringName, _position: Vector2) -> void:
+		activations[0] += 1
+	)
+
+	checkpoint.restore_activation()
+	check(checkpoint.is_activated(), "restauração marca checkpoint como ativo")
+	var indicator: Polygon2D = checkpoint.get_node("%Indicator") as Polygon2D
+	check(indicator.color.is_equal_approx(Color(0.35, 1.0, 0.68, 1.0)), "restauração atualiza indicador visual")
+	check_eq(activations[0], 0, "restauração não emite novo evento de gameplay")
+
+	checkpoint.restore_activation()
+	checkpoint.activate()
+	check_eq(activations[0], 0, "restauração repetida e ativação posterior não duplicam evento")
+
+	root.queue_free()
+	await tree.process_frame
+	return true
