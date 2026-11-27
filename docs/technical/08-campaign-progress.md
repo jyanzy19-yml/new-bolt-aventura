@@ -12,7 +12,7 @@ O payload raiz de SaveSystem contém a chave campaign_progress:
 - schema_version: 1, número finito exatamente integral (TYPE_INT ou TYPE_FLOAT com valor inteiro); strings e floats fracionários são rejeitados
 - current_level_id: string; vazio no estado padrão de campanha nova e W1-L1/W1-L2 após entrada/progressão
 - active_checkpoint_id: string estável ou vazia
-- completed_level_ids: array de strings sem duplicatas
+- completed_level_ids: array de strings sem duplicatas; IDs vazios ou repetidos tornam o estado inválido e falham fechado com erro de domínio específico
 
 A estrutura base está em ADR-0004; a extensão W1-L1→W1-L2 está registrada em ADR-0006.
 
