@@ -66,3 +66,16 @@ func test_invalid_catalog_indices_fail_closed() -> bool:
 	check_eq(CATALOG.get_level_id(0, 6), "", "fase fora do mundo rejeitada")
 	check(not CATALOG.is_world_unlocked(7, []), "mundo inexistente nunca desbloqueia")
 	return true
+
+func test_selection_scenes_and_main_menu_entry_are_loadable() -> bool:
+	var worlds: PackedScene = load("res://scenes/ui/world_selection.tscn") as PackedScene
+	var phases: PackedScene = load("res://scenes/ui/phase_selection.tscn") as PackedScene
+	var menu: PackedScene = load("res://scenes/ui/main_menu.tscn") as PackedScene
+	check(worlds != null, "cena de seleção de mundos carrega")
+	check(phases != null, "cena de seleção de fases carrega")
+	check(menu != null, "menu principal carrega com entrada de seleção")
+	if menu != null:
+		var instance: Node = menu.instantiate()
+		check(instance.get_node_or_null("Center/Column/CampaignSelectionButton") is Button, "menu expõe botão de seleção")
+		instance.free()
+	return true
