@@ -89,3 +89,18 @@ A revisão deve ser acompanhada por inventário atualizado, hipótese mensuráve
 - [Godot — Resource](https://docs.godotengine.org/en/stable/classes/class_resource.html): referência contada e remoção do cache quando todas as referências são liberadas.
 
 **Conclusão:** no baseline atual, a opção de menor risco é manter carregamento threaded por cena, prewarm pontual do script de menu e liberação natural por referência. Não há evidência que justifique preload global, cache manager ou unload forçado.
+
+
+## 8. Telemetria de transições em builds debug — Etapa 29
+
+A implementação complementar da Etapa 29 amplia o `PerformanceProbe` sem alterar o proprietário do carregamento:
+
+- O probe observa os sinais existentes de `SceneFlow`: início, conclusão, falha e cancelamento.
+- Cada transição concluída registra caminho, resultado, duração monotônica em milissegundos e `Performance.MEMORY_STATIC` antes/depois.
+- O histórico mantém no máximo 32 registros; os mais antigos são descartados.
+- O snapshot calcula p95 de duração sob demanda. Nenhuma ordenação ou alocação do histórico ocorre no loop de frame.
+- A telemetria é debug-only e não altera destino, pausa, cancelamento, troca de cena, cache, ownership ou referências de recursos.
+- `MEMORY_STATIC` é um monitor do engine, não RSS do processo Android. A diferença antes/depois não comprova unload nem ausência de vazamento.
+- O teste automatizado injeta os quatro resultados possíveis pelo contrato de sinais e verifica o limite de retenção. A captura física continua necessária para RSS, GPU, temperatura e frame pacing.
+
+A instrumentação fornece evidência comparável de duração de transições no runtime debug e prepara a sequência de medição descrita na seção 5. Ela não autoriza preload global, cache manager ou purge de recursos.

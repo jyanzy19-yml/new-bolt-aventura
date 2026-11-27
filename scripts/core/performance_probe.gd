@@ -4,6 +4,7 @@ extends Node
 
 const SAMPLE_CAPACITY: int = 600
 const RESOURCE_SAMPLE_INTERVAL: int = 30
+const TRANSITION_SAMPLE_CAPACITY: int = 32
 
 var _enabled: bool = false
 var _frame_times_ms: PackedFloat32Array = PackedFloat32Array()
@@ -19,10 +20,24 @@ var _render_objects: int = 0
 var _process_time_ms: float = 0.0
 var _physics_process_time_ms: float = 0.0
 
+var _transition_active: bool = false
+var _transition_started_at_usec: int = 0
+var _transition_started_path: String = ""
+var _transition_memory_before_bytes: int = 0
+var _transition_records: Array[Dictionary] = []
+
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	set_enabled(OS.is_debug_build())
+	# Instrumentation observes the existing transition contract; it never owns or
+	# changes scene loading, pause state, cancellation, or resource references.
+	var scene_flow: Node = get_node_or_null("/root/SceneFlow")
+	if scene_flow != null:
+		scene_flow.connect("transition_started", _on_transition_started)
+		scene_flow.connect("transition_finished", _on_transition_finished)
+		scene_flow.connect("transition_failed", _on_transition_failed)
+		scene_flow.connect("transition_cancelled", _on_transition_cancelled)
 
 
 ## Ativa a coleta somente em builds de desenvolvimento/debug.
@@ -31,6 +46,11 @@ func set_enabled(value: bool) -> bool:
 	if value and not OS.is_debug_build():
 		return false
 	_enabled = value
+	if not _enabled:
+		_transition_active = false
+		_transition_started_at_usec = 0
+		_transition_started_path = ""
+		_transition_memory_before_bytes = 0
 	if _enabled and _frame_times_ms.is_empty():
 		_frame_times_ms.resize(SAMPLE_CAPACITY)
 		_sample_resource_monitors()
@@ -54,6 +74,47 @@ func _process(delta: float) -> void:
 	if _frames_since_resource_sample >= RESOURCE_SAMPLE_INTERVAL:
 		_frames_since_resource_sample = 0
 		_sample_resource_monitors()
+
+
+func _on_transition_started(path: String) -> void:
+	if not _enabled or _transition_active:
+		return
+	_transition_active = true
+	_transition_started_path = path
+	_transition_started_at_usec = Time.get_ticks_usec()
+	_transition_memory_before_bytes = int(Performance.get_monitor(Performance.MEMORY_STATIC))
+
+
+func _on_transition_finished(path: String) -> void:
+	_finish_transition(path, "success")
+
+
+func _on_transition_failed(path: String, _reason: String) -> void:
+	_finish_transition(path, "failed")
+
+
+func _on_transition_cancelled(path: String) -> void:
+	_finish_transition(path, "cancelled")
+
+
+func _finish_transition(path: String, outcome: String) -> void:
+	if not _enabled or not _transition_active or path != _transition_started_path:
+		return
+	var elapsed_usec: int = maxi(0, Time.get_ticks_usec() - _transition_started_at_usec)
+	var record: Dictionary = {
+		"path": path,
+		"outcome": outcome,
+		"duration_ms": float(elapsed_usec) / 1000.0,
+		"memory_static_before_bytes": _transition_memory_before_bytes,
+		"memory_static_after_bytes": int(Performance.get_monitor(Performance.MEMORY_STATIC)),
+	}
+	if _transition_records.size() >= TRANSITION_SAMPLE_CAPACITY:
+		_transition_records.pop_front()
+	_transition_records.append(record)
+	_transition_active = false
+	_transition_started_at_usec = 0
+	_transition_started_path = ""
+	_transition_memory_before_bytes = 0
 
 
 func _sample_resource_monitors() -> void:
@@ -80,6 +141,11 @@ func get_snapshot() -> Dictionary:
 		max_ms = maxf(max_ms, sample_ms)
 
 	var average_ms: float = total_ms / float(_sample_count) if _sample_count > 0 else 0.0
+	var transition_durations: Array[float] = []
+	for record: Dictionary in _transition_records:
+		transition_durations.append(float(record.get("duration_ms", 0.0)))
+	transition_durations.sort()
+	var last_transition: Dictionary = _transition_records.back() if not _transition_records.is_empty() else {}
 	return {
 		"enabled": _enabled,
 		"sample_count": _sample_count,
@@ -96,6 +162,14 @@ func get_snapshot() -> Dictionary:
 		"node_count": _node_count,
 		"draw_calls_last_sample": _draw_calls,
 		"render_objects_last_sample": _render_objects,
+		"transition_sample_count": _transition_records.size(),
+		"transition_duration_ms_last": float(last_transition.get("duration_ms", 0.0)),
+		"transition_duration_ms_p95": _percentile(transition_durations, 0.95),
+		"transition_last_path": str(last_transition.get("path", "")),
+		"transition_last_outcome": str(last_transition.get("outcome", "")),
+		"transition_last_memory_static_before_bytes": int(last_transition.get("memory_static_before_bytes", 0)),
+		"transition_last_memory_static_after_bytes": int(last_transition.get("memory_static_after_bytes", 0)),
+		"transition_history": _transition_records.duplicate(true),
 	}
 
 
@@ -106,11 +180,16 @@ func _percentile(sorted_samples: Array[float], percentile: float) -> float:
 	return sorted_samples[index]
 
 
-## Limpa a janela de frame time sem alterar o estado de execução do jogo.
+## Limpa as janelas de métricas sem alterar o estado de execução do jogo.
 func reset() -> void:
 	_write_index = 0
 	_sample_count = 0
 	_frames_since_resource_sample = 0
+	_transition_records.clear()
+	_transition_active = false
+	_transition_started_at_usec = 0
+	_transition_started_path = ""
+	_transition_memory_before_bytes = 0
 	if not _frame_times_ms.is_empty():
 		_frame_times_ms.fill(0.0)
 	if _enabled:
