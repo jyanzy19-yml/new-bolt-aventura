@@ -788,3 +788,11 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Suíte Godot/Android: 126 testes/2.093 verificações/0 falhas; 20/20 cold boots; mutation check aprovado.
 - APK Debug: 28.469.428 bytes, package ID provisório `com.example.boltaventura`, SHA-256 `7300fbc1452afcdd0ed1ead69593b56ef7084ac3f6f3cbd52b676fcbf5aa7082`; assinatura v2/v3 verificada. Artifact `15223552031`; ZIP SHA-256 `3add372a70530d55cb326fc1e75c22ff004bb5796167d09fdeb78dc9f1a9fcb0`.
 - Nenhuma validação Android física ou CI pós-merge foi confirmada. Etapa 15 permanece EM ANDAMENTO.
+
+
+## Sessão ChatGPT — integração da regressão one-way platform Stage 13 — 2026-11-27
+
+- Branch `test/stage13-one-way-platform-physics-integration-2026-11-27`, baseada no main após integrações Stage 14/15.
+- Consolida o teste da PR #83; arquivo `tests/unit/test_one_way_platform.gd` foi comparado com o ancestral `71463b5a1f27d7499943858ac86392a3933c58f2` e não tinha alterações em main desde a base comum.
+- Teste agora valida geometria, margem, direção, passagem ascendente e aterrissagem superior com BOLT real e InputMap/ActionBuffer do projeto.
+- Somente teste e plano técnico. CI pendente; sem validação visual ou Android físico.
