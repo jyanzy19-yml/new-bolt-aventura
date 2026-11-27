@@ -1,4 +1,18 @@
-## Continuidade vigente — adoção do plano de 32 etapas (27/11/2026)
+## Continuidade vigente — execução da Etapa 06 (27/11/2026)
+
+- Main de referência: `71463b5a1f27d7499943858ac86392a3933c58f2`; nenhuma PR desta sequência foi integrada.
+- PR #87 contém a proposta da Etapa 05 e permanece aberta, aguardando aprovação explícita do usuário.
+- Branch desta unidade: `docs/stage06-asset-production-technical-guide`.
+- Commit da especificação ART-BOLT-002: `f4d921c1ae1605487bf8a071cf322e07dafaae70`.
+- Entrega: `docs/production/SPRITE-ASSET-TECHNICAL-GUIDE.md`, cobrindo ciclo de vida, IDs/nomenclatura, organização, spritesheets, pivôs, tilesets, UI, VFX, áudio, import Godot 4.7.2, compressão, atlas, manifesto, proveniência e checklists.
+- `docs/README.md`, `ASSET_REQUEST_QUEUE.md` e `stage-status.md` atualizados; ART-BOLT-002 marcado SPECIFIED. Etapas 05 e 06 permanecem EM ANDAMENTO até aceite.
+- Dimensões, resolução lógica, paletas, FPS artístico e budgets numéricos continuam TBD; não foram inventados nem aprovados.
+- Nenhum asset visual foi gerado/integrado e nenhum runtime foi alterado.
+- Próxima ação: CI documental e revisão da especificação; em paralelo, obter aprovação da Etapa 05 antes de congelar parâmetros e abrir a Etapa 07.
+
+---
+
+## Snapshot histórico — adoção do plano de 32 etapas (27/11/2026)
 
 - Main HEAD: `d90ac2c78e96b32233f8d003ea6673a38079ecb3`; PR #72 e PR #73 integradas por squash.
 - Docs Validation pós-merge PR #73: run `45986435957` SUCCESS.
