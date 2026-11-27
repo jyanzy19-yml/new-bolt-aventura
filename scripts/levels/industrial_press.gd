@@ -1,7 +1,7 @@
 class_name IndustrialPress
 extends Area2D
 ## Prensa industrial cíclica. O aviso antecede o golpe; a área de dano só fica ativa
-## durante a descida. O Timer respeita a pausa da SceneTree.
+## durante a descida. A máquina de estados usa delta físico fixo e respeita a pausa da SceneTree.
 
 signal state_changed(state: State)
 
