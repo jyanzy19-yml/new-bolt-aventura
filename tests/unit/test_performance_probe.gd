@@ -53,3 +53,25 @@ func test_probe_reset_clears_the_frame_window() -> bool:
 	check_eq(snapshot.get("frame_time_ms_avg", -1.0), 0.0, "reset zera média")
 	check_eq(snapshot.get("frame_time_ms_p95", -1.0), 0.0, "reset zera percentil")
 	return true
+
+
+
+func test_probe_ring_buffer_retains_latest_600_samples() -> bool:
+	var probe: Node = _probe()
+	check(probe != null, "autoload PerformanceProbe presente")
+	if probe == null or not OS.is_debug_build():
+		return true
+
+	probe.call("reset")
+	# Injeção determinística de 605 deltas: a janela deve reter somente os valores 6..605 ms.
+	for frame_index: int in range(1, 606):
+		probe.call("_process", float(frame_index) / 1000.0)
+
+	var snapshot: Dictionary = probe.call("get_snapshot")
+	check_eq(snapshot.get("sample_count", 0), 600, "buffer permanece limitado após overflow")
+	check_eq(snapshot.get("sample_capacity", 0), 600, "capacidade declarada permanece constante")
+	check(is_equal_approx(float(snapshot.get("frame_time_ms_avg", 0.0)), 305.5), "média considera somente os últimos 600 valores")
+	check(is_equal_approx(float(snapshot.get("frame_time_ms_p95", 0.0)), 575.0), "p95 usa nearest-rank sobre a janela ordenada")
+	check(is_equal_approx(float(snapshot.get("frame_time_ms_p99", 0.0)), 599.0), "p99 usa nearest-rank sobre a janela ordenada")
+	check(is_equal_approx(float(snapshot.get("frame_time_ms_max", 0.0)), 605.0), "máximo exclui a amostra descartada")
+	return true
