@@ -402,4 +402,9 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Novo teste `tests/unit/test_stage14_w1_l1_checkpoint_persistence_failure_contract.gd`: semeia schema de domínio 999, ativa checkpoint e KillZone por contato físico real, exige fallback de respawn local, preservação do payload incompatível e ausência de derrota/pausa terminal.
 - Runtime, cenas, colisões, física, Dash, InputMap, schema v1, IDs persistentes, progressão, canon e assets não foram alterados.
 - Plano: `docs/production/plans/2026-11-27-stage14-w1-l1-checkpoint-persistence-failure.md`.
-- **Estado:** implementação e documentação na branch; CI pendente. Etapa 14 continua EM ANDAMENTO. Sem validação Android física.
+- **Estado:** regressão aprovada em CI; PR #96 aberta e não integrada. Etapa 14 continua EM ANDAMENTO.
+- Godot Validation run `46045367448`: SUCCESS — Godot 4.7.2, **109 testes / 1.957 verificações / 0 falhas**; 20/20 cold boots e mutation check do prewarm aprovados.
+- Documentation Validation run `46045367446`: SUCCESS.
+- Android Debug Export run `46045367372`: SUCCESS — suíte headless **109 testes / 1.957 verificações / 0 falhas**; APK **28.469.428 bytes**, package ID placeholder `com.example.boltaventura`, SHA-256 `1a4dde3754c4e0b22a599e5b1ba3ae3e9def7b9d08e78065ab9cc51e6420934c`; assinatura v2/v3 verificada.
+- Artifact ID `15221204802`; ZIP SHA-256 `e18f0b95f5cbd88971a54bbbe7c0ff724d12d465ad5dfe63aed4124b40eda81b`; [download do artefato](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46045367372/artifacts/15221204802).
+- Evidência L2/CI: o APK não foi instalado nem executado em Android físico; touch, safe areas, FPS, frame pacing, memória, temperatura e lifecycle OEM continuam sem validação.
