@@ -61,6 +61,10 @@ func test_industrial_press_warns_before_damage_and_recovers() -> bool:
 	check_eq(press.get_state(), IndustrialPress.State.WARNING, "prensa inicia em aviso visual")
 	check((press.get_node("%StrikeZone") as CollisionShape2D).disabled, "zona de golpe fica desativada durante o aviso")
 	check_eq(health.current_health, 3, "aviso não causa dano")
+	tree.paused = true
+	for _frame in range(12):
+		await tree.process_frame
+	check_eq(press.get_state(), IndustrialPress.State.WARNING, "pausa congela o ciclo da prensa")	tree.paused = false
 	await _step_physics(10)
 	check_eq(press.get_state(), IndustrialPress.State.ACTIVE, "prensa desce após o aviso")
 	check(not (press.get_node("%StrikeZone") as CollisionShape2D).disabled, "zona de golpe só ativa na descida")
