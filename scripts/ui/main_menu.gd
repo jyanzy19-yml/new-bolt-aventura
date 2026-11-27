@@ -8,7 +8,7 @@ const LEVEL_PATHS: Dictionary = {
 	"W1-L3": "res://scenes/campaign/cybercore_w1_l3.tscn",
 }
 const LEVEL_LABELS: Dictionary = {
-	"W1-L1": "Cybercore",
+	"W1-L1": "Despertar entre Ruínas",
 	"W1-L2": "Ruas sem Sinal",
 	"W1-L3": "Fábrica de Ecos",
 }
