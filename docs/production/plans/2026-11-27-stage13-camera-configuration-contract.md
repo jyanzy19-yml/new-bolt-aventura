@@ -14,12 +14,13 @@ Fixar invariantes estruturais já presentes na cena do jogador, sem retunar par�
 - A câmera está habilitada e utiliza suavização de posição e de limites.
 - A suavização possui velocidade positiva.
 - As zonas mortas horizontal e vertical estão habilitadas.
+- `configure_camera()` aplica os limites de mundo definidos para W1-L1 e W1-L2, preservando `limit_smoothed`.
 - As margens são não negativas e não colapsam a área útil de enquadramento.
 
 ## Fora de escopo
 
 - Não altera `bolt.tscn`, limites de fases, smoothing speed, margins ou comportamento de runtime.
-- Não prova enquadramento visual, ausência de clipping, legibilidade em diferentes proporções, seguimento durante gameplay ou performance.
+- Verifica os limites configurados por W1-L1/W1-L2 em isolamento, mas não prova enquadramento visual, ausência de clipping, legibilidade em diferentes proporções, seguimento durante gameplay ou performance.
 - Não substitui revisão em Android físico; a validação visual depende de fase/layout e resolução real.
 - Não converte valores atuais em decisões artísticas definitivas.
 
