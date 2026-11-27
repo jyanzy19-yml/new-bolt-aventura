@@ -1,11 +1,11 @@
 # Snapshot operacional vigente — adoção do plano de 32 etapas (27/11/2026)
 
-**Main HEAD vigente:** `d90ac2c78e96b32233f8d003ea6673a38079ecb3` (PR #72 e PR #73 integradas por squash). Docs Validation pós-merge PR #73: run `45986435957` SUCCESS.  
+**Main HEAD vigente no checkpoint desta atualização:** `71463b5a1f27d7499943858ac86392a3933c58f2` (PRs #72, #73 e #74 integradas). PR #73 adotou o plano de 32 etapas; PR #74 reconciliou os snapshots operacionais. Docs Validation pós-merge PR #73: run `45986435957` SUCCESS; validação pós-merge PR #74 registrada no histórico de CI.  
 **PR #73:** formalizou o plano de 32 etapas e o pipeline de aprovação visual; merge commit `d90ac2c78e96b32233f8d003ea6673a38079ecb3`.
 **Plano primário:** [32-stage-production-plan.md](32-stage-production-plan.md). A matriz de 26 etapas permanece como histórico/crosswalk, não como plano operacional primário.  
 **Etapas novas 01–04:** concluídas no nível automatizado/documental L2 descrito nas evidências históricas; isso não aprova Gate 1 nem QA Android físico.  
 **Nova Etapa 29:** EM ANDAMENTO — recebe o trabalho da antiga Etapa 05 sobre recursos, carregamento, ciclo de vida e instrumentação. PR #69, #70, #71 e #72 integradas; medições físicas ainda pendentes.  
-**Novas Etapas 05–09:** NÃO INICIADAS — direção de arte, guia técnico e produção visual ainda precisam ser executados. A criação visual deverá ser apresentada ao usuário e aprovada antes de integração.  
+**Novas Etapas 05–09:** NÃO INICIADAS no checkpoint original. Pela emenda aprovada em 27/11/2026, executam requisitos visuais, contratos técnicos, wireframes e placeholders; não incluem produção de arte final. A produção pesada fica reservada à Etapa 31.  
 **Gate 1:** EM ANDAMENTO. W1-L1 e W1-L2 permanecem blockouts. Instalação, touch, safe areas, barras, FPS, memória, temperatura e lifecycle ainda carecem de validação Android física.  
 **PR #72:** integrada por squash antes deste plano; teste determinístico de overflow do buffer de 600 amostras. Godot Validation `45969491642` e Android Debug Export `45969491660` SUCCESS no HEAD da PR. Isso não é profiling físico.
 
@@ -17,24 +17,24 @@
 | 02 | VALIDADA (L2 documental) | Requisitos, GAPs e conflitos documentais rastreados |
 | 03 | VALIDADA (L2 documental) | Baseline arquitetural e contratos mapeados |
 | 04 | VALIDADA (L2) | Boot, SceneFlow, SaveSystem, CampaignProgress e LoadingOverlay endurecidos |
-| 05 | NÃO INICIADA | Nova etapa de direção de arte global |
-| 06 | NÃO INICIADA | Guia técnico de assets a formalizar |
-| 07 | NÃO INICIADA | Concept final de BOLT depende de produção e aprovação |
-| 08 | NÃO INICIADA | Spritesheets finais dependem da Etapa 07 |
-| 09 | NÃO INICIADA | Kit visual inicial de UI/HUD depende de aprovação |
+| 05 | NÃO INICIADA | Requisitos visuais globais e identidade descritiva; sem arte final |
+| 06 | NÃO INICIADA | Contratos técnicos e pipeline de assets; sem produção de sprites |
+| 07 | NÃO INICIADA | Especificação funcional/espacial de BOLT; concept final na Etapa 31 |
+| 08 | NÃO INICIADA | Contrato de animação e apresentação com placeholders; spritesheet na Etapa 31 |
+| 09 | NÃO INICIADA | Especificação funcional/wireframes de UI/HUD; kit gráfico na Etapa 31 |
 | 10 | EM ANDAMENTO | BoltPlayer e componentes existem; personagem final ainda não consolidado |
 | 11 | EM ANDAMENTO | Movimento, Dash e touch possuem base/testes; feel e Android físico pendentes |
 | 12 | EM ANDAMENTO | Estados/feedback parciais; animações finais dependem de assets aprovados |
 | 13 | EM ANDAMENTO | Camera2D e componentes espaciais existem; validação visual/device incompleta |
 | 14 | EM ANDAMENTO | Vida, checkpoints, pickups e progressão parciais |
 | 15 | EM ANDAMENTO | Componentes de inimigo-base existem; arquitetura completa não fechada |
-| 16 | NÃO INICIADA | Produção visual de inimigos aguarda direção e aprovação |
+| 16 | NÃO INICIADA | Contratos de apresentação dos arquétipos; arte final na Etapa 31 |
 | 17 | EM ANDAMENTO | Patrulha simples provisória; IA/arquetipagem incompletas |
-| 18 | NÃO INICIADA | Dossiers/concepts dos sete chefes pendentes |
+| 18 | NÃO INICIADA | Dossiers funcionais e requisitos de apresentação; concepts na Etapa 31 |
 | 19 | NÃO INICIADA | Arenas e confrontos finais não identificados |
 | 20 | EM ANDAMENTO | Blueprint de 42 fases existe; rastreabilidade/integração completa pendente |
-| 21 | NÃO INICIADA | Concepts visuais dos sete mundos pendentes |
-| 22 | NÃO INICIADA | Tilesets e kits finais não identificados; blockouts não contam como arte final |
+| 21 | NÃO INICIADA | Identidade ambiental descritiva; concepts na Etapa 31 |
+| 22 | NÃO INICIADA | Kits de blockout/placeholders; tilesets e cenários finais na Etapa 31 |
 | 23 | EM ANDAMENTO | W1-L1/W1-L2 em blockout; demais fases não construídas |
 | 24 | EM ANDAMENTO | Componentes reutilizáveis existem; integração e exploração da campanha parciais |
 | 25 | EM ANDAMENTO | Abertura/tutorial e progressão inicial existem; arco completo pendente |
@@ -43,10 +43,13 @@
 | 28 | EM ANDAMENTO | Export Android CI existe; instalação, safe areas, barras e lifecycle físico pendentes |
 | 29 | EM ANDAMENTO | Antiga Etapa 05 migrada; instrumentação/política documental integradas, baseline físico pendente |
 | 30 | EM ANDAMENTO | CI/regressões existentes; QA integral 42 fases e validação física pendentes |
-| 31 | NÃO INICIADA | Polimento final depende de conteúdo e arte aprovados |
-| 32 | NÃO INICIADA | Release Candidate e auditoria final não iniciados |
+| 31 | NÃO INICIADA | Produção visual definitiva de todo o jogo após estabilização funcional |
+| 32 | NÃO INICIADA | Integração visual final, auditoria da campanha e Release Candidate |
 
-Os estados são um snapshot inicial, não percentuais. Atualizar somente com evidências novas. A correspondência histórica 26→32 está documentada no plano mestre.
+Os estados são um snapshot inicial, não percentuais. Atualizar somente com evidências novas.
+
+## Emenda de sequenciamento visual — 27/11/2026
+A pedido do usuário, a produção visual pesada foi transferida para a Etapa 31. As etapas anteriores usam requisitos, contratos, wireframes e placeholders; não produzem concepts finais, sprites, spritesheets, animações finais, tilesets, fundos, VFX ou UI gráfica definitiva. A Etapa 32 conclui integração e verificação. A mudança não altera os estados de implementação nem valida qualquer Gate. A correspondência histórica 26→32 está documentada no plano mestre.
 
 ---
 

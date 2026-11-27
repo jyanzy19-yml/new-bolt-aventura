@@ -1,7 +1,7 @@
 # Plano Mestre de Produção — BOLT · AVENTURA
 ## Estrutura operacional aprovada em 32 etapas
 
-**Versão:** 1.0 · **Aprovação do usuário:** 27/11/2026  
+**Versão:** 1.1 · **Emenda de sequenciamento aprovada pelo usuário:** 27/11/2026  
 **Engine:** Godot 4.7.2 / GDScript · **Produto:** Android empacotado, paisagem  
 **Escopo macro:** sete mundos e 42 fases, conforme as fontes canônicas do repositório  
 **Autoridade:** subordinado às instruções atuais do usuário, ADRs, bíblias e `MASTER_DIRECTIVE.md`
@@ -44,6 +44,11 @@ Não usar percentuais subjetivos. Arquivo criado, documento escrito, APK exporta
 
 ## 2. Plano detalhado — 32 etapas
 
+### Emenda de sequenciamento aprovada pelo usuário — 27/11/2026
+A produção visual pesada foi deslocada para a Etapa 31. Etapas 05–09, 16, 18, 21 e 22 passam a tratar de requisitos, contratos, especificações e placeholders, não de arte final. Sistemas, inimigos, chefes, mundos, fases, narrativa, UI e validação Android avançam com placeholders técnicos. Sprites, spritesheets, animações finais, concepts finais, tilesets, fundos, cenários, VFX e identidade gráfica final serão produzidos na Etapa 31; integração, cobertura e verificação final ocorrerão nas Etapas 31–32.
+
+A mudança altera o sequenciamento, não elimina trabalho nem reduz o escopo visual. Não renumerar etapas, reiniciar status ou reinterpretar placeholders como assets finais. A aprovação explícita continua obrigatória para cada versão visual exata antes da integração. A produção tardia não dispensa especificações antecipadas de colisões, pivôs lógicos, dimensões de gameplay, legibilidade, budgets e arquitetura de apresentação.
+
 # FASE I — ENGENHARIA E PREPARAÇÃO
 
 ### 01 — Auditoria integral do repositório
@@ -70,39 +75,42 @@ Não usar percentuais subjetivos. Arquivo criado, documento escrito, APK exporta
 **Entregáveis:** serviços integrados; schema/contratos; regressões; fluxo inicial e recuperação segura.  
 **Aceite:** boot/transições previsíveis; concorrência controlada; save versionado/validado; dados válidos preservados; CI aprovada. CI não substitui validação física.
 
-# FASE II — FUNDAÇÃO VISUAL E IDENTIDADE ARTÍSTICA
+# FASE II — ESPECIFICAÇÃO VISUAL E PREPARAÇÃO TÉCNICA (SEM PRODUÇÃO DE ARTE FINAL)
 
-### 05 — Direção de arte e identidade visual global
-**Objetivo:** definir linguagem visual unificadora e permitir identidades próprias dos mundos.  
-**Escopo:** estilo; proporções; silhuetas; paleta global; contraste; iluminação; materialidade; composição; legibilidade mobile; relação entre personagem, cenário, UI e VFX.  
-**Entregáveis:** documento de direção de arte; referências autorizadas; princípios de consistência; critérios de leitura; distinção entre canon visual e proposta.  
-**Aceite:** direção documentada, coerente com as bíblias e aprovada pelo usuário quando constituir decisão visual material.
+### 05 — Requisitos visuais globais e identidade descritiva
+**Objetivo:** estabelecer requisitos de leitura e coerência visual sem iniciar a produção de arte definitiva.
+**Escopo:** legibilidade mobile; contraste funcional; hierarquia de informação; escala relativa; consistência entre personagem, cenário, UI e feedback; acessibilidade; identidades já sustentadas pelas bíblias.
+**Entregáveis:** matriz de requisitos visuais; inventário de decisões aprovadas e lacunas; critérios de leitura; decisões pendentes.
+**Restrições:** não produzir concept art, sprites, spritesheets, tilesets, fundos, VFX ou UI final.
+**Aceite:** requisitos rastreáveis para blockouts/placeholders; nenhuma proposta visual apresentada como canon.
 
-### 06 — Guia técnico de produção de sprites e assets
-**Objetivo:** tornar a direção de arte reproduzível e tecnicamente importável.  
-**Escopo:** dimensões; resolução-base; escala; alpha; pivôs; margens; frame grid; ordem; FPS; nomenclatura; formatos; compressão; filtros; atlas; colisões; budgets e proveniência.  
-**Entregáveis:** guia técnico; templates; convenções; manifesto; checklist de revisão e budgets iniciais marcados como hipóteses.  
-**Aceite:** especificação suficiente para produção/importação sem adivinhação; campos não aplicáveis são omitidos, não inventados.
+### 06 — Contratos técnicos e pipeline de assets
+**Objetivo:** preparar futura produção visual e importação no Godot sem antecipar assets finais.
+**Escopo:** nomes/IDs; formatos; dimensões quando determinadas por contratos reais; alpha; pivôs; margens; frame grid; ordem; FPS; atlas; compressão; filtros; import settings; budgets hipotéticos; proveniência; manifesto e aprovação.
+**Entregáveis:** guia técnico; templates; checklist de spritesheets; política de placeholders; fila/manifesto; critérios de integração/verificação.
+**Restrições:** não gerar spritesheets nem fixar dimensões, FPS, paletas ou budgets sem evidência/decisão.
+**Aceite:** pipeline reproduzível e campos pendentes explicitamente marcados.
 
-### 07 — Concept art do protagonista BOLT e aprovação visual
-**Objetivo:** estabelecer a representação visual consistente do protagonista.  
-**Escopo:** silhueta; proporções; materiais; face/expressão; elementos distintivos; vistas; poses; leitura em escala de gameplay.  
-**Entregáveis:** concepts identificados por versão; folha de personagem; brief técnico preliminar; feedback e decisão registrados.  
-**Aceite:** aprovação explícita do usuário para a direção escolhida; concept não aprovado não pode ser integrado como arte oficial.
+### 07 — Especificação funcional e espacial do protagonista BOLT
+**Objetivo:** fechar requisitos que a representação visual definitiva deverá cumprir, sem criar concept final.
+**Escopo:** silhueta funcional descrita; escala relativa; referências de pivô; estados de gameplay; áreas que não podem ocultar informação; necessidades de animação derivadas de estados aprovados.
+**Entregáveis:** ficha funcional; matriz estado→necessidade de apresentação; requisitos de legibilidade Android; questões pendentes.
+**Restrições:** não criar concept sheet, sprite, pose final ou spritesheet.
+**Aceite:** especificação compatível com gameplay/colisões, sem canonizar hipótese estética.
 
-### 08 — Spritesheets e animações de BOLT, com aprovação
-**Objetivo:** produzir recursos finais a partir do concept aprovado.  
-**Escopo:** estados aprovados; consistência entre frames; pivôs; alpha; margens; timing; exportação; otimização.  
-**Entregáveis:** spritesheets; mapa de frames; especificação de animação; exports; proveniência; prévia em escala nativa e contexto de gameplay.  
-**Aceite:** apresentar cada entrega e aguardar aprovação explícita antes de integrar; depois verificar import, alinhamento, timing e custo no Godot.
+### 08 — Contrato de animação e integração visual do protagonista
+**Objetivo:** definir conexão da apresentação de BOLT ao runtime usando placeholders.
+**Escopo:** estados/prioridades; interrupções; sincronização; pivô lógico; callbacks; fallback; transições e critérios de importação futura.
+**Entregáveis:** mapa estado→animação; contrato do mecanismo efetivamente adotado; placeholders; testes de transição.
+**Restrições:** não produzir animações finais nem spritesheets.
+**Aceite:** gameplay funciona sem arte final; animação não controla física nem bloqueia input essencial.
 
-### 09 — Primeiros elementos de interface e HUD, com aprovação
-**Objetivo:** estabelecer linguagem visual funcional da interface.  
-**Escopo:** hierarquia; tipografia; ícones; botões; painéis; estados; HUD; paisagem e safe areas.  
-**Entregáveis:** concepts; kit visual inicial; estados; layouts de referência; catálogo de componentes.  
-**Aceite:** proposta visual aprovada antes da integração; funcionalidade, legibilidade e acessibilidade também precisam de validação técnica.
-
-# FASE III — PERSONAGEM E GAMEPLAY
+### 09 — Especificação funcional de UI/HUD e placeholders
+**Objetivo:** definir arquitetura, fluxos e requisitos de interface antes da identidade gráfica definitiva.
+**Escopo:** hierarquia; informação; navegação; estados; targets touch; paisagem; safe areas; acessibilidade; feedback.
+**Entregáveis:** wireframes; catálogo lógico; tokens semânticos provisórios; placeholders; matriz de telas/estados.
+**Restrições:** não criar kit gráfico final, ícones definitivos, tipografia proprietária ou painéis finais.
+**Aceite:** fluxos testáveis com placeholders; requisitos visuais finais ficam para Etapa 31.
 
 ### 10 — Implementação definitiva do personagem
 **Objetivo:** consolidar arquitetura e comportamento de runtime do protagonista.  
@@ -116,11 +124,11 @@ Não usar percentuais subjetivos. Arquivo criado, documento escrito, APK exporta
 **Entregáveis:** tuning documentado; testes automatizados; matriz de combinações touch; procedimento de teste físico.  
 **Aceite:** input essencial confiável; física independente de renderização quando exigido; Dash preservado; feel final validado por playtest e aparelho real.
 
-### 12 — Animações integradas e sincronização com gameplay
-**Objetivo:** sincronizar apresentação com estado de runtime sem acoplar animação à física.  
-**Escopo:** state mapping; transições; interrupções; prioridades; callbacks; aterrissagem; feedback e sincronização de ações.  
-**Entregáveis:** mapa estado→animação; controladores; testes de transição; revisão visual/performance.  
-**Aceite:** animação não altera física, não bloqueia input essencial nem contradiz estado de gameplay.
+### 12 — Estados de apresentação e sincronização com gameplay
+**Objetivo:** integrar apresentação ao gameplay sem depender de sprites/animações definitivas.
+**Escopo:** state mapping; transições; interrupções; prioridades; callbacks; aterrissagem; feedback funcional; placeholders; fallback.
+**Entregáveis:** controladores; mapa estado→apresentação; placeholders; testes de transição/interrupção.
+**Aceite:** apresentação não altera física nem bloqueia input; arte final conectada na Etapa 31.
 
 ### 13 — Câmera, colisões e sistemas espaciais
 **Objetivo:** consolidar apresentação espacial e contratos de mundo.  
@@ -142,11 +150,12 @@ Não usar percentuais subjetivos. Arquivo criado, documento escrito, APK exporta
 **Entregáveis:** arquitetura de referência; componentes; documentação de estados; harnesses de teste.  
 **Aceite:** ownership claro; comportamento testável; sem acoplamento indevido à fase; arquétipos distintos por função.
 
-### 16 — Concept art, sprites e animações dos inimigos, com aprovação
-**Objetivo:** definir e produzir a linguagem visual dos arquétipos.  
-**Escopo:** silhuetas; escala; identidade por mundo; poses; ciclos; estados visuais; leitura em tela pequena.  
-**Entregáveis:** concepts; folhas; spritesheets; mapas de frames; manifesto e proveniência.  
-**Aceite:** aprovação do usuário antes da integração de cada conjunto visual; assets em revisão/rejeitados nunca entram em cenas de produção.
+### 16 — Contratos de apresentação dos arquétipos de inimigos
+**Objetivo:** definir requisitos de leitura e estados visuais dos arquétipos sem produzir arte definitiva.
+**Escopo:** função; silhueta descrita; escala; estados; telegraphs; identificação por mundo; requisitos de animação/acessibilidade.
+**Entregáveis:** fichas por arquétipo; matriz estado→feedback; briefs técnicos; placeholders quando necessários.
+**Restrições:** concepts, sprites e spritesheets finais ficam para Etapa 31.
+**Aceite:** IA/encontros podem ser implementados sem arte final; propostas não são canonizadas.
 
 ### 17 — Inteligência artificial e comportamentos
 **Objetivo:** implementar comportamentos que diferenciem papéis e criem desafios legíveis.  
@@ -154,11 +163,12 @@ Não usar percentuais subjetivos. Arquivo criado, documento escrito, APK exporta
 **Entregáveis:** comportamentos por arquétipo; tuning; testes de estado/limite; diagnóstico de encontros.  
 **Aceite:** comportamento legível, consistente e sem softlocks; dificuldade validada por playtest; custo dentro dos budgets medidos.
 
-### 18 — Desenvolvimento visual e técnico dos sete chefes, com aprovação
-**Objetivo:** estabelecer identidade e especificação de cada guardião.  
-**Escopo:** canon; silhueta; escala; fases; linguagem visual; telegraphs; estados; animações; relação com arena, fragmento e narrativa.  
-**Entregáveis:** sete dossiers; concepts; folhas de animação; especificações de estado; QA por encontro.  
-**Aceite:** concepts apresentados e aprovados antes de integrar sprites; lore segue fontes aprovadas e lacunas continuam propostas.
+### 18 — Especificação de encontro e apresentação dos sete guardiões
+**Objetivo:** fechar requisitos de gameplay, leitura e apresentação antes da arte definitiva.
+**Escopo:** canon disponível; função no encontro; escala da arena; estados/fases; telegraphs; pontos de leitura; relação funcional com fragmento/narrativa; necessidades de animação/VFX.
+**Entregáveis:** sete dossiers funcionais; máquinas de estado; matriz de telegraphs/feedback; briefs não finais; lacunas de canon.
+**Restrições:** não produzir concepts, sprites, spritesheets ou VFX finais.
+**Aceite:** encontros construíveis com placeholders; estética permanece proposta até Etapa 31.
 
 ### 19 — Arenas e confrontos dos chefes
 **Objetivo:** implementar e validar encontros culminantes.  
@@ -174,23 +184,26 @@ Não usar percentuais subjetivos. Arquivo criado, documento escrito, APK exporta
 **Entregáveis:** Atlas reconciliado; matriz de dependências; fichas; mapa de progressão; contratos de roteamento.  
 **Aceite:** 42 entradas rastreáveis; seis posições por mundo conforme blueprint; fase planejada não aparece como implementada sem evidência.
 
-### 21 — Direção visual e concept art dos sete mundos, com aprovação
-**Objetivo:** definir identidade artística de cada mundo mantendo coerência global.  
-**Escopo:** paletas; arquitetura; atmosfera; materiais; iluminação; fundos; formas; composição; contraste e assinatura visual.  
-**Entregáveis:** sete world-art bibles; concepts; moodboards; paletas; layouts; decisões de aprovação.  
-**Aceite:** propostas distinguíveis e coerentes com canon; usuário aprova a direção antes de produzir/integrar assets finais.
+### 21 — Identidade ambiental descritiva dos sete mundos
+**Objetivo:** traduzir bíblias em requisitos ambientais para level design/blockouts, sem concept art.
+**Escopo:** fantasia/atmosfera documentadas; materiais/arquitetura textuais; contraste entre planos; vocabulário espacial; leitura de hazards; composição/orientação.
+**Entregáveis:** sete fichas descritivas; matriz de diferenciação; requisitos futuros de tilesets/fundos; lacunas/propostas.
+**Restrições:** não produzir moodboards, concepts, paletas finais, fundos ou assets.
+**Aceite:** requisitos funcionais distintos e rastreáveis ao canon; arte final na Etapa 31.
 
-### 22 — Produção dos tilesets, cenários e elementos ambientais
-**Objetivo:** produzir kits visuais a partir das direções aprovadas.  
-**Escopo:** tilesets; fundos; parallax; plataformas; módulos; decoração; hazards visuais; sinalização; colisões visuais e budgets.  
-**Entregáveis:** kits por mundo; manifests; atlas/import presets; catálogo de variantes.  
-**Aceite:** cada entrega artística aprovada antes da integração; escala, encaixe, leitura, proveniência e performance verificados.
+### 22 — Kits de blockout e placeholders ambientais
+**Objetivo:** fornecer geometria/sinalização provisória para testar fases antes da arte definitiva.
+**Escopo:** módulos geométricos simples; colisões; plataformas; volumes; marcadores de hazards; placeholders de fundo; convenções de substituição.
+**Entregáveis:** kit de blockout; placeholders por função; regras de substituição sem alterar IDs/colisões; checklist de equivalência geométrica.
+**Restrições:** não produzir tilesets, parallax, fundos, decoração ou cenários finais.
+**Aceite:** geometria, escala, rota, colisão e legibilidade funcional testáveis independentemente da arte.
 
-### 23 — Construção das fases e integração dos ambientes
-**Objetivo:** transformar fichas e blockouts em fases jogáveis e autorais.  
-**Escopo:** layout; ritmo; rotas; checkpoints; encontros; assets aprovados; iluminação; parallax; objetivos; segredos e composição.  
-**Entregáveis:** cenas; fichas atualizadas; ambientes integrados; relatórios de rota principal/opcional e QA por fase.  
-**Aceite:** fase concluível, sem softlock, com função própria e assets aprovados; cena existente não basta para declarar fase final.
+### 23 — Construção funcional das 42 fases com blockouts
+**Objetivo:** construir, iterar e validar o fluxo jogável antes da substituição visual definitiva.
+**Escopo:** layout; ritmo; rotas; checkpoints; encontros; objetivos; segredos funcionais; composição espacial; placeholders; critérios de conclusão.
+**Entregáveis:** cenas/blockouts; fichas; relatórios de rota; inventário de substituição visual; QA funcional.
+**Restrições:** não exigir assets finais para fechar geometria/fluxo; não congelar composição artística antes do gameplay.
+**Aceite:** fase concluível, sem softlock, com contratos de colisão/IDs preserváveis; arte definitiva integrada após Etapa 31.
 
 ### 24 — Obstáculos, exploração, segredos e elementos interativos
 **Objetivo:** enriquecer os mundos com desafios sistêmicos e exploração significativa.  
@@ -206,11 +219,12 @@ Não usar percentuais subjetivos. Arquivo criado, documento escrito, APK exporta
 **Entregáveis:** roteiro rastreável; IDs; grafo de flags; integração de eventos e cenas.  
 **Aceite:** continuidade canônica; cenas puláveis sem perda de estado obrigatório; diálogos funcionais; progressão compreensível; final coerente com fontes aprovadas.
 
-### 26 — Interface completa, menus, HUD e experiência do usuário
-**Objetivo:** completar interação e apresentação do produto.  
-**Escopo:** boot; menu; novo jogo/continuar; seleção de mundos/fases; HUD; pausa; configurações; resultados; acessibilidade; touch e safe areas.  
-**Entregáveis:** fluxos; biblioteca de componentes; layouts responsivos; estados de erro/vazio; navegação e testes de usabilidade.  
-**Aceite:** ações visíveis funcionam; navegação previsível; targets touch confortáveis; legibilidade/acessibilidade verificadas; assets finais aprovados antes da integração.
+### 26 — Interface funcional completa com identidade provisória
+**Objetivo:** concluir fluxos e comportamentos de UI/HUD antes da produção gráfica definitiva.
+**Escopo:** boot; menu; novo jogo/continuar; seleção; HUD; pausa; configurações; resultados; acessibilidade; touch; safe areas; estados vazios/erro; navegação.
+**Entregáveis:** telas funcionais; componentes lógicos; wireframes implementados; placeholders; testes; inventário de assets visuais necessários.
+**Restrições:** não bloquear implementação por falta de ícones/fontes/painéis finais; placeholders não são arte final.
+**Aceite:** fluxos funcionais/testáveis; substituição visual planejada para Etapas 31–32.
 
 ### 27 — Áudio, trilhas sonoras e efeitos audiovisuais
 **Objetivo:** estabelecer experiência sonora coerente, integrada e controlável.  
@@ -240,17 +254,20 @@ Não usar percentuais subjetivos. Arquivo criado, documento escrito, APK exporta
 
 # FASE VIII — FINALIZAÇÃO E LANÇAMENTO
 
-### 31 — Polimento artístico, audiovisual e de gameplay
-**Objetivo:** eliminar inconsistências e elevar qualidade sem alterar silenciosamente decisões aprovadas.  
-**Escopo:** animação; timing; feedback; transições; efeitos; áudio; legibilidade; acessibilidade; ritmo; UX e tuning autorizado.  
-**Entregáveis:** backlog de polimento; revisão de consistência; builds comparáveis; changelog; registro de assets aprovados.  
-**Aceite:** sem regressões; canon/física/controles preservados; assets aprovados e licenciados; problemas conhecidos registrados.
+### 31 — Produção visual definitiva de todo o jogo
+**Objetivo:** executar produção artística pesada após estabilização funcional de sistemas, encontros, fases e fluxos.
+**Escopo:** concepts aprovados; design final de BOLT/NPCs/inimigos/guardiões; sprites; spritesheets; ciclos/animações; tilesets; fundos; parallax; cenários; objetos; elementos interativos; VFX; ícones; tipografia; UI/HUD gráfica; variações por mundo; polimento audiovisual.
+**Sequência obrigatória:** consolidar briefs; apresentar concepts-chave; obter aprovação; produzir conjuntos por consumidor/mundo; apresentar cada versão exata; aguardar aprovação explícita; integrar em branches; validar import/alinhamento/escala/legibilidade/performance; registrar manifesto, proveniência e substituições.
+**Entregáveis:** pacote visual final; spritesheets/mapas de frames; kits ambientais; UI/HUD; VFX; manifestos; aprovações; relatório de substituição de placeholders; backlog residual.
+**Restrições:** não gerar/integrar arte final antes de conteúdo consumidor e contratos estáveis. Não integrar sem aprovação explícita da versão exata. Não substituir assets aprovados sem nova autorização.
+**Aceite:** cobertura visual rastreada para sete mundos/42 fases e sistemas; consistência; importação correta; placeholders remanescentes justificados; sem regressões; custo dentro de budgets medidos.
 
-### 32 — Consolidação da campanha, auditoria final e Release Candidate
-**Objetivo:** produzir candidato a lançamento reproduzível e auditável.  
-**Escopo:** auditoria; integridade de conteúdo; campanha; saves; package ID; assinatura; exportação; checklist; licenças; documentação; riscos e rollback.  
-**Entregáveis:** RC identificada por commit/build; artefato verificável; relatório QA; inventário de assets/licenças; documentação; riscos residuais.  
-**Aceite:** gates aplicáveis atendidos; build reproduzível/assinável; nenhum blocker/critical conhecido; evidências completas; autorização explícita antes de publicação oficial. RC não significa release publicado.
+### 32 — Integração visual final, auditoria de campanha e Release Candidate
+**Objetivo:** concluir integração dos assets aprovados e produzir candidato a lançamento reproduzível/auditável.
+**Escopo:** substituição controlada de placeholders; revisão de cenas consumidoras; auditoria de campanha; saves; package ID; assinatura; exportação; checklist; licenças; documentação; riscos/rollback.
+**Entregáveis:** RC por commit/build; artefato verificável; relatório QA; inventário de assets/licenças/aprovações; matriz de cobertura visual; documentação; riscos residuais.
+**Aceite:** gates aplicáveis atendidos; build reproduzível/assinável; sem blocker/critical conhecido; evidências completas; autorização explícita antes de publicação. RC não é release publicado.
+
 
 ---
 
@@ -295,7 +312,7 @@ A matriz `26-stage-traceability-matrix.md` permanece preservada como histórico 
 | 19 Obstáculos/exploração | 24 | Correspondência predominante |
 | 20 Narrativa/progressão | 25 | Persistência técnica continua na Etapa 04 |
 | 21 Interface/UX | 09, 26 | Separar kit visual e implementação funcional |
-| 22 Arte/VFX | 05–09, 16, 18, 21–22, 31 | Distribuir por tipo; aprovação obrigatória |
+| 22 Arte/VFX | 05–06 e 21 (especificação); 31 (produção definitiva); 32 (integração/verificação) | Adiar concepts, sprites, spritesheets, tilesets, fundos, VFX e UI final; preservar requisitos e placeholders |
 | 23 Áudio/apresentação | 27, 31 | Separar produção de polimento |
 | 24 Android/touch | 11, 28 | Separar controles de integração Android |
 | 25 Otimização/QA | 29–30 | Separar profiling e validação da campanha |
@@ -373,7 +390,7 @@ Em cada entrega substancial:
 ### Próximas ações após adoção
 1. Manter Etapas 01–04 concluídas conforme evidências existentes.
 2. Continuar nova Etapa 29 (migração da antiga Etapa 05), preparando captura Android e medições reais, sem tuning especulativo.
-3. Iniciar nova Etapa 05 com direção de arte baseada nas bíblias; não integrar arte não aprovada.
-4. Preparar Etapa 06 e fila/manifesto de assets.
+3. Executar Etapas 05–09 somente como especificação visual/funcional e preparação técnica; não gerar concepts, sprites ou arte final antecipadamente.
+4. Manter a fila/manifesto como planejamento e rastreabilidade; reservar a produção visual pesada para Etapa 31 e integração/verificação para Etapa 32.
 5. Manter W1-L1/W1-L2 como blockouts até construção, arte, áudio, playtest e QA.
 6. Não declarar Gate 1 concluído enquanto validação Android física e demais critérios estiverem pendentes.

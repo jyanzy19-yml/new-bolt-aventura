@@ -2,11 +2,11 @@
 
 Plano operacional primário: [32-stage-production-plan.md](32-stage-production-plan.md).  
 Matriz de 26 etapas: registro histórico e crosswalk; preservar IDs e evidências antigas.  
-Main HEAD: `d90ac2c78e96b32233f8d003ea6673a38079ecb3`; PR #72 e PR #73 integradas. Docs Validation pós-merge PR #73 `45986435957` SUCCESS.
+Main HEAD no checkpoint desta atualização: `71463b5a1f27d7499943858ac86392a3933c58f2`; PRs #72, #73 e #74 integradas. Docs Validation pós-merge PR #73 `45986435957` SUCCESS; PR #74 também foi integrada e reconciliou os snapshots.
 
-**Migração de estado:** novas Etapas 01–04 preservam o estado concluído das antigas 01–04, com limite L2. A antiga Etapa 05 (recursos/loading) migra para a nova Etapa 29 e continua EM ANDAMENTO. Novas Etapas 05–09 são trabalho artístico novo e não herdam conclusão. Nenhuma outra etapa herda status apenas por equivalência temática.
+**Migração de estado:** novas Etapas 01–04 preservam o estado concluído das antigas 01–04, com limite L2. A antiga Etapa 05 (recursos/loading) migra para a nova Etapa 29 e continua EM ANDAMENTO. Novas Etapas 05–09 não herdam conclusão; pela emenda de 27/11/2026, executam apenas especificação/requisitos/wireframes/placeholders. Produção visual pesada está reservada à Etapa 31 e integração/verificação à Etapa 32. Nenhuma etapa herda status apenas por equivalência temática.
 
-**Ownership:** ChatGPT — arquitetura, sistemas centrais, integração, Android/performance, QA e criação dos assets visuais sujeitos à aprovação do usuário. Claude — frentes autorizadas de fases, inimigos/chefes, interativos, UI/conteúdo visual e sistemas independentes, em branch/PR isolada; não integrar assets não aprovados.
+**Ownership:** ChatGPT — arquitetura, sistemas centrais, integração, Android/performance, QA e criação dos assets visuais sujeitos à aprovação do usuário. Claude — frentes autorizadas de fases, inimigos/chefes, interativos, UI/conteúdo visual e sistemas independentes, em branch/PR isolada; pode usar wireframes/placeholders antes da Etapa 31, mas não antecipar nem integrar arte final sem aprovação.
 
 **Restrições preservadas:** Gate 1 em andamento; W1-L1/W1-L2 blockouts; validação Android física pendente; não alterar schema, IDs, Dash, física, InputMap, canon ou decisões de display por causa da migração.
 
@@ -20,6 +20,11 @@ Main HEAD: `d90ac2c78e96b32233f8d003ea6673a38079ecb3`; PR #72 e PR #73 integrada
 - Etapa 05: cancelamento e instrumentação implementados; política de preload/cache/liberação documentada na branch atual, aguardando revisão/CI. Baseline Android físico e medição de RSS/GPU/touch continuam pendentes.
 - Política atual não adiciona preload global nem unload forçado: dependências estão declaradas nas PackedScenes e recursos devem ser liberados por ownership/refcount.
 - Próximo passo: concluir PR de política de recursos; depois preparar procedimento de captura física e revisar necessidade real de preload/unload com evidência.
+
+---
+
+## Emenda de sequenciamento visual — 27/11/2026
+As linhas de status continuam descrevendo o estado de implementação, não autorização temporal para produzir arte. A fila de assets permanece PLANNED; concepts finais, sprites, spritesheets, animações, tilesets, fundos, cenários, VFX e UI gráfica definitiva serão executados na Etapa 31, com integração/verificação na Etapa 32. Até lá, usar apenas requisitos técnicos, wireframes e placeholders identificados.
 
 ---
 

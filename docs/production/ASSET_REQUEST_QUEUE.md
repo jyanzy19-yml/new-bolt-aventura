@@ -22,17 +22,22 @@ Os itens abaixo são necessidades planejadas, não briefs aprovados, conceitos g
 
 | ID | Entrega | Consumidor | Etapa de referência | Estado | Bloqueio/observação |
 |---|---|---|---:|---|---|
-| ART-BOLT-001 | Direção visual global de BOLT · AVENTURA | Todos os mundos/sistemas | 05 | PLANNED | Definir linguagem visual antes dos concepts |
-| ART-BOLT-002 | Guia técnico de sprites e assets | Pipeline Godot | 06 | PLANNED | Definir dimensões, import e budgets |
-| ART-BOLT-003 | Concept do protagonista BOLT | Player | 07 | PLANNED | Requer direção visual; aguarda aprovação |
-| ART-BOLT-004 | Spritesheets/animações de BOLT | Player | 08 | PLANNED | Bloqueado pelo concept aprovado e brief |
-| ART-BOLT-005 | Kit visual inicial de UI/HUD | Menus/HUD | 09 | PLANNED | Requer UI/UX e aprovação |
-| ART-BOLT-006 | Concepts/sprites dos inimigos | Inimigos por mundo | 16 | PLANNED | Requer arquitetura de arquétipos e direção |
-| ART-BOLT-007 | Concepts/sprites dos sete chefes | Chefes/arenas | 18 | PLANNED | Requer canon e dossiers; aprovação individual |
-| ART-BOLT-008 | Concepts visuais dos sete mundos | Ambientes | 21 | PLANNED | Requer bíblias de mundo e aprovação por direção |
-| ART-BOLT-009 | Tilesets, fundos e kits ambientais | Fases | 22 | PLANNED | Requer concepts aprovados por mundo |
-| ART-BOLT-010 | VFX, objetos e elementos ambientais | Gameplay/fases | 22–24 | PLANNED | Especificar por consumidor e legibilidade |
-| ART-BOLT-011 | Polimento/variantes visuais finais | Campanha completa | 31 | PLANNED | Somente após conteúdo integrado e aprovado |
+| ART-BOLT-001 | Requisitos visuais globais (documentação, sem arte final) | Todos os mundos/sistemas | 05 | PLANNED | Definir requisitos de leitura e consistência; não gerar concepts |
+| ART-BOLT-002 | Guia técnico/pipeline de sprites e assets | Pipeline Godot | 06 | PLANNED | Definir contratos e processo; não gerar spritesheets |
+| ART-BOLT-003 | Especificação funcional visual do protagonista BOLT | Player | 07 (requisitos); 31 (concept/arte final) | PLANNED | Não criar concept agora; manter descrição funcional e requisitos |
+| ART-BOLT-004 | Spritesheets/animações finais de BOLT | Player | 31 | PLANNED | Bloqueado até estabilização do gameplay e aprovação do concept |
+| ART-BOLT-005 | UI/HUD gráfica definitiva | Menus/HUD | 31 | PLANNED | Implementar fluxos com wireframes/placeholders antes |
+| ART-BOLT-006 | Concepts/sprites finais dos inimigos | Inimigos por mundo | 31 | PLANNED | Depende de arquétipos funcionais estabilizados |
+| ART-BOLT-007 | Concepts/sprites finais dos sete guardiões | Chefes/arenas | 31 | PLANNED | Depende dos dossiers e encontros funcionais; aprovação individual |
+| ART-BOLT-008 | Concepts visuais finais dos sete mundos | Ambientes | 31 | PLANNED | Direção final após blockouts e composição funcional |
+| ART-BOLT-009 | Tilesets, fundos e kits ambientais finais | Fases | 31 | PLANNED | Produzir após geometrias/colisões e layouts estabilizados |
+| ART-BOLT-010 | VFX, objetos e elementos ambientais finais | Gameplay/fases | 31 | PLANNED | Especificar necessidades antes; produzir assets finais no fim |
+| ART-BOLT-011 | Polimento/variantes visuais finais | Campanha completa | 31–32 | PLANNED | Somente após integração dos conjuntos finais |
+|---|---|---|---:|---|---|
+
+## Política de produção tardia — 27/11/2026
+
+A fila permanece ativa para planejamento, dependências e rastreabilidade, mas não autoriza gerar arte imediatamente. A produção visual definitiva está programada para Etapa 31. Antes dela, só briefs, especificações, wireframes e placeholders técnicos identificados. Etapa 32 fecha integração, verificação e auditoria de cobertura. Nenhum asset final entra no jogo sem aprovação explícita da versão exata pelo usuário.
 
 ## Registro de aprovações
 

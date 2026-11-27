@@ -70,6 +70,8 @@ For every substantial task, inspect the current repository/commit, preserve one-
 
 The approved operational plan is `docs/production/32-stage-production-plan.md`; the 26-stage matrix is retained as historical crosswalk. Preserve old evidence/status: old Stage 05 resource/loading work maps to new Stage 29. Never reset progress because numbering changed.
 
+The user-approved sequencing amendment (2026-11-27) defers heavy visual production—final concepts, sprites, spritesheets, animation, tilesets, backgrounds, environments, VFX and final graphical UI—to Stage 31. Stage 32 is responsible for final integration, verification, coverage and release audit. Earlier stages can define technical/art requirements, contracts, briefs, wireframes and placeholders only; gameplay/content/Android work should proceed without waiting for final art.
+
 Current collaboration ownership is defined in `docs/production/COLLABORATION_STATE.md`. ChatGPT owns architecture, core integration, Android performance/QA and creation of visual assets. Claude is authorized for the five content/system fronts recorded there, using isolated branches/PRs and no concurrent edits to the same files.
 
 No final visual asset may be integrated or replaced before explicit user approval of the exact version presented by ChatGPT. Placeholders must remain identified as placeholders. Follow `docs/production/ASSET_PIPELINE.md`.

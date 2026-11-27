@@ -1,14 +1,18 @@
 ## Estado canônico de colaboração — plano de 32 etapas (27/11/2026)
 
-**Main HEAD:** `d90ac2c78e96b32233f8d003ea6673a38079ecb3` (PR #72 e #73 integradas). Docs Validation pós-merge PR #73 `45986435957` SUCCESS.  
-**Plano:** `docs/production/32-stage-production-plan.md`, formalizado pela PR #73.
+**Main HEAD no checkpoint desta atualização:** `71463b5a1f27d7499943858ac86392a3933c58f2` (PRs #72, #73 e #74 integradas).  
+**Plano operacional:** `docs/production/32-stage-production-plan.md`.  
+**PR #75:** aberta; formaliza o adiamento da produção visual definitiva para a Etapa 31. Head `dfcfbd1f6d411e6c864cb5ca1147ae9ae5998cd5`; Docs Validation `45995603656` SUCCESS.  
+**PR #76:** aberta; adiciona o protocolo reproduzível de profiling Android, atualiza o template e o índice. Head `18d84c71d9d8ba9c66a8e595b2eb6983e2585c32`; Docs Validation após a correção do índice `45996578375` SUCCESS.  
+**PR #77:** aberta; adiciona regressão para pausa/retomada do PerformanceProbe. Head `5e1d0da86202af13811ede4410d5d0891267cfcf`; Godot Validation `45995684946` SUCCESS (109 testes/1.946 verificações/0 falhas; boot smoke 20/20); Android Debug Export `45995684964` SUCCESS.  
+**Estado de integração:** PRs #75, #76 e #77 permanecem abertas e não integradas neste checkpoint.
 
 ### Responsabilidades autorizadas
 
 **ChatGPT**
 - Arquitetura, sistemas centrais, integração, desempenho Android, regressão e QA.
 - Criação dos assets visuais do jogo.
-- Apresentar cada asset ao usuário e aguardar aprovação explícita antes de integrar/substituir qualquer arte.
+- Apresentar cada asset ao usuário e aguardar aprovação explícita da versão exata antes de integrar/substituir qualquer arte.
 
 **Claude**
 - Construção de fases.
@@ -17,7 +21,7 @@
 - Interface e conteúdo visual.
 - Sistemas independentes de gameplay.
 
-A autorização de Claude não permite contornar o processo de aprovação visual do usuário. Claude pode preparar consumidores, cenas, layout e lógica; assets finais só entram depois de aprovação da versão exata.
+A autorização de Claude não permite contornar o processo de aprovação visual. Pode preparar consumidores, cenas, layout e lógica; arte final só entra depois da aprovação explícita da versão exata pelo usuário.
 
 ### Coordenação obrigatória
 - Uma branch/PR por unidade de trabalho; não editar simultaneamente os mesmos arquivos.
@@ -28,11 +32,12 @@ A autorização de Claude não permite contornar o processo de aprovação visua
 - O usuário mantém autoridade sobre canon, decisões materiais e aprovação de arte.
 
 ### Estado de produção
-- Etapas 01–04 do novo plano: concluídas no nível L2 registrado.
-- Nova Etapa 29: em andamento, recebe o trabalho de recursos/loading da antiga Etapa 05.
-- Novas Etapas 05–09: não iniciadas; pipeline de arte exige aprovação antes da integração.
-- Gate 1 em andamento; W1-L1/W1-L2 são blockouts; Android físico pendente.
-
+- Etapas 01–04 do novo plano: concluídas no nível L2 registrado; isso não aprova Gate 1 nem QA físico.
+- Nova Etapa 29: em andamento; recursos/loading e PerformanceProbe estão implementados/documentados, mas baseline física Android ainda não existe.
+- Etapas 05–09: conforme emenda solicitada pelo usuário e proposta na PR #75, executar requisitos, contratos, wireframes e placeholders antes da Etapa 31; não produzir arte final antecipadamente.
+- Etapa 31: reservada à produção visual definitiva, com aprovação explícita por asset/versão; Etapa 32: integração final e Release Candidate.
+- Gate 1 em andamento; W1-L1/W1-L2 são blockouts; instalação, touch, safe areas, barras, FPS, memória, temperatura e lifecycle ainda dependem de validação física.
+- PR #76 é documentação de procedimento, não benchmark, otimização de runtime ou conclusão da Etapa 29.
 ---
 
 ## Snapshot histórico de colaboração — 2026-11-27 (pré-adoção das 32 etapas)
