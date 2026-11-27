@@ -594,3 +594,13 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - CI: Godot `46027916866` SUCCESS; Docs `46027916827` SUCCESS; Android Debug Export `46027916828` SUCCESS.
 - O workflow Android comprova exportação debug automatizada, não instalação/execução física.
 - Etapa 12 permanece EM ANDAMENTO: sincronização visual e critérios completos de animação ainda não foram validados.
+
+
+## Etapa 14 — regressão de recuperação do movimento (2026-11-27)
+
+- Branch: `test/stage14-respawn-movement-state-contract-2026-11-27`, baseada no Main HEAD `79023eabb6b31bccc456d3a2d005731733e8444e`.
+- Plano: [stage14-respawn-movement-state-contract](plans/2026-11-27-stage14-respawn-movement-state-contract.md).
+- Teste novo: `tests/unit/test_player_respawn_movement_contract.gd`.
+- Cenários: interrupção de Dash terrestre e limpeza do cooldown; restauração do Dash aéreo após respawn em posição aérea; restauração do orçamento de salto aéreo após respawn.
+- Testes utilizam a cena real de BOLT, InputMap/ActionBuffer e ticks físicos do runner; nenhum campo privado é alterado para forçar o resultado.
+- **Estado:** implementação documental/teste submetida à validação CI; Etapa 14 permanece EM ANDAMENTO. Nenhum teste físico Android é alegado.
