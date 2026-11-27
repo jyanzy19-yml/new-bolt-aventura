@@ -2,7 +2,7 @@
 
 **Atualização:** 2026-11-27  
 **Main HEAD após PR #60:** `fd8aefa2a5991a67d3ce75caba57df066a5c1514`. PRs #57, #58 e #61 permanecem abertas; PR #58/#61 precisam de reconciliação documental antes de integração.
-**Matriz operacional:** `docs/production/26-stage-traceability-matrix.md`, integrada pela PR #48. Registro de lacunas GAP-001…GAP-022 em elaboração na branch `docs/requirements-gap-register`; Etapa 02 continua em revisão requisito-a-requisito.  
+**Matriz operacional:** `docs/production/26-stage-traceability-matrix.md`, integrada pela PR #48. Registro de lacunas GAP-001…GAP-022 integrado em `docs/production/requirements-gap-register.md`; Etapa 02 CONCLUÍDA.  
 **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente.  
 **Última regressão de gameplay integrada:** PR #39 — limpeza do ActionBuffer no ciclo de vida Android, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.  
 **Última entrega de infraestrutura integrada:** PR #38 — pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.  
