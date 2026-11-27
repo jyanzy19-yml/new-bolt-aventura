@@ -828,3 +828,12 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Artifact `15234169146`; ZIP SHA-256 `41ee39850c322e6be341053b666b887edcb9cade9c3c81c1a30cff354142f84a`; [artefato Android Debug](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46075124490/artifacts/15234169146).
 - Artefato é somente Debug/teste; não foi instalado ou executado em Android físico. Não há validação de touch físico, FPS, frame pacing, memória, temperatura ou clipping.
 - W1-L3 continua BLOCKOUT PROVISÓRIO. Etapa 23 permanece EM ANDAMENTO; nenhuma lore, arte final ou W1-L4 foi aprovada ou criada.
+
+
+## Sessão ChatGPT — alinhamento canônico W1-L3 — 27/11/2026
+
+- O Atlas Mestre define W1-L3 como **Fábrica de Ecos**, W1-L4 como **Laboratório de Memórias** e W1-L5 como **Torre do Núcleo**. A implementação anterior chamava W1-L3 de “Setor de Montagem” e continha apenas plataformas móveis e inimigo-base; isso foi reconhecido como desalinhamento, não como canon.
+- Branch `fix/cybercore-w1-l3-atlas-alignment-2026-11-27` corrige os títulos no catálogo/menu e adiciona esteiras em sentidos opostos e prensas com ciclo de aviso/golpe/recuperação.
+- O inimigo `CybercorePatrolEnemy` permanece genérico e provisório; Tríplice/Laser, arquétipos Operário Corrompido/Drone Vigia/Sentinela, rota por dutos com item de lore e interação real com o painel ainda não estão implementados.
+- PRs #106 e #113 (Núcleo de Distribuição) foram fechadas sem merge por divergirem do blueprint oficial de W1-L4. PRs #108/#109 (Perímetro do Guardião) foram fechadas sem merge porque W1-L5 é Torre do Núcleo.
+- CI desta correção pendente. Nenhum playtest físico Android foi realizado.
