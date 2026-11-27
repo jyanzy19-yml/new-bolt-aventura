@@ -312,3 +312,44 @@ func test_respawn_clears_transient_state() -> bool:
 	check_near(_bolt.global_position.x, 200.0, 0.01, "posição aplicada")
 	await _teardown()
 	return true
+
+
+var _observed_states: Array[int] = []
+
+
+func _capture_player_state(next_state: BoltPlayer.State) -> void:
+	_observed_states.append(next_state)
+
+
+func test_state_changed_emits_ordered_rising_falling_grounded_transitions() -> bool:
+	await _setup()
+	_observed_states.clear()
+	_bolt.state_changed.connect(_capture_player_state)
+	_press(Actions.JUMP)
+
+	var guard: int = 0
+	while _bolt.state != BoltPlayer.State.RISING and guard < 12:
+		await tree.physics_frame
+		guard += 1
+	check_eq(_bolt.state, BoltPlayer.State.RISING, "salto publica RISING")
+	_release(Actions.JUMP)
+
+	guard = 0
+	while _bolt.state != BoltPlayer.State.FALLING and guard < 90:
+		await tree.physics_frame
+		guard += 1
+	check_eq(_bolt.state, BoltPlayer.State.FALLING, "ápice publica FALLING")
+
+	guard = 0
+	while not _bolt.is_on_floor() and guard < 120:
+		await tree.physics_frame
+		guard += 1
+	await _frames(2)
+	check_eq(_bolt.state, BoltPlayer.State.GROUNDED, "pouso publica GROUNDED")
+	check_eq(
+		_observed_states,
+		[BoltPlayer.State.RISING, BoltPlayer.State.FALLING, BoltPlayer.State.GROUNDED],
+		"sequência de sinais é ordenada e não duplica estados"
+	)
+	await _teardown()
+	return true
