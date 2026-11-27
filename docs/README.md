@@ -5,7 +5,6 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 ## Ponto de entrada obrigatório
 
 - [Plano Mestre de Produção — 32 etapas](production/32-stage-production-plan.md) — plano operacional aprovado, critérios de aceite, migração rastreável da matriz histórica e pipeline de aprovação visual.
-
 - [Diretiva de implementação integral e continuidade](production/from-zero-implementation-directive.md) — mandato completo de produção aplicado à base Godot existente; não recriar o projeto.
 - [MASTER_DIRECTIVE.md](../MASTER_DIRECTIVE.md) — diretriz central para criação, produção, implementação e validação. Leia primeiro.
 - [Master Game Design & Gameplay Prompt](prompts/master-game-design-and-gameplay-prompt.md) — diretiva detalhada de design e gameplay; deve ser lida em conjunto com as bíblias e decisões.
@@ -47,7 +46,6 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - [ADR-0005 — fluxo Nova Jornada/Continuar](decisions/ADR-0005-main-menu-campaign-entry.md)
 - [Plano — fluxo Nova Jornada/Continuar](production/plans/2026-11-26-main-menu-new-game-continue.md)
 - [Handoff — fluxo Nova Jornada/Continuar](production/handoffs/HANDOFF_MAIN_MENU_CONTINUE.md)
-
 - [Princípios de arquitetura Godot](technical/00-architecture-principles.md)
 - [Especificação Android e desempenho](technical/01-android-performance.md)
 - [Instrumentação de performance em builds debug](technical/10-performance-instrumentation.md)
@@ -81,6 +79,7 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - [Template de sessão Android](qa/ANDROID_DEVICE_TEST_TEMPLATE.md)
 - [Modelo de bug report](qa/bug-report-template.md)
 - [Captura de performance](qa/performance-capture-template.md)
+- [Protocolo de profiling Android — Etapa 29](qa/android-performance-profiling-protocol.md) — procedimento reproduzível para baseline físico, frame pacing, memória, termal e responsividade; não contém resultados de benchmark.
 - [Relatório de validação do ecossistema](production/validation-report.md)
 - [Estado da etapa](production/stage-status.md)
 - [Registro de decisões](decisions/README.md)
