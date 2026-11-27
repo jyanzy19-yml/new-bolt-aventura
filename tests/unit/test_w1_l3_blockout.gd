@@ -51,6 +51,11 @@ func test_w1_l3_composition_and_checkpoint_survive_scene_reentry() -> bool:
 	check(checkpoint != null and goal != null, "blockout contém checkpoint e objetivo")
 	check_eq(CampaignProgress.load_state().get("current_level_id"), "W1-L3",
 		"entrada registra W1-L3 como destino de retomada")
+	if player == null or mid_floor == null or end_floor == null or lift == null or transfer == null or checkpoint == null:
+		level.free()
+		await tree.process_frame
+		_clear_save()
+		return true
 	check_eq(lift.travel_offset, Vector2(0.0, -48.0), "elevador usa percurso vertical documentado")
 	check_eq(transfer.travel_offset, Vector2(160.0, 0.0), "plataforma de transferência usa percurso horizontal documentado")
 	if enemy_a != null and mid_floor != null:
@@ -103,6 +108,12 @@ func test_w1_l2_completion_routes_to_w1_l3_and_menu_can_resume_it() -> bool:
 	var player: BoltPlayer = level.get_node("Bolt") as BoltPlayer
 	var goal: Area2D = level.get_node("Goal") as Area2D
 	var hud: Hud = level.get_node("Hud") as Hud
+	check(player != null and goal != null and hud != null, "W1-L2 expõe jogador, objetivo e HUD")
+	if player == null or goal == null or hud == null:
+		level.free()
+		await tree.process_frame
+		_clear_save()
+		return true
 	player.global_position = goal.global_position
 	player.velocity = Vector2.ZERO
 	await _step_physics(3)
