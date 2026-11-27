@@ -2,8 +2,10 @@
 
 **Main HEAD no checkpoint desta atualização:** `71463b5a1f27d7499943858ac86392a3933c58f2` (PRs #72, #73 e #74 integradas).  
 **Plano operacional:** `docs/production/32-stage-production-plan.md`.  
-**PR #75:** aberta; formaliza o adiamento da produção visual definitiva para a Etapa 31. Head atual da branch: `82e23213efa9d1dc4039764ef2a096df40ed72f2`. Docs Validation `45991934146` SUCCESS.  
-**PR #76:** aberta; adiciona o protocolo reproduzível de profiling Android e atualiza o template/índice. Head: `4909e90ed0e18595d8482714b462fcfbbb1019c7`. Docs Validation `45991804962` SUCCESS. Nenhuma das duas PRs foi integrada no checkpoint.
+**PR #75:** aberta; formaliza o adiamento da produção visual definitiva para a Etapa 31. Head `dfcfbd1f6d411e6c864cb5ca1147ae9ae5998cd5`; Docs Validation `45995603656` SUCCESS.  
+**PR #76:** aberta; adiciona o protocolo reproduzível de profiling Android, atualiza o template e o índice. Head `18d84c71d9d8ba9c66a8e595b2eb6983e2585c32`; Docs Validation após a correção do índice `45996578375` SUCCESS.  
+**PR #77:** aberta; adiciona regressão para pausa/retomada do PerformanceProbe. Head `5e1d0da86202af13811ede4410d5d0891267cfcf`; Godot Validation `45995684946` SUCCESS (109 testes/1.946 verificações/0 falhas; boot smoke 20/20); Android Debug Export `45995684964` SUCCESS.  
+**Estado de integração:** PRs #75, #76 e #77 permanecem abertas e não integradas neste checkpoint.
 
 ### Responsabilidades autorizadas
 
