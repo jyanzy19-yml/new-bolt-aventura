@@ -607,4 +607,9 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Quatro planos técnicos correspondentes em `docs/production/plans/2026-11-27-stage14-*.md`.
 - Ajuste único em `.github/workflows/android-debug-export.yml`: remove instalação redundante de `cmdline-tools;latest`, já preparada pelo setup do SDK.
 - Sem alteração de runtime, cenas, colisões, tuning, física, Dash, InputMap, ActionBuffer, schema v1, IDs persistentes, progressão, canon ou assets.
-- **Estado:** CI combinado pendente nesta branch. Etapa 14 permanece EM ANDAMENTO; W1-L1 continua blockout provisório e QA Android físico segue pendente.
+- **Estado:** quatro contratos passaram em CI combinado; PR #97 pronta para integração. Etapa 14 permanece EM ANDAMENTO; W1-L1 continua blockout provisório.
+- CI no HEAD `4408e5efe07f6feb600591d72a66b033af571b1d`: Godot Validation `46046013186`, Documentation Validation `46046013068` e Android Debug Export `46046013082` — **todos SUCCESS**.
+- Godot 4.7.2: **115 testes / 2.015 verificações / 0 falhas**; 20/20 cold boots e mutation check do prewarm aprovados.
+- Android Debug Export repetiu a suíte: **115 testes / 2.015 verificações / 0 falhas**. APK **28.469.428 bytes**, package ID placeholder `com.example.boltaventura`, SHA-256 `747083ed3f5b1e108c00a0f671abcba8244dbe2821b28eafa99f064ef7e96b35`; assinatura v2/v3 verificada.
+- Artifact ID `15222041977`; ZIP SHA-256 `ab31c810e7327478cdedc1bf3ad1d3fc7d318a160f67c7db0bb8682e81e632e9`; [artefato Android Debug](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46046013082/artifacts/15222041977).
+- Evidência L2/CI somente: APK não foi instalado nem executado em Android físico; touch, safe areas/barras, FPS, frame pacing, memória, temperatura e lifecycle OEM continuam sem validação.
