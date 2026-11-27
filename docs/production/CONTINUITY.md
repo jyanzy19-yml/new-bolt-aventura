@@ -712,3 +712,13 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - CI no head `0019ac9b0ac1bf813c4bcc874d9017fa69bf0295`: Godot `46027916866`, Docs `46027916827` e Android Debug Export `46027916828` concluídos SUCCESS.
 - Nenhum runtime, cena, tuning, física, InputMap, Dash, arte ou save foi alterado. A exportação debug não foi instalada em aparelho.
 - PR #91 não integrada; Etapa 12 continua EM ANDAMENTO. Próxima unidade independente: contratos de configuração espacial/câmera da Etapa 13, sem sobrepor a PR #91.
+
+
+## Sessão ChatGPT — Etapa 14: fallback local de checkpoint W1-L1 — 2026-11-27
+
+- Base confirmada: `main` HEAD `79023eabb6b31bccc456d3a2d005731733e8444e`; PRs #93–#95 continuam abertas, sem integração.
+- Auditoria da suíte confirmou que `test_w1_l1_restores_persisted_checkpoint_on_scene_reentry` já cobre a reentrada bem-sucedida de W1-L1. Não foi criada regressão duplicada.
+- Lacuna selecionada: comportamento quando `CampaignProgress` rejeita um schema de domínio futuro. O controlador W1-L1 atualiza `_respawn_position` antes de tentar persistir; a sessão deve continuar recuperável sem sobrescrever dados incompatíveis.
+- Branch `test/stage14-w1-l1-checkpoint-save-failure-2026-11-27`; teste `tests/unit/test_stage14_w1_l1_checkpoint_persistence_failure_contract.gd`; plano `docs/production/plans/2026-11-27-stage14-w1-l1-checkpoint-persistence-failure.md`.
+- Escopo somente teste/documentação; nenhum runtime, cena, física, input, Dash, schema v1, ID, progressão, canon ou asset alterado.
+- CI pendente no checkpoint de escrita. Nenhuma validação Android física foi executada.
