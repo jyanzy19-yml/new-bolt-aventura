@@ -43,10 +43,15 @@ func load_state() -> Dictionary:
 	if typeof(current_level) != TYPE_STRING or typeof(checkpoint_id) != TYPE_STRING or typeof(completed) != TYPE_ARRAY:
 		last_error = "invalid_campaign_progress_fields"
 		return _default_state()
+	var seen_completed_ids: Dictionary = {}
 	for level_id: Variant in completed:
 		if typeof(level_id) != TYPE_STRING or str(level_id).is_empty():
 			last_error = "invalid_completed_level_id"
 			return _default_state()
+		if seen_completed_ids.has(level_id):
+			last_error = "duplicate_completed_level_id"
+			return _default_state()
+		seen_completed_ids[level_id] = true
 
 	var state: Dictionary = _default_state()
 	state.merge(raw_state, true)
