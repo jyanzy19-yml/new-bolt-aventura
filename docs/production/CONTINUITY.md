@@ -703,3 +703,13 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Testes adicionados para recuperação do temporário mais novo que backup, preservação de temporário em nova gravação, precedência/fallback, proteção dos três slots futuros e continuidade de checkpoint da campanha.
 - **Estado no checkpoint:** PR #59 aberta; diff revisado. Godot Validation `45913709017` SUCCESS — 95 testes/652 verificações/0 falhas; Documentation Validation `45913709173` SUCCESS; Android Debug Export `45913709027` SUCCESS. APK 28.465.153 bytes, package ID provisório `com.example.boltaventura`, assinatura v2/v3 válida, SHA-256 `2f9ae799db84dbcf648566c8953c5fede9bcb91800417edb9586005092ad358f`; artifact `bolt-aventura-android-debug-90ef12231618606280134d7f29d2761d74ca8306`. PR não integrada. Próximo passo: manter a unidade revisável e continuar auditoria estática de Boot/SceneFlow/LoadingOverlay como parte da Etapa 04; não mesclar automaticamente.
 - Limites: nenhum teste local Godot, encerramento forçado real, Android físico, APK desta branch, profiling ou acesso ao save real do usuário foi realizado.
+
+
+## Continuidade — Etapa 12: contrato de transições de estado (2026-11-27)
+
+- Branch ativa: `test/stage12-player-state-transition-contract-2026-11-27`, criada sobre `main`.
+- Unidade: teste automatizado da sequência pública `BoltPlayer.state_changed` durante salto: `RISING → FALLING → GROUNDED`, sem emissões duplicadas.
+- Arquivos funcionais: somente `tests/unit/test_player_movement.gd`; plano em `docs/production/plans/2026-11-27-stage12-player-state-transition-contract.md`.
+- Nenhum código de runtime, arte, animação, cena, tuning, InputMap, física, Dash, save ou canon foi alterado.
+- Etapa 12 permanece EM ANDAMENTO; o teste de estado não comprova sincronização visual nem aprovação de assets.
+- Aguardar CI Godot, documentação e Android Debug Export; não integrar sem revisão e evidência.
