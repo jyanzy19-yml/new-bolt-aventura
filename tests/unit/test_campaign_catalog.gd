@@ -96,3 +96,40 @@ func test_campaign_progress_count_ignores_unknown_ids() -> bool:
 	check_eq(CATALOG.get_total_completed_count(completed), 2, "contagem considera apenas IDs catalogados")
 	check_eq(CATALOG.get_world_completed_count(0, completed), 2, "progresso do mundo considera IDs do próprio mundo")
 	return true
+
+func test_world_and_phase_screens_build_their_cards_at_runtime() -> bool:
+	var world_scene: PackedScene = load("res://scenes/ui/world_selection.tscn") as PackedScene
+	var phase_scene: PackedScene = load("res://scenes/ui/phase_selection.tscn") as PackedScene
+	check(world_scene != null, "PackedScene de mundos disponível")
+	check(phase_scene != null, "PackedScene de fases disponível")
+	if world_scene == null or phase_scene == null:
+		return true
+
+	var world_screen: Control = world_scene.instantiate() as Control
+	tree.root.add_child(world_screen)
+	await tree.process_frame
+	var world_grid: GridContainer = world_screen.find_child("GridContainer", true, false) as GridContainer
+	check(world_grid != null, "grid de mundos construído em runtime")
+	if world_grid != null:
+		check_eq(world_grid.get_child_count(), 7, "sete cards de mundo")
+		check(world_grid.columns >= 2 and world_grid.columns <= 4, "colunas de mundos adaptadas à largura")
+		var first_world: Button = world_grid.get_child(0) as Button
+		check(first_world != null and not first_world.disabled, "Cybercore disponível no início")
+	world_screen.queue_free()
+	await tree.process_frame
+
+	tree.root.set_meta("campaign_selection_world_id", "W1")
+	var phase_screen: Control = phase_scene.instantiate() as Control
+	tree.root.add_child(phase_screen)
+	await tree.process_frame
+	var phase_grid: GridContainer = phase_screen.find_child("GridContainer", true, false) as GridContainer
+	check(phase_grid != null, "grid de fases construído em runtime")
+	if phase_grid != null:
+		check_eq(phase_grid.get_child_count(), 6, "seis cards de fase")
+		check(phase_grid.columns >= 1 and phase_grid.columns <= 3, "colunas de fases adaptadas à largura")
+		var first_phase: Button = phase_grid.get_child(0) as Button
+		check(first_phase != null and not first_phase.disabled, "W1-L1 pode ser iniciada")
+		check(first_phase.text.contains("FASE ATUAL"), "W1-L1 destacada como fase atual em campanha nova")
+	phase_screen.queue_free()
+	await tree.process_frame
+	return true
