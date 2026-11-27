@@ -117,8 +117,8 @@ func test_world_and_phase_screens_build_their_cards_at_runtime() -> bool:
 		check(first_world != null and not first_world.disabled, "Cybercore disponível no início")
 		var fifth_world: Button = world_grid.get_child(4) as Button
 		var seventh_world: Button = world_grid.get_child(6) as Button
-		check(fifth_world != null and fifth_world.text.contains("Pôr do Sol em\\nCidade Medieval"), "nome longo do mundo 5 quebra linha")
-		check(seventh_world != null and seventh_world.text.contains("Natal / Nova York\\nFuturista"), "nome longo do mundo 7 quebra linha")
+		check(fifth_world != null and fifth_world.text.contains("Pôr do Sol em\nCidade Medieval"), "nome longo do mundo 5 quebra linha")
+		check(seventh_world != null and seventh_world.text.contains("Natal / Nova York\nFuturista"), "nome longo do mundo 7 quebra linha")
 	world_screen.queue_free()
 	await tree.process_frame
 
