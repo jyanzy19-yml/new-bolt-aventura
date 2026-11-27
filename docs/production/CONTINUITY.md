@@ -648,3 +648,18 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Plano: `docs/production/plans/2026-11-26-one-way-platform.md`.
 - **Estado:** aguardando CI. Não integrada em fase.
 \n\n## Sessão ChatGPT — integração da PR #46 — 2026-11-26\n\n- PR #46 `feat: add reusable one-way platform` integrada por squash; merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.\n- Implementação: `scripts/world/one_way_platform.gd`, `scenes/world/one_way_platform.tscn`; teste `tests/unit/test_one_way_platform.gd`; contrato atualizado em `docs/technical/05-system-contracts.md`.\n- Godot CI pré-merge `45887805114`: SUCCESS — 87 testes/548 verificações/0 falhas. Docs CI `45887805097`: SUCCESS. Android Debug Export `45887805269`: SUCCESS; artifact e hash registrados em `stage-status.md`.\n- Não houve integração em fase; margin 2 px e dimensões são provisórias. Sem playtest visual ou Android físico. Pós-merge CI da main não confirmado no momento do registro.\n
+
+---
+
+## Sessão ChatGPT — recuperação de temporário e proteção de versão futura do SaveSystem — 2026-11-26
+
+- Main confirmada no início: `54fd48e5f49fba877740265aafa0d8f649c2b1e9`.
+- Branch: `fix/save-system-temp-recovery-2026-11-26`.
+- Arquivos funcionais alterados: `scripts/core/save_system.gd`, `scripts/campaign/campaign_progress.gd`, `tests/unit/test_save_system.gd` e `tests/unit/test_campaign_progress.gd`.
+- `load_payload()` tenta recuperar `.tmp` completo, com checksum/payload válidos, quando o principal está ausente ou inválido; promove o temporário ao principal. A precedência permanece principal válido → `.tmp` válido → backup válido.
+- Um envelope de versão não suportada em qualquer slot (principal, temporário ou backup) bloqueia a seleção de uma cópia para evitar downgrade silencioso. `save_payload()` verifica os três slots e bloqueia escrita/rotação quando qualquer um contém versão não suportada, preservando os bytes existentes.
+- `has_save()` reconhece `.tmp` pendente. Schema v1, API pública e domínio CampaignProgress não foram alterados.
+- `CampaignProgress` reconhece `recovered_temp`/`recovered_temp_unpromoted:*` como recuperação do armazenamento, preservando validação independente do schema de campanha.
+- Testes adicionados para recuperação do temporário mais novo que backup, preservação de temporário em nova gravação, precedência/fallback, proteção dos três slots futuros e continuidade de checkpoint da campanha.
+- **Estado no checkpoint:** PR #59 aberta; diff revisado. Godot Validation `45913709017` SUCCESS — 95 testes/652 verificações/0 falhas; Documentation Validation `45913709173` SUCCESS; Android Debug Export `45913709027` SUCCESS. APK 28.465.153 bytes, package ID provisório `com.example.boltaventura`, assinatura v2/v3 válida, SHA-256 `2f9ae799db84dbcf648566c8953c5fede9bcb91800417edb9586005092ad358f`; artifact `bolt-aventura-android-debug-90ef12231618606280134d7f29d2761d74ca8306`. PR não integrada. Próximo passo: manter a unidade revisável e continuar auditoria estática de Boot/SceneFlow/LoadingOverlay como parte da Etapa 04; não mesclar automaticamente.
+- Limites: nenhum teste local Godot, encerramento forçado real, Android físico, APK desta branch, profiling ou acesso ao save real do usuário foi realizado.

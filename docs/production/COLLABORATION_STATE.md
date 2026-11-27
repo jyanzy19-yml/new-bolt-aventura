@@ -163,3 +163,12 @@ O usuário autorizou ChatGPT a assumir sozinho todas as etapas de desenvolviment
 - Objetivo: exportar APK Android debug via preset existente, Godot 4.7.2 e templates pareados; não é release e não valida dispositivo.
 - Package ID `com.example.boltaventura` permanece placeholder. Nenhuma chave/credencial de release foi criada.
 - Próxima ação: validar a pipeline na PR e só registrar exportação após confirmar artifact, assinatura, package ID e hash.
+
+
+## Unidade ativa — hardening do SaveSystem (2026-11-26)
+
+- ChatGPT continua como único escritor ativo; Claude permanece inativo para escrita concorrente.
+- Branch atual: `fix/save-system-temp-recovery-2026-11-26`, criada sobre `main` `54fd48e5f49fba877740265aafa0d8f649c2b1e9`.
+- Escopo: recuperar `.tmp` completo após interrupção e impedir sobrescrita/rotação/fallback destrutivos diante de formato futuro não suportado; manter `CampaignProgress` compatível com os novos estados de recuperação sem mascarar erros de domínio.
+- PR #57 e PR #58 permanecem abertas e não integradas; esta unidade não altera suas branches nem `main`.
+- PR #59 aberta e revisada; Godot 95 testes/652 verificações/0 falhas, Docs SUCCESS e Android Debug Export SUCCESS (run `45913709027`). APK debug exportado e verificado; não instalado em aparelho. Não integrar automaticamente. Próxima unidade: concluir auditoria de Boot, SceneFlow e LoadingOverlay na Etapa 04.
