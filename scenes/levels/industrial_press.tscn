@@ -22,6 +22,3 @@ position = Vector2(0, -12)
 shape = SubResource("StrikeShape")
 disabled = true
 
-[node name="CycleTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-one_shot = true
