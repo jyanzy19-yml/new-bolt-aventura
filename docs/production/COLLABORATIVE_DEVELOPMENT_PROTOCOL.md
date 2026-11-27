@@ -5,7 +5,7 @@
 **Plataforma/engine:** Android, Godot 4.x e GDScript, conforme as fontes aprovadas  
 **Autoridade:** subordinado a `MASTER_DIRECTIVE.md`, canon, ADRs e gates aprovados.
 
- > **Estado de ativação — revisão 27/11/2026:** este protocolo de alternância sequencial é histórico/condicional e não ativa automaticamente a alternância. A alocação vigente está em `COLLABORATION_STATE.md`: ChatGPT conduz arquitetura, integração, performance/QA e criação de assets visuais; Claude está autorizado em frentes específicas de conteúdo e sistemas independentes, em branches/PRs isoladas. O plano operacional vigente é de 32 etapas; a matriz de 26 é histórica. A regra de aprovação visual do usuário prevalece sobre este protocolo. Antes de qualquer handoff, consultar o estado canônico.
+> **Estado de ativação — revisão 27/11/2026:** este protocolo de alternância sequencial é histórico/condicional e não ativa automaticamente a alternância. A alocação vigente está em `COLLABORATION_STATE.md`: ChatGPT conduz arquitetura, integração, performance/QA e criação de assets visuais; Claude está autorizado em frentes específicas de conteúdo e sistemas independentes, em branches/PRs isoladas. O plano operacional vigente é de 32 etapas; a matriz de 26 é histórica. A regra de aprovação visual do usuário prevalece sobre este protocolo. Antes de qualquer handoff, consultar o estado canônico.
 
 ## 1. Objetivo e regra central
 
