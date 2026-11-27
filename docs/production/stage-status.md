@@ -586,3 +586,12 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Android Debug Export run `45913709027`: SUCCESS; APK 28.465.153 bytes, package ID provisório `com.example.boltaventura`, assinatura v2/v3 válida, SHA-256 `2f9ae799db84dbcf648566c8953c5fede9bcb91800417edb9586005092ad358f`; artifact [bolt-aventura-android-debug-90ef12231618606280134d7f29d2761d74ca8306](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45913709027/artifacts/15161575932).
 - **Estado:** implementação e regressões aprovadas em CI headless; exportação APK debug validada. PR #59 permanece aberta e não integrada.
 - Limites: teste headless simula estados de arquivos, não queda real do processo, filesystem OEM ou armazenamento Android. APK não instalado/executado em aparelho; nenhum save real do usuário foi acessado.
+
+
+## Atualização — Etapa 12: contrato de estado do jogador (2026-11-27)
+
+- Nova regressão headless verifica que `BoltPlayer.state_changed` emite a sequência ordenada `RISING → FALLING → GROUNDED` durante salto e aterrissagem, sem notificações duplicadas.
+- Plano: `plans/2026-11-27-stage12-player-state-transition-contract.md`.
+- A unidade cobre apenas o contrato de estado consumível por sistemas de apresentação; não valida sprites, animações finais, timing visual, legibilidade nem Android físico.
+- Etapa 12 continua EM ANDAMENTO. A integração de animações depende dos assets aprovados e dos demais critérios da etapa.
+- CI ainda pendente neste checkpoint.
