@@ -20,7 +20,7 @@ Adicionar a terceira fase provisória do mundo Cybercore e conectar o fluxo de c
 - Dois encontros com o inimigo-base provisório.
 - KillZone e saída de conclusão.
 
-As dimensões, coordenadas, durações e distâncias estão documentadas em `docs/game-design/W1-L3-setor-de-montagem.md` e são parâmetros de blockout sujeitos a playtest, não balanceamento final.
+As dimensões, coordenadas, durações e distâncias estão documentadas em `docs/game-design/W1-L3-fabrica-de-ecos.md` e são parâmetros de blockout sujeitos a playtest, não balanceamento final.
 
 ## 3. Integração de campanha
 
