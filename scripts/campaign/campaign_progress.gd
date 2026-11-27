@@ -16,17 +16,34 @@ func load_state() -> Dictionary:
 		last_error = SaveSystem.last_error
 		return _default_state()
 
-	var raw_state: Variant = payload.get(PAYLOAD_KEY, {})
+	# A missing domain means a new campaign. A present but malformed domain must
+	# fail closed; do not normalize an empty/partial object into a valid new save.
+	if not payload.has(PAYLOAD_KEY):
+		return _default_state()
+	var raw_state: Variant = payload[PAYLOAD_KEY]
 	if typeof(raw_state) != TYPE_DICTIONARY:
 		last_error = "invalid_campaign_progress"
 		return _default_state()
-	if raw_state.is_empty():
-		return _default_state()
+	var required_fields: Array[String] = [
+		"campaign_id",
+		"schema_version",
+		"current_level_id",
+		"active_checkpoint_id",
+		"completed_level_ids",
+	]
+	for field: String in required_fields:
+		if not raw_state.has(field):
+			last_error = "invalid_campaign_progress_fields"
+			return _default_state()
 
-	if str(raw_state.get("campaign_id", "")) != CAMPAIGN_ID:
+	var campaign_id: Variant = raw_state["campaign_id"]
+	if typeof(campaign_id) != TYPE_STRING:
+		last_error = "invalid_campaign_progress_fields"
+		return _default_state()
+	if campaign_id != CAMPAIGN_ID:
 		last_error = "campaign_id_mismatch"
 		return _default_state()
-	var schema_version: Variant = raw_state.get("schema_version", null)
+	var schema_version: Variant = raw_state["schema_version"]
 	var schema_is_valid: bool = false
 	if typeof(schema_version) == TYPE_INT:
 		schema_is_valid = schema_version == PROGRESS_SCHEMA_VERSION
@@ -37,9 +54,9 @@ func load_state() -> Dictionary:
 		last_error = "unsupported_progress_schema"
 		return _default_state()
 
-	var current_level: Variant = raw_state.get("current_level_id", "")
-	var checkpoint_id: Variant = raw_state.get("active_checkpoint_id", "")
-	var completed: Variant = raw_state.get("completed_level_ids", [])
+	var current_level: Variant = raw_state["current_level_id"]
+	var checkpoint_id: Variant = raw_state["active_checkpoint_id"]
+	var completed: Variant = raw_state["completed_level_ids"]
 	if typeof(current_level) != TYPE_STRING or typeof(checkpoint_id) != TYPE_STRING or typeof(completed) != TYPE_ARRAY:
 		last_error = "invalid_campaign_progress_fields"
 		return _default_state()

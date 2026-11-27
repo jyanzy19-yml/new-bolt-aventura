@@ -82,6 +82,34 @@ func test_empty_ids_are_rejected_without_writing_progress() -> bool:
 	return true
 
 
+func test_empty_present_campaign_progress_fails_closed() -> bool:
+	var progress: Node = _prepare()
+	check(SaveSystem.save_payload({"campaign_progress": {}}), "grava domínio de campanha presente, mas vazio")
+	var state: Dictionary = progress.call("load_state")
+	check_eq(state.get("current_level_id"), "", "domínio vazio não é interpretado como campanha nova válida")
+	check_eq(progress.get("last_error"), "invalid_campaign_progress_fields", "domínio vazio informa campos obrigatórios ausentes")
+	check(not progress.call("save_checkpoint", "W1-L1", "cp_1"), "não grava sobre domínio vazio inválido")
+	check_eq(progress.get("last_error"), "invalid_campaign_progress_fields", "falha de escrita preserva o diagnóstico do domínio vazio")
+	_cleanup()
+	return true
+
+
+func test_campaign_progress_rejects_missing_required_field() -> bool:
+	var progress: Node = _prepare()
+	var raw_state: Dictionary = {
+		"campaign_id": "main",
+		"schema_version": 1,
+		"current_level_id": "W1-L1",
+		"active_checkpoint_id": "",
+	}
+	check(SaveSystem.save_payload({"campaign_progress": raw_state}), "grava domínio com completed_level_ids ausente")
+	var state: Dictionary = progress.call("load_state")
+	check_eq(state.get("current_level_id"), "", "domínio parcial falha fechado")
+	check_eq(progress.get("last_error"), "invalid_campaign_progress_fields", "campo obrigatório ausente recebe erro de campos")
+	_cleanup()
+	return true
+
+
 func test_unknown_progress_schema_fails_closed() -> bool:
 	var progress: Node = _prepare()
 	check(SaveSystem.save_payload({
