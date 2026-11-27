@@ -79,3 +79,20 @@ func test_selection_scenes_and_main_menu_entry_are_loadable() -> bool:
 		check(instance.get_node_or_null("Center/Column/CampaignSelectionButton") is Button, "menu expõe botão de seleção")
 		instance.free()
 	return true
+
+func test_world_states_respect_progression_and_scene_availability() -> bool:
+	var completed: Array = []
+	check_eq(CATALOG.get_world_state(0, completed, true), "available", "Cybercore disponível no início")
+	check_eq(CATALOG.get_world_state(0, completed, false), "coming_soon", "mundo inicial sem cena fica em breve")
+	check_eq(CATALOG.get_world_state(1, completed, false), "locked", "mundo futuro permanece bloqueado")
+	completed = ["W1-L1", "W1-L2", "W1-L3", "W1-L4", "W1-L5", "W1-L6"]
+	check_eq(CATALOG.get_world_state(0, completed, true), "completed", "mundo completo")
+	check_eq(CATALOG.get_world_state(1, completed, true), "available", "mundo seguinte liberado quando sua cena existir")
+	check_eq(CATALOG.get_world_state(1, completed, false), "coming_soon", "mundo liberado sem primeira cena fica em breve")
+	return true
+
+func test_campaign_progress_count_ignores_unknown_ids() -> bool:
+	var completed: Array = ["W1-L1", "W1-L2", "W99-L99", "UNKNOWN"]
+	check_eq(CATALOG.get_total_completed_count(completed), 2, "contagem considera apenas IDs catalogados")
+	check_eq(CATALOG.get_world_completed_count(0, completed), 2, "progresso do mundo considera IDs do próprio mundo")
+	return true
