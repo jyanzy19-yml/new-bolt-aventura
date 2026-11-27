@@ -74,6 +74,11 @@ func test_w1_l3_composition_and_checkpoint_survive_scene_reentry() -> bool:
 		player.velocity = Vector2.ZERO
 		await _step_physics(3)
 		check(checkpoint.is_activated(), "contato físico ativa o checkpoint W1-L3")
+		var checkpoint_hud: Hud = level.get_node("Hud") as Hud
+		check(checkpoint_hud.get_node("%ProgressNotification").visible,
+			"HUD notifica ativação mesmo quando a persistência é bem-sucedida")
+		check_eq(checkpoint_hud.get_node("%ProgressNotification").text, "CHECKPOINT ATIVADO",
+			"notificação do checkpoint apresenta o estado correto")
 		check_eq(CampaignProgress.get_checkpoint_id("W1-L3"), "cybercore_w1_l3_checkpoint",
 			"checkpoint persiste com ID estável")
 	level.free()
