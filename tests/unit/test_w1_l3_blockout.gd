@@ -141,6 +141,11 @@ func test_w1_l2_completion_routes_to_w1_l3_and_menu_can_resume_it() -> bool:
 		await tree.process_frame
 		check_eq(menu.call("_resolve_level_path", "W1-L3"), W1_L3_SCENE,
 			"menu resolve o destino salvo W1-L3")
+		check_eq(menu.call("_resolve_continue_path"), W1_L3_SCENE,
+			"ação Continuar resolve a fase salva W1-L3")
+		var continue_button: Button = menu.get_node("%ContinueButton") as Button
+		check(continue_button != null and not continue_button.disabled,
+			"menu habilita Continuar quando W1-L3 está salva e disponível")
 		menu.free()
 		await tree.process_frame
 
