@@ -586,3 +586,11 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Android Debug Export run `45913709027`: SUCCESS; APK 28.465.153 bytes, package ID provisório `com.example.boltaventura`, assinatura v2/v3 válida, SHA-256 `2f9ae799db84dbcf648566c8953c5fede9bcb91800417edb9586005092ad358f`; artifact [bolt-aventura-android-debug-90ef12231618606280134d7f29d2761d74ca8306](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45913709027/artifacts/15161575932).
 - **Estado:** implementação e regressões aprovadas em CI headless; exportação APK debug validada. PR #59 permanece aberta e não integrada.
 - Limites: teste headless simula estados de arquivos, não queda real do processo, filesystem OEM ou armazenamento Android. APK não instalado/executado em aparelho; nenhum save real do usuário foi acessado.
+
+
+## Etapa 12 — regressão do contrato de estado (2026-11-27)
+
+- PR #91: teste de sequência `RISING → FALLING → GROUNDED` no sinal público `state_changed` do BOLT, com assert de ausência de emissões duplicadas.
+- CI: Godot `46027916866` SUCCESS; Docs `46027916827` SUCCESS; Android Debug Export `46027916828` SUCCESS.
+- O workflow Android comprova exportação debug automatizada, não instalação/execução física.
+- Etapa 12 permanece EM ANDAMENTO: sincronização visual e critérios completos de animação ainda não foram validados.
