@@ -9,8 +9,8 @@ const LEVEL_PATHS: Dictionary = {
 }
 const LEVEL_LABELS: Dictionary = {
 	"W1-L1": "Cybercore",
-	"W1-L2": "Rede Interrompida",
-	"W1-L3": "Setor de Montagem",
+	"W1-L2": "Ruas sem Sinal",
+	"W1-L3": "Fábrica de Ecos",
 }
 
 @onready var _version: Label = %VersionLabel
