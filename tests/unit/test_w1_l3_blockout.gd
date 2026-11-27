@@ -153,6 +153,52 @@ func test_w1_l2_completion_routes_to_w1_l3_and_menu_can_resume_it() -> bool:
 	return true
 
 
+func test_w1_l3_checkpoint_remains_usable_when_persistence_fails() -> bool:
+	_prepare_save()
+	var corrupt_file: FileAccess = FileAccess.open(TEST_SAVE_PATH, FileAccess.WRITE)
+	check(corrupt_file != null, "cria fixture de save corrompido para W1-L3")
+	if corrupt_file == null:
+		_clear_save()
+		return true
+	corrupt_file.store_string("{invalid-json")
+	corrupt_file.close()
+
+	var packed: PackedScene = load(W1_L3_SCENE) as PackedScene
+	check(packed != null, "W1-L3 carrega com armazenamento indisponível")
+	if packed == null:
+		_clear_save()
+		return true
+
+	var level: Node2D = packed.instantiate() as Node2D
+	tree.root.add_child(level)
+	await tree.physics_frame
+	var player: BoltPlayer = level.get_node("Bolt") as BoltPlayer
+	var checkpoint: BoltCheckpoint = level.get_node("Checkpoint") as BoltCheckpoint
+	if player == null or checkpoint == null:
+		level.free()
+		await tree.process_frame
+		_clear_save()
+		return true
+
+	var expected_respawn: Vector2 = checkpoint.get_respawn_position()
+	player.global_position = checkpoint.global_position
+	player.velocity = Vector2.ZERO
+	await _step_physics(3)
+	check(checkpoint.is_activated(), "checkpoint W1-L3 ativa localmente apesar da falha de save")
+	check(not CampaignProgress.last_error.is_empty(), "falha de persistência W1-L3 permanece diagnosticável")
+
+	player.global_position = Vector2(1100.0, 650.0)
+	player.velocity = Vector2.ZERO
+	await _step_physics(3)
+	check(player.global_position.distance_to(expected_respawn) < 2.0,
+		"KillZone retorna BOLT ao checkpoint local quando a persistência falha")
+
+	level.free()
+	await tree.process_frame
+	_clear_save()
+	return true
+
+
 func test_w1_l3_goal_completes_without_advertising_unimplemented_w1_l4() -> bool:
 	_prepare_save()
 	var packed: PackedScene = load(W1_L3_SCENE) as PackedScene
