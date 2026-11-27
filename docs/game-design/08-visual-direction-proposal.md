@@ -290,7 +290,7 @@ A direção só pode ser marcada como aprovada após decisão explícita do usu�
 
 | ID | Decisão | Estado atual | Consequência |
 |---|---|---|---|
-| VDIR-01 | Estilo-base: pixel art, raster estilizado ou híbrido | A DEFINIR | Afeta pipeline, escala, animação e budgets |
+| VDIR-01 | Estilo-base: pixel art, raster estilizado ou híbrido | **APROVADO — HÍBRIDO CONTROLADO (27/11/2026)** | Define a linguagem-base; resolução, escala, proporções, paletas e parâmetros técnicos permanecem pendentes |
 | VDIR-02 | Resolução lógica e escala de apresentação | A DEFINIR | Afeta todos os assets e UI |
 | VDIR-03 | Tratamento de contorno/silhueta | A DEFINIR | Afeta leitura e consistência |
 | VDIR-04 | Densidade de detalhe e profundidade de cenário | PROPOSTA | Afeta legibilidade e custo |
@@ -316,4 +316,6 @@ Após revisão desta proposta:
 
 **Não entregue:** estilo visual final aprovado, paletas finais, concepts, sprites, animações, tilesets, UI final, VFX finais, áudio final ou validação em aparelho.
 
-**Próximo gate:** revisão do usuário sobre VDIR-01 a VDIR-08. Nenhuma lacuna foi convertida silenciosamente em canon ou parâmetro final.
+**Decisão registrada em 27/11/2026:** VDIR-01 aprovado pelo usuário como **HÍBRIDO CONTROLADO**. A decisão estabelece a combinação disciplinada de personagens estilizados de silhueta forte, cenários raster 2D com profundidade/atmosfera e sinais de gameplay de alto contraste; pixelização poderá ser usada pontualmente, sem impor grade pixelada global. Isso não fecha resolução lógica, escala, proporções, paletas, contornos, densidade, animação ou budgets.
+
+**Próximo gate:** resolver VDIR-02 a VDIR-08 por decisões/provas específicas. Nenhuma lacuna foi convertida silenciosamente em canon ou parâmetro final.
