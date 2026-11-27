@@ -594,3 +594,14 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - CI: Godot `46027916866` SUCCESS; Docs `46027916827` SUCCESS; Android Debug Export `46027916828` SUCCESS.
 - O workflow Android comprova exportação debug automatizada, não instalação/execução física.
 - Etapa 12 permanece EM ANDAMENTO: sincronização visual e critérios completos de animação ainda não foram validados.
+
+
+## Etapa 14 — recuperação física da KillZone em W1-L1 (27/11/2026)
+
+- PR #95 aberta: [test(stage14): cover W1-L1 killzone checkpoint recovery](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/95), branch `test/stage14-w1-l1-killzone-recovery-contract-2026-11-27`.
+- Teste novo `tests/unit/test_stage14_w1_l1_killzone_recovery_contract.gd`: ativa o checkpoint por contato físico, persiste o ID, aplica dano não letal, entra na KillZone real e verifica retorno ao ponto persistido, vida restaurada, um único sinal `respawned`, checkpoint preservado e ausência de derrota terminal/pausa. **18 verificações novas**.
+- CI no HEAD `7e2a646a24ef5dcf51bf7ca8108ae5c59eadc5bb`: Godot run `46043254619` SUCCESS — **109 testes / 1.959 verificações / 0 falhas**, 20/20 cold boots e mutation check do prewarm aprovados; Docs run `46043254425` SUCCESS; Android Debug Export run `46043254483` SUCCESS — suíte headless **109/1.959/0**.
+- APK debug: 28.469.428 bytes; package ID placeholder `com.example.boltaventura`; SHA-256 `82721bcdb626dd62f010abcdb17ff92f6f55ce3ee6b1908c5b065b86f0781f49`; assinatura v2/v3 verificada; artifact ID `15221422243`, digest ZIP SHA-256 `62847b2a844f486f4661ebcb0a5289ad6bebd2d4b585705f599a6f4e227cd4a2`.
+- Workflow Android mantém a remoção da reinstalação redundante de `cmdline-tools;latest`; setup, import, testes, export, assinatura, verificação e upload passaram.
+- **Estado:** PR #95 aberta, não integrada. Somente teste, documentação e workflow CI; nenhum runtime, cena, shape, coordenada, física, tuning, save schema, ID, progressão, canon ou asset foi alterado.
+- W1-L1 continua blockout provisório. APK não foi instalado; sem validação Android física, latência touch, FPS, memória ou estabilidade térmica. Etapa 14 permanece EM ANDAMENTO.
