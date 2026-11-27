@@ -13,10 +13,10 @@ const GUARDIAN_TITLES: Array[String] = [
 	"Rei Esquecido", "Guardião da Coroa", "Ilusionista Supremo", "Guardião do Inverno",
 ]
 const PHASE_TITLES: Dictionary = {
-	"W1-L1": "Despertar nas Ruínas",
-	"W1-L2": "Rede Interrompida",
-	"W1-L3": "Setor de Montagem",
-	"W1-L4": "Núcleo de Distribuição",
+	"W1-L1": "Despertar entre Ruínas",
+	"W1-L2": "Ruas sem Sinal",
+	"W1-L3": "Fábrica de Ecos",
+	"W1-L4": "Laboratório de Memórias",
 }
 const SCENE_PATHS: Dictionary = {
 	"W1-L1": "res://scenes/campaign/cybercore_w1_l1.tscn",
