@@ -116,11 +116,11 @@ func _make_world_card(world_index: int, completed: Array) -> Button:
 
 func _format_world_name(world_index: int) -> String:
 	match world_index:
-		1: return "Egito Antigo\\nFuturista"
-		2: return "Speakeasy\\nAesthetic"
-		4: return "Pôr do Sol em\\nCidade Medieval"
-		5: return "Vaporwave /\\nLas Vegas"
-		6: return "Natal / Nova York\\nFuturista"
+		1: return "Egito Antigo\nFuturista"
+		2: return "Speakeasy\nAesthetic"
+		4: return "Pôr do Sol em\nCidade Medieval"
+		5: return "Vaporwave /\nLas Vegas"
+		6: return "Natal / Nova York\nFuturista"
 		_: return CATALOG.get_world_name(world_index)
 
 
