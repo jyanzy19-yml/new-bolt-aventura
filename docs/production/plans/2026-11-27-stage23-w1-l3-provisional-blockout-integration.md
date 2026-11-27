@@ -38,8 +38,9 @@ Novo teste `tests/unit/test_w1_l3_blockout.gd` cobre:
 2. parâmetros de movimento das duas plataformas;
 3. limites de patrulha dentro dos pisos;
 4. contato físico, persistência e restauração do checkpoint após reentrada;
-5. conclusão de W1-L2, atualização do destino W1-L3 e resolução pelo menu;
-6. conclusão física de W1-L3, registro único da fase concluída e ausência de destino W1-L4 não implementado.
+5. conclusão de W1-L2, atualização do destino W1-L3, resolução efetiva por Continuar e habilitação do botão no menu;
+6. fallback local do checkpoint quando o save está corrompido, incluindo retorno pela KillZone;
+7. conclusão física de W1-L3, registro único da fase concluída e ausência de destino W1-L4 não implementado.
 
 O teste existente `test_w1_l2_progression.gd` foi atualizado para exigir o próximo destino W1-L3, preservando os cenários de checkpoint/falha de save já integrados.
 
@@ -56,9 +57,10 @@ O teste existente `test_w1_l2_progression.gd` foi atualizado para exigir o próx
 
 - Godot 4.7.2: importação, parsing e suíte headless passam.
 - Documentation Validation: SUCCESS.
-- Android Debug Export: SUCCESS (`46074498597`), assinatura v2/v3 e artifact rastreável (`15234138213`; ZIP SHA-256 `2cc8bd5b166c89ec574534996f083be630d5bff82283fa07ac68e08c8d1dd9c8`).
-- Godot Validation `46074498555`: SUCCESS; Documentation Validation `46074498631`: SUCCESS.
-- Suíte headless no job Android: **129 testes / 2.135 verificações / 0 falhas**.
+- Godot Validation `46075124332`: SUCCESS; Documentation Validation `46075124349`: SUCCESS; Android Debug Export `46075124490`: SUCCESS.
+- Suíte Godot e Android: **130 testes / 2.142 verificações / 0 falhas**; 20/20 boots smoke e mutation check do prewarm aprovados.
+- APK Debug Godot 4.7.2: 28.478.036 bytes; package ID placeholder `com.example.boltaventura`; SHA-256 `4fa4a81ca7e5f0b048f05f9a14bc41bec9a0c4c4f0344c1445538a01ca4dc892`; assinatura v2/v3 verificada.
+- Artifact `15234169146`; ZIP SHA-256 `41ee39850c322e6be341053b666b887edcb9cade9c3c81c1a30cff354142f84a`; [artefato Android Debug](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46075124490/artifacts/15234169146).
 - W1-L2 conclui e aponta para W1-L3; menu retoma W1-L3.
 - Checkpoint W1-L3 persiste e restaura após reentrada.
 - Nenhum teste afirma que W1-L3 é fase final ou que W1-L4 existe.
