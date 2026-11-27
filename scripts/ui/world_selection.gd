@@ -45,7 +45,7 @@ func _build_interface() -> void:
 	var state: Dictionary = CampaignProgress.load_state()
 	var completed: Array = state.get("completed_level_ids", [])
 	var progress := Label.new()
-	progress.text = "%d / %d FASES" % [completed.size(), CATALOG.get_total_phase_count()]
+	progress.text = "%d / %d FASES" % [CATALOG.get_total_completed_count(completed), CATALOG.get_total_phase_count()]
 	progress.add_theme_font_size_override("font_size", 20)
 	progress.add_theme_color_override("font_color", COLOR_ACCENT)
 	header.add_child(progress)
