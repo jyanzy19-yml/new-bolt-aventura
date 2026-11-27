@@ -22,9 +22,9 @@ Os itens abaixo são necessidades planejadas, não briefs aprovados, conceitos g
 
 | ID | Entrega | Consumidor | Etapa de referência | Estado | Bloqueio/observação |
 |---|---|---|---:|---|---|
-| ART-BOLT-001 | Direção visual global de BOLT · AVENTURA | Todos os mundos/sistemas | 05 | PLANNED | Definir linguagem visual antes dos concepts |
-| ART-BOLT-002 | Guia técnico de sprites e assets | Pipeline Godot | 06 | PLANNED | Definir dimensões, import e budgets |
-| ART-BOLT-003 | Concept do protagonista BOLT | Player | 07 | PLANNED | Requer direção visual; aguarda aprovação |
+| ART-BOLT-001 | Direção visual global de BOLT · AVENTURA | Todos os mundos/sistemas | 05 | AWAITING_USER_APPROVAL | Proposta documentada na PR #87; aguarda decisão explícita |
+| ART-BOLT-002 | Guia técnico de sprites e assets | Pipeline Godot | 06 | SPECIFIED | Guia criado na PR #88; revisão feita, CI ainda não confirmada |
+| ART-BOLT-003 | Concept do protagonista BOLT | Player | 07 | SPECIFIED | Brief em `BOLT-CHARACTER-CONCEPT-BRIEF.md`; concept visual bloqueado pela aprovação da Etapa 05 e validação da Etapa 06 |
 | ART-BOLT-004 | Spritesheets/animações de BOLT | Player | 08 | PLANNED | Bloqueado pelo concept aprovado e brief |
 | ART-BOLT-005 | Kit visual inicial de UI/HUD | Menus/HUD | 09 | PLANNED | Requer UI/UX e aprovação |
 | ART-BOLT-006 | Concepts/sprites dos inimigos | Inimigos por mundo | 16 | PLANNED | Requer arquitetura de arquétipos e direção |
