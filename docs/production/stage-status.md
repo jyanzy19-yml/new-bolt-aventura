@@ -2,18 +2,19 @@
 
 ## Snapshot vigente — 2026-11-27
 
-**Main HEAD:** 3e4124f561438da2dcff1458a852d47f2f4dfaea — PR #63 integrada por squash.
-**Etapas:** 01–03 concluídas; Etapa 04 em desenvolvimento. Etapas 05–26 conforme a matriz.
+**Main HEAD:** `4544efc7082a17e7824ccf46c524db07486e3dc9` — PRs #65, #66 e #67 integradas; PRs #59, #60 e #63 também permanecem na linha principal.
+**Etapas:** 01–04 concluídas; Etapa 05 em desenvolvimento; etapas 06–26 conforme a matriz.
 **Gate 0:** auditoria e alinhamento estáticos concluídos. **Gate 1:** em andamento; W1-L1 e W1-L2 continuam blockouts e a validação Android física permanece pendente.
 **Responsável:** ChatGPT, único escritor ativo. Claude permanece inativo para escrita concorrente.
 **Última entrega de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, com campo energético cíclico e progressão W1-L1→W1-L2.
-**Hardening integrado:** PR #59 (SaveSystem), PR #60 (liberação de input/touch em suspensão Android) e PR #63 (Boot/cold-start e regressões de carregamento).
-**PRs abertas e não integradas:** #57 (polimento visual Cybercore), #58 (branch antiga de cold boot), #61 (teste Boot/Input Map antigo) e #62 (unidade consolidada anterior). Não integrar automaticamente #58/#61/#62: conteúdo sobreposto ou obsoleto em relação à PR #63; #57 requer revisão independente.
-**Validação PR #63:** Godot 4.7.2 — 99 testes, 1.873 verificações, zero falhas; 150 transições repetidas (30 ciclos × 5 cenas); 20/20 cold boots headless; mutation test reproduziu a falha ao remover o prewarm. Android Debug Export SUCCESS; APK debug assinado/verificado v2/v3 e artefato publicado. Runs 45917993456 e 45917993461.
-**Merge PR #63:** 3e4124f561438da2dcff1458a852d47f2f4dfaea.
-**CI pós-merge main:** Documentation Validation 45918395500 SUCCESS; Godot Validation 45918395535 SUCCESS; Android Debug Export 45918395499 SUCCESS.
-**Limites Android:** APK exportado não significa instalado. Cold-start visual, touch físico/multitouch, safe areas, barras do sistema, lifecycle OEM, FPS, memória, temperatura e sessão prolongada ainda não foram medidos em aparelho.
-**Próxima unidade da Etapa 04:** revisar edge cases de CampaignProgress e LoadingOverlay e a integração dos estados de recuperação SaveSystem→CampaignProgress. Não alterar schema v1, IDs persistentes, Dash, física ou canon sem escopo aprovado.
+**Hardening integrado:** PR #59 (recuperação de save temporário/backup e proteção de formato futuro); PR #60 (liberação de input/touch na suspensão Android); PR #63 (Boot/cold-start, prewarm e transições threaded); PR #65 (IDs de fases concluídas duplicados rejeitados); PR #66 (integração real SceneFlow→LoadingOverlay); PR #67 (domínio CampaignProgress vazio/parcial rejeitado).
+**PRs abertas e não integradas:** #57 (polimento visual Cybercore, revisão independente); #58, #61 e #62 (branches antigas/sobrepostas à PR #63; não integrar automaticamente); #1 (PR documental antiga e divergente; revisão independente antes de qualquer ação).
+**Validação consolidada:** Godot 4.7.2 — 102 testes, 1.891 verificações, zero falhas; 20/20 cold boots headless; mutation test do prewarm aprovado. PRs #65–#67 e CI pós-merge main aprovados.
+**CI pós-merge main:** Documentation Validation 45920441923 SUCCESS; Godot Validation 45920441898 SUCCESS; Android Debug Export 45920441894 SUCCESS.
+**APK main:** 28.465.153 bytes; assinatura v2/v3 verificada; package ID provisório `com.example.boltaventura`; SHA-256 `cf6c96a48012a27d61db83354c777034ffe18c02fee8c2dd8c20e02acc1f0205`; artifact [bolt-aventura-android-debug-4544efc7082a17e7824ccf46c524db07486e3dc9](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/45920441894/artifacts/15164521585).
+**Etapa 04:** CONCLUÍDA no nível L2 — contratos de Boot, SceneFlow, SaveSystem, CampaignProgress e integração do LoadingOverlay endurecidos e aprovados em CI. Isso não equivale a validação Android física.
+**Próxima unidade:** Etapa 05 — auditoria de recursos/carregamento: cancelamento explícito, política de preload, descarregamento seletivo e medições de tempo/memória/frame time. Não alterar gameplay, schema v1, IDs persistentes, Dash, física ou canon sem escopo aprovado.
+**Limites Android:** APK exportado em CI não significa instalado. Cold-start visual, touch físico/multitouch, safe areas, barras do sistema, lifecycle OEM, FPS, memória, temperatura e sessão prolongada ainda não foram medidos em aparelho.
 
 
 **Atualização:** 2026-11-26  
@@ -351,10 +352,10 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 | Etapa | Área | Estado | Evidência / lacuna principal |
 |---:|---|---|---|
 | 01 | Auditoria integral do repositório | CONCLUÍDA — estática | Inventário recursivo de 288 arquivos; revisão manual das 19 cenas, 30 scripts runtime, recurso BoltTuning, configuração Android, fontes mestras, ADRs, PRs e branches. CI compila scripts e instancia cenas; 88 testes/553 verificações passaram na PR #47. Limites físicos Android permanecem nos Gates 1/5, não bloqueiam o fechamento da auditoria estática |
-| 02 | Requisitos e planejamento | EM DESENVOLVIMENTO | Matriz `26-stage-traceability-matrix.md` integrada pela PR #48; registro GAP-001…GAP-022 e conflitos DOC-001…DOC-011 integrado; revisão requisito-a-requisito, classificação, owners, dependências e critérios P0 concluídos |
+| 02 | Requisitos e planejamento | CONCLUÍDA — rastreabilidade e planejamento | Matriz `26-stage-traceability-matrix.md` integrada pela PR #48; registro GAP-001…GAP-022 e conflitos DOC-001…DOC-011 integrado; revisão requisito-a-requisito, classificação, owners, dependências e critérios P0 concluídos |
 | 03 | Arquitetura e organização | CONCLUÍDA — baseline estático | Quatro autoloads, fluxos de boot/menu/campanha, ownership, persistência, player/combat, HUD/touch e plataformas mapeados; nenhum ciclo de autoload/serviço identificado; acoplamento local BoltPlayer↔BoltCombat documentado como exceção consciente; sem migração estética |
-| 04 | Infraestrutura e sistemas centrais | EM DESENVOLVIMENTO | Boot, SceneFlow, SaveSystem, CampaignProgress e LoadingOverlay existem; auditar edge cases, lifecycle, integridade do save, falhas e contratos de progressão antes de ampliar domínios |
-| 05 | Recursos e carregamento | EM DESENVOLVIMENTO | SceneFlow threaded e LoadingOverlay integrados; progresso real sem porcentagem falsa; pausa/input lock em validação; cancelamento, preload abrangente e gestão de memória pendentes |
+| 04 | Infraestrutura e sistemas centrais | CONCLUÍDA — hardening automatizado L2 | Boot/cold-start e transições threaded (PR #63); recuperação de save e formatos futuros (PR #59); domínio CampaignProgress com duplicidades e campos ausentes/vazios rejeitados (PRs #65/#67); integração real SceneFlow→LoadingOverlay (PR #66). Godot 4.7.2: 102 testes/1.891 verificações/0 falhas; 20/20 cold boots e mutation test aprovados. Validação física permanece nos Gates 1/24/25 |
+| 05 | Recursos e carregamento | EM DESENVOLVIMENTO | SceneFlow threaded e LoadingOverlay integrados; progresso real, input lock e ciclo de exibição/ocultação validados em teste headless real (PR #66); cancelamento explícito, política de preload, descarregamento seletivo e medição de memória/frame time pendentes |
 | 06 | Personagem principal | EM DESENVOLVIMENTO | BoltPlayer e BoltTuning provisório; arte/animações finais e validação humana pendentes |
 | 07 | Física e movimentação | EM DESENVOLVIMENTO | Corrida, salto, pulo duplo provisório, coyote, buffer, Dash e colisões; feel e Android físico não validados |
 | 08 | Animações e feedback | EM DESENVOLVIMENTO | Feedback HUD e hit flash; pipeline de animação final ainda não implementado |

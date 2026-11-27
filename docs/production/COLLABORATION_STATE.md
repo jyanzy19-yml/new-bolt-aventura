@@ -2,16 +2,17 @@
 
 ## Snapshot operacional vigente — 2026-11-27
 
-Main HEAD: 3e4124f561438da2dcff1458a852d47f2f4dfaea — PR #63 integrada por squash.
-Hardening integrado: PR #59 SaveSystem (2e1f7cd); PR #60 lifecycle Android/input (fd8aefa); PR #63 Boot/cold-start/threaded loading (3e4124f).
+Main HEAD: `4544efc7082a17e7824ccf46c524db07486e3dc9` — PR #67 integrada por squash.
+Hardening integrado: PR #59 SaveSystem; PR #60 lifecycle Android/input; PR #63 Boot/cold-start/threaded loading; PR #65 CampaignProgress sem IDs duplicados; PR #66 integração real SceneFlow→LoadingOverlay; PR #67 validação de domínio CampaignProgress.
 Última entrega de gameplay: PR #34 — W1-L2 em blockout; não houve nova fase de campanha nesta unidade.
 Escritor ativo: ChatGPT como único escritor; Claude permanece inativo para escrita concorrente.
-Etapas: 01–03 concluídas; Etapa 04 em desenvolvimento; Gate 1 em andamento. W1-L1/W1-L2 permanecem blockouts.
-CI PR #63: Godot 4.7.2, 99 testes/1.873 verificações/0 falhas; 150 transições em cinco cenas; 20/20 cold boots headless; mutation test de remoção do prewarm passou. Android Debug Export SUCCESS; artefato publicado, assinatura v2/v3 verificada.
-CI pós-merge main: Docs 45918395500 SUCCESS; Godot 45918395535 SUCCESS; Android 45918395499 SUCCESS.
-PRs abertas: #57 polimento visual; #58 branch antiga de cold boot; #61 teste Boot/Input Map antigo; #62 unidade consolidada anterior. Não mesclar #58/#61/#62: conteúdo sobreposto/obsoleto em relação à #63. #57 requer revisão independente.
-Limites: APK debug não foi instalado. Touch físico, safe area/barras, lifecycle OEM, FPS, memória e térmica permanecem sem validação em dispositivo.
-Próxima unidade: concluir auditoria de CampaignProgress e LoadingOverlay e conferir contratos de recuperação SaveSystem→CampaignProgress sem alterar schema v1 ou canon.
+Etapas: 01–04 concluídas; Etapa 05 em desenvolvimento; Gate 1 em andamento. W1-L1/W1-L2 permanecem blockouts.
+CI pós-merge main: Docs 45920441923 SUCCESS; Godot 45920441898 SUCCESS; Android Export 45920441894 SUCCESS.
+Godot 4.7.2: 102 testes/1.891 verificações/0 falhas; 20/20 cold boots e mutation test aprovados.
+APK debug: 28.465.153 bytes, assinatura v2/v3 verificada, package ID placeholder `com.example.boltaventura`, SHA-256 `cf6c96a48012a27d61db83354c777034ffe18c02fee8c2dd8c20e02acc1f0205`; artifact ID 15164521585.
+PRs abertas: #57 polimento visual; #58/#61/#62 branches antigas/sobrepostas à PR #63 e não devem ser integradas automaticamente; #1 PR documental antiga e divergente.
+Limites: APK debug não foi instalado. Touch físico, safe area/barras, lifecycle OEM, FPS, memória, temperatura e sessão prolongada permanecem sem validação em dispositivo.
+Próxima unidade: Etapa 05 — cancelamento de carregamento, preload, descarregamento seletivo e medições de recursos. Gate 1 permanece independente e depende de validação Android física.
 
 
 ## Snapshot operacional vigente — 2026-11-26

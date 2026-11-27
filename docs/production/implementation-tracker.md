@@ -2,14 +2,19 @@
 
 ## Snapshot vigente — 2026-11-27
 
-Main HEAD: 3e4124f561438da2dcff1458a852d47f2f4dfaea (PR #63 integrada). PR #59 e #60 também integradas.
+Main HEAD: `4544efc7082a17e7824ccf46c524db07486e3dc9`. PRs #59, #60, #63, #65, #66 e #67 integradas.
 PR #59: recuperação de temporário íntegro e proteção contra downgrade de formatos futuros; schema v1 preservado.
 PR #60: libera ações e ponteiros touch em notificação de suspensão Android; validação física permanece pendente.
-PR #63: prewarm de main_menu.gd na thread principal antes da cena threaded; teste Boot fail-closed; 30 ciclos × 5 cenas; CI com 20 cold boots e mutation test.
-Godot PR #63: 99 testes/1.873 verificações/0 falhas. Android Debug Export SUCCESS; artifact ZIP 28.204.882 bytes, SHA-256 fd331a5151cf8d61732e04bd070ea6ca8eca9844945007248f1fb3b040c50553.
-CI pós-merge main: Docs 45918395500 SUCCESS; Godot 45918395535 SUCCESS; Android Export 45918395499 SUCCESS.
-PRs #57/#58/#61/#62 seguem abertas e fora da main; #58/#61/#62 sobrepõem conteúdo da PR #63 e exigem tratamento separado. #57 é independente e requer revisão própria.
-Etapa 04 permanece EM DESENVOLVIMENTO. Nenhuma validação física Android foi realizada.
+PR #63: prewarm de main_menu.gd na thread principal, Boot fail-closed, 150 transições repetidas e 20 cold boots com mutation test.
+PR #65: rejeita IDs de fases concluídas duplicados em saves carregados.
+PR #66: valida em transição real que SceneFlow ativa/exibe e depois encerra/oculta LoadingOverlay.
+PR #67: diferencia domínio ausente (campanha nova) de domínio presente vazio/parcial; exige os cinco campos do schema v1 e falha fechado.
+Godot 4.7.2 pós-merge main: 102 testes/1.891 verificações/0 falhas; 20/20 cold boots; mutation test aprovado. CI: Docs 45920441923 SUCCESS; Godot 45920441898 SUCCESS; Android Export 45920441894 SUCCESS.
+APK debug main: 28.465.153 bytes; assinatura v2/v3 válida; package ID provisório `com.example.boltaventura`; SHA-256 `cf6c96a48012a27d61db83354c777034ffe18c02fee8c2dd8c20e02acc1f0205`; artifact `bolt-aventura-android-debug-4544efc7082a17e7824ccf46c524db07486e3dc9` (ID 15164521585).
+Etapas 01–04 concluídas; Etapa 05 em desenvolvimento. Gate 1 segue em andamento: W1-L1/W1-L2 blockouts e validação Android física pendentes.
+PRs abertas: #57 (polimento visual, revisão independente); #58/#61/#62 (branches antigas/sobrepostas à PR #63, não integrar automaticamente); #1 (PR documental antiga e divergente).
+Limites: APK debug exportado não foi instalado. Touch físico, safe area/barras, lifecycle OEM, FPS, memória, temperatura e sessão prolongada continuam sem validação em dispositivo.
+Próxima unidade: Etapa 05 — auditoria de cancelamento, preload, descarregamento seletivo e medições de recursos/carregamento. Não alterar schema/canon ou física sem escopo aprovado.
 
 
 **Objetivo:** impedir que sistemas ou fases sejam declarados concluídos apenas por terem arquivos ou cenas criados.  
@@ -50,16 +55,16 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-011 | Chefes e arenas | Não iniciado | Sem implementação do jogo |
 | SYS-012 | NPCs, interação, diálogo e flags | Não iniciado | Sem implementação do jogo |
 | SYS-013 | Objetivos, colecionáveis e fragmentos | Não iniciado | Sem implementação do jogo |
-| SYS-014 | Checkpoints, respawn e progressão | Em andamento | `CampaignProgress` persiste entrada/checkpoint/conclusão; W1-L1 avança o destino salvo para W1-L2; W1-L2 possui checkpoint próprio e blockout integrado pela PR #34; Godot CI pré/pós-merge passou; sandbox permanece ambiente de desenvolvimento |
-| SYS-015 | Save/load, versão e recuperação | Em andamento | `SaveSystem` JSON v1 + `CampaignProgress` v1; reset seletivo, retomada W1-L1/W1-L2, backup/corrupção/schema cobertos. PR #31 CI pós-merge: 66 testes/404 verificações. Encerramento forçado e QA Android pendentes |
+| SYS-014 | Checkpoints, respawn e progressão | Em andamento | `CampaignProgress` v1 persiste entrada/checkpoint/conclusão; rejeita IDs duplicados (PR #65) e payload vazio/parcial (PR #67); W1-L1→W1-L2 e checkpoint de W1-L2 continuam parciais; 102 testes/1.891 verificações aprovados; campanha completa e validação física pendentes |
+| SYS-015 | Save/load, versão e recuperação | Em andamento | `SaveSystem` JSON v1 + `CampaignProgress` v1; PR #59 cobre recuperação de temporário/backup e bloqueio de formatos futuros; PRs #65/#67 endurecem validação do domínio. CI pós-merge: 102 testes/1.891 verificações/0 falhas. Encerramento forçado em Android e QA físico ainda pendentes |
 | SYS-016 | Inventário, moedas, melhorias e skins | Não iniciado | Sem implementação do jogo |
 | SYS-017 | Menus, HUD, pausa e configurações | Em andamento | Nova Jornada/Continuar; retomada mapeia W1-L1 e W1-L2; HUD de resultado oferece PRÓXIMA FASE; overlay persistente de loading integrado pela PR #41 e lock de input em transição pela PR #42. Configurações completas e validação visual/Android ausentes |
 | SYS-018 | Cutscenes, legendas e replay/pulo | Em andamento | Nova Jornada segue abertura/tutorial; Continuar retoma W1-L1 ou W1-L2 conforme o progresso persistido. PR #34 integrada; storyboard/tutorial provisórios, animação final, áudio e replay persistente pendentes |
 | SYS-019 | Áudio, música, buses e opções | Não iniciado | Sem implementação do jogo |
-| SYS-020 | Loading, transições e gestão de memória | Em andamento | PR #41 integrou `LoadingOverlay`; PR #42 pausa SceneTree, oculta touch e retoma após sucesso; PR #43 cobre restauração do pause state em falha. PR #43 CI: 78 testes/484 verificações/0 falhas, export Android SUCCESS. Cancelamento, preload e gestão de memória pendentes |
+| SYS-020 | Loading, transições e gestão de memória | Em andamento | PR #66 valida integração real SceneFlow→LoadingOverlay, incluindo exibição durante a transição e ocultação após sucesso; CI pós-merge 102 testes/1.891 verificações/0 falhas. Cancelamento explícito, preload, descarregamento seletivo e medições de memória/frame time pendentes |
 | SYS-021 | Pipeline de assets e proveniência | Não iniciado | Pipeline do jogo a estabelecer |
-| SYS-022 | Testes automatizados e regressão | Em andamento | Workflow Godot 4.7.2 executa import + `tests/test_runner.gd`; PR #47 pós-merge Godot CI: 88 testes/553 verificações/0 falhas; Docs e Android export SUCCESS. Headless não equivale a QA visual ou Android físico |
-| SYS-023 | Exportação, instalação e QA Android | Em andamento | PR #47 pós-merge main exportou artifact `bolt-aventura-android-debug-2636226c4027625649e66c51ff64d7e2e56168a6`, 28.461.057 bytes, assinatura v2/v3 válida, SHA-256 `c3ca03958eecf120f1a9f5f1e4fae3851fb7560bca303c8eb5a930f987b58123`. Package ID `com.example.boltaventura` ainda placeholder; instalação, inicialização, touch, safe area e QA físico ainda não executados |
+| SYS-022 | Testes automatizados e regressão | Em andamento | Workflow Godot 4.7.2 executa import + `tests/test_runner.gd`; pós-merge main: 102 testes/1.891 verificações/0 falhas, 20/20 cold boots e mutation test aprovados; Docs e Android Export SUCCESS. Headless não equivale a QA visual ou Android físico |
+| SYS-023 | Exportação, instalação e QA Android | Em andamento | CI pós-merge main `45920441894` exportou APK debug de 28.465.153 bytes, assinatura v2/v3 válida, package ID provisório `com.example.boltaventura`, SHA-256 `cf6c96a48012a27d61db83354c777034ffe18c02fee8c2dd8c20e02acc1f0205`; artifact ID 15164521585. Instalação, inicialização, touch, safe area e QA físico ainda não executados |
 | SYS-024 | Créditos, encerramento e release candidate | Não iniciado | Sem campanha implementada |
 
 ## 4. Rastreador das 42 fases
