@@ -1,3 +1,15 @@
+## Atualização de continuidade — aprovação VDIR-01 e concept C01 (27/11/2026)
+
+- O usuário aprovou VDIR-01: **HÍBRIDO CONTROLADO**.
+- Interpretação: personagens estilizados de silhueta forte; cenários 2D raster com profundidade/atmosfera; sinais de gameplay com contraste e leitura imediata; pixelização apenas pontual, sem grade pixelada global obrigatória.
+- VDIR-02 a VDIR-08 continuam pendentes. Não inferir resolução, escala, proporções, paletas, materiais, contornos ou parâmetros de animação.
+- ART-BOLT-003-C01 v0.1 foi gerado e apresentado para avaliação. Estado: **AWAITING_USER_APPROVAL**. Não é arte final e não foi integrado ao projeto Godot.
+- A decisão de estilo não aprova automaticamente o concept, spritesheets, animações, hitboxes ou integração.
+- PRs #87, #88 e #89 continuam abertas e não integradas neste checkpoint; nenhum merge foi executado.
+- Próxima ação: aguardar decisão explícita do usuário sobre C01 (aprovação da versão exata ou pedido de revisão); manter as decisões VDIR-02 a VDIR-08 abertas.
+
+---
+
 ## Continuidade vigente — Etapas 06 e 07 (27/11/2026)
 
 - Base de referência: `71463b5a1f27d7499943858ac86392a3933c58f2`.
