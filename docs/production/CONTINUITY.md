@@ -721,3 +721,5 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Plano: `docs/production/plans/2026-11-27-stage13-camera-configuration-contract.md`.
 - Sem alterações de runtime, cena, tuning, limites de fase ou parâmetros de enquadramento.
 - Headless não valida framing visual, clipping, aspect ratios ou comportamento em aparelho Android. Etapa 13 permanece EM ANDAMENTO.
+
+- O teste também verifica `configure_camera()` em isolamento para os limites declarados por W1-L1/W1-L2, sem instanciar as fases nem acessar CampaignProgress/SaveSystem.
