@@ -84,6 +84,16 @@ Documentos especializados existentes devem ser reutilizados e aprimorados; não 
 
 ---
 
+## 3.1. Plano operacional vigente — 32 etapas
+
+A estrutura de produção aprovada pelo usuário é o [Plano Mestre de Produção — 32 etapas](docs/production/32-stage-production-plan.md). Leia-o em conjunto com este documento, o roadmap de Gates e o estado operacional. A matriz anterior de 26 etapas foi preservada somente como histórico/crosswalk; não reiniciar progresso nem apagar evidências.
+
+A migração mantém as antigas Etapas 01–04 concluídas no nível comprovado e transfere o trabalho da antiga Etapa 05 (recursos/carregamento) para a nova Etapa 29, ainda em andamento. As novas Etapas 05–09 constituem trabalho de direção de arte e produção visual e não herdam o status da etapa antiga.
+
+**Aprovação de arte obrigatória:** ChatGPT cria os assets visuais do jogo e apresenta cada entrega ao usuário. Nenhum asset final pode ser integrado/substituído no repositório ou Godot antes da aprovação explícita da versão exata. Consultar `docs/production/ASSET_PIPELINE.md` e manter manifesto/fila atualizados. A aprovação de um asset não aprova outros assets nem versões futuras.
+
+As 32 etapas organizam execução; Gates 0–5 continuam sendo critérios transversais de qualidade. Etapa concluída não implica Gate aprovado. Status e evidências atuais permanecem em `docs/production/stage-status.md`.
+
 ## 4. Identidade do produto e plataforma
 
 - Nome: **BOLT · AVENTURA**.
@@ -368,6 +378,6 @@ Comandos auxiliares: `/bolt-continue` retoma o trabalho sem depender da memória
 
 ## 18. Colaboração entre Claude Code e ChatGPT — fluxo condicional
 
-A atribuição do escritor é determinada exclusivamente pela decisão vigente do usuário, registrada em `docs/production/COLLABORATION_STATE.md`. **Estado atual: ChatGPT é o único escritor ativo; Claude permanece inativo para escrita concorrente.** Não iniciar alternância nem handoff para Claude sem reativação explícita do usuário.
+A atribuição do escritor é determinada exclusivamente pela decisão vigente do usuário, registrada em `docs/production/COLLABORATION_STATE.md`. **Estado atual:** ChatGPT conduz arquitetura, sistemas centrais, integração, desempenho Android, regressão, QA e criação dos assets visuais sujeitos à aprovação do usuário. Claude está autorizado pelo usuário nas frentes de construção de fases, inimigos/chefes, elementos interativos, interface/conteúdo visual e sistemas independentes de gameplay, sempre em branch/PR própria. Não editar simultaneamente os mesmos arquivos; nenhum asset visual final pode ser integrado sem aprovação explícita do usuário. Consultar `COLLABORATION_STATE.md` antes de atribuir trabalho.
 
 Se o usuário reativar o fluxo colaborativo, seguir `docs/production/COLLABORATIVE_DEVELOPMENT_PROTOCOL.md`, verificar acesso real conforme `docs/production/AGENT_ACCESS_SETUP.md` e registrar handoff em `docs/production/HANDOFF_TEMPLATE.md`. O protocolo histórico define uma sequência Claude → ChatGPT, mas a sequência só se torna operacional quando o usuário a reativar e o estado colaborativo atribuir a próxima etapa. Nunca editar simultaneamente nem iniciar implementação paralela. Ao assumir qualquer etapa, o responsável deve inspecionar o commit e o projeto reais, revisar a etapa anterior, corrigir defeitos confirmados e só então implementar. O repositório/commit é a fonte de verdade; toda entrega exige testes honestamente reportados, tracker/continuidade/estado colaborativo atualizados e handoff quando aplicável. O usuário aciona manualmente o agente seguinte; não existe transferência automática de sessão. Só afirmar alterações, builds ou testes efetivamente realizados. Decisões materiais continuam sob autoridade do usuário.
