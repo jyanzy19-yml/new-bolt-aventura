@@ -427,3 +427,15 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Android Debug Export repetiu a suíte: **122 testes / 2.074 verificações / 0 falhas**. APK **28.469.428 bytes**, package ID placeholder `com.example.boltaventura`, SHA-256 `4ec82202e1286f6e9b1379a20d3fadc648cf0eec5fd56374617e909a247e5e77`; assinatura v2/v3 verificada.
 - Artifact ID `15222278861`; ZIP SHA-256 `fbaaf44d95c55f9a7c6b6873fff5cb46a83b50b5f9a6cde32bcb9f1f72e8d31d`; [artefato Android Debug](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46047470530/artifacts/15222278861).
 - Evidência L2/CI somente; APK não foi instalado nem executado em Android físico. Touch, safe areas/barras, FPS, frame pacing, memória, temperatura e lifecycle OEM continuam pendentes.
+
+
+## Etapa 15 — integração de lifecycle de inimigos e projéteis (27/11/2026)
+
+- Branch: `integration/stage15-enemy-projectile-lifecycle-2026-11-27`; consolida PRs #80 e #81, baseadas no ancestral `71463b5a1f27d7499943858ac86392a3933c58f2`.
+- `CybercorePatrolEnemy`: callback de contato tardio após derrota é ignorado quando `_active` já terminou; último passo de patrulha é limitado ao endpoint declarado para evitar overshoot.
+- `ChronoProjectile`: estado terminal `_spent` impede impacto duplicado e colisão tardia após expiração, antes da remoção deferred.
+- Testes: `test_enemy_lifecycle.gd` cobre contato pós-derrota e limites de patrulha; `test_chrono_projectile.gd` cobre impacto único e expiração.
+- `docs/technical/05-system-contracts.md` amplia os contratos e delimita claramente o que continua não implementado (percepção, navegação por plataformas, telegraphs, pooling e arquétipos adicionais).
+- Plano: `docs/production/plans/2026-11-27-stage15-enemy-projectile-lifecycle-integration.md`.
+- Sem alteração de dano, velocidade configurada, distância de patrulha, cooldown, duração, Dash, InputMap, save, IDs, campanha, canon, arte ou assets.
+- **Estado:** integração na branch; CI pendente. Etapa 15 permanece EM ANDAMENTO; inimigo-base continua provisório.
