@@ -1,5 +1,5 @@
 extends Node2D
-## W1-L1 — Cybercore. Blockout de campanha com inimigo-base provisório.
+## W1-L1 — Despertar entre Ruínas. Blockout de campanha com inimigo-base provisório.
 
 const LEVEL_PATH: String = "res://scenes/campaign/cybercore_w1_l1.tscn"
 const LEVEL_ID: String = "W1-L1"
