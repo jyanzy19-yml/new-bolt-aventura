@@ -712,3 +712,19 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - CI no head `0019ac9b0ac1bf813c4bcc874d9017fa69bf0295`: Godot `46027916866`, Docs `46027916827` e Android Debug Export `46027916828` concluídos SUCCESS.
 - Nenhum runtime, cena, tuning, física, InputMap, Dash, arte ou save foi alterado. A exportação debug não foi instalada em aparelho.
 - PR #91 não integrada; Etapa 12 continua EM ANDAMENTO. Próxima unidade independente: contratos de configuração espacial/câmera da Etapa 13, sem sobrepor a PR #91.
+
+
+---
+
+## Checkpoint de continuidade — PR #94 / Etapa 14 (27/11/2026)
+
+- Branch: `test/stage14-player-defeat-feedback-contract-2026-11-27`.
+- HEAD validado: `d666d52f5f19bc62672eddbf7dd41592142b3ad4`.
+- PR #94: [test(stage14): cover player defeat and terminal feedback integration](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/94), OPEN, não integrada, mergeable no último snapshot. Não há autorização de merge.
+- Escopo: teste de integração W1-L1 que prova a propagação de vida esgotada até o feedback terminal da HUD, sem alterar runtime. Inclui 18 verificações: vida zero, evento único, física desativada, ActionBuffer limpo, overlay e texto, vida 0/3, touch oculto, SceneTree pausada, reinício disponível e rejeição de dano posterior.
+- CI no HEAD: Godot `46042358492` SUCCESS — 109 testes/1.959 verificações/0 falhas, 20/20 cold boots e mutation prewarm; Docs `46042358553` SUCCESS; Android Debug Export `46042358532` SUCCESS, 109/1.959/0.
+- APK debug: 28.469.428 bytes; SHA-256 `c54c573be6b5c4029c22a7476f8756b4ddf52428b91242a9cee93bea7f69e276`; package ID placeholder `com.example.boltaventura`; assinatura v2/v3; artifact `15220227823` (digest ZIP `a1029d859cd2e8c30161ba6e007899b3f866f2d5f3f74ef8b5c187b353ca1fe7`).
+- Workflow Android nesta branch remove reinstalação redundante de `cmdline-tools;latest`; setup SDK, import, testes, export, assinatura e upload passaram.
+- PR #93 continua aberta separadamente; o código de ambas não foi mesclado. PR #94 baseia-se na main atual e não incorpora o diff da PR #93.
+- Próxima unidade recomendada: auditar e testar a integração física de KillZone/queda/respawn em W1-L1, pois PR #79 cobre a restauração/queda de W1-L2 e o contrato local da sandbox, não sendo evidência automática para W1-L1. Antes de criar a unidade, revisar o estado mais recente de PRs #79 e #84 e confirmar ausência de sobreposição.
+- Limites: export debug não equivale a instalação/playtest físico; package ID permanece placeholder; não há evidência de latência touch, FPS, memória ou termal em Android real.
