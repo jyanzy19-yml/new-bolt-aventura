@@ -68,6 +68,8 @@ func _build_interface() -> void:
 	scroll.add_child(grid)
 	for world_index in range(CATALOG.get_world_count()):
 		grid.add_child(_make_world_card(world_index, completed))
+	if grid.get_child_count() > 0:
+		grid.get_child(0).grab_focus()
 
 	var footer := HBoxContainer.new()
 	footer.alignment = BoxContainer.ALIGNMENT_END
