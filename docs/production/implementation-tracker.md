@@ -100,7 +100,7 @@ A matriz define a estrutura planejada: seis fases por mundo; fases 1–5 de prog
 |---|---|---|---|---|
 | W1-L1 | Cybercore | Entrada e exploração | Em andamento | Blockout com BOLT, HUD/touch, combate, coletável, checkpoint persistente e objetivo; conclusão direciona W1-L2 após integração da PR #34. Placeholders, arte/áudio finais, playtest humano e QA Android pendentes |
 | W1-L2 | Cybercore | Progressão | Em andamento | Blockout integrado pela PR #34 em `cybercore_w1_l2.tscn`, com campo energético cíclico, plataformas, checkpoint e objetivo; CI pré-merge passou, playtest humano/Android pendentes |
-| W1-L3 | Cybercore | Progressão | Não iniciado | Sem cena |
+| W1-L3 | Cybercore | Progressão | Em andamento (PR #105; blockout provisório) | Cena/controlador e fluxo W1-L2 → W1-L3; regressões de composição, retomada efetiva, checkpoint com save corrompido e conclusão; CI Godot/Docs/Android SUCCESS (130 testes, 2.142 verificações, 0 falhas); playtest humano/Android físico pendentes |
 | W1-L4 | Cybercore | Combinação de mecânicas | Não iniciado | Sem cena |
 | W1-L5 | Cybercore | Domínio e preparação | Não iniciado | Sem cena |
 | W1-L6 | Cybercore | Guardião Tecnológico / Origem | Não iniciado | Sem cena |

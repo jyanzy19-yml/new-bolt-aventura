@@ -35,6 +35,7 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 6. [Sistemas de gameplay](game-design/04-gameplay-systems.md)
 7. [UI/UX e acessibilidade](game-design/06-ui-ux.md)
 8. [Direção de arte e áudio](game-design/07-art-audio-direction.md)
+9. [W1-L3 — Setor de Montagem (blockout provisório)](game-design/W1-L3-setor-de-montagem.md)
 
 ## Skills e agentes
 
