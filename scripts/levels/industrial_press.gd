@@ -24,6 +24,7 @@ func _ready() -> void:
 	collision_layer = 0
 	collision_mask = 2
 	monitoring = true
+	_cycle_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	body_entered.connect(_on_body_entered)
 	_strike_zone.disabled = true
 	_enter_state(State.WARNING)
