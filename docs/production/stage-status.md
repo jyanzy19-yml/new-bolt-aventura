@@ -11,7 +11,7 @@
 **PRs abertas e não integradas:** #57 (polimento visual Cybercore), #58 (branch antiga de cold boot), #61 (teste Boot/Input Map antigo) e #62 (unidade consolidada anterior). Não integrar automaticamente #58/#61/#62: conteúdo sobreposto ou obsoleto em relação à PR #63; #57 requer revisão independente.
 **Validação PR #63:** Godot 4.7.2 — 99 testes, 1.873 verificações, zero falhas; 150 transições repetidas (30 ciclos × 5 cenas); 20/20 cold boots headless; mutation test reproduziu a falha ao remover o prewarm. Android Debug Export SUCCESS; APK debug assinado/verificado v2/v3 e artefato publicado. Runs 45917993456 e 45917993461.
 **Merge PR #63:** 3e4124f561438da2dcff1458a852d47f2f4dfaea.
-**CI pós-merge main:** Documentation Validation 45918395500 SUCCESS. Godot Validation 45918395535 e Android Debug Export 45918395499 estavam em execução no último snapshot; confirmar antes de registrar como concluídos.
+**CI pós-merge main:** Documentation Validation 45918395500 SUCCESS; Godot Validation 45918395535 SUCCESS; Android Debug Export 45918395499 SUCCESS.
 **Limites Android:** APK exportado não significa instalado. Cold-start visual, touch físico/multitouch, safe areas, barras do sistema, lifecycle OEM, FPS, memória, temperatura e sessão prolongada ainda não foram medidos em aparelho.
 **Próxima unidade da Etapa 04:** revisar edge cases de CampaignProgress e LoadingOverlay e a integração dos estados de recuperação SaveSystem→CampaignProgress. Não alterar schema v1, IDs persistentes, Dash, física ou canon sem escopo aprovado.
 
