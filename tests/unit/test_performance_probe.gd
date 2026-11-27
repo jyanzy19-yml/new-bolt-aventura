@@ -75,3 +75,24 @@ func test_probe_ring_buffer_retains_latest_600_samples() -> bool:
 	check(is_equal_approx(float(snapshot.get("frame_time_ms_p99", 0.0)), 599.0), "p99 usa nearest-rank sobre a janela ordenada")
 	check(is_equal_approx(float(snapshot.get("frame_time_ms_max", 0.0)), 605.0), "máximo exclui a amostra descartada")
 	return true
+
+
+func test_probe_pause_and_resume_control_collection() -> bool:
+	var probe: Node = _probe()
+	check(probe != null, "autoload PerformanceProbe presente")
+	if probe == null or not OS.is_debug_build():
+		return true
+
+	probe.call("reset")
+	check(bool(probe.call("set_enabled", false)), "coleta pode ser pausada em build debug")
+	probe.call("_process", 0.010)
+	var paused_snapshot: Dictionary = probe.call("get_snapshot")
+	check_eq(paused_snapshot.get("sample_count", -1), 0, "coleta pausada ignora novos frames")
+
+	check(bool(probe.call("set_enabled", true)), "coleta pode ser retomada em build debug")
+	probe.call("_process", 0.020)
+	var resumed_snapshot: Dictionary = probe.call("get_snapshot")
+	check_eq(resumed_snapshot.get("sample_count", -1), 1, "coleta retomada inicia nova amostragem")
+	check(is_equal_approx(float(resumed_snapshot.get("frame_time_ms_avg", 0.0)), 20.0), "primeira amostra após retomada é contabilizada")
+	probe.call("reset")
+	return true
