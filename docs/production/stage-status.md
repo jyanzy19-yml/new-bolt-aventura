@@ -604,3 +604,14 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Cenários: interrupção de Dash terrestre e limpeza do cooldown; restauração do Dash aéreo após respawn em posição aérea; restauração do orçamento de salto aéreo; descarte de toques curtos antigos de salto/Dash pendentes no ActionBuffer.
 - Testes utilizam a cena real de BOLT, InputMap/ActionBuffer e ticks físicos do runner; nenhum campo privado é alterado para forçar o resultado.
 - **Estado:** implementação documental/teste submetida à validação CI; Etapa 14 permanece EM ANDAMENTO. Nenhum teste físico Android é alegado.
+
+
+### Evidência final da unidade de recuperação de movimento — PR #93 (27/11/2026)
+
+- HEAD validado: `73cfd59efe937338537b8ef83c386b3a4d3eddee`.
+- Godot Validation run `46041294164`: SUCCESS — Godot 4.7.2, **112 testes / 1.960 verificações / 0 falhas**; boot smoke **20/20** e mutation check do prewarm aprovados.
+- Documentation Validation run `46041294165`: SUCCESS.
+- Android Debug Export run `46041294170`: SUCCESS; suíte headless no pipeline Android: **112 testes / 1.960 verificações / 0 falhas**.
+- APK debug `bolt-aventura-debug.apk`: **28.469.428 bytes**, package ID placeholder `com.example.boltaventura`, SHA-256 `8813a31ef912f05406cf5d56c0979fd56ed108bd77e506b4bd3835bad4778c6c`; assinatura APK v2/v3 verificada. Artifact ID `15221190228`; digest SHA-256 do ZIP do artifact `39fc8fca71c4b9bc6b88d9bfc143069a1224ae82c42df0962e42f936e5115339`.
+- Ajuste de infraestrutura na mesma branch: removida a reinstalação redundante de `cmdline-tools;latest`, já fornecido por `setup-android`; a tentativa anterior havia falhado antes da importação por ZIP inválido do SDK. A execução seguinte concluiu todos os jobs.
+- **Estado:** regressão automatizada e exportação debug aprovadas em CI; PR #93 permanece aberta e não integrada. Etapa 14 continua EM ANDAMENTO; nenhuma validação em Android físico é alegada.
