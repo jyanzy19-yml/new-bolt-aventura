@@ -38,7 +38,8 @@ Novo teste `tests/unit/test_w1_l3_blockout.gd` cobre:
 2. parâmetros de movimento das duas plataformas;
 3. limites de patrulha dentro dos pisos;
 4. contato físico, persistência e restauração do checkpoint após reentrada;
-5. conclusão de W1-L2, atualização do destino W1-L3 e resolução pelo menu.
+5. conclusão de W1-L2, atualização do destino W1-L3 e resolução pelo menu;
+6. conclusão física de W1-L3, registro único da fase concluída e ausência de destino W1-L4 não implementado.
 
 O teste existente `test_w1_l2_progression.gd` foi atualizado para exigir o próximo destino W1-L3, preservando os cenários de checkpoint/falha de save já integrados.
 
