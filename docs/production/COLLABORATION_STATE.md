@@ -1,3 +1,20 @@
+## Estado operacional de colaboração — 2026-11-27 (pós-PR #70)
+
+**Main HEAD:** `5e55fa1693d8ecf6d8a1d79bfffa1999824ad1ea`.
+**ChatGPT:** responsável por arquitetura, sistemas centrais, integração entre subsistemas, desempenho Android, testes de regressão e gates de qualidade.
+**Claude:** autorizado pelo usuário a implementar diretamente, em branches/PRs independentes:
+1. Construção de fases;
+2. Inimigos e chefes;
+3. Elementos interativos;
+4. Interface e conteúdo visual;
+5. Sistemas independentes de gameplay.
+
+**Coordenação:** não editar simultaneamente os mesmos arquivos. Cada agente deve declarar escopo, arquivos/contratos afetados e dependências antes da implementação; usar branch própria e PR; não fazer merge sem CI e revisão. ChatGPT atua como integrador/revisor dos contratos centrais. A autorização não significa que Claude já tenha entregue qualquer item.
+**Etapa 05:** PR #69 (SceneFlow cancelamento lógico) e PR #70 (PerformanceProbe) integradas. Política de ciclo de vida de recursos em revisão nesta branch.
+**Restrições de continuidade:** preservar física, Dash, InputMap, multitouch, save schema v1, IDs persistentes, canon narrativo, Android landscape e política de barras/safe area. Não promover blockouts a fases finais por documentação apenas.
+
+---
+
 # Estado canônico de desenvolvimento — BOLT · AVENTURA
 
 ## Snapshot operacional vigente — 2026-11-27
