@@ -594,3 +594,14 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - CI: Godot `46027916866` SUCCESS; Docs `46027916827` SUCCESS; Android Debug Export `46027916828` SUCCESS.
 - O workflow Android comprova exportação debug automatizada, não instalação/execução física.
 - Etapa 12 permanece EM ANDAMENTO: sincronização visual e critérios completos de animação ainda não foram validados.
+
+
+## Etapa 14 — integração da derrota e feedback terminal (27/11/2026)
+
+- PR #94 aberta: [test(stage14): cover player defeat and terminal feedback integration](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/94), branch `test/stage14-player-defeat-feedback-contract-2026-11-27`.
+- Teste novo `tests/unit/test_stage14_player_defeat_feedback_contract.gd`: instancia W1-L1 e valida a cadeia pública `BoltHealth → BoltPlayer → controlador W1-L1 → Hud`; 18 verificações sobre vida zero, emissão única de `defeated`, interrupção física, limpeza de ActionBuffer, overlay/texto de derrota, HUD 0/3, ocultação de controles touch, pausa e rejeição de dano posterior.
+- CI no HEAD `d666d52f5f19bc62672eddbf7dd41592142b3ad4`: Godot run `46042358492` SUCCESS — **109 testes / 1.959 verificações / 0 falhas**, 20/20 cold boots e mutation check do prewarm aprovados; Docs run `46042358553` SUCCESS; Android Debug Export run `46042358532` SUCCESS — suíte headless **109/1.959/0**.
+- APK debug: 28.469.428 bytes; package ID placeholder `com.example.boltaventura`; SHA-256 `c54c573be6b5c4029c22a7476f8756b4ddf52428b91242a9cee93bea7f69e276`; assinatura APK v2/v3 verificada; artifact ID `15220227823`, digest ZIP SHA-256 `a1029d859cd2e8c30161ba6e007899b3f866f2d5f3f74ef8b5c187b353ca1fe7`.
+- Ajuste de CI: removida reinstalação redundante de `cmdline-tools;latest` porque `setup-android` já prepara o pacote. O passo de setup e a exportação passaram no workflow final.
+- **Estado:** PR #94 aberta, não integrada. Somente teste, documentação e workflow CI; nenhum runtime, cena, física, tuning, save schema, ID persistente, progressão, canon ou asset foi alterado.
+- Limites: APK debug exportado em CI não foi instalado; sem validação em Android físico, latência touch, frame pacing, FPS, memória ou estabilidade térmica. Etapa 14 permanece EM ANDAMENTO.
