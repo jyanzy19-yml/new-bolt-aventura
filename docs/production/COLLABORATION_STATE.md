@@ -35,7 +35,7 @@ A autorização de Claude não permite contornar o processo de aprovação visua
 
 ---
 
-## Estado operacional de colaboração — 2026-11-27 (pós-PR #70)
+## Snapshot histórico de colaboração — 2026-11-27 (pré-adoção das 32 etapas)
 
 **Main HEAD:** `5e55fa1693d8ecf6d8a1d79bfffa1999824ad1ea`.
 **ChatGPT:** responsável por arquitetura, sistemas centrais, integração entre subsistemas, desempenho Android, testes de regressão e gates de qualidade.
@@ -52,7 +52,7 @@ A autorização de Claude não permite contornar o processo de aprovação visua
 
 ---
 
-# Estado canônico de desenvolvimento — BOLT · AVENTURA
+# Registro histórico de colaboração e desenvolvimento — BOLT · AVENTURA
 
 ## Snapshot operacional vigente — 2026-11-27
 
