@@ -5,11 +5,11 @@
 - PR #73 formalizou o plano de 32 etapas, migração 26→32 e aprovação visual obrigatória antes de integração.
 - Plano operacional primário: `docs/production/32-stage-production-plan.md`; matriz 26 etapas preservada como histórico/crosswalk.
 - Etapas 01–04 permanecem concluídas no nível L2 documentado; antiga Etapa 05 migra para nova Etapa 29 e continua em andamento.
-- Novas Etapas 05–09 são trabalho de direção de arte e produção visual; ChatGPT cria assets e apresenta cada entrega ao usuário. Nenhuma integração ocorre antes de aprovação explícita.
+- Emenda do usuário em 27/11/2026: produção visual pesada (concepts finais, sprites, spritesheets, animações, tilesets, fundos, VFX e UI gráfica final) adiada para Etapa 31; Etapa 32 fecha integração/verificação. Etapas anteriores usam requisitos, contratos, wireframes e placeholders, sem arte final.
 - ChatGPT conduz arquitetura, sistemas centrais, integração, performance Android, regressão, QA e criação de assets. Claude está autorizado nas cinco frentes registradas em `COLLABORATION_STATE.md`, com branch/PR isolada e sem integração de assets não aprovados.
 - Gate 1 permanece em andamento; W1-L1/W1-L2 continuam blockouts; instalação e validação Android física permanecem pendentes.
 - PR #72 adicionou regressão de overflow do PerformanceProbe; Godot Validation e Android Debug Export passaram no HEAD da PR. Não é evidência de profiling físico.
-- Próxima execução: avançar a Etapa 29 com preparação de captura Android e iniciar planejamento técnico da nova Etapa 05 sem integrar arte não aprovada.
+- Próxima execução: avançar a Etapa 29 com preparação de captura Android e, quando oportuno, executar Etapas 05–09 somente como especificação técnica/funcional; manter a produção visual pesada reservada à Etapa 31.
 
 ---
 
