@@ -15,7 +15,7 @@ func test_probe_is_registered_and_debug_gated() -> bool:
 		check(not bool(probe.call("is_enabled")), "instrumentação permanece desativada fora de build debug")
 		check(not bool(probe.call("set_enabled", true)), "build não-debug rejeita ativação")
 	else:
-		check(probe.is_enabled(), "instrumentação é habilitada em build debug")
+		check(bool(probe.call("is_enabled")), "instrumentação é habilitada em build debug")
 	return true
 
 
@@ -47,8 +47,8 @@ func test_probe_reset_clears_the_frame_window() -> bool:
 	check(probe != null, "autoload PerformanceProbe presente")
 	if probe == null or not OS.is_debug_build():
 		return true
-	probe.reset()
-	var snapshot: Dictionary = probe.get_snapshot()
+	probe.call("reset")
+	var snapshot: Dictionary = probe.call("get_snapshot")
 	check_eq(snapshot.get("sample_count", -1), 0, "reset limpa quantidade de amostras")
 	check_eq(snapshot.get("frame_time_ms_avg", -1.0), 0.0, "reset zera média")
 	check_eq(snapshot.get("frame_time_ms_p95", -1.0), 0.0, "reset zera percentil")
