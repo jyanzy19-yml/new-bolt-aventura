@@ -30,7 +30,7 @@ O requisito do projeto é tratar barra de status, barra de navegação e recorte
 - Verificar mudanças de comportamento entre versões Android e fabricantes.
 
 ## 5. Testes de interrupção
-Testar chamada/notificação, troca de app, bloqueio/desbloqueio, pausa, retomada, rotação se suportada, perda de foco e retorno. Nenhum estado de input deve ficar preso.
+Testar chamada/notificação, troca de app, bloqueio/desbloqueio, pausa, retomada, rotação se suportada, perda de foco e retorno. `NOTIFICATION_APPLICATION_PAUSED` deve limpar as ações lógicas mantidas pelo `SceneFlow`, os ponteiros/estado visual de `TouchControls` e os edges pendentes do `ActionBuffer`. Após retomar, somente um novo evento de toque pode iniciar outra ação. Nenhum estado de input deve ficar preso.
 
 ## 6. Critério de aprovação
 Controles essenciais funcionam consistentemente em multitouch; layout respeita safe areas; barras e recortes são tratados conforme decisão aprovada; interrupções não causam input fantasma, softlock ou perda de progresso.

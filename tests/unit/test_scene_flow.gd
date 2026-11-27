@@ -51,6 +51,19 @@ func test_failed_transition_restores_previous_pause_state() -> bool:
 	return true
 
 
+func test_application_pause_releases_held_game_actions() -> bool:
+	var flow: Node = _flow()
+	check(flow != null, "autoload SceneFlow presente")
+	if flow == null:
+		return true
+	Input.action_press(Actions.JUMP)
+	check(Input.is_action_pressed(Actions.JUMP), "jump lógico está pressionado antes da suspensão")
+	flow.notification(Node.NOTIFICATION_APPLICATION_PAUSED)
+	check(not Input.is_action_pressed(Actions.JUMP), "SceneFlow libera ações mantidas na suspensão do aplicativo")
+	Input.action_release(Actions.JUMP)
+	return true
+
+
 func test_missing_scene_is_rejected_without_side_effects() -> bool:
 	var flow: Node = _flow()
 	check(flow != null, "autoload SceneFlow presente")

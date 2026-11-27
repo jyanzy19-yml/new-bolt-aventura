@@ -37,7 +37,11 @@ func _exit_tree() -> void:
 
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_APPLICATION_FOCUS_OUT or what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+	if what in [
+		NOTIFICATION_APPLICATION_PAUSED,
+		NOTIFICATION_APPLICATION_FOCUS_OUT,
+		NOTIFICATION_WM_WINDOW_FOCUS_OUT,
+	]:
 		release_all()
 
 
