@@ -80,6 +80,10 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 - [Modelo de bug report](qa/bug-report-template.md)
 - [Captura de performance](qa/performance-capture-template.md)
 - [Protocolo de profiling Android — Etapa 29](qa/android-performance-profiling-protocol.md) — procedimento reproduzível para baseline físico, frame pacing, memória, termal e responsividade; não contém resultados de benchmark.
+- [Relatório de validação do ecossistema](production/validation-report.md)
+- [Estado da etapa](production/stage-status.md)
+- [Registro de decisões](decisions/README.md)
+- [Modelos de trabalho](templates/README.md)
 
 ## Status de informação
 
