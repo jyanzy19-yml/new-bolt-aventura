@@ -23,7 +23,7 @@ Os itens abaixo são necessidades planejadas, não briefs aprovados, conceitos g
 | ID | Entrega | Consumidor | Etapa de referência | Estado | Bloqueio/observação |
 |---|---|---|---:|---|---|
 | ART-BOLT-001 | Direção visual global de BOLT · AVENTURA | Todos os mundos/sistemas | 05 | PLANNED | Definir linguagem visual antes dos concepts |
-| ART-BOLT-002 | Guia técnico de sprites e assets | Pipeline Godot | 06 | PLANNED | Definir dimensões, import e budgets |
+| ART-BOLT-002 | Guia técnico de sprites e assets | Pipeline Godot | 06 | SPECIFIED | Guia base criado em `SPRITE-ASSET-TECHNICAL-GUIDE.md`; parâmetros artísticos e budgets numéricos dependem da aprovação da Etapa 05 e de slice medido |
 | ART-BOLT-003 | Concept do protagonista BOLT | Player | 07 | PLANNED | Requer direção visual; aguarda aprovação |
 | ART-BOLT-004 | Spritesheets/animações de BOLT | Player | 08 | PLANNED | Bloqueado pelo concept aprovado e brief |
 | ART-BOLT-005 | Kit visual inicial de UI/HUD | Menus/HUD | 09 | PLANNED | Requer UI/UX e aprovação |
