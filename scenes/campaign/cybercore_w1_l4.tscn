@@ -1,0 +1,250 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://scripts/campaign/cybercore_w1_l4.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://scenes/world/platform_block.tscn" id="2_block"]
+[ext_resource type="PackedScene" path="res://scenes/world/one_way_platform.tscn" id="3_oneway"]
+[ext_resource type="PackedScene" path="res://scenes/player/bolt.tscn" id="4_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="5_hud"]
+[ext_resource type="PackedScene" path="res://scenes/levels/checkpoint.tscn" id="6_checkpoint"]
+[ext_resource type="PackedScene" path="res://scenes/levels/energy_relay.tscn" id="7_relay"]
+[ext_resource type="PackedScene" path="res://scenes/levels/distribution_gate.tscn" id="8_gate"]
+[ext_resource type="Script" path="res://scripts/levels/distribution_puzzle.gd" id="9_puzzle"]
+[ext_resource type="Script" path="res://scripts/levels/narrative_beat_trigger.gd" id="10_beat"]
+[ext_resource type="Script" path="res://scripts/levels/energy_clue_mural.gd" id="11_mural"]
+[ext_resource type="Script" path="res://scripts/levels/energy_conduit.gd" id="12_conduit"]
+
+[sub_resource type="RectangleShape2D" id="KillShape"]
+size = Vector2(2900, 180)
+
+[sub_resource type="RectangleShape2D" id="GoalShape"]
+size = Vector2(72, 128)
+
+[sub_resource type="RectangleShape2D" id="BeatShape"]
+size = Vector2(160, 128)
+
+[node name="CybercoreW1L4" type="Node2D"]
+script = ExtResource("1_level")
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="StartFloor" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(-32, 0)
+size = Vector2(640, 128)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="FloorL1" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(728, 0)
+size = Vector2(372, 128)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="FloorHub" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(1220, 0)
+size = Vector2(1280, 128)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="LeftWall" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(-64, -560)
+size = Vector2(32, 720)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="RightWall" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(2500, -560)
+size = Vector2(32, 720)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="StepU1" parent="Geometry" instance=ExtResource("3_oneway")]
+position = Vector2(520, -96)
+size = Vector2(140, 24)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="UpperFloor" parent="Geometry" instance=ExtResource("3_oneway")]
+position = Vector2(740, -192)
+size = Vector2(560, 24)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="UpperLedge" parent="Geometry" instance=ExtResource("3_oneway")]
+position = Vector2(1420, -192)
+size = Vector2(280, 24)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="ShortcutStep" parent="Geometry" instance=ExtResource("3_oneway")]
+position = Vector2(1700, -96)
+size = Vector2(120, 24)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="VerticalStep1" parent="Geometry" instance=ExtResource("3_oneway")]
+position = Vector2(2000, -96)
+size = Vector2(100, 24)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="VerticalStep2" parent="Geometry" instance=ExtResource("3_oneway")]
+position = Vector2(1840, -192)
+size = Vector2(100, 24)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="VerticalStep3" parent="Geometry" instance=ExtResource("3_oneway")]
+position = Vector2(1680, -288)
+size = Vector2(100, 24)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="VerticalStep4" parent="Geometry" instance=ExtResource("3_oneway")]
+position = Vector2(1520, -384)
+size = Vector2(100, 24)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="RewardLedge" parent="Geometry" instance=ExtResource("3_oneway")]
+position = Vector2(1240, -384)
+size = Vector2(100, 24)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Conduit0" type="Line2D" parent="Background"]
+unique_name_in_owner = true
+script = ExtResource("12_conduit")
+points = PackedVector2Array(200, -210, 200, -330, 880, -330, 880, -24)
+width = 2.0
+default_color = Color(0.25, 0.33, 0.5, 0.75)
+
+[node name="Conduit1" type="Line2D" parent="Background"]
+unique_name_in_owner = true
+script = ExtResource("12_conduit")
+points = PackedVector2Array(920, -24, 920, -300, 1000, -300, 1000, -216)
+width = 2.0
+default_color = Color(0.25, 0.33, 0.5, 0.75)
+
+[node name="Conduit2" type="Line2D" parent="Background"]
+unique_name_in_owner = true
+script = ExtResource("12_conduit")
+points = PackedVector2Array(1040, -216, 1040, -270, 2150, -270, 2150, -24)
+width = 2.0
+default_color = Color(0.25, 0.33, 0.5, 0.75)
+
+[node name="Conduit3" type="Line2D" parent="Background"]
+unique_name_in_owner = true
+script = ExtResource("12_conduit")
+points = PackedVector2Array(2150, -24, 2330, -24)
+width = 2.0
+default_color = Color(0.25, 0.33, 0.5, 0.75)
+
+[node name="EnergySource" type="Polygon2D" parent="Background"]
+position = Vector2(200, -210)
+color = Color(0.3, 1, 0.9, 0.9)
+polygon = PackedVector2Array(-14, -14, 14, -14, 14, 14, -14, 14)
+
+[node name="ClueMural" type="Node2D" parent="Background"]
+position = Vector2(300, -150)
+script = ExtResource("11_mural")
+relay_paths = Array[NodePath]([NodePath("../../RelayA"), NodePath("../../RelayB"), NodePath("../../RelayC")])
+
+[node name="RewardPlaceholder" type="Polygon2D" parent="Background"]
+position = Vector2(1290, -412)
+color = Color(1, 0.85, 0.3, 0.6)
+polygon = PackedVector2Array(0, -14, 14, 0, 0, 14, -14, 0)
+
+[node name="RewardLabel" type="Label" parent="Background"]
+offset_left = 1190.0
+offset_top = -450.0
+theme_override_font_sizes/font_size = 12
+text = "RECOMPENSA — A ESPECIFICAR (PLACEHOLDER)"
+
+[node name="RelayA" parent="." instance=ExtResource("7_relay")]
+unique_name_in_owner = true
+position = Vector2(900, -24)
+relay_id = &"relay_a"
+glyph = 0
+
+[node name="RelayB" parent="." instance=ExtResource("7_relay")]
+unique_name_in_owner = true
+position = Vector2(1000, -216)
+relay_id = &"relay_b"
+glyph = 1
+
+[node name="RelayC" parent="." instance=ExtResource("7_relay")]
+unique_name_in_owner = true
+position = Vector2(2150, -24)
+relay_id = &"relay_c"
+glyph = 2
+
+[node name="Gate" parent="." instance=ExtResource("8_gate")]
+unique_name_in_owner = true
+position = Vector2(2330, 0)
+
+[node name="Puzzle" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("9_puzzle")
+relay_paths = Array[NodePath]([NodePath("../RelayA"), NodePath("../RelayB"), NodePath("../RelayC")])
+conduit_paths = Array[NodePath]([NodePath("../Background/Conduit0"), NodePath("../Background/Conduit1"), NodePath("../Background/Conduit2"), NodePath("../Background/Conduit3")])
+gate_path = NodePath("../Gate")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(96, -24)
+
+[node name="Bolt" parent="." instance=ExtResource("4_player")]
+unique_name_in_owner = true
+position = Vector2(96, -24)
+
+[node name="Hud" parent="." instance=ExtResource("5_hud")]
+unique_name_in_owner = true
+
+[node name="CheckpointA" parent="." instance=ExtResource("6_checkpoint")]
+unique_name_in_owner = true
+position = Vector2(440, -32)
+checkpoint_id = &"cybercore_w1_l4_checkpoint_a"
+
+[node name="CheckpointB" parent="." instance=ExtResource("6_checkpoint")]
+unique_name_in_owner = true
+position = Vector2(1780, -32)
+checkpoint_id = &"cybercore_w1_l4_checkpoint_b"
+
+[node name="BeatTrigger" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1900, -64)
+script = ExtResource("10_beat")
+beat_id = &"w1_l4_nexo_ancient_signal"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BeatTrigger"]
+shape = SubResource("BeatShape")
+
+[node name="KillZone" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1250, 650)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+shape = SubResource("KillShape")
+
+[node name="Goal" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2430, -32)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal"]
+shape = SubResource("GoalShape")
+
+[node name="GateVisual" type="Polygon2D" parent="Goal"]
+color = Color(0.1, 0.9, 1, 0.6)
+polygon = PackedVector2Array(-32, -64, 32, -64, 32, 64, -32, 64)
+
+[node name="LevelNote" type="Label" parent="."]
+offset_left = 24.0
+offset_top = -110.0
+theme_override_font_sizes/font_size = 14
+text = "W1-L4 · NÚCLEO DE DISTRIBUIÇÃO — BLOCKOUT / MECÂNICA PROVISÓRIA"
