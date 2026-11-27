@@ -54,7 +54,7 @@ func test_patrol_clamps_motion_to_both_horizontal_bounds() -> bool:
 	var origin: Vector2 = Vector2(240.0, 80.0)
 	enemy.global_position = origin
 	enemy.patrol_speed = 300.0
-	enemy.patrol_distance = 30.0
+	enemy.patrol_distance = 32.0
 	root.add_child(enemy)
 	await tree.process_frame
 
