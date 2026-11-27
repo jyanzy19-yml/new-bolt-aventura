@@ -804,3 +804,13 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - CI do HEAD pré-merge `ebd4dc07888769ab3bbd432150e7898b9cff6414`: Godot `46049432501`, Docs `46049432551`, Android Debug Export `46049432531` — todos SUCCESS; 126 testes/2.097 verificações/0 falhas; 20/20 cold boots; mutation check aprovado.
 - APK Debug: 28.469.428 bytes, package ID provisório `com.example.boltaventura`, SHA-256 `d8b268ceffb34ecf45f08c1d606a98e4381364aace07cfde634286f17657fe84`; assinatura v2/v3 verificada. Artifact `15223234577`; ZIP SHA-256 `a4c4f7021315fc4602207586c780721b57f434285e6dbe2c57c4b1c954cf3ad9`.
 - Teste headless não substitui playtest visual/Android físico. Etapa 13 permanece EM ANDAMENTO.
+
+## Sessão ChatGPT — retomada e reconciliação da W1-L3 — 2026-11-27
+
+- A branch `integration/campaign-w1-l3-provisional-blockout-2026-11-27` foi conferida contra a `main` atual e reapresenta a unidade W1-L3 como 9 arquivos; base confirmada em `ceb60919341124e05acf17b9d72d1815b5aa702f`.
+- PR #105 aberta para integrar o blockout provisório e substituir a PR #84, encerrada como supersedida com comentário de rastreabilidade. Nenhum merge realizado.
+- Revisão estática dos scripts, cena e testes; adicionada regressão para conclusão física de W1-L3, registro único em `completed_level_ids`, overlay de resultado e ausência de destino W1-L4.
+- Tracker e status da produção atualizados para refletir W1-L3 como EM ANDAMENTO, não como fase concluída.
+- Head da branch no momento deste registro: `8b7d33bd12061c7b209d2450a10be1d3b2cc04ba`.
+- O conector GitHub não retornou workflow runs nem status checks para os heads consultados; CI permanece PENDENTE/NÃO VERIFICADA. Não declarar testes aprovados até obter evidência.
+- Sem playtest humano ou Android físico; W1-L3 permanece BLOCKOUT PROVISÓRIO. Nenhuma alteração em schema de save, IDs anteriores, Dash, InputMap, física do Player, cânone narrativo ou assets finais.
