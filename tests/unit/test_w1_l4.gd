@@ -442,3 +442,22 @@ func test_w1_l4_unlocks_in_phase_selection_after_w1_l3_completion() -> bool:
 		tree.root.remove_meta("campaign_selection_world_id")
 	_end()
 	return true
+
+
+func test_w1_l4_relay_ignores_non_positive_damage() -> bool:
+	_begin()
+	var level: Node = await _spawn_level()
+	if level == null:
+		_end()
+		return true
+	var puzzle: DistributionPuzzle = level.get_node("%Puzzle") as DistributionPuzzle
+	var relay_a: EnergyRelay = _relay(level, "RelayA")
+	relay_a.apply_damage(0)
+	relay_a.apply_damage(-1)
+	check_eq(puzzle.progress(), 0, "dano zero/negativo não ativa relé")
+	check_eq(puzzle.failure_count(), 0, "dano inválido não altera falhas")
+	relay_a.apply_damage(1)
+	check_eq(puzzle.progress(), 1, "dano positivo ativa o relé")
+	level.free()
+	_end()
+	return true
