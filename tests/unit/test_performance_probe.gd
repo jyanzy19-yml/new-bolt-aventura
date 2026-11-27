@@ -11,10 +11,9 @@ func test_probe_is_registered_and_debug_gated() -> bool:
 	check(probe != null, "autoload PerformanceProbe presente")
 	if probe == null:
 		return true
-	check_eq(probe.SAMPLE_CAPACITY, 600, "janela mantém capacidade limitada de 600 amostras")
 	if not OS.is_debug_build():
-		check(not probe.is_enabled(), "instrumentação permanece desativada fora de build debug")
-		check(not probe.set_enabled(true), "build não-debug rejeita ativação")
+		check(not bool(probe.call("is_enabled")), "instrumentação permanece desativada fora de build debug")
+		check(not bool(probe.call("set_enabled", true)), "build não-debug rejeita ativação")
 	else:
 		check(probe.is_enabled(), "instrumentação é habilitada em build debug")
 	return true
@@ -26,11 +25,12 @@ func test_probe_collects_frame_time_and_calculates_percentiles() -> bool:
 	if probe == null or not OS.is_debug_build():
 		return true
 
-	probe.reset()
+	probe.call("reset")
 	await tree.process_frame
 	await tree.process_frame
 	await tree.process_frame
-	var snapshot: Dictionary = probe.get_snapshot()
+	var snapshot: Dictionary = probe.call("get_snapshot")
+	check_eq(snapshot.get("sample_capacity", 0), 600, "janela mantém capacidade limitada de 600 amostras")
 	check(int(snapshot.get("sample_count", 0)) >= 1, "frames são armazenados na janela")
 	check(float(snapshot.get("frame_time_ms_avg", 0.0)) > 0.0, "média de frame time é positiva")
 	check(float(snapshot.get("frame_time_ms_p95", 0.0)) > 0.0, "p95 é calculado")
