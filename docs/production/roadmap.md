@@ -2,7 +2,11 @@
 
 Este roadmap define gates de qualidade, não datas. A ordem pode ser ajustada após auditoria do projeto real, mas nenhuma etapa deve ser declarada concluída sem evidência e aprovação exigida.
 
-O plano operacional de 26 etapas em `stage-status.md` divide o trabalho em unidades menores dentro destes gates. Os números das 26 etapas não substituem nem renumeram os Gates 0–5; ambos devem ser acompanhados sem confundir seus critérios.
+O plano operacional vigente contém 32 etapas e está formalizado em [32-stage-production-plan.md](32-stage-production-plan.md), com estado em `stage-status.md`. A matriz de 26 etapas foi preservada como histórico/crosswalk, sem apagar evidências ou reiniciar progresso. As 32 etapas não substituem nem renumeram os Gates 0–5; ambos devem ser acompanhados sem confundir seus critérios.
+
+## Plano operacional vigente
+
+A execução detalhada segue o [Plano Mestre de Produção — 32 etapas](32-stage-production-plan.md). Este roadmap continua definindo Gates de qualidade, não uma sequência concorrente. A migração preserva as antigas Etapas 01–04 como concluídas no nível evidenciado; a antiga Etapa 05 (recursos/loading) migra para a nova Etapa 29 e permanece em andamento. As novas Etapas 05–09 são trabalho artístico novo, com aprovação explícita do usuário antes da integração de qualquer asset visual.
 
 ## Gate 0 — Auditoria e alinhamento
 **Objetivo:** compreender o estado real do repositório e congelar o escopo inicial aprovado.
