@@ -142,3 +142,11 @@ func test_xvfb_capture_harness_script_compiles() -> bool:
 	var capture_script: GDScript = load("res://tests/capture_campaign_selection.gd") as GDScript
 	check(capture_script != null, "harness de captura Xvfb compila")
 	return true
+
+
+func test_campaign_phase_titles_match_official_cybercore_atlas() -> bool:
+	check_eq(CATALOG.get_phase_title("W1-L1", 0), "Despertar entre Ruínas", "nome oficial W1-L1")
+	check_eq(CATALOG.get_phase_title("W1-L2", 1), "Ruas sem Sinal", "nome oficial W1-L2")
+	check_eq(CATALOG.get_phase_title("W1-L3", 2), "Fábrica de Ecos", "nome oficial W1-L3")
+	check_eq(CATALOG.get_phase_title("W1-L4", 3), "Laboratório de Memórias", "nome oficial W1-L4")
+	return true
