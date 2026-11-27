@@ -65,7 +65,6 @@ jobs:
             "platform-tools" \
             "platforms;android-35" \
             "build-tools;35.0.1" \
-            "cmdline-tools;latest" \
             "ndk;28.1.13356709" \
             "cmake;3.10.2.4988404"
           test -x "$ANDROID_HOME/platform-tools/adb"
