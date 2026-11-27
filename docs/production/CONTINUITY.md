@@ -712,3 +712,15 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - CI no head `0019ac9b0ac1bf813c4bcc874d9017fa69bf0295`: Godot `46027916866`, Docs `46027916827` e Android Debug Export `46027916828` concluídos SUCCESS.
 - Nenhum runtime, cena, tuning, física, InputMap, Dash, arte ou save foi alterado. A exportação debug não foi instalada em aparelho.
 - PR #91 não integrada; Etapa 12 continua EM ANDAMENTO. Próxima unidade independente: contratos de configuração espacial/câmera da Etapa 13, sem sobrepor a PR #91.
+
+
+---
+
+## Sessão ChatGPT — Etapa 14: contrato de recuperação do movimento — 2026-11-27
+
+- Main base confirmada: `79023eabb6b31bccc456d3a2d005731733e8444e`.
+- Branch: `test/stage14-respawn-movement-state-contract-2026-11-27`.
+- Unidade independente das PRs #78, #79 e #85: adiciona `tests/unit/test_player_respawn_movement_contract.gd` e o plano correspondente.
+- Cobertura: interromper Dash terrestre durante respawn e permitir novo Dash; restaurar Dash aéreo após respawn no ar; restaurar orçamento de salto aéreo após respawn no ar.
+- Runtime, tuning, física, InputMap, Dash, save schema, IDs persistentes, canon e cenas de produção não foram alterados.
+- **Estado:** aguardando validação CI e revisão do diff. PR não integrada; nenhum merge autorizado. Evidência L2/headless não substitui validação física Android.
