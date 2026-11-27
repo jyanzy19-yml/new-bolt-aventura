@@ -8,6 +8,8 @@ const COLOR_ACCENT: Color = Color("#38d9ff")
 const COLOR_MUTED: Color = Color("#8ca6bd")
 const COLOR_LOCKED: Color = Color("#526477")
 const COLOR_COMPLETE: Color = Color("#54e0a2")
+var _safe_area: SafeAreaMargin
+var _grid: GridContainer
 var _world_id: String = ""
 var _world_index: int = -1
 
@@ -27,16 +29,19 @@ func _build_interface() -> void:
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(background)
-	var safe := SafeAreaMargin.new()
-	safe.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	safe.add_theme_constant_override("margin_left", 24)
-	safe.add_theme_constant_override("margin_right", 24)
-	safe.add_theme_constant_override("margin_top", 12)
-	safe.add_theme_constant_override("margin_bottom", 12)
-	add_child(safe)
+	_safe_area = SafeAreaMargin.new()
+	_safe_area.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(_safe_area)
+	var padding := MarginContainer.new()
+	padding.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	padding.add_theme_constant_override("margin_left", 20)
+	padding.add_theme_constant_override("margin_right", 20)
+	padding.add_theme_constant_override("margin_top", 12)
+	padding.add_theme_constant_override("margin_bottom", 12)
+	_safe_area.add_child(padding)
 	var column := VBoxContainer.new()
 	column.add_theme_constant_override("separation", 10)
-	safe.add_child(column)
+	padding.add_child(column)
 
 	var header := HBoxContainer.new()
 	header.add_theme_constant_override("separation", 14)
@@ -67,17 +72,21 @@ func _build_interface() -> void:
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	column.add_child(scroll)
-	var grid := GridContainer.new()
-	grid.columns = 3
-	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	grid.add_theme_constant_override("h_separation", 14)
-	grid.add_theme_constant_override("v_separation", 14)
-	scroll.add_child(grid)
+	_grid = GridContainer.new()
+	_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_grid.add_theme_constant_override("h_separation", 14)
+	_grid.add_theme_constant_override("v_separation", 14)
+	scroll.add_child(_grid)
+	_safe_area.resized.connect(_update_grid_columns)
+	get_viewport().size_changed.connect(_update_grid_columns)
+	call_deferred("_update_grid_columns")
 	var current_level_id: String = str(state.get("current_level_id", ""))
+	if current_level_id.is_empty():
+		current_level_id = CATALOG.get_level_id(0, 0)
 	for phase_index in range(CATALOG.get_phase_count_per_world()):
-		grid.add_child(_make_phase_card(phase_index, completed, current_level_id))
-	if grid.get_child_count() > 0:
-		grid.get_child(0).grab_focus()
+		_grid.add_child(_make_phase_card(phase_index, completed, current_level_id))
+	if _grid.get_child_count() > 0:
+		_grid.get_child(0).grab_focus()
 
 	var footer := HBoxContainer.new()
 	footer.alignment = BoxContainer.ALIGNMENT_END
@@ -88,6 +97,12 @@ func _build_interface() -> void:
 	back.add_theme_font_size_override("font_size", 18)
 	back.pressed.connect(_return_to_worlds)
 	footer.add_child(back)
+
+func _update_grid_columns() -> void:
+	if _grid == null or not is_instance_valid(_grid):
+		return
+	var available_width: float = maxf(0.0, _safe_area.size.x - 40.0)
+	_grid.columns = clampi(floori((available_width + 14.0) / 264.0), 1, 3)
 
 func _make_phase_card(phase_index: int, completed: Array, current_level_id: String) -> Button:
 	var level_id: String = CATALOG.get_level_id(_world_index, phase_index)
