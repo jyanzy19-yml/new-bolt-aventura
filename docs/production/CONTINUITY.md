@@ -1,6 +1,8 @@
 ## Continuidade vigente — adoção do plano de 32 etapas (27/11/2026)
 
-- Base documental: PR #72 integrada por squash em `d4036b942e41299bcd33f3ce19826d8558c50420`.
+- Main HEAD: `d90ac2c78e96b32233f8d003ea6673a38079ecb3`; PR #72 e PR #73 integradas por squash.
+- Docs Validation pós-merge PR #73: run `45986435957` SUCCESS.
+- PR #73 formalizou o plano de 32 etapas, migração 26→32 e aprovação visual obrigatória antes de integração.
 - Plano operacional primário: `docs/production/32-stage-production-plan.md`; matriz 26 etapas preservada como histórico/crosswalk.
 - Etapas 01–04 permanecem concluídas no nível L2 documentado; antiga Etapa 05 migra para nova Etapa 29 e continua em andamento.
 - Novas Etapas 05–09 são trabalho de direção de arte e produção visual; ChatGPT cria assets e apresenta cada entrega ao usuário. Nenhuma integração ocorre antes de aprovação explícita.

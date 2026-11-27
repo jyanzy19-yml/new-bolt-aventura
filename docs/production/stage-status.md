@@ -1,12 +1,13 @@
 # Snapshot operacional vigente — adoção do plano de 32 etapas (27/11/2026)
 
-**Base da branch documental:** `d4036b942e41299bcd33f3ce19826d8558c50420` (PR #72 integrada por squash).  
+**Main HEAD vigente:** `d90ac2c78e96b32233f8d003ea6673a38079ecb3` (PR #72 e PR #73 integradas por squash). Docs Validation pós-merge PR #73: run `45986435957` SUCCESS.  
+**PR #73:** formalizou o plano de 32 etapas e o pipeline de aprovação visual; merge commit `d90ac2c78e96b32233f8d003ea6673a38079ecb3`.
 **Plano primário:** [32-stage-production-plan.md](32-stage-production-plan.md). A matriz de 26 etapas permanece como histórico/crosswalk, não como plano operacional primário.  
 **Etapas novas 01–04:** concluídas no nível automatizado/documental L2 descrito nas evidências históricas; isso não aprova Gate 1 nem QA Android físico.  
 **Nova Etapa 29:** EM ANDAMENTO — recebe o trabalho da antiga Etapa 05 sobre recursos, carregamento, ciclo de vida e instrumentação. PR #69, #70, #71 e #72 integradas; medições físicas ainda pendentes.  
 **Novas Etapas 05–09:** NÃO INICIADAS — direção de arte, guia técnico e produção visual ainda precisam ser executados. A criação visual deverá ser apresentada ao usuário e aprovada antes de integração.  
 **Gate 1:** EM ANDAMENTO. W1-L1 e W1-L2 permanecem blockouts. Instalação, touch, safe areas, barras, FPS, memória, temperatura e lifecycle ainda carecem de validação Android física.  
-**PR #72:** integrada por squash em `d4036b942e41299bcd33f3ce19826d8558c50420`; teste determinístico de overflow do buffer de 600 amostras. Godot Validation `45969491642` e Android Debug Export `45969491660` SUCCESS no HEAD da PR. Isso não é profiling físico.
+**PR #72:** integrada por squash antes deste plano; teste determinístico de overflow do buffer de 600 amostras. Godot Validation `45969491642` e Android Debug Export `45969491660` SUCCESS no HEAD da PR. Isso não é profiling físico.
 
 ## Estado inicial das 32 etapas
 

@@ -1,7 +1,7 @@
 ## Estado canônico de colaboração — plano de 32 etapas (27/11/2026)
 
-**Base documental:** `d4036b942e41299bcd33f3ce19826d8558c50420` (PR #72 integrada).  
-**Plano:** `docs/production/32-stage-production-plan.md`.
+**Main HEAD:** `d90ac2c78e96b32233f8d003ea6673a38079ecb3` (PR #72 e #73 integradas). Docs Validation pós-merge PR #73 `45986435957` SUCCESS.  
+**Plano:** `docs/production/32-stage-production-plan.md`, formalizado pela PR #73.
 
 ### Responsabilidades autorizadas
 
