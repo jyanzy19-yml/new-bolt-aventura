@@ -1,7 +1,9 @@
 # BOLT · AVENTURA — Rastreador de implementação
 
 **Objetivo:** impedir que sistemas ou fases sejam declarados concluídos apenas por terem arquivos ou cenas criados.  
-**Atualização:** em toda entrega substancial e mudança de gate.\n\n**Snapshot 2026-11-27:** `main` HEAD `fd8aefa2a5991a67d3ce75caba57df066a5c1514`; PR #59 e #60 integradas. PR #59: SaveSystem temp recovery/future-format guard; PR #60: Android pause input release. Etapas 01–03 concluídas; Etapa 04 em desenvolvimento. PRs #57/#58/#61 continuam abertas; #58/#61 requerem reconciliação documental.  
+**Atualização:** em toda entrega substancial e mudança de gate.
+
+**Snapshot 2026-11-27:** `main` HEAD `fd8aefa2a5991a67d3ce75caba57df066a5c1514`; PR #59 e #60 integradas. PR #59: SaveSystem temp recovery/future-format guard; PR #60: Android pause input release. Etapas 01–03 concluídas; Etapa 04 em desenvolvimento. PRs #57/#58/#61 continuam abertas; #58/#61 requerem reconciliação documental.  
 **Regra:** estado precisa refletir evidência no branch atual.
 
 ## 1. Vocabulário de status
