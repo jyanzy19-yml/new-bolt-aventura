@@ -73,4 +73,4 @@ func _on_goal_body_entered(body: Node2D) -> void:
 		_section_finished = true
 		if not CampaignProgress.mark_level_completed(LEVEL_ID, NEXT_LEVEL_ID):
 			push_warning("W1-L1: não foi possível persistir a conclusão (%s)." % CampaignProgress.last_error)
-		_hud.show_result("Cybercore — trecho inicial concluído", NEXT_LEVEL_PATH)
+		_hud.show_result("Despertar entre Ruínas concluído", NEXT_LEVEL_PATH)
