@@ -32,3 +32,12 @@ Na revisão estática de 2026-11-27, Boot, SceneFlow e LoadingOverlay não apres
 ## Limitações
 
 Headless valida o contrato programático e a cena carregável. Não comprova cold-start visual, desempenho, entrega de notificações Android, legibilidade em diferentes telas ou comportamento OEM.
+
+## Evidência de CI — 2026-11-27
+
+- Godot Validation run `45914923434`: **SUCCESS — Godot 4.7.2, 93 testes, 593 verificações, 0 falhas**. O novo teste `test_boot_reports_missing_required_action_without_starting_transition` passou com 8 verificações.
+- Documentation Validation run `45914923475`: **SUCCESS**.
+- Android Debug Export run `45914923447`: **SUCCESS**; suíte repetida com 93 testes/593 verificações/0 falhas.
+- APK debug: 28.461.057 bytes; package ID provisório `com.example.boltaventura`; assinatura v2/v3 verificada; SHA-256 `de1cbc2370c958104cb51d9dee607a1d5fba4f9a51a8bb19e0cbc4207c51b231`.
+- Artifact: `bolt-aventura-android-debug-f49cde66ddb82956f30fd6afcc09e00620145f7c` (artifact ID `15161951684`).
+- Limites: CI headless e exportação comprovados; instalação/execução em aparelho Android e cold-start visual não executados.
