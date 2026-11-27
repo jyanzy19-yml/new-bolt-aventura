@@ -1,18 +1,16 @@
-## Snapshot vigente — 2026-11-26
-
 ## Snapshot vigente — 2026-11-27
 
-Repositório: jyanzy19-yml/new-bolt-aventura.
-Main HEAD: 3e4124f561438da2dcff1458a852d47f2f4dfaea, PR #63 integrada por squash.
-Hardening integrado: PR #59 SaveSystem (2e1f7cd2709ff71cc925f26504fa54e52e4f5b95); PR #60 lifecycle Android/input (fd8aefa2a5991a67d3ce75caba57df066a5c1514); PR #63 Boot/cold-start/threaded loading (3e4124f561438da2dcff1458a852d47f2f4dfaea).
-Evidência PR #63: Godot 4.7.2 — 99 testes/1.873 verificações/0 falhas; 150 transições em cinco cenas; 20/20 cold boots headless; mutation test reproduziu o defeito quando o prewarm foi removido. Android Debug Export SUCCESS; APK debug assinado/verificado v2/v3, artefato publicado.
-CI pós-merge main: Docs 45918395500 SUCCESS; Godot 45918395535 SUCCESS; Android Export 45918395499 SUCCESS.
-Escritor ativo: ChatGPT como único escritor; Claude permanece inativo para escrita concorrente.
-Etapas: 01–03 concluídas; Etapa 04 em desenvolvimento; Gate 0 estático concluído; Gate 1 em andamento. W1-L1/W1-L2 permanecem blockouts.
-PRs abertas: #57 (polimento visual), #58 (cold boot antigo), #61 (teste Boot/Input Map antigo), #62 (unidade consolidada anterior). #58/#61/#62 sobrepõem a correção integrada em #63 e não devem ser mescladas automaticamente; #57 requer revisão independente.
-Dash: decisão canônica aprovada e vigente; preservar conforme docs/production/ADR-001-DASH.md.
-Limites: APK debug exportado, mas não instalado em aparelho. Cold-start visual, touch físico, safe area/barras, lifecycle OEM, FPS, memória, temperatura e sessão prolongada permanecem pendentes.
-Próximo passo: revisar edge cases de CampaignProgress e LoadingOverlay e conferir integração dos estados de recuperação do SaveSystem.
+- **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
+- **Main HEAD:** `4544efc7082a17e7824ccf46c524db07486e3dc9`; PR #67 integrada por squash.
+- **Hardening integrado:** PR #59 SaveSystem; PR #60 lifecycle/input Android; PR #63 Boot/cold-start; PR #65 validação de IDs duplicados; PR #66 integração real SceneFlow/LoadingOverlay; PR #67 validação de payload CampaignProgress vazio/parcial.
+- **CI pós-merge main:** Docs 45920441923 SUCCESS; Godot 45920441898 SUCCESS; Android Export 45920441894 SUCCESS.
+- **Evidência:** Godot 4.7.2 — 102 testes/1.891 verificações/0 falhas; 20/20 cold boots; mutation test do prewarm aprovado. APK debug 28.465.153 bytes, assinatura v2/v3 válida, package ID placeholder `com.example.boltaventura`, SHA-256 `cf6c96a48012a27d61db83354c777034ffe18c02fee8c2dd8c20e02acc1f0205`, artifact ID 15164521585.
+- **Escritor ativo:** ChatGPT como único escritor; Claude permanece inativo para escrita concorrente.
+- **Etapas:** 01–04 concluídas; Etapa 05 em desenvolvimento; Gate 0 estático concluído; Gate 1 em andamento. W1-L1/W1-L2 permanecem blockouts.
+- **PRs abertas:** #57 (polimento visual, revisão independente); #58/#61/#62 (branches antigas/sobrepostas à PR #63; não mesclar automaticamente); #1 (PR documental antiga e divergente).
+- **Dash:** decisão canônica aprovada e vigente; preservar conforme `docs/production/ADR-001-DASH.md`.
+- **Limites:** APK debug exportado, mas não instalado em aparelho. Cold-start visual, touch físico, safe area/barras, lifecycle OEM, FPS, memória, temperatura e sessão prolongada permanecem pendentes.
+- **Próximo passo:** iniciar Etapa 05 — revisar cancelamento de carregamento, política de preload, descarregamento seletivo e medições de tempo/memória/frame time; manter o scope de gameplay e canon inalterado.
 
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
