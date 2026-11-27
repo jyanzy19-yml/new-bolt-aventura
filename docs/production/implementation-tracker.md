@@ -7,7 +7,7 @@ PR #59: recuperação de temporário íntegro e proteção contra downgrade de f
 PR #60: libera ações e ponteiros touch em notificação de suspensão Android; validação física permanece pendente.
 PR #63: prewarm de main_menu.gd na thread principal antes da cena threaded; teste Boot fail-closed; 30 ciclos × 5 cenas; CI com 20 cold boots e mutation test.
 Godot PR #63: 99 testes/1.873 verificações/0 falhas. Android Debug Export SUCCESS; artifact ZIP 28.204.882 bytes, SHA-256 fd331a5151cf8d61732e04bd070ea6ca8eca9844945007248f1fb3b040c50553.
-CI pós-merge main: Docs 45918395500 SUCCESS; Godot 45918395535 e Android Export 45918395499 ainda em execução no momento deste snapshot.
+CI pós-merge main: Docs 45918395500 SUCCESS; Godot 45918395535 SUCCESS; Android Export 45918395499 SUCCESS.
 PRs #57/#58/#61/#62 seguem abertas e fora da main; #58/#61/#62 sobrepõem conteúdo da PR #63 e exigem tratamento separado. #57 é independente e requer revisão própria.
 Etapa 04 permanece EM DESENVOLVIMENTO. Nenhuma validação física Android foi realizada.
 
