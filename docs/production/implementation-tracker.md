@@ -455,3 +455,14 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - CI do HEAD pré-merge `ebd4dc07888769ab3bbd432150e7898b9cff6414`: Godot `46049432501`, Docs `46049432551`, Android Debug Export `46049432531` — todos SUCCESS; **126 testes / 2.097 verificações / 0 falhas**; 20/20 cold boots e mutation check aprovados.
 - APK Debug: 28.469.428 bytes, package ID provisório `com.example.boltaventura`, SHA-256 `d8b268ceffb34ecf45f08c1d606a98e4381364aace07cfde634286f17657fe84`; assinatura v2/v3 verificada. Artifact `15223234577`; ZIP SHA-256 `a4c4f7021315fc4602207586c780721b57f434285e6dbe2c57c4b1c954cf3ad9`.
 - Sem validação visual ou Android físico; câmera/clipping, resposta touch, FPS e estabilidade real continuam pendentes.
+
+
+## W1-L4 — integração do blockout provisório Núcleo de Distribuição — 27/11/2026
+
+- Branch `integration/cybercore-w1-l4-current-main-2026-11-27`, baseada no main após PR #107 (seleção de campanha) e PR #105 (W1-L3).
+- Reaplica os arquivos funcionais e testes da antiga PR #106, cuja branch ficou divergente devido a alterações concorrentes em tracker/continuidade. Os snapshots antigos desses documentos não foram copiados.
+- Adiciona W1-L4 com puzzle determinístico de três relés ativados por tiro, mural de pistas, conduítes, barreira terminal, dois checkpoints, beat narrativo apenas por ID, rotas de plataforma e objetivo condicionado à solução do puzzle.
+- W1-L4 permanece BLOCKOUT PROVISÓRIO; nenhuma arte final, recompensa, diálogo ou canon novo é aprovado.
+- Atualiza `main_menu.gd` para resolver W1-L4 pelo botão Continuar e adiciona regressão para a retomada.
+- Inclui cinco capturas Xvfb de composição em `docs/production/evidence/cybercore-w1-l4/`.
+- **Estado: EM VALIDAÇÃO.** CI da branch atual e revisão de integração pendentes. Os checks do head antigo da PR #106 não são considerados validação do head atual. Sem playtest humano ou validação Android física.
