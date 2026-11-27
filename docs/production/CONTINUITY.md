@@ -1,4 +1,16 @@
-## Continuidade vigente — adoção do plano de 32 etapas (27/11/2026)
+## Continuidade vigente — execução da Etapa 05 (27/11/2026)
+
+- Main permanece em `d90ac2c78e96b32233f8d003ea6673a38079ecb3`; nenhuma PR foi integrada nesta unidade.
+- Branch de trabalho: `docs/stage05-global-visual-direction-proposal`.
+- Commit da proposta ART-BOLT-001: `85db26c63cdb8b08cb89df486ab990ef8103e2be`.
+- Entrega: `docs/game-design/08-visual-direction-proposal.md`, com proposta global, matriz visual dos sete mundos, gramática de gameplay, requisitos de UI/mobile, VFX, animação, áudio, protocolo de prova e decisões pendentes.
+- `docs/README.md` e `07-art-audio-direction.md` apontam para a proposta; `stage-status.md` registra Etapa 05 EM ANDAMENTO.
+- Estado: documentação/proposta; não há estilo, paleta, concept ou asset final aprovado. Nenhum arquivo de arte foi integrado.
+- Próxima ação: revisar a proposta com o usuário, registrar as decisões aprovadas e então preparar a especificação técnica da Etapa 06. Não iniciar sprites finais sem aprovação visual explícita.
+
+---
+
+## Snapshot de adoção do plano de 32 etapas (27/11/2026)
 
 - Base documental: PR #72 integrada por squash em `d4036b942e41299bcd33f3ce19826d8558c50420`.
 - Plano operacional primário: `docs/production/32-stage-production-plan.md`; matriz 26 etapas preservada como histórico/crosswalk.
