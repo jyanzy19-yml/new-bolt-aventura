@@ -117,15 +117,18 @@ jobs:
           from pathlib import Path
           path = Path("scripts/core/boot.gd")
           source = path.read_text()
-          lines = source.splitlines(keepends=True)
-          start = next((i for i, line in enumerate(lines) if "_main_menu_script = load(MAIN_MENU_SCRIPT_PATH)" in line), -1)
-          if start < 0:
+          block = (
+              "\\t# Carrega o script leve do menu na thread principal antes de SceneFlow solicitar\\n"
+              "\\t# a PackedScene em modo threaded. O restante da cena continua no fluxo assíncrono.\\n"
+              "\\t_main_menu_script = load(MAIN_MENU_SCRIPT_PATH) as Script\\n"
+              "\\tif _main_menu_script == null:\\n"
+              "\\t\\tpush_error(\\"Boot: falha ao carregar o script do menu.\\")\\n"
+              "\\t\\t_status.text = \\"Falha ao preparar o menu principal.\\"\\n"
+              "\\t\\treturn\\n"
+          )
+          if block not in source:
               raise SystemExit("Main-thread menu script prewarm mutation target missing.")
-          end = start
-          while end < len(lines) and (end == start or lines[end].startswith("\t") or not lines[end].strip()):
-              end += 1
-          del lines[start:end]
-          path.write_text("".join(lines))
+          path.write_text(source.replace(block, "", 1))
           PY
           set +e
           "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300 > mutation-no-prewarm.log 2>&1
