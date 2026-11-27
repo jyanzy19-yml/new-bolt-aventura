@@ -401,3 +401,11 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Escopo não altera runtime, tuning, física, InputMap, Dash, save schema, IDs persistentes ou cenas de produção.
 - Plano: `docs/production/plans/2026-11-27-stage14-respawn-movement-state-contract.md`.
 - **Estado:** aguardando CI; não declara Etapa 14 concluída e não substitui PRs #78, #79 ou #85.
+
+
+## Etapa 14 — evidência final da regressão de respawn (27/11/2026)
+
+- PR #93, HEAD `73cfd59efe937338537b8ef83c386b3a4d3eddee`: Godot Validation `46041294164` SUCCESS — 112 testes/1.960 verificações/0 falhas; Documentation Validation `46041294165` SUCCESS; Android Debug Export `46041294170` SUCCESS.
+- APK debug: 28.469.428 bytes; package ID placeholder `com.example.boltaventura`; SHA-256 `8813a31ef912f05406cf5d56c0979fd56ed108bd77e506b4bd3835bad4778c6c`; assinatura v2/v3 válida; artifact ID `15221190228`.
+- A correção do workflow Android remove a reinstalação de `cmdline-tools;latest` já provida pela action de setup; o job completo passou após essa alteração.
+- PR continua aberta/não integrada. Evidência L2 de CI e exportação; sem instalação ou playtest em dispositivo físico. Etapa 14 permanece EM ANDAMENTO.
