@@ -42,6 +42,23 @@ func test_overlay_captures_input_and_processes_while_paused() -> bool:
 	return true
 
 
+func test_overlay_shows_cancel_status_and_hides_after_cancelled_signal() -> bool:
+	var overlay: Node = _overlay()
+	check(overlay != null, "autoload LoadingOverlay presente")
+	if overlay == null:
+		return true
+	var panel: Control = overlay.get_node("%Overlay") as Control
+	var status: Label = overlay.get_node("%StatusLabel") as Label
+	SceneFlow.transition_started.emit("res://scenes/ui/main_menu.tscn")
+	SceneFlow.transition_cancel_requested.emit("res://scenes/ui/main_menu.tscn")
+	check(panel.visible, "overlay permanece visível enquanto a carga é drenada")
+	check_eq(status.text, "Cancelando carregamento…", "overlay mostra estado de cancelamento")
+	SceneFlow.transition_cancelled.emit("res://scenes/ui/main_menu.tscn")
+	check(not panel.visible, "overlay some após a transição ser cancelada")
+	check(not overlay.is_loading, "cancelamento encerra estado de loading")
+	return true
+
+
 func test_overlay_hides_when_transition_fails() -> bool:
 	var overlay: Node = _overlay()
 	if overlay == null:
