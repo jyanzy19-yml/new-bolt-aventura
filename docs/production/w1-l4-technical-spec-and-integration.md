@@ -70,3 +70,17 @@ Dash, física, InputMap, multitouch, schema de save v1, IDs existentes, `main_me
 - [x] Testes relevantes passam; mutantes eliminados.
 - [x] Diff limitado a arquivos novos e docs; sem tocar L3/menu/save/Dash/física.
 - [ ] Revisão humana, CI remoto, playtest e validação Android (pendentes).
+
+
+## Addendum de integração na main — 27/11/2026
+
+Esta branch reaplica a implementação W1-L4 sobre o HEAD atual após as integrações #107 (seleção de campanha) e #105 (W1-L3). A PR #106 original ficou divergente por alterações concorrentes no tracker/continuidade; seu conteúdo funcional e testes foram reaplicados sem copiar os snapshots antigos desses documentos.
+
+- W1-L3 está integrada em `main` como BLOCKOUT PROVISÓRIO (PR #105).
+- `CampaignCatalog` e as telas de seleção de mundo/fase estão integradas (PR #107); o catálogo já contém o caminho W1-L4, mas a disponibilidade depende da PackedScene real.
+- W1-L4 é adicionada como BLOCKOUT PROVISÓRIO; não é fase final, não introduz canon novo e não contém encontro de guardião.
+- `scripts/ui/main_menu.gd` agora resolve W1-L4 em `LEVEL_PATHS` e `LEVEL_LABELS`, evitando que o botão Continuar fique indisponível após salvar dentro da fase.
+- `test_w1_l4.gd` inclui regressão de retomada pelo menu.
+- As cinco capturas Xvfb de composição foram preservadas em `docs/production/evidence/cybercore-w1-l4/`; são evidência de composição, não de gameplay Android.
+- CI da branch atual aguarda Godot Validation, Documentation Validation e Android Debug Export. Os resultados de CI do head antigo da PR #106 não são transferidos automaticamente para esta branch.
+- Nenhum playtest humano ou teste em Android físico foi realizado. Posição dos relés em relação aos controles touch, legibilidade, dificuldade e performance permanecem pendentes.
