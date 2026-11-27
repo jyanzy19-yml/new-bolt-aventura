@@ -814,3 +814,17 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Head da branch validado: `5fb73885f2657d0138a8870cda14712835281547`.
 - CI no head `5fb73885f2657d0138a8870cda14712835281547`: Godot Validation `46074498555` SUCCESS; Documentation Validation `46074498631` SUCCESS; Android Debug Export `46074498597` SUCCESS. A suíte headless no job Android concluiu com **129 testes / 2.135 verificações / 0 falhas**. A validação Godot separada concluiu importação/parsing; documentação passou.
 - APK Debug exportado e verificado com assinatura v2/v3. Artifact `15234138213`; ZIP SHA-256 `2cc8bd5b166c89ec574534996f083be630d5bff82283fa07ac68e08c8d1dd9c8`; [artefato Android Debug](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46074498597/artifacts/15234138213). É artefato de teste, não release. Sem playtest humano ou Android físico; W1-L3 permanece BLOCKOUT PROVISÓRIO. Nenhuma alteração em schema de save, IDs anteriores, Dash, InputMap, física do Player, cânone narrativo ou assets finais.
+
+
+## Sessão ChatGPT — cobertura adicional e validação final do head W1-L3 — 2026-11-27
+
+- Head de implementação validado: `21dacfdb0533d2925b57584c853f29156ad2cf66`; PR #105 permanece aberta e sem merge.
+- Regressão de retomada ampliada: além de resolver o ID W1-L3, o teste verifica o caminho efetivo de `_resolve_continue_path()` e que o botão Continuar fica habilitado quando a fase salva existe.
+- Nova regressão `test_w1_l3_checkpoint_remains_usable_when_persistence_fails()`: cria save inválido, ativa o checkpoint, confirma erro de persistência diagnosticável e verifica retorno local após contato com a KillZone.
+- Godot Validation `46075124332`: SUCCESS; **130 testes / 2.142 verificações / 0 falhas**; 20/20 boots smoke e mutation check do prewarm aprovados.
+- Documentation Validation `46075124349`: SUCCESS.
+- Android Debug Export `46075124490`: SUCCESS; suíte repetida com **130 testes / 2.142 verificações / 0 falhas**.
+- APK Debug Godot 4.7.2: 28.478.036 bytes; package ID placeholder `com.example.boltaventura`; SHA-256 `4fa4a81ca7e5f0b048f05f9a14bc41bec9a0c4c4f0344c1445538a01ca4dc892`; assinatura v2/v3 verificada.
+- Artifact `15234169146`; ZIP SHA-256 `41ee39850c322e6be341053b666b887edcb9cade9c3c81c1a30cff354142f84a`; [artefato Android Debug](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46075124490/artifacts/15234169146).
+- Artefato é somente Debug/teste; não foi instalado ou executado em Android físico. Não há validação de touch físico, FPS, frame pacing, memória, temperatura ou clipping.
+- W1-L3 continua BLOCKOUT PROVISÓRIO. Etapa 23 permanece EM ANDAMENTO; nenhuma lore, arte final ou W1-L4 foi aprovada ou criada.
