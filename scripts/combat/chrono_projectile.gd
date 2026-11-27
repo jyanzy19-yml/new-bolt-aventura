@@ -8,6 +8,7 @@ extends Area2D
 
 var _direction: int = 1
 var _remaining_lifetime: float = 0.0
+var _spent: bool = false
 
 
 func _ready() -> void:
@@ -24,13 +25,20 @@ func configure(direction: int, shot_speed: float, shot_damage: int, shot_lifetim
 
 
 func _physics_process(delta: float) -> void:
+	if _spent:
+		return
 	global_position.x += float(_direction) * speed * delta
 	_remaining_lifetime -= delta
 	if _remaining_lifetime <= 0.0:
+		_spent = true
 		queue_free()
 
 
 func _on_body_entered(body: Node2D) -> void:
+	if _spent:
+		return
+	# queue_free() só remove o Node ao fim do frame; o guard evita impactos duplicados.
+	_spent = true
 	if body.has_method("apply_damage"):
 		body.call("apply_damage", damage)
 	queue_free()

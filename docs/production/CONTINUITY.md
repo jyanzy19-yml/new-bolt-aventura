@@ -763,3 +763,18 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - CI do HEAD pré-merge `c554d4017b7122115d8aa7f19a958e8ebe17131a`: Godot `46047789524`, Docs `46047789662`, Android Debug Export `46047789618` — todos SUCCESS; 122 testes/2.074 verificações/0 falhas; 20/20 cold boots; mutation check aprovado.
 - APK Debug: 28.469.428 bytes; package ID provisório `com.example.boltaventura`; SHA-256 `3fcc82001ef65fc3809e514ea42e24db6935f1e2d0f9e04b5d5b6f520bc12128`; assinatura v2/v3 verificada; Artifact `15222484035`; ZIP SHA-256 `7fb7d288b160dbaf6bc18f0620d6a80c2dca83cbe53142eabd6e64c632b46bd6`.
 - QA Android físico e CI pós-merge não confirmados. Etapa 14 permanece EM ANDAMENTO.
+
+
+## Sessão ChatGPT — integração de lifecycle Stage 15 — 2026-11-27
+
+- Branch `integration/stage15-enemy-projectile-lifecycle-2026-11-27`, baseada no main após integrações Stage 14.
+- Consolida PR #80 (guard de contato tardio e limite de patrulha do inimigo provisório) e PR #81 (consumo único do ChronoProjectile), ambas baseadas no ancestral `71463b5a1f27d7499943858ac86392a3933c58f2`.
+- Os três arquivos existentes foram comparados com o ancestral: `docs/technical/05-system-contracts.md`, `scripts/enemies/cybercore_patrol_enemy.gd` e `scripts/combat/chrono_projectile.gd` não tinham alterações em main desde a base comum; diffs aplicados sem descartar trabalho posterior.
+- Inclui `test_enemy_lifecycle.gd`, `test_chrono_projectile.gd`, ampliação do contrato técnico e plano da unidade.
+- Sem mudança de Player, Dash, InputMap, save, IDs, campanha, canon, arte ou assets. Sem novos arquétipos ou IA não aprovada.
+- CI integrado concluído com SUCCESS nos três workflows; integração aguarda revisão final.
+- CI no HEAD de implementação `e360d88c1b7e120c02132a0ade04bbd6be86f76c`: Godot Validation `46048527182`, Documentation Validation `46048527246` e Android Debug Export `46048527207` — **todos SUCCESS**.
+- Godot 4.7.2: **126 testes / 2.093 verificações / 0 falhas**; 20/20 cold boots e mutation check do prewarm aprovados.
+- Android Debug Export repetiu a suíte: **126 testes / 2.093 verificações / 0 falhas**. APK **28.469.428 bytes**, package ID placeholder `com.example.boltaventura`, SHA-256 `2601a0baa6451735bd1e2749a5e22f5a87692ed262e9c4093e64754f890f56d2`; assinatura v2/v3 verificada.
+- Artifact ID `15222219353`; ZIP SHA-256 `a88baa791a8ac06d6e3f5af5fb9a093b08064215984696a33125a5d4909c8fb2`; [artefato Android Debug](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46048527207/artifacts/15222219353).
+- Evidência L2/CI somente; APK não foi instalado nem executado em Android físico. Percepção, navegação por plataformas, telegraphs, pooling, FPS, memória, temperatura e playtest permanecem fora do escopo validado.
