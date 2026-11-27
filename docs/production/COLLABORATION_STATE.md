@@ -1,5 +1,19 @@
 # Estado canônico de desenvolvimento — BOLT · AVENTURA
 
+## Snapshot operacional vigente — 2026-11-27
+
+Main HEAD: 3e4124f561438da2dcff1458a852d47f2f4dfaea — PR #63 integrada por squash.
+Hardening integrado: PR #59 SaveSystem (2e1f7cd); PR #60 lifecycle Android/input (fd8aefa); PR #63 Boot/cold-start/threaded loading (3e4124f).
+Última entrega de gameplay: PR #34 — W1-L2 em blockout; não houve nova fase de campanha nesta unidade.
+Escritor ativo: ChatGPT como único escritor; Claude permanece inativo para escrita concorrente.
+Etapas: 01–03 concluídas; Etapa 04 em desenvolvimento; Gate 1 em andamento. W1-L1/W1-L2 permanecem blockouts.
+CI PR #63: Godot 4.7.2, 99 testes/1.873 verificações/0 falhas; 150 transições em cinco cenas; 20/20 cold boots headless; mutation test de remoção do prewarm passou. Android Debug Export SUCCESS; artefato publicado, assinatura v2/v3 verificada.
+CI pós-merge main: Docs 45918395500 SUCCESS; Godot 45918395535 SUCCESS; Android 45918395499 SUCCESS.
+PRs abertas: #57 polimento visual; #58 branch antiga de cold boot; #61 teste Boot/Input Map antigo; #62 unidade consolidada anterior. Não mesclar #58/#61/#62: conteúdo sobreposto/obsoleto em relação à #63. #57 requer revisão independente.
+Limites: APK debug não foi instalado. Touch físico, safe area/barras, lifecycle OEM, FPS, memória e térmica permanecem sem validação em dispositivo.
+Próxima unidade: concluir auditoria de CampaignProgress e LoadingOverlay e conferir contratos de recuperação SaveSystem→CampaignProgress sem alterar schema v1 ou canon.
+
+
 ## Snapshot operacional vigente — 2026-11-26
 
 - **Main HEAD:** `6f8e9b8fbaaab9c44247050e5f86e4442bd2622f` (PR #52 integrada; mapa arquitetural revisado e sincronizado).
