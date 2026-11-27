@@ -20,7 +20,7 @@ Diálogos e cutscenes atualizam flags por IDs definidos e validados. Pular uma c
 ## 6. Scene Flow → Loading
 Um coordenador de transição controla destino, carregamento, cancelamento, erro, bloqueio de input e liberação de recursos. Impedir duas transições incompatíveis simultâneas.
 
-**Implementação atual:** `SceneFlow` controla carregamento threaded, falha e concorrência; `LoadingOverlay` apresenta estado/progresso real. A PR #42 integrou o input lock: pausa a SceneTree, oculta controles touch e retoma após `scene_changed`, restaurando a pausa anterior em falha. Cancelamento e política abrangente de liberação de recursos permanecem pendentes.
+**Implementação atual:** `SceneFlow` controla carregamento threaded, falha e concorrência; `LoadingOverlay` apresenta estado/progresso real. A PR #42 integrou o input lock: pausa a SceneTree, oculta controles touch e retoma após `scene_changed`, restaurando a pausa anterior em falha. A PR #69 adiciona cancelamento lógico opcional da troca: `cancel_transition()` sinaliza a intenção, mas não interrompe a thread do ResourceLoader; a operação é drenada, o destino carregado é descartado sem troca de cena e o estado de pausa anterior é restaurado. O overlay permanece visível com estado de cancelamento durante a drenagem. Preload, descarregamento seletivo e medição de memória continuam pendentes.
 
 ## 7. Audio Events → Audio Buses
 Gameplay emite eventos sem conhecer detalhes de mixagem. Buses controlam categorias e configurações de usuário. Interrupção/resume deve preservar estado coerente.
