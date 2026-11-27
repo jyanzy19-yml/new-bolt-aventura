@@ -728,3 +728,14 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Android Debug Export repetiu a suíte: **115 testes / 2.015 verificações / 0 falhas**. APK **28.469.428 bytes**, package ID placeholder `com.example.boltaventura`, SHA-256 `747083ed3f5b1e108c00a0f671abcba8244dbe2821b28eafa99f064ef7e96b35`; assinatura v2/v3 verificada.
 - Artifact ID `15222041977`; ZIP SHA-256 `ab31c810e7327478cdedc1bf3ad1d3fc7d318a160f67c7db0bb8682e81e632e9`; [artefato Android Debug](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46046013082/artifacts/15222041977).
 - Evidência L2/CI somente: APK não foi instalado nem executado em Android físico; touch, safe areas/barras, FPS, frame pacing, memória, temperatura e lifecycle OEM continuam sem validação.
+
+
+## Sessão ChatGPT — integração do pacote da Etapa 14 — 2026-11-27
+
+- PR #97 `test(stage14): consolidate respawn, checkpoint and defeat contracts` integrada por squash em `63bbc92d1223d922021f3f209f469d29b4899285`.
+- As PRs de origem #93, #94, #95 e #96 foram encerradas como supersedidas após os quatro contratos, seus planos e a correção do workflow serem preservados e integrados na PR #97.
+- HEAD final pré-merge `781db1d9edff479b79163eab6746929d0c3c8bbc`: Godot `46046351715`, Docs `46046351848`, Android Debug Export `46046351864` — todos SUCCESS.
+- Suíte Godot 4.7.2: 115 testes/2.015 verificações/0 falhas; 20/20 cold boots e mutation check do prewarm aprovados.
+- APK debug: 28.469.428 bytes, package ID placeholder `com.example.boltaventura`, SHA-256 `47141db58ac0e11247727e1c3c5822092afd3807d6b80d1e71e20b7a4de1ed98`; assinatura v2/v3 verificada. Artifact `15222507024`; ZIP SHA-256 `eff4379737417cbda1b9e73dfb26475dc09ab3a93f029bb1391ee1ffa0e8311f`.
+- Nenhuma alteração de runtime/gameplay; W1-L1 permanece blockout. Etapa 14 continua EM ANDAMENTO, aguardando QA físico Android e demais critérios.
+- CI pós-merge da main não foi confirmado por este registro; evidência citada é do HEAD validado antes do merge. APK não instalado em aparelho.
