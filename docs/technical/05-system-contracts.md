@@ -138,3 +138,17 @@ Para cada novo arquétipo, criar harnesses headless que instanciem a cena isolad
 - remoção/retorno ao pool apenas se pooling vier a ser justificado.
 
 A arquitetura de referência está documentada; percepção, navegação por plataformas, telegraphs, pooling e arquétipos adicionais continuam não implementados e não devem ser promovidos a estado validado.
+
+
+### Contrato de movimento da patrulha provisória
+
+A patrulha horizontal do `CybercorePatrolEnemy` usa a posição global capturada em `_ready()` como âncora de origem e `patrol_distance` como extensão simétrica. O último passo de cada tick de física é limitado à distância restante até o endpoint; a direção é invertida antes do tick seguinte. Assim, a velocidade configurada não pode produzir overshoot deliberado do limite por discretização do passo de física.
+
+Este contrato é restrito ao inimigo provisório atual:
+- movimento horizontal em um intervalo fixo relativo à posição inicial;
+- cálculo e resolução de movimento continuam pertencendo à raiz `CharacterBody2D`;
+- o comportamento não faz pathfinding, não detecta obstáculos e não atravessa gaps;
+- colisões externas podem impedir o deslocamento; navegação por plataformas continua fora do escopo;
+- os valores exportados permanecem provisórios e sujeitos a tuning/playtest.
+
+**Regressão:** `test_patrol_clamps_motion_to_both_horizontal_bounds()` executa a cena com velocidade elevada e verifica os dois endpoints. O teste demonstra o contrato geométrico do passo de patrulha em simulação headless; não comprova leitura, justiça, qualidade visual ou comportamento em Android físico.
