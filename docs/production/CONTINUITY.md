@@ -828,3 +828,13 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Artifact `15234169146`; ZIP SHA-256 `41ee39850c322e6be341053b666b887edcb9cade9c3c81c1a30cff354142f84a`; [artefato Android Debug](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46075124490/artifacts/15234169146).
 - Artefato é somente Debug/teste; não foi instalado ou executado em Android físico. Não há validação de touch físico, FPS, frame pacing, memória, temperatura ou clipping.
 - W1-L3 continua BLOCKOUT PROVISÓRIO. Etapa 23 permanece EM ANDAMENTO; nenhuma lore, arte final ou W1-L4 foi aprovada ou criada.
+
+
+## Sessão ChatGPT — reaplicação de W1-L4 sobre main atual — 27/11/2026
+
+- PR #107 integrou a seleção de mundos/fases; PR #105 integrou W1-L3 como blockout provisório.
+- A antiga PR #106 ficou divergente por alterações concorrentes no tracker/continuidade. Criada branch `integration/cybercore-w1-l4-current-main-2026-11-27` a partir do main pós-PR #105 e reaplicados os 15 arquivos textuais funcionais/documentais, cinco capturas PNG e os testes de W1-L4.
+- W1-L4 continua BLOCKOUT PROVISÓRIO. A lógica de sequência é pura/determinística; tiros reais ativam relés; falha reinicia sem dano; a barreira só abre quando a sequência é resolvida; a conclusão exige puzzle resolvido.
+- `main_menu.gd` inclui W1-L4 para retomada pelo botão Continuar; foi adicionada regressão específica.
+- CI no head desta nova branch ainda pendente. O resultado do CI da antiga PR #106 não é herdado.
+- Sem validação Android física, playtest humano ou aprovação de arte final.
