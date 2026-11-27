@@ -438,7 +438,7 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - `docs/technical/05-system-contracts.md` amplia os contratos e delimita claramente o que continua não implementado (percepção, navegação por plataformas, telegraphs, pooling e arquétipos adicionais).
 - Plano: `docs/production/plans/2026-11-27-stage15-enemy-projectile-lifecycle-integration.md`.
 - Sem alteração de dano, velocidade configurada, distância de patrulha, cooldown, duração, Dash, InputMap, save, IDs, campanha, canon, arte ou assets.
-- **Estado:** PR #101 aprovada em CI integrado, pronta para integração; Etapa 15 permanece EM ANDAMENTO e inimigo-base continua provisório.
+- **Estado:** PR #101 integrada por squash em `5a5a09d79dae55fd194fcfee7422c740bfda87d2`; PRs de origem #80 e #81 encerradas como supersedidas. Etapa 15 permanece EM ANDAMENTO e inimigo-base continua provisório.
 - CI no HEAD de implementação `e360d88c1b7e120c02132a0ade04bbd6be86f76c`: Godot Validation `46048527182`, Documentation Validation `46048527246` e Android Debug Export `46048527207` — **todos SUCCESS**.
 - Godot 4.7.2: **126 testes / 2.093 verificações / 0 falhas**; 20/20 cold boots e mutation check do prewarm aprovados.
 - Android Debug Export repetiu a suíte: **126 testes / 2.093 verificações / 0 falhas**. APK **28.469.428 bytes**, package ID placeholder `com.example.boltaventura`, SHA-256 `2601a0baa6451735bd1e2749a5e22f5a87692ed262e9c4093e64754f890f56d2`; assinatura v2/v3 verificada.

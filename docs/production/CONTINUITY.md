@@ -772,9 +772,19 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Os três arquivos existentes foram comparados com o ancestral: `docs/technical/05-system-contracts.md`, `scripts/enemies/cybercore_patrol_enemy.gd` e `scripts/combat/chrono_projectile.gd` não tinham alterações em main desde a base comum; diffs aplicados sem descartar trabalho posterior.
 - Inclui `test_enemy_lifecycle.gd`, `test_chrono_projectile.gd`, ampliação do contrato técnico e plano da unidade.
 - Sem mudança de Player, Dash, InputMap, save, IDs, campanha, canon, arte ou assets. Sem novos arquétipos ou IA não aprovada.
-- CI integrado concluído com SUCCESS nos três workflows; integração aguarda revisão final.
+- CI integrado concluído com SUCCESS nos três workflows; PR #101 integrada por squash em `5a5a09d79dae55fd194fcfee7422c740bfda87d2`; PRs #80 e #81 encerradas como supersedidas.
 - CI no HEAD de implementação `e360d88c1b7e120c02132a0ade04bbd6be86f76c`: Godot Validation `46048527182`, Documentation Validation `46048527246` e Android Debug Export `46048527207` — **todos SUCCESS**.
 - Godot 4.7.2: **126 testes / 2.093 verificações / 0 falhas**; 20/20 cold boots e mutation check do prewarm aprovados.
 - Android Debug Export repetiu a suíte: **126 testes / 2.093 verificações / 0 falhas**. APK **28.469.428 bytes**, package ID placeholder `com.example.boltaventura`, SHA-256 `2601a0baa6451735bd1e2749a5e22f5a87692ed262e9c4093e64754f890f56d2`; assinatura v2/v3 verificada.
 - Artifact ID `15222219353`; ZIP SHA-256 `a88baa791a8ac06d6e3f5af5fb9a093b08064215984696a33125a5d4909c8fb2`; [artefato Android Debug](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46048527207/artifacts/15222219353).
 - Evidência L2/CI somente; APK não foi instalado nem executado em Android físico. Percepção, navegação por plataformas, telegraphs, pooling, FPS, memória, temperatura e playtest permanecem fora do escopo validado.
+
+
+## Sessão ChatGPT — integração final de lifecycle Stage 15 — 2026-11-27
+
+- PR #101 integrada por squash em `5a5a09d79dae55fd194fcfee7422c740bfda87d2`.
+- PRs #80 e #81 encerradas como supersedidas; runtime, testes e documentação técnica preservados na integração.
+- CI do HEAD pré-merge `a6f43cc8e7902fabe00fd65072b9292511f1a7f0`: Godot `46048844642`, Docs `46048844634`, Android Debug Export `46048844641` — todos SUCCESS.
+- Suíte Godot/Android: 126 testes/2.093 verificações/0 falhas; 20/20 cold boots; mutation check aprovado.
+- APK Debug: 28.469.428 bytes, package ID provisório `com.example.boltaventura`, SHA-256 `7300fbc1452afcdd0ed1ead69593b56ef7084ac3f6f3cbd52b676fcbf5aa7082`; assinatura v2/v3 verificada. Artifact `15223552031`; ZIP SHA-256 `3add372a70530d55cb326fc1e75c22ff004bb5796167d09fdeb78dc9f1a9fcb0`.
+- Nenhuma validação Android física ou CI pós-merge foi confirmada. Etapa 15 permanece EM ANDAMENTO.
