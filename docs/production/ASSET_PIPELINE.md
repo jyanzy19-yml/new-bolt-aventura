@@ -3,6 +3,7 @@
 **Status:** workflow formal; inventário atual não comprova assets finais integrados.  
 **Autoridade:** `MASTER_DIRECTIVE.md`, `32-stage-production-plan.md` e bíblias de design.  
 **Regra crítica:** ChatGPT cria os assets visuais do jogo, apresenta cada entrega ao usuário e aguarda aprovação explícita antes de integrar no repositório/Godot.
+**Sequenciamento aprovado em 27/11/2026:** produção visual pesada (concepts finais, sprites, spritesheets, animações, tilesets, fundos, cenários, VFX e UI gráfica final) reservada à Etapa 31. Etapas anteriores definem requisitos, contratos, briefs, wireframes e placeholders, sem antecipar conjuntos finais. Etapa 32 concentra integração final, auditoria de cobertura e verificação.
 
 ## 1. Fontes de verdade
 - Direção artística: `docs/game-design/07-art-audio-direction.md`.
@@ -85,7 +86,17 @@ Não integrar sem origem/licença identificáveis. Registrar autoria, ferramenta
 ## 8. Critério de integração/verificação
 Marcar `INTEGRATED` somente se aprovação explícita, versão correta, caminho, import settings, proveniência, referências e commit/PR estiverem registrados. Marcar `VERIFIED` após testes aplicáveis em escala nativa, Godot e, quando necessário, Android físico.
 
-## 9. Inventário inicial
+## 9. Sequenciamento de produção visual
+
+1. **Etapas 05–09:** requisitos visuais, contratos técnicos, especificação funcional e UI; somente wireframes/placeholders. Sem arte final.
+2. **Etapas 10–30:** implementar/testar gameplay, IA, chefes, fases, narrativa, UI funcional e Android com placeholders; preservar contratos de pivô, colisão, escala, estados e leitura.
+3. **Etapa 31:** produzir conjuntos visuais definitivos por consumidor/mundo; apresentar concepts e cada versão de asset ao usuário e obter aprovação individual antes da integração.
+4. **Etapa 32:** concluir substituições e validar cenas, consistência, import settings, desempenho, licenças e cobertura.
+5. Exceção: asset temporário necessário a teste deve ser `PLACEHOLDER`, mínimo e nunca promovido a arte final.
+
+O adiamento da arte final não adia requisitos funcionais de legibilidade, acessibilidade, feedback ou performance; estes devem ser testados com representações provisórias.
+
+## 10. Inventário inicial
 O snapshot auditado em 27/11/2026 identificou 20 arquivos de cena/recurso em `scenes/` e `resources/`, sem diretórios `assets/` ou `audio/` nem catálogo de sprites/áudio importados. W1-L1/W1-L2 continuam blockouts. Revalidar o inventário antes de afirmar o estado atual.
 
 **Distinção obrigatória:** placeholder é temporário; concept é proposta; aprovação é decisão do usuário; integração é alteração no repositório; verificação é evidência.
