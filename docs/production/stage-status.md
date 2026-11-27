@@ -16,7 +16,7 @@
 | 02 | VALIDADA (L2 documental) | Requisitos, GAPs e conflitos documentais rastreados |
 | 03 | VALIDADA (L2 documental) | Baseline arquitetural e contratos mapeados |
 | 04 | VALIDADA (L2) | Boot, SceneFlow, SaveSystem, CampaignProgress e LoadingOverlay endurecidos |
-| 05 | NÃO INICIADA | Nova etapa de direção de arte global |
+| 05 | EM ANDAMENTO | Proposta global ART-BOLT-001 criada na branch `docs/stage05-global-visual-direction-proposal`; aguarda revisão/aprovação do usuário |
 | 06 | NÃO INICIADA | Guia técnico de assets a formalizar |
 | 07 | NÃO INICIADA | Concept final de BOLT depende de produção e aprovação |
 | 08 | NÃO INICIADA | Spritesheets finais dependem da Etapa 07 |
