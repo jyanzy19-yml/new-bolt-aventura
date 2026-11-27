@@ -1,7 +1,7 @@
 # Plano Mestre de Produção — BOLT · AVENTURA
 ## Estrutura operacional aprovada em 32 etapas
 
-**Versão:** 1.0 · **Aprovação do usuário:** 27/11/2026  
+**Versão:** 1.1 · **Emenda de sequenciamento aprovada pelo usuário:** 27/11/2026  
 **Engine:** Godot 4.7.2 / GDScript · **Produto:** Android empacotado, paisagem  
 **Escopo macro:** sete mundos e 42 fases, conforme as fontes canônicas do repositório  
 **Autoridade:** subordinado às instruções atuais do usuário, ADRs, bíblias e `MASTER_DIRECTIVE.md`
