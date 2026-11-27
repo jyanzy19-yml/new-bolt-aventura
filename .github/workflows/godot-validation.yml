@@ -33,7 +33,7 @@ permissions:
 jobs:
   godot:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -64,11 +64,89 @@ jobs:
           ACTUAL_VERSION="$("$GODOT_BIN" --headless --version)"
           [[ "$ACTUAL_VERSION" == "$GODOT_VERSION".* ]]
           "$GODOT_BIN" --headless --editor --path . --import --quit 2>&1 | tee godot-import.log
-          echo "Headless import/parse passed for Godot $GODOT_VERSION."
-          "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd 2>&1 | tee godot-tests.log
-          if grep -nE "SCRIPT ERROR:|Parse Error:|^ERROR:.*(Function blocked during in/out signal|flushing queries)" godot-import.log godot-tests.log; then
-            echo "::error::Godot reported a script or parse error; refusing a green validation."
+          if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' godot-import.log | grep -vE 'audio_driver_alsa|ERR_CANT_OPEN.*audio'; then
+            echo "::error::Unexpected import/parse error."
             exit 1
           fi
-          echo "Headless project test suite passed."
+
+          run_checked() {
+            local label="$1"
+            shift
+            local log="${label}.log"
+            set +e
+            "$@" 2>&1 | tee "$log"
+            local command_status=${PIPESTATUS[0]}
+            set -e
+            if [[ $command_status -ne 0 ]]; then
+              echo "::error::${label} exited with status $command_status."
+              return 1
+            fi
+            # Expected diagnostics only: tests deliberately exercise missing scenes and failure paths.
+            # Any other SCRIPT ERROR, Parse Error or ERROR fails CI.
+            if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' "$log" | grep -vE "Boot: ações ausentes no Input Map|SceneFlow: cena inexistente: res://nao_existe.tscn|SceneFlow: transição para 'res://test_failure_from_unpaused_state.tscn' falhou \\(test_failure\\)|SceneFlow: transição para 'res://test_failure_from_paused_state.tscn' falhou \\(test_failure\\)|audio_driver_alsa|ERR_CANT_OPEN.*audio"; then
+              echo "::error::Unexpected Godot error in ${label}; see ${log}."
+              return 1
+            fi
+          }
+
+          run_checked godot-tests "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd
+
+          # Capture diagnostics from one fresh boot before repeated runs and mutation.
+          set +e
+          "$GODOT_BIN" --headless --path . --verbose --fixed-fps 60 --quit-after 300 > boot-diagnostic.log 2>&1
+          diagnostic_status=$?
+          set -e
+          if [[ $diagnostic_status -ne 0 ]]; then
+            echo "::error::Verbose cold boot exited with status $diagnostic_status."
+            cat boot-diagnostic.log
+            exit 1
+          fi
+          grep -nEi 'main_menu|SCRIPT ERROR|Parse Error|ERROR:|failed|failed loading|loading resource' boot-diagnostic.log | tail -120 || true
+
+          echo "Running 20 real project boots (300 frames each, fixed 60 FPS)."
+          for run in $(seq 1 20); do
+            echo "Boot smoke ${run}/20"
+            run_checked "boot-${run}" "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300
+          done
+          echo "Boot smoke passed: 20/20 process launches."
+
+          # Mutation: remove the prewarm fix and require the original cold-boot failure to return.
+          cp scripts/core/boot.gd boot-fixed.gd
+          trap 'cp boot-fixed.gd scripts/core/boot.gd' EXIT
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("scripts/core/boot.gd")
+          source = path.read_text()
+          block = (
+              "\t# Carrega o script leve do menu na thread principal antes de SceneFlow solicitar\n"
+              "\t# a PackedScene em modo threaded. O restante da cena continua no fluxo assíncrono.\n"
+              "\t_main_menu_script = load(MAIN_MENU_SCRIPT_PATH) as Script\n"
+              "\tif _main_menu_script == null:\n"
+              "\t\tpush_error(\\"Boot: falha ao carregar o script do menu.\\")\n"
+              "\t\t_status.text = \\"Falha ao preparar o menu principal.\\"\n"
+              "\t\treturn\n"
+          )
+          if block not in source:
+              raise SystemExit("Main-thread menu script prewarm mutation target missing.")
+          path.write_text(source.replace(block, "", 1))
+          PY
+          set +e
+          "$GODOT_BIN" --headless --path . --fixed-fps 60 --quit-after 300 > mutation-no-prewarm.log 2>&1
+          mutation_status=$?
+          set -e
+          if ! grep -qE 'Parse Error: Failed.*main_menu.tscn|Failed loading resource: res://scenes/ui/main_menu.tscn' mutation-no-prewarm.log; then
+            echo "::error::Removing the main-thread script prewarm did not reproduce the original menu failure."
+            cat mutation-no-prewarm.log
+            exit 1
+          fi
+          echo "Mutation verified: removing prewarm reproduces the original menu failure (exit $mutation_status)."
+
+          cp boot-fixed.gd scripts/core/boot.gd
+          rm -f boot-fixed.gd
+          trap - EXIT
+          "$GODOT_BIN" --headless --editor --path . --import --quit > godot-restore-import.log 2>&1
+          if grep -nE 'SCRIPT ERROR:|Parse Error:|^ERROR:' godot-restore-import.log | grep -vE 'audio_driver_alsa|ERR_CANT_OPEN.*audio'; then
+            echo "::error::Restored source did not import cleanly after mutation verification."
+            exit 1
+          fi
           echo "This does not prove Android export, rendering, touch hardware or physical-device performance."

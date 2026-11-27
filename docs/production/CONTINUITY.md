@@ -1,20 +1,20 @@
-## Snapshot vigente — 2026-11-26
+## Snapshot vigente — 2026-11-27
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
-- **Main HEAD após PR #52:** `6f8e9b8fbaaab9c44247050e5f86e4442bd2622f`; PR #51/#52 integraram e revisaram o mapa arquitetural atual.
-- **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético e progressão W1-L1→W1-L2.
-- **Última correção de gameplay:** PR #47 — estado inicial `initial_active=false` do `TimedEnergyGate`, merge `2636226c4027625649e66c51ff64d7e2e56168a6`.
-- **Último componente de plataforma:** PR #46 — `OneWayPlatform`, merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`; PR #45 adicionou `MovingPlatform`.
-- **Última unidade documental:** PR #52 — acoplamento Player/Combat documentado e snapshots sincronizados; Docs CI pré/pós-merge SUCCESS. Etapas 01–03 concluídas.
-- **Escritor ativo:** ChatGPT como único escritor, por decisão explícita do usuário; Claude permanece inativo para escrita concorrente.
-- **Etapas operacionais:** Etapas 01–03 CONCLUÍDAS (auditoria, planejamento e baseline arquitetural); Etapa 04 EM DESENVOLVIMENTO (hardening dos sistemas centrais); etapas 05–26 conforme `stage-status.md`. Gate 0 estático concluído; Gate 1 continua em andamento.
-- **CI pós-merge PR #46:** Godot `45888110305`, Docs `45888110285`, Android Export `45888110166`: SUCCESS; 87 testes/548 verificações/0 falhas.
-- **CI pós-merge PR #47:** Godot `45894802128`, Docs `45894802067`, Android Export `45894802116`: SUCCESS; 88 testes/553 verificações/0 falhas. APK 28.461.057 bytes, SHA-256 `c3ca03958eecf120f1a9f5f1e4fae3851fb7560bca303c8eb5a930f987b58123`, assinatura v2/v3 válida; package ID continua placeholder `com.example.boltaventura`.
-- **CI pós-merge PR #48:** Docs `45895074739` SUCCESS.
-- **PR #1:** continua OPEN, antiga e divergente; não mesclar/rebasear automaticamente. Revisar o diff inteiro e reconciliar documentos raiz antes de qualquer decisão.
-- **Dash:** decisão canônica aprovada e vigente; deve permanecer conforme `docs/production/ADR-001-DASH.md`.
-- **Limites:** W1-L1/W1-L2 continuam blockouts. APK debug exportado, mas não instalado em aparelho. Toque físico, safe area, barras, lifecycle, profiling e performance Android permanecem pendentes.
-- **Próximo passo:** auditar edge cases de Boot/SceneFlow/SaveSystem/CampaignProgress/LoadingOverlay na Etapa 04, corrigir defeitos confirmados e ampliar regressões sem alterar o schema/canon.
+- **Main HEAD:** `fd8aefa2a5991a67d3ce75caba57df066a5c1514` (PR #59 e #60 integradas por squash).
+- **Última correção de persistência integrada:** PR #59 — recuperação de temporário íntegro, proteção de versões futuras e continuidade de CampaignProgress.
+- **Última correção Android integrada:** PR #60 — limpeza de ações lógicas e estado multitouch em suspensão do aplicativo.
+- **Escritor ativo:** ChatGPT como único escritor; Claude permanece inativo para escrita concorrente.
+- **Etapas:** 01–03 CONCLUÍDAS; Etapa 04 EM DESENVOLVIMENTO. Gate 0 estático concluído; Gate 1 em andamento.
+- **PRs abertas:** #57 (polimento Cybercore), #58 (cold boot/threaded loading) e #61 (regressão de Boot). #58/#61 ficaram não mergeáveis por conflitos documentais após #59/#60.
+- **Branch ativa:** `fix/stage04-boot-scene-loading-2026-11-27`, baseada no HEAD pós-PR #60. Consolida prewarm do script de menu, testes repetidos de transição, teste fail-closed do Input Map e reforço do workflow de cold boot.
+- **Validação PR #59:** Godot 4.7.2, 95 testes/652 verificações/0 falhas; Docs e Android Debug Export SUCCESS. Não equivale a validação pós-merge.
+- **Validação PR #60:** Godot 4.7.2, 94 testes/593 verificações/0 falhas; Docs e Android Debug Export SUCCESS. Não equivale a validação pós-merge.
+- **Limites:** W1-L1/W1-L2 permanecem blockouts; APK debug ainda não foi instalado em aparelho. Toque físico, safe area, barras, cold start visual, FPS, memória e comportamento OEM continuam pendentes.
+- **Próxima ação:** concluir a nova PR de boot/loading, validar CI no HEAD combinado e reavaliar #57 sem misturar polimento com hardening.
+
+**Regra de continuidade:** não declarar PR integrada sem merge confirmado; não declarar CI pós-merge sem execução no commit de main; não declarar validação Android sem aparelho físico.
+
 
 ---
 
