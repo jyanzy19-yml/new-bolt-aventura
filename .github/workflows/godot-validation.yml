@@ -93,6 +93,17 @@ jobs:
 
           run_checked godot-tests "$GODOT_BIN" --headless --path . --script res://tests/test_runner.gd
 
+          # Capture the actual menu/world/phase screens in a virtual 16:9 display.
+          if ! command -v xvfb-run >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y xvfb
+          fi
+          mkdir -p artifacts/campaign-selection
+          LIBGL_ALWAYS_SOFTWARE=1 xvfb-run -a "$GODOT_BIN" --path . --script res://tests/capture_campaign_selection.gd 2>&1 | tee ui-capture.log
+          test -s artifacts/campaign-selection/01-main-menu.png
+          test -s artifacts/campaign-selection/02-world-selection.png
+          test -s artifacts/campaign-selection/03-phase-selection-cybercore.png
+
           # Capture verbose diagnostics from one fresh boot before mutation or repeated runs.
           set +e
           "$GODOT_BIN" --headless --path . --verbose --fixed-fps 60 --quit-after 300 > boot-diagnostic.log 2>&1
@@ -151,3 +162,12 @@ jobs:
           fi
 
           echo "This does not prove Android export, rendering, touch hardware or physical-device performance."
+
+      - name: Upload campaign selection UI captures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: campaign-selection-ui-captures-${{ github.sha }}
+          path: artifacts/campaign-selection/*.png
+          if-no-files-found: warn
+          retention-days: 14
