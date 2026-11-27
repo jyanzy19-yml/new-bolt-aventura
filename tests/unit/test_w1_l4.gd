@@ -392,3 +392,23 @@ func test_w1_l4_beat_trigger_fires_once_and_polygons_render() -> bool:
 	level.free()
 	_end()
 	return true
+
+
+func test_w1_l4_is_resumable_from_main_menu_continue() -> bool:
+	_begin()
+	check(CampaignProgress.begin_level("W1-L4"), "save isolado registra W1-L4 para retomada")
+	var menu_scene: PackedScene = load("res://scenes/ui/main_menu.tscn") as PackedScene
+	check(menu_scene != null, "menu principal carrega para teste de retomada W1-L4")
+	if menu_scene == null:
+		_end()
+		return true
+	var menu: Node = menu_scene.instantiate()
+	tree.root.add_child(menu)
+	await tree.process_frame
+	var continue_button: Button = menu.get_node("%ContinueButton") as Button
+	check(continue_button != null and not continue_button.disabled, "Continuar habilitado quando current_level_id é W1-L4")
+	check_eq(str(menu.call("_resolve_continue_path")), LEVEL_SCENE, "Continuar resolve a PackedScene W1-L4")
+	menu.free()
+	await tree.process_frame
+	_end()
+	return true
