@@ -36,6 +36,15 @@ Quando aplicável:
 - Melhorias não foram presumidas a partir de FPS isolado.
 - Mudanças visuais ou físicas são explicitadas.
 
+## Arte e assets visuais
+Quando aplicável:
+- O asset possui ID, brief, versão e consumidor rastreáveis.
+- A versão exata foi apresentada ao usuário.
+- A aprovação explícita do usuário está registrada antes da integração.
+- Proveniência/licença e import settings estão documentados.
+- A integração foi verificada no Godot e em Android quando pertinente.
+- Assets rejeitados ou em revisão não foram integrados; placeholders permanecem identificados.
+
 ## Comunicação
 - Resumo objetivo do que mudou.
 - Lista de arquivos.
