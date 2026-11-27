@@ -48,7 +48,8 @@ func _capture_scene(scene_path: String, filename: String) -> bool:
 	get_root().add_child(instance)
 	current_scene = instance
 	await process_frame
-	await RenderingServer.frame_post_draw
+	await process_frame
+	await process_frame
 
 	var viewport_texture: ViewportTexture = get_root().get_texture()
 	var screenshot: Image = viewport_texture.get_image()
