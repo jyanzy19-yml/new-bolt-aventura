@@ -712,3 +712,19 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - CI no head `0019ac9b0ac1bf813c4bcc874d9017fa69bf0295`: Godot `46027916866`, Docs `46027916827` e Android Debug Export `46027916828` concluídos SUCCESS.
 - Nenhum runtime, cena, tuning, física, InputMap, Dash, arte ou save foi alterado. A exportação debug não foi instalada em aparelho.
 - PR #91 não integrada; Etapa 12 continua EM ANDAMENTO. Próxima unidade independente: contratos de configuração espacial/câmera da Etapa 13, sem sobrepor a PR #91.
+
+
+---
+
+## Checkpoint de continuidade — PR #95 / KillZone W1-L1 (27/11/2026)
+
+- Branch: `test/stage14-w1-l1-killzone-recovery-contract-2026-11-27`.
+- HEAD de implementação validado: `7e2a646a24ef5dcf51bf7ca8108ae5c59eadc5bb`.
+- PR #95: [test(stage14): cover W1-L1 killzone checkpoint recovery](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/95), OPEN, não integrada, mergeable no último snapshot. Nenhuma autorização de merge foi dada.
+- Teste de integração em W1-L1 cobre 18 verificações: contato físico ativa checkpoint e persiste ID; dano não letal; contato real com KillZone; retorno à posição persistida; vida restaurada; exatamente um `respawned`; checkpoint permanece ativo; sem overlay terminal ou pausa.
+- CI: Godot `46043254619` SUCCESS — 109 testes/1.959 verificações/0 falhas, 20/20 cold boots e mutation prewarm; Docs `46043254425` SUCCESS; Android Debug Export `46043254483` SUCCESS — 109/1.959/0.
+- APK debug: 28.469.428 bytes; SHA-256 `82721bcdb626dd62f010abcdb17ff92f6f55ce3ee6b1908c5b065b86f0781f49`; package ID placeholder `com.example.boltaventura`; assinatura v2/v3; artifact `15221422243` (digest ZIP `62847b2a844f486f4661ebcb0a5289ad6bebd2d4b585705f599a6f4e227cd4a2`).
+- Workflow Android usa a correção de setup `cmdline-tools;latest` das PRs #93/#94; exportação completa e upload passaram.
+- PR #95 baseia-se em main e não incorpora diffs de #93/#94. Nenhuma PR foi integrada.
+- Próxima unidade: revisar as lacunas restantes da Etapa 14 em interações ambientais/feedback de sobrevivência e verificar diffs/estado de PRs abertas antes de nova implementação. W1-L1 continua blockout; não canonizar conteúdo provisório.
+- Limites: APK debug exportado não foi instalado; sem teste físico Android, touch, safe areas, FPS, memória ou termal.
