@@ -71,3 +71,70 @@ Para cada contrato, documentar produtor, consumidor, payload, frequência, ciclo
 ### Cobertura de regressão
 
 Os testes devem cobrir vida inicial, dano aceito/rejeitado, feedback, contato físico, invulnerabilidade do jogador, derrota idempotente, callback tardio após derrota e remoção do inimigo. Testes headless não comprovam leitura visual, balanceamento ou playtest Android.
+
+
+### Arquitetura de referência para novos arquétipos
+
+A arquitetura deve separar dois eixos de estado:
+
+1. **Lifecycle:** `ACTIVE` → `DEFEATED` (e, somente se um caso real exigir, `DESPAWNED` ou `DISABLED`). Lifecycle governa se a entidade ainda pode processar movimento, contato, dano e sinais.
+2. **Behavior:** estados próprios do arquétipo, como patrulha, alerta, preparação, execução e recuperação. Não criar estados comportamentais no inimigo que não os utiliza.
+
+A entidade raiz deve manter ownership de:
+- transform, corpo físico e uma única chamada de movimento por tick;
+- lifecycle e transição terminal;
+- coordenação entre componentes;
+- sinais públicos consumidos pela fase.
+
+Componentes/filhos opcionais:
+- `BoltHealth`: vida e evento de esgotamento;
+- `ContactArea`: volume de contato físico e encaminhamento para a API do alvo;
+- `DetectionArea` ou sensores direcionais: percepção, separados do volume de contato;
+- comportamento de locomoção: somente quando mais de um comportamento real justificar extração;
+- apresentação: recebe eventos/estado, sem controlar vida ou física.
+
+Não é obrigatório que todos os inimigos tenham todos os componentes. Uma composição menor é preferível a uma cena-base inchada.
+
+### Percepção
+
+- Percepção deve produzir observações (por exemplo, alvo entrou/saiu de alcance), não aplicar dano nem alterar CampaignProgress.
+- `DetectionArea` não deve reutilizar `ContactArea`: proximidade de detecção e contato físico têm semânticas diferentes.
+- Linha de visão, cones, alcance e memória de alvo só devem ser adicionados quando um arquétipo aprovado precisar deles.
+- A percepção deve ter limites explícitos de frequência, alcance e quantidade de alvos; a fase não deve ser consultada por caminhos frágeis ou nomes de nós.
+- **Estado atual:** o inimigo provisório implementa contato, não percepção/alerta. Não declarar detecção ou perseguição implementadas.
+
+### Locomoção e navegação local
+
+- O comportamento calcula uma intenção de movimento; a raiz aplica velocidade e executa a resolução física uma única vez.
+- Não combinar múltiplos `move_and_slide()` no mesmo tick nem somar duas vezes a velocidade de plataformas móveis.
+- Limites de patrulha devem ser definidos em coordenadas locais/âncora estável ou por contrato explícito da fase; não inferir limites a partir de nomes de nós.
+- Navegação local não equivale a pathfinding global. Para plataformas 2D, usar soluções específicas por arquétipo (patrulha, salto entre plataformas, perseguição limitada) e não adicionar um sistema global sem necessidade comprovada.
+- **Estado atual:** `CybercorePatrolEnemy` usa patrulha horizontal relativa à posição inicial. Não possui navegação por plataformas nem percepção de obstáculos.
+
+### Telegraphs e contratos de encontro
+
+- Um telegraph comunica intenção e janela temporal; não causa dano por si só.
+- O comportamento deve emitir eventos de início/fim de telegraph com identidade estável do padrão e duração definida; a camada de apresentação observa esses eventos.
+- A fase/arena define limites, condições de ativação e regras de encerramento do encontro. O inimigo não deve conhecer o HUD, o objetivo da fase, o SaveSystem ou CampaignProgress.
+- A fase reage a `defeated` para atualizar o encontro/progresso. Recompensas e flags persistentes pertencem ao domínio da campanha, não ao script do inimigo.
+- **Estado atual:** o inimigo-base provisório não possui telegraphs nem lógica de encontro; esses contratos são requisitos para arquétipos e chefes futuros.
+
+### Dados e extensibilidade
+
+- Valores exportados no inimigo atual são provisórios e locais à cena.
+- Criar um `Resource` de definição somente quando dois ou mais arquétipos compartilharem dados estáveis que precisem de autoria/reuso; evitar antecipar um catálogo genérico sem consumidores.
+- IDs de arquétipo e de instância persistente, quando necessários, devem ser separados de nomes de apresentação. O inimigo provisório atual ainda não participa de persistência.
+- Novos componentes devem declarar produtor, consumidor, payload, lifecycle, ownership, falha e testes antes de integração.
+
+### Harnesses e critérios de aceite da arquitetura
+
+Para cada novo arquétipo, criar harnesses headless que instanciem a cena isoladamente e verifiquem:
+- lifecycle inicial, transições válidas e transição terminal idempotente;
+- movimento dentro dos limites declarados e respeito à pausa;
+- percepção com entrada/saída e perda de alvo, quando implementada;
+- separação entre detecção, contato e telegraph;
+- dano, invulnerabilidade do alvo e callback tardio;
+- sinais de encontro sem dependência direta do HUD ou da campanha;
+- remoção/retorno ao pool apenas se pooling vier a ser justificado.
+
+A arquitetura de referência está documentada; percepção, navegação por plataformas, telegraphs, pooling e arquétipos adicionais continuam não implementados e não devem ser promovidos a estado validado.
