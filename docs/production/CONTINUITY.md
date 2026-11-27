@@ -811,6 +811,6 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - PR #105 aberta para integrar o blockout provisório e substituir a PR #84, encerrada como supersedida com comentário de rastreabilidade. Nenhum merge realizado.
 - Revisão estática dos scripts, cena e testes; adicionada regressão para conclusão física de W1-L3, registro único em `completed_level_ids`, overlay de resultado e ausência de destino W1-L4.
 - Tracker e status da produção atualizados para refletir W1-L3 como EM ANDAMENTO, não como fase concluída.
-- Head da branch no momento deste registro: `8b7d33bd12061c7b209d2450a10be1d3b2cc04ba`.
-- O conector GitHub não retornou workflow runs nem status checks para os heads consultados; CI permanece PENDENTE/NÃO VERIFICADA. Não declarar testes aprovados até obter evidência.
-- Sem playtest humano ou Android físico; W1-L3 permanece BLOCKOUT PROVISÓRIO. Nenhuma alteração em schema de save, IDs anteriores, Dash, InputMap, física do Player, cânone narrativo ou assets finais.
+- Head da branch validado: `5fb73885f2657d0138a8870cda14712835281547`.
+- CI no head `5fb73885f2657d0138a8870cda14712835281547`: Godot Validation `46074498555` SUCCESS; Documentation Validation `46074498631` SUCCESS; Android Debug Export `46074498597` SUCCESS. A suíte headless no job Android concluiu com **129 testes / 2.135 verificações / 0 falhas**. A validação Godot separada concluiu importação/parsing; documentação passou.
+- APK Debug exportado e verificado com assinatura v2/v3. Artifact `15234138213`; ZIP SHA-256 `2cc8bd5b166c89ec574534996f083be630d5bff82283fa07ac68e08c8d1dd9c8`; [artefato Android Debug](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46074498597/artifacts/15234138213). É artefato de teste, não release. Sem playtest humano ou Android físico; W1-L3 permanece BLOCKOUT PROVISÓRIO. Nenhuma alteração em schema de save, IDs anteriores, Dash, InputMap, física do Player, cânone narrativo ou assets finais.
