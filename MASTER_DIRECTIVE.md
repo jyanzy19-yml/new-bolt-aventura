@@ -88,7 +88,7 @@ Documentos especializados existentes devem ser reutilizados e aprimorados; não 
 
 A estrutura de produção aprovada pelo usuário é o [Plano Mestre de Produção — 32 etapas](docs/production/32-stage-production-plan.md). Leia-o em conjunto com este documento, o roadmap de Gates e o estado operacional. A matriz anterior de 26 etapas foi preservada somente como histórico/crosswalk; não reiniciar progresso nem apagar evidências.
 
-A migração mantém as antigas Etapas 01–04 concluídas no nível comprovado e transfere o trabalho da antiga Etapa 05 (recursos/carregamento) para a nova Etapa 29, ainda em andamento. As novas Etapas 05–09 constituem trabalho de direção de arte e produção visual e não herdam o status da etapa antiga.
+A migração mantém as antigas Etapas 01–04 concluídas no nível comprovado e transfere o trabalho da antiga Etapa 05 (recursos/carregamento) para a nova Etapa 29, ainda em andamento. A emenda aprovada em 27/11/2026 reserva a produção visual pesada para Etapa 31 e a integração/verificação final para Etapa 32. Etapas 05–09, 16, 18, 21 e 22 tratam de requisitos, contratos, especificações e placeholders; não devem antecipar concepts finais, sprites, spritesheets, animações, tilesets, fundos, VFX ou UI gráfica definitiva.
 
 **Aprovação de arte obrigatória:** ChatGPT cria os assets visuais do jogo e apresenta cada entrega ao usuário. Nenhum asset final pode ser integrado/substituído no repositório ou Godot antes da aprovação explícita da versão exata. Consultar `docs/production/ASSET_PIPELINE.md` e manter manifesto/fila atualizados. A aprovação de um asset não aprova outros assets nem versões futuras.
 
