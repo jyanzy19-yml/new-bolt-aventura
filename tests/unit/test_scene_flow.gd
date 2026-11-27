@@ -27,6 +27,8 @@ func test_failed_transition_restores_previous_pause_state() -> bool:
 	var previous_busy: bool = flow._busy
 	var previous_target: String = flow._target_path
 	var previous_was_paused: bool = flow._was_paused
+	var previous_cancelable: bool = flow._cancelable
+	var previous_cancel_requested: bool = flow._cancel_requested
 
 	tree.paused = true
 	flow._busy = true
@@ -48,6 +50,8 @@ func test_failed_transition_restores_previous_pause_state() -> bool:
 	flow._busy = previous_busy
 	flow._target_path = previous_target
 	flow._was_paused = previous_was_paused
+	flow._cancelable = previous_cancelable
+	flow._cancel_requested = previous_cancel_requested
 	return true
 
 
@@ -93,6 +97,8 @@ func test_cancelable_transition_drains_load_and_preserves_current_scene() -> boo
 	var overlay_panel: Control = loading_overlay.get_node("%Overlay") as Control
 	var status_label: Label = loading_overlay.get_node("%StatusLabel") as Label
 	var previous_scene: Node = tree.current_scene
+	var original_pause: bool = tree.paused
+	tree.paused = true
 	var previous_pause: bool = tree.paused
 	var cancelled: Array[String] = []
 	var finished: Array[String] = []
@@ -130,6 +136,7 @@ func test_cancelable_transition_drains_load_and_preserves_current_scene() -> boo
 	check_eq(tree.paused, previous_pause, "cancelamento restaura o estado anterior de pausa")
 	check(not loading_overlay.is_loading and not overlay_panel.visible, "overlay encerra após drenar a carga")
 	check_eq(flow.progress, 0.0, "progresso é reiniciado após cancelamento")
+	tree.paused = original_pause
 	return true
 
 
