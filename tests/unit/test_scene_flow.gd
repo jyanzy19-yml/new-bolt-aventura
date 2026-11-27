@@ -86,6 +86,12 @@ func test_transition_loads_scene_and_blocks_concurrent_transition() -> bool:
 	if flow == null:
 		check(false, "autoload SceneFlow presente")
 		return true
+	var loading_overlay: Node = tree.root.get_node_or_null("LoadingOverlay")
+	check(loading_overlay != null, "autoload LoadingOverlay presente para integração real")
+	if loading_overlay == null:
+		return true
+	var overlay_panel: Control = loading_overlay.get_node("%Overlay") as Control
+
 	var finished: Array[String] = []
 	var on_finished: Callable = func(path: String) -> void: finished.append(path)
 	flow.transition_finished.connect(on_finished)
@@ -93,6 +99,8 @@ func test_transition_loads_scene_and_blocks_concurrent_transition() -> bool:
 	check(started, "primeira transição aceita")
 	check(flow.is_transitioning(), "em transição logo após o pedido")
 	check(tree.paused, "simulação pausada durante o carregamento")
+	check(loading_overlay.is_loading, "transição real ativa o estado do LoadingOverlay")
+	check(overlay_panel.visible, "transição real exibe o overlay enquanto carrega")
 	var second: bool = flow.change_scene(MAIN_MENU)
 	check(not second, "segunda transição simultânea rejeitada")
 	var frames: int = 0
@@ -101,6 +109,8 @@ func test_transition_loads_scene_and_blocks_concurrent_transition() -> bool:
 		frames += 1
 	flow.transition_finished.disconnect(on_finished)
 	check(not flow.is_transitioning(), "transição concluiu em até 600 frames")
+	check(not loading_overlay.is_loading, "transição real encerra o estado do LoadingOverlay")
+	check(not overlay_panel.visible, "transição real oculta o overlay após concluir")
 	check(not tree.paused, "simulação retomada após carregar a nova cena")
 	check_eq(finished.size(), 1, "transition_finished emitido uma vez")
 	check(tree.current_scene != null and tree.current_scene.scene_file_path == MAIN_MENU, "cena atual é o menu principal")
