@@ -646,3 +646,11 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Android Debug Export repetiu a suíte: **126 testes / 2.093 verificações / 0 falhas**. APK **28.469.428 bytes**, package ID placeholder `com.example.boltaventura`, SHA-256 `2601a0baa6451735bd1e2749a5e22f5a87692ed262e9c4093e64754f890f56d2`; assinatura v2/v3 verificada.
 - Artifact ID `15222219353`; ZIP SHA-256 `a88baa791a8ac06d6e3f5af5fb9a093b08064215984696a33125a5d4909c8fb2`; [artefato Android Debug](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46048527207/artifacts/15222219353).
 - Evidência L2/CI somente; APK não foi instalado nem executado em Android físico. Percepção, navegação por plataformas, telegraphs, pooling, FPS, memória, temperatura e playtest permanecem fora do escopo validado.
+
+
+## Etapa 13 — regressão de plataforma unidirecional (27/11/2026)
+
+- Branch: `test/stage13-one-way-platform-physics-integration-2026-11-27`; consolida a cobertura anteriormente proposta na PR #83.
+- Amplia `tests/unit/test_one_way_platform.gd`: verifica geometria retangular, dimensões/posição da CollisionShape2D, direção de bloqueio e margem; simula BOLT apoiado em piso sólido, salto através da plataforma e aterrissagem na face superior usando InputMap/ActionBuffer reais.
+- Somente testes e plano técnico (`docs/production/plans/2026-11-27-stage13-one-way-platform-physics-integration.md`); nenhum runtime, Player, física, tuning, Dash, InputMap, cena de produção, arte ou asset é alterado.
+- **Estado:** CI pendente. Etapa 13 permanece EM ANDAMENTO; teste headless não substitui playtest visual/Android.
