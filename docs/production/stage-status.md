@@ -664,7 +664,8 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Adiciona a cena/controlador W1-L3, transição W1-L2 → W1-L3, retomada pelo menu, checkpoint persistente e regressões de composição, patrulhas, reentrada e conclusão.
 - W1-L3 permanece BLOCKOUT PROVISÓRIO; sem lore canonizada, arte final, áudio, VFX ou alteração de schema de save, IDs existentes, Dash, InputMap ou física do Player.
 - A conclusão de W1-L3 mantém a própria fase como destino de retomada e não anuncia W1-L4.
-- **Estado:** PR #105 aberta; diff com 12 arquivos, 14 commits à frente e 0 atrás da `main`. Godot Validation `46074498555`, Documentation Validation `46074498631` e Android Debug Export `46074498597` — todos SUCCESS no head `5fb73885f2657d0138a8870cda14712835281547`.
-- Suíte headless executada no job Android: **129 testes / 2.135 verificações / 0 falhas**. APK Debug exportado e assinatura v2/v3 verificada; artifact `15234138213`, ZIP SHA-256 `2cc8bd5b166c89ec574534996f083be630d5bff82283fa07ac68e08c8d1dd9c8`.
+- **Estado:** PR #105 aberta; head de implementação `21dacfdb0533d2925b57584c853f29156ad2cf66`; diff de 12 arquivos, 20 commits à frente e 0 atrás da `main`. Godot Validation `46075124332`, Documentation Validation `46075124349` e Android Debug Export `46075124490` — todos SUCCESS.
+- Suíte headless: **130 testes / 2.142 verificações / 0 falhas** no Godot e no job Android; 20/20 boots smoke e mutation check do prewarm aprovados.
+- APK Debug Godot 4.7.2: 28.478.036 bytes; package ID placeholder `com.example.boltaventura`; SHA-256 `4fa4a81ca7e5f0b048f05f9a14bc41bec9a0c4c4f0344c1445538a01ca4dc892`; assinatura v2/v3 verificada. Artifact `15234169146`; ZIP SHA-256 `41ee39850c322e6be341053b666b887edcb9cade9c3c81c1a30cff354142f84a`; [artefato Android Debug](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46075124490/artifacts/15234169146).
 - CI valida parsing/importação, regressões automatizadas, documentação e exportação. Não comprova instalação ou execução em Android físico.
-- Sem playtest humano, validação Android física, medição de touch, câmera/clipping, FPS, memória ou comportamento térmico. Etapa 23 permanece EM ANDAMENTO.
+- Sem playtest humano, validação Android física, medição de touch, câmera/clipping, FPS, memória ou comportamento térmico. W1-L3 continua BLOCKOUT PROVISÓRIO; Etapa 23 permanece EM ANDAMENTO.
