@@ -392,3 +392,13 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Exige exatamente `RISING → FALLING → GROUNDED`, sem duplicação; runtime, física e assets não foram alterados.
 - CI no commit `0019ac9b0ac1bf813c4bcc874d9017fa69bf0295`: Godot run `46027916866` SUCCESS; Docs `46027916827` SUCCESS; Android Debug Export `46027916828` SUCCESS.
 - **Estado:** regressão automatizada aprovada em CI; PR #91 aberta e não integrada. Etapa 12 continua EM ANDAMENTO, sem validação visual ou Android físico.
+
+
+## Etapa 14 — contrato físico da KillZone W1-L1 (27/11/2026)
+
+- PR #95 aberta: `test/stage14-w1-l1-killzone-recovery-contract-2026-11-27`; teste novo `tests/unit/test_stage14_w1_l1_killzone_recovery_contract.gd`.
+- Valida a cadeia física checkpoint persistido → dano não letal → entrada real na KillZone → respawn no checkpoint; 18 verificações, sem chamada direta ao callback privado da fase.
+- CI no HEAD `7e2a646a24ef5dcf51bf7ca8108ae5c59eadc5bb`: Godot `46043254619` SUCCESS (109 testes/1.959 verificações/0 falhas; 20/20 cold boots); Docs `46043254425` SUCCESS; Android Debug Export `46043254483` SUCCESS (109/1.959/0).
+- APK debug 28.469.428 bytes; package ID placeholder; SHA-256 `82721bcdb626dd62f010abcdb17ff92f6f55ce3ee6b1908c5b065b86f0781f49`; assinatura v2/v3; artifact `15221422243`.
+- PR #95 continua aberta/não integrada. Complementa PR #79 (sandbox/W1-L2), #93 (estado transitório no respawn) e #94 (derrota/feedback terminal). Nenhum runtime foi alterado.
+- Etapa 14 permanece EM ANDAMENTO; sem instalação ou validação Android física.
