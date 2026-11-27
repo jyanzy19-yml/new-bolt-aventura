@@ -118,3 +118,9 @@ static func get_world_state(world_index: int, completed_level_ids: Array, first_
 	if is_world_unlocked(world_index, completed_level_ids):
 		return "available"
 	return "locked"
+
+static func get_total_completed_count(completed_level_ids: Array) -> int:
+	var count: int = 0
+	for world_index in range(get_world_count()):
+		count += get_world_completed_count(world_index, completed_level_ids)
+	return count
