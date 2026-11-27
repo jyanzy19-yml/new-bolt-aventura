@@ -51,7 +51,7 @@ Este parágrafo registra somente o baseline histórico de pré-produção de 202
 | SYS-007 | Câmera e limites de fase | Em andamento | `Camera2D` nativa com smoothing, drag margins, callback físico e limites W1-L1/W1-L2; PR #44 extrai `configure_camera()` e valida rig/limites (81 testes/508 verificações/0 falhas). Enquadramento, bordas e feel não avaliados visualmente/em aparelho |
 | SYS-008 | Combate, dano e armas | Em andamento | `BoltHealth`, `BoltCombat`, `ChronoProjectile`, `BoltHealthPickup` e `CybercorePatrolEnemy`: Pistola Crono, dano/vida do jogador, invulnerabilidade, knockback, cura limitada, coletável de recuperação e flash de impacto. Tríplice Prisma, Laser Nexo, chefes e balanceamento final pendentes. PR #21: 53 testes, 276 verificações, 0 falhas em Godot 4.7.2 |
 | SYS-009 | Habilidades e cooldowns | Não iniciado | Sem implementação do jogo |
-| SYS-010 | IA e arquétipos de inimigos | Em andamento | `CybercorePatrolEnemy` é um inimigo-base provisório de patrulha e contato em W1-L1. Ainda não é arquétipo canônico; IA avançada, variedade e tuning final pendentes |
+| SYS-010 | IA e arquétipos de inimigos | Em andamento | `CybercorePatrolEnemy` é um inimigo-base provisório de patrulha e contato em W1-L1. **Branch `feat/w1-l3-assembly-sector-sentry`:** `CybercoreSentry` + `SentryBolt` implementam, como PROPOSTA (GAP-010, aguardando aprovação), um 2º arquétipo (atirador estacionário com percepção por linha de visão, telegraph, direção travada, stagger e limite de 1 projétil) com 9 testes headless; sem áudio, arte final, playtest ou medição em aparelho. IA avançada, variedade e tuning final pendentes |
 | SYS-011 | Chefes e arenas | Não iniciado | Sem implementação do jogo |
 | SYS-012 | NPCs, interação, diálogo e flags | Não iniciado | Sem implementação do jogo |
 | SYS-013 | Objetivos, colecionáveis e fragmentos | Não iniciado | Sem implementação do jogo |
@@ -74,8 +74,8 @@ A matriz define a estrutura planejada: seis fases por mundo; fases 1–5 de prog
 | ID | Mundo | Função planejada | Status inicial | Evidência |
 |---|---|---|---|---|
 | W1-L1 | Cybercore | Entrada e exploração | Em andamento | Blockout com BOLT, HUD/touch, combate, coletável, checkpoint persistente e objetivo; conclusão direciona W1-L2 após integração da PR #34. Placeholders, arte/áudio finais, playtest humano e QA Android pendentes |
+| W1-L3 | Cybercore | Setor de Montagem (combate + plataformas móveis) | Implementado em blockout (branch `feat/w1-l3-assembly-sector-sentry`, PR aberta, não integrada) | `cybercore_w1_l3.tscn`: balsa móvel sobre abismo, elevador, 2 checkpoints persistentes, 2 patrulhas, 2 Sentinelas (PROPOSTA), cura e objetivo; encadeado de W1-L2 e do menu. 118 testes/2.258 verificações/0 falhas em Godot 4.7.2 headless; capturas renderizadas via Xvfb em `docs/production/evidence/cybercore-w1-l3/`. Layout, tempos e dificuldade provisórios; playtest humano/Android pendentes |
 | W1-L2 | Cybercore | Progressão | Em andamento | Blockout integrado pela PR #34 em `cybercore_w1_l2.tscn`, com campo energético cíclico, plataformas, checkpoint e objetivo; CI pré-merge passou, playtest humano/Android pendentes |
-| W1-L3 | Cybercore | Progressão | Não iniciado | Sem cena |
 | W1-L4 | Cybercore | Combinação de mecânicas | Não iniciado | Sem cena |
 | W1-L5 | Cybercore | Domínio e preparação | Não iniciado | Sem cena |
 | W1-L6 | Cybercore | Guardião Tecnológico / Origem | Não iniciado | Sem cena |

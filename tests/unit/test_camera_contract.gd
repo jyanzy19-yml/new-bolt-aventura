@@ -5,6 +5,7 @@ extends BoltTest
 const PLAYER_SCENE: String = "res://scenes/player/bolt.tscn"
 const W1_L1_SCRIPT: String = "res://scripts/campaign/cybercore_w1_l1.gd"
 const W1_L2_SCRIPT: String = "res://scripts/campaign/cybercore_w1_l2.gd"
+const W1_L3_SCRIPT: String = "res://scripts/campaign/cybercore_w1_l3.gd"
 
 
 func test_player_camera_uses_builtin_smoothing_and_drag_margins() -> bool:
@@ -53,3 +54,7 @@ func test_w1_l1_camera_limits_match_level_bounds() -> bool:
 
 func test_w1_l2_camera_limits_match_level_bounds() -> bool:
 	return _check_level_limits(W1_L2_SCRIPT, 1900, "W1-L2")
+
+
+func test_w1_l3_camera_limits_match_level_bounds() -> bool:
+	return _check_level_limits(W1_L3_SCRIPT, 2600, "W1-L3")

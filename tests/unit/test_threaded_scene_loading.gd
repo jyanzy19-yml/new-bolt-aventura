@@ -8,6 +8,7 @@ const SCENES: Array[String] = [
 	"res://scenes/tutorial/tutorial.tscn",
 	"res://scenes/campaign/cybercore_w1_l1.tscn",
 	"res://scenes/campaign/cybercore_w1_l2.tscn",
+	"res://scenes/campaign/cybercore_w1_l3.tscn",
 ]
 const LOAD_REPETITIONS: int = 30
 
@@ -64,6 +65,10 @@ func test_scene_flow_repeatedly_loads_all_campaign_entry_scenes() -> bool:
 	var flow: Node = tree.root.get_node_or_null("SceneFlow")
 	if flow != null:
 		check(not bool(flow.call("is_transitioning")), "nenhuma transição permanece ativa ao final do laço")
+	# Não deixa a última cena carregada viva: ela vazaria física/colisões para os testes seguintes.
+	if tree.current_scene != null:
+		tree.current_scene.queue_free()
+		await tree.process_frame
 	if save_system != null:
 		save_system.call("delete_save")
 		save_system.set("storage_path_override", "")

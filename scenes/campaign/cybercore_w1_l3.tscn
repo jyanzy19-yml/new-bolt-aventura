@@ -1,0 +1,135 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://scripts/campaign/cybercore_w1_l3.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://scenes/world/platform_block.tscn" id="2_block"]
+[ext_resource type="PackedScene" path="res://scenes/world/moving_platform.tscn" id="3_moving"]
+[ext_resource type="PackedScene" path="res://scenes/player/bolt.tscn" id="4_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="5_hud"]
+[ext_resource type="PackedScene" path="res://scenes/levels/checkpoint.tscn" id="6_checkpoint"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/cybercore_patrol_enemy.tscn" id="7_patrol"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/cybercore_sentry.tscn" id="8_sentry"]
+[ext_resource type="PackedScene" path="res://scenes/combat/bolt_health_pickup.tscn" id="9_pickup"]
+
+[sub_resource type="RectangleShape2D" id="KillShape"]
+size = Vector2(3200, 180)
+
+[sub_resource type="RectangleShape2D" id="GoalShape"]
+size = Vector2(72, 128)
+
+[node name="CybercoreW1L3" type="Node2D"]
+script = ExtResource("1_level")
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="StartFloor" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(-32, 0)
+size = Vector2(672, 128)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="FloorB" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(1024, 0)
+size = Vector2(676, 128)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="CoverBlock" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(1440, -44)
+size = Vector2(64, 44)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="FloorC" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(1828, -208)
+size = Vector2(772, 128)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="EndWall" parent="Geometry" instance=ExtResource("2_block")]
+position = Vector2(2600, -420)
+size = Vector2(32, 560)
+fill_color = Color(0.055, 0.08, 0.15, 1)
+top_color = Color(0.08, 0.85, 1, 1)
+
+[node name="PitFerry" parent="Geometry" instance=ExtResource("3_moving")]
+position = Vector2(640, 0)
+size = Vector2(128, 24)
+travel_offset = Vector2(256, 0)
+travel_duration = 3.5
+endpoint_pause = 0.8
+
+[node name="AssemblyLift" parent="Geometry" instance=ExtResource("3_moving")]
+unique_name_in_owner = true
+position = Vector2(1700, 0)
+size = Vector2(128, 24)
+travel_offset = Vector2(0, -208)
+travel_duration = 3.2
+endpoint_pause = 1.2
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(96, -24)
+
+[node name="Bolt" parent="." instance=ExtResource("4_player")]
+unique_name_in_owner = true
+position = Vector2(96, -24)
+
+[node name="PatrolEnemyB" parent="." instance=ExtResource("7_patrol")]
+position = Vector2(1250, -19)
+patrol_distance = 90.0
+
+[node name="SentryB" parent="." instance=ExtResource("8_sentry")]
+position = Vector2(1640, -20)
+initial_facing = -1
+
+[node name="PatrolEnemyC" parent="." instance=ExtResource("7_patrol")]
+position = Vector2(2080, -227)
+patrol_distance = 100.0
+
+[node name="SentryC" parent="." instance=ExtResource("8_sentry")]
+position = Vector2(2480, -228)
+initial_facing = -1
+
+[node name="HealthPickup" parent="." instance=ExtResource("9_pickup")]
+unique_name_in_owner = true
+position = Vector2(1340, -32)
+
+[node name="Hud" parent="." instance=ExtResource("5_hud")]
+unique_name_in_owner = true
+
+[node name="CheckpointA" parent="." instance=ExtResource("6_checkpoint")]
+unique_name_in_owner = true
+position = Vector2(1090, -32)
+checkpoint_id = &"cybercore_w1_l3_checkpoint_a"
+
+[node name="CheckpointB" parent="." instance=ExtResource("6_checkpoint")]
+unique_name_in_owner = true
+position = Vector2(1900, -240)
+checkpoint_id = &"cybercore_w1_l3_checkpoint_b"
+
+[node name="KillZone" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1300, 650)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+shape = SubResource("KillShape")
+
+[node name="Goal" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2540, -272)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal"]
+shape = SubResource("GoalShape")
+
+[node name="GateVisual" type="Polygon2D" parent="Goal"]
+color = Color(0.1, 0.9, 1, 0.6)
+polygon = PackedVector2Array(-32, -64, 32, -64, 32, 64, -32, 64)
+
+[node name="LevelNote" type="Label" parent="."]
+position = Vector2(24, -168)
+theme_override_font_sizes/font_size = 16
+text = "W1-L3 · SETOR DE MONTAGEM — BLOCKOUT / MECÂNICA PROVISÓRIA"

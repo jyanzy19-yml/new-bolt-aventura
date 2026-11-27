@@ -267,6 +267,11 @@ func test_main_menu_gates_continue_and_keeps_new_game_available_on_bad_save() ->
 	check(not continue_button.disabled, "Continuar é habilitado para W1-L2 implementada")
 	check_eq(menu.call("_resolve_continue_path"), CYBERCORE_W1_L2_PATH, "retomada aponta diretamente para W1-L2")
 	check(status.text.contains("Rede Interrompida"), "menu identifica a fase atual pelo nome")
+
+	check(CampaignProgress.begin_level("W1-L3"), "fixture registra W1-L3 como fase atual")
+	menu.call("_refresh_continue_state")
+	check_eq(menu.call("_resolve_continue_path"), "res://scenes/campaign/cybercore_w1_l3.tscn", "retomada aponta diretamente para W1-L3")
+	check(status.text.contains("Setor de Montagem"), "menu identifica W1-L3 pelo nome")
 	menu.free()
 
 	SaveSystem.delete_save()

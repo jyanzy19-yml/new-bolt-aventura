@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/sentry_bolt.gd" id="1_bolt"]
+
+[sub_resource type="RectangleShape2D" id="BoltShape"]
+size = Vector2(22, 12)
+
+[node name="SentryBolt" type="Area2D"]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_bolt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("BoltShape")
+
+[node name="Glow" type="Polygon2D" parent="."]
+color = Color(1, 0.4, 0.2, 0.3)
+polygon = PackedVector2Array(-16, -9, 8, -9, 16, 0, 8, 9, -16, 9)
+
+[node name="Core" type="Polygon2D" parent="."]
+color = Color(1, 0.62, 0.3, 1)
+polygon = PackedVector2Array(-11, -5, 5, -5, 11, 0, 5, 5, -11, 5)

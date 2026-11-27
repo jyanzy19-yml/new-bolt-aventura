@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/cybercore_sentry.gd" id="1_sentry"]
+[ext_resource type="Script" path="res://scripts/combat/bolt_health.gd" id="2_health"]
+
+[sub_resource type="RectangleShape2D" id="SentryBody"]
+size = Vector2(30, 40)
+
+[sub_resource type="RectangleShape2D" id="SentrySense"]
+size = Vector2(800, 400)
+
+[node name="CybercoreSentry" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_sentry")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SentryBody")
+
+[node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_health")
+max_health = 2
+
+[node name="Sensor" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sensor"]
+shape = SubResource("SentrySense")
+
+[node name="Visual" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+color = Color(0.46, 0.55, 0.8, 1)
+polygon = PackedVector2Array(-15, 20, -15, -6, -8, -20, 8, -20, 15, -6, 15, -3, 28, -3, 28, 6, 15, 6, 15, 20)
+
+[node name="Core" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+color = Color(0.2, 0.85, 1, 1)
+polygon = PackedVector2Array(-7, -14, 7, -14, 7, 0, -7, 0)
+
+[node name="Muzzle" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-22, 0)
+
+[node name="AimLine" type="Line2D" parent="Muzzle"]
+unique_name_in_owner = true
+points = PackedVector2Array(0, 0, 240, 0)
+width = 4.0
+default_color = Color(1, 0.45, 0.2, 0.9)
