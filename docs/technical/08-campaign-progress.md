@@ -6,7 +6,7 @@ CampaignProgress é o dono do schema de progresso de campanha. SaveSystem contin
 
 ## Schema atual
 
-O payload raiz de SaveSystem contém a chave campaign_progress:
+O payload raiz de SaveSystem pode não conter a chave campaign_progress antes de a campanha ser inicializada; nesse caso, CampaignProgress retorna o estado padrão de uma campanha nova. Se a chave estiver presente, o domínio precisa conter todos os campos obrigatórios abaixo. Um objeto vazio ou parcial é inválido e falha fechado com `invalid_campaign_progress_fields`; não pode ser normalizado silenciosamente como campanha nova.
 
 - campaign_id: main
 - schema_version: 1, número finito exatamente integral (TYPE_INT ou TYPE_FLOAT com valor inteiro); strings e floats fracionários são rejeitados
