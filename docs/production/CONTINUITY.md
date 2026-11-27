@@ -1,5 +1,20 @@
 ## Snapshot vigente — 2026-11-26
 
+## Snapshot vigente — 2026-11-27
+
+Repositório: jyanzy19-yml/new-bolt-aventura.
+Main HEAD: 3e4124f561438da2dcff1458a852d47f2f4dfaea, PR #63 integrada por squash.
+Hardening integrado: PR #59 SaveSystem (2e1f7cd2709ff71cc925f26504fa54e52e4f5b95); PR #60 lifecycle Android/input (fd8aefa2a5991a67d3ce75caba57df066a5c1514); PR #63 Boot/cold-start/threaded loading (3e4124f561438da2dcff1458a852d47f2f4dfaea).
+Evidência PR #63: Godot 4.7.2 — 99 testes/1.873 verificações/0 falhas; 150 transições em cinco cenas; 20/20 cold boots headless; mutation test reproduziu o defeito quando o prewarm foi removido. Android Debug Export SUCCESS; APK debug assinado/verificado v2/v3, artefato publicado.
+CI pós-merge main: Docs 45918395500 SUCCESS; Godot 45918395535 e Android Export 45918395499 estavam em execução no momento da atualização.
+Escritor ativo: ChatGPT como único escritor; Claude permanece inativo para escrita concorrente.
+Etapas: 01–03 concluídas; Etapa 04 em desenvolvimento; Gate 0 estático concluído; Gate 1 em andamento. W1-L1/W1-L2 permanecem blockouts.
+PRs abertas: #57 (polimento visual), #58 (cold boot antigo), #61 (teste Boot/Input Map antigo), #62 (unidade consolidada anterior). #58/#61/#62 sobrepõem a correção integrada em #63 e não devem ser mescladas automaticamente; #57 requer revisão independente.
+Dash: decisão canônica aprovada e vigente; preservar conforme docs/production/ADR-001-DASH.md.
+Limites: APK debug exportado, mas não instalado em aparelho. Cold-start visual, touch físico, safe area/barras, lifecycle OEM, FPS, memória, temperatura e sessão prolongada permanecem pendentes.
+Próximo passo: revisar edge cases de CampaignProgress e LoadingOverlay e conferir integração dos estados de recuperação do SaveSystem.
+
+
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
 - **Main HEAD após PR #52:** `6f8e9b8fbaaab9c44247050e5f86e4442bd2622f`; PR #51/#52 integraram e revisaram o mapa arquitetural atual.
 - **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético e progressão W1-L1→W1-L2.
