@@ -1,3 +1,16 @@
+## Continuidade vigente — adoção do plano de 32 etapas (27/11/2026)
+
+- Base documental: PR #72 integrada por squash em `d4036b942e41299bcd33f3ce19826d8558c50420`.
+- Plano operacional primário: `docs/production/32-stage-production-plan.md`; matriz 26 etapas preservada como histórico/crosswalk.
+- Etapas 01–04 permanecem concluídas no nível L2 documentado; antiga Etapa 05 migra para nova Etapa 29 e continua em andamento.
+- Novas Etapas 05–09 são trabalho de direção de arte e produção visual; ChatGPT cria assets e apresenta cada entrega ao usuário. Nenhuma integração ocorre antes de aprovação explícita.
+- ChatGPT conduz arquitetura, sistemas centrais, integração, performance Android, regressão, QA e criação de assets. Claude está autorizado nas cinco frentes registradas em `COLLABORATION_STATE.md`, com branch/PR isolada e sem integração de assets não aprovados.
+- Gate 1 permanece em andamento; W1-L1/W1-L2 continuam blockouts; instalação e validação Android física permanecem pendentes.
+- PR #72 adicionou regressão de overflow do PerformanceProbe; Godot Validation e Android Debug Export passaram no HEAD da PR. Não é evidência de profiling físico.
+- Próxima execução: avançar a Etapa 29 com preparação de captura Android e iniciar planejamento técnico da nova Etapa 05 sem integrar arte não aprovada.
+
+---
+
 ## Continuidade vigente — 2026-11-27 (pós-PR #70)
 
 - Main HEAD: `5e55fa1693d8ecf6d8a1d79bfffa1999824ad1ea`.
