@@ -724,3 +724,16 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Cobertura: interromper Dash terrestre durante respawn e permitir novo Dash; restaurar Dash aéreo após respawn no ar; restaurar orçamento de salto aéreo; descartar toques curtos antigos de salto/Dash pendentes no ActionBuffer.
 - Runtime, tuning, física, InputMap, Dash, save schema, IDs persistentes, canon e cenas de produção não foram alterados.
 - **Estado:** aguardando validação CI e revisão do diff. PR não integrada; nenhum merge autorizado. Evidência L2/headless não substitui validação física Android.
+
+
+---
+
+## Checkpoint de continuidade — PR #93 validada em CI (27/11/2026)
+
+- Branch ativa: `test/stage14-respawn-movement-state-contract-2026-11-27`; HEAD `73cfd59efe937338537b8ef83c386b3a4d3eddee`.
+- PR #93 continua OPEN, mergeable e NÃO integrada. Não há autorização de merge.
+- CI do HEAD: Godot `46041294164` SUCCESS (112 testes/1.960 verificações/0 falhas; 20/20 cold boots); Docs `46041294165` SUCCESS; Android Debug Export `46041294170` SUCCESS (mesma suíte headless aprovada).
+- APK: 28.469.428 bytes; SHA-256 `8813a31ef912f05406cf5d56c0979fd56ed108bd77e506b4bd3835bad4778c6c`; package ID placeholder `com.example.boltaventura`; assinatura v2/v3 verificada; artifact `15221190228`.
+- A falha anterior do Android SDK foi ambiental/configuracional: a workflow reinstalava `cmdline-tools;latest` apesar de `setup-android` já disponibilizá-lo. Removida a instalação duplicada; nova execução passou integralmente.
+- Próximo passo: manter PR #93 aberta para revisão; depois escolher uma unidade independente da Etapa 14 conforme gaps restantes e PRs #78/#79/#82/#85, sem criar escrita concorrente nem declarar a etapa concluída.
+- Limite: APK exportado e assinado em CI não equivale a instalação, execução, touch, safe areas, frame pacing ou profiling em Android físico.
