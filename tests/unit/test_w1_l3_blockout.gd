@@ -146,3 +146,45 @@ func test_w1_l2_completion_routes_to_w1_l3_and_menu_can_resume_it() -> bool:
 
 	_clear_save()
 	return true
+
+
+func test_w1_l3_goal_completes_without_advertising_unimplemented_w1_l4() -> bool:
+	_prepare_save()
+	var packed: PackedScene = load(W1_L3_SCENE) as PackedScene
+	check(packed != null, "cena W1-L3 carrega para validar conclusão")
+	if packed == null:
+		_clear_save()
+		return true
+
+	var level: Node2D = packed.instantiate() as Node2D
+	tree.root.add_child(level)
+	await tree.physics_frame
+	var player: BoltPlayer = level.get_node("Bolt") as BoltPlayer
+	var goal: Area2D = level.get_node("Goal") as Area2D
+	var hud: Hud = level.get_node("Hud") as Hud
+	check(player != null and goal != null and hud != null, "W1-L3 expõe jogador, objetivo e HUD")
+	if player == null or goal == null or hud == null:
+		level.free()
+		await tree.process_frame
+		_clear_save()
+		return true
+
+	player.global_position = goal.global_position
+	player.velocity = Vector2.ZERO
+	await _step_physics(3)
+
+	check(CampaignProgress.is_level_completed("W1-L3"), "contato físico com o objetivo conclui W1-L3")
+	var state: Dictionary = CampaignProgress.load_state()
+	var completed_ids: Array = state.get("completed_level_ids", [])
+	check_eq(completed_ids.count("W1-L3"), 1, "W1-L3 é registrada uma única vez na campanha")
+	check(hud.get_node("%ResultOverlay").visible, "conclusão apresenta o overlay de resultado")
+	check_eq(hud.get_node("%AgainButton").text, "JOGAR DE NOVO",
+		"W1-L3 oferece reinício, sem anunciar W1-L4 ainda inexistente")
+	check_eq(state.get("current_level_id"), "W1-L3",
+		"conclusão mantém W1-L3 como destino disponível sem inventar próxima fase")
+
+	tree.paused = false
+	level.free()
+	await tree.process_frame
+	_clear_save()
+	return true
