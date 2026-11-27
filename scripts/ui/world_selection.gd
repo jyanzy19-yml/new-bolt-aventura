@@ -103,7 +103,7 @@ func _make_world_card(world_index: int, completed: Array) -> Button:
 	button.custom_minimum_size = Vector2(190, 144)
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	button.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	button.text = "%s\n%s\n%d / 6 FASES\n%s" % [world_id, CATALOG.get_world_name(world_index), count, _status_label(state)]
+	button.text = "%s\n%s\n%d / 6 FASES\n%s" % [world_id, _format_world_name(world_index), count, _status_label(state)]
 	button.add_theme_font_size_override("font_size", 17)
 	button.add_theme_color_override("font_color", Color.WHITE if state != "locked" else COLOR_MUTED)
 	button.add_theme_stylebox_override("normal", _card_style(state, false))
