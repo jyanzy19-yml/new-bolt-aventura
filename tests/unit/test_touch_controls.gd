@@ -203,3 +203,41 @@ func test_reused_pointer_id_releases_previous_action() -> bool:
 	check(not Input.is_action_pressed(Actions.MOVE_RIGHT), "nova ação liberada no UP")
 	await _teardown()
 	return true
+
+
+## Four independent touch pointers must preserve gameplay actions even when released
+func test_four_finger_gameplay_and_short_taps_reach_action_buffer() -> bool:
+	await _setup()
+	var buffer: ActionBuffer = ActionBuffer.new()
+	tree.root.add_child(buffer)
+	await tree.process_frame
+
+	# Four independent fingers hold movement, jump, dash and attack simultaneously.
+	# Release all actions before yielding to a physics frame to model a short touch under frame drops.
+	_touch(0, _center(Actions.MOVE_RIGHT), true)
+	_touch(1, _center(Actions.JUMP), true)
+	_touch(2, _center(Actions.DASH), true)
+	_touch(3, _center(Actions.ATTACK), true)
+	check(Input.is_action_pressed(Actions.MOVE_RIGHT), "move_right permanece ativa com quatro ponteiros")
+	check(Input.is_action_pressed(Actions.JUMP), "jump permanece ativa simultaneamente")
+	check(Input.is_action_pressed(Actions.DASH), "dash permanece ativo simultaneamente")
+	check(Input.is_action_pressed(Actions.ATTACK), "attack permanece ativo simultaneamente")
+
+	_touch(3, _center(Actions.ATTACK), false)
+	_touch(2, _center(Actions.DASH), false)
+	_touch(1, _center(Actions.JUMP), false)
+	_touch(0, _center(Actions.MOVE_RIGHT), false)
+	check(not Input.is_action_pressed(Actions.MOVE_RIGHT), "movimento é liberado após o UP")
+	check(not Input.is_action_pressed(Actions.JUMP), "jump é liberado após o UP")
+	check(not Input.is_action_pressed(Actions.DASH), "dash é liberado após o UP")
+	check(not Input.is_action_pressed(Actions.ATTACK), "attack é liberado após o UP")
+
+	for action: StringName in [Actions.JUMP, Actions.DASH, Actions.ATTACK]:
+		check(buffer.has_pending(action), "%s curto chega ao ActionBuffer sem tick de física" % action)
+		check(buffer.consume(action), "%s pode ser consumido uma vez" % action)
+		check(not buffer.consume(action), "%s não é consumido duas vezes" % action)
+
+	buffer.queue_free()
+	await tree.process_frame
+	await _teardown()
+	return true
