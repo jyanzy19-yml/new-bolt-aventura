@@ -47,3 +47,37 @@ func test_camera_drag_margins_are_valid_and_axes_are_enabled() -> bool:
 	check(camera.drag_top_margin + camera.drag_bottom_margin < 1.0, "margens verticais não colapsam a área útil")
 	await _teardown()
 	return true
+
+
+func _verify_level_camera_limits(script_path: String, expected: Rect2i) -> bool:
+	var level_script: GDScript = load(script_path) as GDScript
+	check(level_script != null, "script de fase carrega: %s" % script_path)
+	if level_script == null:
+		return false
+	var level: Node2D = level_script.new() as Node2D
+	var camera: Camera2D = Camera2D.new()
+	level.call("configure_camera", camera)
+	check_eq(camera.limit_left, expected.position.x, "limite esquerdo configurado")
+	check_eq(camera.limit_top, expected.position.y, "limite superior configurado")
+	check_eq(camera.limit_right, expected.end.x, "limite direito configurado")
+	check_eq(camera.limit_bottom, expected.end.y, "limite inferior configurado")
+	check(camera.limit_smoothed, "limites da fase usam suavização")
+	camera.free()
+	level.free()
+	return true
+
+
+func test_w1_l1_camera_limits_are_applied_by_level_contract() -> bool:
+	_verify_level_camera_limits(
+		"res://scripts/campaign/cybercore_w1_l1.gd",
+		Rect2i(0, -360, 2200, 620)
+	)
+	return true
+
+
+func test_w1_l2_camera_limits_are_applied_by_level_contract() -> bool:
+	_verify_level_camera_limits(
+		"res://scripts/campaign/cybercore_w1_l2.gd",
+		Rect2i(0, -360, 1900, 620)
+	)
+	return true
