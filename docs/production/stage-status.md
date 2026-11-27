@@ -1,3 +1,17 @@
+## Snapshot operacional vigente — 2026-11-27 (pós-PR #70)
+
+**Main HEAD:** `5e55fa1693d8ecf6d8a1d79bfffa1999824ad1ea`. PR #69 e PR #70 integradas por squash.
+**Etapas:** 01–04 concluídas; Etapa 05 em desenvolvimento. Gate 1 permanece em andamento; W1-L1/W1-L2 seguem blockouts e QA Android físico permanece pendente.
+**PR #69 — SceneFlow soft cancellation:** integrada em `a68d8c5e9b5575ae936d85d087e4d2d241e2c65d`. Cancelamento lógico opt-in; drena o carregamento threaded, não instala a cena de destino, restaura pause state e encerra o overlay. Não cancela I/O físico nem prova unload.
+**PR #70 — PerformanceProbe:** integrada em `5e55fa1693d8ecf6d8a1d79bfffa1999824ad1ea`. Autoload debug-only; janela de 600 amostras, média/p95/p99/máximo de frame time, monitores de memória/objetos/nós/draw calls/process time; snapshot calculado sob demanda.
+**CI PR #70:** Godot 45968533614 SUCCESS — 107 testes/1.933 verificações/0 falhas; Documentation 45968533594 SUCCESS; Android Debug Export 45968533542 SUCCESS. **CI pós-merge main:** Godot 45969003590 SUCCESS; Documentation 45969003654 SUCCESS; Android Debug Export 45969003728 ainda em execução no momento deste snapshot.
+**Inventário de recursos:** baseline contém 20 arquivos de cena/recurso em `scenes/` e `resources/`, todos pequenos arquivos de texto Godot; não foram encontrados diretórios `assets/` ou `audio/` nem catálogo de texturas/áudio importados. W1-L1/W1-L2 permanecem blockouts com geometria/cores/controles provisórios.
+**Política proposta nesta branch:** não introduzir preload global nem gerenciador genérico; manter SceneFlow threaded por cena, prewarm pontual do script MainMenu no Boot e liberação natural por referências/ownership. Não implementar purge/unload forçado sem evidência e ownership definido. Ver `technical/11-resource-lifecycle-policy.md`.
+**Responsabilidade:** ChatGPT conduz arquitetura, sistemas centrais, integração, desempenho e qualidade. Claude está autorizado a desenvolver as cinco frentes de conteúdo em branch isolada/PR própria; não realizar escrita concorrente nos mesmos arquivos. Nenhuma entrega de conteúdo nova de Claude é presumida neste snapshot.
+**Limites:** CI headless e APK exportado não comprovam FPS, RSS, GPU, latência touch, safe area, lifecycle OEM, temperatura ou estabilidade em aparelho. Nenhuma captura física foi realizada nesta unidade.
+
+---
+
 # Estado de produção — BOLT · AVENTURA
 
 ## Snapshot vigente — 2026-11-27
