@@ -33,6 +33,7 @@ func set_enabled(value: bool) -> bool:
 	_enabled = value
 	if _enabled and _frame_times_ms.is_empty():
 		_frame_times_ms.resize(SAMPLE_CAPACITY)
+		if _enabled:
 		_sample_resource_monitors()
 	set_process(_enabled)
 	return true
