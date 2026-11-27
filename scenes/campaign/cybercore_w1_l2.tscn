@@ -94,4 +94,4 @@ polygon = PackedVector2Array(-32, -64, 32, -64, 32, 64, -32, 64)
 [node name="LevelNote" type="Label" parent="."]
 position = Vector2(24, -168)
 theme_override_font_sizes/font_size = 16
-text = "W1-L2 · REDE INTERROMPIDA — BLOCKOUT / MECÂNICA PROVISÓRIA"
+text = "W1-L2 · RUAS SEM SINAL — BLOCKOUT PROVISÓRIO"
