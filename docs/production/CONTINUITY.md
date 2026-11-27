@@ -796,3 +796,11 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Consolida o teste da PR #83; arquivo `tests/unit/test_one_way_platform.gd` foi comparado com o ancestral `71463b5a1f27d7499943858ac86392a3933c58f2` e não tinha alterações em main desde a base comum.
 - Teste agora valida geometria, margem, direção, passagem ascendente e aterrissagem superior com BOLT real e InputMap/ActionBuffer do projeto.
 - Somente teste e plano técnico. CI pendente; sem validação visual ou Android físico.
+
+
+## Sessão ChatGPT — integração da regressão one-way platform Stage 13 — 2026-11-27
+
+- PR #103 integrada por squash em `8d55fa26c23bde2a2e362648d8befab304cac2a4`; PR #83 encerrada como supersedida.
+- CI do HEAD pré-merge `ebd4dc07888769ab3bbd432150e7898b9cff6414`: Godot `46049432501`, Docs `46049432551`, Android Debug Export `46049432531` — todos SUCCESS; 126 testes/2.097 verificações/0 falhas; 20/20 cold boots; mutation check aprovado.
+- APK Debug: 28.469.428 bytes, package ID provisório `com.example.boltaventura`, SHA-256 `d8b268ceffb34ecf45f08c1d606a98e4381364aace07cfde634286f17657fe84`; assinatura v2/v3 verificada. Artifact `15223234577`; ZIP SHA-256 `a4c4f7021315fc4602207586c780721b57f434285e6dbe2c57c4b1c954cf3ad9`.
+- Teste headless não substitui playtest visual/Android físico. Etapa 13 permanece EM ANDAMENTO.
