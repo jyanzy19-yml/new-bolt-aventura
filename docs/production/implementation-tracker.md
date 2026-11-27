@@ -401,3 +401,5 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Plano: `docs/production/plans/2026-11-27-stage13-camera-configuration-contract.md`.
 - Não altera cena, runtime, limites de fase ou parâmetros de câmera; não prova enquadramento visual.
 - **Estado:** aguardando CI; Etapa 13 permanece EM ANDAMENTO.
+
+- Cobertura ampliada: valida também `configure_camera()` e os limites reais declarados por W1-L1 (`0,-360,2200,620`) e W1-L2 (`0,-360,1900,620`), sem instanciar fases nem tocar no save.
