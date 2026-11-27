@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_menu"]
+[ext_resource type="Script" path="res://scripts/ui/campaign_selection_entry.gd" id="2_selection"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -43,6 +44,13 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 28
 disabled = true
 text = "CONTINUAR"
+
+[node name="CampaignSelectionButton" type="Button" parent="Center/Column"]
+custom_minimum_size = Vector2(380, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "SELECIONAR MUNDO / FASE"
+script = ExtResource("2_selection")
 
 [node name="ProgressStatusLabel" type="Label" parent="Center/Column"]
 unique_name_in_owner = true
