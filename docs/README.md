@@ -25,6 +25,11 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 | Production Roadmap | [Roadmap](production/roadmap.md), [status da etapa](production/stage-status.md), [gestão de mudanças](production/change-management.md) |
 | QA & Acceptance | [Matriz de QA](qa/test-matrix.md), [Definition of Done](production/definition-of-done.md) |
 
+## Produção visual
+
+- [Brief técnico de concept art de BOLT — Etapa 07](production/BOLT-CHARACTER-CONCEPT-BRIEF.md)
+- [Guia técnico de produção de sprites e assets — Etapa 06](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/88) (PR #88; Docs Validation SUCCESS)
+
 ## Design
 
 1. [Visão geral e pilares](game-design/00-game-overview.md)

@@ -1,3 +1,41 @@
+## Atualização de continuidade — aprovação do concept BOLT C02 (27/11/2026)
+
+- O usuário aprovou explicitamente **ART-BOLT-003-C02 v0.1**: robô com cabelo/crista branca espetada, olhos ciano luminosos, detalhes de energia azul e leitura de pixel art 16-bit mais evidente, mantendo identidade robótica azul/branca/preta.
+- C02 substitui C01 como referência conceitual aprovada de BOLT. C01 permanece apenas como exploração anterior, superada.
+- A aprovação fecha o gate de aprovação do concept da Etapa 07, mas não aprova spritesheets, animações finais, hitboxes, alterações de Player ou integração no jogo.
+- A produção visual definitiva permanece reservada à Etapa 31, conforme o plano vigente. Não gerar nem integrar assets finais antecipadamente.
+- VDIR-01 permanece HÍBRIDO CONTROLADO; VDIR-02 a VDIR-08 continuam pendentes. A aparência pixelada de C02 é uma referência de concept e não fecha resolução lógica, escala ou pipeline técnico global.
+- A imagem C02 foi apresentada nesta conversa; ainda não foi adicionada ao repositório como asset binário.
+- PR #89 permanece aberta e não integrada neste checkpoint. Nenhum merge foi executado.
+
+---
+
+## Atualização de continuidade — aprovação VDIR-01 e concept C01 (27/11/2026)
+
+- O usuário aprovou VDIR-01: **HÍBRIDO CONTROLADO**.
+- Interpretação: personagens estilizados de silhueta forte; cenários 2D raster com profundidade/atmosfera; sinais de gameplay com contraste e leitura imediata; pixelização apenas pontual, sem grade pixelada global obrigatória.
+- VDIR-02 a VDIR-08 continuam pendentes. Não inferir resolução, escala, proporções, paletas, materiais, contornos ou parâmetros de animação.
+- ART-BOLT-003-C01 v0.1 foi gerado e apresentado para avaliação. Estado: **AWAITING_USER_APPROVAL**. Não é arte final e não foi integrado ao projeto Godot.
+- A decisão de estilo não aprova automaticamente o concept, spritesheets, animações, hitboxes ou integração.
+- PRs #87, #88 e #89 continuam abertas e não integradas neste checkpoint; nenhum merge foi executado.
+- Próxima ação: aguardar decisão explícita do usuário sobre C01 (aprovação da versão exata ou pedido de revisão); manter as decisões VDIR-02 a VDIR-08 abertas.
+
+---
+
+## Continuidade vigente — Etapas 06 e 07 (27/11/2026)
+
+- Base de referência: `71463b5a1f27d7499943858ac86392a3933c58f2`.
+- PR #87 (Etapa 05) continua aberta; direção visual aguarda aprovação explícita do usuário.
+- PR #88 (Etapa 06) contém ART-BOLT-002, guia técnico de sprites/assets; Docs Validation run `46016532136` SUCCESS. Etapa 06 VALIDADA no escopo documental. PR ainda aberta, sem merge.
+- PR #88 não foi integrada. Nenhuma PR foi integrada sem autorização do usuário.
+- Etapa 07 iniciada na branch `docs/stage07-bolt-character-design-brief`.
+- ART-BOLT-003: brief técnico criado em `BOLT-CHARACTER-CONCEPT-BRIEF.md`, com fatos canônicos, lacunas, requisitos de leitura, folha de personagem, matriz de poses, aprovação e limites de integração.
+- O concept visual final não foi gerado: a Etapa 05 ainda não foi aprovada e a validação da Etapa 06 não está confirmada. Não definir proporções, paleta, resolução, estilo ou origem técnica por suposição.
+- Nenhuma cena, script, física, Dash, InputMap, multitouch, save schema, ID persistente, progressão ou canon foi alterado.
+- Próxima ação: confirmar Docs Validation da PR #88; obter decisão da direção visual da PR #87; então criar e apresentar concept visual versionado de BOLT para aprovação.
+
+---
+
 ## Continuidade vigente — adoção do plano de 32 etapas (27/11/2026)
 
 - Main HEAD: `d90ac2c78e96b32233f8d003ea6673a38079ecb3`; PR #72 e PR #73 integradas por squash.
