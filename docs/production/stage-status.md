@@ -669,3 +669,12 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - APK Debug Godot 4.7.2: 28.478.036 bytes; package ID placeholder `com.example.boltaventura`; SHA-256 `4fa4a81ca7e5f0b048f05f9a14bc41bec9a0c4c4f0344c1445538a01ca4dc892`; assinatura v2/v3 verificada. Artifact `15234169146`; ZIP SHA-256 `41ee39850c322e6be341053b666b887edcb9cade9c3c81c1a30cff354142f84a`; [artefato Android Debug](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46075124490/artifacts/15234169146).
 - CI valida parsing/importação, regressões automatizadas, documentação e exportação. Não comprova instalação ou execução em Android físico.
 - Sem playtest humano, validação Android física, medição de touch, câmera/clipping, FPS, memória ou comportamento térmico. W1-L3 continua BLOCKOUT PROVISÓRIO; Etapa 23 permanece EM ANDAMENTO.
+
+
+## Correção de alinhamento canônico W1-L3 — 27/11/2026
+
+- A ficha W1-L3 foi reconciliada com o Atlas Mestre: nome oficial **Fábrica de Ecos**, estrutura híbrida, esteiras em direções variáveis, prensas sinalizadas, plataformas móveis, contexto de fábrica e rota de controle.
+- Branch `fix/cybercore-w1-l3-atlas-alignment-2026-11-27` adiciona `ConveyorBelt` e `IndustrialPress`, integra duas esteiras opostas e duas prensas e corrige títulos W1-L1 a W1-L4 no catálogo.
+- W1-L3 continua blockout. Armas Tríplice/Laser, inimigos canônicos específicos, segredo com item de lore e interação real de desligamento da linha continuam pendentes.
+- W1-L4 oficial: Laboratório de Memórias. W1-L5 oficial: Torre do Núcleo. As PRs de conteúdos divergentes foram fechadas sem merge.
+- CI pendente; sem playtest humano/Android físico.
