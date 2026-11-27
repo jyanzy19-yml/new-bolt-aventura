@@ -58,10 +58,9 @@ func _on_contact_body_entered(body: Node2D) -> void:
 	# Ignore any late overlap callback after its active lifecycle has ended.
 	if not _active or not body is BoltPlayer:
 		return
-	if body is BoltPlayer:
-		var player: BoltPlayer = body as BoltPlayer
-		var knockback_direction: float = signf(player.global_position.x - global_position.x)
-		player.take_damage(contact_damage, knockback_direction)
+	var player: BoltPlayer = body as BoltPlayer
+	var knockback_direction: float = signf(player.global_position.x - global_position.x)
+	player.take_damage(contact_damage, knockback_direction)
 
 
 func _on_depleted() -> void:
