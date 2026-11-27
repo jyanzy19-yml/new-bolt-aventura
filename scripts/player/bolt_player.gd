@@ -82,7 +82,7 @@ func respawn(at: Vector2) -> void:
 	_is_defeated = false
 	_invulnerability_left = 0.0
 	_health.restore_full()
-	_combat.set_enabled(true)
+	_combat.reset_for_respawn()
 	set_physics_process(true)
 	_visual.modulate = Color.WHITE
 	_set_state(State.GROUNDED)
