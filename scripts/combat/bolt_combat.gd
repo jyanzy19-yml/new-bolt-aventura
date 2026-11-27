@@ -29,6 +29,12 @@ func set_enabled(enabled: bool) -> void:
 		_buffer.clear()
 
 
+## Reinicia o estado transitório de combate ao recuperar BOLT após derrota/respawn.
+func reset_for_respawn() -> void:
+	_cooldown_left = 0.0
+	set_enabled(true)
+
+
 func _physics_process(delta: float) -> void:
 	if not _enabled or _player == null or not _player.is_physics_processing():
 		return
