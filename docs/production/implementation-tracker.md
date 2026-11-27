@@ -448,7 +448,10 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 
 ## Etapa 13 — regressão de plataforma unidirecional (27/11/2026)
 
-- Branch: `test/stage13-one-way-platform-physics-integration-2026-11-27`; consolida a cobertura anteriormente proposta na PR #83.
+- Branch de implementação `test/stage13-one-way-platform-physics-integration-2026-11-27`; PR #103 integrada por squash em `8d55fa26c23bde2a2e362648d8befab304cac2a4`; PR #83 encerrada como supersedida.
 - Amplia `tests/unit/test_one_way_platform.gd`: verifica geometria retangular, dimensões/posição da CollisionShape2D, direção de bloqueio e margem; simula BOLT apoiado em piso sólido, salto através da plataforma e aterrissagem na face superior usando InputMap/ActionBuffer reais.
 - Somente testes e plano técnico (`docs/production/plans/2026-11-27-stage13-one-way-platform-physics-integration.md`); nenhum runtime, Player, física, tuning, Dash, InputMap, cena de produção, arte ou asset é alterado.
-- **Estado:** CI pendente. Etapa 13 permanece EM ANDAMENTO; teste headless não substitui playtest visual/Android.
+- **Estado:** PR #103 integrada; regressão de plataforma unidirecional está em `main`. Etapa 13 permanece EM ANDAMENTO; teste headless não substitui playtest visual/Android.
+- CI do HEAD pré-merge `ebd4dc07888769ab3bbd432150e7898b9cff6414`: Godot `46049432501`, Docs `46049432551`, Android Debug Export `46049432531` — todos SUCCESS; **126 testes / 2.097 verificações / 0 falhas**; 20/20 cold boots e mutation check aprovados.
+- APK Debug: 28.469.428 bytes, package ID provisório `com.example.boltaventura`, SHA-256 `d8b268ceffb34ecf45f08c1d606a98e4381364aace07cfde634286f17657fe84`; assinatura v2/v3 verificada. Artifact `15223234577`; ZIP SHA-256 `a4c4f7021315fc4602207586c780721b57f434285e6dbe2c57c4b1c954cf3ad9`.
+- Sem validação visual ou Android físico; câmera/clipping, resposta touch, FPS e estabilidade real continuam pendentes.
