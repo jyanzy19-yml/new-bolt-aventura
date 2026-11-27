@@ -11,7 +11,7 @@
 
 ---
 
-## Continuidade vigente — 2026-11-27 (pós-PR #70)
+## Snapshot histórico de continuidade — 2026-11-27 (pré-adoção das 32 etapas)
 
 - Main HEAD: `5e55fa1693d8ecf6d8a1d79bfffa1999824ad1ea`.
 - PR #69 integrada: cancelamento lógico opt-in de SceneFlow, com drenagem da carga, sem cancelamento físico de I/O.
@@ -23,7 +23,7 @@
 
 ---
 
-## Snapshot vigente — 2026-11-27
+## Snapshot histórico — 2026-11-27 (plano anterior de 26 etapas)
 
 - **Repositório:** `jyanzy19-yml/new-bolt-aventura`.
 - **Main HEAD:** `4544efc7082a17e7824ccf46c524db07486e3dc9`; PR #67 integrada por squash.
