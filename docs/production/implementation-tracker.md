@@ -397,7 +397,7 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 ## Etapa 14 — contrato de recuperação do movimento (2026-11-27)
 
 - Branch: `test/stage14-respawn-movement-state-contract-2026-11-27`; base `79023eabb6b31bccc456d3a2d005731733e8444e`.
-- Novo teste `tests/unit/test_player_respawn_movement_contract.gd`: cobre cancelamento de Dash em andamento, reset observável do cooldown, restauração do Dash aéreo e orçamento de salto aéreo no respawn.
+- Novo teste `tests/unit/test_player_respawn_movement_contract.gd`: cobre cancelamento de Dash em andamento, reset observável do cooldown, restauração do Dash aéreo e orçamento de salto aéreo, além de descartar comandos curtos antigos pendentes no ActionBuffer durante o respawn.
 - Escopo não altera runtime, tuning, física, InputMap, Dash, save schema, IDs persistentes ou cenas de produção.
 - Plano: `docs/production/plans/2026-11-27-stage14-respawn-movement-state-contract.md`.
 - **Estado:** aguardando CI; não declara Etapa 14 concluída e não substitui PRs #78, #79 ou #85.
