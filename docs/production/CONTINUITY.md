@@ -804,3 +804,14 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - CI do HEAD pré-merge `ebd4dc07888769ab3bbd432150e7898b9cff6414`: Godot `46049432501`, Docs `46049432551`, Android Debug Export `46049432531` — todos SUCCESS; 126 testes/2.097 verificações/0 falhas; 20/20 cold boots; mutation check aprovado.
 - APK Debug: 28.469.428 bytes, package ID provisório `com.example.boltaventura`, SHA-256 `d8b268ceffb34ecf45f08c1d606a98e4381364aace07cfde634286f17657fe84`; assinatura v2/v3 verificada. Artifact `15223234577`; ZIP SHA-256 `a4c4f7021315fc4602207586c780721b57f434285e6dbe2c57c4b1c954cf3ad9`.
 - Teste headless não substitui playtest visual/Android físico. Etapa 13 permanece EM ANDAMENTO.
+
+
+## Sessão Claude — W1-L4 Núcleo de Distribuição (branch `feat/w1-l4-distribution-core`) — 2026-11-27
+
+- Base: `main` `ceb6091`. PR #84 (W1-L3) aberta e **não** integrada; W1-L4 independente dela. Não houve merge.
+- Arquivos novos: `scripts/levels/{energy_sequence,energy_relay,energy_conduit,distribution_gate,distribution_puzzle,energy_clue_mural,narrative_beat_trigger}.gd`, `scenes/levels/{energy_relay,distribution_gate}.tscn`, `scripts/campaign/cybercore_w1_l4.gd`, `scenes/campaign/cybercore_w1_l4.tscn`, `tests/unit/{test_energy_sequence,test_w1_l4}.gd`, docs (proposta de design, spec técnica) e evidências em `docs/production/evidence/cybercore-w1-l4/`. Edição em `implementation-tracker.md` (linha W1-L4).
+- Testes executados: suíte completa Godot 4.7.2 headless — 141 testes/2.283 verificações/0 falhas; 8/8 mutantes eliminados; capturas Xvfb (software GL).
+- Não executado: CI remoto, Android físico, FPS/memória, playtest humano.
+- Nível de validação: implementado + testado headless; **não** validado em aparelho.
+- Pendências: integração L3→L4 e menu (outros arquivos/workstream); consumidor do beat narrativo; recompensa opcional a especificar; persistência de estado do puzzle (ADR + schema).
+- Próxima ação executável: abrir/revisar a PR, registrar CI; após integração de PR #84, abrir unidade separada de wiring L3→L4/menu.

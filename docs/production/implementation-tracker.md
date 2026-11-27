@@ -101,7 +101,7 @@ A matriz define a estrutura planejada: seis fases por mundo; fases 1–5 de prog
 | W1-L1 | Cybercore | Entrada e exploração | Em andamento | Blockout com BOLT, HUD/touch, combate, coletável, checkpoint persistente e objetivo; conclusão direciona W1-L2 após integração da PR #34. Placeholders, arte/áudio finais, playtest humano e QA Android pendentes |
 | W1-L2 | Cybercore | Progressão | Em andamento | Blockout integrado pela PR #34 em `cybercore_w1_l2.tscn`, com campo energético cíclico, plataformas, checkpoint e objetivo; CI pré-merge passou, playtest humano/Android pendentes |
 | W1-L3 | Cybercore | Progressão | Não iniciado | Sem cena |
-| W1-L4 | Cybercore | Combinação de mecânicas | Não iniciado | Sem cena |
+| W1-L4 | Cybercore | Combinação de mecânicas (Núcleo de Distribuição) | Implementado em blockout provisório (branch `feat/w1-l4-distribution-core`, PR aberta, não integrada) | `cybercore_w1_l4.tscn`: puzzle de 3 relés por TIRO (ordem por conduítes + mural), barreira, 2 rotas que convergem, atalhos one-way, rota vertical opcional, 2 checkpoints; 141 testes/2.283 verificações/0 falhas + 8/8 mutantes eliminados em Godot 4.7.2 headless. Independente de W1-L3 (PR #84); integração de progressão/menu separada. Playtest humano, CI remoto e Android pendentes; ver `w1-l4-technical-spec-and-integration.md` |
 | W1-L5 | Cybercore | Domínio e preparação | Não iniciado | Sem cena |
 | W1-L6 | Cybercore | Guardião Tecnológico / Origem | Não iniciado | Sem cena |
 | W2-L1 | Egito Antigo Futurista | Entrada e exploração | Não iniciado | Sem cena |
