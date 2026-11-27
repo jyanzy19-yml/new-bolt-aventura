@@ -763,3 +763,13 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - CI do HEAD pré-merge `c554d4017b7122115d8aa7f19a958e8ebe17131a`: Godot `46047789524`, Docs `46047789662`, Android Debug Export `46047789618` — todos SUCCESS; 122 testes/2.074 verificações/0 falhas; 20/20 cold boots; mutation check aprovado.
 - APK Debug: 28.469.428 bytes; package ID provisório `com.example.boltaventura`; SHA-256 `3fcc82001ef65fc3809e514ea42e24db6935f1e2d0f9e04b5d5b6f520bc12128`; assinatura v2/v3 verificada; Artifact `15222484035`; ZIP SHA-256 `7fb7d288b160dbaf6bc18f0620d6a80c2dca83cbe53142eabd6e64c632b46bd6`.
 - QA Android físico e CI pós-merge não confirmados. Etapa 14 permanece EM ANDAMENTO.
+
+
+## Sessão ChatGPT — integração de lifecycle Stage 15 — 2026-11-27
+
+- Branch `integration/stage15-enemy-projectile-lifecycle-2026-11-27`, baseada no main após integrações Stage 14.
+- Consolida PR #80 (guard de contato tardio e limite de patrulha do inimigo provisório) e PR #81 (consumo único do ChronoProjectile), ambas baseadas no ancestral `71463b5a1f27d7499943858ac86392a3933c58f2`.
+- Os três arquivos existentes foram comparados com o ancestral: `docs/technical/05-system-contracts.md`, `scripts/enemies/cybercore_patrol_enemy.gd` e `scripts/combat/chrono_projectile.gd` não tinham alterações em main desde a base comum; diffs aplicados sem descartar trabalho posterior.
+- Inclui `test_enemy_lifecycle.gd`, `test_chrono_projectile.gd`, ampliação do contrato técnico e plano da unidade.
+- Sem mudança de Player, Dash, InputMap, save, IDs, campanha, canon, arte ou assets. Sem novos arquétipos ou IA não aprovada.
+- CI pendente; não integrar antes de Godot, Docs e Android Debug Export passarem.
