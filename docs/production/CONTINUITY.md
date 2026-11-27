@@ -712,3 +712,12 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - CI no head `0019ac9b0ac1bf813c4bcc874d9017fa69bf0295`: Godot `46027916866`, Docs `46027916827` e Android Debug Export `46027916828` concluídos SUCCESS.
 - Nenhum runtime, cena, tuning, física, InputMap, Dash, arte ou save foi alterado. A exportação debug não foi instalada em aparelho.
 - PR #91 não integrada; Etapa 12 continua EM ANDAMENTO. Próxima unidade independente: contratos de configuração espacial/câmera da Etapa 13, sem sobrepor a PR #91.
+
+
+## Sessão ChatGPT — Etapa 13: contrato estrutural da câmera — 2026-11-27
+
+- Branch: `test/stage13-camera-configuration-contract-2026-11-27`.
+- Teste novo: `tests/unit/test_camera_configuration.gd`; verifica ownership e acesso público da Camera2D, habilitação, smoothing, limites suavizados, dead zones e margens válidas.
+- Plano: `docs/production/plans/2026-11-27-stage13-camera-configuration-contract.md`.
+- Sem alterações de runtime, cena, tuning, limites de fase ou parâmetros de enquadramento.
+- Headless não valida framing visual, clipping, aspect ratios ou comportamento em aparelho Android. Etapa 13 permanece EM ANDAMENTO.
