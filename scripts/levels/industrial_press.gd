@@ -14,20 +14,25 @@ enum State { WARNING, ACTIVE, RECOVERY }
 @export_range(24.0, 120.0, 1.0) var press_travel: float = 56.0
 
 var _state: State = State.WARNING
+var _state_time_left: float = 0.0
 
 @onready var _head: Polygon2D = %Head
 @onready var _strike_zone: CollisionShape2D = %StrikeZone
-@onready var _cycle_timer: Timer = %CycleTimer
 
 
 func _ready() -> void:
 	collision_layer = 0
 	collision_mask = 2
 	monitoring = true
-	_cycle_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	body_entered.connect(_on_body_entered)
 	_strike_zone.disabled = true
 	_enter_state(State.WARNING)
+
+
+func _physics_process(delta: float) -> void:
+	_state_time_left -= delta
+	if _state_time_left <= 0.0:
+		_on_cycle_timeout()
 
 
 func get_state() -> State:
@@ -55,17 +60,17 @@ func _enter_state(next_state: State) -> void:
 			_strike_zone.set_deferred("disabled", true)
 			_head.position.y = -press_travel
 			_head.color = Color(1.0, 0.72, 0.18, 1.0)
-			_cycle_timer.start(warning_duration)
+			_state_time_left = warning_duration
 		State.ACTIVE:
 			_head.position.y = -12.0
 			_head.color = Color(1.0, 0.22, 0.18, 1.0)
 			_strike_zone.set_deferred("disabled", false)
-			_cycle_timer.start(active_duration)
+			_state_time_left = active_duration
 		State.RECOVERY:
 			_strike_zone.set_deferred("disabled", true)
 			_head.position.y = -press_travel
 			_head.color = Color(0.22, 0.78, 1.0, 0.72)
-			_cycle_timer.start(recovery_duration)
+			_state_time_left = recovery_duration
 	state_changed.emit(_state)
 
 
