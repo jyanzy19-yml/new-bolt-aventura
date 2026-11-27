@@ -47,3 +47,14 @@ O teste não chama o handler privado `_on_kill_zone_body_entered`; a colisão de
 ## Limitações
 
 Headless não comprova justiça da queda, legibilidade visual da área de perigo, resposta de toque, frame pacing, FPS, memória ou estabilidade térmica Android. A geometria e coordenadas de W1-L1 permanecem blockout provisório.
+
+
+## Evidência CI — HEAD de implementação
+
+- HEAD de implementação validado: `7e2a646a24ef5dcf51bf7ca8108ae5c59eadc5bb`.
+- Godot Validation run `46043254619`: SUCCESS — **109 testes / 1.959 verificações / 0 falhas**, 20/20 cold boots e mutation check do prewarm aprovados.
+- Documentation Validation run `46043254425`: SUCCESS.
+- Android Debug Export run `46043254483`: SUCCESS — suíte headless **109 testes / 1.959 verificações / 0 falhas**.
+- APK debug: 28.469.428 bytes; package ID placeholder `com.example.boltaventura`; SHA-256 `82721bcdb626dd62f010abcdb17ff92f6f55ce3ee6b1908c5b065b86f0781f49`; assinatura v2/v3 verificada; artifact ID `15221422243`; digest ZIP SHA-256 `62847b2a844f486f4661ebcb0a5289ad6bebd2d4b585705f599a6f4e227cd4a2`.
+- A remoção da instalação redundante de `cmdline-tools;latest` mantém o setup Android determinístico enquanto a correção equivalente ainda não está integrada em `main`.
+- Evidência é de CI/headless e exportação debug; não houve instalação ou playtest em Android físico.
