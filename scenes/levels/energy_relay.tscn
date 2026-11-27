@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/energy_relay.gd" id="1_relay"]
+
+[sub_resource type="RectangleShape2D" id="RelayShape"]
+size = Vector2(40, 48)
+
+[node name="EnergyRelay" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_relay")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RelayShape")
+
+[node name="Halo" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+visible = false
+color = Color(0.3, 1, 0.9, 0.3)
+polygon = PackedVector2Array(-34, -8, -24, -24, -8, -34, 8, -34, 24, -24, 34, -8, 34, 8, 24, 24, 8, 34, -8, 34, -24, 24, -34, 8)
+
+[node name="Base" type="Polygon2D" parent="."]
+color = Color(0.08, 0.11, 0.2, 1)
+polygon = PackedVector2Array(-20, -24, 20, -24, 20, 24, -20, 24)
+
+[node name="Rim" type="Line2D" parent="."]
+points = PackedVector2Array(-20, -24, 20, -24, 20, 24, -20, 24, -20, -24)
+width = 2.0
+default_color = Color(0.55, 0.85, 1, 1)
+
+[node name="GlyphFill" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+color = Color(0.3, 0.38, 0.55, 1)
+
+[node name="RejectMark" type="Node2D" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="StrokeA" type="Line2D" parent="RejectMark"]
+points = PackedVector2Array(-16, -16, 16, 16)
+width = 4.0
+default_color = Color(1, 1, 1, 1)
+
+[node name="StrokeB" type="Line2D" parent="RejectMark"]
+points = PackedVector2Array(16, -16, -16, 16)
+width = 4.0
+default_color = Color(1, 1, 1, 1)
+
+[node name="FlashTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
