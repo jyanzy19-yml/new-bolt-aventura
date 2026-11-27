@@ -12,7 +12,7 @@ Base documental: PR #72 integrada em `d4036b942e41299bcd33f3ce19826d8558c50420`.
 
 ---
 
-## Snapshot técnico — 2026-11-27 (pós-PR #70)
+## Snapshot histórico — 2026-11-27 (pré-adoção das 32 etapas)
 
 - Main HEAD: `5e55fa1693d8ecf6d8a1d79bfffa1999824ad1ea`; PR #69/#70 integradas.
 - SYS-020/SceneFlow: cancelamento lógico opt-in integrado; a thread ResourceLoader não é interrompida.
@@ -25,7 +25,7 @@ Base documental: PR #72 integrada em `d4036b942e41299bcd33f3ce19826d8558c50420`.
 
 # BOLT · AVENTURA — Rastreador de implementação
 
-## Snapshot vigente — 2026-11-27
+## Snapshot histórico — 2026-11-27 (plano anterior de 26 etapas)
 
 Main HEAD: `4544efc7082a17e7824ccf46c524db07486e3dc9`. PRs #59, #60, #63, #65, #66 e #67 integradas.
 PR #59: recuperação de temporário íntegro e proteção contra downgrade de formatos futuros; schema v1 preservado.
