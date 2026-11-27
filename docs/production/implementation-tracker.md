@@ -384,3 +384,13 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Godot Validation `45913709017`: SUCCESS — 95 testes/652 verificações/0 falhas; Docs Validation `45913709173`: SUCCESS.
 - Android Debug Export `45913709027`: SUCCESS; APK 28.465.153 bytes, SHA-256 `2f9ae799db84dbcf648566c8953c5fede9bcb91800417edb9586005092ad358f`, assinatura v2/v3 válida; package ID provisório `com.example.boltaventura`; artifact registrado no stage-status.
 - **Estado:** implementação validada em CI headless e exportação debug; PR #59 aberta, sem merge. Não altera schema v1, API pública, CampaignProgress, IDs de fase/checkpoint ou payload de domínio. Sem instalação Android física.
+
+
+## Etapa 12 — contrato de transições de estado do jogador (2026-11-27)
+
+- Branch: `test/stage12-player-state-transition-contract-2026-11-27`.
+- Adiciona regressão em `tests/unit/test_player_movement.gd` para o sinal público `BoltPlayer.state_changed` durante um salto completo.
+- O teste acompanha e exige exatamente a sequência `RISING → FALLING → GROUNDED`, sem emissões duplicadas.
+- Plano: `docs/production/plans/2026-11-27-stage12-player-state-transition-contract.md`.
+- Escopo exclusivamente de teste/documentação; nenhum runtime, animação, cena, tuning, InputMap ou física alterado.
+- **Estado:** aguardando CI. Etapa 12 permanece EM ANDAMENTO; o teste do contrato de estado não comprova integração visual de animações.
