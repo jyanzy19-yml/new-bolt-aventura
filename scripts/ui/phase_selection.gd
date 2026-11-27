@@ -76,6 +76,8 @@ func _build_interface() -> void:
 	var current_level_id: String = str(state.get("current_level_id", ""))
 	for phase_index in range(CATALOG.get_phase_count_per_world()):
 		grid.add_child(_make_phase_card(phase_index, completed, current_level_id))
+	if grid.get_child_count() > 0:
+		grid.get_child(0).grab_focus()
 
 	var footer := HBoxContainer.new()
 	footer.alignment = BoxContainer.ALIGNMENT_END
