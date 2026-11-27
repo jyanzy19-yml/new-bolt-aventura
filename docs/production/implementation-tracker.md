@@ -2,7 +2,7 @@
 
 Plano operacional primário: [32-stage-production-plan.md](32-stage-production-plan.md).  
 Matriz de 26 etapas: registro histórico e crosswalk; preservar IDs e evidências antigas.  
-Main HEAD: `d90ac2c78e96b32233f8d003ea6673a38079ecb3`; PR #72 e PR #73 integradas. Docs Validation pós-merge PR #73 `45986435957` SUCCESS.
+Main HEAD no início desta unidade: `79023eabb6b31bccc456d3a2d005731733e8444e`. PRs #93, #94 e #95 estavam abertas e com CI SUCCESS em seus HEADs; nenhuma foi integrada nesta unidade.
 
 **Migração de estado:** novas Etapas 01–04 preservam o estado concluído das antigas 01–04, com limite L2. A antiga Etapa 05 (recursos/loading) migra para a nova Etapa 29 e continua EM ANDAMENTO. Novas Etapas 05–09 são trabalho artístico novo e não herdam conclusão. Nenhuma outra etapa herda status apenas por equivalência temática.
 
@@ -392,3 +392,14 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Exige exatamente `RISING → FALLING → GROUNDED`, sem duplicação; runtime, física e assets não foram alterados.
 - CI no commit `0019ac9b0ac1bf813c4bcc874d9017fa69bf0295`: Godot run `46027916866` SUCCESS; Docs `46027916827` SUCCESS; Android Debug Export `46027916828` SUCCESS.
 - **Estado:** regressão automatizada aprovada em CI; PR #91 aberta e não integrada. Etapa 12 continua EM ANDAMENTO, sem validação visual ou Android físico.
+
+
+## Etapa 14 — fallback local de checkpoint W1-L1 diante de save incompatível (27/11/2026)
+
+- Unidade aberta na branch `test/stage14-w1-l1-checkpoint-save-failure-2026-11-27`; PR criada após validação do escopo.
+- Auditoria confirmou que a cobertura existente já inclui reentrada de W1-L1 com checkpoint persistido (`test_w1_l1_restores_persisted_checkpoint_on_scene_reentry`), ativação física, queda e recuperação com persistência válida. Não foi duplicado esse cenário.
+- Lacuna distinta: ausência de regressão para domínio `CampaignProgress` com schema futuro/incompatível durante a sessão.
+- Novo teste `tests/unit/test_stage14_w1_l1_checkpoint_persistence_failure_contract.gd`: semeia schema de domínio 999, ativa checkpoint e KillZone por contato físico real, exige fallback de respawn local, preservação do payload incompatível e ausência de derrota/pausa terminal.
+- Runtime, cenas, colisões, física, Dash, InputMap, schema v1, IDs persistentes, progressão, canon e assets não foram alterados.
+- Plano: `docs/production/plans/2026-11-27-stage14-w1-l1-checkpoint-persistence-failure.md`.
+- **Estado:** implementação e documentação na branch; CI pendente. Etapa 14 continua EM ANDAMENTO. Sem validação Android física.
