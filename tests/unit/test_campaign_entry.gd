@@ -23,7 +23,7 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 	check(opening != null, "cena da abertura carrega")
 	check(tutorial != null, "cena do tutorial carrega")
 	check(cybercore != null, "cena W1-L1 de Cybercore carrega")
-	check(cybercore_l2 != null, "cena W1-L2 Rede Interrompida carrega")
+	check(cybercore_l2 != null, "cena W1-L2 Ruas sem Sinal carrega")
 	if opening == null or tutorial == null or cybercore == null or cybercore_l2 == null:
 		return true
 
@@ -163,7 +163,7 @@ func test_campaign_entry_scenes_load_and_expose_required_nodes() -> bool:
 		if hud.get_node("%ResultOverlay").visible:
 			break
 	check(hud.get_node("%ResultOverlay").visible, "alcançar fisicamente a saída conclui o trecho")
-	check_eq(hud.get_node("%ResultTitle").text, "Cybercore — trecho inicial concluído", "tela de resultado identifica a conclusão")
+	check_eq(hud.get_node("%ResultTitle").text, "Despertar entre Ruínas concluído", "tela de resultado identifica a conclusão")
 	check(CampaignProgress.is_level_completed("W1-L1"), "conclusão da W1-L1 é persistida")
 	check_eq(CampaignProgress.load_state().get("current_level_id"), "W1-L2", "conclusão da W1-L1 avança o destino de retomada para W1-L2")
 	check_eq(hud.get_node("%AgainButton").text, "PRÓXIMA FASE", "resultado oferece entrada direta na próxima fase")
@@ -266,7 +266,7 @@ func test_main_menu_gates_continue_and_keeps_new_game_available_on_bad_save() ->
 	menu.call("_refresh_continue_state")
 	check(not continue_button.disabled, "Continuar é habilitado para W1-L2 implementada")
 	check_eq(menu.call("_resolve_continue_path"), CYBERCORE_W1_L2_PATH, "retomada aponta diretamente para W1-L2")
-	check(status.text.contains("Rede Interrompida"), "menu identifica a fase atual pelo nome")
+	check(status.text.contains("Ruas sem Sinal"), "menu identifica a fase atual pelo nome")
 	menu.free()
 
 	SaveSystem.delete_save()
