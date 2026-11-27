@@ -100,7 +100,7 @@ func _make_world_card(world_index: int, completed: Array) -> Button:
 	var state: String = CATALOG.get_world_state(world_index, completed, scene_exists)
 	var count: int = CATALOG.get_world_completed_count(world_index, completed)
 	var button := Button.new()
-	button.custom_minimum_size = Vector2(190, 128)
+	button.custom_minimum_size = Vector2(190, 144)
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	button.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	button.text = "%s\n%s\n%d / 6 FASES\n%s" % [world_id, CATALOG.get_world_name(world_index), count, _status_label(state)]
@@ -113,6 +113,16 @@ func _make_world_card(world_index: int, completed: Array) -> Button:
 	button.disabled = state != "available" and state != "completed"
 	button.pressed.connect(_open_world.bind(world_id))
 	return button
+
+func _format_world_name(world_index: int) -> String:
+	match world_index:
+		1: return "Egito Antigo\\nFuturista"
+		2: return "Speakeasy\\nAesthetic"
+		4: return "Pôr do Sol em\\nCidade Medieval"
+		5: return "Vaporwave /\\nLas Vegas"
+		6: return "Natal / Nova York\\nFuturista"
+		_: return CATALOG.get_world_name(world_index)
+
 
 func _card_style(state: String, hovered: bool) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
