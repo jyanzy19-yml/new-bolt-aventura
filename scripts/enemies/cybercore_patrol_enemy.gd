@@ -44,11 +44,23 @@ func _physics_process(delta: float) -> void:
 		_hit_flash_left = maxf(0.0, _hit_flash_left - delta)
 		if _hit_flash_left == 0.0:
 			_visual.color = _base_visual_color
-	if global_position.x >= _origin_x + patrol_distance:
-		_direction = -1.0
-	elif global_position.x <= _origin_x - patrol_distance:
-		_direction = 1.0
-	velocity.x = _direction * patrol_speed
+	# Clamp the final physics step to the active patrol endpoint. Reversing
+	# only after crossing the endpoint permits visible overshoot at high speed.
+	var direction_sign: float = -1.0 if _direction < 0.0 else 1.0
+	var patrol_extent: float = maxf(0.0, patrol_distance)
+	var target_x: float = _origin_x + patrol_extent * direction_sign
+	var remaining_distance: float = (target_x - global_position.x) * direction_sign
+	var safe_delta: float = maxf(delta, 0.000001)
+	var maximum_step: float = maxf(0.0, patrol_speed) * maxf(delta, 0.0)
+
+	if remaining_distance <= 0.001:
+		velocity.x = 0.0
+		_direction = -direction_sign
+	elif maximum_step >= remaining_distance:
+		velocity.x = direction_sign * remaining_distance / safe_delta
+		_direction = -direction_sign
+	else:
+		velocity.x = direction_sign * maxf(0.0, patrol_speed)
 	velocity.y = 0.0
 	move_and_slide()
 
