@@ -412,3 +412,33 @@ func test_w1_l4_is_resumable_from_main_menu_continue() -> bool:
 	await tree.process_frame
 	_end()
 	return true
+
+
+func test_w1_l4_unlocks_in_phase_selection_after_w1_l3_completion() -> bool:
+	_begin()
+	check(CampaignProgress.start_new_campaign(), "campanha de teste inicia")
+	check(CampaignProgress.mark_level_completed("W1-L1", "W1-L2"), "conclusão W1-L1 libera W1-L2")
+	check(CampaignProgress.mark_level_completed("W1-L2", "W1-L3"), "conclusão W1-L2 libera W1-L3")
+	check(CampaignProgress.mark_level_completed("W1-L3"), "conclusão W1-L3 é persistida")
+	tree.root.set_meta("campaign_selection_world_id", "W1")
+	var phase_scene: PackedScene = load("res://scenes/ui/phase_selection.tscn") as PackedScene
+	check(phase_scene != null, "seleção de fases carrega")
+	if phase_scene == null:
+		tree.root.remove_meta("campaign_selection_world_id")
+		_end()
+		return true
+	var screen: Node = phase_scene.instantiate()
+	tree.root.add_child(screen)
+	await tree.process_frame
+	var grid: GridContainer = screen.find_child("PhaseGrid", true, false) as GridContainer
+	check(grid != null and grid.get_child_count() == 6, "Cybercore apresenta seis cards")
+	if grid != null and grid.get_child_count() == 6:
+		var w1_l4: Button = grid.get_child(3) as Button
+		check(w1_l4 != null and not w1_l4.disabled, "W1-L4 fica selecionável após concluir W1-L3")
+		check(w1_l4 != null and w1_l4.text.contains("DISPONÍVEL"), "W1-L4 é exibida como disponível")
+	screen.free()
+	await tree.process_frame
+	if tree.root.has_meta("campaign_selection_world_id"):
+		tree.root.remove_meta("campaign_selection_world_id")
+	_end()
+	return true
