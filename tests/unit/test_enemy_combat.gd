@@ -275,3 +275,51 @@ func test_respawn_discards_unconsumed_action_buffer_press() -> bool:
 	root.queue_free()
 	await tree.process_frame
 	return true
+
+
+func test_enemy_terminal_lifecycle_is_idempotent_and_ignores_late_contact() -> bool:
+	var player_scene: PackedScene = load(PLAYER_SCENE) as PackedScene
+	var enemy_scene: PackedScene = load(ENEMY_SCENE) as PackedScene
+	check(player_scene != null and enemy_scene != null, "cenas de BOLT e inimigo carregam para o contrato terminal")
+	if player_scene == null or enemy_scene == null:
+		return true
+
+	var root: Node2D = Node2D.new()
+	tree.root.add_child(root)
+	var player: BoltPlayer = player_scene.instantiate() as BoltPlayer
+	var enemy: CybercorePatrolEnemy = enemy_scene.instantiate() as CybercorePatrolEnemy
+	player.global_position = Vector2(1000.0, 0.0)
+	enemy.global_position = Vector2.ZERO
+	root.add_child(player)
+	root.add_child(enemy)
+	await tree.process_frame
+
+	var player_health: BoltHealth = player.get_node("%Health") as BoltHealth
+	var enemy_health: BoltHealth = enemy.get_node("%Health") as BoltHealth
+	var defeated_events: Array[int] = [0]
+	var hit_events: Array[int] = [0]
+	enemy.defeated.connect(func() -> void: defeated_events[0] += 1)
+	enemy.hit_received.connect(func(_remaining: int) -> void: hit_events[0] += 1)
+
+	enemy.apply_damage(0)
+	check_eq(enemy_health.current_health, 3, "dano inválido não altera a vida do inimigo")
+	check_eq(hit_events[0], 0, "dano inválido não emite hit_received")
+
+	enemy.apply_damage(3)
+	check_eq(enemy_health.current_health, 0, "dano letal esgota a vida do inimigo")
+	check_eq(hit_events[0], 1, "dano letal aceito emite um único hit_received")
+	check_eq(defeated_events[0], 1, "transição terminal emite defeated uma única vez")
+	check(enemy.is_queued_for_deletion(), "inimigo derrotado agenda remoção")
+
+	# queue_free() é diferido; callbacks ainda podem chegar antes do flush da SceneTree.
+	enemy.apply_damage(1)
+	enemy.call("_on_contact_body_entered", player)
+	check_eq(enemy_health.current_health, 0, "dano tardio não reabre o ciclo terminal")
+	check_eq(hit_events[0], 1, "dano tardio não duplica hit_received")
+	check_eq(defeated_events[0], 1, "callbacks tardios não duplicam defeated")
+	check_eq(player_health.current_health, player_health.max_health,
+		"contato tardio após derrota não causa dano em BOLT")
+
+	root.queue_free()
+	await tree.process_frame
+	return true
