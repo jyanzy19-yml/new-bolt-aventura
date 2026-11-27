@@ -3,7 +3,7 @@
 **ID:** ART-BOLT-003  
 **Etapa:** 07 — Concept art do protagonista BOLT e aprovação visual  
 **Versão:** 0.1 — brief técnico preparatório  
-**Estado:** SPECIFIED / aguardando decisões visuais da Etapa 05  
+**Estado:** CONCEPT_CREATED / AWAITING_USER_APPROVAL — ART-BOLT-003-C01 v0.1 apresentado em 27/11/2026  
 **Engine:** Godot 4.7.2 / GDScript  
 **Produto:** Android empacotado, orientação paisagem  
 **Fonte narrativa:** `docs/game-design/03-character-bible.md`  
@@ -42,7 +42,7 @@ Qualquer solução visual para esses campos deve ser rotulada como proposta de c
 
 ### 3.1 Etapa 05 — direção visual global
 
-A proposta de direção visual global está registrada na PR #87 e ainda aguarda avaliação/aprovação explícita. Portanto, este brief pode avançar em requisitos, critérios e estrutura de apresentação, mas não pode congelar:
+A proposta de direção visual global está registrada na PR #87. Em 27/11/2026, VDIR-01 foi aprovado como HÍBRIDO CONTROLADO. As decisões VDIR-02 a VDIR-08 permanecem abertas. Portanto, o concept C01 é uma exploração visual compatível com o estilo-base, mas não congela:
 - estilo artístico;
 - resolução lógica e escala de apresentação;
 - proporções finais;
@@ -53,7 +53,7 @@ A proposta de direção visual global está registrada na PR #87 e ainda aguarda
 
 ### 3.2 Etapa 06 — pipeline técnico
 
-O guia ART-BOLT-002 foi criado na PR #88. A PR permanece aberta e sua validação documental automatizada foi concluída com sucesso (Docs Validation run `46016532136`). O guia está validado no escopo documental, embora ainda não integrado à `main`. Os valores técnicos dependentes da direção visual continuam TBD até a aprovação da Etapa 05.
+O guia ART-BOLT-002 foi criado na PR #88. A PR permanece aberta e sua validação documental automatizada foi concluída com sucesso (Docs Validation run `46016532136`). O guia está validado no escopo documental, embora ainda não integrado à base principal. Os valores técnicos dependentes de decisões ainda abertas permanecem TBD.
 
 ### 3.3 Regra de não bloqueio
 
@@ -166,12 +166,12 @@ A etapa será concluída quando:
 7. decisão, versão e proveniência forem registradas no manifesto e na fila;
 8. nenhum asset não aprovado for integrado.
 
-Enquanto a Etapa 05 não estiver aprovada, o trabalho desta etapa permanece preparatório e não pode declarar aceite visual final.
+A aprovação de VDIR-01 libera a exploração do concept, mas não equivale à aprovação do concept C01 nem fecha as demais decisões da Etapa 05. A Etapa 07 permanece em avaliação até aprovação explícita de uma versão exata.
 
 ## 11. Estado desta entrega
 
 **Entregue nesta unidade:** brief técnico ART-BOLT-003, matriz de fatos e lacunas, requisitos de leitura, folha de personagem, matriz de poses, critérios de avaliação, contrato de aprovação e limites de integração.
 
-**Ainda não entregue:** concept visual, vistas desenhadas, poses ilustradas, paleta, proporções, arte final, spritesheet ou integração no jogo.
+**Entregue nesta sessão:** concept exploratório ART-BOLT-003-C01 v0.1 apresentado para avaliação. **Ainda não entregue:** aprovação do concept, vistas ortográficas completas verificadas, paleta oficial, proporções técnicas, arte final, spritesheet ou integração no jogo.
 
-**Próxima ação:** resolver aprovação da direção visual global (Etapa 05) e validação do pipeline (Etapa 06); em seguida, produzir a primeira folha de concept de BOLT para avaliação explícita.
+**Próxima ação:** obter decisão do usuário sobre ART-BOLT-003-C01 v0.1 (aprovar ou solicitar revisão); em paralelo, manter VDIR-02 a VDIR-08 e a integração das PRs rastreados sem antecipar arte final.
