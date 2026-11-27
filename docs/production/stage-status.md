@@ -1,6 +1,6 @@
 # Snapshot operacional vigente — adoção do plano de 32 etapas (27/11/2026)
 
-**Main HEAD vigente:** `d90ac2c78e96b32233f8d003ea6673a38079ecb3` (PR #72 e PR #73 integradas por squash). Docs Validation pós-merge PR #73: run `45986435957` SUCCESS.  
+**Main HEAD vigente no checkpoint desta atualização:** `71463b5a1f27d7499943858ac86392a3933c58f2` (PRs #72, #73 e #74 integradas). PR #73 adotou o plano de 32 etapas; PR #74 reconciliou os snapshots operacionais. Docs Validation pós-merge PR #73: run `45986435957` SUCCESS; validação pós-merge PR #74 registrada no histórico de CI.  
 **PR #73:** formalizou o plano de 32 etapas e o pipeline de aprovação visual; merge commit `d90ac2c78e96b32233f8d003ea6673a38079ecb3`.
 **Plano primário:** [32-stage-production-plan.md](32-stage-production-plan.md). A matriz de 26 etapas permanece como histórico/crosswalk, não como plano operacional primário.  
 **Etapas novas 01–04:** concluídas no nível automatizado/documental L2 descrito nas evidências históricas; isso não aprova Gate 1 nem QA Android físico.  
