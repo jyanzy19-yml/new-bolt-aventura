@@ -18,55 +18,76 @@
 **Identidade:** ruínas tecnológicas, infraestrutura quebrada e energia residual.  
 **Curva local:** ensinar linguagem física e estabelecer BOLT–NEXO; depois expandir exploração e combate sem sobrecarregar o início.
 
-### W1-L1 — Despertar nas Ruínas
-- **Função:** primeiro contato com o mundo destruído e entrada de campanha. A fase deve ser curta o bastante para ensinar sem parecer uma arena de testes.
-- **Percurso:** trecho horizontal inicial com área segura de observação, sequência de plataformas baixas, primeiro risco ambiental legível, encontro controlado e saída visível.
-- **Mecânica:** movimento, salto, leitura de bordas e primeiro uso de ataque. Dash permanece como habilidade existente, ensinado no tutorial/fluxo aprovado e reforçado com espaço seguro.
-- **Narrativa:** mostrar o estado de Cybercore e vestígios do Grande Colapso; BOLT não compreende ainda a escala do evento.
-- **Opcional:** pequeno desvio com registro ambiental que sugere uma função antiga da infraestrutura.
-- **Gate:** rota obrigatória concluível; combate não bloqueia movimento de forma injusta; checkpoint e pickup não criam loop de morte; objetivo claro. A implementação atual é blockout, não fase final.
+### W1-L1 — Despertar entre Ruínas
+- **Função:** tutorial orgânico e apresentação de Bolt.
+- **Estrutura:** horizontal com pequenas elevações e uma seção vertical curta.
+- **Percurso:** câmara de despertar → corredor desmoronado → pátio aberto → abrigo de manutenção.
+- **Ensina:** andar, aceleração, salto, altura variável, pulo duplo e interação, cada ação em espaço seguro antes de ser combinada.
+- **Desafios:** plataformas largas; depois, vãos moderados; por fim, sequência de saltos com aterrissagens visíveis.
+- **Inimigos:** unidade de manutenção defeituosa introduzida isoladamente; primeiro confronto opcional/leve.
+- **Narrativa:** Bolt desperta sem memória. NEXO emite um sinal fragmentado e orienta a saída.
+- **Segredo:** compartimento de diagnóstico que sugere que Bolt não é um robô comum.
+- **Conclusão:** alcançar o abrigo e ativar o primeiro ponto de sincronização.
 
-### W1-L2 — Rede Interrompida
-- **Função:** primeira expansão do espaço e apresentação de circuitos ambientais.
-- **Percurso:** sala industrial, eixo vertical curto e retorno por plataforma que altera a leitura do espaço.
-- **Mecânica:** energia residual liga/desliga elementos do cenário em ciclos previsíveis. O jogador aprende a observar um ciclo antes de atravessar.
-- **Narrativa:** registros fragmentados indicam que Cybercore era um sistema habitado, não apenas uma fábrica.
-- **Opcional:** rota de manutenção com pickup/recompensa ainda a definir, acessível por domínio do Dash.
-- **Gate:** ciclo ambiental não pode prender o jogador; sinalização deve antecipar mudança; checkpoint após seção de aprendizagem.
+### W1-L2 — Ruas sem Sinal
+- **Função:** apresentar exploração urbana e combate básico.
+- **Estrutura:** horizontal ramificada com plataformas de fachadas.
+- **Percurso:** avenida destruída → estação de energia → telhados baixos → praça de comunicação.
+- **Ensina:** Pistola, troca entre as três armas e leitura de projéteis inimigos.
+- **Desafios:** coberturas, inimigos em alturas diferentes e pequenas rotas superiores.
+- **Inimigos:** Sentinela de Patrulha, Drone Vigia e unidade de manutenção.
+- **Narrativa:** NEXO recupera mapas incompletos de Cybercore.
+- **Segredo:** sala de mensagens com registro de evacuação.
+- **Conclusão:** religar o repetidor e abrir a passagem para a zona industrial.
 
-### W1-L3 — Setor de Montagem
-- **Função:** combinar combate básico com plataforma em espaço de leitura ampla.
-- **Percurso:** sequência de salas conectadas por elevadores industriais e plataformas móveis lentas.
-- **Mecânica:** inimigos patrulheiros e mecanismos que exigem posicionamento, sem introduzir múltiplos sistemas simultaneamente.
-- **Narrativa:** BOLT encontra sinais de que unidades robóticas tinham funções diferentes; introduzir a ideia de comunidade perdida.
-- **Opcional:** compartimento lateral com uma mensagem visual, não uma longa exposição.
-- **Gate:** densidade de inimigos compatível com touch; projéteis não ocultam plataformas; plataformas móveis previsíveis.
+### W1-L3 — Fábrica de Ecos
+- **Função:** combinar plataforma e combate em cenário industrial.
+- **Estrutura:** híbrida, com esteiras, elevadores e poços de manutenção.
+- **Percurso:** docas → linha de montagem → núcleo de esteiras → torre de controle.
+- **Ensina:** Tríplice para cobertura ampla e Laser para alvos resistentes/precisos.
+- **Desafios:** esteiras com direção variável, prensas claramente sinalizadas e plataformas móveis.
+- **Inimigos:** Operário Corrompido, Drone Vigia e Sentinela.
+- **Narrativa:** registros mostram que a fábrica produzia componentes ligados ao Núcleo da Eternidade.
+- **Segredo:** rota por dutos que evita uma arena secundária e oferece item de lore.
+- **Conclusão:** desativar a linha de montagem sem destruir os registros.
 
-### W1-L4 — Núcleo de Distribuição
-- **Função:** primeira fase de combinação e orientação espacial.
-- **Percurso:** mapa híbrido com dois caminhos que convergem, atalhos visíveis e uma rota vertical opcional.
-- **Mecânica:** direcionamento de energia por interruptores de ambiente; a ordem correta deve ser inferível por pistas.
-- **Narrativa:** NEXO reage a um sinal antigo, mas não consegue decodificá-lo completamente.
-- **Opcional:** rota de domínio de movimento com recompensa cosmética/colecionável ainda a especificar.
-- **Gate:** puzzle pode ser resolvido sem pixel hunting; feedback de estado; retorno seguro após falha.
+### W1-L4 — Laboratório de Memórias
+- **Função:** aprofundar mistério e precisão.
+- **Estrutura:** vertical, com elevadores, câmaras e plataformas em níveis.
+- **Percurso:** recepção lacrada → arquivo holográfico → câmaras de teste → observatório.
+- **Ensina:** leitura de plataformas, saltos encadeados e uso deliberado de cada arma.
+- **Desafios:** plataformas que alternam estado com aviso visual; lasers ambientais lentos e previsíveis.
+- **Inimigos:** Projeção Defensiva, Drone Vigia e Sentinela.
+- **Narrativa:** primeira evidência de que Bolt esteve ligado a um projeto de preservação.
+- **Segredo:** memória corrompida com silhueta de uma figura associada ao Arquiteto.
+- **Conclusão:** recuperar o registro central e localizar a torre de energia.
 
-### W1-L5 — Perímetro do Guardião
-- **Função:** preparar o clímax local, revisando movimento, combate e leitura de hazards.
-- **Percurso:** travessia mais longa com checkpoint antes de uma arena de aproximação; sinais visuais do guardião aparecem antes do encontro.
-- **Mecânica:** combinar plataforma móvel, inimigo e janela de energia, usando apenas regras ensinadas.
-- **Narrativa:** revelar que o guardião protege o fragmento Origem, sem explicar toda a história do Núcleo.
-- **Opcional:** observatório lateral que mostra Cybercore em escala maior.
-- **Gate:** checkpoint justo; sem novo input obrigatório; telegraphs visíveis na tela de celular.
+### W1-L5 — Torre do Núcleo
+- **Função:** síntese das mecânicas do mundo e preparação do guardião.
+- **Estrutura:** vertical ascendente, com descansos e atalhos desbloqueáveis.
+- **Percurso:** base da torre → anéis de manutenção → antenas externas → câmara de contenção.
+- **Desafios:** plataformas móveis, inimigos em posições de pressão e janelas de salto bem comunicadas.
+- **Inimigos:** combinação controlada dos inimigos já apresentados; não introduzir comportamento essencial novo no clímax.
+- **Narrativa:** NEXO revela que a energia temporal foi fragmentada.
+- **Segredo:** rota opcional de manutenção com melhoria cosmética/colecionável.
+- **Conclusão:** abrir a câmara do guardião.
 
-### W1-L6 — Guardião Tecnológico
-- **Função:** primeiro grande exame de domínio e obtenção do fragmento Origem.
-- **Percurso:** arena de leitura simples com espaço lateral e vertical suficiente para salto/Dash.
-- **Mecânica:** fases curtas do chefe; alternar ameaça de zona e janela vulnerável; cada transição claramente anunciada.
-- **Narrativa:** fragmento reage a BOLT/NEXO; conquista altera o estado do portão dimensional.
-- **Opcional:** nenhum segredo pode competir com clareza do primeiro chefe.
-- **Gate:** todas as fases do chefe têm contra-jogo; derrota e retry funcionam; fragmento persiste; transição não duplica recompensa.
+### W1-L6 — Guardião: Sentinela do Fragmento
+- **Função:** primeiro chefe e exame justo dos fundamentos.
+- **Arena:** ampla, plana o bastante para leitura, com duas plataformas elevadas e limites seguros.
+- **Fases do combate:** patrulha e disparos anunciados; investida linear com recuperação; núcleo exposto após sequência de ataques; fase final com combinação de padrões já ensinados.
+- **Regras:** sinais claros antes de cada ataque; janelas de dano consistentes; sem dano inevitável ao reaparecer.
+- **Narrativa:** ao ser derrotado, o guardião revela o Fragmento de Origem e um registro de Bolt.
+- **Recompensa:** Fragmento de Origem e abertura do primeiro portal dimensional.
+- **Conclusão:** cena curta de reação de NEXO e saída para o próximo universo.
 
 ---
+
+## Nota de reconciliação de implementação — 27/11/2026
+
+Este bloco W1 substitui os títulos e resumos anteriores do blueprint do repositório, que divergiam do Atlas Mestre de 42 fases disponibilizado nas fontes do projeto. Em particular, W1-L3 é **Fábrica de Ecos**, W1-L4 é **Laboratório de Memórias** e W1-L5 é **Torre do Núcleo**.
+
+O runtime atual ainda contém Dash, mas as entradas W1 do Atlas acima não o definem como requisito obrigatório de progressão. O código existente é preservado nesta correção; nenhuma fase deve exigir Dash como único meio de avanço até que a lista canônica de habilidades e os contratos de gameplay sejam formalmente reconciliados.
 
 # MUNDO 2 — EGITO ANTIGO FUTURISTA
 **Fragmento:** Memória. **Guardião:** Guardião Ancestral das Pirâmides.  
