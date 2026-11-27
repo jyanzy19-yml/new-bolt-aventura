@@ -1,5 +1,17 @@
 # BOLT · AVENTURA — Rastreador de implementação
 
+## Snapshot vigente — 2026-11-27
+
+Main HEAD: 3e4124f561438da2dcff1458a852d47f2f4dfaea (PR #63 integrada). PR #59 e #60 também integradas.
+PR #59: recuperação de temporário íntegro e proteção contra downgrade de formatos futuros; schema v1 preservado.
+PR #60: libera ações e ponteiros touch em notificação de suspensão Android; validação física permanece pendente.
+PR #63: prewarm de main_menu.gd na thread principal antes da cena threaded; teste Boot fail-closed; 30 ciclos × 5 cenas; CI com 20 cold boots e mutation test.
+Godot PR #63: 99 testes/1.873 verificações/0 falhas. Android Debug Export SUCCESS; artifact ZIP 28.204.882 bytes, SHA-256 fd331a5151cf8d61732e04bd070ea6ca8eca9844945007248f1fb3b040c50553.
+CI pós-merge main: Docs 45918395500 SUCCESS; Godot 45918395535 e Android Export 45918395499 ainda em execução no momento deste snapshot.
+PRs #57/#58/#61/#62 seguem abertas e fora da main; #58/#61/#62 sobrepõem conteúdo da PR #63 e exigem tratamento separado. #57 é independente e requer revisão própria.
+Etapa 04 permanece EM DESENVOLVIMENTO. Nenhuma validação física Android foi realizada.
+
+
 **Objetivo:** impedir que sistemas ou fases sejam declarados concluídos apenas por terem arquivos ou cenas criados.  
 **Atualização:** em toda entrega substancial e mudança de gate.\n\n**Snapshot 2026-11-26:** `main` HEAD `54fd48e5f49fba877740265aafa0d8f649c2b1e9` (PRs #57/#58 abertas, não integradas); PR #47 pós-merge Godot 88 testes/553 verificações/0 falhas, Docs e Android Export SUCCESS. APK debug exportado, não instalado em aparelho. Etapas 01–03 concluídas; Etapa 04 em desenvolvimento.  
 **Regra:** estado precisa refletir evidência no branch atual.
