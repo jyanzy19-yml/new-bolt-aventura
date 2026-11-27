@@ -48,6 +48,7 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 
 - [Princípios de arquitetura Godot](technical/00-architecture-principles.md)
 - [Especificação Android e desempenho](technical/01-android-performance.md)
+- [Instrumentação de performance em builds debug](technical/10-performance-instrumentation.md)
 - [Input touch, tela e áreas seguras](technical/02-touch-and-display.md)
 - [Carregamento e recursos](technical/03-loading-and-assets.md)
 - [Checklist de build Android](technical/04-android-build-checklist.md)
