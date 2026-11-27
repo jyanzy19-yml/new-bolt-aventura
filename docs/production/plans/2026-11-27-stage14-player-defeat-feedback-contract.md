@@ -27,8 +27,9 @@ Cenário coberto:
 
 ## Preservação
 
-- Somente um arquivo de teste é adicionado.
+- Um arquivo de teste é adicionado; o workflow Android também remove a reinstalação redundante de `cmdline-tools;latest`, já disponibilizado pelo passo `setup-android`.
 - Nenhum script de runtime, cena, valor de vida/dano, física, invulnerabilidade, Dash, InputMap, ActionBuffer, save schema, ID persistente, progressão, canon, arte ou asset é modificado.
+- A mudança no workflow é operacional e idêntica à correção aplicada na PR #93, necessária enquanto essa correção ainda não estiver integrada em `main`.
 - Não altera a política de recuperação/respawn da PR #93.
 - Não duplica o contrato unitário de sinais de `BoltHealth` da PR #82; cobre a integração `BoltHealth → BoltPlayer → controlador W1-L1 → Hud`.
 - O save de teste usa caminho isolado e é removido ao final.
