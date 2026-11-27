@@ -5,7 +5,7 @@
 **Plano primário:** [32-stage-production-plan.md](32-stage-production-plan.md). A matriz de 26 etapas permanece como histórico/crosswalk, não como plano operacional primário.  
 **Etapas novas 01–04:** concluídas no nível automatizado/documental L2 descrito nas evidências históricas; isso não aprova Gate 1 nem QA Android físico.  
 **Nova Etapa 29:** EM ANDAMENTO — recebe o trabalho da antiga Etapa 05 sobre recursos, carregamento, ciclo de vida e instrumentação. PR #69, #70, #71 e #72 integradas; medições físicas ainda pendentes.  
-**Etapa 05:** EM ANDAMENTO — proposta de direção visual em PR #87, aguardando aprovação explícita do usuário. **Etapa 06:** IMPLEMENTADA — guia ART-BOLT-002 em PR #88; revisão documental realizada, mas CI/validação automatizada ainda não confirmada. **Etapa 07:** EM ANDAMENTO — brief técnico ART-BOLT-003 em preparação; concept visual final depende das Etapas 05 e 06.  
+**Etapa 05:** EM ANDAMENTO — proposta de direção visual em PR #87, aguardando aprovação explícita do usuário. **Etapa 06:** VALIDADA (documental) — guia ART-BOLT-002 em PR #88; Docs Validation run `46016532136` SUCCESS. PR ainda aberta, sem merge. **Etapa 07:** EM ANDAMENTO — brief técnico ART-BOLT-003 em preparação; concept visual final depende das Etapas 05 e 06.  
 **Gate 1:** EM ANDAMENTO. W1-L1 e W1-L2 permanecem blockouts. Instalação, touch, safe areas, barras, FPS, memória, temperatura e lifecycle ainda carecem de validação Android física.  
 **PR #72:** integrada por squash antes deste plano; teste determinístico de overflow do buffer de 600 amostras. Godot Validation `45969491642` e Android Debug Export `45969491660` SUCCESS no HEAD da PR. Isso não é profiling físico.
 
@@ -18,7 +18,7 @@
 | 03 | VALIDADA (L2 documental) | Baseline arquitetural e contratos mapeados |
 | 04 | VALIDADA (L2) | Boot, SceneFlow, SaveSystem, CampaignProgress e LoadingOverlay endurecidos |
 | 05 | EM ANDAMENTO | Proposta em PR #87; aguardando aprovação explícita do usuário |
-| 06 | IMPLEMENTADA | Guia ART-BOLT-002 em PR #88; validação automatizada ainda não confirmada |
+| 06 | VALIDADA (documental) | Guia ART-BOLT-002 em PR #88; Docs Validation `46016532136` SUCCESS; PR ainda não integrada |
 | 07 | EM ANDAMENTO | Brief ART-BOLT-003 em PR desta etapa; concept visual aguarda Etapas 05 e 06 |
 | 08 | NÃO INICIADA | Spritesheets finais dependem da Etapa 07 |
 | 09 | NÃO INICIADA | Kit visual inicial de UI/HUD depende de aprovação |
