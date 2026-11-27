@@ -4,6 +4,8 @@
 Construir uma identidade audiovisual consistente para protagonista, máquina temporal, sete mundos, inimigos, chefes, interface e cutscenes. Esta bíblia define critérios de produção; não substitui referências visuais aprovadas.
 
 ## 2. Estado do estilo
+
+A proposta exploratória da Etapa 05 está em [08-visual-direction-proposal.md](08-visual-direction-proposal.md). Ela não equivale a aprovação de estilo, paleta ou asset.
 A direção final de pixel art, resolução-base, escala de sprites, paletas, proporções, densidade de detalhe, iluminação e animação precisa ser confirmada a partir dos materiais aprovados. Não inventar esses parâmetros como decisões fechadas.
 
 ## 3. Personagem e silhueta
