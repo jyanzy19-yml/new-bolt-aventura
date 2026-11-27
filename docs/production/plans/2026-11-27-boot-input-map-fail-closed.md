@@ -41,3 +41,13 @@ Headless valida o contrato programático e a cena carregável. Não comprova col
 - APK debug: 28.461.057 bytes; package ID provisório `com.example.boltaventura`; assinatura v2/v3 verificada; SHA-256 `de1cbc2370c958104cb51d9dee607a1d5fba4f9a51a8bb19e0cbc4207c51b231`.
 - Artifact: `bolt-aventura-android-debug-f49cde66ddb82956f30fd6afcc09e00620145f7c` (artifact ID `15161951684`).
 - Limites: CI headless e exportação comprovados; instalação/execução em aparelho Android e cold-start visual não executados.
+
+## Revalidação no HEAD documental final — `2837be13`
+
+Após registrar a primeira evidência, os três workflows foram executados novamente no HEAD final da PR:
+
+- Godot Validation run `45915128321`: **SUCCESS — 93 testes, 593 verificações, 0 falhas**.
+- Documentation Validation run `45915128398`: **SUCCESS**.
+- Android Debug Export run `45915128330`: **SUCCESS — 93 testes, 593 verificações, 0 falhas**.
+- APK debug: 28.461.057 bytes; package ID provisório `com.example.boltaventura`; assinatura v2/v3 verificada; SHA-256 `d382f51b3c433d84c3ad9052b7145596305e3cc9751e2a1c29edc304ce99b9e4`.
+- Artifact: `bolt-aventura-android-debug-68a34763ce73ead7f7cd0d2bf540c40a7eff5c59` (artifact ID `15162021236`).
