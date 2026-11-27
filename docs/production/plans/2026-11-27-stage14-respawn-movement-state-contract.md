@@ -30,7 +30,7 @@ Os testes usam a cena real do jogador, o `ActionBuffer`, o `InputMap` e ticks re
 
 ## Critérios de aceite
 
-- Os três cenários são descobertos automaticamente por `tests/test_runner.gd`.
+- Os quatro cenários são descobertos automaticamente por `tests/test_runner.gd`.
 - Godot Validation e Documentation Validation passam no commit final.
 - Android Debug Export passa, como verificação de compatibilidade de empacotamento; não equivale a instalação física.
 - A PR permanece aberta para revisão e não é mesclada sem autorização explícita.
