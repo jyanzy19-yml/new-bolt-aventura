@@ -111,13 +111,13 @@ static func get_world_completed_count(world_index: int, completed_level_ids: Arr
 static func get_world_state(world_index: int, completed_level_ids: Array, first_phase_scene_exists: bool) -> String:
 	if world_index < 0 or world_index >= get_world_count():
 		return "locked"
-	if not first_phase_scene_exists:
-		return "coming_soon"
 	if get_world_completed_count(world_index, completed_level_ids) == get_phase_count_per_world():
 		return "completed"
-	if is_world_unlocked(world_index, completed_level_ids):
-		return "available"
-	return "locked"
+	if not is_world_unlocked(world_index, completed_level_ids):
+		return "locked"
+	if not first_phase_scene_exists:
+		return "coming_soon"
+	return "available"
 
 static func get_total_completed_count(completed_level_ids: Array) -> int:
 	var count: int = 0
