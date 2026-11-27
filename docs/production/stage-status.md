@@ -1,11 +1,11 @@
 # Snapshot operacional vigente — adoção do plano de 32 etapas (27/11/2026)
 
-**Main HEAD vigente:** `d90ac2c78e96b32233f8d003ea6673a38079ecb3` (PR #72 e PR #73 integradas por squash). Docs Validation pós-merge PR #73: run `45986435957` SUCCESS.  
+**Main HEAD de referência desta unidade:** `71463b5a1f27d7499943858ac86392a3933c58f2`. PR #87 (Etapa 05) e a PR desta Etapa 06 são propostas abertas; nenhuma foi integrada. Docs Validation pós-merge PR #73: run `45986435957` SUCCESS.  
 **PR #73:** formalizou o plano de 32 etapas e o pipeline de aprovação visual; merge commit `d90ac2c78e96b32233f8d003ea6673a38079ecb3`.
 **Plano primário:** [32-stage-production-plan.md](32-stage-production-plan.md). A matriz de 26 etapas permanece como histórico/crosswalk, não como plano operacional primário.  
 **Etapas novas 01–04:** concluídas no nível automatizado/documental L2 descrito nas evidências históricas; isso não aprova Gate 1 nem QA Android físico.  
 **Nova Etapa 29:** EM ANDAMENTO — recebe o trabalho da antiga Etapa 05 sobre recursos, carregamento, ciclo de vida e instrumentação. PR #69, #70, #71 e #72 integradas; medições físicas ainda pendentes.  
-**Novas Etapas 05–09:** NÃO INICIADAS — direção de arte, guia técnico e produção visual ainda precisam ser executados. A criação visual deverá ser apresentada ao usuário e aprovada antes de integração.  
+**Etapa 05:** EM ANDAMENTO — proposta ART-BOLT-001 apresentada em PR #87; aguarda aprovação visual explícita do usuário. **Etapa 06:** EM ANDAMENTO — guia técnico ART-BOLT-002 elaborado nesta branch; aguarda CI/revisão documental. **Etapas 07–09:** NÃO INICIADAS — dependem das decisões visuais e aprovações aplicáveis. A criação visual deverá ser apresentada ao usuário e aprovada antes de integração.  
 **Gate 1:** EM ANDAMENTO. W1-L1 e W1-L2 permanecem blockouts. Instalação, touch, safe areas, barras, FPS, memória, temperatura e lifecycle ainda carecem de validação Android física.  
 **PR #72:** integrada por squash antes deste plano; teste determinístico de overflow do buffer de 600 amostras. Godot Validation `45969491642` e Android Debug Export `45969491660` SUCCESS no HEAD da PR. Isso não é profiling físico.
 
@@ -17,8 +17,8 @@
 | 02 | VALIDADA (L2 documental) | Requisitos, GAPs e conflitos documentais rastreados |
 | 03 | VALIDADA (L2 documental) | Baseline arquitetural e contratos mapeados |
 | 04 | VALIDADA (L2) | Boot, SceneFlow, SaveSystem, CampaignProgress e LoadingOverlay endurecidos |
-| 05 | NÃO INICIADA | Nova etapa de direção de arte global |
-| 06 | NÃO INICIADA | Guia técnico de assets a formalizar |
+| 05 | EM ANDAMENTO | Proposta global em PR #87; aguardando aprovação explícita do usuário |
+| 06 | EM ANDAMENTO | Guia técnico ART-BOLT-002 nesta branch; parâmetros artísticos numéricos dependem da Etapa 05 |
 | 07 | NÃO INICIADA | Concept final de BOLT depende de produção e aprovação |
 | 08 | NÃO INICIADA | Spritesheets finais dependem da Etapa 07 |
 | 09 | NÃO INICIADA | Kit visual inicial de UI/HUD depende de aprovação |
