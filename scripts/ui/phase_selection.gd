@@ -13,7 +13,8 @@ var _world_index: int = -1
 
 func _ready() -> void:
 	_world_id = str(get_tree().root.get_meta("campaign_selection_world_id", ""))
-	get_tree().root.remove_meta("campaign_selection_world_id")
+	if get_tree().root.has_meta("campaign_selection_world_id"):
+		get_tree().root.remove_meta("campaign_selection_world_id")
 	_world_index = CATALOG.get_world_index(_world_id)
 	if _world_index < 0:
 		_return_to_worlds()
