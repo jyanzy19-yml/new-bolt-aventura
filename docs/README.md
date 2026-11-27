@@ -25,6 +25,12 @@ Este índice organiza a documentação de design, narrativa, tecnologia, produç
 | Production Roadmap | [Roadmap](production/roadmap.md), [status da etapa](production/stage-status.md), [gestão de mudanças](production/change-management.md) |
 | QA & Acceptance | [Matriz de QA](qa/test-matrix.md), [Definition of Done](production/definition-of-done.md) |
 
+## Produção de assets
+
+- [Guia técnico de produção de sprites e assets — Etapa 06](production/SPRITE-ASSET-TECHNICAL-GUIDE.md)
+- [Pipeline de assets](production/ASSET_PIPELINE.md)
+- [Fila de solicitações de assets](production/ASSET_REQUEST_QUEUE.md)
+
 ## Design
 
 1. [Visão geral e pilares](game-design/00-game-overview.md)
