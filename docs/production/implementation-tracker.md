@@ -2,7 +2,7 @@
 
 Plano operacional primário: [32-stage-production-plan.md](32-stage-production-plan.md).  
 Matriz de 26 etapas: registro histórico e crosswalk; preservar IDs e evidências antigas.  
-Main HEAD: `d90ac2c78e96b32233f8d003ea6673a38079ecb3`; PR #72 e PR #73 integradas. Docs Validation pós-merge PR #73 `45986435957` SUCCESS.
+Main HEAD no checkpoint desta atualização: `71463b5a1f27d7499943858ac86392a3933c58f2`; PRs #72, #73 e #74 integradas. Docs Validation pós-merge PR #73 `45986435957` SUCCESS; PR #74 também foi integrada e reconciliou os snapshots.
 
 **Migração de estado:** novas Etapas 01–04 preservam o estado concluído das antigas 01–04, com limite L2. A antiga Etapa 05 (recursos/loading) migra para a nova Etapa 29 e continua EM ANDAMENTO. Novas Etapas 05–09 não herdam conclusão; pela emenda de 27/11/2026, executam apenas especificação/requisitos/wireframes/placeholders. Produção visual pesada está reservada à Etapa 31 e integração/verificação à Etapa 32. Nenhuma etapa herda status apenas por equivalência temática.
 
