@@ -1,5 +1,5 @@
 extends Node2D
-## W1-L3 — Setor de Montagem. Blockout provisório baseado no blueprint W1-L3.
+## W1-L3 — Fábrica de Ecos. Blockout provisório alinhado ao Atlas oficial.
 
 const LEVEL_PATH: String = "res://scenes/campaign/cybercore_w1_l3.tscn"
 const LEVEL_ID: String = "W1-L3"
@@ -65,4 +65,4 @@ func _on_goal_body_entered(body: Node2D) -> void:
 		_section_finished = true
 		if not CampaignProgress.mark_level_completed(LEVEL_ID):
 			push_warning("W1-L3: não foi possível persistir a conclusão (%s)." % CampaignProgress.last_error)
-		_hud.show_result("Cybercore — Setor de Montagem concluído")
+		_hud.show_result("Cybercore — Fábrica de Ecos concluída")

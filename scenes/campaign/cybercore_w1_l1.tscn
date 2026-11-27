@@ -96,4 +96,4 @@ polygon = PackedVector2Array(-32, -64, 32, -64, 32, 64, -32, 64)
 [node name="LevelNote" type="Label" parent="."]
 position = Vector2(24, -168)
 theme_override_font_sizes/font_size = 16
-text = "W1-L1 · CYBERCORE — BLOCKOUT / CONTEÚDO PROVISÓRIO"
+text = "W1-L1 · DESPERTAR ENTRE RUÍNAS — BLOCKOUT PROVISÓRIO"

@@ -455,3 +455,13 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - CI do HEAD pré-merge `ebd4dc07888769ab3bbd432150e7898b9cff6414`: Godot `46049432501`, Docs `46049432551`, Android Debug Export `46049432531` — todos SUCCESS; **126 testes / 2.097 verificações / 0 falhas**; 20/20 cold boots e mutation check aprovados.
 - APK Debug: 28.469.428 bytes, package ID provisório `com.example.boltaventura`, SHA-256 `d8b268ceffb34ecf45f08c1d606a98e4381364aace07cfde634286f17657fe84`; assinatura v2/v3 verificada. Artifact `15223234577`; ZIP SHA-256 `a4c4f7021315fc4602207586c780721b57f434285e6dbe2c57c4b1c954cf3ad9`.
 - Sem validação visual ou Android físico; câmera/clipping, resposta touch, FPS e estabilidade real continuam pendentes.
+
+
+## Correção de alinhamento canônico W1-L3 — 27/11/2026
+
+- Branch `fix/cybercore-w1-l3-atlas-alignment-2026-11-27`, baseada no main após PRs #107 e #105.
+- A auditoria do Atlas Mestre encontrou divergência: o título e a ficha anterior de W1-L3 não correspondiam integralmente à entrada oficial **Fábrica de Ecos**.
+- Corrigidos nomes de W1-L1 a W1-L4 no catálogo; W1-L4 agora é **Laboratório de Memórias** e permanece indisponível até existir a cena correta.
+- Adicionados `ConveyorBelt` (velocidade de superfície bidirecional) e `IndustrialPress` (aviso → golpe → recuperação), integrados ao blockout W1-L3.
+- Testes novos cobrem transporte de BOLT pela esteira, janela de dano da prensa e nomes oficiais. Tríplice/Laser, inimigos canônicos, segredo com item de lore e interação de desativação continuam pendentes.
+- **Estado: EM VALIDAÇÃO.** Sem playtest humano ou Android físico; W1-L3 continua BLOCKOUT PROVISÓRIO.

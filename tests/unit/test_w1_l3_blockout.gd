@@ -40,6 +40,10 @@ func test_w1_l3_composition_and_checkpoint_survive_scene_reentry() -> bool:
 	var end_floor: PlatformBlock = level.get_node("Geometry/EndFloor") as PlatformBlock
 	var lift: MovingPlatform = level.get_node("LiftA") as MovingPlatform
 	var transfer: MovingPlatform = level.get_node("TransferPlatform") as MovingPlatform
+	var conveyor_a: ConveyorBelt = level.get_node("Geometry/ConveyorBeltA") as ConveyorBelt
+	var conveyor_b: ConveyorBelt = level.get_node("Geometry/ConveyorBeltB") as ConveyorBelt
+	var press_a: IndustrialPress = level.get_node("IndustrialPressA") as IndustrialPress
+	var press_b: IndustrialPress = level.get_node("IndustrialPressB") as IndustrialPress
 	var enemy_a: CybercorePatrolEnemy = level.get_node("PatrolEnemyA") as CybercorePatrolEnemy
 	var enemy_b: CybercorePatrolEnemy = level.get_node("PatrolEnemyB") as CybercorePatrolEnemy
 	var checkpoint: BoltCheckpoint = level.get_node("Checkpoint") as BoltCheckpoint
@@ -47,6 +51,14 @@ func test_w1_l3_composition_and_checkpoint_survive_scene_reentry() -> bool:
 
 	check(player != null and mid_floor != null and end_floor != null, "BOLT e pisos principais estão presentes")
 	check(lift != null and transfer != null, "blockout contém elevador e plataforma de transferência")
+	check(conveyor_a != null and conveyor_b != null, "Fábrica de Ecos contém duas esteiras")
+	check(press_a != null and press_b != null, "Fábrica de Ecos contém duas prensas sinalizadas")
+	if conveyor_a != null and conveyor_b != null:
+		check_eq(conveyor_a.get_surface_velocity(), Vector2(110.0, 0.0), "esteira A move para a direita")
+		check_eq(conveyor_b.get_surface_velocity(), Vector2(-95.0, 0.0), "esteira B move para a esquerda")
+	if press_a != null and press_b != null:
+		check_eq(press_a.get_state(), IndustrialPress.State.WARNING, "prensa A inicia em aviso")
+		check_eq(press_b.get_state(), IndustrialPress.State.WARNING, "prensa B inicia em aviso")
 	check(enemy_a != null and enemy_b != null, "blockout contém dois encontros provisórios")
 	check(checkpoint != null and goal != null, "blockout contém checkpoint e objetivo")
 	check_eq(CampaignProgress.load_state().get("current_level_id"), "W1-L3",
