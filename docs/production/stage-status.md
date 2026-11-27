@@ -657,3 +657,12 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - CI do HEAD pré-merge `ebd4dc07888769ab3bbd432150e7898b9cff6414`: Godot `46049432501`, Docs `46049432551`, Android Debug Export `46049432531` — todos SUCCESS; **126 testes / 2.097 verificações / 0 falhas**; 20/20 cold boots e mutation check aprovados.
 - APK Debug: 28.469.428 bytes, package ID provisório `com.example.boltaventura`, SHA-256 `d8b268ceffb34ecf45f08c1d606a98e4381364aace07cfde634286f17657fe84`; assinatura v2/v3 verificada. Artifact `15223234577`; ZIP SHA-256 `a4c4f7021315fc4602207586c780721b57f434285e6dbe2c57c4b1c954cf3ad9`.
 - Sem validação visual ou Android físico; câmera/clipping, resposta touch, FPS e estabilidade real continuam pendentes.
+
+## Etapa 23 — blockout provisório e integração de campanha W1-L3 (27/11/2026)
+
+- Branch `integration/campaign-w1-l3-provisional-blockout-2026-11-27`; PR #105 aberta, baseada no HEAD `ceb60919341124e05acf17b9d72d1815b5aa702f` da `main`.
+- Adiciona a cena/controlador W1-L3, transição W1-L2 → W1-L3, retomada pelo menu, checkpoint persistente e regressões de composição, patrulhas, reentrada e conclusão.
+- W1-L3 permanece BLOCKOUT PROVISÓRIO; sem lore canonizada, arte final, áudio, VFX ou alteração de schema de save, IDs existentes, Dash, InputMap ou física do Player.
+- A conclusão de W1-L3 mantém a própria fase como destino de retomada e não anuncia W1-L4.
+- **Estado:** PR #105 aberta; diff estático com 9 arquivos, 11 commits à frente e 0 atrás da `main`. CI ainda não retornou workflow runs/status checks para o head consultado; validação automatizada permanece PENDENTE/NÃO VERIFICADA.
+- Sem playtest humano, validação Android física, medição de touch, câmera/clipping, FPS, memória ou comportamento térmico. Etapa 23 permanece EM ANDAMENTO.
