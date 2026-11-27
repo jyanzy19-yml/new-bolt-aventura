@@ -102,7 +102,7 @@ O percurso principal deve ser predominantemente horizontal, com variações vert
 
 **Função:** reforçar leitura de movimento e temporização.
 
-- Reutilizar o contrato existente de plataforma móvel; não criar um novo tipo de plataforma.
+- Reutilizar o contrato existente de `MovingPlatform` previsto no blockout W1-L3; confirmar a implementação efetivamente integrada antes de instanciar. Não criar um novo tipo de plataforma.
 - Preferir movimento lento e previsível, com extremos e trajetória legíveis.
 - Incluir uma área segura de observação antes da primeira travessia.
 - Evitar que uma plataforma móvel seja ocultada por foreground, efeitos ou HUD.
@@ -114,7 +114,7 @@ O percurso principal deve ser predominantemente horizontal, com variações vert
 
 **Função:** combinar posicionamento com um encontro familiar.
 
-- Reutilizar somente arquétipos e contratos de inimigo já aprovados e disponíveis na branch integrada.
+- Reutilizar somente arquétipos e contratos de inimigo já aprovados e disponíveis na branch integrada. O `CybercorePatrolEnemy` de W1-L1/W1-L3 permanece classificado como inimigo-base provisório, não como arquétipo canônico.
 - A arena deve manter espaço suficiente para observar o inimigo e continuar se movimentando.
 - Projéteis, partículas e feedback de dano não podem ocultar bordas, plataformas ou telegraphs.
 - Não introduzir um novo padrão de ataque obrigatório nesta fase.
@@ -137,7 +137,7 @@ O percurso principal deve ser predominantemente horizontal, com variações vert
 
 **Função:** testar observação e temporização sem criar uma regra nova.
 
-- Reutilizar o comportamento de energia cíclica já apresentado em W1-L2 ou a gramática de energia efetivamente aprovada em W1-L4, após auditoria das respectivas implementações integradas.
+- Reutilizar prioritariamente `TimedEnergyGate`, apresentado em W1-L2, após auditoria da cena/script integrado. O W1-L2 atual configura 1,8 s ativo e 1,2 s inativo; esses valores são referência de implementação existente, não parâmetros automaticamente aprovados para W1-L5. O puzzle de relés ordenados de W1-L4 é um sistema distinto e não deve ser tratado como janela temporal.
 - A janela deve possuir indicação visual antecipada e estado ativo/inativo distinguível por mais de cor.
 - Atravessar durante a janela adequada não deve exigir frame-perfect input.
 - Plataformas móveis, encontro e janela de energia devem ser distribuídos em subtrechos, não empilhados todos no mesmo instante.
