@@ -712,3 +712,19 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - CI no head `0019ac9b0ac1bf813c4bcc874d9017fa69bf0295`: Godot `46027916866`, Docs `46027916827` e Android Debug Export `46027916828` concluídos SUCCESS.
 - Nenhum runtime, cena, tuning, física, InputMap, Dash, arte ou save foi alterado. A exportação debug não foi instalada em aparelho.
 - PR #91 não integrada; Etapa 12 continua EM ANDAMENTO. Próxima unidade independente: contratos de configuração espacial/câmera da Etapa 13, sem sobrepor a PR #91.
+
+
+## Sessão ChatGPT — consolidação de contratos da Etapa 14 — 2026-11-27
+
+- Base `main`: `79023eabb6b31bccc456d3a2d005731733e8444e`.
+- Criada branch `integration/stage14-respawn-checkpoint-defeat-contracts-2026-11-27` para reunir as regressões anteriormente divididas nas PRs #93–#96, reduzindo divergência documental e repetição do mesmo ajuste no workflow Android.
+- Quatro contratos: recuperação de estados transitórios após respawn (4 cenários); integração da derrota ao feedback terminal W1-L1; recuperação física pela KillZone com checkpoint persistido; fallback local quando o schema de campanha não pode ser gravado.
+- A reentrada normal com checkpoint persistido já tinha cobertura em `test_campaign_entry.gd`; preservada sem duplicação.
+- Inclui quatro planos de unidade e uma única remoção da instalação redundante de `cmdline-tools;latest` no workflow Android.
+- Somente testes, planos, continuidade/tracker/status e workflow. Nenhum runtime, cena, física, input, Dash, save schema, IDs, progressão, canon, arte ou asset alterado.
+- CI combinado concluído com SUCCESS nos três workflows. A Etapa 14 permanece em andamento até validação física Android e demais critérios do plano.
+- CI no HEAD `4408e5efe07f6feb600591d72a66b033af571b1d`: Godot Validation `46046013186`, Documentation Validation `46046013068` e Android Debug Export `46046013082` — **todos SUCCESS**.
+- Godot 4.7.2: **115 testes / 2.015 verificações / 0 falhas**; 20/20 cold boots e mutation check do prewarm aprovados.
+- Android Debug Export repetiu a suíte: **115 testes / 2.015 verificações / 0 falhas**. APK **28.469.428 bytes**, package ID placeholder `com.example.boltaventura`, SHA-256 `747083ed3f5b1e108c00a0f671abcba8244dbe2821b28eafa99f064ef7e96b35`; assinatura v2/v3 verificada.
+- Artifact ID `15222041977`; ZIP SHA-256 `ab31c810e7327478cdedc1bf3ad1d3fc7d318a160f67c7db0bb8682e81e632e9`; [artefato Android Debug](https://github.com/jyanzy19-yml/new-bolt-aventura/actions/runs/46046013082/artifacts/15222041977).
+- Evidência L2/CI somente: APK não foi instalado nem executado em Android físico; touch, safe areas/barras, FPS, frame pacing, memória, temperatura e lifecycle OEM continuam sem validação.
