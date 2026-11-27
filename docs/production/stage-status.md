@@ -1,16 +1,24 @@
 # Estado de produção — BOLT · AVENTURA
 
-**Atualização:** 2026-11-26  
-**Main HEAD confirmado nesta unidade:** `54fd48e5f49fba877740265aafa0d8f649c2b1e9` (PRs #57/#58 permanecem abertas e não integradas).  
+**Atualização:** 2026-11-27  
+**Main HEAD após PR #60:** `fd8aefa2a5991a67d3ce75caba57df066a5c1514`. PRs #57, #58 e #61 permanecem abertas; PR #58/#61 precisam de reconciliação documental antes de integração.
 **Matriz operacional:** `docs/production/26-stage-traceability-matrix.md`, integrada pela PR #48. Registro de lacunas GAP-001…GAP-022 em elaboração na branch `docs/requirements-gap-register`; Etapa 02 continua em revisão requisito-a-requisito.  
 **Última entrega de conteúdo de gameplay:** PR #34 — W1-L2 Rede Interrompida em blockout, campo energético cíclico e progressão persistente.  
 **Última regressão de gameplay integrada:** PR #39 — limpeza do ActionBuffer no ciclo de vida Android, merge `50c9bfdd997edf0cb5cb7cfb22d246bd4d0beca2`.  
 **Última entrega de infraestrutura integrada:** PR #38 — pipeline Android debug, merge `d08a2b203e525ccc98a4a0e45d1532b41e674fc5`.  
 **Último componente de plataforma integrado:** PR #46 — `OneWayPlatform`, merge `8ecfe0aa11eb911745bbe5e8e1b2211c03010702`.  
 **Última correção de gameplay integrada:** PR #47 — estado inicial do `TimedEnergyGate`, merge `2636226c4027625649e66c51ff64d7e2e56168a6`.  
-**Branch de trabalho:** `main`; PR #47 integrada. Próxima branch deve ser criada somente para a unidade aprovada seguinte.  
+**Branch de integração:** `main` em `fd8aefa2a5991a67d3ce75caba57df066a5c1514`; branch ativa `fix/stage04-boot-scene-loading-2026-11-27` para consolidar Boot, carregamento threaded e regressões.
 **Responsável atual:** ChatGPT, único escritor ativo conforme decisão vigente do usuário.  
 **Estado do Gate 1:** EM ANDAMENTO — W1-L1/W1-L2 seguem blockouts; APK debug exportado em CI, instalação e validação Android física pendentes.
+
+## Atualização operacional — consolidação da Etapa 04 (2026-11-27)
+
+- PR #59 integrada por squash (`2e1f7cd`): recuperação de `.tmp` íntegro antes do backup, proteção de envelopes de versão futura em todos os slots, preservação de temporário pendente e compatibilidade com `CampaignProgress`. CI pré-merge: 95 testes/652 verificações/0 falhas; Docs e Android Debug Export SUCCESS. Validação pós-merge na `main` ainda não confirmada.
+- PR #60 integrada por squash (`fd8aefa`): liberação de ações lógicas e ponteiros touch em `NOTIFICATION_APPLICATION_PAUSED`. CI pré-merge: 94 testes/593 verificações/0 falhas; Docs e Android Debug Export SUCCESS. Validação pós-merge na `main` ainda não confirmada.
+- PR #58 e PR #61 continuam abertas e tornaram-se não mergeáveis após atualizações concorrentes dos documentos operacionais. Runtime e testes estão sendo consolidados em nova branch, sem rebase destrutivo.
+- PR #57 (polimento visual Cybercore) permanece isolada; não integrar antes de resolver dependência e revisão do boot.
+- Etapa 04 continua EM ANDAMENTO; Gate 1 continua pendente de instalação e validação Android física.
 
 **CI da PR #39:** Godot Validation `45881320136` SUCCESS — Godot 4.7.2, 72 testes, 451 verificações, 0 falhas; Docs Validation `45881320133` SUCCESS; Android Debug Export `45881252046` SUCCESS.  
 **Artifact PR #39:** `bolt-aventura-android-debug-7415dfb988faf2dd63f9ff289106e7f7205dcdd1`, 28.194.534 bytes; package ID provisório `com.example.boltaventura`; assinatura v2/v3 verificada; SHA-256 `db03a42b909781a1f5e7c94d025615e1aa5f397c8ebd306ba30cddf84eca14b0`.
