@@ -247,3 +247,31 @@ func test_respawn_resets_attack_cooldown_and_reenables_combat() -> bool:
 	root.queue_free()
 	await tree.process_frame
 	return true
+
+
+func test_respawn_discards_unconsumed_action_buffer_press() -> bool:
+	var packed: PackedScene = load(PLAYER_SCENE) as PackedScene
+	check(packed != null, "cena de BOLT carrega para regressão do ActionBuffer no respawn")
+	if packed == null:
+		return true
+
+	var root: Node2D = Node2D.new()
+	tree.root.add_child(root)
+	var player: BoltPlayer = packed.instantiate() as BoltPlayer
+	root.add_child(player)
+	await tree.process_frame
+	var buffer: ActionBuffer = player.get_node("%ActionBuffer") as ActionBuffer
+	player.set_physics_process(false)
+
+	_send_action(Actions.ATTACK, true)
+	_send_action(Actions.ATTACK, false)
+	check(buffer.has_pending(Actions.ATTACK), "toque curto fica pendente antes do respawn")
+
+	player.respawn(Vector2(64.0, -24.0))
+	check(not buffer.has_pending(Actions.ATTACK), "respawn descarta o comando antigo não consumido")
+	check(player.is_physics_processing(), "respawn reativa o processamento do jogador")
+
+	Actions.release_all_game_actions()
+	root.queue_free()
+	await tree.process_frame
+	return true
