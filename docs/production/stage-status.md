@@ -602,3 +602,5 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - Plano: `plans/2026-11-27-stage13-camera-configuration-contract.md`.
 - Nenhum valor de câmera ou cena foi alterado. O teste não comprova enquadramento, clipping, legibilidade por proporção de tela ou Android físico.
 - **Estado:** aguardando CI; Etapa 13 permanece EM ANDAMENTO.
+
+- Cobertura ampliada para verificar, em isolamento, a aplicação dos limites de câmera de W1-L1 e W1-L2 por `configure_camera()`; não instancia a campanha nem altera dados persistentes.
