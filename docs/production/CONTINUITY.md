@@ -3,7 +3,7 @@
 - Main HEAD: `5e55fa1693d8ecf6d8a1d79bfffa1999824ad1ea`.
 - PR #69 integrada: cancelamento lógico opt-in de SceneFlow, com drenagem da carga, sem cancelamento físico de I/O.
 - PR #70 integrada: PerformanceProbe debug-only; CI PR: 107 testes/1.933 verificações/0 falhas; Docs e Android export SUCCESS.
-- Pós-merge main: Godot e Docs SUCCESS; Android Debug Export 45969003728 ainda em execução no snapshot.
+- Pós-merge main: Godot 45969003590, Docs 45969003654 e Android Debug Export 45969003728 SUCCESS. APK 28.209.643 bytes, assinatura v2/v3 verificada, SHA-256 `4c2096d378a798f7df42735cf06a9dcb90330d8a6ae7a8ebf091ffd4a4ec74e9`, artifact ID 15183533835.
 - Etapa 05 permanece ativa. A política de recursos está sendo formalizada em `technical/11-resource-lifecycle-policy.md`; nenhuma evidência atual justifica preload global ou purge forçado.
 - Claude autorizado para fases, inimigos/chefes, interativos, UI/visual e sistemas independentes em branches isoladas. ChatGPT mantém arquitetura, infraestrutura, integração, profiling e QA. Evitar edição concorrente dos mesmos arquivos.
 - Gate 1 e validação Android física continuam pendentes; APK exportado/headless não equivale a instalação, playtest ou profiling em aparelho.
