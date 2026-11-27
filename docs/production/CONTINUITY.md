@@ -1,3 +1,15 @@
+## Atualização de continuidade — aprovação do concept BOLT C02 (27/11/2026)
+
+- O usuário aprovou explicitamente **ART-BOLT-003-C02 v0.1**: robô com cabelo/crista branca espetada, olhos ciano luminosos, detalhes de energia azul e leitura de pixel art 16-bit mais evidente, mantendo identidade robótica azul/branca/preta.
+- C02 substitui C01 como referência conceitual aprovada de BOLT. C01 permanece apenas como exploração anterior, superada.
+- A aprovação fecha o gate de aprovação do concept da Etapa 07, mas não aprova spritesheets, animações finais, hitboxes, alterações de Player ou integração no jogo.
+- A produção visual definitiva permanece reservada à Etapa 31, conforme o plano vigente. Não gerar nem integrar assets finais antecipadamente.
+- VDIR-01 permanece HÍBRIDO CONTROLADO; VDIR-02 a VDIR-08 continuam pendentes. A aparência pixelada de C02 é uma referência de concept e não fecha resolução lógica, escala ou pipeline técnico global.
+- A imagem C02 foi apresentada nesta conversa; ainda não foi adicionada ao repositório como asset binário.
+- PR #89 permanece aberta e não integrada neste checkpoint. Nenhum merge foi executado.
+
+---
+
 ## Atualização de continuidade — aprovação VDIR-01 e concept C01 (27/11/2026)
 
 - O usuário aprovou VDIR-01: **HÍBRIDO CONTROLADO**.
