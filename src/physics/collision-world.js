@@ -86,6 +86,7 @@ export class CollisionWorld {
       let targetX = x + deltaX;
 
       for (const collider of this.#colliders.values()) {
+        if (collider.oneWay) continue;
         if (!overlapsVertically(y, body.height, collider)) continue;
 
         if (
