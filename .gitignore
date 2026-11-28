@@ -1,28 +1,51 @@
-# Godot 4 generated data (rebuilt by `godot --headless --path . --import`)
-.godot/
-*.translation
+# Dependencies and package-manager caches
+node_modules/
+.npm/
+.pnpm-store/
+.yarn/
+.parcel-cache/
+.vite/
 
-# Editor / local overrides
-.nomedia
-export_credentials.cfg
+# Build output and test artifacts
+dist/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
 
-# Export artifacts and Android build tree
-build/
-export/
-*.apk
-*.aab
-*.idsig
-android/build/
-
-# Signing material — NEVER commit
+# Local environment and secrets
+.env
+.env.*
+!.env.example
 *.keystore
 *.jks
 *.p12
 *.pem
 *.key
+android/local.properties
+android/.gradle/
+android/build/
+ios/Pods/
+ios/build/
 
-# OS / tool noise
+# IDE / OS / temporary files
+.vscode/*
+!.vscode/extensions.json
+.idea/
 .DS_Store
 Thumbs.db
+*.swp
 *.tmp
 *.log
+
+# Legacy Godot-generated data (historical only; no Godot runtime is used)
+.godot/
+*.translation
+export_credentials.cfg
+
+# Android build artifacts
+build/
+export/
+*.apk
+*.aab
+*.idsig
