@@ -38,7 +38,6 @@ IDs must be unique across geometry, checkpoints and exits within one level. Unkn
 - One-way platforms do not block horizontal movement or upward movement.
 - `dropThrough` bypasses one-way platforms for the current movement operation.
 - The first collision kernel is static and axis-separated. Slopes, moving platforms and dynamic-vs-dynamic collision require separate contracts and tests.
-- `createCollisionWorldFromLevel` accepts only a validated definition.
 
 ## 4. Camera contract
 
