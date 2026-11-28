@@ -25,7 +25,7 @@
 | HTML5-06C CombatRuntime | ChatGPT | Claude Code | `agent/chatgpt/stage-06-combat-runtime` | [#156](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/156) | `agent/chatgpt/stage-06-weapon-controller` | CI and docs passed; open |
 | HTML5-09A Android display contract | ChatGPT | Claude Code | `agent/chatgpt/stage-09-android-display-contract` | [#159](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/159) | `main` | CI, docs and CodeQL passed; open |
 | HTML5-09B AssetManifest/AssetLoader | ChatGPT | Claude Code | `agent/chatgpt/stage-09-asset-loader` | [#160](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/160) | `main` | CI, docs and CodeQL passed; open |
-| HTML5-10A Debug playable slice | ChatGPT | Claude Code | `agent/chatgpt/stage-10-debug-playable-slice` | [#161](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/161) | `main` | Web CI/docs passed; CodeQL in progress; aggregate PR; open |
+| HTML5-10A Debug playable slice | ChatGPT | Claude Code | `agent/chatgpt/stage-10-debug-playable-slice` | [#161](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/161) | `main` | Web CI, docs and CodeQL passed; aggregate PR; open |
 
 **Baseline:** `main` HEAD `27c34070a9ee1746076a1ca034833a577858b306`; tree SHA matches original baseline `9c32df4225b4e410340b2254a098167023593625`. All listed PRs are open and unmerged. No implementation branch has been merged automatically. A documentation file was inadvertently created on main by omitting the branch argument, then immediately deleted; the current tree is restored exactly to the original baseline. Continue PR-only changes.
 
