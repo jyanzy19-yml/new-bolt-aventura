@@ -24,7 +24,7 @@ func has_fired() -> bool:
 func _on_body_entered(body: Node2D) -> void:
 	if not body is BoltPlayer or (one_shot and _fired):
 		return
-	if beat_id.is_empty():
+	if String(beat_id).is_empty():
 		push_warning("NarrativeBeatTrigger: beat_id vazio; evento ignorado.")
 		return
 	_fired = true
