@@ -97,6 +97,17 @@ describe('PlayerMotor jumping', () => {
     expect(landed.jumpsRemaining).toBe(2);
   });
 
+  it('accepts an immediate jump when the buffer duration is zero', () => {
+    const motor = createMotor({
+      config: makeConfig({ jumpBufferSeconds: 0 }),
+    });
+
+    const state = motor.update(0.016, frame({ pressed: [JUMP] }));
+
+    expect(state.velocity.y).toBeLessThan(0);
+    expect(state.jumpsRemaining).toBe(1);
+  });
+
   it('supports the configured second jump while airborne', () => {
     const motor = createMotor();
 
