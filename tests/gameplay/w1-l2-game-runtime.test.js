@@ -73,10 +73,31 @@ describe('W1L2GameRuntime', () => {
   it('fires at an enemy and applies enemy-owned health consistently', () => {
     const runtime = new W1L2GameRuntime({ level: W1_L2, combatSystem: makeCombat() });
     const target = { ...player, body: { ...player.body, x: 860, y: 504 } };
-    runtime.update(1 / 60, target, { pressed: ['fire'], released: [], held: ['fire'] });
-    const state = runtime.update(0.2, target, { pressed: [], released: [], held: ['fire'] });
-    expect(state.combat.projectiles.length).toBeGreaterThanOrEqual(0);
-    expect(state.enemies.find((enemy) => enemy.id === 'patrol-sentinel-alpha')).toBeDefined();
+    runtime.update(1 / 60, target, { pressed: ['fire'], released: [], held: [] });
+    const state = runtime.update(0.1, target, { pressed: [], released: [], held: [] });
+    expect(state.enemies.find((enemy) => enemy.id === 'patrol-sentinel-alpha').health).toBe(3);
+  });
+
+
+  it('uses the Laser Nexo beam to damage a target through an unobstructed lane', () => {
+    const runtime = new W1L2GameRuntime({ level: W1_L2, combatSystem: makeCombat() });
+    const target = { ...player, body: { ...player.body, x: 860, y: 504 } };
+    const state = runtime.update(1 / 60, target, {
+      pressed: ['weapon-3', 'fire'], released: [], held: [],
+    });
+    expect(state.combat.activeWeaponId).toBe('laser-nexo');
+    expect(state.enemies.find((enemy) => enemy.id === 'patrol-sentinel-alpha').health).toBe(2);
+  });
+
+  it('allows an enemy projectile to damage the player after its telegraphed firing interval', () => {
+    const runtime = new W1L2GameRuntime({ level: W1_L2, combatSystem: makeCombat() });
+    const stationary = { ...player, body: { ...player.body, x: 820, y: 504 } };
+    let state = runtime.snapshot;
+    for (let frame = 0; frame < 240; frame += 1) {
+      state = runtime.update(1 / 60, stationary);
+      if (state.combat.playerHealth < state.combat.maxPlayerHealth) break;
+    }
+    expect(state.combat.playerHealth).toBeLessThan(state.combat.maxPlayerHealth);
   });
 
   it('restores the repeater only through its explicit interaction', () => {
