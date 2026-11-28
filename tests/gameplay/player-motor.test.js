@@ -139,11 +139,14 @@ describe('PlayerMotor jumping', () => {
       }),
     });
 
-    motor.update(0.15, frame({ pressed: [JUMP] }));
+    const landing = motor.update(0.15, frame({ pressed: [JUMP] }));
+    expect(landing.grounded).toBe(true);
+    expect(landing.jumpBufferRemaining).toBeGreaterThan(0);
+
     const state = motor.update(0.016, frame());
 
     expect(state.velocity.y).toBeLessThan(0);
-    expect(state.jumpsRemaining).toBe(1);
+    expect(state.jumpsRemaining).toBe(0);
   });
 
   it('allows a coyote-time jump after leaving a ledge', () => {
