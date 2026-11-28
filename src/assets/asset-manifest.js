@@ -144,6 +144,7 @@ export function validateAssetManifest(manifest) {
     ids.add(entry.id);
   }
 
+  const entriesById = new Map(manifest.assets.map((entry) => [entry.id, entry]));
   for (const entry of manifest.assets) {
     for (const dependency of entry.dependencies ?? []) {
       if (!ids.has(dependency)) {
@@ -157,6 +158,24 @@ export function validateAssetManifest(manifest) {
       throw new Error(`Fallback ausente ${entry.fallback} em ${entry.id}.`);
     }
   }
+
+  const visiting = new Set();
+  const visited = new Set();
+  const visit = (id) => {
+    if (visiting.has(id)) {
+      throw new Error(`Dependência circular detectada em ${id}.`);
+    }
+    if (visited.has(id)) return;
+
+    visiting.add(id);
+    for (const dependency of entriesById.get(id).dependencies ?? []) {
+      visit(dependency);
+    }
+    visiting.delete(id);
+    visited.add(id);
+  };
+
+  for (const id of ids) visit(id);
 
   return manifest.assets;
 }
