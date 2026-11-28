@@ -23,8 +23,9 @@
 | HTML5-06 Combat core | ChatGPT | Claude Code | `agent/chatgpt/stage-06-combat-core` | [#150](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/150) | `agent/chatgpt/stage-04-collision-kernel` | Web CI passed; open |
 | HTML5-06B WeaponController | ChatGPT | Claude Code | `agent/chatgpt/stage-06-weapon-controller` | [#155](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/155) | `agent/chatgpt/stage-06-combat-core` | CI and docs passed; open |
 | HTML5-06C CombatRuntime | ChatGPT | Claude Code | `agent/chatgpt/stage-06-combat-runtime` | [#156](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/156) | `agent/chatgpt/stage-06-weapon-controller` | CI and docs passed; open |
+| HTML5-09A Android display contract | ChatGPT | Claude Code | `agent/chatgpt/stage-09-android-display-contract` | [#159](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/159) | `main` | Docs/Web CI in progress; open |
 
-**Baseline:** `main` at `9c32df4225b4e410340b2254a098167023593625`. All listed PRs are open and unmerged. No branch has been merged automatically.
+**Baseline:** `main` HEAD `27c34070a9ee1746076a1ca034833a577858b306`; tree SHA matches original baseline `9c32df4225b4e410340b2254a098167023593625`. All listed PRs are open and unmerged. No implementation branch has been merged automatically. A documentation file was inadvertently created on main by omitting the branch argument, then immediately deleted; the current tree is restored exactly to the original baseline. Continue PR-only changes.
 
 ### Active writer boundaries
 - ChatGPT owns the runtime/physics/input/level integration work listed above.
