@@ -27,6 +27,7 @@ func test_world_catalog_matches_approved_world_bible_order() -> bool:
 	check_eq(CATALOG.get_world_name(5), "Vaporwave / Las Vegas", "mundo 6")
 	check_eq(CATALOG.get_world_name(6), "Natal / Nova York Futurista", "mundo 7")
 	check_eq(CATALOG.get_fragment_name(0), "Origem", "fragmento Cybercore")
+	check_eq(CATALOG.get_guardian_title(0), "Sentinela do Fragmento", "guardião oficial de Cybercore")
 	check_eq(CATALOG.get_guardian_title(6), "Guardião do Inverno", "guardião mundo 7")
 	return true
 
@@ -149,4 +150,9 @@ func test_campaign_phase_titles_match_official_cybercore_atlas() -> bool:
 	check_eq(CATALOG.get_phase_title("W1-L2", 1), "Ruas sem Sinal", "nome oficial W1-L2")
 	check_eq(CATALOG.get_phase_title("W1-L3", 2), "Fábrica de Ecos", "nome oficial W1-L3")
 	check_eq(CATALOG.get_phase_title("W1-L4", 3), "Laboratório de Memórias", "nome oficial W1-L4")
+	return true
+
+
+func test_cybercore_guardian_title_matches_official_atlas() -> bool:
+	check_eq(CATALOG.get_guardian_title(0), "Sentinela do Fragmento", "W1-L6 usa o nome oficial Sentinela do Fragmento")
 	return true
