@@ -1,5 +1,19 @@
 # Collaboration State — BOLT · AVENTURA
 
+## Tarefa ativa — BOLT-001 / W1-L1 playable production (2026-11-28)
+
+- **Primary writer:** ChatGPT.
+- **Reviewer:** revisão automatizada/CI e revisão posterior read-only; usuário mantém autoridade de integração.
+- **Base commit:** 3ef82158aa45c21af51e2eea793b0ebbdfc44570 (HEAD da PR #161, branch agent/chatgpt/stage-10-debug-playable-slice).
+- **Working branch:** agent/chatgpt/w1-l1-production-playable.
+- **Objective:** substituir a fixture de debug como conteúdo inicial do jogo por uma W1-L1 jogável em blockout, consumindo o runtime existente.
+- **Allowed paths:** src/main.js, src/styles.css, src/input/touch-controls.js, novos módulos src/levels/w1-l1.js, src/gameplay/w1-l1-game-runtime.js, src/rendering/w1-l1-canvas-renderer.js, testes de W1-L1 e documentação de produção/continuidade.
+- **Forbidden:** mudanças no contrato central de física/PlayerMotor, retuning do Dash, migração para Godot, assets finais sem aprovação, telemetry/profiling fora do escopo.
+- **Dependencies:** PR #161 fornece o runtime HTML5 integrado; PRs #145–#158 são suas unidades-fonte e não devem ser mescladas em duplicidade.
+- **Acceptance:** W1-L1 carrega a partir de dados de produção; jogador pode percorrer as quatro áreas; controles touch/teclado funcionam; compartimento é opcional; primeiro ponto de sincronização conclui a fase; testes/build/CI reportados sem alegações não verificadas.
+- **Next owner:** ChatGPT para revisão de CI e correções; usuário para decisão de merge.
+
+
 **Status:** ACTIVE — ChatGPT and Claude Code are both authorized development agents.  
 **Authority:** latest user instruction and `MASTER_DIRECTIVE.md`.  
 **Technology:** clean-start HTML5, CSS3, JavaScript ES Modules, Canvas 2D and Vite.  
