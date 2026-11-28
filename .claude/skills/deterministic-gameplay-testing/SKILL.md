@@ -1,3 +1,8 @@
+---
+name: deterministic-gameplay-testing
+description: "Build deterministic gameplay tests and reliable regression coverage."
+---
+
 # Skill: Deterministic Gameplay and Regression Testing
 
 Design gameplay systems so time, randomness, input and persistence can be controlled in tests. Prefer injected clock/random sources and explicit action queues over hidden global state.
