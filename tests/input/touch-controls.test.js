@@ -61,7 +61,7 @@ function createHarness() {
 }
 
 describe('TouchControls', () => {
-  it('mounts accessible logical controls for movement, jump, Dash and fire', () => {
+  it('mounts accessible logical controls for movement, jump, Dash, fire and interaction', () => {
     const { controls, container, inputManager } = createHarness();
 
     expect(controls.mount(container)).toBe(true);
@@ -79,10 +79,11 @@ describe('TouchControls', () => {
       'jump',
       'dash',
       'fire',
+      'interact',
     ]);
     expect(buttons.every((button) => button.type === 'button')).toBe(true);
     expect(buttons.every((button) => button.attributes['aria-label'])).toBe(true);
-    expect(inputManager.bindPointerAction).toHaveBeenCalledTimes(5);
+    expect(inputManager.bindPointerAction).toHaveBeenCalledTimes(6);
   });
 
   it('is idempotent when mounted twice', () => {
@@ -91,7 +92,7 @@ describe('TouchControls', () => {
     expect(controls.mount(container)).toBe(true);
     expect(controls.mount(container)).toBe(false);
     expect(container.children).toHaveLength(1);
-    expect(inputManager.bindPointerAction).toHaveBeenCalledTimes(5);
+    expect(inputManager.bindPointerAction).toHaveBeenCalledTimes(6);
   });
 
   it('disposes all pointer bindings and removes the control root', () => {
@@ -176,7 +177,7 @@ describe('TouchControls', () => {
     const controls = new TouchControls({
       inputManager,
       documentTarget,
-      enabledActions: ['move-left', 'move-right', 'jump', 'dash'],
+      enabledActions: ['move-left', 'move-right', 'jump', 'dash', 'interact'],
     });
 
     controls.mount(container);
@@ -184,7 +185,7 @@ describe('TouchControls', () => {
       .flatMap((group) => group.children)
       .map((button) => button.dataset.action);
 
-    expect(actions).toEqual(['move-left', 'move-right', 'jump', 'dash']);
+    expect(actions).toEqual(['move-left', 'move-right', 'jump', 'dash', 'interact']);
     expect(actions).not.toContain('fire');
     controls.dispose();
   });
