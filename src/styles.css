@@ -60,7 +60,8 @@ h1 span { color: #78b9ff; }
 
 .game-canvas {
   display: block;
-  width: min(100%, calc((100svh - 160px) * 16 / 9), 1280px);
+  width: min(100%, 1280px);
+  max-height: calc(100svh - 160px);
   height: auto;
   aspect-ratio: 16 / 9;
   border: 1px solid rgb(142 190 245 / 42%);
@@ -105,7 +106,8 @@ h1 span { color: #78b9ff; }
   }
 
   .game-canvas {
-    width: min(100%, calc((100svh - 150px) * 16 / 9));
+    width: min(100%, 1280px);
+    max-height: calc(100svh - 150px);
     border-radius: 8px;
   }
 
