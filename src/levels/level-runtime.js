@@ -28,8 +28,23 @@ function cloneJsonValue(value, name, ancestors = new WeakSet()) {
 
   let clone;
   if (Array.isArray(value)) {
-    clone = value.map((item, index) =>
-      cloneJsonValue(item, `${name}[${index}]`, ancestors),
+    const descriptors = Object.getOwnPropertyDescriptors(value);
+    const ownKeys = Reflect.ownKeys(value);
+    if (ownKeys.some((key) => typeof key !== 'string')) {
+      throw new TypeError(`${name} contém chave de símbolo.`);
+    }
+    const indices = ownKeys.filter((key) => key !== 'length');
+    if (indices.length !== value.length) {
+      throw new TypeError(`${name} contém índices ausentes ou propriedades extras.`);
+    }
+    for (let index = 0; index < value.length; index += 1) {
+      const descriptor = descriptors[String(index)];
+      if (!descriptor?.enumerable || !Object.hasOwn(descriptor, 'value')) {
+        throw new TypeError(`${name}[${index}] não é um dado JSON serializável.`);
+      }
+    }
+    clone = Array.from({ length: value.length }, (_, index) =>
+      cloneJsonValue(descriptors[String(index)].value, `${name}[${index}]`, ancestors),
     );
   } else {
     const prototype = Object.getPrototypeOf(value);
@@ -38,9 +53,14 @@ function cloneJsonValue(value, name, ancestors = new WeakSet()) {
     }
 
     clone = Object.create(null);
+    const ownKeys = Reflect.ownKeys(value);
+    if (ownKeys.some((key) => typeof key !== 'string')) {
+      throw new TypeError(`${name} contém chave de símbolo.`);
+    }
     const descriptors = Object.getOwnPropertyDescriptors(value);
 
-    for (const [key, descriptor] of Object.entries(descriptors)) {
+    for (const key of ownKeys) {
+      const descriptor = descriptors[key];
       if (!descriptor.enumerable || !Object.hasOwn(descriptor, 'value')) {
         throw new TypeError(`${name} contém propriedade não serializável: ${key}`);
       }
