@@ -1,3 +1,54 @@
+# COLLABORATION OVERRIDE — CHATGPT + CLAUDE CODE (2026-11-27)
+
+**This is the current operational collaboration decision. It supersedes every older statement in the retained prompt or historical documentation that describes Claude as inactive, ChatGPT as the sole writer, or collaboration as awaiting reactivation.**
+
+Both **ChatGPT and Claude Code are authorized development agents** for BOLT · AVENTURA. Either may implement code, tests, documentation, tooling, and assets within an assigned task. The user remains the product owner and final authority for canon, scope, material architecture changes, and approvals.
+
+## Binding coordination protocol
+
+1. **One task, one accountable writer.** Every task must name its primary agent (ChatGPT or Claude) before implementation. The other agent may review, but must not edit the same files concurrently.
+2. **Isolated work.** Prefer a task branch named `agent/claude/<short-task>` or `agent/chatgpt/<short-task>`. Never force-push, rewrite shared history, or commit directly to `main` for substantial work. Use a PR for integration when branch/PR tooling is available.
+3. **Explicit ownership.** A task handoff lists scope, allowed paths, forbidden paths, dependencies, acceptance criteria, baseline commit, tests, and expected output. Expand scope only after checking for overlap.
+4. **Repository is the shared memory.** Read current `main`, open PRs, recent commits, `docs/production/COLLABORATION_STATE.md` (if present), and task handoff before acting. Chat history is not a substitute.
+5. **No simultaneous same-file edits.** If both agents need the same file, sequence the work: first writer finishes and commits; second fetches the new commit and rebases/restarts from it.
+6. **Review before integration.** The non-authoring agent performs a focused review for correctness, regressions, architecture, performance, mobile UX, security, and test gaps. Review findings must cite paths/lines and severity.
+7. **No automatic merge.** The user controls which agent runs next and whether a PR is merged. Do not claim a handoff, merge, test, build, or deployment happened unless the repository/tool result proves it.
+8. **Conflict protocol.** Stop on conflicting canon, requirements, architecture decisions, or overlapping uncommitted work. Preserve both alternatives, describe impact, and request the user's decision when material.
+9. **Asset approval remains independent.** An agent may create candidate art/assets, but final integration follows the exact-asset approval rule in the applicable current directive.
+10. **Continuity is mandatory.** Every substantial task updates the continuity record and collaboration state with commit/PR, writer, changed paths, tests actually run, validation level, known risks, and next owner.
+
+## Default division of responsibilities (not a hard capability restriction)
+
+- **ChatGPT — default lead:** architecture and cross-system integration, runtime contracts, physics/input reliability, performance profiling, build/CI, regression strategy, technical documentation, and integration review.
+- **Claude Code — default implementation partner:** independently scoped gameplay features, level/content implementation, enemy/boss behavior, UI flows, tools, tests, and technical tasks assigned through a handoff.
+- Either agent may take any task when explicitly assigned. The division is for reducing overlap, not limiting capability.
+
+## Mandatory task handoff format
+
+```text
+TASK ID:
+PRIMARY WRITER:
+REVIEWER:
+BASE COMMIT:
+BRANCH:
+OBJECTIVE:
+IN SCOPE:
+ALLOWED PATHS:
+FORBIDDEN / RESERVED PATHS:
+DEPENDENCIES:
+ACCEPTANCE CRITERIA:
+REQUIRED TESTS:
+KNOWN RISKS:
+DELIVERABLE / PR:
+NEXT OWNER:
+```
+
+## Current technology authority
+
+The game is created **from zero** with HTML5, CSS3, JavaScript ES Modules, Canvas 2D and Vite; Web Audio API and Pointer Events support runtime/audio/input. Capacitor remains the Android packaging candidate subject to validation. This is not a Godot migration. Every historical Godot/GDScript-only instruction is obsolete unless the user explicitly changes the technology decision.
+
+---
+
 # SUPERSEDING ADDENDUM — HTML5 CLEAN-START DECISION (2026-11-28)
 
 **This addendum is the latest explicit user decision and overrides every conflicting engine, language, architecture, migration, repository-state, workflow and implementation instruction below.** The historical prompt body is retained intact as source material for creative canon, product requirements and quality expectations; any Godot/GDScript-specific instructions in it are obsolete and must not be followed.
