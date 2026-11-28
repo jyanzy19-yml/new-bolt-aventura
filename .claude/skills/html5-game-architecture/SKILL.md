@@ -1,3 +1,8 @@
+---
+name: html5-game-architecture
+description: "Design maintainable HTML5 game modules, dependencies and application lifecycle."
+---
+
 # Skill: HTML5 Game Architecture
 
 ## Activation
