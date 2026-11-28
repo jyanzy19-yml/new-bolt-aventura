@@ -1,46 +1,44 @@
-name: Feature proposal
-description: Propose a BOLT gameplay, narrative, accessibility or production improvement.
+name: Proposta de melhoria
+description: Sugira uma melhoria técnica ou de experiência.
 title: "[FEATURE] "
-labels: ["enhancement", "needs-review"]
 body:
   - type: textarea
     id: problem
     attributes:
-      label: Player problem or opportunity
-      description: What experience should this improve?
+      label: Problema ou oportunidade
+      description: Qual necessidade real esta proposta atende?
     validations:
       required: true
   - type: textarea
     id: proposal
     attributes:
-      label: Proposed behavior
-      description: Describe the idea. Treat narrative and scope changes as proposals until approved.
+      label: Proposta
+      description: Explique o comportamento desejado sem presumir aprovação de canon.
     validations:
       required: true
   - type: textarea
     id: alternatives
     attributes:
-      label: Alternatives and trade-offs
-    validations:
-      required: false
+      label: Alternativas e trade-offs
   - type: dropdown
-    id: domain
+    id: area
     attributes:
-      label: Area
+      label: Área
       options:
         - Gameplay
-        - Narrative
-        - World / level design
-        - UI / accessibility
-        - Android / performance
-        - Audio / visuals
-        - Production / tooling
+        - Level design
+        - Narrativa
+        - Arte e áudio
+        - UI/UX
+        - Android e performance
+        - Arquitetura e tooling
+        - QA
     validations:
       required: true
   - type: checkboxes
-    id: approvals
+    id: checks
     attributes:
-      label: Scope awareness
+      label: Confirmações
       options:
-        - label: This may change approved canon, scope, architecture or platform and needs explicit review.
-          required: false
+        - label: Entendo que propostas de canon precisam de aprovação do usuário.
+          required: true
