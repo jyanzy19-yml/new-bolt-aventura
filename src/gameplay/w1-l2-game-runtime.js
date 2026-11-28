@@ -16,6 +16,8 @@ function cloneEnemy(enemy) {
     health: enemy.health,
     alive: true,
     fireRemaining: enemy.fireInterval > 0 ? enemy.fireInterval * 0.65 : 0,
+    windupRemaining: 0,
+    attackDirection: 1,
     contactCooldown: 0,
   };
 }
@@ -103,28 +105,36 @@ export class W1L2GameRuntime {
         enemy.direction = -1;
       }
       if (enemy.fireInterval > 0) {
-        enemy.fireRemaining -= deltaSeconds;
+        enemy.fireRemaining = Math.max(0, enemy.fireRemaining - deltaSeconds);
         const playerCenter = player.x + player.width / 2;
         const enemyCenter = enemy.x + enemy.width / 2;
         const sameLane = Math.abs((player.y + player.height * 0.45) -
           (enemy.y + enemy.height * 0.5)) < 170;
         const inRange = Math.abs(playerCenter - enemyCenter) < 520;
-        if (enemy.fireRemaining <= 0 && sameLane && inRange) {
-          const facing = playerCenter < enemyCenter ? -1 : 1;
-          const originX = facing > 0 ? enemy.x + enemy.width : enemy.x - 8;
-          this.#combat.spawnEnemyProjectile({
-            x: originX,
-            y: enemy.y + enemy.height * 0.45,
-            vx: facing * enemy.projectileSpeed,
-            vy: Math.sign((player.y + player.height * 0.45) -
-              (enemy.y + enemy.height * 0.45)) * 24,
-            width: 9,
-            height: 9,
-            damage: 1,
-            lifetimeSeconds: 3,
-            sourceId: enemy.id,
-          });
-          enemy.fireRemaining = enemy.fireInterval;
+
+        if (!sameLane || !inRange) {
+          enemy.windupRemaining = 0;
+        } else if (enemy.fireRemaining === 0 && enemy.windupRemaining === 0) {
+          enemy.attackDirection = playerCenter < enemyCenter ? -1 : 1;
+          enemy.windupRemaining = 0.38;
+        } else if (enemy.windupRemaining > 0) {
+          enemy.windupRemaining = Math.max(0, enemy.windupRemaining - deltaSeconds);
+          if (enemy.windupRemaining === 0) {
+            const originX = enemy.attackDirection > 0 ? enemy.x + enemy.width : enemy.x - 8;
+            this.#combat.spawnEnemyProjectile({
+              x: originX,
+              y: enemy.y + enemy.height * 0.45,
+              vx: enemy.attackDirection * enemy.projectileSpeed,
+              vy: Math.sign((player.y + player.height * 0.45) -
+                (enemy.y + enemy.height * 0.45)) * 24,
+              width: 9,
+              height: 9,
+              damage: 1,
+              lifetimeSeconds: 3,
+              sourceId: enemy.id,
+            });
+            enemy.fireRemaining = enemy.fireInterval;
+          }
         }
       }
       if (near(player, enemy, 0) && this.#contactCooldown <= 0) {
