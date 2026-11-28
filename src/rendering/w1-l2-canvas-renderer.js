@@ -183,7 +183,7 @@ export class W1L2CanvasRenderer {
     }
     const barWidth = enemy.width;
     panel(ctx, enemy.x, enemy.y - 9, barWidth, 3, '#263b4b');
-    panel(ctx, enemy.x, enemy.y - 9, barWidth * Math.max(0, enemy.health) / (enemy.archetype === 'patrol-sentinel' ? 4 : enemy.archetype === 'watch-drone' ? 2 : 3), 3, '#e1b96e');
+    panel(ctx, enemy.x, enemy.y - 9, barWidth * Math.max(0, enemy.health) / enemy.maxHealth, 3, '#e1b96e');
   }
 
   #drawCombat(ctx, combat) {
