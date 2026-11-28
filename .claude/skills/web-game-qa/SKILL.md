@@ -1,3 +1,8 @@
+---
+name: web-game-qa
+description: "Validate HTML5 gameplay, browser behavior and regression quality."
+---
+
 # Skill: HTML5 Game QA and Regression
 
 ## Activation
