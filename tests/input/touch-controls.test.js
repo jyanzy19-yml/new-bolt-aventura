@@ -1,7 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
+import { InputManager } from '../../src/input/input-manager.js';
 import { TouchControls } from '../../src/input/touch-controls.js';
 
 function createElement(tagName) {
+  const listeners = new Map();
   return {
     tagName,
     children: [],
@@ -25,8 +27,21 @@ function createElement(tagName) {
     setAttribute(name, value) {
       this.attributes[name] = value;
     },
-    addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
+    addEventListener(type, listener) {
+      const handlers = listeners.get(type) ?? [];
+      handlers.push(listener);
+      listeners.set(type, handlers);
+    },
+    removeEventListener(type, listener) {
+      listeners.set(
+        type,
+        (listeners.get(type) ?? []).filter((handler) => handler !== listener),
+      );
+    },
+    dispatch(type, event) {
+      for (const listener of listeners.get(type) ?? []) listener(event);
+    },
+    setPointerCapture: vi.fn(),
   };
 }
 
@@ -106,6 +121,50 @@ describe('TouchControls', () => {
     expect(() => controls.mount(container)).toThrow('binding failed');
     expect(container.children).toHaveLength(0);
     expect(controls.mounted).toBe(false);
+  });
+
+  it('preserves simultaneous jump and Dash pointers through the real InputManager', () => {
+    const documentTarget = {
+      createElement: vi.fn((tagName) => createElement(tagName)),
+    };
+    const container = createElement('main');
+    const inputManager = new InputManager({
+      keyboardTarget: null,
+      lifecycleTarget: null,
+      documentTarget: null,
+    });
+    const controls = new TouchControls({ inputManager, documentTarget });
+
+    controls.mount(container);
+    const buttons = controls.element.children.flatMap((group) => group.children);
+    const jump = buttons.find((button) => button.dataset.action === 'jump');
+    const dash = buttons.find((button) => button.dataset.action === 'dash');
+
+    jump.dispatch('pointerdown', { pointerId: 11, preventDefault: vi.fn() });
+    dash.dispatch('pointerdown', { pointerId: 12, preventDefault: vi.fn() });
+
+    expect(inputManager.consume()).toEqual({
+      pressed: ['jump', 'dash'],
+      released: [],
+      held: ['jump', 'dash'],
+    });
+
+    jump.dispatch('pointerup', { pointerId: 11 });
+    expect(inputManager.consume()).toEqual({
+      pressed: [],
+      released: ['jump'],
+      held: ['dash'],
+    });
+
+    dash.dispatch('pointercancel', { pointerId: 12 });
+    expect(inputManager.consume()).toEqual({
+      pressed: [],
+      released: ['dash'],
+      held: [],
+    });
+
+    controls.dispose();
+    inputManager.dispose();
   });
 
   it('rejects incompatible input manager, document and container', () => {
