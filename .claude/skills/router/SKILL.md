@@ -1,3 +1,8 @@
+---
+name: router
+description: "Route BOLT tasks to the correct specialized skills and enforce agent workflow."
+---
+
 # BOLT Skill Router — HTML5 + Multi-Agent Production
 
 ## Authority and collaboration
