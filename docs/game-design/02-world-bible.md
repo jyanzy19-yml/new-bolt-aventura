@@ -25,7 +25,7 @@ A ordem abaixo é fixa e está definida no prompt mestre de design. Cada mundo p
 
 | Nº | Mundo | Identidade central | Fragmento | Guardião final |
 |---|---|---|---|---|
-| 1 | **Cybercore** | Ruínas tecnológicas e mundo destruído; ponto de despertar de BOLT e introdução da viagem com NEXO | **Origem** | Guardião Tecnológico |
+| 1 | **Cybercore** | Ruínas tecnológicas e mundo destruído; ponto de despertar de BOLT e introdução da viagem com NEXO | **Origem** | Sentinela do Fragmento |
 | 2 | **Egito Antigo Futurista** | Arquitetura monumental, civilização ancestral, mecanismos e tecnologia futurista | **Memória** | Guardião Ancestral das Pirâmides |
 | 3 | **Speakeasy Aesthetic** | Atmosfera urbana inspirada nos speakeasies dos anos 1920, elegância, música, mistério e segredos | **Verdade** | Mestre das Sombras |
 | 4 | **Dark Fantasy** | Fantasia sombria, ruínas, exploração, ameaça e atmosfera | **Sombra** | Rei Esquecido |
