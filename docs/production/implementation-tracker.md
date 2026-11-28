@@ -476,3 +476,12 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Guardião W1 corrigido para Sentinela do Fragmento conforme Atlas.
 - Arquétipos Projeção Defensiva/Drone Vigia, armas Tríplice/Laser, lore persistente e narrativa global continuam pendentes. Inimigo atual é placeholder genérico.
 - **Estado: EM VALIDAÇÃO.** Sem playtest humano ou Android físico.
+
+
+## Regressão E2E da seleção de campanha — 27/11/2026
+
+- Branch `test/campaign-selection-end-to-end-main-2026-11-27`, baseada no main após integração das correções canônicas W1-L3 e W1-L4.
+- Adiciona teste ponta a ponta do fluxo Menu → Mundos → Fases → W1-L1 usando botões reais, SceneFlow threaded e save isolado.
+- Confirma Cybercore disponível em campanha nova, W1-L1 disponível, W1-L2 bloqueada antes de concluir W1-L1 e persistência do nível atual.
+- Escopo de testes/documentação; nenhum runtime ou contrato persistente alterado.
+- Estado: EM VALIDAÇÃO; aguardando CI.
