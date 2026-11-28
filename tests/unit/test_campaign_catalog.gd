@@ -27,6 +27,7 @@ func test_world_catalog_matches_approved_world_bible_order() -> bool:
 	check_eq(CATALOG.get_world_name(5), "Vaporwave / Las Vegas", "mundo 6")
 	check_eq(CATALOG.get_world_name(6), "Natal / Nova York Futurista", "mundo 7")
 	check_eq(CATALOG.get_fragment_name(0), "Origem", "fragmento Cybercore")
+	check_eq(CATALOG.get_guardian_title(0), "Sentinela do Fragmento", "guardião oficial de Cybercore")
 	check_eq(CATALOG.get_guardian_title(6), "Guardião do Inverno", "guardião mundo 7")
 	return true
 
