@@ -1,3 +1,8 @@
+---
+name: asset-provenance-qa
+description: "Validate asset provenance, licensing, approvals and manifest integrity."
+---
+
 # Skill: Asset Provenance and Integration QA
 
 Every asset must have stable ID, source/creator, license/permission, dimensions or duration, file format, intended use, approval status and fallback. Treat external assets as untrusted and never assume a web image is licensed for redistribution.
