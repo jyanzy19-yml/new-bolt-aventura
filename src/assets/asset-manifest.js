@@ -58,7 +58,7 @@ export function validateAssetEntry(entry, index = 0) {
   if (
     /^[a-z][a-z0-9+.-]*:/i.test(entry.url) ||
     entry.url.startsWith('//') ||
-    path.includes('\\\\') ||
+    path.includes(String.fromCharCode(92)) ||
     decodedPath.split('/').includes('..')
   ) {
     throw new TypeError(`${name}.url deve ser um caminho local sem traversal.`);
