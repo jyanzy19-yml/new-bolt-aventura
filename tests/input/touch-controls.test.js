@@ -167,6 +167,28 @@ describe('TouchControls', () => {
     inputManager.dispose();
   });
 
+  it('supports a scene-specific touch action subset without showing unused actions', () => {
+    const documentTarget = {
+      createElement: vi.fn((tagName) => createElement(tagName)),
+    };
+    const inputManager = { bindPointerAction: vi.fn(() => vi.fn()) };
+    const container = createElement('main');
+    const controls = new TouchControls({
+      inputManager,
+      documentTarget,
+      enabledActions: ['move-left', 'move-right', 'jump', 'dash'],
+    });
+
+    controls.mount(container);
+    const actions = controls.element.children
+      .flatMap((group) => group.children)
+      .map((button) => button.dataset.action);
+
+    expect(actions).toEqual(['move-left', 'move-right', 'jump', 'dash']);
+    expect(actions).not.toContain('fire');
+    controls.dispose();
+  });
+
   it('rejects incompatible input manager, document and container', () => {
     expect(() => new TouchControls({ inputManager: {} })).toThrow(TypeError);
 
