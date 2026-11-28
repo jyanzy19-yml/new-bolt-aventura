@@ -172,7 +172,7 @@ checkpoint_id = &"cybercore_w1_l4_chambers_checkpoint"
 
 [node name="MemoryRecordTrigger" parent="." instance=ExtResource("10_beat")]
 unique_name_in_owner = true
-position = Vector2(760, -692)
+position = Vector2(860, -692)
 beat_id = &"w1_l4_preservation_project_record"
 
 [node name="MemoryEchoTrigger" parent="." instance=ExtResource("10_beat")]
