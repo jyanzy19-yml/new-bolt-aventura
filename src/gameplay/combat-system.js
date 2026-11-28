@@ -271,7 +271,8 @@ export class CombatSystem {
   selectWeaponById(id) {
     const index = this.#weaponIndexById.get(id);
     if (index === undefined) return false;
-    return this.selectWeapon(index) || true;
+    this.selectWeapon(index);
+    return true;
   }
 
   cycleWeapon() {
