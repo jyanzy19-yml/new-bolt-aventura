@@ -123,6 +123,7 @@ describe('PlayerMotor jumping', () => {
       config: makeConfig({
         gravity: 100,
         jumpVelocity: 200,
+        jumpCount: 1,
         jumpBufferSeconds: 0.2,
       }),
     });
