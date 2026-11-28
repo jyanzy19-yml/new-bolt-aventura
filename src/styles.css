@@ -40,3 +40,98 @@ h1 { margin: 18px 0; font-size: clamp(2rem, 8vw, 4.8rem); letter-spacing: 0.04em
 h1 span { color: #78b9ff; }
 .boot-copy { color: #d1e1f5; font-size: clamp(1rem, 3vw, 1.25rem); }
 .boot-status { margin: 32px 0 0; color: #8fa8c7; font-size: 0.85rem; }
+
+
+.touch-controls {
+  display: flex;
+  width: min(100%, 1280px);
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-inline: auto;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.touch-control-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.touch-control {
+  display: inline-flex;
+  min-width: 58px;
+  min-height: 58px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 1px solid rgb(142 190 245 / 42%);
+  border-radius: 16px;
+  background: rgb(17 35 59 / 86%);
+  color: #edf4ff;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
+}
+
+.touch-control:active {
+  background: rgb(50 100 154 / 92%);
+  border-color: #8ec8ff;
+}
+
+.touch-control--move-left,
+.touch-control--move-right {
+  min-width: 64px;
+  font-size: 1.25rem;
+}
+
+.touch-control--jump {
+  min-width: 72px;
+  background: rgb(29 76 111 / 92%);
+}
+
+.touch-control--dash {
+  background: rgb(89 65 30 / 92%);
+}
+
+.touch-control--fire {
+  background: rgb(105 48 49 / 92%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .touch-controls {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .touch-controls {
+    gap: 8px;
+  }
+
+  .touch-control-group {
+    gap: 6px;
+  }
+
+  .touch-control {
+    min-width: 52px;
+    min-height: 52px;
+    padding: 8px;
+    border-radius: 13px;
+    font-size: 0.68rem;
+  }
+
+  .touch-control--move-left,
+  .touch-control--move-right {
+    min-width: 54px;
+  }
+}
