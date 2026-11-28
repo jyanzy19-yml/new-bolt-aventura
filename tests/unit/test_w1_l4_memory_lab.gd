@@ -161,13 +161,12 @@ func test_w1_l4_requires_preservation_record_and_emits_optional_memory() -> bool
 	check_eq(hud.get_node("%ProgressNotification").text, "REGISTRO DE PRESERVAÇÃO RECUPERADO",
 		"HUD confirma o registro central")
 
-	player.global_position = goal.global_position
-	player.velocity = Vector2.ZERO
-	await _step_physics(3)
+	goal.body_entered.emit(player)
 	check(CampaignProgress.is_level_completed("W1-L4"), "recuperar o registro libera a conclusão")
 	check(hud.get_node("%ResultOverlay").visible, "conclusão apresenta o overlay de resultado")
 	check_eq(hud.get_node("%ResultTitle").text, "Laboratório de Memórias concluído",
 		"resultado identifica a fase canônica")
+	tree.paused = false
 	level.free()
 	await tree.process_frame
 	_clear_save()
