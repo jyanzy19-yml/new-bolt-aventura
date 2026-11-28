@@ -1,3 +1,13 @@
+# CURRENT DOCUMENTATION ENTRYPOINT — HTML5 MASTER BIBLE v2.0 (2026-11-28)
+
+**Mandatory reading for substantial product, gameplay, narrative, architecture or QA work:** `docs/game-design/BOLT_MASTER_BIBLE_HTML5_V2.md`.
+
+This consolidated Bible is the current product-and-engineering context under the accepted clean-start decision. It does not replace this file's operational authority, specialized accepted ADRs, source code or test evidence. The active stack remains HTML5 + CSS3 + JavaScript ES Modules + Canvas 2D + Vite; no game engine. Godot/GDScript passages retained below are historical and superseded by the HTML5 addenda and accepted ADRs.
+
+Adoption record: `docs/decisions/ADR-0006-MASTER-BIBLE-HTML5-V2.md`. Repository update handoff: `docs/production/BIBLE_V2_REPOSITORY_UPDATE.md`.
+
+---
+
 # COLLABORATION OVERRIDE — CHATGPT + CLAUDE CODE (2026-11-27)
 
 **This is the current operational collaboration decision. It supersedes every older statement in the retained prompt or historical documentation that describes Claude as inactive, ChatGPT as the sole writer, or collaboration as awaiting reactivation.**
