@@ -1,19 +1,9 @@
 # Skill: Enemy AI and Boss Encounter Design
 
-## Activation
-Use for enemy archetypes, behavior trees/state machines, combat roles, boss patterns, telegraphs and encounter balancing.
+Define each enemy by gameplay role, silhouette, movement, perception, attack, telegraph, recovery, vulnerability/counterplay, damage model, defeat behavior and audiovisual feedback. Color or health changes alone do not create a distinct archetype.
 
-## Design contract
-Each enemy archetype needs a distinct gameplay role, silhouette/readability, locomotion, detection/engagement range, attack rules, telegraph, recovery window, vulnerability/counterplay, damage model, defeat behavior and audio/visual feedback. A color or health-value change alone is not a distinct archetype.
+Use explicit finite-state machines or behavior structures with bounded transitions. Separate perception, decision, movement, attack execution and presentation. Avoid hidden coupling to player internals. Inject clocks/randomness for deterministic tests where practical.
 
-## AI architecture
-Use explicit finite-state machines or behavior structures with bounded transitions. Separate perception, decision, movement, attack execution and presentation. Avoid hidden coupling to player internals. Make AI deterministic in tests through injected clocks/randomness where practical.
+Boss specifications must include arena, entry/exit, phase transitions, attack patterns, telegraph duration, safe zones, recovery windows, escalation, vulnerability, checkpoint/retry and victory progression. Difficulty comes from readable pattern mastery, not unavoidable damage or unclear hitboxes.
 
-## Bosses
-Specify arena geometry, entry/exit conditions, phase transitions, attack patterns, telegraph duration, safe zones, recovery windows, escalation, vulnerability rules, checkpoint/retry behavior and victory progression. Difficulty must come from readable pattern mastery, not unavoidable damage or unclear hitboxes.
-
-## Mobile and performance
-Ensure telegraphs remain visible on phone screens. Avoid excessive simultaneous projectiles, particles and expensive per-frame searches. Cap active agents and use spatial queries/culling where justified by profiling.
-
-## Validation
-Test each state transition, interruption, pause/resume, player death, boss reset, edge-of-arena cases, simultaneous damage, phase transition and softlock recovery. Record tuning changes and rationale.
+Keep telegraphs legible on phone screens. Bound projectiles, particles and per-frame searches. Test every state transition, interruption, pause/resume, player death, reset, simultaneous damage and softlock recovery. Read approved canon and gameplay skills before implementation.
