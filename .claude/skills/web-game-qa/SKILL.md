@@ -1,3 +1,8 @@
+---
+name: web-game-qa
+description: "Plan and execute HTML5 game testing, regression coverage, bug triage and evidence-based release gates."
+---
+
 # Skill: HTML5 Game QA and Regression
 
 ## Activation
