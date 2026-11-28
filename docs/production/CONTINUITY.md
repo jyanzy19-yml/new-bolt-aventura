@@ -848,3 +848,10 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - Projeção Defensiva e Drone Vigia ainda não existem como arquétipos; Tríplice/Laser não estão completos. O inimigo atual é genérico e provisório.
 - PR #113/#106 de Núcleo de Distribuição e PR #108/#109 de Perímetro do Guardião permanecem fechadas sem merge; W1-L5 oficial é Torre do Núcleo.
 - CI desta branch pendente. Sem validação Android física.
+
+
+## Regressão E2E da seleção de campanha — 27/11/2026
+
+- A PR #112 original ficou dirty após integrações de W1-L3/W1-L4 porque compartilhava o tracker/continuidade. Seu teste foi reaplicado em `test/campaign-selection-end-to-end-main-2026-11-27` sobre o main atual `44bed68`.
+- O teste usa botões reais, SceneFlow threaded, verifica menu → mundos → fases → W1-L1 e isola o save.
+- Nenhum runtime de produção alterado. CI pendente.
