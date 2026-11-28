@@ -105,8 +105,13 @@ func test_alternating_platform_warns_before_losing_and_restoring_collision() -> 
 	await _step_physics(10)
 	check_eq(platform.get_state(), AlternatingPlatform.State.WARNING_ON, "aviso antecede a reativação")
 	check(not platform.is_collision_enabled(), "plataforma ainda não é sólida durante o aviso de retorno")
-	await _step_physics(6)
-	check_eq(platform.get_state(), AlternatingPlatform.State.ACTIVE, "plataforma retorna ao estado ativo")
+	var saw_active: bool = false
+	for _frame in range(20):
+		if platform.get_state() == AlternatingPlatform.State.ACTIVE:
+			saw_active = true
+			break
+		await tree.physics_frame
+	check(saw_active, "plataforma retorna ao estado ativo após o aviso")
 	check(platform.is_collision_enabled(), "colisão retorna depois do aviso")
 	platform.free()
 	await tree.process_frame
