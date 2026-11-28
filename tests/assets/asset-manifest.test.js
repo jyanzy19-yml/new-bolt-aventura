@@ -71,6 +71,13 @@ describe('validateAssetManifest', () => {
     ]))).toThrow('provenance.source');
   });
 
+  it('rejects cyclic dependency graphs', () => {
+    expect(() => validateAssetManifest(manifest([
+      asset({ id: 'asset-a', dependencies: ['asset-b'] }),
+      asset({ id: 'asset-b', url: '/assets/b.webp', dependencies: ['asset-a'] }),
+    ]))).toThrow('circular');
+  });
+
   it('allows placeholders only under explicit development policy', () => {
     const placeholder = asset({ state: 'PLACEHOLDER' });
 
