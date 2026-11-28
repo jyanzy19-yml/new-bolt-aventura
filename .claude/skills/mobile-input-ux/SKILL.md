@@ -1,3 +1,8 @@
+---
+name: mobile-input-ux
+description: "Engineer touch-first controls, multitouch, safe areas and mobile interaction."
+---
+
 # Skill: Mobile Input and UX
 
 ## Activation
