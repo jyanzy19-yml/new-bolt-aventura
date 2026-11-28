@@ -51,8 +51,8 @@ describe('DebugCanvasRenderer', () => {
     expect(surface.clear).toHaveBeenCalledWith('#080d18');
     expect(context.save).toHaveBeenCalledTimes(1);
     expect(context.translate).toHaveBeenCalledWith(0, 0);
-    expect(context.fillRect).toHaveBeenCalledTimes(5);
-    expect(context.strokeRect).toHaveBeenCalledTimes(2);
+    expect(context.fillRect).toHaveBeenCalledTimes(6);
+    expect(context.strokeRect).toHaveBeenCalledTimes(3);
     expect(context.restore).toHaveBeenCalledTimes(1);
     expect(result).toEqual({
       solids: 1,
