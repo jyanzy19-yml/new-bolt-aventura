@@ -68,7 +68,7 @@ function bootW1L2() {
   const defeatPanel = element('div', 'completion-panel');
   const defeatTitle = element('h2', '', 'SINAL PERDIDO');
   const defeatCopy = element('p', '', 'BOLT precisa reiniciar a travessia. Recomece a fase para tentar novamente.');
-  const retryButton = element('button', 'primary-button', 'TENTAR NOVAMENTE');
+  const retryButton = element('button', 'primary-button', 'REAPARECER NO CHECKPOINT');
   retryButton.type = 'button';
   defeatPanel.append(defeatTitle, defeatCopy, retryButton);
   defeatOverlay.appendChild(defeatPanel);
@@ -164,7 +164,21 @@ function bootW1L2() {
   pauseButton.addEventListener('click', () => paused ? resumeGame() : pauseGame());
   resumeButton.addEventListener('click', resumeGame);
   restartButton.addEventListener('click', () => window.location.reload());
-  retryButton.addEventListener('click', () => window.location.reload());
+  retryButton.addEventListener('click', () => {
+    const respawnPosition = gameRuntime.respawn();
+    const currentBody = sceneRuntime.playerSnapshot.body;
+    sceneRuntime.reset({
+      ...currentBody,
+      x: respawnPosition.x,
+      y: respawnPosition.y,
+    });
+    defeated = false;
+    defeatOverlay.hidden = true;
+    pauseButton.hidden = false;
+    inputManager.setEnabled(true);
+    renderer.setState(gameRuntime.snapshot);
+    loop.start();
+  });
 
   loop = new FixedStepLoop({
     update: (deltaSeconds) => {
