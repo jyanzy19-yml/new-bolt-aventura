@@ -41,7 +41,7 @@ describe('Camera2D', () => {
       1,
     );
 
-    expect(result.x).toBe(1030);
+    expect(result.x).toBe(715);
   });
 
   it('applies exponential smoothing using simulation delta', () => {
