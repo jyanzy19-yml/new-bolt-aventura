@@ -1,3 +1,8 @@
+---
+name: gameplay-physics-loop
+description: "Engineer movement, collision, combat simulation and approved Dash behavior."
+---
+
 # Skill: Gameplay Physics and Simulation
 
 ## Activation
