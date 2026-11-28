@@ -85,6 +85,24 @@ describe('LevelRuntime', () => {
     expect(runtime.activeLevelId).toBe('w1-l1');
   });
 
+  it('rejects array accessors and symbol-keyed metadata', () => {
+    const runtime = new LevelRuntime();
+    runtime.load(makeLevel());
+
+    const withArrayAccessor = makeLevel();
+    Object.defineProperty(withArrayAccessor.geometry.solids, '0', {
+      enumerable: true,
+      configurable: true,
+      get: () => ({ id: 'starting-floor', x: 0, y: 400, width: 800, height: 50 }),
+    });
+    expect(() => runtime.load(withArrayAccessor)).toThrow('serializável');
+
+    const withSymbol = makeLevel({ metadata: {} });
+    withSymbol.metadata[Symbol('hidden')] = 'not-json';
+    expect(() => runtime.load(withSymbol)).toThrow('chave de símbolo');
+    expect(runtime.activeLevelId).toBe('w1-l1');
+  });
+
   it('unloads idempotently and clears the active reference', () => {
     const runtime = new LevelRuntime();
     runtime.load(makeLevel());
