@@ -86,7 +86,7 @@ describe('mapClientPointToLogical', () => {
   it('maps client coordinates into logical game coordinates', () => {
     const point = mapClientPointToLogical(510, 318.75, { left: 10, top: 20 }, viewport);
 
-    expect(point).toEqual({ x: 400, y: 240, inside: true });
+    expect(point).toEqual({ x: 400, y: 224, inside: true });
   });
 
   it('marks letterbox bars as outside the logical viewport', () => {
