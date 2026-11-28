@@ -169,6 +169,8 @@ button { font: inherit; }
 .touch-control--jump { border-color: #8ce4d6; }
 .touch-control--dash { border-color: #e5c77c; }
 .touch-control--interact { border-color: #91b9ee; }
+.touch-control--weapon-next { border-color: #b99aee; }
+.touch-control-group--actions { display: grid; grid-template-columns: repeat(3, minmax(46px, 1fr)); gap: 6px; }
 .touch-control:active { background: rgb(48 113 122 / 92%); transform: scale(0.96); }
 @media (orientation: portrait) { .orientation-hint { display: block; } }
 @media (max-width: 520px) {
@@ -178,5 +180,6 @@ button { font: inherit; }
   .game-status { font-size: 0.56rem; }
   .touch-control { min-width: 48px; min-height: 48px; padding: 5px; font-size: 0.56rem; }
   .touch-control--move-left, .touch-control--move-right { min-width: 50px; min-height: 50px; }
-  .touch-control-group, .touch-control-group--actions { gap: 5px; }
+  .touch-control-group { gap: 5px; }
+  .touch-control-group--actions { gap: 4px; grid-template-columns: repeat(3, 48px); }
 }
