@@ -19,3 +19,13 @@
 3. Executar lint, Vitest, build Vite, validador documental e CodeQL no commit integrado.
 4. Implementar a primeira vertical slice com contratos e testes.
 5. Validar browser, Android WebView e dispositivo físico separadamente.
+
+## Entrega em desenvolvimento — BOLT-001 W1-L1 (2026-11-28)
+
+- **Primary writer:** ChatGPT. **Branch:** agent/chatgpt/w1-l1-production-playable.
+- **Base:** PR #161, commit 3ef82158aa45c21af51e2eea793b0ebbdfc44570. A PR #161 é uma integração agregada ainda aberta; contém o runtime HTML5, input multitouch, física, câmera e uma fixture de debug.
+- Implementação criada nesta branch: dados reais de conteúdo W1-L1 em src/levels/w1-l1.js; runtime de objetivos/segredo/patrulha/sincronização; renderer vetorial de blockout; boot/menu de início, pause/resume e controles touch de movimento, salto, Dash e interação; testes específicos de dados e runtime.
+- O conteúdo respeita o percurso da fonte de campanha: câmara de despertar → corredor desmoronado → pátio aberto → abrigo de manutenção. A ativação do primeiro ponto de sincronização conclui W1-L1.
+- **Status:** implementação submetida à validação CI; blockout jogável pretendido, não arte final. Sem áudio final, save persistente, W1-L2, combate ou validação Android física nesta unidade.
+- **Não confundir:** PR #161 continua sendo dependência técnica da branch e a main não recebeu estes arquivos. A nova PR deve deixar clara a estratégia de integração para evitar mesclar componentes #145–#158 em duplicidade.
+- Próxima ação: executar lint, Vitest, Vite build e revisão de diff após abrir PR; corrigir falhas observadas. Depois, avançar para integração de combate/feedback e W1-L2, sem declarar campanha completa.

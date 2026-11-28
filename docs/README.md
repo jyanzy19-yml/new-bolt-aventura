@@ -21,6 +21,9 @@ O jogo está sendo reconstruído do zero como produto HTML5, com Android como pl
 ## Fontes de design
 Os documentos em `game-design/` são a referência para canon, personagens, mundos, campanha, gameplay, arte, áudio e UX. Não inventar nomes, sequência ou revelações que não estejam aprovados.
 
+## Primeira fase jogável
+- [W1-L1 — Despertar entre Ruínas](production/W1-L1-PLAYABLE-IMPLEMENTATION.md) — estado da implementação, percurso, mecânicas, QA e limitações.
+
 ## Produção e QA
 - `production/` — roadmap, ownership, handoffs, decisões, continuidade, rastreabilidade e gates.
 - `qa/` — matriz de testes, templates e evidências.

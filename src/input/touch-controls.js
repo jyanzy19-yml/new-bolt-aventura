@@ -13,7 +13,7 @@ const CONTROL_GROUPS = Object.freeze([
     controls: [
       { action: 'jump', label: 'Pular', glyph: 'PULAR' },
       { action: 'dash', label: 'Dash', glyph: 'DASH' },
-      { action: 'fire', label: 'Atirar', glyph: 'TIRO' },
+      { action: 'interact', label: 'Interagir', glyph: 'AÇÃO' },
     ],
   },
 ]);
@@ -92,14 +92,14 @@ export class TouchControls {
     try {
       for (const groupDefinition of this.#groups) {
         const group = this.#document.createElement('div');
-        group.className = `touch-control-group touch-control-group--${groupDefinition.id}`;
+        group.className = 'touch-control-group touch-control-group--' + groupDefinition.id;
         group.setAttribute('role', 'group');
         group.setAttribute('aria-label', groupDefinition.label);
 
         for (const control of groupDefinition.controls) {
           const button = this.#document.createElement('button');
           button.type = 'button';
-          button.className = `touch-control touch-control--${control.action}`;
+          button.className = 'touch-control touch-control--' + control.action;
           button.textContent = control.glyph;
           button.setAttribute('aria-label', control.label);
           button.dataset.action = control.action;
