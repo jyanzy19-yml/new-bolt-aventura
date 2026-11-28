@@ -48,9 +48,18 @@ export function validateAssetEntry(entry, index = 0) {
   }
 
   assertText(entry.url, `${name}.url`);
+  const path = entry.url.split(/[?#]/, 1)[0];
+  let decodedPath;
+  try {
+    decodedPath = decodeURIComponent(path);
+  } catch {
+    throw new TypeError(`${name}.url contém escape inválido.`);
+  }
   if (
-    /^(?:https?:|data:|blob:)/i.test(entry.url) ||
-    entry.url.split(/[?#]/, 1)[0].split('/').includes('..')
+    /^[a-z][a-z0-9+.-]*:/i.test(entry.url) ||
+    entry.url.startsWith('//') ||
+    path.includes('\\\\') ||
+    decodedPath.split('/').includes('..')
   ) {
     throw new TypeError(`${name}.url deve ser um caminho local sem traversal.`);
   }
