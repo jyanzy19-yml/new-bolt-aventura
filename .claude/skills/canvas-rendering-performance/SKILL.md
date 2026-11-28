@@ -1,3 +1,8 @@
+---
+name: canvas-rendering-performance
+description: "Optimize Canvas rendering cost, backing-store memory and frame-time stability."
+---
+
 # Skill: Canvas Rendering and Frame-Time Engineering
 
 Keep rendering deterministic with respect to supplied simulation state. The renderer must not own gameplay state or advance physics.
