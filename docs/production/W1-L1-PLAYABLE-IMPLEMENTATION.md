@@ -105,3 +105,6 @@ Os resultados oficiais de lint, testes, build e análise estática são os check
 
 
 A rendererização da fase também possui testes de contrato com Canvas mockado para verificar o desenho do blockout, HUD, estado opcional e feedback de conclusão. Isso não substitui inspeção visual em navegador ou aparelho.
+
+
+A validação específica de W1-L1 verifica cobertura contígua dos quatro segmentos, ordenação dos objetivos, unicidade dos IDs do pacote, limites de landmarks/interações e faixa de patrulha da unidade de manutenção.
