@@ -170,6 +170,34 @@ describe('AssetLoader', () => {
     })).rejects.toMatchObject({ name: 'AbortError' });
   });
 
+  it('requires an explicit unload before changing a cached asset identity', async () => {
+    const { loader, loadImage } = createLoader();
+    await loader.loadOne(asset());
+
+    await expect(loader.loadOne(asset({
+      url: '/assets/bolt/idle-v2.webp',
+    }))).rejects.toThrow('outra identidade');
+
+    expect(loader.has('bolt-idle')).toBe(true);
+    expect(loadImage).toHaveBeenCalledTimes(1);
+  });
+
+  it('rejects unsupported streaming loads and rolls back on progress callback failure', async () => {
+    const { loader, releaseImage } = createLoader();
+
+    await expect(loader.loadOne(asset({ loadPolicy: 'stream' })))
+      .rejects.toThrow('streaming');
+
+    await expect(loader.loadManifest(manifest([asset()]), {
+      onProgress: () => {
+        throw new Error('progress consumer failed');
+      },
+    })).rejects.toThrow('progress consumer failed');
+
+    expect(loader.has('bolt-idle')).toBe(false);
+    expect(releaseImage).toHaveBeenCalledTimes(1);
+  });
+
   it('returns an empty report without inventing progress for an empty preload set', async () => {
     const { loader } = createLoader();
     const result = await loader.loadManifest(manifest([
