@@ -14,6 +14,7 @@ function cloneEnemy(enemy) {
     ...enemy,
     direction: 1,
     health: enemy.health,
+    maxHealth: enemy.health,
     alive: true,
     fireRemaining: enemy.fireInterval > 0 ? enemy.fireInterval * 0.65 : 0,
     windupRemaining: 0,
