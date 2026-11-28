@@ -14,6 +14,7 @@ const CONTROL_GROUPS = Object.freeze([
       { action: 'jump', label: 'Pular', glyph: 'PULAR' },
       { action: 'dash', label: 'Dash', glyph: 'DASH' },
       { action: 'fire', label: 'Atirar', glyph: 'TIRO' },
+      { action: 'weapon-next', label: 'Trocar arma', glyph: 'ARMA' },
       { action: 'interact', label: 'Interagir', glyph: 'AÇÃO' },
     ],
   },
