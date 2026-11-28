@@ -151,3 +151,8 @@ func test_campaign_phase_titles_match_official_cybercore_atlas() -> bool:
 	check_eq(CATALOG.get_phase_title("W1-L3", 2), "Fábrica de Ecos", "nome oficial W1-L3")
 	check_eq(CATALOG.get_phase_title("W1-L4", 3), "Laboratório de Memórias", "nome oficial W1-L4")
 	return true
+
+
+func test_cybercore_guardian_title_matches_official_atlas() -> bool:
+	check_eq(CATALOG.get_guardian_title(0), "Sentinela do Fragmento", "W1-L6 usa o nome oficial Sentinela do Fragmento")
+	return true
