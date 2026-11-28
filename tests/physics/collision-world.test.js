@@ -68,8 +68,8 @@ describe('CollisionWorld', () => {
       grounded: false,
       collidedY: false,
     });
-    expect(world.move({ ...body, y: 40 }, 100, 0)).toMatchObject({
-      x: 110,
+    expect(world.move({ ...body, x: -20, y: 45 }, 100, 0)).toMatchObject({
+      x: 80,
       collidedX: false,
     });
   });
