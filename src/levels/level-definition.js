@@ -1,6 +1,3 @@
-import { CollisionWorld } from '../physics/collision-world.js';
-import { validateAabb } from '../physics/aabb.js';
-
 export const LEVEL_SCHEMA_VERSION = 1;
 
 const LEVEL_ID_PATTERN = /^w[1-7]-l[1-6]$/;
@@ -9,6 +6,18 @@ const STABLE_ID_PATTERN = /^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;
 function assertRecord(value, name) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
     throw new TypeError(`${name} deve ser um objeto.`);
+  }
+}
+
+function assertRect(rect, name) {
+  assertRecord(rect, name);
+  for (const key of ['x', 'y', 'width', 'height']) {
+    if (!Number.isFinite(rect[key])) {
+      throw new TypeError(`${name}.${key} deve ser finito.`);
+    }
+  }
+  if (rect.width <= 0 || rect.height <= 0) {
+    throw new RangeError(`${name} precisa ter largura e altura positivas.`);
   }
 }
 
@@ -41,7 +50,7 @@ function assertPoint(point, name, bounds) {
 }
 
 function assertInsideBounds(rect, name, bounds) {
-  validateAabb(rect, name);
+  assertRect(rect, name);
   if (
     rect.x < bounds.x ||
     rect.y < bounds.y ||
@@ -71,7 +80,7 @@ export function validateLevelDefinition(level) {
   assertText(level.title, 'level.title');
 
   assertRecord(level.bounds, 'level.bounds');
-  validateAabb(level.bounds, 'level.bounds');
+  assertRect(level.bounds, 'level.bounds');
   assertPoint(level.spawn, 'level.spawn', level.bounds);
 
   assertRecord(level.geometry, 'level.geometry');
@@ -122,17 +131,3 @@ export function validateLevelDefinition(level) {
   return level;
 }
 
-export function createCollisionWorldFromLevel(level) {
-  validateLevelDefinition(level);
-
-  const solids = level.geometry.solids.map((rect) => ({
-    ...rect,
-    oneWay: false,
-  }));
-  const oneWayPlatforms = level.geometry.oneWayPlatforms.map((rect) => ({
-    ...rect,
-    oneWay: true,
-  }));
-
-  return new CollisionWorld([...solids, ...oneWayPlatforms]);
-}
