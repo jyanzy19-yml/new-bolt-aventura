@@ -120,6 +120,19 @@ describe('W1L2GameRuntime', () => {
     expect(state.completed).toBe(false);
   });
 
+
+  it('activates checkpoints and respawns at the latest synchronized position', () => {
+    const runtime = new W1L2GameRuntime({ level: W1_L2, combatSystem: makeCombat() });
+    const beyondFirstCheckpoint = {
+      ...player,
+      body: { x: 1910, y: 504, width: 30, height: 46 },
+    };
+    const state = runtime.update(1 / 60, beyondFirstCheckpoint);
+    expect(state.checkpointId).toBe('power-station-checkpoint');
+    expect(runtime.respawn()).toEqual({ x: 1900, y: 504 });
+    expect(runtime.snapshot.combat.playerHealth).toBe(5);
+  });
+
   it('resets combat, enemy health, objective and optional progress', () => {
     const runtime = new W1L2GameRuntime({ level: W1_L2, combatSystem: makeCombat() });
     runtime.update(1 / 60, player, { pressed: ['weapon-2'], released: [], held: [] });
