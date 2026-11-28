@@ -1,3 +1,8 @@
+---
+name: persistence-save-integrity
+description: "Design robust save schemas, checkpoint persistence and migration recovery."
+---
+
 # Skill: Persistence, Checkpoints and Save Integrity
 
 Separate transient runtime state, checkpoint state and campaign-persistent state. Use stable IDs for worlds, phases, fragments, unlocks, inventory and flags. Define a versioned schema and migration policy before expanding the format.
