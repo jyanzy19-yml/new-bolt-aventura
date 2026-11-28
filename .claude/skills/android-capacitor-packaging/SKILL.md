@@ -1,3 +1,8 @@
+---
+name: android-capacitor-packaging
+description: "Package the HTML5 game for Android and validate native shell integration."
+---
+
 # Skill: Android Packaging with Capacitor
 
 ## Activation
