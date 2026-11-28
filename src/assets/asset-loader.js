@@ -1,5 +1,6 @@
 import {
   assertAssetLoadApproved,
+  validateAssetEntry,
   validateAssetManifest,
 } from './asset-manifest.js';
 
@@ -127,6 +128,10 @@ export class AssetLoader {
   async loadOne(entry, { signal } = {}) {
     validateSignal(signal);
     if (signal?.aborted) throw createAbortError();
+    validateAssetEntry(entry);
+    if (entry.loadPolicy === 'stream') {
+      throw new Error(`Asset ${entry.id} usa streaming, ainda não suportado pelo loader.`);
+    }
     assertAssetLoadApproved(entry, {
       allowPlaceholders: this.#allowPlaceholders,
     });
@@ -161,6 +166,7 @@ export class AssetLoader {
       total: entries.length,
       completed: 0,
       ratio: entries.length === 0 ? null : 0,
+      callbackError: null,
     };
 
     let cursor = 0;
@@ -189,26 +195,40 @@ export class AssetLoader {
         report.ratio = report.total === 0
           ? null
           : report.completed / report.total;
-        onProgress?.({
-          total: report.total,
-          completed: report.completed,
-          failed: report.failures.length,
-          ratio: report.ratio,
-          assetId: entry.id,
-          status,
-        });
+        try {
+          onProgress?.({
+            total: report.total,
+            completed: report.completed,
+            failed: report.failures.length,
+            ratio: report.ratio,
+            assetId: entry.id,
+            status,
+          });
+        } catch (error) {
+          report.callbackError ??= error;
+        }
       }
     };
 
     const workerCount = Math.min(this.#maxConcurrency, entries.length);
     await Promise.all(Array.from({ length: workerCount }, () => worker()));
 
+    if (report.callbackError) {
+      this.#rollbackNewEntries(report.newlyLoadedIds);
+      throw report.callbackError;
+    }
+
     return report;
   }
 
   async #loadEntry(entry, signal) {
     const cached = this.#cache.get(entry.id);
-    if (cached && cached.url === entry.url && cached.type === entry.type) {
+    if (cached) {
+      if (cached.url !== entry.url || cached.type !== entry.type) {
+        throw new Error(
+          `Asset ${entry.id} já está carregado com outra identidade; descarregue antes de substituir.`,
+        );
+      }
       return { value: cached.value, cached: true };
     }
 
@@ -223,14 +243,12 @@ export class AssetLoader {
       throw createAbortError();
     }
 
-    const previous = this.#cache.get(entry.id);
     this.#cache.set(entry.id, {
       entry,
       url: entry.url,
       type: entry.type,
       value,
     });
-    if (previous) this.#releaseValue(previous.entry, previous.value);
 
     return { value, cached: false };
   }
