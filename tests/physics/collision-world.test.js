@@ -68,6 +68,10 @@ describe('CollisionWorld', () => {
       grounded: false,
       collidedY: false,
     });
+    expect(world.move({ ...body, y: 40 }, 100, 0)).toMatchObject({
+      x: 110,
+      collidedX: false,
+    });
   });
 
   it('probes ground without changing the caller body', () => {
