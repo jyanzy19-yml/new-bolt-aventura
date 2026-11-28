@@ -85,10 +85,11 @@ def check_unique_metadata(folder: str, key: str) -> int:
 def check_required_files() -> None:
     required = (
         ".claude/skills/router/SKILL.md",
-        ".claude/skills/bolt-godot-debugging/SKILL.md",
+        ".claude/skills/html5-game-architecture/SKILL.md",
+        ".claude/skills/web-game-qa/SKILL.md",
         ".claude/skills/bolt-regression-engineering/SKILL.md",
         ".claude/skills/bolt-android-release-readiness/SKILL.md",
-        ".claude/agents/godot-integration-reviewer.md",
+        ".claude/agents/architecture-reviewer.md",
         ".claude/agents/android-release-auditor.md",
         ".claude/agents/persistence-integrity-auditor.md",
         "docs/production/COLLABORATION_STATE.md",
@@ -98,6 +99,27 @@ def check_required_files() -> None:
     for relative in required:
         if not (ROOT / relative).is_file():
             ERRORS.append(f"Required project file is missing: {relative}")
+
+
+def is_legacy_godot_reference(path: Path) -> bool:
+    """Allow historical documents to mention removed Godot paths without masking new broken links."""
+    try:
+        relative = path.relative_to(ROOT.resolve()).as_posix()
+    except ValueError:
+        return False
+    return (
+        relative.startswith(("scenes/", "resources/"))
+        or (relative.startswith("scripts/") and relative != "scripts/validate_project_docs.py")
+        or (relative.startswith("tests/") and relative.endswith((".gd", ".uid")))
+        or relative.startswith(".claude/skills/godot-")
+        or relative.startswith(".claude/skills/bolt-godot-debugging/")
+        or relative == ".claude/agents/godot-integration-reviewer.md"
+        or relative in {
+            ".godot-version", "project.godot", "export_presets.cfg", "icon.svg.import",
+            ".github/workflows/godot-validation.yml",
+            ".github/workflows/android-debug-export.yml",
+        }
+    )
 
 
 def check_markdown_links() -> int:
@@ -123,7 +145,12 @@ def check_markdown_links() -> int:
                 ERRORS.append(f"{source.relative_to(ROOT)}: link escapes repository: {target}")
                 continue
             if not resolved.exists():
-                ERRORS.append(f"{source.relative_to(ROOT)}: broken local link: {target}")
+                if is_legacy_godot_reference(resolved):
+                    WARNINGS.append(
+                        f"{source.relative_to(ROOT)}: historical Godot reference retained: {target}"
+                    )
+                else:
+                    ERRORS.append(f"{source.relative_to(ROOT)}: broken local link: {target}")
             checked += 1
     return checked
 
@@ -136,8 +163,8 @@ def main() -> int:
     unique_skills = check_unique_metadata(".claude/skills", "name")
     unique_agents = check_unique_metadata(".claude/agents", "name")
 
-    if skills < 39:
-        ERRORS.append(f"Expected at least 39 skills in the current baseline; found {skills}")
+    if skills < 43:
+        ERRORS.append(f"Expected at least 43 active skills in the HTML5 baseline; found {skills}")
     if agents < 11:
         ERRORS.append(f"Expected at least 11 specialist agents in the current baseline; found {agents}")
     if commands < 6:

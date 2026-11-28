@@ -1,4 +1,9 @@
 # BOLT · AVENTURA
+
+> **AVISO DE AUTORIDADE — CONTEXTO HISTÓRICO (28/11/2026):** Este dossiê foi consolidado quando o projeto adotava Godot 4.7.2/GDScript. A decisão posterior e soberana determina reconstrução clean-start em HTML5, CSS3, JavaScript ES Modules, Canvas 2D e Vite. Conteúdo narrativo, de produto e requisitos ainda compatível permanece como referência; instruções Godot, estado de implementação, paths, comandos, métricas e afirmações de engine estão superados e não podem orientar a implementação ativa. Consulte `MASTER_DIRECTIVE.md`, `AGENTS.md`, `docs/PROJECT_CONTEXT_HTML5.md` e o estado atual do GitHub. O histórico Git preserva o original integral.
+
+---
+
 # DOSSIÊ MESTRE DE CONTEXTO, BÍBLIA TÉCNICA E ENGENHARIA DE PRODUÇÃO
 ## Documento de referência integral para continuidade do desenvolvimento por agentes de engenharia de jogos 2D
 

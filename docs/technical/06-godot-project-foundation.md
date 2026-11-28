@@ -1,3 +1,7 @@
+> **ARQUIVO HISTÓRICO — NÃO USAR COMO ESPECIFICAÇÃO ATIVA.** Este documento descreve a antiga fundação Godot/GDScript e contém paths, configurações, parâmetros e evidências que deixaram de representar a árvore ativa após a reconstrução HTML5. Foi mantido para rastreabilidade histórica; a implementação atual deve seguir `MASTER_DIRECTIVE.md`, `AGENTS.md` e `docs/PROJECT_CONTEXT_HTML5.md`.
+
+---
+
 # Fundação do projeto Godot — estado real (baseline técnico atual)
 
 **Escopo:** descreve o projeto Godot que **existe** no repositório. Complementa os princípios de [00-architecture-principles.md](00-architecture-principles.md) e os contratos de [05-system-contracts.md](05-system-contracts.md). Tudo marcado como **provisório** é decisão técnica reversível, não canon, e precisa de medição em aparelho Android antes de ser congelada.
