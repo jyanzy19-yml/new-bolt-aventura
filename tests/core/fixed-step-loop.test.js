@@ -139,6 +139,59 @@ describe('FixedStepLoop', () => {
     expect(scheduler.callbacks.size).toBe(0);
   });
 
+  it('stops when the initial render callback fails', () => {
+    const scheduler = createScheduler();
+    const failure = new Error('render failed');
+    const loop = new FixedStepLoop({
+      update: vi.fn(),
+      render: () => {
+        throw failure;
+      },
+      requestFrame: scheduler.requestFrame,
+      cancelFrame: scheduler.cancelFrame,
+    });
+
+    loop.start();
+    expect(() => scheduler.fire(0)).toThrow(failure);
+    expect(loop.running).toBe(false);
+    expect(scheduler.callbacks.size).toBe(0);
+  });
+
+  it('stops when scheduling the next frame fails', () => {
+    const scheduler = createScheduler();
+    const loop = new FixedStepLoop({
+      update: vi.fn(),
+      render: vi.fn(),
+      requestFrame: scheduler.requestFrame,
+      cancelFrame: scheduler.cancelFrame,
+      stepMs: 10,
+    });
+
+    loop.start();
+    scheduler.fire(0);
+    const failure = new Error('scheduler failed');
+    loop.stop();
+    const brokenLoop = new FixedStepLoop({
+      update: vi.fn(),
+      render: vi.fn(),
+      requestFrame: (() => {
+        let calls = 0;
+        return (callback) => {
+          calls += 1;
+          if (calls > 1) throw failure;
+          return scheduler.requestFrame(callback);
+        };
+      })(),
+      cancelFrame: scheduler.cancelFrame,
+      stepMs: 10,
+    });
+
+    brokenLoop.start();
+    scheduler.fire(100);
+    expect(() => scheduler.fire(110)).toThrow(failure);
+    expect(brokenLoop.running).toBe(false);
+  });
+
   it('rejects invalid callbacks and timing configuration', () => {
     const scheduler = createScheduler();
     const valid = {
