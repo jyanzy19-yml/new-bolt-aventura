@@ -9,12 +9,12 @@
 
 | Stage | GitHub issue | Primary responsibility | Scope | Status |
 |---|---:|---|---|---|
-| 01 — Runtime kernel | [#135](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/135) | ChatGPT | Fixed-step clock/loop, bounded catch-up, deterministic tests | TESTED — [PR #145](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/145), CI green; awaiting review/merge |
+| 01 — Runtime kernel | [#135](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/135) | ChatGPT | Fixed-step clock/loop, bounded catch-up, deterministic tests | TESTED — [PR #145](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/145), lint/tests/build/docs pass; CodeQL running |
 | 02 — Canvas renderer and viewport | [#136](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/136) | ChatGPT | Canvas lifecycle, logical viewport, resize and DPR policy | TESTED — [PR #146](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/146), CI green; awaiting review/merge |
 | 03 — Input and multitouch | [#137](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/137) | ChatGPT | Keyboard, Pointer Events, action edges/buffer, cancellation | TESTED — [PR #147](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/147), CI green; awaiting review/merge |
 | 04 — Player physics and Dash | [#138](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/138) | ChatGPT | Movement, jump, collision, state machine and approved Dash | IN PROGRESS — collision kernel tested in [PR #148](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/148); PlayerMotor/Dash tuning pending |
-| 05 — Level runtime and camera | [#139](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/139) | ChatGPT | Validated level schema, world geometry and camera | IN PROGRESS — schema/camera in [PR #149](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/149); CI pending |
-| 06 — Combat | [#140](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/140) | ChatGPT | Weapons, projectiles, damage and combat lifecycle | IN PROGRESS — health/projectile core in [PR #150](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/150); CI partially green |
+| 05 — Level runtime and camera | [#139](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/139) | ChatGPT | Validated level schema, world geometry and camera | IN PROGRESS — schema/camera in [PR #149](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/149); docs pass, Web CI pending |
+| 06 — Combat | [#140](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/140) | ChatGPT | Weapons, projectiles, damage and combat lifecycle | IN PROGRESS — health/projectile core in [PR #150](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/150); Web CI pass, CodeQL pending |
 | 07 — Enemies and hazards | [#141](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/141) | Claude Code (content), ChatGPT (runtime) | Enemy archetypes, encounter data, hazards and telegraphs | PLANNED |
 | 08 — UI and game flow | [#142](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/142) | ChatGPT | Menus, HUD, pause, settings and result flow | PLANNED |
 | 09 — Assets, loading, audio and saves | [#143](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/143) | ChatGPT | Asset manifest, real loading, Web Audio and versioned persistence | PLANNED |
@@ -33,4 +33,4 @@
 
 ## Current implementation boundary
 
-The current `main` baseline still contains the Vite shell and math utility. PRs #145–#150 hold the first runtime, renderer, input, collision, level-schema/camera and combat increments; all remain unmerged. PRs #145–#148 have passing lint, tests, build and CodeQL as configured. PR #149 validation is in progress; PR #150 lint/tests/build passed, with remaining checks pending. No PlayerMotor, final weapon catalog or playable phase is claimed yet.
+The current `main` baseline still contains the Vite shell and math utility. PRs #145–#150 hold the first runtime, renderer, input, collision, level-schema/camera and combat increments; all remain unmerged. PRs #146–#148 have passing lint, tests, build and CodeQL as configured. PR #145 lint/tests/build/docs passed with CodeQL running; PR #149 documentation passed and Web CI is pending; PR #150 Web CI passed with CodeQL pending. No PlayerMotor, final weapon catalog or playable phase is claimed yet.
