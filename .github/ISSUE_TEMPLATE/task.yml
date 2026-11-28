@@ -1,7 +1,6 @@
 name: Tarefa de desenvolvimento
 description: Registre uma unidade de trabalho com critérios verificáveis.
 title: "[TASK] "
-labels: ["task", "needs-triage"]
 body:
   - type: input
     id: task_id
