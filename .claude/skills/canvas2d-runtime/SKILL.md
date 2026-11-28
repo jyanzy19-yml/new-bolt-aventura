@@ -1,3 +1,8 @@
+---
+name: canvas2d-runtime
+description: "Implement Canvas 2D runtime, camera, frame loop and lifecycle."
+---
+
 # Skill: Canvas 2D Runtime
 
 ## Activation
