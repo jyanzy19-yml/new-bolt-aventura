@@ -100,7 +100,7 @@ export class DebugCanvasRenderer {
 
     context.save();
     try {
-      context.translate(-camera.x, -camera.y);
+      context.translate(camera.x === 0 ? 0 : -camera.x, camera.y === 0 ? 0 : -camera.y);
 
       for (const solid of level.geometry.solids) {
         context.fillStyle = COLORS.solid;
