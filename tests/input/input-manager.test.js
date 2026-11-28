@@ -176,6 +176,38 @@ describe('InputManager pointer controls', () => {
     expect(button.listenerCount('pointerdown')).toBe(0);
   });
 
+  it('clears pointer ownership on blur so a reused pointer ID is accepted', () => {
+    const { manager, lifecycleTarget } = createManager();
+    const button = createEventTarget();
+    manager.bindPointerAction(button, 'jump');
+
+    button.dispatch('pointerdown', { pointerId: 21 });
+    lifecycleTarget.dispatch('blur');
+
+    expect(manager.consume()).toEqual({
+      pressed: [],
+      released: [],
+      held: [],
+    });
+
+    button.dispatch('pointerdown', { pointerId: 21 });
+    expect(manager.consume()).toEqual({
+      pressed: ['jump'],
+      released: [],
+      held: ['jump'],
+    });
+
+    manager.setEnabled(false);
+    manager.setEnabled(true);
+    button.dispatch('pointerdown', { pointerId: 21 });
+
+    expect(manager.consume()).toEqual({
+      pressed: ['jump'],
+      released: [],
+      held: ['jump'],
+    });
+  });
+
   it('does not capture pointer input while disabled', () => {
     const { manager } = createManager();
     const button = createEventTarget();
