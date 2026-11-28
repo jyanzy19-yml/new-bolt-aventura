@@ -1,3 +1,8 @@
+---
+name: enemy-boss-design
+description: "Specify readable enemy archetypes, boss encounters, state machines, telegraphs, counterplay and regression cases."
+---
+
 # Skill: Enemy AI and Boss Encounter Design
 
 Define each enemy by gameplay role, silhouette, movement, perception, attack, telegraph, recovery, vulnerability/counterplay, damage model, defeat behavior and audiovisual feedback. Color or health changes alone do not create a distinct archetype.
