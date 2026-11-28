@@ -17,26 +17,42 @@ body {
   background: radial-gradient(ellipse at 50% 38%, rgb(30 69 112 / 32%), transparent 58%), #080d18;
 }
 
-.boot-screen {
+.game-screen {
   display: grid;
   min-height: 100svh;
-  padding: max(24px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right))
-    max(24px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
-  place-items: center;
+  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+    max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
 }
 
-.boot-panel {
-  width: min(100%, 720px);
-  padding: clamp(28px, 6vw, 64px);
-  border: 1px solid rgb(132 178 232 / 24%);
-  border-radius: 24px;
-  background: linear-gradient(145deg, rgb(19 34 56 / 94%), rgb(9 17 30 / 96%));
+.game-canvas {
+  display: block;
+  width: min(100%, calc((100svh - 64px) * 16 / 9), 1280px);
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 1px solid rgb(120 185 255 / 32%);
+  border-radius: 12px;
+  background: #080d18;
   box-shadow: 0 24px 80px rgb(0 0 0 / 35%);
+  touch-action: none;
+  user-select: none;
+}
+
+.game-status {
+  margin: 0;
+  color: #8fa8c7;
+  font-size: 0.8rem;
   text-align: center;
 }
 
-.eyebrow { color: #78b9ff; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.22em; }
-h1 { margin: 18px 0; font-size: clamp(2rem, 8vw, 4.8rem); letter-spacing: 0.04em; }
-h1 span { color: #78b9ff; }
-.boot-copy { color: #d1e1f5; font-size: clamp(1rem, 3vw, 1.25rem); }
-.boot-status { margin: 32px 0 0; color: #8fa8c7; font-size: 0.85rem; }
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
