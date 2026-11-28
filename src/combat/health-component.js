@@ -48,6 +48,13 @@ export class HealthComponent {
 
   heal(amount) {
     assertPositiveFinite(amount, 'amount');
+    if (this.defeated) {
+      return {
+        healed: 0,
+        currentHealth: this.#currentHealth,
+        defeated: true,
+      };
+    }
     const healed = Math.min(amount, this.#maxHealth - this.#currentHealth);
     this.#currentHealth += healed;
 
