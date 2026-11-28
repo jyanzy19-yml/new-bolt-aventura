@@ -88,10 +88,10 @@ Os dois agentes estão autorizados a implementar. Cada tarefa substancial tem um
 - Protocolo: [docs/production/COLLABORATIVE_DEVELOPMENT_PROTOCOL.md](docs/production/COLLABORATIVE_DEVELOPMENT_PROTOCOL.md)
 
 ## GitHub
-- [Issues](../../issues) — bugs, tarefas e propostas.
-- [Pull requests](../../pulls) — revisão e integração.
-- [Actions](../../actions) — CI.
-- [Security](../../security) — alertas e políticas, quando habilitados.
+- [Issues](https://github.com/jyanzy19-yml/new-bolt-aventura/issues) — bugs, tarefas e propostas.
+- [Pull requests](https://github.com/jyanzy19-yml/new-bolt-aventura/pulls) — revisão e integração.
+- [Actions](https://github.com/jyanzy19-yml/new-bolt-aventura/actions) — CI.
+- [Security](https://github.com/jyanzy19-yml/new-bolt-aventura/security) — alertas e políticas, quando habilitados.
 
 Consulte [CONTRIBUTING.md](CONTRIBUTING.md) antes de contribuir.
 
