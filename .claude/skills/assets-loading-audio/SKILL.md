@@ -1,3 +1,8 @@
+---
+name: assets-loading-audio
+description: "Design and validate asset manifests, loading, decoding, caching, transitions and Web Audio lifecycle."
+---
+
 # Skill: Asset Pipeline, Loading and Web Audio
 
 ## Activation
