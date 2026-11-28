@@ -1,3 +1,8 @@
+---
+name: level-design-content
+description: "Specify campaign worlds, phases, pacing, encounters and checkpoints."
+---
+
 # Skill: Level Design and Campaign Content
 
 Preserve the approved seven-world, seven-fragment and planned 42-phase campaign. The documented macro-plan is six phases per world, five progression/exploration phases and a sixth culminating guardian/fragment/transitional phase; consult the approved blueprint before fixing details. Do not invent world names, sequence, lore or guardian proper names.
