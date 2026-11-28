@@ -9,7 +9,7 @@ const WORLD_NAMES: Array[String] = [
 ]
 const FRAGMENT_NAMES: Array[String] = ["Origem", "Memória", "Verdade", "Sombra", "Luz", "Ilusão", "Equilíbrio"]
 const GUARDIAN_TITLES: Array[String] = [
-	"Guardião Tecnológico", "Guardião Ancestral das Pirâmides", "Mestre das Sombras",
+	"Sentinela do Fragmento", "Guardião Ancestral das Pirâmides", "Mestre das Sombras",
 	"Rei Esquecido", "Guardião da Coroa", "Ilusionista Supremo", "Guardião do Inverno",
 ]
 const PHASE_TITLES: Dictionary = {
