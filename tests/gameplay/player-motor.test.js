@@ -151,7 +151,11 @@ describe('PlayerMotor jumping', () => {
     const motor = createMotor({
       body: { x: -4, y: 90, width: 10, height: 10 },
       colliders: [{ id: 'ledge', x: -100, y: 100, width: 100, height: 20 }],
-      config: makeConfig({ jumpCount: 1, coyoteTimeSeconds: 0.02 }),
+      config: makeConfig({
+        jumpCount: 1,
+        coyoteTimeSeconds: 0.02,
+        groundAcceleration: 5000,
+      }),
     });
 
     motor.update(0.05, frame({ held: [MOVE_RIGHT] }));
