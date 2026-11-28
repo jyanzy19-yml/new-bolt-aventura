@@ -1,3 +1,9 @@
+---
+name: agent-catalog
+description: "Catalog of read-only specialist review agents and their responsibilities."
+tools: Read, Grep, Glob
+---
+
 # BOLT · AVENTURA — Agent Catalog
 
 These are focused **read-only review agents**. They inspect assigned diffs and report findings; they do not implement fixes or override user decisions.
