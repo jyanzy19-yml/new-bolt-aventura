@@ -36,7 +36,7 @@ function assertOptionalPositiveInteger(value, name) {
   }
 }
 
-function validateAssetEntry(entry, index) {
+export function validateAssetEntry(entry, index = 0) {
   const name = `assets[${index}]`;
   if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
     throw new TypeError(`${name} deve ser um objeto.`);
