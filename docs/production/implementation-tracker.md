@@ -465,3 +465,14 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Adicionados `ConveyorBelt` (velocidade de superfície bidirecional) e `IndustrialPress` (aviso → golpe → recuperação), integrados ao blockout W1-L3.
 - Testes novos cobrem transporte de BOLT pela esteira, janela de dano da prensa e nomes oficiais. Tríplice/Laser, inimigos canônicos, segredo com item de lore e interação de desativação continuam pendentes.
 - **Estado: EM VALIDAÇÃO.** Sem playtest humano ou Android físico; W1-L3 continua BLOCKOUT PROVISÓRIO.
+
+
+## W1-L4 — Laboratório de Memórias — 27/11/2026
+
+- Branch `feat/cybercore-w1-l4-memory-lab-2026-11-27`, baseada na main após W1-L3 Fábrica de Ecos.
+- Implementa blockout vertical com três elevadores, plataformas alternantes com avisos, dois lasers cíclicos, arquivo holográfico, dois checkpoints e observatório.
+- Registro central é condição de conclusão. Memória secreta emite beat ID one-shot; sem persistência ou diálogo global.
+- MainMenu Continue inclui W1-L4; catálogo já usa título oficial e a cena passa a existir.
+- Guardião W1 corrigido para Sentinela do Fragmento conforme Atlas.
+- Arquétipos Projeção Defensiva/Drone Vigia, armas Tríplice/Laser, lore persistente e narrativa global continuam pendentes. Inimigo atual é placeholder genérico.
+- **Estado: EM VALIDAÇÃO.** Sem playtest humano ou Android físico.
