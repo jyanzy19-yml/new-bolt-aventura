@@ -90,6 +90,22 @@ describe('W1L2GameRuntime', () => {
     expect(state.enemies.find((enemy) => enemy.id === 'patrol-sentinel-alpha').health).toBe(2);
   });
 
+
+  it('telegraphs enemy fire before spawning a projectile', () => {
+    const runtime = new W1L2GameRuntime({ level: W1_L2, combatSystem: makeCombat() });
+    const stationary = { ...player, body: { ...player.body, x: 820, y: 504 } };
+    let state = runtime.snapshot;
+    for (let frame = 0; frame < 120; frame += 1) {
+      state = runtime.update(1 / 60, stationary);
+    }
+    expect(state.enemies.find((enemy) => enemy.id === 'patrol-sentinel-alpha').windupRemaining)
+      .toBeGreaterThan(0);
+    for (let frame = 0; frame < 40; frame += 1) {
+      state = runtime.update(1 / 60, stationary);
+    }
+    expect(state.combat.projectiles.some((projectile) => projectile.owner === 'enemy')).toBe(true);
+  });
+
   it('allows an enemy projectile to damage the player after its telegraphed firing interval', () => {
     const runtime = new W1L2GameRuntime({ level: W1_L2, combatSystem: makeCombat() });
     const stationary = { ...player, body: { ...player.body, x: 820, y: 504 } };
