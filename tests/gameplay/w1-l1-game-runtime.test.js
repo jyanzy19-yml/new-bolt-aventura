@@ -3,7 +3,7 @@ import { W1L1GameRuntime } from '../../src/gameplay/w1-l1-game-runtime.js';
 import { W1_L1 } from '../../src/levels/w1-l1.js';
 
 const frame = (pressed = []) => ({ pressed, released: [], held: [] });
-const playerAt = (x, y = 504) => ({ body: { x, y, width: 30, height: 46 } });
+const playerAt = (x, y = 504, extra = {}) => ({ body: { x, y, width: 30, height: 46 }, ...extra });
 
 describe('W1L1GameRuntime', () => {
   it('advances the main objective sequence from spatial progress', () => {
@@ -15,6 +15,21 @@ describe('W1L1GameRuntime', () => {
     expect(runtime.snapshot.objectiveIndex).toBe(2);
     runtime.update(1 / 60, playerAt(2800));
     expect(runtime.snapshot.objectiveIndex).toBe(3);
+  });
+
+  it('introduces movement, variable-jump, double-jump and Dash cues contextually', () => {
+    const runtime = new W1L1GameRuntime(W1_L1);
+    runtime.update(1 / 60, playerAt(160));
+    expect(runtime.snapshot.message).toContain('MOVIMENTO');
+
+    runtime.update(1 / 60, playerAt(220, 420, { jumpsRemaining: 1 }), frame(['jump']));
+    expect(runtime.snapshot.message).toContain('SEGURE PULAR');
+
+    runtime.update(1 / 60, playerAt(260, 350, { jumpsRemaining: 0 }), frame(['jump']));
+    expect(runtime.snapshot.message).toContain('PULO DUPLO');
+
+    runtime.update(1 / 60, playerAt(1600, 400, { jumpsRemaining: 0 }), frame(['dash']));
+    expect(runtime.snapshot.message).toContain('DASH');
   });
 
   it('allows the optional diagnostic secret without completing the phase', () => {

@@ -46,9 +46,11 @@ O compartimento de diagnóstico (X≈2200, Y≈222) é opcional. Sua ativação 
 
 ## 4. Mecânicas e input
 
+A tutorialização usa mensagens curtas não bloqueantes: movimento na câmara, altura variável no primeiro salto, pulo duplo no segundo comando em voo e Dash na entrada do pátio. A interação é ensinada pelo prompt contextual dos terminais.
+
 - Movimento horizontal e aceleração: setas ou A/D; botões touch independentes esquerda/direita.
-- Salto variável e pulo duplo: Espaço/W/Z; botão touch PULAR.
-- Dash: Shift/C; botão touch DASH. O contrato e os parâmetros existentes do PlayerMotor foram preservados, sem retuning nesta entrega.
+- Salto variável e pulo duplo: Espaço/W/Z; botão touch PULAR. Dicas contextuais são disparadas ao executar as ações pela primeira vez.
+- Dash: Shift/C; botão touch DASH. O contrato e os parâmetros existentes do PlayerMotor foram preservados, sem retuning nesta entrega. Uma dica contextual aparece na área do pátio.
 - Interação: E/Enter; botão touch AÇÃO.
 - Pausa: P/Escape ou botão PAUSAR.
 - O input continua desacoplado da taxa de renderização por ActionBuffer e simulação em passo fixo de 60 Hz.

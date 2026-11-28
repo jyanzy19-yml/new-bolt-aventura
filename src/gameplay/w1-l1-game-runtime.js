@@ -75,6 +75,25 @@ export class W1L1GameRuntime {
 
     const player = playerSnapshot.body;
     if (!this.#completed) {
+      if (!this.#messageFlags.has('movement') && player.x >= 150) {
+        this.#messageFlags.add('movement');
+        this.#setMessage('MOVIMENTO // USE OS CONTROLES LATERAIS PARA AVANÇAR.', 3.5);
+      }
+      if (inputFrame.pressed.includes('jump') && playerSnapshot.jumpsRemaining === 1 &&
+          !this.#messageFlags.has('variable-jump')) {
+        this.#messageFlags.add('variable-jump');
+        this.#setMessage('SALTO // SEGURE PULAR PARA GANHAR ALTURA; SOLTE PARA ENCURTAR.', 4.5);
+      }
+      if (inputFrame.pressed.includes('jump') && playerSnapshot.jumpsRemaining === 0 &&
+          !this.#messageFlags.has('double-jump')) {
+        this.#messageFlags.add('double-jump');
+        this.#setMessage('PULO DUPLO // PRESSIONE PULAR NOVAMENTE ENQUANTO ESTIVER NO AR.', 4.5);
+      }
+      if (player.x >= 1500 && inputFrame.pressed.includes('dash') &&
+          !this.#messageFlags.has('dash')) {
+        this.#messageFlags.add('dash');
+        this.#setMessage('DASH // USE A HABILIDADE PARA ATRAVESSAR O PÁTIO COM AGILIDADE.', 4);
+      }
       while (
         this.#objectiveIndex < this.#level.objectives.length - 1 &&
         player.x >= this.#level.objectives[this.#objectiveIndex].thresholdX
