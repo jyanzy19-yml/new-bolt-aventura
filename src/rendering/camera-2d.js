@@ -93,7 +93,7 @@ export class Camera2D {
   }
 
   update(target, deltaSeconds) {
-    validateAabb(target, 'target');
+    validateRect(target, 'target');
     if (!Number.isFinite(deltaSeconds) || deltaSeconds < 0) {
       throw new RangeError('deltaSeconds deve ser finito e não negativo.');
     }
