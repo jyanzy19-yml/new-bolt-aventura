@@ -1,6 +1,6 @@
 # BOLT · AVENTURA — HTML5 Execution Tracker
 
-**Baseline:** `main` at `9c32df4225b4e410340b2254a098167023593625`  
+**Baseline:** `main` at `27c34070a9ee1746076a1ca034833a577858b306` (tree restored to the original `9c32df4225b4e410340b2254a098167023593625` baseline)  
 **Technology authority:** HTML5, CSS3, JavaScript ES Modules, Canvas 2D, Vite, Web Audio API and Pointer Events.  
 **Product target:** Android landscape; Capacitor remains conditional on validation.  
 **Status vocabulary:** PLANNED → IMPLEMENTED → TESTED → VERIFIED. These states are not interchangeable.
@@ -33,4 +33,4 @@
 
 ## Current implementation boundary
 
-The current `main` baseline remains `9c32df4225b4e410340b2254a098167023593625`, containing the clean Vite shell and math utility. PRs #145–#158 are open and unmerged. Runtime, Canvas viewport, input, collision, PlayerMotor/Dash, touch controls, debug renderer, PlayerSceneRuntime, level schema/camera/lifecycle/geometry adapter and combat/weapon composition are implemented on isolated branches. Configured CI is green for PRs #145–#157; PR #158 documentation validation passed and Web CI is pending. No playable W1-L1, final weapon catalogue, APK/Capacitor package or physical-device validation is claimed.
+The current `main` HEAD is `27c34070a9ee1746076a1ca034833a577858b306`; its tree SHA matches the original baseline `9c32df4225b4e410340b2254a098167023593625` after an unintended documentation add was immediately deleted. No implementation files remain changed on main. PRs #145–#159 are open and unmerged. Runtime, Canvas viewport, input, collision, PlayerMotor/Dash, touch controls, debug renderer, PlayerSceneRuntime, level schema/camera/lifecycle/geometry adapter and combat/weapon composition are implemented on isolated branches. Configured CI is green for PRs #145–#157; PR #158 documentation validation passed and Web CI is pending. No playable W1-L1, final weapon catalogue, APK/Capacitor package or physical-device validation is claimed.
