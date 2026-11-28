@@ -1,61 +1,54 @@
-name: Bug report
-description: Report a reproducible BOLT gameplay, UI, Android or stability problem.
+name: Relatório de bug
+description: Registre um defeito reproduzível no BOLT · AVENTURA.
 title: "[BUG] "
-labels: ["bug", "needs-triage"]
 body:
   - type: markdown
     attributes:
-      value: "Report only what you observed. Do not include passwords, signing keys or private account data."
-  - type: input
-    id: build
+      value: "Relate apenas comportamento observado. Não inclua senhas, tokens ou dados pessoais."
+  - type: textarea
+    id: summary
     attributes:
-      label: Game build / commit
-      placeholder: "Commit SHA or build identifier"
-    validations:
-      required: false
-  - type: input
-    id: device
-    attributes:
-      label: Android device and Android version
-      placeholder: "Device model, SoC, RAM, Android version"
-    validations:
-      required: false
-  - type: dropdown
-    id: severity
-    attributes:
-      label: Severity
-      options:
-        - Blocker
-        - Critical
-        - Major
-        - Minor
-        - Cosmetic
+      label: Resumo
+      description: O que está errado?
     validations:
       required: true
   - type: textarea
-    id: reproduction
+    id: reproduce
     attributes:
-      label: Steps to reproduce
-      description: Include exact steps and how often it occurs.
+      label: Passos para reproduzir
       placeholder: "1. ...\n2. ...\n3. ..."
     validations:
       required: true
   - type: textarea
     id: expected
     attributes:
-      label: Expected result
+      label: Resultado esperado
     validations:
       required: true
   - type: textarea
-    id: observed
+    id: actual
     attributes:
-      label: Observed result
+      label: Resultado observado
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Ambiente
+      description: Navegador/WebView, Android, aparelho, versão e build.
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Impacto
+      options:
+        - Bloqueia progressão ou impede iniciar
+        - Afeta gameplay/controles
+        - Afeta visual/áudio
+        - Problema menor
     validations:
       required: true
   - type: textarea
     id: evidence
     attributes:
-      label: Logs, screenshots or video
-      description: Remove personal information before attaching.
-    validations:
-      required: false
+      label: Evidências
+      description: Logs, screenshots ou vídeo sem informações sensíveis.
