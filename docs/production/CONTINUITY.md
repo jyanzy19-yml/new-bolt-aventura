@@ -837,3 +837,14 @@ Esta seção substitui snapshots anteriores para a próxima retomada. O históri
 - O inimigo `CybercorePatrolEnemy` permanece genérico e provisório; Tríplice/Laser, arquétipos Operário Corrompido/Drone Vigia/Sentinela, rota por dutos com item de lore e interação real com o painel ainda não estão implementados.
 - PRs #106 e #113 (Núcleo de Distribuição) foram fechadas sem merge por divergirem do blueprint oficial de W1-L4. PRs #108/#109 (Perímetro do Guardião) foram fechadas sem merge porque W1-L5 é Torre do Núcleo.
 - CI desta correção pendente. Nenhum playtest físico Android foi realizado.
+
+
+## Sessão ChatGPT — W1-L4 Laboratório de Memórias — 27/11/2026
+
+- O Atlas Mestre define W1-L4 como **Laboratório de Memórias**, fase vertical com elevadores, arquivo holográfico, câmaras de teste, observatório, plataformas alternantes sinalizadas e lasers lentos/previsíveis.
+- Branch `feat/cybercore-w1-l4-memory-lab-2026-11-27` cria a cena vertical, três elevadores, quatro plataformas alternantes, dois lasers, arquivo/registro central, rota lateral secreta com silhueta provisória e dois checkpoints.
+- `AlternatingPlatform` usa fixed-step e estados com aviso antes de mudar colisão. `NarrativeBeatTrigger` emite apenas IDs, sem texto ou save.
+- W1-L4 só conclui após recuperar o registro central; a memória secreta é one-shot local.
+- Projeção Defensiva e Drone Vigia ainda não existem como arquétipos; Tríplice/Laser não estão completos. O inimigo atual é genérico e provisório.
+- PR #113/#106 de Núcleo de Distribuição e PR #108/#109 de Perímetro do Guardião permanecem fechadas sem merge; W1-L5 oficial é Torre do Núcleo.
+- CI desta branch pendente. Sem validação Android física.
