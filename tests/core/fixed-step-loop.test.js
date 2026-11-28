@@ -49,7 +49,8 @@ describe('FixedStepLoop', () => {
     scheduler.fire(100);
 
     expect(update).not.toHaveBeenCalled();
-    expect(render).toHaveBeenCalledExactlyOnceWith(0);
+    expect(render).toHaveBeenCalledTimes(1);
+    expect(render).toHaveBeenCalledWith(0);
     expect(scheduler.callbacks.size).toBe(1);
   });
 
@@ -60,7 +61,8 @@ describe('FixedStepLoop', () => {
     scheduler.fire(0);
     scheduler.fire(1000 / 60);
 
-    expect(update).toHaveBeenCalledExactlyOnceWith((1000 / 60) / 1000);
+    expect(update).toHaveBeenCalledTimes(1);
+    expect(update).toHaveBeenCalledWith((1000 / 60) / 1000);
   });
 
   it('passes fractional accumulator progress to rendering', () => {
