@@ -32,7 +32,8 @@ describe('W1-L2 production content', () => {
   it('rejects duplicated enemy ids and unknown archetypes', () => {
     const duplicate = {
       ...W1_L2,
-      enemies: [W1_L2.enemies[0], { ...W1_L2.enemies[1], id: W1_L2.enemies[0].id }],
+      enemies: W1_L2.enemies.map((enemy, index) =>
+        index === 1 ? { ...enemy, id: W1_L2.enemies[0].id } : enemy),
     };
     expect(() => validateW1L2Content(duplicate)).toThrow('ID duplicado');
 
