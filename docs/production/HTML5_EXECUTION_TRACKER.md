@@ -9,10 +9,10 @@
 
 | Stage | GitHub issue | Primary responsibility | Scope | Status |
 |---|---:|---|---|---|
-| 01 — Runtime kernel | [#135](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/135) | ChatGPT | Fixed-step clock/loop, bounded catch-up, deterministic tests | IN PROGRESS |
-| 02 — Canvas renderer and viewport | [#136](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/136) | ChatGPT | Canvas lifecycle, logical viewport, resize and DPR policy | PLANNED |
-| 03 — Input and multitouch | [#137](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/137) | ChatGPT | Keyboard, Pointer Events, action edges/buffer, cancellation | PLANNED |
-| 04 — Player physics and Dash | [#138](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/138) | ChatGPT | Movement, jump, collision, state machine and approved Dash | PLANNED |
+| 01 — Runtime kernel | [#135](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/135) | ChatGPT | Fixed-step clock/loop, bounded catch-up, deterministic tests | TESTED — [PR #145](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/145), CI green; awaiting review/merge |
+| 02 — Canvas renderer and viewport | [#136](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/136) | ChatGPT | Canvas lifecycle, logical viewport, resize and DPR policy | TESTED — [PR #146](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/146), CI green; awaiting review/merge |
+| 03 — Input and multitouch | [#137](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/137) | ChatGPT | Keyboard, Pointer Events, action edges/buffer, cancellation | TESTED — [PR #147](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/147), CI green; awaiting review/merge |
+| 04 — Player physics and Dash | [#138](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/138) | ChatGPT | Movement, jump, collision, state machine and approved Dash | IN PROGRESS — collision kernel in [PR #148](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/148) |
 | 05 — Level runtime and camera | [#139](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/139) | ChatGPT | Validated level schema, world geometry and camera | PLANNED |
 | 06 — Combat | [#140](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/140) | ChatGPT | Weapons, projectiles, damage and combat lifecycle | PLANNED |
 | 07 — Enemies and hazards | [#141](https://github.com/jyanzy19-yml/new-bolt-aventura/issues/141) | Claude Code (content), ChatGPT (runtime) | Enemy archetypes, encounter data, hazards and telegraphs | PLANNED |
@@ -33,4 +33,4 @@
 
 ## Current implementation boundary
 
-The repository contains a Vite shell and a small tested math utility. This is a technical foundation, not gameplay. The first implementation increment establishes a bounded fixed-step runtime loop before renderer, input and gameplay systems are layered on top.
+The current `main` baseline still contains the Vite shell and math utility. PRs #145–#148 hold the first runtime, renderer, input and collision increments; they are separate and awaiting review/merge. PRs #145–#147 have passing CI (lint, Vitest, build and CodeQL as configured); PR #148 validation is pending. No player controller or playable phase is claimed yet.
