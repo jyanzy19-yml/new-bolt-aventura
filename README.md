@@ -3,11 +3,11 @@
 **Jogo 2D de plataforma, ação e aventura criado do zero em HTML5, com Android como plataforma-alvo.**
 
 ## Comece aqui
-1. [MASTER_DIRECTIVE.md](MASTER_DIRECTIVE.md) — diretiva soberana, canon, tecnologia, workflow e colaboração ChatGPT/Claude.
-2. [AGENTS.md](AGENTS.md) — regras comuns a qualquer agente.
+1. [MASTER_DIRECTIVE.md](MASTER_DIRECTIVE.md) — diretiva soberana, canon, tecnologia, workflow e colaboração.
+2. [AGENTS.md](AGENTS.md) — contrato comum dos agentes.
 3. [CLAUDE.md](CLAUDE.md) — instruções específicas para Claude Code.
-4. [docs/PROJECT_CONTEXT_HTML5.md](docs/PROJECT_CONTEXT_HTML5.md) — contexto consolidado do produto adaptado à decisão HTML5.
-5. [docs/production/](docs/production/) — planejamento, status, handoffs e evidências, quando disponíveis.
+4. [docs/PROJECT_CONTEXT_HTML5.md](docs/PROJECT_CONTEXT_HTML5.md) — contexto do produto sob a decisão HTML5.
+5. [docs/production/](docs/production/) — planejamento, status, handoffs e evidências.
 
 ## Stack oficial
 - HTML5, CSS3 e JavaScript ES Modules
@@ -17,15 +17,18 @@
 - Pointer Events e multitouch
 - Capacitor como candidato de empacotamento Android, condicionado a validação técnica
 
-Godot/GDScript não fazem parte da nova implementação. O jogo está sendo criado do zero; não é port nem migração.
+Godot/GDScript não fazem parte da implementação ativa. O jogo é uma reconstrução clean-start, não um port ou migração.
+
+## Estado técnico
+A fundação HTML5/Vite foi adicionada em branch de integração e contém shell inicial, lint, testes unitários básicos e build web. Isso ainda não representa gameplay, vertical slice, APK Android ou validação física. O inventário de 28/11/2026 remove da árvore ativa os arquivos executáveis e workflows exclusivos Godot; os registros históricos de design e produção permanecem preservados.
 
 ## Colaboração
-ChatGPT e Claude Code estão autorizados a desenvolver. Cada tarefa deve ter um escritor primário, escopo e arquivos delimitados, branch isolada e revisão antes da integração. É proibido editar simultaneamente os mesmos arquivos. O usuário controla a sequência e o merge.
+ChatGPT e Claude Code são agentes implementadores autorizados. Cada tarefa deve ter um escritor primário, escopo delimitado, branch isolada e revisão. Não editar os mesmos arquivos simultaneamente. Registrar resultados reais de testes e limitações.
 
 ## Skills e agentes
-- Skills: `.claude/skills/` — comece pelo `router` e carregue apenas as especializações pertinentes.
-- Agentes consultivos: `.claude/agents/` — revisões focadas e read-only.
+- Skills: `.claude/skills/` — comece pelo `router`.
+- Agentes consultivos: `.claude/agents/` — revisões read-only.
 - Comandos: `.claude/commands/` — continuidade, handoff e revisão.
 
-## Estado e evidência
-A redefinição para HTML5 e a base de skills foram registradas. A limpeza dos arquivos antigos ainda exige inventário verificável da árvore completa. Não assumir que código, assets ou documentação Godot já foram removidos. Não confundir planejado, implementado, testado e validado em Android físico.
+## Qualidade e evidência
+Não prometer ausência absoluta de bugs. Prevenir regressões com lint, testes, build, revisão de diff e validação em browser/WebView/dispositivo conforme o nível exigido. Não confundir planejado, implementado, testado e verificado.

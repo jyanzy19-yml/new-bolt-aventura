@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentação e processo do projeto
+    url: https://github.com/jyanzy19-yml/new-bolt-aventura#comece-por-aqui
+    about: Consulte a diretiva mestre e os critérios antes de abrir uma solicitação.

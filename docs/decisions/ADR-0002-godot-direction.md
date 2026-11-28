@@ -1,6 +1,6 @@
 # ADR-0002 — Godot como direção de engine
 
-- **Status:** Aprovada como direção; versão ainda não fixada
+- **Status:** SUPERSEDIDA em 2026-11-28 pela decisão clean-start HTML5 registrada no addendum de `MASTER_DIRECTIVE.md`
 - **Data de registro:** 2026-11-25
 - **Escopo:** engine e tecnologia
 
@@ -16,3 +16,6 @@ Usar Godot Engine 4.x e GDScript. Como o projeto executável ainda não existe, 
 - APIs, plugins e export templates precisam corresponder à versão detectada.
 - Migração de versão exige análise de compatibilidade e aprovação.
 - A instalação das skills não significa que o projeto Godot já esteja criado.
+
+
+> Registro histórico: esta ADR documenta a direção tecnológica anterior. Não constitui autorização atual para usar Godot/GDScript nem para recriar a fundação removida.
