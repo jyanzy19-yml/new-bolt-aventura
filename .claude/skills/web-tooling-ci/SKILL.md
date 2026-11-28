@@ -1,3 +1,8 @@
+---
+name: web-tooling-ci
+description: "Maintain deterministic web tooling, CI pipelines, dependency hygiene, lockfiles and repository quality gates."
+---
+
 # Skill: Web Tooling, CI and Repository Hygiene
 
 Pin Node/package manager expectations and dependencies; commit the lockfile. Keep scripts deterministic and document environment variables without secrets. Validate clean install, tests and production build in CI.

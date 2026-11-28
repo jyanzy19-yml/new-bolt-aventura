@@ -1,3 +1,8 @@
+---
+name: mobile-input-ux
+description: "Implement and validate mobile touch, multitouch, Pointer Events, responsive controls and safe-area behavior."
+---
+
 # Skill: Mobile Input and UX
 
 ## Activation

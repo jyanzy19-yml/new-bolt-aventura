@@ -1,3 +1,8 @@
+---
+name: ui-ux-accessibility
+description: "Design accessible mobile game interfaces, navigation, touch ergonomics, feedback and safe-area layouts."
+---
+
 # Skill: UI/UX and Accessibility for Mobile Games
 
 For each screen define purpose, primary/secondary actions, navigation graph, back/cancel behavior, focus/selection, loading/error/empty states and persistence. Avoid dead ends and hidden controls.

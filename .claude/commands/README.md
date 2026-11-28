@@ -1,3 +1,7 @@
+---
+description: "Index of project-specific Claude Code workflow commands and their intended use."
+---
+
 # BOLT · AVENTURA — Claude Code Commands
 
 - `/bolt-continue`: inspect repository state and resume the assigned task.

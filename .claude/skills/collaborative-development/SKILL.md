@@ -1,3 +1,8 @@
+---
+name: collaborative-development
+description: "Coordinate ChatGPT and Claude Code through isolated branches, explicit ownership, review and factual handoffs."
+---
+
 # Skill: Collaborative Development — ChatGPT + Claude Code
 
 ## Purpose

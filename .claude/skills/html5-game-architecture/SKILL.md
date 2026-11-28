@@ -1,3 +1,8 @@
+---
+name: html5-game-architecture
+description: "Define HTML5 game architecture, module boundaries, dependency direction, Vite tooling and subsystem lifecycle."
+---
+
 # Skill: HTML5 Game Architecture
 
 ## Activation

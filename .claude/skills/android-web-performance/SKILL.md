@@ -1,3 +1,8 @@
+---
+name: android-web-performance
+description: "Profile and optimize HTML5 game performance, memory, frame pacing and WebView behavior on Android devices."
+---
+
 # Skill: Android Web Runtime Performance
 
 ## Activation

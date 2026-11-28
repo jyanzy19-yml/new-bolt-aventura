@@ -1,3 +1,8 @@
+---
+name: gameplay-physics-loop
+description: "Design and test deterministic gameplay simulation, movement, collision, combat, Dash and state transitions."
+---
+
 # Skill: Gameplay Physics and Simulation
 
 ## Activation

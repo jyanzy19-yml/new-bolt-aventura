@@ -1,3 +1,8 @@
+---
+name: android-capacitor-packaging
+description: "Evaluate and implement the Android packaging shell with Capacitor, APK/AAB configuration, lifecycle, system bars and device validation."
+---
+
 # Skill: Android Packaging with Capacitor
 
 ## Activation
