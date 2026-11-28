@@ -96,5 +96,9 @@ func _on_goal_body_entered(body: Node2D) -> void:
 	_hud.show_result("Laboratório de Memórias concluído")
 
 
+func has_recovered_record() -> bool:
+	return _record_recovered
+
+
 func has_recovered_secret_memory() -> bool:
 	return _secret_memory_recovered
