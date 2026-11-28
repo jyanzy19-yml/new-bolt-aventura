@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "id": "w1-l1",
+  "worldId": "cybercore",
+  "title": "Despertar entre Ruínas",
+  "bounds": {"x": 0, "y": 0, "width": 7040, "height": 960},
+  "spawn": {"x": 96, "y": 674},
+  "geometry": {
+    "solids": [
+      {"id": "s1-wall-left", "x": 0, "y": 288, "width": 32, "height": 432},
+      {"id": "s1-ceiling", "x": 32, "y": 288, "width": 992, "height": 192},
+      {"id": "s1-floor", "x": 0, "y": 720, "width": 1024, "height": 240},
+      {"id": "s2-ceiling-a", "x": 1024, "y": 288, "width": 496, "height": 192},
+      {"id": "s2-ceiling-b", "x": 1648, "y": 288, "width": 528, "height": 192},
+      {"id": "s2-floor-a", "x": 1024, "y": 720, "width": 496, "height": 240},
+      {"id": "s2-rubble-low", "x": 1280, "y": 704, "width": 96, "height": 16},
+      {"id": "s2-pit1-bed", "x": 1520, "y": 768, "width": 96, "height": 192},
+      {"id": "s2-floor-b", "x": 1616, "y": 720, "width": 320, "height": 240},
+      {"id": "s2-block-high", "x": 1744, "y": 648, "width": 96, "height": 72},
+      {"id": "s2-pit2-bed", "x": 1936, "y": 768, "width": 80, "height": 192},
+      {"id": "s2-floor-c", "x": 2016, "y": 720, "width": 160, "height": 240},
+      {"id": "s3-base-floor", "x": 2176, "y": 720, "width": 704, "height": 240},
+      {"id": "s3-terrace", "x": 2880, "y": 352, "width": 512, "height": 608},
+      {"id": "s4-courtyard-0", "x": 3392, "y": 600, "width": 608, "height": 360},
+      {"id": "s4-trench-1-bed", "x": 4000, "y": 648, "width": 96, "height": 312},
+      {"id": "s4-courtyard-1", "x": 4096, "y": 600, "width": 640, "height": 360},
+      {"id": "s4-trench-2-bed", "x": 4736, "y": 648, "width": 96, "height": 312},
+      {"id": "s4-courtyard-2", "x": 4832, "y": 600, "width": 480, "height": 360},
+      {"id": "s5-pool-bed", "x": 5312, "y": 768, "width": 1024, "height": 192},
+      {"id": "s6-floor", "x": 6336, "y": 600, "width": 704, "height": 360},
+      {"id": "s6-roof", "x": 6432, "y": 288, "width": 576, "height": 192},
+      {"id": "s6-back-wall", "x": 7008, "y": 288, "width": 32, "height": 312}
+    ],
+    "oneWayPlatforms": [
+      {"id": "s3-ledge-a", "x": 2288, "y": 656, "width": 112, "height": 12},
+      {"id": "s3-ledge-b", "x": 2480, "y": 592, "width": 112, "height": 12},
+      {"id": "s3-ledge-c", "x": 2672, "y": 528, "width": 112, "height": 12},
+      {"id": "s3-secret-ledge", "x": 3040, "y": 176, "width": 112, "height": 12},
+      {"id": "s4-service-step-1", "x": 3424, "y": 448, "width": 96, "height": 12},
+      {"id": "s4-service-step-2", "x": 3552, "y": 544, "width": 96, "height": 12},
+      {"id": "s4-catwalk-step-1", "x": 4128, "y": 544, "width": 96, "height": 12},
+      {"id": "s4-catwalk-step-2", "x": 4256, "y": 488, "width": 96, "height": 12},
+      {"id": "s4-catwalk-1", "x": 4384, "y": 432, "width": 192, "height": 12},
+      {"id": "s4-catwalk-2", "x": 4800, "y": 432, "width": 192, "height": 12},
+      {"id": "s5-pad-1", "x": 5440, "y": 600, "width": 96, "height": 12},
+      {"id": "s5-pad-2", "x": 5648, "y": 552, "width": 96, "height": 12},
+      {"id": "s5-pad-3", "x": 5856, "y": 576, "width": 96, "height": 12},
+      {"id": "s5-pad-4", "x": 6192, "y": 576, "width": 96, "height": 12}
+    ]
+  },
+  "checkpoints": [
+    {"id": "cp-01-terrace", "x": 2976, "y": 352},
+    {"id": "cp-02-courtyard", "x": 3680, "y": 600},
+    {"id": "cp-03-chain-entry", "x": 5152, "y": 600}
+  ],
+  "exits": [
+    {"id": "exit-w1-l2", "x": 6960, "y": 520, "width": 40, "height": 80, "targetLevelId": "w1-l2"}
+  ],
+  "metadata": {
+    "contentStatus": "SPECIFIED_NOT_INTEGRATED",
+    "productionApproved": false,
+    "task": "BOLT-001",
+    "contentPackage": "content/levels/w1-l1.content.json",
+    "titleStatus": "BLUEPRINT_PROPOSAL",
+    "note": "Geometria estática da W1-L1 conforme schema v1. Candidata a substituir src/levels/fixtures/w1-l1-debug.js após integração e teste; não declarada implementada."
+  }
+}

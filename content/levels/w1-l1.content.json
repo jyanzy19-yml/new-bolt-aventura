@@ -1,0 +1,1109 @@
+{
+  "formatVersion": "0.1.0-proposal",
+  "levelId": "w1-l1",
+  "geometryFile": "content/levels/w1-l1.level.json",
+  "contentStatus": "SPECIFIED_NOT_INTEGRATED",
+  "task": "BOLT-001",
+  "contractNote": "Extensão PROPOSTA ao schema v1 (docs/technical/HTML5_LEVEL_RUNTIME_CONTRACT.md §6). Não consumível pelo runtime até existir schema v2 versionado e validado.",
+  "sourceDocs": [
+    "docs/game-design/EXPANDED-42-LEVEL-CAMPAIGN-BLUEPRINT.md#W1-L1",
+    "docs/game-design/02-world-bible.md",
+    "docs/prompts/master-game-design-and-gameplay-prompt.md",
+    "docs/game-design/W1-L1-despertar-entre-ruinas.md"
+  ],
+  "designEnvelope": {
+    "status": "MEASURED_FROM_DEBUG_TUNING_TEMPORARY",
+    "source": "PlayerMotor @ 3ef8215 (PR #161) + DEBUG_PLAYER_TUNING; piso plano; entradas roteirizadas; 60 Hz",
+    "note": "Tuning de debug NÃO aprovado. Reexecutar a medição e o validador quando o tuning mudar.",
+    "unit": "px",
+    "player": {"width": 30, "height": 46},
+    "viewport": {"width": 800, "height": 450, "deadZone": {"x": 300, "y": 150, "width": 200, "height": 120}, "lookAheadX": 48},
+    "runSpeed": 220,
+    "tapJumpHeight": 25.2,
+    "jumpHeight": 129.4,
+    "doubleJumpHeight": 258.4,
+    "runJumpReach": 194.3,
+    "standJumpReach": 165.9,
+    "doubleJumpReach": 337.3,
+    "dashGroundDistance": 164.7,
+    "jumpDashReach": 362.7,
+    "visibleAhead": 300,
+    "visibleBelow": 180,
+    "reachRiseDerating": 0.5,
+    "robustnessProbe": {"scale": 0.9, "note": "Pernas devem permanecer viáveis com velocidade e impulso de pulo a 90%."}
+  },
+  "abilities": {
+    "move": {"status": "REQUISITO_DO_BLUEPRINT"},
+    "accelerate": {"status": "REQUISITO_DO_BLUEPRINT"},
+    "jump": {"status": "REQUISITO_DO_BLUEPRINT"},
+    "variable-jump": {"status": "REQUISITO_DO_BLUEPRINT"},
+    "double-jump": {
+      "status": "REQUISITO_DO_BLUEPRINT",
+      "runtime": "jumpCount=2 no tuning de debug; aprovação formal pendente (D-03)"
+    },
+    "interact": {"status": "REQUISITO_DO_BLUEPRINT", "runtime": "sem ação 'interact' no runtime atual (D-09)"},
+    "dash": {
+      "status": "APROVADO_ADR_001",
+      "usage": "OPCIONAL_PROPOSTA",
+      "note": "Não é ensinado pelo blueprint da W1-L1; uso opcional é proposta (D-04)."
+    },
+    "shoot": {
+      "status": "A_DEFINIR",
+      "usage": "OPCIONAL_PROPOSTA",
+      "note": "Arma ensinada na W1-L2 pelo blueprint; disponibilidade na W1-L1 pendente (D-01)."
+    }
+  },
+  "sections": [
+    {
+      "id": "sec-01-chamber",
+      "name": "Câmara de Despertar",
+      "x0": 0,
+      "x1": 1024,
+      "step": 1,
+      "phase": "apresentação segura",
+      "purpose": "Andar, acelerar e primeira interação, sem qualquer ameaça.",
+      "teaches": ["move", "accelerate", "interact"],
+      "maxRatio": 0.0,
+      "minLandingWidth": 96,
+      "lethal": false
+    },
+    {
+      "id": "sec-02-corridor",
+      "name": "Corredor Desmoronado",
+      "x0": 1024,
+      "x1": 2176,
+      "step": 2,
+      "phase": "desafios simples",
+      "purpose": "Salto curto, salto sustentado e vãos pequenos com recuperação.",
+      "teaches": ["jump", "variable-jump"],
+      "maxRatio": 0.6,
+      "maxRatioOptional": 0.75,
+      "minLandingWidth": 96,
+      "lethal": false
+    },
+    {
+      "id": "sec-03-climb",
+      "name": "Poço de Manutenção e Terraço",
+      "x0": 2176,
+      "x1": 3392,
+      "step": 3,
+      "phase": "combinação",
+      "purpose": "Saltos encadeados e primeiro pulo duplo na subida; vista do pátio.",
+      "teaches": ["double-jump", "chained-jumps"],
+      "maxRatio": 0.75,
+      "maxRatioOptional": 0.8,
+      "minLandingWidth": 96,
+      "lethal": false
+    },
+    {
+      "id": "sec-04-courtyard",
+      "name": "Pátio Aberto",
+      "x0": 3392,
+      "x1": 5312,
+      "step": 4,
+      "phase": "aplicação",
+      "purpose": "Vãos moderados, encontro isolado opcional e rota alternativa.",
+      "teaches": ["gap-reading", "optional-encounter"],
+      "maxRatio": 0.65,
+      "maxRatioOptional": 0.75,
+      "minLandingWidth": 96,
+      "lethal": false
+    },
+    {
+      "id": "sec-05-residue-chain",
+      "name": "Fosso de Resíduos",
+      "x0": 5312,
+      "x1": 6336,
+      "step": 5,
+      "phase": "maior domínio",
+      "purpose": "Sequência de saltos com aterrissagens visíveis sobre energia residual.",
+      "teaches": ["mastery-chain"],
+      "maxRatio": 0.78,
+      "maxRatioOptional": 0.78,
+      "minLandingWidth": 96,
+      "lethal": true
+    },
+    {
+      "id": "sec-06-shelter",
+      "name": "Abrigo de Manutenção",
+      "x0": 6336,
+      "x1": 7040,
+      "step": 6,
+      "phase": "encerramento",
+      "purpose": "Descanso, chegada e ativação do primeiro ponto de sincronização.",
+      "teaches": [],
+      "maxRatio": 0.5,
+      "minLandingWidth": 96,
+      "lethal": false
+    }
+  ],
+  "route": {
+    "main": [
+      {"id": "rn-00-spawn", "solid": "s1-floor", "x": 96, "via": "start"},
+      {"id": "rn-01-console", "solid": "s1-floor", "x": 528, "via": "walk", "interact": "ix-awakening-console"},
+      {"id": "rn-02-corridor", "solid": "s2-floor-a", "x": 1088, "via": "walk", "passesGate": "gate-chamber-exit"},
+      {"id": "rn-03-rubble", "solid": "s2-rubble-low", "x": 1328, "via": "jump"},
+      {"id": "rn-04-floor-a", "solid": "s2-floor-a", "x": 1440, "via": "drop"},
+      {"id": "rn-05-floor-b", "solid": "s2-floor-b", "x": 1680, "via": "jump"},
+      {"id": "rn-06-block", "solid": "s2-block-high", "x": 1792, "via": "jump"},
+      {"id": "rn-07-floor-b-end", "solid": "s2-floor-b", "x": 1900, "via": "drop"},
+      {"id": "rn-08-floor-c", "solid": "s2-floor-c", "x": 2096, "via": "jump"},
+      {"id": "rn-09-base", "solid": "s3-base-floor", "x": 2240, "via": "walk"},
+      {"id": "rn-10-ledge-a", "solid": "s3-ledge-a", "x": 2344, "via": "jump"},
+      {"id": "rn-11-ledge-b", "solid": "s3-ledge-b", "x": 2536, "via": "jump"},
+      {"id": "rn-12-ledge-c", "solid": "s3-ledge-c", "x": 2728, "via": "jump"},
+      {"id": "rn-13-terrace", "solid": "s3-terrace", "x": 2976, "via": "doubleJump", "checkpoint": "cp-01-terrace"},
+      {"id": "rn-14-step-1", "solid": "s4-service-step-1", "x": 3472, "via": "drop"},
+      {"id": "rn-15-step-2", "solid": "s4-service-step-2", "x": 3600, "via": "drop"},
+      {
+        "id": "rn-16-courtyard-0",
+        "solid": "s4-courtyard-0",
+        "x": 3680,
+        "via": "drop",
+        "checkpoint": "cp-02-courtyard"
+      },
+      {
+        "id": "rn-17-courtyard-1",
+        "solid": "s4-courtyard-1",
+        "x": 4144,
+        "via": "jump",
+        "encounter": "en-maint-unit-01"
+      },
+      {"id": "rn-18-courtyard-2", "solid": "s4-courtyard-2", "x": 4880, "via": "jump", "pickup": "pk-repair-ground"},
+      {"id": "rn-19-pad-1", "solid": "s5-pad-1", "x": 5488, "via": "jump", "checkpoint": "cp-03-chain-entry"},
+      {"id": "rn-20-pad-2", "solid": "s5-pad-2", "x": 5696, "via": "jump"},
+      {"id": "rn-21-pad-3", "solid": "s5-pad-3", "x": 5904, "via": "jump"},
+      {"id": "rn-22-pad-4", "solid": "s5-pad-4", "x": 6240, "via": "doubleJump"},
+      {"id": "rn-23-shelter", "solid": "s6-floor", "x": 6400, "via": "jump", "trigger": "tr-shelter-entered"},
+      {
+        "id": "rn-24-sync",
+        "solid": "s6-floor",
+        "x": 6768,
+        "via": "walk",
+        "interact": "ix-sync-terminal",
+        "passesGate": "gate-shelter-exit"
+      },
+      {"id": "rn-25-exit", "solid": "s6-floor", "x": 6980, "via": "walk", "exit": "exit-w1-l2"}
+    ],
+    "optional": [
+      {
+        "id": "route-catwalk-bypass",
+        "from": "s4-courtyard-1",
+        "purpose": "Desvio opcional sobre a unidade; recompensa: kit de reparo (rota alternativa justificada: evita o encontro).",
+        "needs": ["jump", "doubleJump-or-dash"],
+        "nodes": [
+          {"id": "ro-cw-step-1", "solid": "s4-catwalk-step-1", "x": 4176, "via": "jump"},
+          {"id": "ro-cw-step-2", "solid": "s4-catwalk-step-2", "x": 4304, "via": "jump"},
+          {"id": "ro-cw-1", "solid": "s4-catwalk-1", "x": 4480, "via": "jump"},
+          {
+            "id": "ro-cw-2",
+            "solid": "s4-catwalk-2",
+            "x": 4896,
+            "via": "doubleJump",
+            "alsoVia": "jumpDash",
+            "pickup": "pk-repair-catwalk"
+          },
+          {"id": "ro-cw-return", "solid": "s4-courtyard-2", "x": 4950, "via": "drop"}
+        ]
+      },
+      {
+        "id": "route-secret-diagnostic",
+        "from": "s3-terrace",
+        "purpose": "Compartimento de diagnóstico (segredo); não bloqueia a campanha.",
+        "needs": ["doubleJump"],
+        "nodes": [
+          {
+            "id": "ro-sec-ledge",
+            "solid": "s3-secret-ledge",
+            "x": 3096,
+            "via": "doubleJump",
+            "interact": "ix-diagnostic-compartment"
+          }
+        ]
+      }
+    ]
+  },
+  "gates": [
+    {
+      "id": "gate-chamber-exit",
+      "rect": {"x": 992, "y": 480, "width": 32, "height": 240},
+      "initial": "closed",
+      "openWhen": "evt-console-used",
+      "section": "sec-01-chamber",
+      "implementation": "collider adicionado ao carregar e removido ao abrir (CollisionWorld.removeCollider)",
+      "assetRef": "prop-w1l1-chamber-door"
+    },
+    {
+      "id": "gate-shelter-exit",
+      "rect": {"x": 6912, "y": 480, "width": 32, "height": 120},
+      "initial": "closed",
+      "openWhen": "evt-sync-activated",
+      "section": "sec-06-shelter",
+      "implementation": "idem; impede sair antes de ativar a sincronização",
+      "assetRef": "prop-w1l1-exit-door"
+    }
+  ],
+  "interactables": [
+    {
+      "id": "ix-awakening-console",
+      "zone": {"x": 480, "y": 674, "width": 96, "height": 46},
+      "section": "sec-01-chamber",
+      "event": "evt-console-used",
+      "assetRef": "prop-w1l1-awakening-console",
+      "failsafe": {"pulsePromptAfterSeconds": 45, "autoActivateAfterSeconds": 90},
+      "note": "Failsafe obrigatório: abre a única saída da câmara."
+    },
+    {
+      "id": "ix-diagnostic-compartment",
+      "zone": {"x": 3072, "y": 128, "width": 48, "height": 48},
+      "section": "sec-03-climb",
+      "event": "evt-secret-found",
+      "assetRef": "prop-w1l1-diagnostic-compartment",
+      "optional": true,
+      "once": true
+    },
+    {
+      "id": "ix-sync-terminal",
+      "zone": {"x": 6720, "y": 554, "width": 96, "height": 46},
+      "section": "sec-06-shelter",
+      "event": "evt-sync-activated",
+      "assetRef": "prop-w1l1-sync-terminal",
+      "failsafe": {"pulsePromptAfterSeconds": 45, "autoActivateAfterSeconds": 90},
+      "note": "Failsafe obrigatório: abre a única saída do abrigo (D-09: runtime ainda não tem ação de interação)."
+    }
+  ],
+  "hazards": [
+    {
+      "id": "hz-pit-1",
+      "kind": "recovery-pit",
+      "rect": {"x": 1520, "y": 720, "width": 96, "height": 48},
+      "bed": "s2-pit1-bed",
+      "effect": "none",
+      "section": "sec-02-corridor",
+      "assetRef": "vfx-w1-pit-edge-light"
+    },
+    {
+      "id": "hz-pit-2",
+      "kind": "recovery-pit",
+      "rect": {"x": 1936, "y": 720, "width": 80, "height": 48},
+      "bed": "s2-pit2-bed",
+      "effect": "none",
+      "section": "sec-02-corridor",
+      "assetRef": "vfx-w1-pit-edge-light"
+    },
+    {
+      "id": "hz-trench-1",
+      "kind": "recovery-pit",
+      "rect": {"x": 4000, "y": 600, "width": 96, "height": 48},
+      "bed": "s4-trench-1-bed",
+      "effect": "none",
+      "section": "sec-04-courtyard",
+      "assetRef": "vfx-w1-pit-edge-light"
+    },
+    {
+      "id": "hz-trench-2",
+      "kind": "recovery-pit",
+      "rect": {"x": 4736, "y": 600, "width": 96, "height": 48},
+      "bed": "s4-trench-2-bed",
+      "effect": "none",
+      "section": "sec-04-courtyard",
+      "assetRef": "vfx-w1-pit-edge-light"
+    },
+    {
+      "id": "hz-residue-pool",
+      "kind": "killzone",
+      "rect": {"x": 5312, "y": 664, "width": 1024, "height": 104},
+      "section": "sec-05-residue-chain",
+      "effect": "light-damage-and-respawn",
+      "respawnCheckpoint": "cp-03-chain-entry",
+      "assetRef": "vfx-w1-residue-pool",
+      "status": "PROPOSTA",
+      "note": "Dano e política de respawn dependem de contrato de dano/vida do runtime (D-06)."
+    }
+  ],
+  "enemies": [
+    {
+      "id": "en-maint-unit-01",
+      "archetype": "enemy-cybercore-maint-unit-defective",
+      "section": "sec-04-courtyard",
+      "solid": "s4-courtyard-1",
+      "size": {"width": 48, "height": 44},
+      "spawnX": 4480,
+      "patrol": {"minX": 4320, "maxX": 4640, "speed": 60, "pauseAtTurnSeconds": 0.6},
+      "initialState": "dormant",
+      "wake": {"radiusX": 320, "bandY": 160, "rebootTelegraphSeconds": 1.2},
+      "glitch": {"everyNPatrolLegs": 2, "durationSeconds": 1.4, "coreExposed": true, "contactDamageDuringGlitch": false},
+      "contactDamage": {"amount": 1, "unit": "RELATIVE_UNIT", "invulnerabilitySeconds": 1.0},
+      "health": {"value": 3, "unit": "BASE_SHOT_EQUIVALENT", "coreExposedMultiplier": 2},
+      "optional": true,
+      "resetPolicy": "reset-on-player-respawn",
+      "defeatEvent": "evt-unit-defeated",
+      "wakeEvent": "evt-unit-reboot",
+      "assetRef": "sprite-w1-maint-unit-defective",
+      "tuningStatus": "PROVISIONAL_RELATIVE_VALUES"
+    }
+  ],
+  "pickups": [
+    {
+      "id": "pk-repair-ground",
+      "kind": "repair-kit",
+      "x": 4992,
+      "y": 600,
+      "solid": "s4-courtyard-2",
+      "section": "sec-04-courtyard",
+      "heal": 1,
+      "healUnit": "RELATIVE_UNIT",
+      "onMainRoute": true,
+      "assetRef": "prop-w1l1-repair-kit"
+    },
+    {
+      "id": "pk-repair-catwalk",
+      "kind": "repair-kit",
+      "x": 4896,
+      "y": 432,
+      "solid": "s4-catwalk-2",
+      "section": "sec-04-courtyard",
+      "heal": 1,
+      "healUnit": "RELATIVE_UNIT",
+      "onMainRoute": false,
+      "assetRef": "prop-w1l1-repair-kit"
+    }
+  ],
+  "props": [
+    {
+      "id": "pr-cradle",
+      "x": 96,
+      "y": 720,
+      "section": "sec-01-chamber",
+      "assetRef": "prop-w1l1-awakening-cradle",
+      "decor": true
+    },
+    {
+      "id": "pr-speed-strip",
+      "x": 160,
+      "y": 720,
+      "w": 768,
+      "section": "sec-01-chamber",
+      "assetRef": "prop-w1l1-floor-light-strip",
+      "decor": true,
+      "purpose": "Faixa luminosa de piso que torna a aceleração perceptível."
+    },
+    {
+      "id": "pr-inert-unit",
+      "x": 1440,
+      "y": 720,
+      "section": "sec-02-corridor",
+      "assetRef": "sprite-w1-maint-unit-inert",
+      "decor": true,
+      "purpose": "Pré-figura a silhueta da unidade defeituosa sem risco."
+    },
+    {
+      "id": "pr-landing-light-1",
+      "x": 5488,
+      "y": 600,
+      "section": "sec-05-residue-chain",
+      "assetRef": "prop-w1l1-landing-light",
+      "decor": true
+    },
+    {
+      "id": "pr-landing-light-2",
+      "x": 5696,
+      "y": 552,
+      "section": "sec-05-residue-chain",
+      "assetRef": "prop-w1l1-landing-light",
+      "decor": true
+    },
+    {
+      "id": "pr-landing-light-3",
+      "x": 5904,
+      "y": 576,
+      "section": "sec-05-residue-chain",
+      "assetRef": "prop-w1l1-landing-light",
+      "decor": true
+    },
+    {
+      "id": "pr-landing-light-4",
+      "x": 6240,
+      "y": 576,
+      "section": "sec-05-residue-chain",
+      "assetRef": "prop-w1l1-landing-light",
+      "decor": true
+    },
+    {
+      "id": "pr-shelter-lamps",
+      "x": 6528,
+      "y": 600,
+      "w": 384,
+      "section": "sec-06-shelter",
+      "assetRef": "prop-w1l1-shelter-lamps",
+      "decor": true
+    },
+    {
+      "id": "pr-checkpoint-beacon-1",
+      "x": 2976,
+      "y": 352,
+      "section": "sec-03-climb",
+      "assetRef": "prop-w1l1-checkpoint-beacon",
+      "checkpoint": "cp-01-terrace"
+    },
+    {
+      "id": "pr-checkpoint-beacon-2",
+      "x": 3680,
+      "y": 600,
+      "section": "sec-04-courtyard",
+      "assetRef": "prop-w1l1-checkpoint-beacon",
+      "checkpoint": "cp-02-courtyard"
+    },
+    {
+      "id": "pr-checkpoint-beacon-3",
+      "x": 5152,
+      "y": 600,
+      "section": "sec-04-courtyard",
+      "assetRef": "prop-w1l1-checkpoint-beacon",
+      "checkpoint": "cp-03-chain-entry"
+    }
+  ],
+  "triggers": [
+    {
+      "id": "tr-hint-move",
+      "rect": {"x": 96, "y": 600, "width": 288, "height": 120},
+      "kind": "hint",
+      "hint": "move",
+      "once": true,
+      "suppressIfPerformed": ["move"]
+    },
+    {
+      "id": "tr-hint-interact",
+      "rect": {"x": 448, "y": 600, "width": 160, "height": 120},
+      "kind": "hint",
+      "hint": "interact",
+      "once": true,
+      "suppressIfPerformed": ["interact"]
+    },
+    {
+      "id": "tr-corridor-entered",
+      "rect": {"x": 1024, "y": 480, "width": 32, "height": 240},
+      "kind": "event",
+      "event": "evt-corridor-entered",
+      "once": true
+    },
+    {
+      "id": "tr-hint-jump-tap",
+      "rect": {"x": 1168, "y": 600, "width": 96, "height": 120},
+      "kind": "hint",
+      "hint": "jump-tap",
+      "once": true,
+      "suppressIfPerformed": ["jump"]
+    },
+    {
+      "id": "tr-hint-jump-hold",
+      "rect": {"x": 1664, "y": 600, "width": 64, "height": 120},
+      "kind": "hint",
+      "hint": "jump-hold",
+      "once": true,
+      "suppressIfPerformed": ["jump-hold"]
+    },
+    {
+      "id": "tr-hint-double-jump",
+      "rect": {"x": 2672, "y": 408, "width": 112, "height": 120},
+      "kind": "hint",
+      "hint": "double-jump",
+      "once": true,
+      "suppressIfPerformed": ["double-jump"]
+    },
+    {
+      "id": "tr-secret-flicker",
+      "rect": {"x": 2944, "y": 248, "width": 320, "height": 104},
+      "kind": "event",
+      "event": "evt-secret-flicker",
+      "once": true
+    },
+    {
+      "id": "tr-vista",
+      "rect": {"x": 3296, "y": 232, "width": 96, "height": 120},
+      "kind": "event",
+      "event": "evt-vista-reached",
+      "once": true
+    },
+    {
+      "id": "tr-hint-shoot",
+      "rect": {"x": 4096, "y": 480, "width": 64, "height": 120},
+      "kind": "hint",
+      "hint": "shoot",
+      "once": true,
+      "suppressIfPerformed": ["shoot"],
+      "requiresAbility": "shoot"
+    },
+    {
+      "id": "tr-hint-dash",
+      "rect": {"x": 4448, "y": 312, "width": 128, "height": 120},
+      "kind": "hint",
+      "hint": "dash",
+      "once": true,
+      "suppressIfPerformed": ["dash"],
+      "requiresAbility": "dash"
+    },
+    {
+      "id": "tr-shelter-entered",
+      "rect": {"x": 6336, "y": 480, "width": 96, "height": 120},
+      "kind": "event",
+      "event": "evt-shelter-entered",
+      "once": true
+    }
+  ],
+  "events": [
+    {
+      "id": "evt-level-enter",
+      "kind": "level",
+      "description": "Carga concluída; BOLT em ativação.",
+      "effects": [
+        {"op": "setObjective", "id": "obj-leave-chamber"},
+        {"op": "music", "cue": "audio-mus-w1l1-awakening"}
+      ]
+    },
+    {
+      "id": "evt-control-granted",
+      "kind": "level",
+      "description": "Ativação termina; controle concedido.",
+      "after": "evt-level-enter",
+      "delaySeconds": 2.5,
+      "effects": [
+        {"op": "grantControl"},
+        {"op": "dialogue", "id": "dlg-signal-001", "delaySeconds": 1.5}
+      ]
+    },
+    {
+      "id": "evt-console-used",
+      "kind": "interaction",
+      "description": "Console de despertar acionado.",
+      "effects": [
+        {"op": "setFlag", "flag": "w1l1-console-used", "persistent": true},
+        {"op": "openGate", "id": "gate-chamber-exit"},
+        {"op": "dialogue", "id": "dlg-signal-002"},
+        {"op": "setObjective", "id": "obj-reach-shelter"},
+        {"op": "sfx", "cue": "audio-sfx-door-open"}
+      ]
+    },
+    {
+      "id": "evt-corridor-entered",
+      "kind": "zone",
+      "description": "BOLT entra no corredor.",
+      "effects": [
+        {"op": "ambience", "cue": "audio-amb-w1l1-corridor"},
+        {"op": "music", "cue": "audio-mus-w1l1-exploration"}
+      ]
+    },
+    {
+      "id": "evt-cp-01-activated",
+      "kind": "checkpoint",
+      "description": "Checkpoint do terraço.",
+      "effects": [
+        {"op": "saveCheckpoint", "id": "cp-01-terrace"}
+      ]
+    },
+    {
+      "id": "evt-cp-02-activated",
+      "kind": "checkpoint",
+      "description": "Checkpoint do pátio.",
+      "effects": [
+        {"op": "saveCheckpoint", "id": "cp-02-courtyard"}
+      ]
+    },
+    {
+      "id": "evt-cp-03-activated",
+      "kind": "checkpoint",
+      "description": "Checkpoint da sequência de saltos.",
+      "effects": [
+        {"op": "saveCheckpoint", "id": "cp-03-chain-entry"}
+      ]
+    },
+    {
+      "id": "evt-secret-flicker",
+      "kind": "zone",
+      "description": "O sinal oscila perto do compartimento (dica diegética).",
+      "effects": [
+        {"op": "sfx", "cue": "audio-sfx-signal-flicker"}
+      ]
+    },
+    {
+      "id": "evt-secret-found",
+      "kind": "interaction",
+      "description": "Compartimento de diagnóstico aberto.",
+      "effects": [
+        {"op": "setFlag", "flag": "w1l1-secret-diagnostic", "persistent": true},
+        {"op": "dialogue", "id": "dlg-diag-001"},
+        {"op": "dialogue", "id": "dlg-diag-002", "delaySeconds": 2.2},
+        {"op": "dialogue", "id": "dlg-diag-003", "delaySeconds": 4.4},
+        {"op": "sfx", "cue": "audio-stg-secret-found"}
+      ]
+    },
+    {
+      "id": "evt-vista-reached",
+      "kind": "zone",
+      "description": "Borda do terraço com vista para o pátio.",
+      "effects": [
+        {"op": "dialogue", "id": "dlg-signal-003"}
+      ]
+    },
+    {
+      "id": "evt-unit-reboot",
+      "kind": "enemy",
+      "description": "A unidade defeituosa reinicia (telegraph de 1,2 s).",
+      "effects": [
+        {"op": "dialogue", "id": "dlg-signal-004"}
+      ]
+    },
+    {
+      "id": "evt-unit-defeated",
+      "kind": "enemy",
+      "description": "Unidade neutralizada (opcional).",
+      "effects": [
+        {"op": "completeOptional", "id": "obj-opt-defeat-unit"}
+      ]
+    },
+    {
+      "id": "evt-shelter-entered",
+      "kind": "zone",
+      "description": "BOLT entra no abrigo.",
+      "effects": [
+        {"op": "music", "cue": "audio-mus-w1l1-shelter"},
+        {"op": "dialogue", "id": "dlg-signal-005"},
+        {"op": "setObjective", "id": "obj-activate-sync"}
+      ]
+    },
+    {
+      "id": "evt-sync-activated",
+      "kind": "interaction",
+      "description": "Primeiro ponto de sincronização ativado (sequência curta e pulável, até 8 s).",
+      "effects": [
+        {"op": "lockInput", "skippable": true, "maxSeconds": 8},
+        {"op": "dialogue", "id": "dlg-signal-006"},
+        {"op": "dialogue", "id": "dlg-nexo-007", "delaySeconds": 2.5},
+        {"op": "setFlag", "flag": "w1l1-sync-activated", "persistent": true},
+        {"op": "openGate", "id": "gate-shelter-exit"},
+        {"op": "sfx", "cue": "audio-stg-sync-established"},
+        {"op": "emit", "id": "evt-level-complete"}
+      ]
+    },
+    {
+      "id": "evt-level-complete",
+      "kind": "level",
+      "description": "Fase concluída: salvar e liberar a W1-L2.",
+      "effects": [
+        {"op": "completeLevel", "next": "w1-l2"},
+        {"op": "save", "scope": "campaign"}
+      ]
+    }
+  ],
+  "objectives": [
+    {"id": "obj-leave-chamber", "type": "primary", "label": "Saia da câmara.", "completedBy": "evt-console-used"},
+    {
+      "id": "obj-reach-shelter",
+      "type": "primary",
+      "label": "Alcance o abrigo de manutenção.",
+      "completedBy": "evt-shelter-entered"
+    },
+    {
+      "id": "obj-activate-sync",
+      "type": "primary",
+      "label": "Ative o ponto de sincronização.",
+      "completedBy": "evt-sync-activated"
+    },
+    {
+      "id": "obj-opt-find-diagnostic",
+      "type": "optional",
+      "label": "Encontre o compartimento de diagnóstico.",
+      "completedBy": "evt-secret-found"
+    },
+    {
+      "id": "obj-opt-defeat-unit",
+      "type": "optional",
+      "label": "Neutralize a unidade defeituosa.",
+      "completedBy": "evt-unit-defeated",
+      "requiresAbility": "shoot"
+    }
+  ],
+  "dialogue": [
+    {
+      "id": "dlg-signal-001",
+      "event": "evt-control-granted",
+      "speakerLabel": "SINAL",
+      "text": "…sinal… fragmentado… unidade detectada.",
+      "status": "RASCUNHO"
+    },
+    {
+      "id": "dlg-signal-002",
+      "event": "evt-console-used",
+      "speakerLabel": "SINAL",
+      "text": "Passagem liberada. Siga o sinal… a leste.",
+      "status": "RASCUNHO"
+    },
+    {
+      "id": "dlg-signal-003",
+      "event": "evt-vista-reached",
+      "speakerLabel": "SINAL",
+      "text": "Estrutura de manutenção à frente. O sinal fica mais forte.",
+      "status": "RASCUNHO"
+    },
+    {
+      "id": "dlg-signal-004",
+      "event": "evt-unit-reboot",
+      "speakerLabel": "SINAL",
+      "text": "Unidade de manutenção com defeito. Evite o contato.",
+      "status": "RASCUNHO"
+    },
+    {
+      "id": "dlg-signal-005",
+      "event": "evt-shelter-entered",
+      "speakerLabel": "SINAL",
+      "text": "Ponto de sincronização ativo. Aproxime-se.",
+      "status": "RASCUNHO"
+    },
+    {
+      "id": "dlg-signal-006",
+      "event": "evt-sync-activated",
+      "speakerLabel": "SINAL",
+      "text": "Sincronizando…",
+      "status": "RASCUNHO"
+    },
+    {
+      "id": "dlg-nexo-007",
+      "event": "evt-sync-activated",
+      "speakerLabel": "NEXO",
+      "text": "Conexão estabelecida.",
+      "status": "RASCUNHO",
+      "openDecision": "D-02"
+    },
+    {
+      "id": "dlg-diag-001",
+      "event": "evt-secret-found",
+      "speakerLabel": "DIAGNÓSTICO",
+      "text": "CLASSE DE UNIDADE: NÃO CATALOGADA.",
+      "status": "RASCUNHO"
+    },
+    {
+      "id": "dlg-diag-002",
+      "event": "evt-secret-found",
+      "speakerLabel": "DIAGNÓSTICO",
+      "text": "NÚCLEO: SEM CORRESPONDÊNCIA NOS REGISTROS DE MANUTENÇÃO.",
+      "status": "RASCUNHO"
+    },
+    {
+      "id": "dlg-diag-003",
+      "event": "evt-secret-found",
+      "speakerLabel": "DIAGNÓSTICO",
+      "text": "HISTÓRICO DE FABRICAÇÃO: INDISPONÍVEL.",
+      "status": "RASCUNHO"
+    }
+  ],
+  "completion": {"event": "evt-level-complete", "requires": ["evt-sync-activated"], "next": "w1-l2"},
+  "respawnPolicy": {
+    "onDefeatOrKillzone": "last-activated-checkpoint",
+    "resetOnRespawn": ["enemies", "pickups-collected-after-checkpoint", "transient-flags"],
+    "keepOnRespawn": ["persistent-flags", "gates-opened-by-persistent-flags", "pickups-collected-before-checkpoint"],
+    "health": "RESTORE_FULL_PROPOSTA",
+    "invulnerabilitySeconds": 1.5,
+    "placement": "corpo com pés em (x, y) do checkpoint; convenção não definida no contrato (D-10)"
+  },
+  "persistence": {
+    "persistentFlags": ["w1l1-console-used", "w1l1-secret-diagnostic", "w1l1-sync-activated"],
+    "persistentFields": ["levelCompleted", "activeCheckpointId", "collectedPickupIds", "secretsFound"],
+    "note": "Esquema de save do HTML5 ainda não definido; campos são requisitos para o dono do save (D-11)."
+  },
+  "assets": [
+    {
+      "id": "tile-w1-floor-metal",
+      "type": "image",
+      "description": "Piso metálico de infraestrutura (topo com realce de borda).",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["solids"]
+    },
+    {
+      "id": "tile-w1-wall-ruin",
+      "type": "image",
+      "description": "Parede e massa de teto em ruína tecnológica.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["solids"]
+    },
+    {
+      "id": "tile-w1-rubble",
+      "type": "image",
+      "description": "Entulho e blocos caídos (obstáculos e leitos de vala).",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["solids"]
+    },
+    {
+      "id": "tile-w1-ledge-debris",
+      "type": "image",
+      "description": "Cornijas e restos estruturais usados como plataformas unidirecionais.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["one-way"]
+    },
+    {
+      "id": "tile-w1-catwalk-metal",
+      "type": "image",
+      "description": "Passarelas metálicas e almofadas de pouso.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["one-way"]
+    },
+    {
+      "id": "tile-w1-pool-bed",
+      "type": "image",
+      "description": "Leito do fosso de energia residual.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["solids"]
+    },
+    {
+      "id": "bg-w1l1-far-skyline",
+      "type": "image",
+      "description": "Camada distante: horizonte tecnológico fragmentado e farol do abrigo.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["level"]
+    },
+    {
+      "id": "bg-w1l1-mid-ruins",
+      "type": "image",
+      "description": "Camada intermediária: estruturas em ruína.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["level"]
+    },
+    {
+      "id": "bg-w1l1-near-structures",
+      "type": "image",
+      "description": "Camada próxima: vigas e dutos fora do plano jogável.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["level"]
+    },
+    {
+      "id": "bg-w1l1-chamber-interior",
+      "type": "image",
+      "description": "Interior da câmara de despertar.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["sec-01-chamber"]
+    },
+    {
+      "id": "bg-w1l1-shelter-interior",
+      "type": "image",
+      "description": "Interior do abrigo de manutenção.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["sec-06-shelter"]
+    },
+    {
+      "id": "prop-w1l1-awakening-cradle",
+      "type": "image",
+      "description": "Berço de despertar de BOLT.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["props"]
+    },
+    {
+      "id": "prop-w1l1-awakening-console",
+      "type": "image",
+      "description": "Console de despertar (inativo, pulsando, usado).",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["interactables"]
+    },
+    {
+      "id": "prop-w1l1-chamber-door",
+      "type": "image",
+      "description": "Porta da câmara (fechada, abrindo, aberta).",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["gates"]
+    },
+    {
+      "id": "prop-w1l1-exit-door",
+      "type": "image",
+      "description": "Porta de saída do abrigo (fechada, abrindo, aberta).",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["gates"]
+    },
+    {
+      "id": "prop-w1l1-floor-light-strip",
+      "type": "image",
+      "description": "Faixa luminosa de piso.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["props"]
+    },
+    {
+      "id": "prop-w1l1-checkpoint-beacon",
+      "type": "image",
+      "description": "Baliza de checkpoint (inativa, ativando, ativa).",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["checkpoints"]
+    },
+    {
+      "id": "prop-w1l1-repair-kit",
+      "type": "image",
+      "description": "Kit de reparo (coletável de cura).",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["pickups"]
+    },
+    {
+      "id": "prop-w1l1-diagnostic-compartment",
+      "type": "image",
+      "description": "Painel rachado com luz vazando; abre ao interagir.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["interactables"]
+    },
+    {
+      "id": "prop-w1l1-landing-light",
+      "type": "image",
+      "description": "Luz de pouso das almofadas da sequência de saltos.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["props"]
+    },
+    {
+      "id": "prop-w1l1-sync-terminal",
+      "type": "image",
+      "description": "Terminal do primeiro ponto de sincronização.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["interactables"]
+    },
+    {
+      "id": "prop-w1l1-shelter-lamps",
+      "type": "image",
+      "description": "Iluminação do abrigo.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["props"]
+    },
+    {
+      "id": "sprite-w1-maint-unit-defective",
+      "type": "image",
+      "description": "Unidade de manutenção defeituosa: dormente, reinício, patrulha, giro, pane, dano, derrota.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["enemies"]
+    },
+    {
+      "id": "sprite-w1-maint-unit-inert",
+      "type": "image",
+      "description": "Unidade de manutenção inerte (cenário).",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["props"]
+    },
+    {
+      "id": "vfx-w1-pit-edge-light",
+      "type": "image",
+      "description": "Luz de borda de vala (redundância não cromática do perigo).",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["hazards"]
+    },
+    {
+      "id": "vfx-w1-residue-pool",
+      "type": "image",
+      "description": "Energia residual do fosso (pulso, brilho, partículas limitadas).",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["hazards"]
+    },
+    {
+      "id": "audio-mus-w1l1-awakening",
+      "type": "audio",
+      "description": "Música: isolamento e despertar (esparsa).",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["events"]
+    },
+    {
+      "id": "audio-mus-w1l1-exploration",
+      "type": "audio",
+      "description": "Música: exploração (movimento gradual).",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["events"]
+    },
+    {
+      "id": "audio-mus-w1l1-shelter",
+      "type": "audio",
+      "description": "Música: resolução no abrigo.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["events"]
+    },
+    {
+      "id": "audio-amb-w1l1-corridor",
+      "type": "audio",
+      "description": "Ambiência do corredor (zumbido elétrico, estrutura, vento distante).",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["events"]
+    },
+    {
+      "id": "audio-sfx-door-open",
+      "type": "audio",
+      "description": "Efeito: abertura de porta.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["events"]
+    },
+    {
+      "id": "audio-sfx-signal-flicker",
+      "type": "audio",
+      "description": "Efeito: oscilação do sinal.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["events"]
+    },
+    {
+      "id": "audio-stg-secret-found",
+      "type": "audio",
+      "description": "Stinger: segredo encontrado.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["events"]
+    },
+    {
+      "id": "audio-stg-sync-established",
+      "type": "audio",
+      "description": "Stinger: sincronização estabelecida.",
+      "state": "SPECIFIED",
+      "approval": "NONE",
+      "usedBy": ["events"]
+    }
+  ],
+  "qa": {
+    "caseIdPrefix": "QA-W1L1-",
+    "expected": {
+      "sections": 6,
+      "checkpoints": 3,
+      "killzones": 1,
+      "recoveryPits": 4,
+      "enemies": 1,
+      "interactables": 3,
+      "pickups": 2,
+      "gates": 2,
+      "optionalRoutes": 2,
+      "primaryObjectives": 3,
+      "optionalObjectives": 2
+    },
+    "limits": {
+      "minCheckpointDistanceFromDamageSource": 400,
+      "maxCheckpointDistanceBeforeEnemy": 800,
+      "maxCheckpointDistanceBeforeKillzone": 400,
+      "minCheckpointFloorMargin": 96
+    }
+  }
+}
