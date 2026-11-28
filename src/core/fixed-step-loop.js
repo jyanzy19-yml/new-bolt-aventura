@@ -113,8 +113,13 @@ export class FixedStepLoop {
 
     if (this.#lastTimestamp === null) {
       this.#lastTimestamp = timestampMs;
-      this.#render(0);
-      this.#scheduleNextFrame();
+      try {
+        this.#render(0);
+        this.#scheduleNextFrame();
+      } catch (error) {
+        this.stop();
+        throw error;
+      }
       return;
     }
 
@@ -143,11 +148,10 @@ export class FixedStepLoop {
       }
 
       this.#render(this.#accumulator / this.#stepMs);
+      this.#scheduleNextFrame();
     } catch (error) {
       this.stop();
       throw error;
     }
-
-    this.#scheduleNextFrame();
   }
 }
