@@ -97,3 +97,8 @@ Os últimos cinco casos exigem validação manual/ambiente apropriado e não sã
 ## 9. Critério de aceite desta unidade
 
 A unidade será considerada integrada quando CI confirmar lint, testes e build; revisão do diff não apontar regressões; a rota principal puder ser concluída em browser; e as limitações de Android/arte/áudio permanecerem explicitamente rastreadas. A aprovação de integração não equivale à aprovação de arte final ou validação Android física.
+
+
+## Estado de CI
+
+Os resultados oficiais de lint, testes, build e análise estática são os checks associados ao HEAD atual da Pull Request. Este documento não substitui essas evidências e deve ser atualizado após cada execução relevante.
