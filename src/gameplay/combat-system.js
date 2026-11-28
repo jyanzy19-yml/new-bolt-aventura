@@ -537,7 +537,7 @@ export class CombatSystem {
       projectile.remainingSeconds -= deltaSeconds;
       if (projectile.remainingSeconds <= 0) continue;
 
-      const movement = this.#sweepProjectile(projectile, deltaSeconds, enemies);
+      const movement = this.#sweepProjectile(projectile, deltaSeconds, enemies, playerSnapshot.body);
       if (!movement.alive) {
         if (movement.hit) {
           if (projectile.owner === 'player') enemyHits.push(movement.hit);
@@ -562,7 +562,7 @@ export class CombatSystem {
     };
   }
 
-  #sweepProjectile(projectile, deltaSeconds, enemies) {
+  #sweepProjectile(projectile, deltaSeconds, enemies, playerBody) {
     const startX = projectile.x;
     const startY = projectile.y;
     const deltaX = projectile.vx * deltaSeconds;
@@ -597,7 +597,7 @@ export class CombatSystem {
             };
           }
         }
-      } else if (aabbIntersects(projectile, this.#currentPlayerBody)) {
+      } else if (aabbIntersects(projectile, playerBody)) {
         return { alive: false, hit: true };
       }
     }
