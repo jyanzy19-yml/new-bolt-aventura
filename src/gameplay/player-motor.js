@@ -236,7 +236,7 @@ export class PlayerMotor {
     if (
       !startedDash &&
       this.#dashRemaining === 0 &&
-      this.#jumpBufferRemaining > 0 &&
+      (input.pressed.has(PLAYER_ACTIONS.JUMP) || this.#jumpBufferRemaining > 0) &&
       (this.#jumpsRemaining > 0 || this.#coyoteRemaining > 0)
     ) {
       this.#velocityY = -config.jumpVelocity;
