@@ -9,6 +9,7 @@ import { W1L1GameRuntime } from './gameplay/w1-l1-game-runtime.js';
 import { LevelRuntime } from './levels/level-runtime.js';
 import { createLevelCollisionWorld } from './levels/level-collision-adapter.js';
 import { W1_L1, W1_L1_KEYBOARD_BINDINGS, W1_L1_PLAYER_TUNING } from './levels/w1-l1.js';
+import { validateW1L1Content } from './levels/w1-l1-validation.js';
 import { Camera2D } from './rendering/camera-2d.js';
 import { CanvasSurface } from './rendering/canvas-surface.js';
 import { W1L1CanvasRenderer } from './rendering/w1-l1-canvas-renderer.js';
@@ -102,7 +103,7 @@ function bootLevel() {
   touchControls.mount(screen);
 
   const levelRuntime = new LevelRuntime();
-  const level = levelRuntime.load(W1_L1);
+  const level = levelRuntime.load(validateW1L1Content(W1_L1));
   const collisionWorld = createLevelCollisionWorld(level);
   const playerMotor = new PlayerMotor({
     body: { x: level.spawn.x, y: level.spawn.y, width: 30, height: 46 },
