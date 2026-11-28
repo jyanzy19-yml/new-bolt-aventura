@@ -1,3 +1,8 @@
+---
+name: android-web-performance
+description: "Profile Android WebView performance, memory, frame pacing and thermal behavior."
+---
+
 # Skill: Android Web Runtime Performance
 
 ## Activation
