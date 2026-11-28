@@ -1,3 +1,60 @@
+# Collaboration State — BOLT · AVENTURA
+
+**Status:** ACTIVE — ChatGPT and Claude Code are both authorized development agents.  
+**Authority:** latest user instruction and `MASTER_DIRECTIVE.md`.  
+**Technology:** clean-start HTML5, CSS3, JavaScript ES Modules, Canvas 2D and Vite.  
+**Integration owner:** user.
+
+## Current assignment
+No implementation task is assigned by this governance update. Do not infer a task or begin overlapping code changes. The next task must name a primary writer, reviewer, baseline commit, branch, allowed/forbidden paths and acceptance criteria.
+
+## Default responsibility map
+| Area | Default lead | Notes |
+|---|---|---|
+| Cross-system architecture/integration | ChatGPT | Claude may implement scoped architecture tasks by assignment |
+| Runtime, physics/input contracts | ChatGPT | Claude may implement isolated features with explicit contracts |
+| Level/content production | Claude Code | ChatGPT may review or take an explicitly assigned task |
+| Enemy/boss behavior | Claude Code | Requires gameplay acceptance tests |
+| UI/content systems | Claude Code | Respect mobile UX and asset approval rules |
+| Performance/Android integration/CI | ChatGPT | Claude may take bounded implementation tasks |
+| QA/regression review | Either, assigned per task | Non-authoring agent reviews read-only |
+
+This table is default routing, not an exclusive capability restriction.
+
+## Binding coordination rules
+- Exactly one primary writer per task; reviewer remains read-only until handoff.
+- Prefer isolated branches: `agent/claude/<task>` or `agent/chatgpt/<task>`.
+- Do not edit the same paths concurrently.
+- No force-push, shared-history rewrite or self-merge.
+- User chooses agent sequence and approves merges.
+- Inspect current Git state and open PRs before assigning work.
+- Update this file and `CONTINUITY.md` after substantial work.
+- Asset approval remains independent: no final art asset is integrated before approval of that exact version.
+
+## Handoff template
+```text
+TASK ID:
+PRIMARY WRITER:
+REVIEWER:
+BASE COMMIT:
+BRANCH:
+OBJECTIVE:
+IN SCOPE:
+ALLOWED PATHS:
+FORBIDDEN / RESERVED PATHS:
+DEPENDENCIES:
+ACCEPTANCE CRITERIA:
+REQUIRED TESTS:
+KNOWN RISKS:
+DELIVERABLE / PR:
+NEXT OWNER:
+```
+
+## Historical record
+The sections below are retained as historical evidence from the former Godot/GDScript project. Their old assignments, HEAD hashes, 26/32-stage status, PR references and claims that Claude was inactive or ChatGPT was the sole writer are not current instructions. They must not be used as the current runtime baseline. The user's later decision to rebuild from zero in HTML5 and authorize both agents supersedes those historical operational states.
+
+---
+
 ## Estado canônico de colaboração — plano de 32 etapas (27/11/2026)
 
 **Main HEAD:** `d90ac2c78e96b32233f8d003ea6673a38079ecb3` (PR #72 e #73 integradas). Docs Validation pós-merge PR #73 `45986435957` SUCCESS.  
