@@ -41,6 +41,10 @@ func is_solid() -> bool:
 	return _state == State.ACTIVE or _state == State.WARNING_OFF
 
 
+func is_collision_enabled() -> bool:
+	return _shape_node != null and not _shape_node.disabled
+
+
 func _advance_state() -> void:
 	match _state:
 		State.ACTIVE:
