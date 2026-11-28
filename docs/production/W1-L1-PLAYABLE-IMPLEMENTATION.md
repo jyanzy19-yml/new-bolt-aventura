@@ -102,3 +102,6 @@ A unidade será considerada integrada quando CI confirmar lint, testes e build; 
 ## Estado de CI
 
 Os resultados oficiais de lint, testes, build e análise estática são os checks associados ao HEAD atual da Pull Request. Este documento não substitui essas evidências e deve ser atualizado após cada execução relevante.
+
+
+A rendererização da fase também possui testes de contrato com Canvas mockado para verificar o desenho do blockout, HUD, estado opcional e feedback de conclusão. Isso não substitui inspeção visual em navegador ou aparelho.
