@@ -20,15 +20,15 @@
 Godot/GDScript não fazem parte da implementação ativa. O jogo é uma reconstrução clean-start, não um port ou migração.
 
 ## Estado técnico
-A fundação HTML5/Vite foi adicionada em branch de integração e contém shell inicial, lint, testes unitários básicos e build web. Isso ainda não representa gameplay, vertical slice, APK Android ou validação física. O inventário de 28/11/2026 remove da árvore ativa os arquivos executáveis e workflows exclusivos Godot; os registros históricos de design e produção permanecem preservados.
+A fundação HTML5/Vite está integrada à main: shell inicial, lint, Vitest, build web, CodeQL e dependências reproduzíveis via package-lock.json e npm ci. O inventário de 28/11/2026 removeu 169 paths exclusivamente Godot da árvore ativa, preservando canon, bíblias e histórico Git. Isso ainda não representa gameplay, vertical slice, integração Capacitor, APK ou validação física Android.
 
 ## Colaboração
 ChatGPT e Claude Code são agentes implementadores autorizados. Cada tarefa deve ter um escritor primário, escopo delimitado, branch isolada e revisão. Não editar os mesmos arquivos simultaneamente. Registrar resultados reais de testes e limitações.
 
 ## Skills e agentes
-- Skills: `.claude/skills/` — comece pelo `router`.
-- Agentes consultivos: `.claude/agents/` — revisões read-only.
-- Comandos: `.claude/commands/` — continuidade, handoff e revisão.
+- Skills: .claude/skills/ — comece pelo router.
+- Agentes consultivos: .claude/agents/ — revisões read-only.
+- Comandos: .claude/commands/ — continuidade, handoff e revisão.
 
 ## Qualidade e evidência
 Não prometer ausência absoluta de bugs. Prevenir regressões com lint, testes, build, revisão de diff e validação em browser/WebView/dispositivo conforme o nível exigido. Não confundir planejado, implementado, testado e verificado.
