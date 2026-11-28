@@ -168,6 +168,19 @@ export class W1L2CanvasRenderer {
       panel(ctx, enemy.x + 7, enemy.y + enemy.height - 9, 10, 8, '#243442');
       panel(ctx, enemy.x + 26, enemy.y + enemy.height - 9, 10, 8, '#243442');
     }
+    if (enemy.windupRemaining > 0) {
+      ctx.save();
+      ctx.strokeStyle = '#f4d27c';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(enemy.x + enemy.width / 2, enemy.y - 5, 13, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.fillStyle = '#ffe7a5';
+      ctx.font = '900 12px system-ui, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('!', enemy.x + enemy.width / 2, enemy.y - 19);
+      ctx.restore();
+    }
     const barWidth = enemy.width;
     panel(ctx, enemy.x, enemy.y - 9, barWidth, 3, '#263b4b');
     panel(ctx, enemy.x, enemy.y - 9, barWidth * Math.max(0, enemy.health) / (enemy.archetype === 'patrol-sentinel' ? 4 : enemy.archetype === 'watch-drone' ? 2 : 3), 3, '#e1b96e');
