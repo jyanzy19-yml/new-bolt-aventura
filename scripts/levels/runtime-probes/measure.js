@@ -1,3 +1,4 @@
+/* eslint-disable no-console -- sonda de linha de comando; a saída é o resultado. */
 import { CollisionWorld } from '../../../src/physics/collision-world.js';
 import { PlayerMotor } from '../../../src/gameplay/player-motor.js';
 import { DEBUG_PLAYER_TUNING as T } from '../../../src/levels/fixtures/w1-l1-debug.js';

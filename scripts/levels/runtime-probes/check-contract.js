@@ -1,3 +1,4 @@
+/* eslint-disable no-console -- sonda de linha de comando; a saída é o resultado. */
 import { readFileSync } from 'node:fs';
 import { validateLevelDefinition } from '../../../src/levels/level-definition.js';
 import { LevelRuntime } from '../../../src/levels/level-runtime.js';

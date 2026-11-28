@@ -1,3 +1,4 @@
+/* eslint-disable no-console -- sonda de linha de comando; a saída é o resultado. */
 import { readFileSync } from 'node:fs';
 import { createLevelCollisionWorld } from '../../../src/levels/level-collision-adapter.js';
 import { PlayerMotor } from '../../../src/gameplay/player-motor.js';
@@ -41,7 +42,7 @@ function attempt(from, to, plan, cfg) {
 }
 
 function legPlans(from, to, via) {
-  const plans = []; const rightward = true;
+  const plans = [];
   const edge = (to.x >= from.x + from.width) ? from.x + from.width : to.x;
   const lo = (to.x >= from.x + from.width) ? edge - 160 : edge - 200, hi = edge + 24;
   const runUps = [0, 128, 400];

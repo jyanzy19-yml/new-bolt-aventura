@@ -319,14 +319,13 @@ function checkRoute(level, content, surfaces, report) {
   return { legInfo, sectionStats: [...sectionStats.entries()].map(([id, v]) => ({ id, ...v })) };
 }
 
-function checkTeaching(content, report) {
+function checkTeaching(content, surfaces, report) {
   const env = content.designEnvelope;
   const main = content.route.main;
   const surf = new Map();
   const triggers = content.triggers;
   const hintBefore = (hint, x) => triggers.some((t) => t.kind === 'hint' && t.hint === hint && t.rect.x + t.rect.width <= x);
-  const levelSurfaces = content.__surfaces;
-  for (const s of levelSurfaces) surf.set(s.id, s);
+  for (const s of surfaces) surf.set(s.id, s);
   const firstJump = main.find((n) => n.via === 'jump');
   const firstDouble = main.find((n) => n.via === 'doubleJump');
   if (firstJump) {
@@ -460,7 +459,7 @@ function checkEventsAndRefs(level, content, report) {
     if (ev.after && !events.has(ev.after)) report.error('EVENT_REF', `after inexistente: ${ev.after}.`, ev.id);
   }
   // acyclic emit/after graph
-  const edges = new Map(content.events.map((e) => [e.id, [...(e.after ? [] : []), ...(e.effects ?? []).filter((f) => f.op === 'emit').map((f) => f.id)]]));
+  const edges = new Map(content.events.map((e) => [e.id, [...(e.effects ?? []).filter((f) => f.op === 'emit').map((f) => f.id)]]));
   const visiting = new Set();
   const done = new Set();
   const dfs = (id) => {
@@ -572,9 +571,7 @@ function checkRouteCoverage(level, content, surfaces, report) {
       report.error('GATE_ROUTE', 'Nenhum nó da rota principal atravessa o portão.', g.id);
       continue;
     }
-    const opener = content.interactables.find((i) => i.event === g.openWhen) ?? null;
-    const sync = events.get(g.openWhen);
-    const viaEvent = opener ?? (sync ? content.interactables.find((i) => i.event === g.openWhen) : null);
+    const viaEvent = content.interactables.find((i) => i.event === g.openWhen) ?? null;
     const interactNode = main.find((n) => n.interact && viaEvent && n.interact === viaEvent.id);
     if (!viaEvent || !interactNode) report.error('GATE_ORDER', 'Nenhuma interação da rota principal abre o portão.', g.id);
     else if (order.get(interactNode.id) > passIdx) report.error('GATE_ORDER', 'A rota atravessa o portão antes de abri-lo.', g.id);
@@ -621,11 +618,10 @@ export function validateLevelPackage(level, content) {
   checkContractMirror(level, report);
   if (report.errors.length) return { errors: report.errors, warnings: report.warnings, stats: null };
   const surfaces = checkGeometry(level, content, report);
-  Object.defineProperty(content, '__surfaces', { value: surfaces, enumerable: false, configurable: true });
   const reach = reachableSurfaces(level, content, surfaces);
   const informationalFalls = checkFalls(level, content, surfaces, reach, report);
   const route = checkRoute(level, content, surfaces, report);
-  checkTeaching(content, report);
+  checkTeaching(content, surfaces, report);
   checkEncounterAndCheckpoints(level, content, surfaces, report);
   checkEventsAndRefs(level, content, report);
   checkRouteCoverage(level, content, surfaces, report);

@@ -6,7 +6,7 @@
 ## A. Dados e contrato
 | Caso | Verificação | Esperado | Sev. | Resultado |
 |---|---|---|---|---|
-| QA-W1L1-001 | `validateLevelDefinition` sobre `w1-l1.level.json` (PR #161 @ `3ef8215`) | aceito; 23 sólidos, 14 unidirecionais, 3 checkpoints, 1 saída | S1 | **Passou** (`runtime-probes/check-contract.mjs`; controle negativo rejeitou ID inválido) |
+| QA-W1L1-001 | `validateLevelDefinition` sobre `w1-l1.level.json` (PR #161 @ `3ef8215`) | aceito; 23 sólidos, 14 unidirecionais, 3 checkpoints, 1 saída | S1 | **Passou** (`runtime-probes/check-contract.js`; controle negativo rejeitou ID inválido) |
 | QA-W1L1-002 | `LevelRuntime.load` e `CollisionWorld` a partir do arquivo | carrega; 37 colliders | S1 | **Passou** (mesmo script) |
 | QA-W1L1-003 | Validador estático do pacote | 0 erros; 1 aviso conhecido (`FALL_NEAR_DORMANT_ENEMY`) | S1 | **Passou** (`node scripts/levels/validate-level-package.js`) |
 | QA-W1L1-004 | Testes `tests/content/w1-l1-level-package.test.js` (4 de dados + 11 de mutação) | 15/15 | S2 | **Passou sob shim mínimo de Vitest**; Vitest real **não executado** (sem rede para instalar); CI **não executou** |
@@ -16,7 +16,7 @@
 ## B. Alcançabilidade e rota
 | Caso | Verificação | Esperado | Sev. | Resultado |
 |---|---|---|---|---|
-| QA-W1L1-010 | Bot por perna: 26 pernas de rota + 4 saídas de vala no `PlayerMotor` real | cada perna tem entrada que conclui a 100% e 90% | S1 | **Passou** (`legbot.mjs`, 30/30) |
+| QA-W1L1-010 | Bot por perna: 26 pernas de rota + 4 saídas de vala no `PlayerMotor` real | cada perna tem entrada que conclui a 100% e 90% | S1 | **Passou** (`legbot.js`, 30/30) |
 | QA-W1L1-011 | Pernas de pulo duplo sem solução com pulo simples a 100% | `rn-13`, `rn-22`, `ro-cw-2`, `ro-sec-ledge` | S2 | **Passou** a 100% e 90% |
 | QA-W1L1-012 | Sensibilidade +10% de tuning | pulo duplo continua necessário | S2 | **Falhou parcialmente (informativo)**: a 110%, `rn-22-pad-4` (8 entradas) e `ro-cw-2` (16) admitem pulo simples. Risco registrado; reavaliar quando o tuning for aprovado |
 | QA-W1L1-013 | Rota principal sem Dash/tiro | nenhum nó exige | S1 | **Passou** (validador estático) |
