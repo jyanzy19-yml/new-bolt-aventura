@@ -485,3 +485,10 @@ A auditoria estática confirmou que Dash está implementado e foi aprovado pelo 
 - Confirma Cybercore disponível em campanha nova, W1-L1 disponível, W1-L2 bloqueada antes de concluir W1-L1 e persistência do nível atual.
 - Escopo de testes/documentação; nenhum runtime ou contrato persistente alterado.
 - Estado: EM VALIDAÇÃO; aguardando CI.
+
+## BOLT-001 — Pacote de produção W1-L1 — 28/11/2026
+
+- Branch `agent/claude/w1-l1-production-package`. Dados (`content/levels/w1-l1.*`), validador estático, testes, sondas de runtime, figura e documentos `W1-L1-*`.
+- Geometria aceita pelo validador de contrato v1 (script); pernas verificadas por bot no `PlayerMotor` real com tuning de debug. Sem playtest, Vitest real, CI ou Android.
+- Conflito de propriedade com a PR #162 (mesma task, design divergente): ver `docs/production/W1-L1-PENDING-AND-DEPENDENCIES.md`.
+- **Estado: ESPECIFICADO, NÃO INTEGRADO.**

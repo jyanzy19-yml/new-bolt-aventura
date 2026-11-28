@@ -68,3 +68,7 @@ verification: null
 ```
 
 O template é um esquema de planejamento, não autorização para preencher lacunas por palpite. Para assets de áudio/fontes, adaptar os campos técnicos.
+
+## Registro BOLT-001 — W1-L1 (28/11/2026)
+
+34 itens de arte e áudio da W1-L1 estão especificados em `docs/assets/W1-L1-ASSET-AUDIO-INVENTORY.md` e em `content/levels/w1-l1.content.json` (`assets[]`), todos `SPECIFIED`, aprovação `NONE`, sem arquivo criado. Pedidos individuais ainda não foram abertos: dependem da decisão sobre o conflito com a PR #162 e da escala de arte (D-13).
