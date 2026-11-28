@@ -155,7 +155,7 @@ describe('PlayerMotor jumping', () => {
     });
 
     motor.update(0.05, frame({ held: [MOVE_RIGHT] }));
-    const state = motor.update(0.016, frame({ pressed: [JUMP] }));
+    const state = motor.update(0.05, frame({ pressed: [JUMP] }));
 
     expect(state.velocity.y).toBeGreaterThanOrEqual(0);
     expect(state.jumpsRemaining).toBe(0);
