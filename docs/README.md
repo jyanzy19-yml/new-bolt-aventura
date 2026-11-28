@@ -20,11 +20,13 @@ O projeto está sendo criado do zero como jogo HTML5 para Android. Godot/GDScrip
 - [Perfil de performance Android](performance/ANDROID_PERFORMANCE_PROFILE.md).
 - [Estratégia de testes](qa/HTML5_TEST_STRATEGY.md).
 
-## Produção
+## Produção e colaboração
 - [Workflow de 26 etapas](production/26_STAGE_WORKFLOW.md) — organização do trabalho; o prompt mestre continua soberano.
 - [Template de fase](production/LEVEL_SPEC_TEMPLATE.md).
+- [Template de tarefa multiagente](production/AGENT_TASK_TEMPLATE.md).
 - [Definition of Done](production/DEFINITION_OF_DONE.md).
 - [Governança do repositório](production/REPOSITORY_GOVERNANCE.md).
+- [Configuração do GitHub Actions](production/GITHUB_ACTIONS_SETUP.md).
 - [Lockfile e dependências](production/LOCKFILE_AND_DEPENDENCIES.md).
 - [Checklist de release Android](release/ANDROID_RELEASE_CHECKLIST.md).
 
