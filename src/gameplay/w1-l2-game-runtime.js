@@ -38,6 +38,8 @@ export class W1L2GameRuntime {
   #prompt = '';
   #time = 0;
   #contactCooldown = 0;
+  #checkpointIndex = -1;
+  #respawnPosition;
 
   constructor({ level, combatSystem }) {
     if (level?.id !== 'w1-l2' || !Array.isArray(level.enemies)) {
@@ -51,6 +53,7 @@ export class W1L2GameRuntime {
     this.#level = level;
     this.#combat = combatSystem;
     this.#enemies = level.enemies.map(cloneEnemy);
+    this.#respawnPosition = { ...level.spawn };
   }
 
   get snapshot() {
@@ -61,6 +64,8 @@ export class W1L2GameRuntime {
       secretFound: this.#secretFound,
       repeaterActive: this.#repeaterActive,
       completed: this.#completed,
+      checkpointId: this.#checkpointIndex >= 0 ? this.#level.checkpoints[this.#checkpointIndex].id : null,
+      respawnPosition: { ...this.#respawnPosition },
       enemies: this.#enemies.map((enemy) => ({ ...enemy })),
       combat: this.#combat.snapshot,
       message: this.#messageRemaining > 0 ? this.#message : '',
@@ -78,6 +83,14 @@ export class W1L2GameRuntime {
     this.#time += deltaSeconds;
     this.#messageRemaining = Math.max(0, this.#messageRemaining - deltaSeconds);
     this.#contactCooldown = Math.max(0, this.#contactCooldown - deltaSeconds);
+
+    for (let index = this.#checkpointIndex + 1; index < this.#level.checkpoints.length; index += 1) {
+      const checkpoint = this.#level.checkpoints[index];
+      if (player.x + player.width / 2 < checkpoint.x) break;
+      this.#checkpointIndex = index;
+      this.#respawnPosition = { x: checkpoint.x, y: checkpoint.y - player.height };
+      this.#setMessage('PONTO DE SINCRONIZAÇÃO // CHECKPOINT ATIVADO.', 3);
+    }
 
     for (const enemy of this.#enemies) {
       if (!enemy.alive) continue;
@@ -118,7 +131,7 @@ export class W1L2GameRuntime {
         const hit = this.#combat.damagePlayer(1);
         if (hit.applied) {
           this.#contactCooldown = 0.65;
-          this.#setMessage('BOLT // IMPACTO DETECTADO. RECUERE A COBERTURA.', 2.5);
+          this.#setMessage('BOLT // IMPACTO DETECTADO. PROCURE A COBERTURA.', 2.5);
         }
       }
     }
@@ -173,6 +186,14 @@ export class W1L2GameRuntime {
     return this.snapshot;
   }
 
+  respawn() {
+    this.#combat.respawnPlayer();
+    this.#enemies = this.#level.enemies.map(cloneEnemy);
+    this.#contactCooldown = 0;
+    this.#setMessage('NEXO // SINCRONIZAÇÃO RESTAURADA. CONTINUE.', 3.5);
+    return { ...this.#respawnPosition };
+  }
+
   reset() {
     this.#combat.reset();
     this.#enemies = this.#level.enemies.map(cloneEnemy);
@@ -181,6 +202,8 @@ export class W1L2GameRuntime {
     this.#repeaterActive = false;
     this.#completed = false;
     this.#time = 0;
+    this.#checkpointIndex = -1;
+    this.#respawnPosition = { ...this.#level.spawn };
     this.#contactCooldown = 0;
     this.#setMessage('NEXO // MAPA PARCIAL RECUPERADO. PROCURE O REPETIDOR.', 5);
     return this.snapshot;
