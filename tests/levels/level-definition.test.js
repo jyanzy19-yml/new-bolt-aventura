@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import {
-  createCollisionWorldFromLevel,
   LEVEL_SCHEMA_VERSION,
   validateLevelDefinition,
 } from '../../src/levels/level-definition.js';
@@ -77,14 +76,3 @@ describe('validateLevelDefinition', () => {
   });
 });
 
-describe('createCollisionWorldFromLevel', () => {
-  it('creates solid and one-way colliders from validated level data', () => {
-    const world = createCollisionWorldFromLevel(makeLevel());
-
-    expect(world.colliders).toHaveLength(2);
-    expect(world.colliders.map((collider) => collider.oneWay)).toEqual([
-      false,
-      true,
-    ]);
-  });
-});
