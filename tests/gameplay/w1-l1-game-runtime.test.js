@@ -35,6 +35,14 @@ describe('W1L1GameRuntime', () => {
     expect(runtime.snapshot.completed).toBe(true);
   });
 
+  it('resolves side contact with a non-damaging bump and keeps the player outside the unit', () => {
+    const runtime = new W1L1GameRuntime(W1_L1);
+    const result = runtime.update(1 / 60, playerAt(1810, 506));
+    expect(result.enemyContact).toBe(true);
+    expect(result.contactResolution).not.toBeNull();
+    expect(result.contactResolution.x + 30).toBeLessThanOrEqual(result.enemy.x + 0.001);
+  });
+
   it('keeps the maintenance unit inside its patrol bounds', () => {
     const runtime = new W1L1GameRuntime(W1_L1);
     for (let index = 0; index < 500; index += 1) {

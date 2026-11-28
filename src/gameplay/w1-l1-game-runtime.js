@@ -28,6 +28,8 @@ export class W1L1GameRuntime {
   #interactPrompt = '';
   #time = 0;
   #enemyContact = false;
+  #contactCooldown = 0;
+  #contactResolution = null;
 
   constructor(level) {
     if (!level || level.id !== 'w1-l1' || !Array.isArray(level.objectives)) {
@@ -47,6 +49,7 @@ export class W1L1GameRuntime {
       completed: this.#completed,
       enemy: { ...this.#enemy },
       enemyContact: this.#enemyContact,
+      contactResolution: this.#contactResolution ? { ...this.#contactResolution } : null,
       interactPrompt: this.#interactPrompt,
       message: this.#messageRemaining > 0 ? this.#message : '',
       time: this.#time,
@@ -66,7 +69,9 @@ export class W1L1GameRuntime {
 
     this.#time += deltaSeconds;
     this.#messageRemaining = Math.max(0, this.#messageRemaining - deltaSeconds);
+    this.#contactCooldown = Math.max(0, this.#contactCooldown - deltaSeconds);
     this.#enemyContact = false;
+    this.#contactResolution = null;
 
     const player = playerSnapshot.body;
     if (!this.#completed) {
@@ -89,6 +94,19 @@ export class W1L1GameRuntime {
 
     if (overlapsExpanded(player, this.#enemy, 0)) {
       this.#enemyContact = true;
+      const standingAbove = player.y + player.height <= this.#enemy.y + 10;
+      if (!standingAbove && this.#contactCooldown === 0) {
+        const playerCenter = player.x + player.width / 2;
+        const enemyCenter = this.#enemy.x + this.#enemy.width / 2;
+        const hitFromLeft = playerCenter < enemyCenter;
+        this.#contactResolution = {
+          x: hitFromLeft ? this.#enemy.x - player.width - 2 : this.#enemy.x + this.#enemy.width + 2,
+          y: player.y,
+          facing: hitFromLeft ? 1 : -1,
+        };
+        this.#contactCooldown = 0.45;
+        this.#setMessage('UNIDADE DE MANUTENÇÃO // MOVIMENTO ERRÁTICO. DESVIE.', 2.5);
+      }
     }
 
     const diagnostic = this.#level.interactables.find((item) => item.kind === 'secret');

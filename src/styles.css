@@ -109,7 +109,7 @@ button { font: inherit; }
   background: rgb(2 8 15 / 78%);
   place-items: center;
 }
-.pause-overlay[hidden] { display: none; }
+.pause-overlay[hidden], .completion-overlay[hidden] { display: none; }
 .pause-panel {
   width: min(100%, 360px);
   padding: 30px;
@@ -118,7 +118,25 @@ button { font: inherit; }
   background: #10283a;
   text-align: center;
 }
-.pause-panel h2 { margin: 0 0 22px; letter-spacing: 0.12em; }
+.pause-panel h2, .completion-panel h2 { margin: 0 0 22px; letter-spacing: 0.12em; }
+.completion-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: grid;
+  padding: 20px;
+  background: rgb(2 8 15 / 82%);
+  place-items: center;
+}
+.completion-panel {
+  width: min(100%, 420px);
+  padding: 30px;
+  border: 1px solid #8be7dd;
+  border-radius: 16px;
+  background: #10283a;
+  text-align: center;
+}
+.completion-panel p { margin: 0 0 24px; color: #bfd4d8; line-height: 1.55; }
 .touch-controls {
   position: absolute;
   inset: auto 12px max(12px, env(safe-area-inset-bottom)) 12px;

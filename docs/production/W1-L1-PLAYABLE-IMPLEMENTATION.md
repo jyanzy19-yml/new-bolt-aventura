@@ -57,7 +57,7 @@ Os parâmetros do PlayerMotor reutilizam os valores da fixture de runtime que j�
 
 ## 5. Unidade de manutenção
 
-A unidade patrulha um trecho isolado do pátio, entre os limites declarados nos dados da fase. Sua função nesta primeira fase é introduzir leitura de movimento e evasão sem antecipar a lição de arsenal prevista para W1-L2. O contato é sinalizado visualmente; dano, combate e balanceamento de inimigos ainda não estão implementados nesta slice.
+A unidade patrulha um trecho isolado do pátio, entre os limites declarados nos dados da fase. Sua função nesta primeira fase é introduzir leitura de movimento e evasão sem antecipar a lição de arsenal prevista para W1-L2. O contato lateral gera um recuo não-danoso, sem sistema de vida; o jogador pode evitar a unidade saltando ou usando Dash. Combate armado e balanceamento de inimigos ainda não estão implementados nesta slice.
 
 ## 6. Direção visual e áudio
 

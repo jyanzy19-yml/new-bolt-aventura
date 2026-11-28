@@ -60,6 +60,15 @@ function bootLevel() {
   const orientationHint = element('p', 'orientation-hint', 'Gire o dispositivo para jogar na horizontal.');
   const status = element('p', 'game-status', 'TOUCH: movimento · PULAR · DASH · AÇÃO   |   TECLADO: A/D · Espaço · Shift · E');
   const pauseOverlay = element('section', 'pause-overlay');
+  const completionOverlay = element('section', 'completion-overlay');
+  completionOverlay.hidden = true;
+  const completionPanel = element('div', 'completion-panel');
+  const completionTitle = element('h2', '', 'FASE CONCLUÍDA');
+  const completionCopy = element('p', '', 'O primeiro ponto de sincronização foi ativado. W1-L2 ainda está em produção.');
+  const restartButton = element('button', 'primary-button', 'REJOGAR W1-L1');
+  restartButton.type = 'button';
+  completionPanel.append(completionTitle, completionCopy, restartButton);
+  completionOverlay.appendChild(completionPanel);
   pauseOverlay.hidden = true;
   const pausePanel = element('div', 'pause-panel');
   const pauseTitle = element('h2', '', 'JOGO PAUSADO');
@@ -67,7 +76,7 @@ function bootLevel() {
   resumeButton.type = 'button';
   pausePanel.append(pauseTitle, resumeButton);
   pauseOverlay.appendChild(pausePanel);
-  screen.append(topbar, canvas, orientationHint, status, pauseOverlay);
+  screen.append(topbar, canvas, orientationHint, status, pauseOverlay, completionOverlay);
   root.replaceChildren(screen);
 
   const surface = new CanvasSurface(canvas, {
@@ -148,17 +157,30 @@ function bootLevel() {
 
   pauseButton.addEventListener('click', () => paused ? resumeGame() : pauseGame());
   resumeButton.addEventListener('click', resumeGame);
+  restartButton.addEventListener('click', () => window.location.reload());
 
   loop = new FixedStepLoop({
     update: (deltaSeconds) => {
       sceneRuntime.update(deltaSeconds);
       const state = gameRuntime.update(deltaSeconds, sceneRuntime.playerSnapshot, latestInputFrame);
+      if (state.contactResolution) {
+        const currentBody = sceneRuntime.playerSnapshot.body;
+        sceneRuntime.reset(
+          { ...currentBody, x: state.contactResolution.x, y: state.contactResolution.y },
+          { facing: state.contactResolution.facing },
+        );
+      }
       renderer.setState(state);
       if (latestInputFrame.pressed.includes('pause')) pauseGame();
     },
     render: (alpha) => {
       sceneRuntime.render(alpha);
-      if (gameRuntime.snapshot.completed) loop.stop();
+      if (gameRuntime.snapshot.completed) {
+        completionOverlay.hidden = false;
+        pauseButton.hidden = true;
+        inputManager.setEnabled(false);
+        loop.stop();
+      }
     },
     stepMs: 1000 / 60,
     maxFrameDeltaMs: 250,
