@@ -33,6 +33,7 @@ export class InputManager {
   #lifecycleTarget;
   #documentTarget;
   #pointerDisposers = new Set();
+  #pointerResetters = new Set();
   #enabled = true;
   #nextBindingId = 0;
   #onKeyDown;
@@ -59,9 +60,9 @@ export class InputManager {
 
     this.#onKeyDown = (event) => this.#handleKeyDown(event);
     this.#onKeyUp = (event) => this.#handleKeyUp(event);
-    this.#onBlur = () => this.#buffer.clearAll();
+    this.#onBlur = () => this.#clearAllSources();
     this.#onVisibilityChange = () => {
-      if (this.#documentTarget?.hidden) this.#buffer.clearAll();
+      if (this.#documentTarget?.hidden) this.#clearAllSources();
     };
 
     this.#keyboardTarget?.addEventListener('keydown', this.#onKeyDown);
@@ -83,7 +84,7 @@ export class InputManager {
     }
     if (this.#enabled === enabled) return;
     this.#enabled = enabled;
-    if (!enabled) this.#buffer.clearAll();
+    if (!enabled) this.#clearAllSources();
   }
 
   consume() {
@@ -129,24 +130,30 @@ export class InputManager {
       this.#buffer.release(action, source);
     };
 
+    const releaseAllPointers = () => {
+      for (const source of activePointers.values()) {
+        this.#buffer.release(action, source);
+      }
+      activePointers.clear();
+    };
+
     element.addEventListener('pointerdown', onPointerDown);
     element.addEventListener('pointerup', releasePointer);
     element.addEventListener('pointercancel', releasePointer);
     element.addEventListener('lostpointercapture', releasePointer);
 
     const dispose = () => {
-      for (const source of activePointers.values()) {
-        this.#buffer.release(action, source);
-      }
-      activePointers.clear();
+      releaseAllPointers();
       element.removeEventListener('pointerdown', onPointerDown);
       element.removeEventListener('pointerup', releasePointer);
       element.removeEventListener('pointercancel', releasePointer);
       element.removeEventListener('lostpointercapture', releasePointer);
       this.#pointerDisposers.delete(dispose);
+      this.#pointerResetters.delete(releaseAllPointers);
     };
 
     this.#pointerDisposers.add(dispose);
+    this.#pointerResetters.add(releaseAllPointers);
     return dispose;
   }
 
@@ -165,6 +172,13 @@ export class InputManager {
 
     this.#buffer.clearAll();
     this.#enabled = false;
+  }
+
+  #clearAllSources() {
+    for (const releasePointers of [...this.#pointerResetters]) {
+      releasePointers();
+    }
+    this.#buffer.clearAll();
   }
 
   #handleKeyDown(event) {
