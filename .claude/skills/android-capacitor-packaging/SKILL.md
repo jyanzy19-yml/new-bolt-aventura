@@ -1,2 +1,16 @@
-# Android Packaging with Capacitor
-Read the master prompt. Treat Capacitor as the candidate Android bridge after the HTML5 runtime works in browser. Pin Capacitor and plugin versions; keep native plugins minimal and justified. Define app ID, orientation, status/navigation bar behavior, safe areas, permissions, splash, icon, lifecycle and offline asset strategy. Verify WebView compatibility and local asset loading. Keep web build reproducible and ensure native shell consumes the intended build output. Do not commit signing secrets. Distinguish debug build, install test, release bundle and store publication. Test install, cold start, background/foreground, audio, touch, orientation and memory on physical devices. Never claim APK/AAB/device validation without evidence.
+# Skill: Android Packaging with Capacitor
+
+## Activation
+Use only when evaluating or implementing the native Android shell, APK/AAB, plugins, system bars and lifecycle.
+
+## Gate
+First prove the HTML5 runtime builds and runs correctly in a supported browser. Treat Capacitor as the current packaging candidate, not a completed commitment; validate compatibility and native requirements before adopting it.
+
+## Configuration
+Pin Capacitor and plugin versions. Keep native plugins minimal. Define application ID, versioning, landscape orientation, splash/icon, local asset strategy, permissions, status/navigation bar policy, safe areas, keyboard behavior, back navigation, lifecycle and offline operation.
+
+## Build and security
+Make web build output deterministic and ensure native shell packages the exact intended artifact. Never commit signing keys, passwords, tokens or private keystores. Distinguish debug APK, signed release APK, AAB and store publication. Document reproducible setup without exposing secrets.
+
+## Device validation
+Test install/upgrade/uninstall, cold start, offline launch, background/foreground, interruptions, audio unlock, touch/multitouch, orientation, safe areas/system bars, memory, thermal behavior and long sessions on identified physical devices. Never claim a successful install or device test without evidence.
