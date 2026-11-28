@@ -5,8 +5,41 @@
 **Technology:** clean-start HTML5, CSS3, JavaScript ES Modules, Canvas 2D and Vite.  
 **Integration owner:** user.
 
-## Current assignment
-No implementation task is assigned by this governance update. Do not infer a task or begin overlapping code changes. The next task must name a primary writer, reviewer, baseline commit, branch, allowed/forbidden paths and acceptance criteria.
+## Current active assignments — snapshot 2026-11-28
+
+| Task | Primary writer | Reviewer | Branch | PR | Base | Status |
+|---|---|---|---|---:|---|---|
+| HTML5-01 Runtime kernel | ChatGPT | Claude Code | `agent/chatgpt/stage-01-runtime-kernel` | [#145](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/145) | `main` | CI, docs and CodeQL passed; open |
+| HTML5-02 Canvas viewport | ChatGPT | Claude Code | `agent/chatgpt/stage-02-canvas-viewport` | [#146](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/146) | `main` | CI and CodeQL passed; open |
+| HTML5-03 Input/multitouch | ChatGPT | Claude Code | `agent/chatgpt/stage-03-input-multitouch` | [#147](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/147) | `main` | CI and CodeQL passed; pointer ownership now clears on blur/disable; open |
+| HTML5-03B TouchControls | ChatGPT | Claude Code | `agent/chatgpt/stage-03-touch-controls` | [#157](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/157) | `agent/chatgpt/stage-03-input-multitouch` | Web CI passed; open |
+| HTML5-04 Collision kernel | ChatGPT | Claude Code | `agent/chatgpt/stage-04-collision-kernel` | [#148](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/148) | `main` | CI and CodeQL passed; open |
+| HTML5-04B PlayerMotor/Dash | ChatGPT | Claude Code | `agent/chatgpt/stage-04-player-motor` | [#151](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/151) | `agent/chatgpt/stage-04-collision-kernel` | Web CI and docs passed; open |
+| HTML5-04C Debug renderer | ChatGPT | Claude Code | `agent/chatgpt/stage-04-debug-renderer` | [#154](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/154) | `agent/chatgpt/stage-04-player-motor` | Web CI and docs passed; open |
+| HTML5-04D Player scene composition | ChatGPT | Claude Code | `agent/chatgpt/stage-04-player-scene-runtime` | [#158](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/158) | `agent/chatgpt/stage-04-debug-renderer` | CI and docs passed; open |
+| HTML5-05 Level schema/camera | ChatGPT | Claude Code | `agent/chatgpt/stage-05-level-camera` | [#149](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/149) | `main` | CI and docs passed; open |
+| HTML5-05B LevelRuntime | ChatGPT | Claude Code | `agent/chatgpt/stage-05-level-runtime` | [#152](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/152) | `agent/chatgpt/stage-05-level-camera` | CI and docs passed; open |
+| HTML5-05C Geometry adapter | ChatGPT | Claude Code | `agent/chatgpt/stage-05-level-collision-adapter` | [#153](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/153) | `agent/chatgpt/stage-04-collision-kernel` | CI and docs passed; open |
+| HTML5-06 Combat core | ChatGPT | Claude Code | `agent/chatgpt/stage-06-combat-core` | [#150](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/150) | `agent/chatgpt/stage-04-collision-kernel` | Web CI passed; open |
+| HTML5-06B WeaponController | ChatGPT | Claude Code | `agent/chatgpt/stage-06-weapon-controller` | [#155](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/155) | `agent/chatgpt/stage-06-combat-core` | CI and docs passed; open |
+| HTML5-06C CombatRuntime | ChatGPT | Claude Code | `agent/chatgpt/stage-06-combat-runtime` | [#156](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/156) | `agent/chatgpt/stage-06-weapon-controller` | CI and docs passed; open |
+| HTML5-09A Android display contract | ChatGPT | Claude Code | `agent/chatgpt/stage-09-android-display-contract` | [#159](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/159) | `main` | CI, docs and CodeQL passed; open |
+| HTML5-09B AssetManifest/AssetLoader | ChatGPT | Claude Code | `agent/chatgpt/stage-09-asset-loader` | [#160](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/160) | `main` | CI, docs and CodeQL passed; open |
+| HTML5-10A Debug playable slice | ChatGPT | Claude Code | `agent/chatgpt/stage-10-debug-playable-slice` | [#161](https://github.com/jyanzy19-yml/new-bolt-aventura/pull/161) | `main` | Web CI, docs and CodeQL passed; aggregate PR; open |
+
+**Baseline:** `main` HEAD `27c34070a9ee1746076a1ca034833a577858b306`; tree SHA matches original baseline `9c32df4225b4e410340b2254a098167023593625`. All listed PRs are open and unmerged. No implementation branch has been merged automatically. A documentation file was inadvertently created on main by omitting the branch argument, then immediately deleted; the current tree is restored exactly to the original baseline. Continue PR-only changes.
+
+### Active writer boundaries
+- ChatGPT owns the runtime/physics/input/level integration work listed above.
+- Claude Code is the designated read-only reviewer for these PRs; no Claude review result or implementation delivery is presumed.
+- Each branch has isolated paths. A reviewer must not edit the same paths before the primary writer hands off.
+- The user remains responsible for merge decisions.
+
+### Next executable work
+1. Complete the latest PlayerMotor Web CI run and fix any remaining regression.
+2. Review the collision/PlayerMotor contract and integrate the level geometry adapter after both schema and collision dependencies are available.
+3. Continue combat integration and create the first playable W1-L1 slice only from approved content.
+4. Keep the HTML5 tracker and continuity log synchronized after every substantial delivery.
 
 ## Default responsibility map
 | Area | Default lead | Notes |
