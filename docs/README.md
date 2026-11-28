@@ -7,6 +7,7 @@ O jogo está sendo reconstruído do zero como produto HTML5, com Android como pl
 - [Contrato comum dos agentes](../AGENTS.md).
 - [Instruções Claude Code](../CLAUDE.md).
 - [Dossiê histórico](../BOLT_MASTER_CONTEXT.md) — fonte original de contexto, com instruções Godot explicitamente superadas pelo addendum HTML5.
+- [Dossiê mestre compartilhado](../BOLT_SHARED_MASTER_CONTEXT.md) — contexto atualizado para ChatGPT e Claude Code: canon, stack HTML5, estado verificável, governança e próximos trabalhos.
 - [Contexto consolidado HTML5](PROJECT_CONTEXT_HTML5.md) — requisitos de produto adaptados à decisão atual.
 - [Estado de colaboração](production/COLLABORATION_STATE.md).
 - [Continuidade](production/CONTINUITY.md).
