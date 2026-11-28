@@ -79,7 +79,7 @@ export const W1_L1 = Object.freeze({
     { id: 'broken-signal-mast', kind: 'mast', x: 1160, y: 354, width: 46, height: 196 },
     { id: 'courtyard-ruin', kind: 'arch', x: 1510, y: 364, width: 176, height: 186 },
     { id: 'diagnostic-terminal', kind: 'terminal', x: 2200, y: 222, width: 68, height: 70 },
-    { id: 'maintenance-shelter', kind: 'shelter', x: 2825, y: 404, width: 260, height: 146 },
+    { id: 'maintenance-shelter-structure', kind: 'shelter', x: 2825, y: 404, width: 260, height: 146 },
     { id: 'sync-beacon', kind: 'beacon', x: 3220, y: 444, width: 84, height: 106 },
   ],
   sections: [
