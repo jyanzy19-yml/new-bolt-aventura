@@ -87,9 +87,8 @@ func test_alternating_platform_warns_before_losing_and_restoring_collision() -> 
 	platform.reactivation_warning_duration = 0.12
 	tree.root.add_child(platform)
 	await _step_physics(2)
-	var shape: CollisionShape2D = platform.get_node("CollisionShape2D") as CollisionShape2D
 	check_eq(platform.get_state(), AlternatingPlatform.State.ACTIVE, "plataforma inicia ativa")
-	check(not shape.disabled, "plataforma ativa é sólida")
+	check(platform.is_collision_enabled(), "plataforma ativa é sólida")
 
 	tree.paused = true
 	for _frame in range(12):
@@ -99,16 +98,16 @@ func test_alternating_platform_warns_before_losing_and_restoring_collision() -> 
 
 	await _step_physics(10)
 	check_eq(platform.get_state(), AlternatingPlatform.State.WARNING_OFF, "aviso antecede a desativação")
-	check(not shape.disabled, "plataforma permanece sólida durante o aviso de saída")
+	check(platform.is_collision_enabled(), "plataforma permanece sólida durante o aviso de saída")
 	await _step_physics(10)
 	check_eq(platform.get_state(), AlternatingPlatform.State.INACTIVE, "plataforma entra no estado inativo")
-	check(shape.disabled, "colisão é removida somente após o aviso")
+	check(not platform.is_collision_enabled(), "colisão é removida somente após o aviso")
 	await _step_physics(10)
 	check_eq(platform.get_state(), AlternatingPlatform.State.WARNING_ON, "aviso antecede a reativação")
-	check(shape.disabled, "plataforma ainda não é sólida durante o aviso de retorno")
+	check(not platform.is_collision_enabled(), "plataforma ainda não é sólida durante o aviso de retorno")
 	await _step_physics(10)
 	check_eq(platform.get_state(), AlternatingPlatform.State.ACTIVE, "plataforma retorna ao estado ativo")
-	check(not shape.disabled, "colisão retorna depois do aviso")
+	check(platform.is_collision_enabled(), "colisão retorna depois do aviso")
 	platform.free()
 	await tree.process_frame
 	return true
