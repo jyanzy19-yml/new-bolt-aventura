@@ -1,4 +1,16 @@
-import { validateAabb } from '../physics/aabb.js';
+function validateRect(rect, name) {
+  if (!rect || typeof rect !== 'object') {
+    throw new TypeError(`${name} deve ser um objeto.`);
+  }
+  for (const key of ['x', 'y', 'width', 'height']) {
+    if (!Number.isFinite(rect[key])) {
+      throw new TypeError(`${name}.${key} deve ser finito.`);
+    }
+  }
+  if (rect.width <= 0 || rect.height <= 0) {
+    throw new RangeError(`${name} precisa ter largura e altura positivas.`);
+  }
+}
 
 function assertPositiveFinite(value, name) {
   if (!Number.isFinite(value) || value <= 0) {
@@ -41,8 +53,8 @@ export class Camera2D {
   }) {
     assertPositiveFinite(viewportWidth, 'viewportWidth');
     assertPositiveFinite(viewportHeight, 'viewportHeight');
-    validateAabb(worldBounds, 'worldBounds');
-    validateAabb(deadZone, 'deadZone');
+    validateRect(worldBounds, 'worldBounds');
+    validateRect(deadZone, 'deadZone');
 
     if (
       deadZone.x < 0 ||
@@ -72,7 +84,7 @@ export class Camera2D {
   }
 
   reset(target) {
-    validateAabb(target, 'target');
+    validateRect(target, 'target');
     this.#x = target.x + target.width / 2 - this.#viewportWidth / 2;
     this.#y = target.y + target.height / 2 - this.#viewportHeight / 2;
     this.#clampToWorld();
