@@ -89,7 +89,7 @@ describe('PlayerMotor jumping', () => {
     expect(airborne.jumpsRemaining).toBe(1);
 
     let landed;
-    for (let index = 0; index < 100; index += 1) {
+    for (let index = 0; index < 300; index += 1) {
       landed = motor.update(0.016, frame());
       if (landed.grounded) break;
     }
@@ -118,7 +118,7 @@ describe('PlayerMotor jumping', () => {
 
   it('buffers a jump shortly before landing', () => {
     const motor = createMotor({
-      body: { x: 0, y: 0, width: 10, height: 10 },
+      body: { x: 0, y: 9, width: 10, height: 10 },
       colliders: [{ id: 'floor', x: -100, y: 20, width: 1000, height: 20 }],
       config: makeConfig({
         gravity: 100,
@@ -136,10 +136,11 @@ describe('PlayerMotor jumping', () => {
 
   it('allows a coyote-time jump after leaving a ledge', () => {
     const motor = createMotor({
-      colliders: [{ id: 'ledge', x: -100, y: 100, width: 10, height: 20 }],
+      body: { x: -4, y: 90, width: 10, height: 10 },
+      colliders: [{ id: 'ledge', x: -100, y: 100, width: 100, height: 20 }],
     });
 
-    motor.update(0.02, frame({ held: [MOVE_RIGHT] }));
+    motor.update(0.1, frame({ held: [MOVE_RIGHT] }));
     const state = motor.update(0.02, frame({ pressed: [JUMP] }));
 
     expect(state.velocity.y).toBeLessThan(0);
@@ -148,8 +149,8 @@ describe('PlayerMotor jumping', () => {
 
   it('does not allow a ground jump after coyote time expires', () => {
     const motor = createMotor({
-      body: { x: 0, y: 0, width: 10, height: 10 },
-      colliders: [{ id: 'ledge', x: -100, y: 100, width: 10, height: 20 }],
+      body: { x: -4, y: 90, width: 10, height: 10 },
+      colliders: [{ id: 'ledge', x: -100, y: 100, width: 100, height: 20 }],
       config: makeConfig({ jumpCount: 1, coyoteTimeSeconds: 0.02 }),
     });
 
