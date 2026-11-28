@@ -28,8 +28,13 @@ export class TouchControls {
   #root = null;
   #container = null;
   #disposers = [];
+  #groups;
 
-  constructor({ inputManager, documentTarget = globalThis.document ?? null }) {
+  constructor({
+    inputManager,
+    documentTarget = globalThis.document ?? null,
+    enabledActions = null,
+  }) {
     if (!inputManager || typeof inputManager.bindPointerAction !== 'function') {
       throw new TypeError('TouchControls exige um InputManager compatível.');
     }
@@ -37,8 +42,32 @@ export class TouchControls {
       throw new TypeError('TouchControls exige um document com createElement().');
     }
 
+    if (enabledActions !== null && (
+      !Array.isArray(enabledActions) ||
+      enabledActions.length === 0 ||
+      enabledActions.some((action) => typeof action !== 'string')
+    )) {
+      throw new TypeError('enabledActions deve ser null ou um array não vazio de ações.');
+    }
+
+    const enabled = enabledActions === null ? null : new Set(enabledActions);
+    const knownActions = new Set(
+      CONTROL_GROUPS.flatMap((group) => group.controls.map((control) => control.action)),
+    );
+    if (enabled && [...enabled].some((action) => !knownActions.has(action))) {
+      throw new RangeError('enabledActions contém uma ação touch desconhecida.');
+    }
+
     this.#inputManager = inputManager;
     this.#document = documentTarget;
+    this.#groups = CONTROL_GROUPS
+      .map((group) => ({
+        ...group,
+        controls: enabled
+          ? group.controls.filter((control) => enabled.has(control.action))
+          : group.controls,
+      }))
+      .filter((group) => group.controls.length > 0);
   }
 
   get mounted() {
@@ -61,7 +90,7 @@ export class TouchControls {
     root.setAttribute('aria-label', 'Controles de toque');
 
     try {
-      for (const groupDefinition of CONTROL_GROUPS) {
+      for (const groupDefinition of this.#groups) {
         const group = this.#document.createElement('div');
         group.className = `touch-control-group touch-control-group--${groupDefinition.id}`;
         group.setAttribute('role', 'group');
