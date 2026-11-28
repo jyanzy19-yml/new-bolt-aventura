@@ -1,5 +1,8 @@
 # BOLT · AVENTURA — Contexto Consolidado para Implementação HTML5
 
+> **Bíblia consolidada vigente (28/11/2026):** consulte também [BOLT_MASTER_BIBLE_HTML5_V2.md](game-design/BOLT_MASTER_BIBLE_HTML5_V2.md). Ela reúne os requisitos de produto, canon, campanha, mecânicas e engenharia sob a decisão HTML5. Este contexto continua complementar e não comprova implementação ou validação.
+
+
 **Finalidade:** adaptar o dossiê mestre de contexto fornecido pelo usuário à decisão tecnológica mais recente. Este documento é contexto de produto e engenharia, não substitui `MASTER_DIRECTIVE.md`, bíblias aprovadas, ADRs ou código real.
 
 ## 1. Regime de autoridade e evidência
