@@ -2,7 +2,7 @@ name: BOLT documentation validation
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'agent/**', 'chore/**', 'feat/**', 'fix/**']
     paths:
       - "README.md"
       - "CLAUDE.md"
