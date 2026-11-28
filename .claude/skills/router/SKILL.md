@@ -6,10 +6,14 @@ Read `MASTER_DIRECTIVE.md` and `AGENTS.md` first. Claude Code must also read `CL
 ## Route by task
 - Architecture, module boundaries, dependency direction, Vite and tooling: `html5-game-architecture`.
 - Canvas renderer, camera, DPR, frame loop, visibility and lifecycle: `canvas2d-runtime`.
+- Canvas draw costs, backing-store budget, batching and frame-time profiling: `canvas-rendering-performance`.
 - Movement, collision, combat, Dash, simulation and state machines: `gameplay-physics-loop`.
+- Deterministic simulation, event traces and regression design: `deterministic-gameplay-testing`.
 - Touch, multitouch, pointer lifecycle, safe areas and responsive UX: `mobile-input-ux`.
+- Browser APIs, Android WebView compatibility and system UI: `browser-webview-compatibility`.
 - Profiling, memory, WebView and thermal constraints: `android-web-performance`.
 - Asset manifests, decoding, loading, Web Audio and transitions: `assets-loading-audio`.
+- Asset licensing, approval states, manifest validation and provenance: `asset-provenance-qa`.
 - Unit/integration/browser regression and evidence: `web-game-qa`.
 - APK/AAB, native shell and Capacitor: `android-capacitor-packaging`.
 - Task ownership, branch isolation, review and handoff: `collaborative-development`.
