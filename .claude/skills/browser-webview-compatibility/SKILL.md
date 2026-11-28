@@ -1,3 +1,8 @@
+---
+name: browser-webview-compatibility
+description: "Validate browser APIs and Android WebView compatibility."
+---
+
 # Skill: Browser and Android WebView Compatibility
 
 Read the master directive and runtime contracts first. Treat browser support as a tested compatibility matrix, not an assumption based on desktop Chrome.
