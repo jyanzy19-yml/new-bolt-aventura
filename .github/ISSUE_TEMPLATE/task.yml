@@ -1,0 +1,50 @@
+name: Tarefa de desenvolvimento
+description: Registre uma unidade de trabalho com critérios verificáveis.
+title: "[TASK] "
+labels: ["task", "needs-triage"]
+body:
+  - type: input
+    id: task_id
+    attributes:
+      label: Task ID
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objetivo
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Escopo e paths permitidos
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critérios de aceite
+      description: Use condições objetivas e testáveis.
+    validations:
+      required: true
+  - type: dropdown
+    id: writer
+    attributes:
+      label: Escritor primário
+      options:
+        - ChatGPT
+        - Claude Code
+        - A definir pelo usuário
+    validations:
+      required: true
+  - type: textarea
+    id: reviewer
+    attributes:
+      label: Revisor e dependências
+  - type: textarea
+    id: tests
+    attributes:
+      label: Testes exigidos
+    validations:
+      required: true
