@@ -257,9 +257,11 @@ describe('CombatSystem enemy projectiles and health', () => {
   it('clears transient combat entities on reset and respawn', () => {
     const combat = createCombat();
     combat.tryFirePlayer(player);
+    combat.update(0.25, player);
     combat.selectWeapon(2);
     combat.tryFirePlayer(player);
-    expect(combat.snapshot.projectiles.length + combat.snapshot.beams.length).toBeGreaterThan(0);
+    expect(combat.snapshot.projectiles.length).toBeGreaterThan(0);
+    expect(combat.snapshot.beams.length).toBeGreaterThan(0);
 
     combat.reset();
     expect(combat.snapshot.projectiles).toHaveLength(0);
