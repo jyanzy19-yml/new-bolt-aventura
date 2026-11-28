@@ -678,3 +678,12 @@ ChatGPT conduz a Etapa 2 por decisão explícita do usuário. A unidade de check
 - W1-L3 continua blockout. Armas Tríplice/Laser, inimigos canônicos específicos, segredo com item de lore e interação real de desligamento da linha continuam pendentes.
 - W1-L4 oficial: Laboratório de Memórias. W1-L5 oficial: Torre do Núcleo. As PRs de conteúdos divergentes foram fechadas sem merge.
 - CI pendente; sem playtest humano/Android físico.
+
+
+## W1-L4 — Laboratório de Memórias — 27/11/2026
+
+- Blockout vertical criado conforme Atlas: elevadores, plataformas alternantes com aviso, lasers lentos/previsíveis, arquivo holográfico, câmaras e observatório.
+- Registro central é requisito para conclusão; memória secreta emite beat ID one-shot sem persistência.
+- Dois checkpoints verticais e retomada pelo menu implementados.
+- Inimigos específicos Projeção Defensiva/Drone Vigia e armas Tríplice/Laser permanecem dependências. O inimigo genérico é placeholder.
+- Estado: CI pendente; sem playtest físico Android.
