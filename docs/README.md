@@ -115,3 +115,5 @@ Atualize este índice quando documentos forem adicionados ou movidos. Use links 
 - [Registro de lacunas e decisões — Etapa 02](production/requirements-gap-register.md) — requisitos ainda a definir, prioridades, dependências e decisões já fechadas.
 - [Mapa da arquitetura atual](technical/09-current-architecture-map.md) — autoloads, fluxo de boot, ownership de estado, contratos e lacunas arquiteturais.
 - [Checklist de release Android](production/android-release-checklist.md)
+
+- [W1-L4 — Laboratório de Memórias](game-design/W1-L4-laboratorio-de-memorias.md) — blockout vertical.
