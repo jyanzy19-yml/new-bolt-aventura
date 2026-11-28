@@ -1,3 +1,8 @@
+---
+name: assets-loading-audio
+description: "Design asset loading, decoding, Web Audio and transition pipelines."
+---
+
 # Skill: Asset Pipeline, Loading and Web Audio
 
 ## Activation
