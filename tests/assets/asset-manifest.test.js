@@ -49,6 +49,12 @@ describe('validateAssetManifest', () => {
     expect(() => validateAssetManifest(manifest([
       asset({ url: 'https://example.com/asset.png' }),
     ]))).toThrow('caminho local');
+    expect(() => validateAssetManifest(manifest([
+      asset({ url: 'javascript:alert(1)' }),
+    ]))).toThrow('caminho local');
+    expect(() => validateAssetManifest(manifest([
+      asset({ url: '/assets/%2e%2e/private.png' }),
+    ]))).toThrow('caminho local');
   });
 
   it('validates dependencies and fallback references', () => {
