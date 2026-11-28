@@ -89,11 +89,6 @@ export class W1L1GameRuntime {
         this.#messageFlags.add('double-jump');
         this.#setMessage('PULO DUPLO // PRESSIONE PULAR NOVAMENTE ENQUANTO ESTIVER NO AR.', 4.5);
       }
-      if (player.x >= 1500 && inputFrame.pressed.includes('dash') &&
-          !this.#messageFlags.has('dash')) {
-        this.#messageFlags.add('dash');
-        this.#setMessage('DASH // USE A HABILIDADE PARA ATRAVESSAR O PÁTIO COM AGILIDADE.', 4);
-      }
       while (
         this.#objectiveIndex < this.#level.objectives.length - 1 &&
         player.x >= this.#level.objectives[this.#objectiveIndex].thresholdX
@@ -158,6 +153,12 @@ export class W1L1GameRuntime {
     if (!this.#messageFlags.has('courtyard') && player.x >= 1540) {
       this.#messageFlags.add('courtyard');
       this.#setMessage('NEXO // UMA FONTE DE SINCRONIZAÇÃO ESTÁ ADIANTE.', 4.5);
+    }
+
+    if (!this.#completed && player.x >= 1500 && inputFrame.pressed.includes('dash') &&
+        !this.#messageFlags.has('dash')) {
+      this.#messageFlags.add('dash');
+      this.#setMessage('DASH // USE A HABILIDADE PARA ATRAVESSAR O PÁTIO COM AGILIDADE.', 4);
     }
 
     return this.snapshot;

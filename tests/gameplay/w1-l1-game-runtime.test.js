@@ -28,6 +28,7 @@ describe('W1L1GameRuntime', () => {
     runtime.update(1 / 60, playerAt(260, 350, { jumpsRemaining: 0 }), frame(['jump']));
     expect(runtime.snapshot.message).toContain('PULO DUPLO');
 
+    runtime.update(1 / 60, playerAt(1600, 400, { jumpsRemaining: 0 }));
     runtime.update(1 / 60, playerAt(1600, 400, { jumpsRemaining: 0 }), frame(['dash']));
     expect(runtime.snapshot.message).toContain('DASH');
   });
