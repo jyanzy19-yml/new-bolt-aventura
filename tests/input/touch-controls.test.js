@@ -79,11 +79,12 @@ describe('TouchControls', () => {
       'jump',
       'dash',
       'fire',
+      'weapon-next',
       'interact',
     ]);
     expect(buttons.every((button) => button.type === 'button')).toBe(true);
     expect(buttons.every((button) => button.attributes['aria-label'])).toBe(true);
-    expect(inputManager.bindPointerAction).toHaveBeenCalledTimes(6);
+    expect(inputManager.bindPointerAction).toHaveBeenCalledTimes(7);
   });
 
   it('is idempotent when mounted twice', () => {
@@ -92,7 +93,7 @@ describe('TouchControls', () => {
     expect(controls.mount(container)).toBe(true);
     expect(controls.mount(container)).toBe(false);
     expect(container.children).toHaveLength(1);
-    expect(inputManager.bindPointerAction).toHaveBeenCalledTimes(6);
+    expect(inputManager.bindPointerAction).toHaveBeenCalledTimes(7);
   });
 
   it('disposes all pointer bindings and removes the control root', () => {
