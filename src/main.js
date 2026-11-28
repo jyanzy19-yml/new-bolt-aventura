@@ -77,7 +77,11 @@ function resizeCanvas() {
   renderFoundationScreen();
 }
 
-const resizeObserver = new ResizeObserver(resizeCanvas);
-resizeObserver.observe(canvas);
-window.addEventListener('resize', resizeCanvas, { passive: true });
+if (typeof ResizeObserver === 'function') {
+  const resizeObserver = new ResizeObserver(resizeCanvas);
+  resizeObserver.observe(canvas);
+} else {
+  window.addEventListener('resize', resizeCanvas, { passive: true });
+}
+
 resizeCanvas();
