@@ -107,7 +107,7 @@ describe('CombatSystem projectile weapons', () => {
     const combat = createCombat({ weapons: [weapon], maxPlayerProjectiles: 2 });
 
     expect(combat.tryFirePlayer(player).fired).toBe(true);
-    combat.update(0.02, player);
+    combat.update(0.25, player);
     expect(combat.tryFirePlayer(player).fired).toBe(false);
     expect(combat.snapshot.projectiles).toHaveLength(2);
   });
